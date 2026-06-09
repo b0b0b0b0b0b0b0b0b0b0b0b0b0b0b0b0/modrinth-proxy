@@ -10,6 +10,7 @@ import CopyLabeledButton from './CopyLabeledButton'
 import GitHubSidebarSection from './GitHubSidebarSection'
 import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
 import LicenseLink from './LicenseLink'
+import TeamMembersList from './TeamMembersList'
 
 export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
@@ -216,31 +217,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
             </svg>
             Авторы
           </h3>
-          <div className="space-y-2">
-            {teamMembers.map((member, idx) => (
-              <Link
-                key={idx}
-                href={`/user/${member.user.id}`}
-                className="flex items-start gap-2 p-2 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-800 transition-colors group"
-              >
-                {member.user.avatar_url ? (
-                  <img 
-                    src={member.user.avatar_url} 
-                    alt={member.user.username}
-                    className="w-8 h-8 rounded-lg object-cover flex-shrink-0"
-                  />
-                ) : (
-                  <div className="w-8 h-8 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-xs font-bold flex-shrink-0">
-                    {member.user.username.charAt(0).toUpperCase()}
-                  </div>
-                )}
-                <div>
-                  <p className="text-sm text-gray-900 dark:text-white font-medium group-hover:text-modrinth-green transition-colors">{member.user.username}</p>
-                  <p className="text-xs text-gray-600 dark:text-gray-400">{translateRole(member.role)}</p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <TeamMembersList members={teamMembers} />
         </div>
       )}
 
@@ -306,17 +283,6 @@ function PermanentLinkCopyButton({ projectId, browseRoute }) {
       />
     </div>
   )
-}
-
-function translateRole(role) {
-  const roles = {
-    'Owner': 'Владелец',
-    'Developer': 'Разработчик',
-    'Artist': 'Художник',
-    'Maintainer': 'Поддержка',
-    'Contributor': 'Участник'
-  }
-  return roles[role] || role
 }
 
 function translateDonationPlatform(platform) {

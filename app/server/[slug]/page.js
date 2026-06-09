@@ -10,6 +10,7 @@ import ServerSidebarDetails from '@/app/components/ServerSidebarDetails'
 import ServerGallery from '@/app/components/ServerGallery'
 import ServerSidebarLink from '@/app/components/ServerSidebarLink'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
+import TeamMembersList from '@/app/components/TeamMembersList'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -195,34 +196,10 @@ export default async function ServerPage({ params }) {
           {teamMembers && teamMembers.length > 0 && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
               <h2 className="text-lg font-bold text-white m-0">Авторы</h2>
-              <div className="flex flex-col gap-3 font-semibold">
-                {teamMembers.map((member, idx) => (
-                  <a 
-                    key={idx}
-                    href={`/user/${member.user.username}`}
-                    className="flex gap-2.5 items-center w-fit text-gray-300 hover:text-white leading-tight group"
-                  >
-                    {member.user.avatar_url && (
-                      <img 
-                        className="w-8 h-8 rounded-full object-cover flex-shrink-0" 
-                        src={member.user.avatar_url} 
-                        alt="" 
-                      />
-                    )}
-                    <div className="flex flex-col min-w-0">
-                      <span className="flex items-center gap-1 group-hover:underline text-sm font-semibold text-white">
-                        {member.user.username}
-                        {member.role === 'Owner' && (
-                          <svg className="w-3.5 h-3.5 text-yellow-500" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                          </svg>
-                        )}
-                      </span>
-                      <span className="text-xs text-gray-500 font-medium capitalize">{member.role}</span>
-                    </div>
-                  </a>
-                ))}
-              </div>
+              <TeamMembersList
+                members={teamMembers}
+                linkClassName="!p-0 hover:!bg-transparent"
+              />
             </div>
           )}        </div>
       </div>
