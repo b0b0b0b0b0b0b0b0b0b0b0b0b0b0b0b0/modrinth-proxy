@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import { getAuthorInfo, getAuthorProjects, formatAuthorStats, getProjectTypeDisplayName } from '@/lib/author'
 import { filterModContent, filterModsList, isUserBlocked } from '@/lib/contentFilter'
 import { formatDownloads } from '@/lib/modrinth'
+import { resolveOrganizationsFromProjects } from '@/lib/organizations'
+import { resolveUserBadges } from '@/lib/userBadges'
 import ResourceList from '@/app/components/ResourceList'
 import dynamic from 'next/dynamic'
 
@@ -70,7 +72,7 @@ export default async function AuthorPage({ params, searchParams }) {
     )
   }
   
-  let author, projects, stats
+  let author, projects, stats, organizations, badges
   try {
     author = await getAuthorInfo(userId)
     
@@ -78,8 +80,10 @@ export default async function AuthorPage({ params, searchParams }) {
       notFound()
     }
     
-    const allProjects = await getAuthorProjects(author.id, {})
+    const allProjects = await getAuthorProjects(author.id, { limit: 10000 })
     stats = formatAuthorStats(author, allProjects.hits)
+    organizations = await resolveOrganizationsFromProjects(allProjects.hits)
+    badges = resolveUserBadges(author, allProjects.hits)
     const byType = projectType
       ? allProjects.hits.filter((project) => project.project_type === projectType)
       : allProjects.hits
@@ -196,7 +200,7 @@ export default async function AuthorPage({ params, searchParams }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <UserSidebar organizations={[]} badges={[]} />
+          <UserSidebar organizations={organizations} badges={badges} />
         </div>
       </div>
     </div>
@@ -223,10 +227,10 @@ function formatJoinDate(dateString) {
 
 function translateUserRole(role) {
   const roles = {
-    'admin': 'Администратор',
-    'moderator': 'Модератор', 
-    'developer': 'Разработчик',
-    'user': 'Пользователь'
+    admin: 'Администратор Modrinth',
+    moderator: 'Модератор Modrinth',
+    developer: 'Разработчик',
+    user: 'Пользователь',
   }
   return roles[role] || role
 }

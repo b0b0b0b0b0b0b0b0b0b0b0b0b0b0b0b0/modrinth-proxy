@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
@@ -78,7 +78,7 @@ export default async function DatapackPage({ params }) {
     )
   }
 
-  let pack, versions, teamMembers;
+  let pack, versions, teamMembers, organization;
   try {
     [pack, versions, teamMembers] = await Promise.all([
       getMod(slug),
@@ -88,6 +88,7 @@ export default async function DatapackPage({ params }) {
     
     pack = filterModContent(pack);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = pack.organization ? await getOrganization(pack.organization) : null;
     
     if ((isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) {
       return (
@@ -145,7 +146,7 @@ export default async function DatapackPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} teamMembers={teamMembers} contentType="datapack" />
+          <ResourceSidebar resource={pack} organization={organization} teamMembers={teamMembers} contentType="datapack" />
         </div>
       </div>
     </div>

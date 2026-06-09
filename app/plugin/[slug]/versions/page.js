@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
@@ -56,7 +56,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
 
   const initialLoader = searchParams.l || 'all'
 
-  let plugin, versions, teamMembers;
+  let plugin, versions, teamMembers, organization;
   try {
     [plugin, versions, teamMembers] = await Promise.all([
       getMod(slug),
@@ -66,6 +66,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
     
     plugin = filterModContent(plugin);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = plugin.organization ? await getOrganization(plugin.organization) : null;
     
     if ((isProjectBlocked(plugin.slug, plugin.id) || isOrganizationBlocked(plugin.organization))) {
       notFound()
@@ -87,7 +88,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={plugin} teamMembers={teamMembers} contentType="plugin" />
+          <ResourceSidebar resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
         </div>
       </div>
     </div>

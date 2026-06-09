@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
@@ -41,11 +41,12 @@ export default async function ModpackChangelogPage({ params }) {
     return <div className="text-center py-16"><Link href="/modpacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
   }
 
-  let modpack, versions, teamMembers;
+  let modpack, versions, teamMembers, organization;
   try {
     [modpack, versions, teamMembers] = await Promise.all([getMod(slug), getModVersions(slug), getTeamMembers(slug)]);
     modpack = filterModContent(modpack);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = modpack.organization ? await getOrganization(modpack.organization) : null;
     if ((isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) notFound()
   } catch (error) {
     notFound()
@@ -68,7 +69,7 @@ export default async function ModpackChangelogPage({ params }) {
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={modpack} teamMembers={teamMembers} />
+          <ResourceSidebar resource={modpack} organization={organization} teamMembers={teamMembers} />
         </div>
       </div>
     </div>

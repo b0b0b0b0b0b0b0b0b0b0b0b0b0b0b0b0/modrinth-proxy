@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
@@ -43,11 +43,12 @@ export default async function ResourcepackVersionsPage({ params, searchParams = 
 
   const initialLoader = searchParams.l || 'all'
 
-  let pack, versions, teamMembers;
+  let pack, versions, teamMembers, organization;
   try {
     [pack, versions, teamMembers] = await Promise.all([getMod(slug), getModVersions(slug), getTeamMembers(slug)]);
     pack = filterModContent(pack);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = pack.organization ? await getOrganization(pack.organization) : null;
     if ((isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) notFound()
   } catch (error) {
     notFound()
@@ -65,7 +66,7 @@ export default async function ResourcepackVersionsPage({ params, searchParams = 
           <VersionsList versions={versions} contentType="resourcepack" slug={slug} initialLoader={searchParams.l || 'all'} projectColor={pack.color} />
         </div>
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} teamMembers={teamMembers} />
+          <ResourceSidebar resource={pack} organization={organization} teamMembers={teamMembers} />
         </div>
       </div>
     </div>

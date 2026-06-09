@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions } from '@/lib/modrinth'
+import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
@@ -64,7 +64,7 @@ export default async function ShaderGalleryPage({ params }) {
     )
   }
 
-  let shader, versions
+  let shader, versions, organization
   try {
     [shader, versions] = await Promise.all([
       getMod(slug),
@@ -100,6 +100,8 @@ export default async function ShaderGalleryPage({ params }) {
 
   shader = filterModContent(shader)
 
+  organization = shader.organization ? await getOrganization(shader.organization) : null;
+
   const gallery = shader.gallery || []
   const filteredGallery = filterGalleryImages(gallery)
   const sortedGallery = [...filteredGallery].sort((a, b) => a.ordering - b.ordering)
@@ -117,7 +119,7 @@ export default async function ShaderGalleryPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={shader} teamMembers={[]} />
+          <ResourceSidebar resource={shader} organization={organization} teamMembers={[]} />
         </div>
       </div>
     </div>

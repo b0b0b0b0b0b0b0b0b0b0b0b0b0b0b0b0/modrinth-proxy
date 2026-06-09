@@ -10,9 +10,9 @@ import CopyLabeledButton from './CopyLabeledButton'
 import GitHubSidebarSection from './GitHubSidebarSection'
 import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
 import LicenseLink from './LicenseLink'
-import TeamMembersList from './TeamMembersList'
+import AuthorsSection from './AuthorsSection'
 
-export default function ResourceSidebar({ resource, teamMembers = [], contentType = null }) {
+export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null }) {
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
   const loaders = (resource.loaders || []).filter(l => l !== 'minecraft')
   const browseRoute = resolveContentTypeRoute(contentType, resource.project_type)
@@ -209,7 +209,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
         <GitHubSidebarSection sourceUrl={resource.source_url} />
       )}
 
-      {teamMembers.length > 0 && (
+      {(organization || teamMembers.length > 0) && (
         <div className="bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
           <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
             <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,7 +217,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], contentTyp
             </svg>
             Авторы
           </h3>
-          <TeamMembersList members={teamMembers} />
+          <AuthorsSection organization={organization} members={teamMembers} />
         </div>
       )}
 

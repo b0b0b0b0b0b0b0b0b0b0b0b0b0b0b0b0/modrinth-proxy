@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
@@ -43,11 +43,12 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
 
   const initialLoader = searchParams.l || 'all'
 
-  let shader, versions, teamMembers;
+  let shader, versions, teamMembers, organization;
   try {
     [shader, versions, teamMembers] = await Promise.all([getMod(slug), getModVersions(slug), getTeamMembers(slug)]);
     shader = filterModContent(shader);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = shader.organization ? await getOrganization(shader.organization) : null;
     if ((isProjectBlocked(shader.slug, shader.id) || isOrganizationBlocked(shader.organization))) notFound()
   } catch (error) {
     notFound()
@@ -65,7 +66,7 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
           <VersionsList versions={versions} contentType="shader" slug={slug} initialLoader={searchParams.l || 'all'} projectColor={shader.color} />
         </div>
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={shader} teamMembers={teamMembers} />
+          <ResourceSidebar resource={shader} organization={organization} teamMembers={teamMembers} />
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getTeamMembers, getVersion, formatDate } from '@/lib/modrinth'
+import { getMod, getOrganization, getTeamMembers, getVersion, formatDate } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { getFilterConfig, getCategoryName } from '@/lib/filterConfig'
 import { buildServerPageMetadata, buildServerNotFoundMetadata } from '@/lib/serverPageSeo'
@@ -10,7 +10,7 @@ import ServerSidebarDetails from '@/app/components/ServerSidebarDetails'
 import ServerGallery from '@/app/components/ServerGallery'
 import ServerSidebarLink from '@/app/components/ServerSidebarLink'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
-import TeamMembersList from '@/app/components/TeamMembersList'
+import AuthorsSection from '@/app/components/AuthorsSection'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -57,7 +57,7 @@ export default async function ServerPage({ params }) {
     )
   }
 
-  let server, teamMembers, requiredContentVersion = null;
+  let server, teamMembers, organization, requiredContentVersion = null;
   try {
     [server, teamMembers] = await Promise.all([
       getMod(slug),
@@ -66,6 +66,7 @@ export default async function ServerPage({ params }) {
     
     server = filterModContent(server);
     teamMembers = filterTeamMembers(teamMembers);
+    organization = server.organization ? await getOrganization(server.organization) : null;
     
     if (server.minecraft_java_server?.content?.version_id) {
       try {
@@ -193,10 +194,11 @@ export default async function ServerPage({ params }) {
             </div>
           )}
 
-          {teamMembers && teamMembers.length > 0 && (
+          {(organization || (teamMembers && teamMembers.length > 0)) && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
               <h2 className="text-lg font-bold text-white m-0">Авторы</h2>
-              <TeamMembersList
+              <AuthorsSection
+                organization={organization}
                 members={teamMembers}
                 linkClassName="!p-0 hover:!bg-transparent"
               />

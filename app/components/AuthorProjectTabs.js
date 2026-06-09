@@ -2,20 +2,13 @@
 
 import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { useMemo } from 'react'
 import { getProjectTypeDisplayName } from '@/lib/author'
 
-export default function AuthorProjectTabs({ userId, currentType, typeStats, totalProjects }) {
+export default function AuthorProjectTabs({ currentType, typeStats, totalProjects }) {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const navRef = useRef(null)
-  const [activeTabStyle, setActiveTabStyle] = useState({ width: 0, left: 0 })
-  const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-  
   const createUrl = (type) => {
     const params = new URLSearchParams(searchParams)
     if (type) {
@@ -23,101 +16,50 @@ export default function AuthorProjectTabs({ userId, currentType, typeStats, tota
     } else {
       params.delete('type')
     }
-    return `${pathname}?${params.toString()}`
+    const query = params.toString()
+    return query ? `${pathname}?${query}` : pathname
   }
 
-  const tabs = [
-    { 
-      key: null, 
-      label: 'Все', 
-      count: totalProjects,
-      isActive: !currentType 
-    }
-  ]
+  const tabs = useMemo(() => {
+    const items = [
+      {
+        key: null,
+        label: 'Все',
+        isActive: !currentType,
+      },
+    ]
 
     Object.entries(typeStats).forEach(([type, count]) => {
-      tabs.push({
-        key: type,
-        label: getProjectTypeDisplayName(type),
-        count,
-        isActive: currentType === type
-      })
+      if (count > 0) {
+        items.push({
+          key: type,
+          label: getProjectTypeDisplayName(type),
+          isActive: currentType === type,
+        })
+      }
     })
 
-  useEffect(() => {
-    const updateActiveTabStyle = () => {
-      if (navRef.current) {
-        const activeIndex = tabs.findIndex(tab => tab.isActive)
-        const activeLink = navRef.current.children[activeIndex]
-        
-        if (activeLink) {
-          setActiveTabStyle({
-            width: activeLink.offsetWidth,
-            left: activeLink.offsetLeft
-          })
-        }
-      }
-    }
+    return items
+  }, [currentType, typeStats])
 
-    const timer = setTimeout(updateActiveTabStyle, 10)
-    
-    return () => clearTimeout(timer)
-  }, [currentType, tabs])
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (navRef.current) {
-        const activeIndex = tabs.findIndex(tab => tab.isActive)
-        const activeLink = navRef.current.children[activeIndex]
-        
-        if (activeLink) {
-          setActiveTabStyle({
-            width: activeLink.offsetWidth,
-            left: activeLink.offsetLeft
-          })
-        }
-      }
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  if (!mounted) {
-    return null
-  }
+  if (totalProjects === 0) return null
 
   return (
-    <div className="mb-6 max-w-full">
-      <nav ref={navRef} className="relative flex w-fit rounded-full bg-modrinth-dark border border-gray-800 p-1 text-sm font-bold shadow-lg">
+    <div className="mb-6 max-w-full overflow-x-auto overscroll-x-contain mobile-nav-spacing custom-scrollbar">
+      <nav className="relative flex w-max rounded-full border border-gray-800 bg-modrinth-dark p-1 text-sm font-bold shadow-lg">
         {tabs.map((tab) => (
           <Link
             key={tab.key || 'all'}
             href={createUrl(tab.key)}
-            className={`
-              relative z-10 flex items-center px-4 py-2 rounded-full transition-colors whitespace-nowrap
-              ${tab.isActive 
-                ? '' 
-                : 'text-gray-300 hover:text-white'
-              }
-            `}
-            style={tab.isActive ? { color: 'var(--color-green)' } : {}}
+            className={`relative z-[1] flex shrink-0 items-center whitespace-nowrap rounded-full px-4 py-2 transition-colors ${
+              tab.isActive
+                ? 'bg-modrinth-green text-black'
+                : 'text-gray-400 hover:text-white'
+            }`}
           >
-            <span>{tab.label}</span>
+            {tab.label}
           </Link>
         ))}
-        
-        {activeTabStyle.width > 0 && (
-          <div 
-            className="absolute h-[calc(100%-0.5rem)] rounded-full transition-all duration-300 ease-out pointer-events-none"
-            style={{
-              width: `${activeTabStyle.width}px`,
-              left: `${activeTabStyle.left}px`,
-              top: '0.25rem',
-              backgroundColor: 'rgba(27,217,106,.25)'
-            }}
-          />
-        )}
       </nav>
     </div>
   )
