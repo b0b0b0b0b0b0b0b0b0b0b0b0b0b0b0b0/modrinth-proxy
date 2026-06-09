@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { getAuthorInfo, getAuthorProjects, formatAuthorStats, getProjectTypeDisplayName } from '@/lib/author'
-import { filterModContent, filterModsList, isUserBlocked } from '@/lib/contentFilter'
+import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
 import { formatDownloads } from '@/lib/modrinth'
 import { resolveOrganizationsFromProjects } from '@/lib/organizations'
 import { resolveUserBadges } from '@/lib/userBadges'
@@ -15,7 +15,7 @@ import UserSidebar from '@/app/components/UserSidebar'
 
 export async function generateMetadata({ params, searchParams }) {
   try {
-    const author = await getAuthorInfo(params.userId)
+    const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
       return {
         title: 'Автор не найден | ModrinthProxy',
@@ -74,7 +74,7 @@ export default async function AuthorPage({ params, searchParams }) {
   
   let author, projects, stats, organizations, badges
   try {
-    author = await getAuthorInfo(userId)
+    author = filterUserPublic(await getAuthorInfo(userId))
     
     if (!author) {
       notFound()

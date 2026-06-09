@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { formatDownloads, modrinthHoverAccentHex } from '@/lib/modrinth'
+import { getPublicUsername } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { LOADERS } from '@/lib/loaders'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
@@ -158,7 +159,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             <h3 className="line-clamp-2 text-base font-bold leading-snug text-white transition-colors group-hover:text-modrinth-green">
               {resource.title}
             </h3>
-            <p className="mt-1 text-xs text-gray-500">от {resource.author}</p>
+            <p className="mt-1 text-xs text-gray-500">от {getPublicUsername(resource.author, resource.author_id)}</p>
             <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-400">{resource.description}</p>
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
               {uniqueStrings(resource.display_categories).slice(0, 3).map((catId) => {
@@ -340,7 +341,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               {resource.title}
             </h3>
           </Link>
-          <span className="text-xs text-gray-500">от {resource.author}</span>
+          <span className="text-xs text-gray-500">от {getPublicUsername(resource.author, resource.author_id)}</span>
         </div>
         <p className="text-sm text-gray-400 mb-2">
           {resource.description}

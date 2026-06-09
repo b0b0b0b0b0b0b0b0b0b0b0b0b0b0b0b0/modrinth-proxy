@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor, resolveModrinthProjectAccent } from '@/lib/modrinth'
-import { filterVersionChangelog, filterAvatar } from '@/lib/contentFilter'
+import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
@@ -40,10 +40,7 @@ class VersionPageData {
 class VersionMetadata {
   constructor(version, author) {
     this.version = version
-    this.author = author ? {
-      ...author,
-      avatar_url: filterAvatar(author.avatar_url)
-    } : null
+    this.author = author ? filterUserPublic(author) : null
   }
 
   render() {
