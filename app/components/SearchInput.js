@@ -7,7 +7,7 @@ export default function SearchInput({
   defaultValue = '', 
   placeholder = 'Поиск...', 
   categoryPath = 'mods',
-  delay = 500 
+  delay = 500,
 }) {
   const router = useRouter()
   const searchParams = useSearchParams()

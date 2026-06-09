@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
 import ModpackSidebarFilters from './ModpackSidebarFilters'
@@ -9,17 +10,13 @@ import ResourceList from '@/app/components/ResourceList'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
 import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
+import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
+import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
+import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
+import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 
 export async function generateMetadata({ searchParams }) {
-  const page = parseInt(searchParams?.page || '1');
-  const title = page > 1 
-    ? `Модпаки для Minecraft - Скачать бесплатно (стр. ${page}) | ModrinthProxy`
-    : 'Модпаки для Minecraft - Скачать бесплатно | ModrinthProxy';
-  
-  return {
-    title,
-    description: 'Скачать модпаки для Minecraft на русском языке. Fabric, Forge, NeoForge, Quilt. Тысячи готовых сборок для любой версии Minecraft.',
-  };
+  return buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'modpacks' })
 }
 
 export default async function ModpacksPage({ searchParams }) {
@@ -118,10 +115,13 @@ export default async function ModpacksPage({ searchParams }) {
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
+  let layoutCorrection = null;
+  let searchAlternatives = []
   let error = null;
   
   try {
     const initialData = await searchMods({ query, facets, limit: 1, offset: 0, index: sortBy });
+    layoutCorrection = initialData.layoutCorrection ?? null;
     const totalHits = initialData.total_hits;
     
     let totalBlockedCount = 0, totalBlockedByProject = 0, totalBlockedByOrganization = 0;
@@ -187,6 +187,14 @@ export default async function ModpacksPage({ searchParams }) {
     error = err;
   }
 
+  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
+    try {
+      searchAlternatives = await findCatalogSearchAlternatives('modpacks', query, { version })
+    } catch (err) {
+      console.error('Failed to load search alternatives:', err)
+    }
+  }
+
   const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
 
   const buildPageUrl = (newPage) => {
@@ -248,6 +256,8 @@ export default async function ModpacksPage({ searchParams }) {
                 categoryPath="modpacks"
               />
             </div>
+
+            <SearchLayoutCorrectionNote correction={layoutCorrection} />
             
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
@@ -275,31 +285,27 @@ export default async function ModpacksPage({ searchParams }) {
           </div>
         </div>
       ) : data && data.hits.length === 0 ? (
-        <div className="text-center py-16">
-          {blockedCount > 0 ? (
-            <div className="max-w-2xl mx-auto">
-              <svg className="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-              </svg>
-              <p className="text-xl font-semibold text-red-400 mb-3">Все модпаки на этой странице заблокированы</p>
-              <p className="text-gray-400 text-sm">
-                Из {data.total_hits.toLocaleString('ru-RU')} найденных модпаков, все {blockedCount} на текущей странице заблокированы по требованиям РКН
-                {blockedByProject > 0 && blockedByOrganization > 0 && (
-                  <> ({blockedByProject} по проекту, {blockedByOrganization} по организации)</>
-                )}
-                {blockedByProject > 0 && blockedByOrganization === 0 && (
-                  <> ({blockedByProject} по проекту)</>
-                )}
-                {blockedByProject === 0 && blockedByOrganization > 0 && (
-                  <> ({blockedByOrganization} по организации)</>
-                )}
-                . Попробуйте изменить параметры поиска или фильтры.
-              </p>
-            </div>
-          ) : (
-            <p className="text-xl text-gray-400">Модпаки не найдены</p>
-          )}
-        </div>
+        <>
+          <CatalogSearchAlternatives
+            query={query}
+            categoryPath="modpacks"
+            version={version}
+            catalogKey="modpacks"
+            alternatives={searchAlternatives}
+          />
+          <div className={searchAlternatives.length > 0 ? 'pb-8' : 'text-center py-16'}>
+            <CatalogEmptyResults
+              data={data}
+              blockedCount={blockedCount}
+              blockedByProject={blockedByProject}
+              blockedByOrganization={blockedByOrganization}
+              foundLabel="найденных модпаков"
+              blockedTitle="Все модпаки на этой странице заблокированы"
+              emptyTitle="Модпаки не найдены"
+              hideEmptyMessage={searchAlternatives.length > 0}
+            />
+          </div>
+        </>
       ) : (
         <>
           {totalPages > 1 && (

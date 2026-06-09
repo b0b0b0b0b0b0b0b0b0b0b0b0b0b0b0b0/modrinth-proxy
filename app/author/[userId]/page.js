@@ -12,6 +12,7 @@ const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTa
   loading: () => <div className="mb-6 h-12 bg-modrinth-dark border border-gray-800 rounded-full animate-pulse"></div>
 })
 import UserSidebar from '@/app/components/UserSidebar'
+import { buildUserProfileMetadata } from '@/lib/profileSeo'
 
 export async function generateMetadata({ params, searchParams }) {
   try {
@@ -27,18 +28,15 @@ export async function generateMetadata({ params, searchParams }) {
     const projects = await getAuthorProjects(author.id, { projectType })
     const stats = formatAuthorStats(author, projects.hits)
 
-    return {
-      title: `${author.username} - Автор проектов`,
-      description: `Профиль автора ${author.username}. ${stats.projectCount} проектов, ${formatDownloads(stats.totalDownloads)} загрузок.`,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'profile',
-        title: `${author.username} - Автор проектов`,
-        description: author.bio || `Профиль автора ${author.username}`,
-        images: author.avatar_url ? [{ url: author.avatar_url }] : [],
+    return buildUserProfileMetadata(
+      author,
+      {
+        projectCount: stats.projectCount,
+        totalDownloads: formatDownloads(stats.totalDownloads),
       },
-    }
+      author.id,
+      { profilePath: 'author' },
+    )
   } catch {
     return {
       title: 'Автор не найден | ModrinthProxy',

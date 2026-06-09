@@ -8,18 +8,24 @@ import ActiveFilters from '@/app/components/ActiveFilters'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
 import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
+import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import ResourceList from '@/app/components/ResourceList'
+import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
 
 export async function generateMetadata({ searchParams }) {
-  const page = parseInt(searchParams?.page || '1');
-  const title = page > 1 
-    ? `Minecraft серверы - Список серверов (стр. ${page}) | ModrinthProxy`
-    : 'Minecraft серверы - Список серверов | ModrinthProxy';
-  
+  const { title, description } = buildServerCatalogSeo({ searchParams })
+
   return {
     title,
-    description: 'Каталог Minecraft серверов. Выберите лучший сервер для игры в Minecraft. IP-адреса, версии, подробные описания.',
-  };
+    description,
+    robots: 'all',
+    openGraph: {
+      siteName: 'modrinth.black',
+      type: 'website',
+      title,
+      description,
+    },
+  }
 }
 
 export default async function ServersPage({ searchParams }) {
@@ -69,10 +75,12 @@ export default async function ServersPage({ searchParams }) {
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
+  let layoutCorrection = null;
   let error = null;
   
   try {
     const initialData = await searchMods({ query, facets, limit: 1, offset: 0, index: sortBy });
+    layoutCorrection = initialData.layoutCorrection ?? null;
     const totalHits = initialData.total_hits;
     
     let totalBlockedCount = 0, totalBlockedByProject = 0, totalBlockedByOrganization = 0;
@@ -178,6 +186,8 @@ export default async function ServersPage({ searchParams }) {
                 categoryPath="servers"
               />
             </div>
+
+            <SearchLayoutCorrectionNote correction={layoutCorrection} />
             
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">

@@ -18,7 +18,9 @@ export async function generateMetadata({ searchParams }) {
   return {
     title,
     description,
+    robots: 'all',
     openGraph: {
+      siteName: 'modrinth.black',
       title,
       description,
       type: 'website',
@@ -56,7 +58,6 @@ export default async function ServersPage({ searchParams }) {
     console.error('Failed to load Minecraft versions:', error);
   }
   
-  const catalogSeo = buildServerCatalogSeo({ searchParams })
 
   const scParams = Array.isArray(searchParams.sc) ? searchParams.sc : (searchParams.sc ? [searchParams.sc] : []);
   const sctParams = Array.isArray(searchParams.sct) ? searchParams.sct : (searchParams.sct ? [searchParams.sct] : []);
@@ -280,7 +281,7 @@ export default async function ServersPage({ searchParams }) {
         <div className="flex-1 min-w-0">
           <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col gap-3">
-              <h1 className="text-2xl md:text-3xl font-bold">{catalogSeo.heading}</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">Серверы майнкрафт</h1>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <p className="text-gray-400 text-sm md:text-base shrink-0">
                   {data ? (
