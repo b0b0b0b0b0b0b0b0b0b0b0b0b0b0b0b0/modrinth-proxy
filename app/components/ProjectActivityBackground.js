@@ -118,7 +118,7 @@ export default function ProjectActivityBackground({ versions = [] }) {
               <stop offset="100%" stopColor={accent} stopOpacity="0" />
             </linearGradient>
           </defs>
-          {hasAnyData ? (
+          {hasAnyData && (
             <>
               <path
                 d={areaPath}
@@ -144,22 +144,6 @@ export default function ProjectActivityBackground({ versions = [] }) {
                 }}
               />
             </>
-          ) : (
-            <line
-              x1="0"
-              y1={baseline}
-              x2={svgWidth}
-              y2={baseline}
-              stroke={accent}
-              strokeOpacity="0.2"
-              strokeWidth="1.5"
-              pathLength="1"
-              style={{
-                strokeDasharray: '1',
-                strokeDashoffset: animated ? '0' : '1',
-                transition: 'stroke-dashoffset 1.2s ease-out',
-              }}
-            />
           )}
         </svg>
       )}
