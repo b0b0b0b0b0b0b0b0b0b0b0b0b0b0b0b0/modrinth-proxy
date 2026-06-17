@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY } from '@/lib/serverCategories'
 import { searchServers, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
+import { fetchFilteredCatalogPage } from '@/lib/catalogPagination'
 import ServerSidebarFilters from '@/app/servers/ServerSidebarFilters'
 import MobileMenu from '@/app/servers/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
@@ -203,41 +204,12 @@ export default async function ServersPage({ searchParams }) {
     blockedByProject = totalBlockedByProject;
     blockedByOrganization = totalBlockedByOrganization;
     
-    let currentPageOffset = 0;
-    let allFilteredHits = [];
-    let firstData = null;
-    const maxAttempts = 20;
-    let attempts = 0;
-    const skipCount = (page - 1) * limit;
-    
-    while (allFilteredHits.length < skipCount + limit && attempts < maxAttempts) {
-      const batchData = await searchServers({ query, newFilters, limit: limit * 2, offset: currentPageOffset, index: sortBy });
-      
-      if (!firstData) {
-        firstData = batchData;
-      }
-      
-      const filtered = filterModsList(batchData.hits);
-      allFilteredHits = allFilteredHits.concat(filtered.hits);
-      
-      if (allFilteredHits.length >= skipCount + limit) {
-        break;
-      }
-      
-      if (currentPageOffset + batchData.hits.length >= batchData.total_hits) {
-        break;
-      }
-      
-      currentPageOffset += batchData.hits.length;
-      attempts++;
-    }
-    
-    if (firstData) {
-      data = {
-        ...firstData,
-        hits: allFilteredHits.slice(skipCount, skipCount + limit)
-      };
-    }
+    data = await fetchFilteredCatalogPage({
+      searchBatch: (opts) => searchServers({ query, newFilters, index: sortBy, ...opts }),
+      page,
+      limit,
+      filterList: filterModsList,
+    })
   } catch (err) {
     console.error('Failed to load servers:', err);
     error = err;
