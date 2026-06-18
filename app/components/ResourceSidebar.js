@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { LOADERS } from '@/lib/loaders'
 import { buildAllowedLoaderIds } from '@/lib/contextualVersions'
+import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
 import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
 import CompressedGameVersionsChips from './CompressedGameVersionsChips'
 import CopyButton from './CopyButton'
@@ -14,6 +15,7 @@ import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
 import LicenseLink from './LicenseLink'
 import AuthorsSection from './AuthorsSection'
 import StyledTooltip from './StyledTooltip'
+import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 
 function contentTypeFromPathname(pathname) {
   const match = pathname?.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\//)
@@ -36,6 +38,10 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
   const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
   const environment = getEnvironment(resource.client_side, resource.server_side)
+  const alternateFormat = resolveAlternateProjectFormat({
+    project: resource,
+    contentType: resolvedContentType,
+  })
   const projectId = resource.id ?? resource.project_id
   const hasGitHubSource = Boolean(parseGitHubRepoFromSourceUrl(resource.source_url))
   const showSourceInLinks = resource.source_url && !hasGitHubSource
@@ -100,6 +106,15 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                       </StyledTooltip>
                     )
                   })}
+                </div>
+              </div>
+            )}
+
+            {alternateFormat && (
+              <div>
+                <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)] text-center">А так же</h3>
+                <div className="flex justify-center">
+                  <AlternateProjectFormatLink {...alternateFormat} />
                 </div>
               </div>
             )}

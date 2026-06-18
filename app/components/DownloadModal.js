@@ -11,8 +11,8 @@ import {
   getVersionGameVersions,
   getVersionLoaders,
   normalizeContentRoute,
-  versionMatchesLoaders,
 } from '@/lib/contextualVersions'
+import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import StyledTooltip from './StyledTooltip'
 import { favoritesManager } from '@/lib/favoritesManager'
@@ -118,29 +118,6 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
   )
 }
 
-function getProjectTypes(mod) {
-  if (Array.isArray(mod?.project_types) && mod.project_types.length > 0) {
-    return mod.project_types
-  }
-  if (mod?.project_type) return [mod.project_type]
-  return []
-}
-
-const ALTERNATE_DOWNLOAD_FORMATS = {
-  mod: {
-    targetType: 'plugin',
-    route: 'plugin',
-    tooltip: 'У нас есть ещё плагин для сервера',
-    linkLabel: 'Открыть плагин',
-  },
-  plugin: {
-    targetType: 'mod',
-    route: 'mod',
-    tooltip: 'У нас есть ещё мод для клиента',
-    linkLabel: 'Открыть мод',
-  },
-}
-
 export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const router = useRouter()
   const accent = useMemo(() => resolveModrinthProjectAccent(mod?.color), [mod?.color])
@@ -189,25 +166,15 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
 
   const showAppSection = contentRoute === 'mod' || contentRoute === 'modpack'
 
-  const alternateDownloadFormat = useMemo(() => {
-    const config = ALTERNATE_DOWNLOAD_FORMATS[contentRoute]
-    if (!config || !mod?.slug) return null
-
-    const projectTypes = getProjectTypes(mod)
-    if (!projectTypes.includes(config.targetType)) return null
-
-    const targetLoaderIds = buildAllowedLoaderIds(config.route === 'plugin' ? 'plugins' : 'mods')
-    const hasTargetVersions = versions.some((version) =>
-      versionMatchesLoaders(version, targetLoaderIds),
-    )
-    if (!hasTargetVersions) return null
-
-    return {
-      href: `/${config.route}/${mod.slug}`,
-      tooltip: config.tooltip,
-      linkLabel: config.linkLabel,
-    }
-  }, [contentRoute, mod, versions])
+  const alternateDownloadFormat = useMemo(
+    () =>
+      resolveAlternateProjectFormat({
+        project: mod,
+        contentType,
+        versions,
+      }),
+    [mod, versions, contentType],
+  )
 
   const handleInstallClick = () => {
     window.location.href = launcherUri
