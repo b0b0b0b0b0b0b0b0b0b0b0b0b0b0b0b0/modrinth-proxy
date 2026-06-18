@@ -14,6 +14,7 @@ import { filterVersionChangelog } from '@/lib/contentFilter'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { LOADERS } from '@/lib/loaders'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
+import ChannelsDropdown from './ChannelsDropdown'
 import { ChangelogTimelineRow } from './ChangelogVersionEntries'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -81,6 +82,26 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
     return Array.from(loadersSet)
   }, [contextualVersions])
 
+  const channelTypesPresent = useMemo(() => {
+    const s = new Set()
+    contextualVersions.forEach((v) => {
+      if (v.version_type == null) return
+      const t = String(v.version_type).toLowerCase().replace(/\s+/g, '_')
+      if (t) s.add(t)
+    })
+    return s
+  }, [contextualVersions])
+
+  const showChannelFilter = channelTypesPresent.size > 1
+
+  useEffect(() => {
+    setSelectedChannel((ch) => {
+      if (channelTypesPresent.size <= 1) return 'all'
+      if (ch === 'all') return ch
+      return channelTypesPresent.has(ch) ? ch : 'all'
+    })
+  }, [channelTypesPresent])
+
   const releaseVersions = useMemo(() => {
     return mcVersions.filter(v => {
       
@@ -112,7 +133,11 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
       }
 
       if (selectedChannel !== 'all') {
-        if (version.version_type !== selectedChannel) return false
+        const t =
+          version.version_type != null
+            ? String(version.version_type).toLowerCase().replace(/\s+/g, '_')
+            : ''
+        if (t !== selectedChannel) return false
       }
 
       return true
@@ -273,48 +298,13 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                   {showOnlyReleases ? 'Show all versions' : 'Showing all versions'}
                 </button>
 
-                <div className="flex gap-1 bg-gray-800 rounded p-1">
-                  <button
-                    onClick={() => setSelectedChannel('all')}
-                    className={`px-3 py-1 rounded text-sm transition ${
-                      selectedChannel === 'all'
-                        ? 'bg-modrinth-green text-black font-semibold'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    All
-                  </button>
-                  <button
-                    onClick={() => setSelectedChannel('release')}
-                    className={`px-3 py-1 rounded text-sm transition ${
-                      selectedChannel === 'release'
-                        ? 'bg-version-release-bg text-version-release-fg font-semibold'
-                        : 'text-version-release-fg/90 hover:bg-version-release-bg/30'
-                    }`}
-                  >
-                    Release
-                  </button>
-                  <button
-                    onClick={() => setSelectedChannel('beta')}
-                    className={`px-3 py-1 rounded text-sm transition ${
-                      selectedChannel === 'beta'
-                        ? 'bg-version-beta-bg text-version-beta-fg font-semibold'
-                        : 'text-version-beta-fg/90 hover:bg-version-beta-bg/30'
-                    }`}
-                  >
-                    Beta
-                  </button>
-                  <button
-                    onClick={() => setSelectedChannel('alpha')}
-                    className={`px-3 py-1 rounded text-sm transition ${
-                      selectedChannel === 'alpha'
-                        ? 'bg-red-900 text-red-200 font-semibold'
-                        : 'text-red-400/90 hover:bg-red-900/40'
-                    }`}
-                  >
-                    Alpha
-                  </button>
-                </div>
+                {showChannelFilter && (
+                  <ChannelsDropdown
+                    selectedChannel={selectedChannel}
+                    onChannelChange={setSelectedChannel}
+                    channelTypesPresent={channelTypesPresent}
+                  />
+                )}
 
                 {loaders.length > 1 && (
                   <div className="flex gap-1 bg-gray-800 rounded p-1">

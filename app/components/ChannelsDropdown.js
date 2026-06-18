@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 const CHANNEL_OPTIONS = [
-  { id: 'all', label: 'Все', textClass: 'text-white', activeRing: '' },
+  { id: 'all', label: 'Все каналы', textClass: 'text-white', activeRing: '' },
   {
     id: 'release',
     label: 'Релиз',
@@ -60,7 +60,10 @@ export default function ChannelsDropdown({
   const selectedMeta =
     CHANNEL_OPTIONS.find((c) => c.id === selectedChannel) || CHANNEL_OPTIONS[0]
 
-  const getLabel = () => selectedMeta.label
+  const getLabel = () => {
+    if (selectedChannel === 'all') return 'Каналы'
+    return selectedMeta.label
+  }
 
   const triggerSpanClass =
     selectedChannel !== 'all' && selectedMeta.textClass !== 'text-white'
