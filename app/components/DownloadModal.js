@@ -2,8 +2,10 @@
 
 import { useState, useMemo, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
+import { getFilterConfig } from '@/lib/filterConfig'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import StyledTooltip from './StyledTooltip'
 import { favoritesManager } from '@/lib/favoritesManager'
@@ -109,6 +111,55 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
   )
 }
 
+function getVersionGameVersions(version) {
+  return Array.isArray(version?.game_versions) ? version.game_versions : []
+}
+
+function getVersionLoaders(version) {
+  return Array.isArray(version?.loaders) ? version.loaders : []
+}
+
+function versionMatchesLoaders(version, allowedLoaderIds) {
+  if (!allowedLoaderIds?.size) return true
+  return getVersionLoaders(version).some((loader) => allowedLoaderIds.has(loader))
+}
+
+function normalizeContentRoute(contentType) {
+  const base = String(contentType || 'mods').replace(/^discover\//, '').replace(/s$/, '')
+  return base || 'mod'
+}
+
+function getProjectTypes(mod) {
+  if (Array.isArray(mod?.project_types) && mod.project_types.length > 0) {
+    return mod.project_types
+  }
+  if (mod?.project_type) return [mod.project_type]
+  return []
+}
+
+function buildAllowedLoaderIds(contentType) {
+  const config = getFilterConfig(contentType)
+  const ids = new Set()
+  config.loaders?.forEach((loader) => ids.add(loader.id))
+  config.platforms?.forEach((platform) => ids.add(platform.id))
+  return ids
+}
+
+const ALTERNATE_DOWNLOAD_FORMATS = {
+  mod: {
+    targetType: 'plugin',
+    route: 'plugin',
+    tooltip: 'У нас есть ещё плагин для сервера',
+    linkLabel: 'Открыть плагин',
+  },
+  plugin: {
+    targetType: 'mod',
+    route: 'mod',
+    tooltip: 'У нас есть ещё мод для клиента',
+    linkLabel: 'Открыть мод',
+  },
+}
+
 export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const router = useRouter()
   const accent = useMemo(() => resolveModrinthProjectAccent(mod?.color), [mod?.color])
@@ -140,42 +191,42 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const [favLoader, setFavLoader] = useState('')
   const [showLauncherHelp, setShowLauncherHelp] = useState(false)
 
+  const contentRoute = normalizeContentRoute(contentType)
+
+  const allowedLoaderIds = useMemo(() => buildAllowedLoaderIds(contentType), [contentType])
+
+  const contextualVersions = useMemo(() => {
+    if (!allowedLoaderIds.size) return versions
+    return versions.filter((version) => versionMatchesLoaders(version, allowedLoaderIds))
+  }, [versions, allowedLoaderIds])
+
   const launcherUri = useMemo(() => {
     const isModpack = contentType === 'modpack' || contentType === 'modpacks'
     const type = isModpack ? 'modpack' : 'mod'
     return `modrinth://${type}/${mod?.slug}`
   }, [contentType, mod?.slug])
 
-  const showAppSection = useMemo(() => {
-    const loaders = mod?.loaders || []
-    const pluginLoaders = ['bukkit', 'spigot', 'paper', 'purpur', 'sponge', 'bungeecord', 'waterfall', 'velocity', 'folia']
-    const datapackLoaders = ['datapack']
-    const modLoaders = ['forge', 'fabric', 'quilt', 'liteloader', 'modloader', 'rift', 'neoforge']
+  const showAppSection = contentRoute === 'mod' || contentRoute === 'modpack'
 
-    let baseType = mod?.project_type
-    if (!baseType) {
-      if (contentType === 'plugin' || contentType === 'plugins') baseType = 'plugin'
-      else if (contentType === 'datapack' || contentType === 'datapacks') baseType = 'datapack'
-      else if (contentType === 'resourcepack' || contentType === 'resourcepacks') baseType = 'resourcepack'
-      else if (contentType === 'shader' || contentType === 'shaders') baseType = 'shader'
-      else if (contentType === 'modpack' || contentType === 'modpacks') baseType = 'modpack'
-      else baseType = 'mod'
+  const alternateDownloadFormat = useMemo(() => {
+    const config = ALTERNATE_DOWNLOAD_FORMATS[contentRoute]
+    if (!config || !mod?.slug) return null
+
+    const projectTypes = getProjectTypes(mod)
+    if (!projectTypes.includes(config.targetType)) return null
+
+    const targetLoaderIds = buildAllowedLoaderIds(config.route === 'plugin' ? 'plugins' : 'mods')
+    const hasTargetVersions = versions.some((version) =>
+      versionMatchesLoaders(version, targetLoaderIds),
+    )
+    if (!hasTargetVersions) return null
+
+    return {
+      href: `/${config.route}/${mod.slug}`,
+      tooltip: config.tooltip,
+      linkLabel: config.linkLabel,
     }
-
-    let resolvedType = baseType
-    if (baseType === 'mod') {
-      const isDatapack = loaders.some(l => datapackLoaders.includes(l))
-      const isPlugin = loaders.some(l => pluginLoaders.includes(l))
-      const isMod = loaders.some(l => modLoaders.includes(l))
-
-      if (isDatapack) resolvedType = 'datapack'
-      else if (isPlugin) resolvedType = 'plugin'
-      else if (isMod) resolvedType = 'mod'
-    }
-
-    if (resolvedType !== 'plugin') return true
-    return loaders.some(l => !pluginLoaders.includes(l))
-  }, [contentType, mod?.project_type, mod?.loaders])
+  }, [contentRoute, mod, versions])
 
   const handleInstallClick = () => {
     window.location.href = launcherUri
@@ -221,8 +272,8 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       const urlLoader = searchParams.get('loader')
 
       const availableMcVersions = new Set()
-      versions.forEach(version => {
-        version.game_versions.forEach(v => availableMcVersions.add(v))
+      contextualVersions.forEach(version => {
+        getVersionGameVersions(version).forEach(v => availableMcVersions.add(v))
       })
 
       let targetVersion = ''
@@ -231,9 +282,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       if (urlVersion && availableMcVersions.has(urlVersion)) {
         targetVersion = urlVersion
         const availableLoaders = new Set()
-        versions.forEach(version => {
-          if (version.game_versions.includes(urlVersion)) {
-            version.loaders.forEach(l => availableLoaders.add(l))
+        contextualVersions.forEach(version => {
+          if (getVersionGameVersions(version).includes(urlVersion)) {
+            getVersionLoaders(version).forEach(l => availableLoaders.add(l))
           }
         })
         if (urlLoader && availableLoaders.has(urlLoader)) {
@@ -244,9 +295,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       } else if (activeFavVersion && availableMcVersions.has(activeFavVersion)) {
         targetVersion = activeFavVersion
         const availableLoaders = new Set()
-        versions.forEach(version => {
-          if (version.game_versions.includes(activeFavVersion)) {
-            version.loaders.forEach(l => availableLoaders.add(l))
+        contextualVersions.forEach(version => {
+          if (getVersionGameVersions(version).includes(activeFavVersion)) {
+            getVersionLoaders(version).forEach(l => availableLoaders.add(l))
           }
         })
         if (activeFavLoader && availableLoaders.has(activeFavLoader)) {
@@ -262,7 +313,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     } else {
       isInitialUrlSyncRef.current = false
     }
-  }, [isOpen, versions, contentType])
+  }, [isOpen, contextualVersions, contentType])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -354,9 +405,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const selectMcVersion = (version) => {
     setSelectedMcVersion(version)
     const availableLoaders = new Set()
-    versions.forEach(v => {
-      if (v.game_versions.includes(version)) {
-        v.loaders.forEach(l => availableLoaders.add(l))
+    contextualVersions.forEach(v => {
+      if (getVersionGameVersions(v).includes(version)) {
+        getVersionLoaders(v).forEach(l => availableLoaders.add(l))
       }
     })
     const activeFavLoader = favoritesManager.getFavoriteLoader(contentType)
@@ -400,8 +451,8 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
 
   const mcVersions = useMemo(() => {
     const versionsSet = new Set()
-    versions.forEach(version => {
-      version.game_versions.forEach(v => versionsSet.add(v))
+    contextualVersions.forEach(version => {
+      getVersionGameVersions(version).forEach(v => versionsSet.add(v))
     })
     const allVersions = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
     
@@ -409,18 +460,18 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       return allVersions
     }
     return allVersions.filter(v => isReleaseVersion(v))
-  }, [versions, showAllVersions])
+  }, [contextualVersions, showAllVersions])
 
   const loaders = useMemo(() => {
     if (!selectedMcVersion) return []
     const loadersSet = new Set()
-    versions.forEach(version => {
-      if (version.game_versions.includes(selectedMcVersion)) {
-        version.loaders.forEach(l => loadersSet.add(l))
+    contextualVersions.forEach(version => {
+      if (getVersionGameVersions(version).includes(selectedMcVersion)) {
+        getVersionLoaders(version).forEach(l => loadersSet.add(l))
       }
     })
     return Array.from(loadersSet)
-  }, [versions, selectedMcVersion])
+  }, [contextualVersions, selectedMcVersion])
 
   const filteredMcVersions = useMemo(() => {
     if (!versionSearch) return mcVersions
@@ -430,14 +481,14 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const matchingVersion = useMemo(() => {
     if (!selectedMcVersion || !selectedLoader) return null
     
-    const filtered = versions.filter(version => {
-      const mcMatch = version.game_versions.includes(selectedMcVersion)
-      const loaderMatch = version.loaders.includes(selectedLoader)
+    const filtered = contextualVersions.filter(version => {
+      const mcMatch = getVersionGameVersions(version).includes(selectedMcVersion)
+      const loaderMatch = getVersionLoaders(version).includes(selectedLoader)
       return mcMatch && loaderMatch
     })
     
     return filtered[0] || null
-  }, [versions, selectedMcVersion, selectedLoader])
+  }, [contextualVersions, selectedMcVersion, selectedLoader])
 
   const getLoaderName = (loader) => {
     const names = {
@@ -511,11 +562,45 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">Скачать {mod.title}</h2>
               </div>
               <div className="flex items-center gap-1.5">
+                {alternateDownloadFormat && (
+                  <StyledTooltip
+                    label={
+                      <span className="text-sm leading-snug">
+                        {alternateDownloadFormat.tooltip}{' '}
+                        <Link
+                          href={alternateDownloadFormat.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-modrinth-green hover:underline"
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {alternateDownloadFormat.linkLabel}
+                        </Link>
+                      </span>
+                    }
+                  >
+                    <Link
+                      href={alternateDownloadFormat.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsOpen(false)}
+                      className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-500 hover:text-modrinth-green dark:text-gray-400 dark:hover:text-modrinth-green flex items-center justify-center"
+                      aria-label={alternateDownloadFormat.tooltip}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                        <path d="M16 3h5v5" />
+                        <path d="M8 3H3v5" />
+                        <path d="M12 22v-8.3a4 4 0 0 0 1.172-2.828L21 7" />
+                        <path d="m3 7 7.828 7.872A4 4 0 0 1 12 17.7V22" />
+                      </svg>
+                    </Link>
+                  </StyledTooltip>
+                )}
                 <StyledTooltip label="Посмотреть все версии">
                   <button
                     onClick={() => {
                       setIsOpen(false)
-                      window.location.href = `/${contentType.replace(/s$/, '')}/${mod.slug}/versions`
+                      window.location.href = `/${contentRoute}/${mod.slug}/versions`
                     }}
                     className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white flex items-center justify-center"
                   >
@@ -813,7 +898,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
 
                   <StyledTooltip label="Посмотреть список изменений">
                     <a
-                      href={`/${contentType.replace(/s$/, '')}/${mod.slug}/version/${matchingVersion.id}`}
+                      href={`/${contentRoute}/${mod.slug}/version/${matchingVersion.id}`}
                       onClick={() => setIsOpen(false)}
                       className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-[#2e3035] hover:bg-gray-300 dark:hover:bg-[#3b3d45] active:scale-[0.95] text-gray-700 dark:text-gray-300 transition-all flex-shrink-0"
                       aria-label="View version"
