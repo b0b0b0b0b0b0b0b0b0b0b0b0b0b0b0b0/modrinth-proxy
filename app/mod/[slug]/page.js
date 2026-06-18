@@ -153,7 +153,7 @@ export default async function ModPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={mod} organization={organization} teamMembers={teamMembers} />
+          <ResourceSidebar resource={mod} organization={organization} teamMembers={teamMembers} contentType="mod" />
         </div>
       </div>
     </div>

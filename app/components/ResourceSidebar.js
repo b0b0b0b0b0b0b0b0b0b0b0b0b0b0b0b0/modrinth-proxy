@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { LOADERS } from '@/lib/loaders'
 import { buildAllowedLoaderIds } from '@/lib/contextualVersions'
 import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
@@ -12,14 +13,26 @@ import GitHubSidebarSection from './GitHubSidebarSection'
 import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
 import LicenseLink from './LicenseLink'
 import AuthorsSection from './AuthorsSection'
+import StyledTooltip from './StyledTooltip'
+
+function contentTypeFromPathname(pathname) {
+  const match = pathname?.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\//)
+  return match?.[1] ?? null
+}
 
 export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null }) {
+  const pathname = usePathname()
+  const resolvedContentType = contentType ?? contentTypeFromPathname(pathname)
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
-  const allowedLoaderIds = contentType ? buildAllowedLoaderIds(contentType) : null
+  const allowedLoaderIds = resolvedContentType ? buildAllowedLoaderIds(resolvedContentType) : null
   const loaders = (resource.loaders || [])
-    .filter(l => l !== 'minecraft')
+    .filter((l) => {
+      if (l === 'minecraft') return false
+      if (l === 'datapack' && resolvedContentType !== 'datapack') return false
+      return true
+    })
     .filter(l => !allowedLoaderIds?.size || allowedLoaderIds.has(l))
-  const browseRoute = resolveContentTypeRoute(contentType, resource.project_type)
+  const browseRoute = resolveContentTypeRoute(resolvedContentType, resource.project_type)
   const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
   const environment = getEnvironment(resource.client_side, resource.server_side)
@@ -63,25 +76,28 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                     const filterUrl = `/${contentTypeRoute}?g=categories:${loaderId}`
                     
                     return (
-                      <Link
+                      <StyledTooltip
                         key={loaderId}
-                        href={filterUrl}
-                        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors group"
-                        title={loader.name}
+                        label={`Смотреть в каталоге · ${loader.name}`}
                       >
-                        <div 
-                          className="w-4 h-4 flex-shrink-0" 
-                          style={loader.color ? { color: loader.color } : { color: 'var(--text-secondary)' }}
+                        <Link
+                          href={filterUrl}
+                          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors group"
                         >
-                          {loader.icon}
-                        </div>
-                        <span 
-                          className="text-xs font-medium" 
-                          style={loader.color ? { color: loader.color } : { color: 'var(--text-secondary)' }}
-                        >
-                          {loader.name}
-                        </span>
-                      </Link>
+                          <div 
+                            className="w-4 h-4 flex-shrink-0" 
+                            style={loader.color ? { color: loader.color } : { color: 'var(--text-secondary)' }}
+                          >
+                            {loader.icon}
+                          </div>
+                          <span 
+                            className="text-xs font-medium" 
+                            style={loader.color ? { color: loader.color } : { color: 'var(--text-secondary)' }}
+                          >
+                            {loader.name}
+                          </span>
+                        </Link>
+                      </StyledTooltip>
                     )
                   })}
                 </div>
