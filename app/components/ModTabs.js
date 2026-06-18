@@ -5,6 +5,11 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { formatDate, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
+import {
+  filterVersionsByContentType,
+  getVersionGameVersions,
+  getVersionLoaders,
+} from '@/lib/contextualVersions'
 import { filterVersionChangelog } from '@/lib/contentFilter'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { LOADERS } from '@/lib/loaders'
@@ -49,22 +54,32 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
     }
   }
 
+  const pathMatch = pathname?.match(
+    /^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
+  )
+  const contentRoute = pathMatch?.[1] ?? 'mod'
+
+  const contextualVersions = useMemo(
+    () => filterVersionsByContentType(versions, contentRoute),
+    [versions, contentRoute],
+  )
+
   const mcVersions = useMemo(() => {
     const versionsSet = new Set()
-    versions.forEach(v => {
-      v.game_versions.forEach(gv => versionsSet.add(gv))
+    contextualVersions.forEach(v => {
+      getVersionGameVersions(v).forEach(gv => versionsSet.add(gv))
     })
     const sorted = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
     return sorted
-  }, [versions])
+  }, [contextualVersions])
 
   const loaders = useMemo(() => {
     const loadersSet = new Set()
-    versions.forEach(v => {
-      v.loaders.forEach(l => loadersSet.add(l))
+    contextualVersions.forEach(v => {
+      getVersionLoaders(v).forEach(l => loadersSet.add(l))
     })
     return Array.from(loadersSet)
-  }, [versions])
+  }, [contextualVersions])
 
   const releaseVersions = useMemo(() => {
     return mcVersions.filter(v => {
@@ -74,7 +89,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
   }, [mcVersions])
 
   const filteredVersions = useMemo(() => {
-    return versions.filter(version => {
+    return contextualVersions.filter(version => {
      
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
@@ -84,16 +99,16 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
       }
 
       if (selectedMcVersion !== 'all') {
-        if (!version.game_versions.includes(selectedMcVersion)) return false
+        if (!getVersionGameVersions(version).includes(selectedMcVersion)) return false
       }
 
       if (showOnlyReleases && selectedMcVersion === 'all') {
-        const hasReleaseVersion = version.game_versions.some(v => releaseVersions.includes(v))
+        const hasReleaseVersion = getVersionGameVersions(version).some(v => releaseVersions.includes(v))
         if (!hasReleaseVersion) return false
       }
 
       if (selectedLoader !== 'all') {
-        if (!version.loaders.includes(selectedLoader)) return false
+        if (!getVersionLoaders(version).includes(selectedLoader)) return false
       }
 
       if (selectedChannel !== 'all') {
@@ -102,12 +117,9 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
 
       return true
     })
-  }, [versions, searchQuery, selectedMcVersion, selectedLoader, selectedChannel, showOnlyReleases, releaseVersions])
+  }, [contextualVersions, searchQuery, selectedMcVersion, selectedLoader, selectedChannel, showOnlyReleases, releaseVersions])
 
-  const pathMatch = pathname?.match(
-    /^\/(mod|plugin|datapack|shader|resourcepack|modpack)\/([^/]+)/,
-  )
-  const changelogContentType = pathMatch?.[1] ?? 'mod'
+  const changelogContentType = contentRoute
   const changelogSlug = pathMatch?.[2] ?? mod.slug
   const changelogResourceBarHex = resolveModrinthProjectAccent(mod.color)?.accentHex
 

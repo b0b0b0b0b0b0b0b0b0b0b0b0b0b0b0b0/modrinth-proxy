@@ -7,6 +7,11 @@ import { useTheme } from 'next-themes'
 import { compressVersionRanges, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
+import {
+  filterVersionsByContentType,
+  getVersionGameVersions,
+  getVersionLoaders,
+} from '@/lib/contextualVersions'
 import { LOADERS } from '@/lib/loaders'
 import VersionsDropdown from './VersionsDropdown'
 import LoadersDropdown from './LoadersDropdown'
@@ -81,32 +86,37 @@ export default function VersionsList({
     setCurrentPage(1)
   }
 
+  const contextualVersions = useMemo(
+    () => filterVersionsByContentType(versions, contentType),
+    [versions, contentType],
+  )
+
   const mcVersions = useMemo(() => {
     const versionsSet = new Set()
-    versions.forEach(v => {
-      v.game_versions.forEach(gv => versionsSet.add(gv))
+    contextualVersions.forEach(v => {
+      getVersionGameVersions(v).forEach(gv => versionsSet.add(gv))
     })
     const sorted = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
     return sorted
-  }, [versions])
+  }, [contextualVersions])
 
   const loaders = useMemo(() => {
     const loadersSet = new Set()
-    versions.forEach(v => {
-      v.loaders.forEach(l => loadersSet.add(l))
+    contextualVersions.forEach(v => {
+      getVersionLoaders(v).forEach(l => loadersSet.add(l))
     })
     return Array.from(loadersSet)
-  }, [versions])
+  }, [contextualVersions])
 
   const channelTypesPresent = useMemo(() => {
     const s = new Set()
-    versions.forEach((v) => {
+    contextualVersions.forEach((v) => {
       if (v.version_type == null) return
       const t = String(v.version_type).toLowerCase().replace(/\s+/g, '_')
       if (t) s.add(t)
     })
     return s
-  }, [versions])
+  }, [contextualVersions])
 
   useEffect(() => {
     setSelectedChannel((ch) => {
@@ -125,7 +135,7 @@ export default function VersionsList({
   }, [mcVersions])
 
   const filteredVersions = useMemo(() => {
-    return versions.filter(version => {
+    return contextualVersions.filter(version => {
       if (searchQuery) {
         const query = searchQuery.toLowerCase()
         const matchName = version.name.toLowerCase().includes(query)
@@ -134,16 +144,16 @@ export default function VersionsList({
       }
 
       if (selectedMcVersion !== 'all') {
-        if (!version.game_versions.includes(selectedMcVersion)) return false
+        if (!getVersionGameVersions(version).includes(selectedMcVersion)) return false
       }
 
       if (showOnlyReleases && selectedMcVersion === 'all') {
-        const hasReleaseVersion = version.game_versions.some(v => releaseVersions.includes(v))
+        const hasReleaseVersion = getVersionGameVersions(version).some(v => releaseVersions.includes(v))
         if (!hasReleaseVersion) return false
       }
 
       if (selectedLoaders.length > 0) {
-        const hasSelectedLoader = version.loaders.some(l => selectedLoaders.includes(l))
+        const hasSelectedLoader = getVersionLoaders(version).some(l => selectedLoaders.includes(l))
         if (!hasSelectedLoader) return false
       }
 
@@ -157,7 +167,7 @@ export default function VersionsList({
 
       return true
     })
-  }, [versions, searchQuery, selectedMcVersion, selectedLoaders, selectedChannel, showOnlyReleases, releaseVersions])
+  }, [contextualVersions, searchQuery, selectedMcVersion, selectedLoaders, selectedChannel, showOnlyReleases, releaseVersions])
 
   const totalPages = Math.ceil(filteredVersions.length / versionsPerPage)
   const paginatedVersions = filteredVersions.slice(

@@ -5,7 +5,14 @@ import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
-import { getFilterConfig } from '@/lib/filterConfig'
+import {
+  buildAllowedLoaderIds,
+  filterVersionsByContentType,
+  getVersionGameVersions,
+  getVersionLoaders,
+  normalizeContentRoute,
+  versionMatchesLoaders,
+} from '@/lib/contextualVersions'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import StyledTooltip from './StyledTooltip'
 import { favoritesManager } from '@/lib/favoritesManager'
@@ -111,38 +118,12 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
   )
 }
 
-function getVersionGameVersions(version) {
-  return Array.isArray(version?.game_versions) ? version.game_versions : []
-}
-
-function getVersionLoaders(version) {
-  return Array.isArray(version?.loaders) ? version.loaders : []
-}
-
-function versionMatchesLoaders(version, allowedLoaderIds) {
-  if (!allowedLoaderIds?.size) return true
-  return getVersionLoaders(version).some((loader) => allowedLoaderIds.has(loader))
-}
-
-function normalizeContentRoute(contentType) {
-  const base = String(contentType || 'mods').replace(/^discover\//, '').replace(/s$/, '')
-  return base || 'mod'
-}
-
 function getProjectTypes(mod) {
   if (Array.isArray(mod?.project_types) && mod.project_types.length > 0) {
     return mod.project_types
   }
   if (mod?.project_type) return [mod.project_type]
   return []
-}
-
-function buildAllowedLoaderIds(contentType) {
-  const config = getFilterConfig(contentType)
-  const ids = new Set()
-  config.loaders?.forEach((loader) => ids.add(loader.id))
-  config.platforms?.forEach((platform) => ids.add(platform.id))
-  return ids
 }
 
 const ALTERNATE_DOWNLOAD_FORMATS = {
@@ -195,10 +176,10 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
 
   const allowedLoaderIds = useMemo(() => buildAllowedLoaderIds(contentType), [contentType])
 
-  const contextualVersions = useMemo(() => {
-    if (!allowedLoaderIds.size) return versions
-    return versions.filter((version) => versionMatchesLoaders(version, allowedLoaderIds))
-  }, [versions, allowedLoaderIds])
+  const contextualVersions = useMemo(
+    () => filterVersionsByContentType(versions, contentType),
+    [versions, contentType],
+  )
 
   const launcherUri = useMemo(() => {
     const isModpack = contentType === 'modpack' || contentType === 'modpacks'

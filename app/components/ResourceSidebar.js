@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { LOADERS } from '@/lib/loaders'
+import { buildAllowedLoaderIds } from '@/lib/contextualVersions'
 import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
 import CompressedGameVersionsChips from './CompressedGameVersionsChips'
 import CopyButton from './CopyButton'
@@ -14,7 +15,10 @@ import AuthorsSection from './AuthorsSection'
 
 export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null }) {
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
-  const loaders = (resource.loaders || []).filter(l => l !== 'minecraft')
+  const allowedLoaderIds = contentType ? buildAllowedLoaderIds(contentType) : null
+  const loaders = (resource.loaders || [])
+    .filter(l => l !== 'minecraft')
+    .filter(l => !allowedLoaderIds?.size || allowedLoaderIds.has(l))
   const browseRoute = resolveContentTypeRoute(contentType, resource.project_type)
   const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
