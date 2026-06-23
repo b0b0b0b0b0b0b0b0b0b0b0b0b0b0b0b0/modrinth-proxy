@@ -311,14 +311,6 @@ export async function GET() {
             </p>
         </div>
     </div>
-
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(function(error) {
-                console.log('SW registration failed');
-            });
-        }
-    </script>
 </body>
 </html>`
 

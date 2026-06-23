@@ -110,15 +110,6 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
               </div>
             )}
 
-            {alternateFormat && (
-              <div>
-                <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)] text-center">А так же</h3>
-                <div className="flex justify-center">
-                  <AlternateProjectFormatLink {...alternateFormat} />
-                </div>
-              </div>
-            )}
-
             {environment && (
               <div>
                 <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">Поддерживаемые окружения</h3>
@@ -131,6 +122,15 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {alternateFormat && (
+        <div className="bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
+          <h3 className="text-base font-bold m-0 mb-3 text-[var(--text-gray)] text-center">А так же</h3>
+          <div className="flex justify-center">
+            <AlternateProjectFormatLink {...alternateFormat} />
           </div>
         </div>
       )}

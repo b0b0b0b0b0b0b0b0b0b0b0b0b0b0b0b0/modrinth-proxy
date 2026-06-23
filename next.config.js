@@ -1,15 +1,19 @@
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
-  disable: true,
-  register: false,
+  disable: false,
+  register: true,
   skipWaiting: true,
+  cacheOnFrontEndNav: false,
   fallbacks: {
     document: '/offline.html',
   },
-  cacheOnFrontEndNav: false,
   buildExcludes: [
     /\/_next\/static\/.*/i,
     /\/_next\/data\/.*/i,
+    /_buildManifest\.js$/i,
+    /_ssgManifest\.js$/i,
+    /middleware-manifest\.json$/i,
+    /build-manifest\.json$/i,
   ],
   workboxOptions: {
     disableDevLogs: true,
@@ -18,10 +22,16 @@ const withPWA = require('@ducanh2912/next-pwa').default({
     skipWaiting: true,
     navigateFallback: null,
     navigateFallbackDenylist: [
+      /\/_next\//i,
+      /\/api\//i,
+    ],
+    exclude: [
       /\/_next\/static\/.*/i,
       /\/_next\/data\/.*/i,
-      /\/_next\/.*\.js$/i,
-      /\/_next\/.*\.css$/i,
+      /_buildManifest\.js$/i,
+      /_ssgManifest\.js$/i,
+      /middleware-manifest\.json$/i,
+      /build-manifest\.json$/i,
     ],
     runtimeCaching: [
       {
@@ -73,6 +83,19 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'no-cache, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/sw.js',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Service-Worker-Allowed',
+            value: '/',
           },
         ],
       },
