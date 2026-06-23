@@ -174,7 +174,7 @@ export default async function AuthorPage({ params, searchParams }) {
 
           <div className="mt-4">
             {projects.hits.length > 0 ? (
-              <ResourceList resources={projects.hits} type="mod" isProfile={true} />
+              <ResourceList resources={projects.hits} type={projectType || 'mod'} isProfile={true} />
             ) : (
               <div className="text-center py-16">
                 <div className="mb-4">

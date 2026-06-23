@@ -104,7 +104,7 @@ export default function ResourceList({ resources, type = 'mod', isProfile = fals
         <ResourceCard 
           key={resource.project_id || resource.id || resource.slug}
           resource={resource} 
-          type={resource.project_type || type} 
+          type={!isProfile || type !== 'mod' ? type : (resource.project_type || type)}
           forceLayout={activeLayout}
         />
       ))}

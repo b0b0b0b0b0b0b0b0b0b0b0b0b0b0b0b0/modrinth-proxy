@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getMod, getOrganization, getTeamMembers, getVersion, formatDate } from '@/lib/modrinth'
+import { getServer, getOrganization, getTeamMembers, getVersion, formatDate } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { getFilterConfig, getCategoryName } from '@/lib/filterConfig'
 import { buildServerPageMetadata, buildServerNotFoundMetadata } from '@/lib/serverPageSeo'
@@ -17,7 +17,7 @@ import rehypeRaw from 'rehype-raw'
 
 export async function generateMetadata({ params }) {
   try {
-    const server = await getMod(params.slug)
+    const server = await getServer(params.slug)
     return buildServerPageMetadata(server, params.slug)
   } catch {
     return buildServerNotFoundMetadata()
@@ -60,7 +60,7 @@ export default async function ServerPage({ params }) {
   let server, teamMembers, organization, requiredContentVersion = null;
   try {
     [server, teamMembers] = await Promise.all([
-      getMod(slug),
+      getServer(slug),
       getTeamMembers(slug),
     ]);
     
