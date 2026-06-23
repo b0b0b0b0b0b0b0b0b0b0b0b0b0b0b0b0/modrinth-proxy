@@ -13,8 +13,8 @@ import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
 import ExtensionBanner from './components/ExtensionBanner'
 import AppSettingsSync from './components/AppSettingsSync'
-import ChunkLoadRecovery from './components/ChunkLoadRecovery'
 import { PALETTES } from '../lib/paletteManager'
+import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -63,6 +63,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ru" className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{ __html: CHUNK_LOAD_RECOVERY_INLINE }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -129,7 +132,6 @@ export default function RootLayout({ children }) {
         >
           <AppTooltipProvider>
           <AppSettingsSync />
-          <ChunkLoadRecovery />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <TopNav />

@@ -1,7 +1,7 @@
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
-  disable: false,
-  register: true,
+  disable: true,
+  register: false,
   skipWaiting: true,
   fallbacks: {
     document: '/offline.html',
@@ -24,6 +24,14 @@ const withPWA = require('@ducanh2912/next-pwa').default({
       /\/_next\/.*\.css$/i,
     ],
     runtimeCaching: [
+      {
+        urlPattern: /\/_next\/static\/.*/i,
+        handler: 'NetworkOnly',
+      },
+      {
+        urlPattern: /\/_next\/data\/.*/i,
+        handler: 'NetworkOnly',
+      },
       {
         urlPattern: /^https:\/\/cdn\.modrinth\.com\/.*/i,
         handler: 'CacheFirst',
