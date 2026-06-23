@@ -13,6 +13,7 @@ import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
 import ExtensionBanner from './components/ExtensionBanner'
 import AppSettingsSync from './components/AppSettingsSync'
+import ChunkLoadRecovery from './components/ChunkLoadRecovery'
 import { PALETTES } from '../lib/paletteManager'
 
 const nunito = Nunito({
@@ -128,6 +129,7 @@ export default function RootLayout({ children }) {
         >
           <AppTooltipProvider>
           <AppSettingsSync />
+          <ChunkLoadRecovery />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <TopNav />

@@ -14,6 +14,8 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   workboxOptions: {
     disableDevLogs: true,
     cleanupOutdatedCaches: true,
+    clientsClaim: true,
+    skipWaiting: true,
     navigateFallback: null,
     navigateFallbackDenylist: [
       /\/_next\/static\/.*/i,
@@ -55,6 +57,19 @@ const nextConfig = {
   staticPageGenerationTimeout: 300,
   trailingSlash: false,
   poweredByHeader: false,
+  async headers() {
+    return [
+      {
+        source: '/:path((?!_next/static|_next/image|favicon.ico|icon.png|manifest.json|sw.js|workbox-).*)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, must-revalidate',
+          },
+        ],
+      },
+    ]
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
