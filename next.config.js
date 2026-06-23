@@ -4,34 +4,42 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   register: true,
   skipWaiting: true,
   cacheOnFrontEndNav: false,
+  cacheStartUrl: true,
   fallbacks: {
     document: '/offline.html',
   },
-  buildExcludes: [
-    /\/_next\/static\/.*/i,
-    /\/_next\/data\/.*/i,
-    /_buildManifest\.js$/i,
-    /_ssgManifest\.js$/i,
-    /middleware-manifest\.json$/i,
-    /build-manifest\.json$/i,
-  ],
   workboxOptions: {
     disableDevLogs: true,
     cleanupOutdatedCaches: true,
     clientsClaim: true,
     skipWaiting: true,
     navigateFallback: null,
-    navigateFallbackDenylist: [
-      /\/_next\//i,
-      /\/api\//i,
-    ],
+    navigateFallbackDenylist: [/\/_next\//i, /\/api\//i],
     exclude: [
-      /\/_next\/static\/.*/i,
-      /\/_next\/data\/.*/i,
-      /_buildManifest\.js$/i,
-      /_ssgManifest\.js$/i,
-      /middleware-manifest\.json$/i,
-      /build-manifest\.json$/i,
+      /\.map$/,
+      /^manifest.*\.js$/,
+      /\/_next\/static\/.*(?<!\.p)\.woff2/,
+      ({ asset }) => {
+        const name = asset?.name || ''
+        return (
+          name.startsWith('static/') ||
+          name.startsWith('server/') ||
+          name.includes('_buildManifest') ||
+          name.includes('_ssgManifest') ||
+          /^((app-|^)build-manifest\.json|react-loadable-manifest\.json)$/.test(name)
+        )
+      },
+    ],
+    manifestTransforms: [
+      async (manifestEntries) => ({
+        manifest: manifestEntries.filter(
+          (entry) =>
+            !entry.url.includes('/_next/') &&
+            !entry.url.includes('_buildManifest') &&
+            !entry.url.includes('_ssgManifest'),
+        ),
+        warnings: [],
+      }),
     ],
     runtimeCaching: [
       {
