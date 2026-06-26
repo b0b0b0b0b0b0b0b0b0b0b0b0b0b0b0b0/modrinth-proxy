@@ -3,6 +3,7 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 Disallow: /sw.js
+Disallow: /sw-v2.js
 
 Sitemap: https://modrinth.black/sitemap.xml
 

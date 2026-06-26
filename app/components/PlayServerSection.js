@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 import { SERVER_REGIONS } from '@/lib/serverCategories'
 import StyledTooltip from './StyledTooltip'
@@ -22,8 +23,13 @@ const mapRegion = (region) => {
 export default function PlayServerSection({ resource, playersOnline, region, address }) {
   const [copied, setCopied] = useState(false)
   const [modalOpen, setModalOpen] = useState(false)
+  const [portalTarget, setPortalTarget] = useState(null)
   const [countdown, setCountdown] = useState(3)
   const [progress, setProgress] = useState(1)
+
+  useEffect(() => {
+    setPortalTarget(document.body)
+  }, [])
 
   const handleCopy = async () => {
     if (!address) return
@@ -63,7 +69,12 @@ export default function PlayServerSection({ resource, playersOnline, region, add
       }
     }, 16)
 
-    return () => clearInterval(interval)
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      clearInterval(interval)
+      document.body.style.overflow = ''
+    }
   }, [modalOpen])
 
   const circumference = 2 * Math.PI * 45
@@ -138,10 +149,10 @@ export default function PlayServerSection({ resource, playersOnline, region, add
         </div>
       )}
 
-      {modalOpen && (
+      {modalOpen && portalTarget && createPortal(
         <div 
           onClick={() => setModalOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
         >
           <div 
             onClick={(e) => e.stopPropagation()}
@@ -265,7 +276,8 @@ export default function PlayServerSection({ resource, playersOnline, region, add
               </a>
             </div>
           </div>
-        </div>
+        </div>,
+        portalTarget,
       )}
     </div>
   )

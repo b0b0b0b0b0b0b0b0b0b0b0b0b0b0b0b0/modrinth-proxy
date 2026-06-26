@@ -28,6 +28,8 @@ coverage/
 
 public/sw.js
 public/sw.js.map
+public/sw-v2.js
+public/sw-v2.js.map
 public/workbox-*.js
 public/workbox-*.js.map
 public/fallback*.js

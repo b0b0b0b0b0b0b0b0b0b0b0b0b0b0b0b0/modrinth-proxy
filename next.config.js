@@ -1,5 +1,6 @@
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
+  sw: 'sw-v2.js',
   disable: false,
   register: false,
   skipWaiting: true,
@@ -86,7 +87,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path((?!_next/static|_next/image|favicon.ico|icon.png|manifest.json|sw.js|workbox-).*)',
+        source: '/:path((?!_next/static|_next/image|favicon.ico|icon.png|manifest.json|sw.js|sw-v2.js|workbox-).*)',
         headers: [
           {
             key: 'Cache-Control',
@@ -96,6 +97,15 @@ const nextConfig = {
       },
       {
         source: '/sw.js',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      },
+      {
+        source: '/sw-v2.js',
         headers: [
           {
             key: 'Cache-Control',
