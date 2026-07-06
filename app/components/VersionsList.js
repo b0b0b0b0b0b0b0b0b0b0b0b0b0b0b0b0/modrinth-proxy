@@ -24,7 +24,6 @@ const ROW_GRID_XL_WITH_ENV =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(48px,68px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
 const ROW_GRID_XL_NO_ENV =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
-/** У ресурс-паков нет платформенных лоадеров в интерфейсе Modrinth */
 const ROW_GRID_XL_RESOURCEPACK =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
 
@@ -555,5 +554,3 @@ export default function VersionsList({
     </div>
   )
 }
-
-

@@ -91,5 +91,3 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
     </div>
   )
 }
-
-

@@ -129,7 +129,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/mods'] = el}
         href="/discover/mods" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)] hover:bg-[rgba(var(--color-green-rgb),0.18)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/mods') || isActive('/mods') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-[color:var(--color-green-hover)] dark:group-hover:text-modrinth-green-light'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path>
@@ -142,7 +142,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/resourcepacks'] = el}
         href="/discover/resourcepacks" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-purple-500/10 dark:hover:bg-purple-500/10 hover:bg-purple-200/30 dark:hover:bg-purple-500/10">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-purple-500/10 dark:hover:bg-purple-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/resourcepacks') || isActive('/resourcepacks') ? 'text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3"></path>
@@ -155,7 +155,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/datapacks'] = el}
         href="/discover/datapacks" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-orange-500/10 dark:hover:bg-orange-500/10 hover:bg-orange-200/30 dark:hover:bg-orange-500/10">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-orange-500/10 dark:hover:bg-orange-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/datapacks') || isActive('/datapacks') ? 'text-orange-600 dark:text-orange-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path>
@@ -167,7 +167,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/shaders'] = el}
         href="/discover/shaders" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/10 hover:bg-cyan-200/30 dark:hover:bg-cyan-500/10">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/shaders') || isActive('/shaders') ? 'text-cyan-600 dark:text-cyan-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-cyan-600 dark:group-hover:text-cyan-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="6" cy="15" r="4"></circle>
@@ -181,7 +181,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/modpacks'] = el}
         href="/discover/modpacks" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-red-500/10 dark:hover:bg-red-500/10 hover:bg-red-200/30 dark:hover:bg-red-500/10">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-red-500/10 dark:hover:bg-red-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/modpacks') || isActive('/modpacks') ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M12 22v-9M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.66 1.66 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z"></path>
@@ -195,7 +195,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/plugins'] = el}
         href="/discover/plugins" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-blue-500/10 dark:hover:bg-blue-500/10 hover:bg-blue-200/30 dark:hover:bg-blue-500/10">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-blue-500/10 dark:hover:bg-blue-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/plugins') || isActive('/plugins') ? 'text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path>
@@ -207,7 +207,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/discover/servers'] = el}
         href="/discover/servers" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-indigo-500/10 dark:hover:bg-indigo-950/30 hover:bg-indigo-200/30 dark:hover:bg-indigo-950/30">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-indigo-500/10 dark:hover:bg-indigo-950/30">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/servers') || isActive('/servers') ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <line x1="22" x2="2" y1="12" y2="12" />
@@ -224,7 +224,7 @@ export default function Navigation() {
       <Link 
         ref={el => linksRef.current['/app'] = el}
         href="/app" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30 hover:bg-emerald-200/30 dark:hover:bg-emerald-950/30">
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g>
@@ -307,5 +307,3 @@ export default function Navigation() {
     </div>
   )
 }
-
-

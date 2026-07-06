@@ -36,5 +36,3 @@ export default function MobileMenu({ initialVersions = null }) {
     </div>
   )
 }
-
-

@@ -7,17 +7,9 @@ export async function POST(request) {
   } catch {
     return Response.json({ error: 'invalid body' }, { status: 400 })
   }
-
   const { dependencies, loader, gameVersion } = body || {}
-
-  if (!loader || !gameVersion) {
-    return Response.json({ error: 'loader and gameVersion required' }, { status: 400 })
-  }
-
-  if (!Array.isArray(dependencies)) {
-    return Response.json({ error: 'dependencies required' }, { status: 400 })
-  }
-
+  if (!loader || !gameVersion) return Response.json({ error: 'loader and gameVersion required' }, { status: 400 })
+  if (!Array.isArray(dependencies)) return Response.json({ error: 'dependencies required' }, { status: 400 })
   try {
     const items = await downloadDependencyResolver.resolve(dependencies, { loader, gameVersion })
     return Response.json(items, {

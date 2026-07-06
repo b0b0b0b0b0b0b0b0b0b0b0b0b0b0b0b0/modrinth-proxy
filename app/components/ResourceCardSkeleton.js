@@ -55,4 +55,3 @@ export default function ResourceCardSkeleton({ variant = 'default' }) {
     </div>
   )
 }
-

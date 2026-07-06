@@ -14,7 +14,6 @@ import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
-import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('resourcepacks', searchParams, { basePath: 'resourcepacks' })
@@ -294,7 +293,3 @@ export default async function ResourcepacksPage({ searchParams }) {
     </>
   )
 }
-
-
-
-

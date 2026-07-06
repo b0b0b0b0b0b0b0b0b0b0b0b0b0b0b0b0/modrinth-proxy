@@ -10,7 +10,6 @@ const mapRegion = (region) => {
   if (!region) return ''
   const reg = SERVER_REGIONS.find(r => r.id.toLowerCase() === region.toLowerCase())
   if (reg) return reg.name
-  
   const fallbackMapping = {
     'us_west': 'Западное побережье США',
     'us_east': 'Восточное побережье США',
@@ -191,10 +190,11 @@ export default function PlayServerSection({ resource, playersOnline, region, add
               <div className="flex flex-col items-center gap-4 bg-gray-900/50 border border-gray-800/80 rounded-2xl p-4 w-full">
                 <div className="flex items-center gap-3 rounded-xl bg-gray-900/80 border border-gray-800/40 p-3 w-full">
                   {resource.icon_url && (
-                    <img 
+                    <img
                       className="w-12 h-12 rounded-xl object-cover flex-shrink-0" 
-                      src={resource.icon_url} 
-                      alt="" 
+                      src={resource.icon_url}
+                      alt=""
+                      referrerPolicy="no-referrer"
                     />
                   )}
                   <div className="flex flex-col min-w-0">
@@ -221,7 +221,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                 </div>
 
                 <div className="flex flex-col text-left gap-3 w-full">
-                  <span className="font-semibold text-white text-xs uppercase tracking-wider text-gray-500">
+                  <span className="font-semibold text-white text-xs uppercase tracking-wider">
                     Зачем использовать Modrinth App
                   </span>
                   <div className="flex flex-col gap-2">

@@ -72,4 +72,3 @@ export default async function ResourcepackVersionsPage({ params, searchParams = 
     </div>
   )
 }
-

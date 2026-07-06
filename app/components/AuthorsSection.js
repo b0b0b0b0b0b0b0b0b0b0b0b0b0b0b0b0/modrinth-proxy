@@ -20,6 +20,7 @@ function OrganizationRow({ organization, linkClassName = '' }) {
           src={org.iconUrl}
           alt={org.name}
           className="size-8 shrink-0 rounded object-cover"
+          referrerPolicy="no-referrer"
         />
       ) : (
         <div className="flex size-8 shrink-0 items-center justify-center rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/20 to-orange-400/10">
@@ -50,6 +51,7 @@ function TeamMemberRow({ member, linkClassName = '' }) {
           src={member.user.avatar_url}
           alt={member.user.username}
           className="size-8 shrink-0 rounded-full object-cover"
+          referrerPolicy="no-referrer"
         />
       ) : (
         <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">

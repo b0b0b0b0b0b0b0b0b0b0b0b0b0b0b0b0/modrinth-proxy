@@ -159,4 +159,3 @@ export default async function ModPage({ params }) {
     </div>
   )
 }
-

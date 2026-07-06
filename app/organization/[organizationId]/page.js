@@ -121,6 +121,7 @@ export default async function OrganizationPage({ params }) {
                   src={presenter.iconUrl}
                   alt={presenter.name}
                   className="size-24 shrink-0 rounded object-cover"
+                  referrerPolicy="no-referrer"
                 />
               ) : (
                 <div className="flex size-24 shrink-0 items-center justify-center rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/20 to-orange-400/10">

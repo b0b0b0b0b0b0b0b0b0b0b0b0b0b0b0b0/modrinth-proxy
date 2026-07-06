@@ -14,4 +14,3 @@ export default function CurrentDomain() {
     <span className="font-medium select-none">{domain}</span>
   )
 }
-

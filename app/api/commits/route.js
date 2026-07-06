@@ -11,17 +11,9 @@ export async function GET() {
         }
       }
     )
-    
-    if (!res.ok) {
-      return Response.json({ error: 'Failed to fetch commits' }, { status: 500 })
-    }
-    
+    if (!res.ok) return Response.json({ error: 'Failed to fetch commits' }, { status: 500 })
     const commits = await res.json()
-    
-    if (!Array.isArray(commits)) {
-      return Response.json({ error: 'Invalid response from GitHub' }, { status: 500 })
-    }
-    
+    if (!Array.isArray(commits)) return Response.json({ error: 'Invalid response from GitHub' }, { status: 500 })
     return Response.json(commits, {
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400'
@@ -32,4 +24,3 @@ export async function GET() {
     return Response.json({ error: 'Failed to fetch commits' }, { status: 500 })
   }
 }
-

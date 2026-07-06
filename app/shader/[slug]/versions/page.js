@@ -72,4 +72,3 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
     </div>
   )
 }
-

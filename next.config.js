@@ -77,6 +77,14 @@ const nextConfig = {
   },
   images: {
     domains: ['cdn.modrinth.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.modrinth.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
     unoptimized: true,
   },
   eslint: {

@@ -159,10 +159,11 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                 <div className="flex gap-1.5 items-center justify-between px-3 pr-1.5 py-1.5 rounded-xl bg-gray-900/50 border border-gray-800/40">
                   <div className="flex gap-2 items-center min-w-0">
                     {server.minecraft_java_server.content.project_icon && (
-                      <img 
-                        className="w-9 h-9 rounded-lg object-cover flex-shrink-0" 
-                        src={server.minecraft_java_server.content.project_icon} 
-                        alt="" 
+                      <img
+                        className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                        src={server.minecraft_java_server.content.project_icon}
+                        alt=""
+                        referrerPolicy="no-referrer"
                       />
                     )}
                     <div className="flex flex-col min-w-0">

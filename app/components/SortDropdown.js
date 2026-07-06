@@ -3,12 +3,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 
-export default function SortDropdown({ 
-  currentSort = 'relevance', 
-  query = '', 
-  version = '', 
+export default function SortDropdown({
+  currentSort = 'relevance',
+  query = '',
+  version = '',
   categoryPath = 'mods',
-  searchParams = {} 
+  searchParams = {}
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -127,4 +127,3 @@ export default function SortDropdown({
     </div>
   )
 }
-

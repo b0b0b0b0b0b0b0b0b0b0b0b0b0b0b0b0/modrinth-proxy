@@ -5,8 +5,6 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useState, useRef } from 'react'
 import CurrentDomain from './CurrentDomain'
 
-const ICON_VERSION = '2'
-
 export default function Logo() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -23,13 +21,11 @@ export default function Logo() {
       while (target && target !== document.body) {
         if (target.tagName === 'A') {
           const href = target.getAttribute('href') || target.href
-          
           if (href && !href.startsWith('#') && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
             try {
               if (href.startsWith('/') || href.startsWith(window.location.origin)) {
                 const url = new URL(href.startsWith('/') ? href : new URL(href).pathname, window.location.origin)
                 const currentUrl = window.location
-                
                 if (url.pathname !== currentUrl.pathname || url.search !== currentUrl.search) {
                   shouldStartLoading = true
                   break
@@ -124,6 +120,7 @@ export default function Logo() {
         style={{
           animationDuration: isLoading ? '0.8s' : undefined
         }}
+        referrerPolicy="no-referrer"
       />
       <span className="text-lg md:text-xl font-bold bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent hidden sm:block group-hover:from-modrinth-green-light group-hover:to-modrinth-green transition-all select-none">ModrinthProxy</span>
       <div className="hidden sm:block absolute top-full left-1/2 -translate-x-1/2 mt-[2px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 pointer-events-none z-50 select-none">
@@ -162,4 +159,3 @@ export default function Logo() {
     </Link>
   )
 }
-

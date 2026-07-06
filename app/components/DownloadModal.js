@@ -505,7 +505,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
             <div className="bg-gray-50 dark:bg-modrinth-darker border-b border-gray-200 dark:border-none p-5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 {mod.icon_url && (
-                  <img src={mod.icon_url} alt={mod.title} className="w-10 h-10 rounded-lg" />
+                  <img src={mod.icon_url} alt={mod.title} className="w-10 h-10 rounded-lg" referrerPolicy="no-referrer" />
                 )}
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white">Скачать {mod.title}</h2>
               </div>
@@ -879,5 +879,3 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     </>
   )
 }
-
-

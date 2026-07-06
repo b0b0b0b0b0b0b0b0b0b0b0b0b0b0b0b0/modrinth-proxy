@@ -112,9 +112,10 @@ export default async function UserPage({ params, searchParams }) {
             }} />
             {author.avatar_url ? (
               <img 
-                src={author.avatar_url} 
+                src={author.avatar_url}
                 alt={author.username}
                 className="w-24 h-24 rounded-lg object-cover flex-shrink-0"
+                referrerPolicy="no-referrer"
               />
             ) : (
               <div className="w-24 h-24 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-2xl font-bold flex-shrink-0">

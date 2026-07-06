@@ -10,6 +10,7 @@ function BadgeItem({ badge }) {
       alt={badge.name}
       className="size-full p-0.5"
       loading="lazy"
+      referrerPolicy="no-referrer"
     />
   )
 
@@ -59,6 +60,7 @@ export default function UserSidebar({ organizations = [], badges = [] }) {
                         src={presenter.iconUrl}
                         alt={presenter.name}
                         className="size-12 rounded object-cover"
+                        referrerPolicy="no-referrer"
                       />
                     ) : (
                       <div className="flex size-12 items-center justify-center rounded bg-gradient-to-br from-orange-500/20 to-orange-400/10 text-sm font-bold text-orange-400">

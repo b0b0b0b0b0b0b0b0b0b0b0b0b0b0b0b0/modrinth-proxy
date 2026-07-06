@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import DownloadButtons from './DownloadButtons'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
@@ -30,8 +29,9 @@ export default async function AppPage() {
               <div className="relative max-w-5xl mx-auto mt-16">
                 <img 
                   src="https://cdn-raw.modrinth.com/app-landing/app-screenshot.webp" 
-                  alt="Modrinth App Screenshot" 
+                  alt="Modrinth App Screenshot"
                   className="w-full h-auto"
+                  referrerPolicy="no-referrer"
                 />
               </div>
             </div>

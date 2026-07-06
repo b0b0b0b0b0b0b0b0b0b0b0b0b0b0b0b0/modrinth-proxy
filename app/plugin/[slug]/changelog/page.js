@@ -128,4 +128,3 @@ export default async function PluginChangelogPage({ params }) {
     </div>
   )
 }
-

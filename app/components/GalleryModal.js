@@ -41,6 +41,7 @@ export default function GalleryModal({ image, onClose, onPrev, onNext, hasPrev, 
         alt={image.title || 'Gallery image'}
         className="relative z-[221] max-h-[85vh] max-w-[90vw] w-auto h-auto object-contain rounded-lg"
         onClick={(e) => e.stopPropagation()}
+        referrerPolicy="no-referrer"
       />
 
       <div className="fixed bottom-8 left-1/2 z-[222] flex -translate-x-1/2 transform items-center gap-2 rounded-full bg-black/40 px-2 py-2 opacity-60 backdrop-blur-sm transition-all duration-200 hover:opacity-100">
@@ -102,4 +103,3 @@ export default function GalleryModal({ image, onClose, onPrev, onNext, hasPrev, 
     document.body,
   )
 }
-

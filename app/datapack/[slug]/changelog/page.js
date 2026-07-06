@@ -92,4 +92,3 @@ export default async function DatapackChangelogPage({ params }) {
     </div>
   )
 }
-

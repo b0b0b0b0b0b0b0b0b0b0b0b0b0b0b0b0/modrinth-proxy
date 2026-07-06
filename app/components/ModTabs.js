@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useEffect } from 'react'
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { formatDate, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
@@ -24,7 +24,6 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
   const [activeTab, setActiveTab] = useState(initialTab)
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
   
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedMcVersion, setSelectedMcVersion] = useState('all')

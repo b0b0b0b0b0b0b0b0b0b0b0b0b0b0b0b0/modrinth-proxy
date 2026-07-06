@@ -3,8 +3,7 @@ import { isOrganizationBlocked, isProjectBlocked } from '@/lib/contentFilter'
 import ProjectBackdrop from './ProjectBackdrop'
 
 export default async function ProjectBackdropLayoutShell({ slug, children }) {
-  const safeSlug =
-    typeof slug === 'string' ? slug.trim() : typeof slug === 'number' ? String(slug) : ''
+  const safeSlug = typeof slug === 'string' ? slug.trim() : typeof slug === 'number' ? String(slug) : ''
 
   if (!safeSlug || isProjectBlocked(safeSlug)) {
     return children

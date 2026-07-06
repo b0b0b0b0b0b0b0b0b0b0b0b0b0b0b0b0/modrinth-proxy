@@ -4,8 +4,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 
 export default function SearchInput({ 
-  defaultValue = '', 
-  placeholder = 'Поиск...', 
+  defaultValue = '',
+  placeholder = 'Поиск...',
   categoryPath = 'mods',
   delay = 500,
 }) {

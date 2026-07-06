@@ -16,6 +16,7 @@ export default function ProjectBackdrop({ src }) {
         height={506}
         decoding="async"
         className="absolute left-1/2 top-[-14%] h-[clamp(520px,68vmin,920px)] w-[220%] min-w-[920px] max-w-[2600px] origin-top -translate-x-1/2 object-cover blur-3xl scale-x-[1.1] scale-y-[1.28] opacity-[0.26] saturate-[1.08] motion-reduce:blur-xl motion-reduce:scale-y-110 motion-reduce:opacity-[0.12]"
+        referrerPolicy="no-referrer"
       />
       <div
         className="absolute inset-0"

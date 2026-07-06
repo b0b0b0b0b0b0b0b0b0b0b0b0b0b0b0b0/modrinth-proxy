@@ -73,4 +73,3 @@ export default async function ModpackVersionsPage({ params, searchParams }) {
     </div>
   )
 }
-

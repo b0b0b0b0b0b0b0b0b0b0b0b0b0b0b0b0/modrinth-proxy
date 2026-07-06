@@ -74,4 +74,3 @@ export default async function ResourcepackChangelogPage({ params }) {
     </div>
   )
 }
-

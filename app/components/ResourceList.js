@@ -111,4 +111,3 @@ export default function ResourceList({ resources, type = 'mod', isProfile = fals
     </div>
   )
 }
-

@@ -152,4 +152,3 @@ export default async function PluginPage({ params }) {
     </div>
   )
 }
-

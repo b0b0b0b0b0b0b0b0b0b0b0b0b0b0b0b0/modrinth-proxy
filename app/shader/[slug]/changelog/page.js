@@ -74,4 +74,3 @@ export default async function ShaderChangelogPage({ params }) {
     </div>
   )
 }
-

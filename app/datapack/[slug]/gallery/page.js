@@ -125,4 +125,3 @@ export default async function DatapackGalleryPage({ params }) {
     </div>
   )
 }
-

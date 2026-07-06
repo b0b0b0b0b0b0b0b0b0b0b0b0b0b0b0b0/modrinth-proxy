@@ -9,7 +9,6 @@ export default function NewsCounter() {
     const checkUnread = async () => {
       try {
         const lastSeenSha = localStorage.getItem('lastSeenCommitSha')
-        
         const res = await fetch('/api/commits')
         const commits = await res.json()
         
@@ -58,5 +57,3 @@ export default function NewsCounter() {
     </span>
   )
 }
-
-

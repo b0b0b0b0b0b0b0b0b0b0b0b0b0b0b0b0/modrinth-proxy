@@ -298,5 +298,3 @@ export default async function ModsPage({ searchParams }) {
     </>
   )
 }
-
-

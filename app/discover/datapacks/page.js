@@ -279,5 +279,3 @@ export default async function DatapacksPage({ searchParams }) {
     </>
   )
 }
-
-

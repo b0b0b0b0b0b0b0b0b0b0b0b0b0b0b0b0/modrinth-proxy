@@ -41,4 +41,3 @@ export default function TiltCard({ children, className, shadowColor = 'rgba(239,
     </div>
   )
 }
-

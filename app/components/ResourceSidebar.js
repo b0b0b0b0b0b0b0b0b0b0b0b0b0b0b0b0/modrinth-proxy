@@ -407,4 +407,3 @@ function formatTimeAgo(dateString) {
   
   return 'только что'
 }
-

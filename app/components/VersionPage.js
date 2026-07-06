@@ -1,9 +1,6 @@
 import Link from 'next/link'
-import { formatDownloads, formatDate, formatFileSize, groupVersionsByMajor, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { formatDownloads, formatFileSize, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
-import { CATEGORIES } from '@/lib/categories'
-import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
-import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { LOADERS } from '@/lib/loaders'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -119,10 +116,11 @@ class VersionMetadata {
                   {this.author && (
                     <>
                       {this.author.avatar_url && (
-                        <img 
-                          src={this.author.avatar_url} 
+                        <img
+                          src={this.author.avatar_url}
                           alt={this.author.username}
                           className="w-6 h-6 rounded-full"
+                          referrerPolicy="no-referrer"
                         />
                       )}
                       <Link href={`/user/${this.author.id}`} className="font-semibold hover:text-modrinth-green transition-colors">
@@ -374,5 +372,3 @@ export default function VersionPage({ project, version, author, contentType, plu
     </div>
   )
 }
-
-

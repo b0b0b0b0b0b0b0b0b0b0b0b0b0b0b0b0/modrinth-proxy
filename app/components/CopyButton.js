@@ -59,5 +59,3 @@ export default function CopyButton({ text, tooltipLabel = 'Скопироват�
     </StyledTooltip>
   )
 }
-
-

@@ -7,7 +7,6 @@ import StyledTooltip from './StyledTooltip'
 
 export default function OrganizationMembersSidebar({ members = [] }) {
   const items = new TeamMemberPresenter(members).sorted()
-
   if (items.length === 0) return null
 
   return (
@@ -25,6 +24,7 @@ export default function OrganizationMembersSidebar({ members = [] }) {
                 src={member.user.avatar_url}
                 alt={member.user.username}
                 className="size-8 shrink-0 rounded-full object-cover"
+                referrerPolicy="no-referrer"
               />
             ) : (
               <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">

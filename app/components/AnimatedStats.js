@@ -60,5 +60,3 @@ export default function AnimatedStats({ end, duration = 2000, suffix = '' }) {
     </span>
   )
 }
-
-

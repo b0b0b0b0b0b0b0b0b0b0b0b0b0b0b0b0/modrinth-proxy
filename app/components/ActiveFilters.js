@@ -5,13 +5,10 @@ import { useSearchParams } from 'next/navigation'
 import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEnvironmentName } from '@/lib/filterConfig'
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
 
-
 export default function ActiveFilters({ categoryPath = 'plugins' }) {
   const searchParams = useSearchParams()
   const config = getFilterConfig(categoryPath)
-  
   const activeFilters = []
-
   const scParams = Array.isArray(searchParams.getAll('sc')) ? searchParams.getAll('sc') : (searchParams.get('sc') ? [searchParams.get('sc')] : [])
   scParams.forEach(param => {
     if (!param) return
@@ -225,7 +222,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       {activeFilters.length >= 2 && (
         <Link
           href={clearAllUrl()}
-          className="bg-gray-800 hover:bg-gray-700 px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 text-gray-300 hover:text-white transition-colors border-none transition-transform active:scale-[0.95] cursor-pointer"
+          className="bg-gray-800 hover:bg-gray-700 px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 text-gray-300 hover:text-white transition-colors border-none active:scale-[0.95] cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"></circle>
@@ -239,7 +236,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         <Link
           key={`${filter.type}-${filter.id}-${index}`}
           href={buildUrlWithoutFilter(filter)}
-          className="bg-gray-800 hover:bg-gray-700 px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 text-gray-300 hover:text-white transition-colors border-none transition-transform active:scale-[0.95] cursor-pointer"
+          className="bg-gray-800 hover:bg-gray-700 px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 text-gray-300 hover:text-white transition-colors border-none active:scale-[0.95] cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" className="w-4 h-4 shrink-0">
             <path fillRule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L10 8.586l4.293-4.293a1 1 0 1 1 1.414 1.414L11.414 10l4.293 4.293a1 1 0 0 1-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L8.586 10 4.293 5.707a1 1 0 0 1 0-1.414" clipRule="evenodd"></path>
@@ -250,4 +247,3 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     </div>
   )
 }
-

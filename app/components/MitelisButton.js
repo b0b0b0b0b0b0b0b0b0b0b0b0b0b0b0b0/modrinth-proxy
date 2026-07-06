@@ -51,4 +51,3 @@ export default function MitelisButton({ animationData }) {
     </a>
   )
 }
-

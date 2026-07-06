@@ -96,6 +96,7 @@ export default function GalleryGrid({ gallery }) {
                   alt={item.title || 'Gallery image'}
                   className="w-full h-auto object-cover hover:opacity-90 transition-opacity"
                   loading="lazy"
+                  referrerPolicy="no-referrer"
                 />
               </button>
             )}
@@ -133,10 +134,9 @@ export default function GalleryGrid({ gallery }) {
 
 function formatDate(dateString) {
   const date = new Date(dateString)
-  return date.toLocaleDateString('ru-RU', { 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
+  return date.toLocaleDateString('ru-RU', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
   })
 }
-

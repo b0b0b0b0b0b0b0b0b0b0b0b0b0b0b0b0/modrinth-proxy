@@ -54,4 +54,3 @@ export default function EmailCopyButton({ email }) {
     </button>
   )
 }
-

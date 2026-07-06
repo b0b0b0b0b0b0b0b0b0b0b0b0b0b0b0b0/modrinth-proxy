@@ -2,12 +2,12 @@
 
 import { useState, useRef, useEffect } from 'react'
 
-export default function VersionsDropdown({ 
-  versions, 
-  selectedVersion, 
-  onVersionChange, 
-  showOnlyReleases, 
-  onShowOnlyReleasesChange 
+export default function VersionsDropdown({
+  versions,
+  selectedVersion,
+  onVersionChange,
+  showOnlyReleases,
+  onShowOnlyReleasesChange
 }) {
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -114,5 +114,3 @@ export default function VersionsDropdown({
     </div>
   )
 }
-
-

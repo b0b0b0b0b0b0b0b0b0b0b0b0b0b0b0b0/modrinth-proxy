@@ -9,7 +9,6 @@ import DownloadModal from './DownloadModal'
 import MobileDownloadButton from './MobileDownloadButton'
 import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckPromo'
 import AuthorPluginPromo from './AuthorPluginPromo'
-import CopyButton from './CopyButton'
 import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
 import ServerCategoryTagsRow from './ServerCategoryTagsRow'
@@ -113,6 +112,7 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
                 src={iconUrl}
                 alt={resource.title}
                 className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
+                referrerPolicy="no-referrer"
               />
             )}
             <div className="flex-1 min-w-0">
@@ -289,4 +289,3 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
     </>
   )
 }
-

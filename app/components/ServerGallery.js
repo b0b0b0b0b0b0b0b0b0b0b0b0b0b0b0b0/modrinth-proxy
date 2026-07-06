@@ -61,14 +61,16 @@ export default function ServerGallery({ gallery = [] }) {
               }`}
             >
               <img 
-                src={src} 
-                alt="" 
+                src={src}
+                alt=""
                 className="absolute inset-0 w-full h-full object-cover blur-2xl opacity-20 scale-110 pointer-events-none"
+                referrerPolicy="no-referrer"
               />
               <img 
-                src={src} 
-                alt={name || 'Изображение сервера'} 
+                src={src}
+                alt={name || 'Изображение сервера'}
                 className="relative w-full h-full object-contain pointer-events-none"
+                referrerPolicy="no-referrer"
               />
               
               {(name || desc) && (
@@ -140,10 +142,11 @@ export default function ServerGallery({ gallery = [] }) {
                     : 'border-gray-800 hover:border-gray-700 opacity-60 hover:opacity-100'
                 }`}
               >
-                <img 
-                  src={src} 
-                  alt="" 
+                <img
+                  src={src}
+                  alt=""
                   className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
                 />
               </button>
             )
@@ -190,10 +193,11 @@ export default function ServerGallery({ gallery = [] }) {
             onClick={(e) => e.stopPropagation()}
             className="relative max-w-5xl max-h-[85vh] flex flex-col gap-3 pointer-events-auto cursor-default"
           >
-            <img 
-              src={imageSrc} 
-              alt={displayName || 'Изображение галереи'} 
+            <img
+              src={imageSrc}
+              alt={displayName || 'Изображение галереи'}
               className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl border border-white/5"
+              referrerPolicy="no-referrer"
             />
             {(displayName || displayDesc) && (
               <div className="text-center text-white px-4">

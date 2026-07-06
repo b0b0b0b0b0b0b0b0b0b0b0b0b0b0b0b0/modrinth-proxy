@@ -10,11 +10,9 @@ class MinecraftVersions {
       this.full = data.full || []
     }
   }
-
   getRelease() {
     return [...this.release]
   }
-
   getFull() {
     return [...this.full]
   }
@@ -26,7 +24,6 @@ const CACHE_DURATION = 86400000
 
 export async function GET() {
   const now = Date.now()
-  
   if (cachedVersions && (now - cacheTimestamp) < CACHE_DURATION) {
     return Response.json(cachedVersions, {
       headers: {
@@ -34,7 +31,6 @@ export async function GET() {
       }
     })
   }
-
   try {
     const apiVersions = await getMinecraftVersions()
     const versions = new MinecraftVersions(apiVersions)
@@ -42,10 +38,8 @@ export async function GET() {
       release: versions.getRelease(),
       full: versions.getFull()
     }
-    
     cachedVersions = result
     cacheTimestamp = now
-    
     return Response.json(result, {
       headers: {
         'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate=86400'
@@ -53,7 +47,6 @@ export async function GET() {
     })
   } catch (error) {
     console.error('Failed to get Minecraft versions:', error)
-    
     if (cachedVersions) {
       return Response.json(cachedVersions, {
         headers: {
@@ -61,7 +54,6 @@ export async function GET() {
         }
       })
     }
-    
     return Response.json(
       { release: [], full: [] },
       { 
@@ -73,4 +65,3 @@ export async function GET() {
     )
   }
 }
-

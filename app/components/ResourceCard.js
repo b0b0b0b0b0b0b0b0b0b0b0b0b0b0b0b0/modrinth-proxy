@@ -137,6 +137,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                 alt=""
                 className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-[1.03]"
                 loading="lazy"
+                referrerPolicy="no-referrer"
               />
             ) : resource.icon_url ? (
               <img
@@ -152,6 +153,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                 alt=""
                 className="absolute bottom-2 left-2 h-11 w-11 rounded-lg border border-white/15 bg-black/45 object-cover shadow-lg ring-1 ring-black/40 backdrop-blur-[2px]"
                 loading="lazy"
+                referrerPolicy="no-referrer"
               />
             )}
           </div>
@@ -234,6 +236,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             src={resource.icon_url}
             alt={resource.title}
             className="w-12 h-12 md:w-16 md:h-16 rounded-xl object-cover flex-shrink-0"
+            referrerPolicy="no-referrer"
           />
         )}
 
@@ -320,6 +323,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
           src={resource.icon_url}
           alt={resource.title}
           className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-cover flex-shrink-0"
+          referrerPolicy="no-referrer"
         />
       )}
       
@@ -421,6 +425,3 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
     </div>
   )
 }
-
-
-

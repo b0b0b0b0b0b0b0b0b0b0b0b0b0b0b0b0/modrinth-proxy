@@ -45,4 +45,3 @@ export default function MobileDownloadButton({ accent = null, resourceTitle }) {
     </StyledTooltip>
   )
 }
-

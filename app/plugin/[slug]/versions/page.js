@@ -94,4 +94,3 @@ export default async function PluginVersionsPage({ params, searchParams }) {
     </div>
   )
 }
-

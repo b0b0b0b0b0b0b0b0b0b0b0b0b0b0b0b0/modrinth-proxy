@@ -75,4 +75,3 @@ export default async function ModpackChangelogPage({ params }) {
     </div>
   )
 }
-

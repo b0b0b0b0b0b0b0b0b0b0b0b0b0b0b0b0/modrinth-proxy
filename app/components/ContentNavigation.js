@@ -21,9 +21,7 @@ export default function ContentNavigation({
     () => resolveModrinthProjectAccent(projectColor),
     [projectColor],
   )
-  /** В светлой теме не тонируем nav цветами проекта (инлайн-стили портят светлый вид). */
-  const effectiveAccent =
-    accent && (!mounted || resolvedTheme === 'dark') ? accent : null
+  const effectiveAccent = accent && (!mounted || resolvedTheme === 'dark') ? accent : null
 
   const isActive = (path) => {
     if (path === `/${contentType}/${slug}`) {
