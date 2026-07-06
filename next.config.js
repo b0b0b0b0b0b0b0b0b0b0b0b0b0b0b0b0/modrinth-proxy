@@ -5,7 +5,8 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   register: false,
   skipWaiting: true,
   cacheOnFrontEndNav: false,
-  cacheStartUrl: true,
+  cacheStartUrl: false,
+  dynamicStartUrl: false,
   fallbacks: {
     document: '/offline.html',
   },
@@ -43,6 +44,18 @@ const withPWA = require('@ducanh2912/next-pwa').default({
       }),
     ],
     runtimeCaching: [
+      {
+        urlPattern: ({ request }) => request.mode === 'navigate',
+        handler: 'NetworkFirst',
+        options: {
+          cacheName: 'pages',
+          networkTimeoutSeconds: 5,
+          expiration: {
+            maxEntries: 32,
+            maxAgeSeconds: 60 * 60,
+          },
+        },
+      },
       {
         urlPattern: /\/_next\/static\/.*/i,
         handler: 'NetworkOnly',
@@ -86,6 +99,15 @@ const nextConfig = {
   poweredByHeader: false,
   async headers() {
     return [
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
       {
         source: '/:path((?!_next/static|_next/image|favicon.ico|icon.png|manifest.json|sw.js|sw-v2.js|workbox-).*)',
         headers: [
