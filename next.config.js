@@ -1,7 +1,7 @@
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   sw: 'sw-v2.js',
-  disable: false,
+  disable: true,
   register: false,
   skipWaiting: true,
   cacheOnFrontEndNav: false,
