@@ -68,6 +68,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 
 const nextConfig = {
   basePath: '',
+  compress: false,
   async rewrites() {
     return [
       { source: '/app', destination: '/launcher' },
