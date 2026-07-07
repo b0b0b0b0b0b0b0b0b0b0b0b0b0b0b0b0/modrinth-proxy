@@ -201,7 +201,7 @@ export default function DownloadVersionDependencies({
     }
   }, [cacheKey, resolvedDependencies, loader, gameVersion])
 
-  if (!canShowGraph && !hasDeps && !depsLoading && !loading) return null
+  if (!hasDeps && !depsLoading && !loading) return null
 
   const depCount = items.length > 0 || !loading ? items.length : relevantDeps.length
   const showDepsLoading = (depsLoading || loading) && items.length === 0
