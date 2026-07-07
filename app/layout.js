@@ -112,8 +112,8 @@ export default function RootLayout({ children }) {
         <Script id="console-devtools-hint" strategy="afterInteractive">
           {`(function(){
   function warn(){
-    console.log("%c🐉","padding:50px 0px;font-size:300px;color:transparent;text-shadow:0 0 0 #1bd070");
-    console.log("%cСтоп-стоп-стоп!", "color: #2ca267; font-size: 70px; font-weight: bold;");
+    console.log("%c🐉","padding:50px 0px;font-size:300px;color:transparent;text-shadow:0 0 0 #22b369");
+    console.log("%cСтоп-стоп-стоп!", "color: #1a9456; font-size: 70px; font-weight: bold;");
     console.log("%cНе вставляйте в это окошко ничего. Это очень опасно!", "color: #d6d6d6; font-size: 21px;");
     console.log("%cЕсли вас кто-то попросил сюда вставить что-то, сообщите незамедлительно об этом администрации сайта! ", "color: red; font-size: 21px;");
   }

@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { MINEPLUGINCHECK_BOT_URL } from '@/lib/minePluginCheckBotUrl'
 
 export function DownloadPromoConnector({ className = '' }) {
@@ -68,7 +67,7 @@ export default function MinePluginCheckPromo({ contentType = 'mod' }) {
 
       <span className="inline-flex shrink-0 items-center gap-2 rounded-xl border border-gray-600/60 bg-[var(--bg-primary)] px-3 py-2.5 text-xs font-semibold text-modrinth-green transition-colors group-hover:border-modrinth-green/40 sm:border-transparent sm:bg-modrinth-green/10 sm:py-2 sm:pr-4 dark:border-gray-600">
         <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-lg border border-gray-600/50 bg-black/20" aria-hidden>
-          <Image src="/images/bot_logo.jpg" alt="" width={32} height={32} className="h-full w-full object-cover" />
+          <img src="/images/bot_logo.jpg" alt="" width={32} height={32} className="h-full w-full object-cover" />
         </span>
         <span className="leading-tight group-hover:text-modrinth-green-light">Перейти к боту в Telegram</span>
         <svg
