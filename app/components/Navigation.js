@@ -72,13 +72,19 @@ export default function Navigation() {
             })
 
             const scrollElement = scrollRef.current
-            if (scrollElement) {
+            if (scrollElement && scrollElement.classList.contains('nav-links-scroll--can-scroll')) {
               const linkLeft = element.offsetLeft
               const linkRight = linkLeft + element.offsetWidth
               const viewLeft = scrollElement.scrollLeft
               const viewRight = viewLeft + scrollElement.clientWidth
               if (linkLeft < viewLeft || linkRight > viewRight) {
-                element.scrollIntoView({ behavior: hasAnimated ? 'smooth' : 'auto', inline: 'nearest', block: 'nearest' })
+                const targetLeft = linkRight > viewRight
+                  ? linkRight - scrollElement.clientWidth
+                  : linkLeft
+                scrollElement.scrollTo({
+                  left: Math.max(0, targetLeft),
+                  behavior: hasAnimated ? 'smooth' : 'auto',
+                })
               }
             }
             
