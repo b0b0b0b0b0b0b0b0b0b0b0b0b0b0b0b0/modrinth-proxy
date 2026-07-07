@@ -25,6 +25,10 @@ function contentTypeFromPathname(pathname) {
 export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null }) {
   const pathname = usePathname()
   const resolvedContentType = contentType ?? contentTypeFromPathname(pathname)
+  const authorMembers =
+    teamMembers.length > 0
+      ? teamMembers
+      : (organization?.members ?? [])
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
   const allowedLoaderIds = resolvedContentType ? buildAllowedLoaderIds(resolvedContentType) : null
   const loaders = (resource.loaders || [])
@@ -244,7 +248,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
         <GitHubSidebarSection sourceUrl={resource.source_url} />
       )}
 
-      {(organization || teamMembers.length > 0) && (
+      {(organization || authorMembers.length > 0) && (
         <div className="bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
           <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
             <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,7 +256,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
             </svg>
             Авторы
           </h3>
-          <AuthorsSection organization={organization} members={teamMembers} />
+          <AuthorsSection organization={organization} members={authorMembers} />
         </div>
       )}
 
