@@ -14,6 +14,16 @@ const clientCache = new Map()
 
 const RELEVANT_TYPES = new Set(['required', 'optional', 'embedded'])
 
+function normalizeDependencies(dependencies) {
+  return Array.isArray(dependencies) ? dependencies : []
+}
+
+function filterRelevantDependencies(dependencies) {
+  return normalizeDependencies(dependencies).filter((dep) =>
+    RELEVANT_TYPES.has(dep.dependency_type),
+  )
+}
+
 const BADGE_STYLES = {
   required:
     'bg-modrinth-green/12 text-modrinth-green border border-modrinth-green/25 dark:bg-modrinth-green/15',
@@ -30,8 +40,7 @@ const BADGE_TOOLTIPS = {
 }
 
 function buildCacheKey(dependencies, loader, gameVersion) {
-  const depKeys = (dependencies || [])
-    .filter((dep) => RELEVANT_TYPES.has(dep.dependency_type))
+  const depKeys = filterRelevantDependencies(dependencies)
     .map((dep) => `${dep.dependency_type}:${dep.version_id || ''}:${dep.project_id || ''}`)
     .sort()
     .join('|')
@@ -89,17 +98,66 @@ export default function DownloadVersionDependencies({
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(false)
   const [graphOpen, setGraphOpen] = useState(false)
+  const [resolvedDependencies, setResolvedDependencies] = useState(() =>
+    normalizeDependencies(dependencies),
+  )
+  const [depsLoading, setDepsLoading] = useState(false)
 
-  const relevantDeps = useMemo(
-    () => (dependencies || []).filter((dep) => RELEVANT_TYPES.has(dep.dependency_type)),
+  const propRelevantDeps = useMemo(
+    () => filterRelevantDependencies(dependencies),
     [dependencies],
   )
 
+  useEffect(() => {
+    if (propRelevantDeps.length > 0) {
+      setResolvedDependencies(normalizeDependencies(dependencies))
+      setDepsLoading(false)
+      return undefined
+    }
+
+    if (!projectSlug || !versionNumber) {
+      setResolvedDependencies([])
+      setDepsLoading(false)
+      return undefined
+    }
+
+    let cancelled = false
+    setDepsLoading(true)
+
+    const params = new URLSearchParams({
+      slug: projectSlug,
+      version: String(versionNumber),
+    })
+
+    fetch(`/api/dependencies?${params.toString()}`)
+      .then((res) => (res.ok ? res.json() : []))
+      .then((data) => {
+        if (cancelled) return
+        setResolvedDependencies(Array.isArray(data) ? data : [])
+      })
+      .catch(() => {
+        if (!cancelled) setResolvedDependencies([])
+      })
+      .finally(() => {
+        if (!cancelled) setDepsLoading(false)
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [dependencies, propRelevantDeps.length, projectSlug, versionNumber])
+
+  const relevantDeps = useMemo(
+    () => filterRelevantDependencies(resolvedDependencies),
+    [resolvedDependencies],
+  )
+
+  const canShowGraph = Boolean(projectSlug && versionNumber)
   const hasDeps = relevantDeps.length > 0
 
   const cacheKey = useMemo(
-    () => (hasDeps && loader && gameVersion ? buildCacheKey(dependencies, loader, gameVersion) : ''),
-    [dependencies, hasDeps, loader, gameVersion],
+    () => (hasDeps && loader && gameVersion ? buildCacheKey(resolvedDependencies, loader, gameVersion) : ''),
+    [resolvedDependencies, hasDeps, loader, gameVersion],
   )
 
   useEffect(() => {
@@ -122,7 +180,7 @@ export default function DownloadVersionDependencies({
     fetch('/api/download-dependencies', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ dependencies, loader, gameVersion }),
+      body: JSON.stringify({ dependencies: resolvedDependencies, loader, gameVersion }),
     })
       .then((res) => (res.ok ? res.json() : []))
       .then((data) => {
@@ -141,11 +199,12 @@ export default function DownloadVersionDependencies({
     return () => {
       cancelled = true
     }
-  }, [cacheKey, dependencies, loader, gameVersion])
+  }, [cacheKey, resolvedDependencies, loader, gameVersion])
 
-  if (!hasDeps) return null
+  if (!canShowGraph && !hasDeps && !depsLoading && !loading) return null
 
   const depCount = items.length > 0 || !loading ? items.length : relevantDeps.length
+  const showDepsLoading = (depsLoading || loading) && items.length === 0
 
   return (
     <>
@@ -153,9 +212,9 @@ export default function DownloadVersionDependencies({
         <div>
           <div className="flex items-center gap-1.5">
             <p className="m-0 text-xs font-semibold text-gray-700 dark:text-gray-300">
-              {loading && items.length === 0 ? 'Зависимости…' : `Зависимости (${depCount})`}
+              {showDepsLoading ? 'Зависимости…' : `Зависимости (${depCount})`}
             </p>
-            {projectSlug && (
+            {canShowGraph && (
               <DependencyGraphButton onOpen={() => setGraphOpen(true)} />
             )}
           </div>
@@ -196,7 +255,7 @@ export default function DownloadVersionDependencies({
             ))}
           </div>
         )}
-        {loading && items.length === 0 && (
+        {showDepsLoading && (
           <div className="h-9 animate-pulse rounded-xl bg-gray-200/80 dark:bg-[#2e3035]/80" />
         )}
       </div>

@@ -805,7 +805,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
               {matchingVersion && matchingVersion.files && matchingVersion.files.length > 0 && (
                 <div
                   className={`grid grid-cols-[min-content_1fr_auto_auto] items-center gap-2 rounded-2xl p-2 w-full animate-fade-in-up transition-all duration-300 ${
-                    (favMcVersion && matchingVersion.game_versions.includes(favMcVersion)) && (favLoader && matchingVersion.loaders.includes(favLoader))
+                    (favMcVersion && getVersionGameVersions(matchingVersion).includes(favMcVersion)) && (favLoader && getVersionLoaders(matchingVersion).includes(favLoader))
                       ? 'border border-yellow-500/20 dark:border-yellow-500/30 bg-yellow-50/40 dark:bg-yellow-500/5 shadow-[0_0_15px_rgba(234,179,8,0.15)]'
                       : 'border border-gray-200 dark:border-[#2e3035] bg-gray-50 dark:bg-[#16181c]'
                   }`}
@@ -861,7 +861,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
 
               {showDependencyDownloads && matchingVersion && selectedLoader && selectedMcVersion && (
                 <DownloadVersionDependencies
-                  dependencies={matchingVersion.dependencies}
+                  dependencies={Array.isArray(matchingVersion.dependencies) ? matchingVersion.dependencies : []}
                   loader={selectedLoader}
                   gameVersion={selectedMcVersion}
                   primaryFilename={matchingVersion.files?.[0]?.filename}

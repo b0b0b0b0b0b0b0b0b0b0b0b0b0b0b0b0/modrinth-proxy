@@ -23,12 +23,6 @@ function pickVersionGameVersion(version) {
   return release || gameVersions[0] || ''
 }
 
-function hasResolvableDependencies(version) {
-  return (version.dependencies || []).some((dep) =>
-    ['required', 'optional', 'embedded'].includes(dep.dependency_type),
-  )
-}
-
 class VersionPageData {
   constructor(project, version) {
     this.project = project
@@ -350,10 +344,10 @@ export default function VersionPage({ project, version, author, contentType, plu
 
           {filesList.render()}
 
-          {DEPENDENCY_CONTENT_TYPES.has(contentType) && hasResolvableDependencies(version) && (
+          {DEPENDENCY_CONTENT_TYPES.has(contentType) && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
               <DownloadVersionDependencies
-                dependencies={version.dependencies}
+                dependencies={Array.isArray(version.dependencies) ? version.dependencies : []}
                 loader={pickVersionLoader(version)}
                 gameVersion={pickVersionGameVersion(version)}
                 primaryFilename={primaryFile?.filename}
