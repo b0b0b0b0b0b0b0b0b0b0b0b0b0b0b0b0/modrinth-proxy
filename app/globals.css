@@ -2021,11 +2021,18 @@ html.no-advanced-rendering .nav-indicator {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   touch-action: pan-x pan-y pinch-zoom;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(128, 128, 128, 0.45) transparent;
 }
 
 .nav-links-scroll--can-scroll::-webkit-scrollbar {
-  display: none;
+  display: block;
+  height: 4px;
+}
+
+.nav-links-scroll--can-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(128, 128, 128, 0.45);
 }
 
 /* Color Theme Customizations */
