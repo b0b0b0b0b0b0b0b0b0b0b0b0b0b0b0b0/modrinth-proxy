@@ -8,6 +8,7 @@ export default function Navigation() {
   const [indicator, setIndicator] = useState({ left: 0, width: 0, height: 0, opacity: 0, color: 'modrinth-green' })
   const prevPathnameRef = useRef(null)
   const navRef = useRef(null)
+  const scrollRef = useRef(null)
   const linksRef = useRef({})
   const [hasAnimated, setHasAnimated] = useState(false)
 
@@ -69,6 +70,17 @@ export default function Navigation() {
               opacity: 1,
               color: getColorForPath(pathname)
             })
+
+            const scrollElement = scrollRef.current
+            if (scrollElement) {
+              const linkLeft = element.offsetLeft
+              const linkRight = linkLeft + element.offsetWidth
+              const viewLeft = scrollElement.scrollLeft
+              const viewRight = viewLeft + scrollElement.clientWidth
+              if (linkLeft < viewLeft || linkRight > viewRight) {
+                element.scrollIntoView({ behavior: hasAnimated ? 'smooth' : 'auto', inline: 'nearest', block: 'nearest' })
+              }
+            }
             
             prevPathnameRef.current = pathname
           }
@@ -87,12 +99,54 @@ export default function Navigation() {
     const handleResize = () => {
       updateIndicator()
     }
+
+    const scrollElement = scrollRef.current
+    const handleScroll = () => {
+      updateIndicator()
+    }
     
     window.addEventListener('resize', handleResize)
+    scrollElement?.addEventListener('scroll', handleScroll, { passive: true })
     
     return () => {
       clearTimeout(timeoutId)
       window.removeEventListener('resize', handleResize)
+      scrollElement?.removeEventListener('scroll', handleScroll)
+    }
+  }, [pathname])
+
+  useEffect(() => {
+    const scrollEl = scrollRef.current
+    const navEl = navRef.current
+    if (!scrollEl || !navEl) return
+
+    const syncScrollability = () => {
+      const overflowPx = navEl.scrollWidth - scrollEl.clientWidth
+      const overflows = overflowPx > 12
+      scrollEl.classList.toggle('nav-links-scroll--can-scroll', overflows)
+      if (!overflows && scrollEl.scrollLeft !== 0) {
+        scrollEl.scrollLeft = 0
+      }
+    }
+
+    const lockScrollWhenIdle = () => {
+      if (!scrollEl.classList.contains('nav-links-scroll--can-scroll')) {
+        scrollEl.scrollLeft = 0
+      }
+    }
+
+    syncScrollability()
+
+    const resizeObserver = new ResizeObserver(syncScrollability)
+    resizeObserver.observe(scrollEl)
+    resizeObserver.observe(navEl)
+    window.addEventListener('resize', syncScrollability)
+    scrollEl.addEventListener('scroll', lockScrollWhenIdle, { passive: true })
+
+    return () => {
+      resizeObserver.disconnect()
+      window.removeEventListener('resize', syncScrollability)
+      scrollEl.removeEventListener('scroll', lockScrollWhenIdle)
     }
   }, [pathname])
 
@@ -112,19 +166,23 @@ export default function Navigation() {
   }
 
   return (
-    <div ref={navRef} className="hidden lg:flex items-center gap-0.5 md:gap-1 flex-1 relative">
-      <div 
-        className={`nav-indicator absolute rounded-lg bg-gradient-to-r pointer-events-none ${getGradientClass(indicator.color)} ${hasAnimated ? 'transition-all duration-700 ease-out' : ''}`}
-        style={{
-          left: `${indicator.left}px`,
-          width: `${indicator.width}px`,
-          height: `${indicator.height}px`,
-          opacity: indicator.opacity,
-          transform: 'translateZ(0)',
-          top: '0',
-          zIndex: 0
-        }}
-      />
+    <div
+      ref={scrollRef}
+      className="nav-links-scroll hidden min-w-0 flex-1 lg:block"
+    >
+      <div ref={navRef} className="relative flex w-max flex-nowrap items-center gap-0.5 md:gap-1">
+        <div 
+          className={`nav-indicator absolute rounded-lg bg-gradient-to-r pointer-events-none ${getGradientClass(indicator.color)} ${hasAnimated ? 'transition-all duration-700 ease-out' : ''}`}
+          style={{
+            left: `${indicator.left}px`,
+            width: `${indicator.width}px`,
+            height: `${indicator.height}px`,
+            opacity: indicator.opacity,
+            transform: 'translateZ(0)',
+            top: '0',
+            zIndex: 0
+          }}
+        />
       
       <Link 
         ref={el => linksRef.current['/discover/mods'] = el}
@@ -218,13 +276,11 @@ export default function Navigation() {
           <span>Серверы</span>
         </span>
       </Link>
-      
-      <div className="flex-1"></div>
-      
+
       <Link 
         ref={el => linksRef.current['/app'] = el}
         href="/app" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30">
+        className="group relative z-10 rounded-lg px-2.5 py-2 transition-all duration-300 whitespace-nowrap hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30 md:px-4">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
             <g>
@@ -304,6 +360,7 @@ export default function Navigation() {
           <span>Modrinth App</span>
         </span>
       </Link>
+      </div>
     </div>
   )
 }

@@ -137,7 +137,7 @@ export default function RootLayout({ children }) {
           <TopNav />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">
-              <div className="flex items-center gap-4 md:gap-6">
+              <div className="flex min-w-0 items-center gap-4 md:gap-6">
                 <Suspense fallback={<div className="w-9 h-9 flex-shrink-0"></div>}>
                   <Logo />
                 </Suspense>

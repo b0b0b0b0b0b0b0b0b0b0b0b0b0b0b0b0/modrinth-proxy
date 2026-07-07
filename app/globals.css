@@ -2009,6 +2009,25 @@ html.no-advanced-rendering .nav-indicator {
   display: none !important;
 }
 
+.nav-links-scroll {
+  overflow-x: clip;
+  overflow-y: hidden;
+  overscroll-behavior-x: none;
+  touch-action: pan-y pinch-zoom;
+}
+
+.nav-links-scroll--can-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pan-y pinch-zoom;
+  scrollbar-width: none;
+}
+
+.nav-links-scroll--can-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 /* Color Theme Customizations */
 .theme-options {
   display: grid;
