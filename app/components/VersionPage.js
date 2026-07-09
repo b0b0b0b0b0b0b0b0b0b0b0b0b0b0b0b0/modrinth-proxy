@@ -350,7 +350,7 @@ export default function VersionPage({ project, version, author, contentType, plu
                 dependencies={Array.isArray(version.dependencies) ? version.dependencies : []}
                 loader={pickVersionLoader(version)}
                 gameVersion={pickVersionGameVersion(version)}
-                primaryFilename={primaryFile?.filename}
+                contentType={contentType}
                 projectSlug={project.slug}
                 projectTitle={project.title}
                 versionNumber={version.version_number || version.id}

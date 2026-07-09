@@ -11,8 +11,11 @@ export async function POST(request) {
   if (!loader || !gameVersion) return Response.json({ error: 'loader and gameVersion required' }, { status: 400 })
   if (!Array.isArray(dependencies)) return Response.json({ error: 'dependencies required' }, { status: 400 })
   try {
-    const items = await downloadDependencyResolver.resolve(dependencies, { loader, gameVersion })
-    return Response.json(items, {
+    const [tree, files] = await Promise.all([
+      downloadDependencyResolver.resolveTree(dependencies, { loader, gameVersion }),
+      downloadDependencyResolver.resolve(dependencies, { loader, gameVersion }),
+    ])
+    return Response.json({ tree, files }, {
       headers: {
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
       },

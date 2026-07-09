@@ -6,18 +6,21 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
-  buildAllowedLoaderIds,
-  filterVersionsByContentType,
+  filterVersionsForProject,
   getVersionGameVersions,
   getVersionLoaders,
   normalizeContentRoute,
 } from '@/lib/contextualVersions'
 import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { downloadZipBundle, downloadFilesSequentially, buildModrinthExtractZipName } from '@/lib/downloadZip'
 import StyledTooltip from './StyledTooltip'
 import { favoritesManager } from '@/lib/favoritesManager'
-import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import DownloadVersionDependencies from './DownloadVersionDependencies'
+import { DownloadFooterButton } from './DownloadModalParts'
+import DownloadModalPickers from './DownloadModalPickers'
+import DownloadCompatibleVersions from './DownloadCompatibleVersions'
+import DownloadVersionBundledFiles from './DownloadVersionBundledFiles'
 import Lottie from 'lottie-react'
 import bookmarkAnimation from '@/public/animations/bookmark.json'
 import noBookmarkAnimation from '@/public/animations/no_bookmark.json'
@@ -118,6 +121,34 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
   )
 }
 
+const VERSION_TYPE_ORDER = { release: 0, beta: 1, alpha: 2 }
+
+function pickCompatibleVersionsByChannel(versions) {
+  const byChannel = new Map()
+
+  for (const version of versions) {
+    const channel = String(version.version_type || 'release').toLowerCase()
+    const current = byChannel.get(channel)
+    if (!current) {
+      byChannel.set(channel, version)
+      continue
+    }
+    const currentDate = new Date(current.date_published || 0).getTime()
+    const nextDate = new Date(version.date_published || 0).getTime()
+    if (nextDate > currentDate) {
+      byChannel.set(channel, version)
+    }
+  }
+
+  return [...byChannel.entries()]
+    .sort(([channelA], [channelB]) => {
+      const typeA = VERSION_TYPE_ORDER[channelA] ?? 3
+      const typeB = VERSION_TYPE_ORDER[channelB] ?? 3
+      return typeA - typeB
+    })
+    .map(([, version]) => version)
+}
+
 export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const router = useRouter()
   const accent = useMemo(() => resolveModrinthProjectAccent(mod?.color), [mod?.color])
@@ -148,14 +179,17 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   const [favMcVersion, setFavMcVersion] = useState('')
   const [favLoader, setFavLoader] = useState('')
   const [showLauncherHelp, setShowLauncherHelp] = useState(false)
+  const [depItems, setDepItems] = useState([])
+  const [zipLoading, setZipLoading] = useState(false)
+  const [depsZipLoading, setDepsZipLoading] = useState(false)
+  const [openPicker, setOpenPicker] = useState(null)
+  const [selectedCompatibleVersionId, setSelectedCompatibleVersionId] = useState('')
 
   const contentRoute = normalizeContentRoute(contentType)
 
-  const allowedLoaderIds = useMemo(() => buildAllowedLoaderIds(contentType), [contentType])
-
   const contextualVersions = useMemo(
-    () => filterVersionsByContentType(versions, contentType),
-    [versions, contentType],
+    () => filterVersionsForProject(versions, mod, contentType),
+    [versions, mod, contentType],
   )
 
   const launcherUri = useMemo(() => {
@@ -181,13 +215,6 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     setTimeout(() => {
       setShowLauncherHelp(true)
     }, 1500)
-  }
-
-  const formatFileSizeRu = (bytes) => {
-    if (!bytes) return '0 Б'
-    const sizes = ['Б', 'КБ', 'МБ', 'ГБ']
-    const i = Math.floor(Math.log(bytes) / Math.log(1024))
-    return `${(bytes / Math.pow(1024, i)).toFixed(2)} ${sizes[i]}`
   }
 
 
@@ -260,6 +287,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       isInitialUrlSyncRef.current = true
     } else {
       isInitialUrlSyncRef.current = false
+      setOpenPicker(null)
     }
   }, [isOpen, contextualVersions, contentType])
 
@@ -351,13 +379,20 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
   }, [isOpen, selectedMcVersion, selectedLoader, mod?.title, contentType])
 
   const selectMcVersion = (version) => {
+    if (!version) {
+      setSelectedMcVersion('')
+      return
+    }
     setSelectedMcVersion(version)
     const availableLoaders = new Set()
-    contextualVersions.forEach(v => {
+    contextualVersions.forEach((v) => {
       if (getVersionGameVersions(v).includes(version)) {
-        getVersionLoaders(v).forEach(l => availableLoaders.add(l))
+        getVersionLoaders(v).forEach((l) => availableLoaders.add(l))
       }
     })
+    if (selectedLoader && availableLoaders.has(selectedLoader)) {
+      return
+    }
     const activeFavLoader = favoritesManager.getFavoriteLoader(contentType)
     if (activeFavLoader && availableLoaders.has(activeFavLoader)) {
       setSelectedLoader(activeFavLoader)
@@ -365,6 +400,25 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       setSelectedLoader(Array.from(availableLoaders)[0])
     } else {
       setSelectedLoader('')
+    }
+  }
+
+  const selectLoader = (loader) => {
+    if (!loader) {
+      setSelectedLoader('')
+      return
+    }
+    setSelectedLoader(loader)
+    if (!selectedMcVersion) return
+
+    const availableVersions = new Set()
+    contextualVersions.forEach((v) => {
+      if (getVersionLoaders(v).includes(loader)) {
+        getVersionGameVersions(v).forEach((gv) => availableVersions.add(gv))
+      }
+    })
+    if (!availableVersions.has(selectedMcVersion)) {
+      setSelectedMcVersion('')
     }
   }
 
@@ -387,56 +441,153 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     favoritesManager.setFavoriteLoader(newValue, contentType)
     setFavLoader(newValue)
     if (newValue === loader) {
-      setSelectedLoader(loader)
+      selectLoader(loader)
     } else {
       setSelectedLoader('')
     }
   }
 
   const isReleaseVersion = (version) => {
-    return /^\d+\.\d+(\.\d+)?$/.test(version)
+    if (!/^\d+\.\d+(\.\d+)?$/.test(version)) return false
+    return !/-(pre|rc|snapshot)/i.test(version)
   }
 
-  const mcVersions = useMemo(() => {
+  const allMcVersionsForPicker = useMemo(() => {
     const versionsSet = new Set()
-    contextualVersions.forEach(version => {
-      getVersionGameVersions(version).forEach(v => versionsSet.add(v))
+    contextualVersions.forEach((version) => {
+      if (selectedLoader && !getVersionLoaders(version).includes(selectedLoader)) {
+        return
+      }
+      getVersionGameVersions(version).forEach((v) => versionsSet.add(v))
     })
-    const allVersions = Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
-    
-    if (showAllVersions) {
-      return allVersions
+    return Array.from(versionsSet).sort(compareMinecraftVersionsDesc)
+  }, [contextualVersions, selectedLoader])
+
+  const hasSnapshotVersions = useMemo(
+    () => allMcVersionsForPicker.some((version) => !isReleaseVersion(version)),
+    [allMcVersionsForPicker],
+  )
+
+  useEffect(() => {
+    if (!hasSnapshotVersions) {
+      setShowAllVersions(false)
     }
-    return allVersions.filter(v => isReleaseVersion(v))
-  }, [contextualVersions, showAllVersions])
+  }, [hasSnapshotVersions, selectedLoader])
+
+  const mcVersions = useMemo(() => {
+    if (showAllVersions) {
+      return allMcVersionsForPicker
+    }
+    return allMcVersionsForPicker.filter((v) => isReleaseVersion(v))
+  }, [allMcVersionsForPicker, showAllVersions])
+
+  const allLoaders = useMemo(() => {
+    const loadersSet = new Set()
+    contextualVersions.forEach((version) => {
+      getVersionLoaders(version).forEach((l) => loadersSet.add(l))
+    })
+    return Array.from(loadersSet)
+  }, [contextualVersions])
 
   const loaders = useMemo(() => {
-    if (!selectedMcVersion) return []
+    if (!selectedMcVersion) return allLoaders
     const loadersSet = new Set()
-    contextualVersions.forEach(version => {
+    contextualVersions.forEach((version) => {
       if (getVersionGameVersions(version).includes(selectedMcVersion)) {
-        getVersionLoaders(version).forEach(l => loadersSet.add(l))
+        getVersionLoaders(version).forEach((l) => loadersSet.add(l))
       }
     })
     return Array.from(loadersSet)
-  }, [contextualVersions, selectedMcVersion])
+  }, [contextualVersions, selectedMcVersion, allLoaders])
 
   const filteredMcVersions = useMemo(() => {
     if (!versionSearch) return mcVersions
     return mcVersions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
   }, [mcVersions, versionSearch])
 
-  const matchingVersion = useMemo(() => {
-    if (!selectedMcVersion || !selectedLoader) return null
-    
-    const filtered = contextualVersions.filter(version => {
+  const matchingVersions = useMemo(() => {
+    if (!selectedMcVersion || !selectedLoader) return []
+
+    const filtered = contextualVersions.filter((version) => {
       const mcMatch = getVersionGameVersions(version).includes(selectedMcVersion)
       const loaderMatch = getVersionLoaders(version).includes(selectedLoader)
-      return mcMatch && loaderMatch
+      return mcMatch && loaderMatch && version.files?.length > 0
     })
-    
-    return filtered[0] || null
+
+    return pickCompatibleVersionsByChannel(filtered)
   }, [contextualVersions, selectedMcVersion, selectedLoader])
+
+  useEffect(() => {
+    if (matchingVersions.length === 0) {
+      setSelectedCompatibleVersionId('')
+      return
+    }
+    const currentStillValid = matchingVersions.some(
+      (version) => version.id === selectedCompatibleVersionId,
+    )
+    if (!currentStillValid) {
+      const preferred =
+        matchingVersions.find((version) => version.version_type === 'release') ||
+        matchingVersions[0]
+      setSelectedCompatibleVersionId(preferred.id)
+    }
+  }, [matchingVersions, selectedCompatibleVersionId])
+
+  const matchingVersion = useMemo(() => {
+    if (matchingVersions.length === 0) return null
+    return (
+      matchingVersions.find((version) => version.id === selectedCompatibleVersionId) ||
+      matchingVersions[0]
+    )
+  }, [matchingVersions, selectedCompatibleVersionId])
+
+  useEffect(() => {
+    setDepItems([])
+  }, [selectedMcVersion, selectedLoader, matchingVersion?.id])
+
+  const buildZipName = () =>
+    buildModrinthExtractZipName(mod?.title || mod?.slug, matchingVersion?.version_number)
+
+  const getVersionFiles = () => {
+    if (!matchingVersion?.files?.length) return []
+    return matchingVersion.files.map((file) => ({
+      url: file.url,
+      filename: file.filename,
+    }))
+  }
+
+  const getAllDownloadFiles = () => {
+    const primaryFiles = getVersionFiles()
+    const depFiles = depItems.map((item) => ({
+      url: item.url,
+      filename: item.filename,
+    }))
+    return [...primaryFiles, ...depFiles]
+  }
+
+  const handleDownloadZip = async () => {
+    const files = getAllDownloadFiles()
+    if (files.length === 0) return
+    setZipLoading(true)
+    try {
+      await downloadZipBundle(files, buildZipName())
+    } catch {
+      await downloadFilesSequentially(files)
+    } finally {
+      setZipLoading(false)
+    }
+  }
+
+  const handleDownloadWithDeps = async () => {
+    const files = getAllDownloadFiles()
+    if (files.length === 0) return
+    setDepsZipLoading(true)
+    try {
+      await downloadFilesSequentially(files)
+    } finally {
+      setDepsZipLoading(false)
+    }
+  }
 
   const getLoaderName = (loader) => {
     const names = {
@@ -457,6 +608,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       'optifine': 'OptiFine',
       'canvas': 'Canvas',
       'vanilla': 'Vanilla',
+      'datapack': 'Datapack',
     }
     return names[loader] || loader
   }
@@ -474,6 +626,72 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
     contentType === 'plugins' ||
     contentType === 'datapack' ||
     contentType === 'datapacks'
+
+  const showLoaderPicker =
+    allLoaders.length > 0 &&
+    contentType !== 'resourcepack' &&
+    contentType !== 'resourcepacks'
+
+  const bundleFileCount = useMemo(() => {
+    const primaryCount = matchingVersion?.files?.length || 0
+    return primaryCount + depItems.length
+  }, [matchingVersion?.files?.length, depItems.length])
+
+  const showBundleFooter = bundleFileCount > 1
+
+  const zipDownloadTooltip = useMemo(() => {
+    const depCount = depItems.length
+    const allFiles = [
+      ...(matchingVersion?.files || []).map((file) => file.filename),
+      ...depItems.map((item) => item.filename),
+    ].filter(Boolean)
+    const depTitles = depItems.map((item) => item.title).filter(Boolean)
+
+    return (
+      <span className="flex flex-col gap-1.5 text-left leading-snug">
+        <span className="font-bold">Всё в одном .zip</span>
+        <span className="text-xs opacity-90">
+          {depCount > 0
+            ? 'Один архив: основной файл и все зависимости внутри.'
+            : 'Один архив с файлами выбранной версии.'}
+        </span>
+        {depTitles.length > 0 && (
+          <span className="text-[11px] leading-tight opacity-75">
+            Включая: {depTitles.slice(0, 3).join(', ')}
+            {depTitles.length > 3 ? ` и ещё ${depTitles.length - 3}` : ''}
+          </span>
+        )}
+        {allFiles.length > 0 && (
+          <span className="text-[11px] font-mono leading-tight opacity-75">
+            {allFiles.length} шт. в архиве
+          </span>
+        )}
+      </span>
+    )
+  }, [matchingVersion, depItems])
+
+  const depsDownloadTooltip = useMemo(() => {
+    const depCount = depItems.length
+    const depTitles = depItems.map((item) => item.title).filter(Boolean)
+    const totalFiles = (matchingVersion?.files?.length || 0) + depCount
+
+    return (
+      <span className="flex flex-col gap-1.5 text-left leading-snug">
+        <span className="font-bold">Скачать по очереди</span>
+        <span className="text-xs opacity-90">
+          {totalFiles > 1
+            ? 'Каждый .jar скачается отдельно, один за другим — как несколько загрузок в браузере.'
+            : 'Один файл скачается напрямую, без архива.'}
+        </span>
+        {depTitles.length > 0 && (
+          <span className="text-[11px] leading-tight opacity-75">
+            {mod?.title || 'Ресурс'}, затем: {depTitles.slice(0, 3).join(', ')}
+            {depTitles.length > 3 ? ` и ещё ${depTitles.length - 3}` : ''}
+          </span>
+        )}
+      </span>
+    )
+  }, [depItems, matchingVersion?.files?.length, mod?.title])
 
   return (
     <>
@@ -499,7 +717,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
         >
           <div 
             className="bg-white dark:bg-modrinth-dark text-gray-900 dark:text-white rounded-2xl w-full max-h-[85vh] overflow-hidden shadow-2xl animate-fade-in-up transform flex flex-col"
-            style={{ maxWidth: '550px', animationDelay: '0ms' }}
+            style={{ maxWidth: '640px', animationDelay: '0ms' }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="bg-gray-50 dark:bg-modrinth-darker border-b border-gray-200 dark:border-none p-5 flex items-center justify-between">
@@ -570,7 +788,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
               </div>
             </div>
 
-            <div className="p-5 space-y-4 flex-1 overflow-y-auto overscroll-contain custom-scrollbar touch-pan-y">
+            <div className={`p-5 space-y-4 flex-1 overscroll-contain custom-scrollbar touch-pan-y ${openPicker ? 'overflow-visible' : 'overflow-y-auto'}`}>
               {showAppSection && (
                 <>
                   <div className="flex flex-col items-center w-full">
@@ -608,270 +826,89 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
                   </div>
                 </>
               )}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true" className="w-4.5 h-4.5 text-gray-400">
-                      <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01M17.32 5H6.68a4 4 0 0 0-3.978 3.59q-.008.077-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258q-.01-.075-.017-.151A4 4 0 0 0 17.32 5" />
-                    </svg>
-                    <span>Выберите версию игры</span>
-                  </h3>
-                  
-                  {selectedMcVersion ? (
-                    <button
-                      onClick={() => {
-                        setSelectedMcVersion('')
-                        setSelectedLoader('')
-                      }}
-                      className="p-1 hover:bg-red-500/20 rounded transition-colors text-red-500"
-                      title="Отменить"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => setShowAllVersions(!showAllVersions)}
-                      className="text-xs text-modrinth-green hover:text-modrinth-green-light transition-colors"
-                    >
-                      {showAllVersions ? 'Только релизы' : 'Показать все'}
-                    </button>
-                  )}
-                </div>
-                
-                {selectedMcVersion ? (
-                  <div className="mb-2 flex items-center w-fit gap-1.5 px-2.5 py-1 bg-gray-50 dark:bg-[#16181c] rounded-xl text-sm text-gray-900 dark:text-gray-200 font-medium animate-fade-in">
-                    <LottieStar
-                      isFavorite={favMcVersion === selectedMcVersion}
-                      alwaysVisible={true}
-                      animationData={favMcVersion === selectedMcVersion ? noBookmarkAnimation : bookmarkAnimation}
-                      onClick={() => toggleFavoriteMcVersion(selectedMcVersion)}
-                      label={
-                        favMcVersion === selectedMcVersion ? (
-                          'Убрать из избранного'
-                        ) : (
-                          <span className="flex flex-col items-center">
-                            <span>Сделать избранной версией</span>
-                            <span className="text-[10px] opacity-60 font-normal mt-0.5">(будет в будущем выбираться автоматически)</span>
-                          </span>
-                        )
-                      }
-                    />
-                    <span>{selectedMcVersion}</span>
-                  </div>
-                ) : (
-                  <>
-                    <div className="relative mb-2">
-                      <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                      </svg>
-                      <input
-                        type="text"
-                        placeholder="Поиск версий игры..."
-                        value={versionSearch}
-                        onChange={(e) => setVersionSearch(e.target.value)}
-                        className="w-full pl-10 pr-4 py-2 rounded-lg text-sm transition-colors bg-gray-100 dark:bg-[#16181c] text-gray-900 dark:text-white border border-gray-200 dark:border-[#2e3035]/50 focus:border-modrinth-green focus:outline-none"
-                      />
-                    </div>
-                    <div className="space-y-1 max-h-48 overflow-y-auto custom-scrollbar bg-transparent dark:bg-transparent rounded-lg p-2">
-                      {filteredMcVersions.map(version => (
-                        <div
-                          key={version}
-                          className="flex items-center gap-1 group/row"
-                        >
-                          <LottieStar
-                            isFavorite={favMcVersion === version}
-                            animationData={favMcVersion === version ? noBookmarkAnimation : bookmarkAnimation}
-                            onClick={() => toggleFavoriteMcVersion(version)}
-                            label={
-                              favMcVersion === version ? (
-                                'Убрать из избранного'
-                              ) : (
-                                <span className="flex flex-col items-center">
-                                  <span>Сделать избранной версией</span>
-                                  <span className="text-[10px] opacity-60 font-normal mt-0.5">(будет в будущем выбираться автоматически)</span>
-                                </span>
-                              )
-                            }
-                          />
-                          <button
-                            onClick={() => selectMcVersion(version)}
-                            className={`flex-1 text-left px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                              selectedMcVersion === version
-                                ? 'bg-modrinth-green text-black'
-                                : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#202225]'
-                            }`}
-                          >
-                            {version}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
+              <DownloadModalPickers
+                selectedMcVersion={selectedMcVersion}
+                selectedLoader={selectedLoader}
+                filteredMcVersions={filteredMcVersions}
+                loaders={loaders}
+                versionSearch={versionSearch}
+                onVersionSearchChange={setVersionSearch}
+                showAllVersions={showAllVersions}
+                hasSnapshotVersions={hasSnapshotVersions}
+                onToggleShowAllVersions={() => setShowAllVersions(!showAllVersions)}
+                favMcVersion={favMcVersion}
+                favLoader={favLoader}
+                onSelectMcVersion={selectMcVersion}
+                onSelectLoader={selectLoader}
+                onToggleFavoriteMcVersion={toggleFavoriteMcVersion}
+                onToggleFavoriteLoader={toggleFavoriteLoader}
+                getLoaderName={getLoaderName}
+                showLoaderPicker={showLoaderPicker}
+                openPicker={openPicker}
+                onOpenPickerChange={setOpenPicker}
+                LottieStar={LottieStar}
+                bookmarkAnimation={bookmarkAnimation}
+                noBookmarkAnimation={noBookmarkAnimation}
+              />
 
-              {loaders.length > 0 && contentType !== 'resourcepack' && contentType !== 'resourcepacks' && (
-                <div className="animate-fade-in-up">
-                  <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 flex items-center gap-1.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true" className="w-4.5 h-4.5 text-gray-400">
-                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-                      </svg>
-                      <span>Выберите загрузчик</span>
-                    </h3>
-                    
-                    {selectedLoader && (
-                      <button
-                        onClick={() => setSelectedLoader('')}
-                        className="p-1 hover:bg-red-500/20 rounded transition-colors text-red-500"
-                        title="Отменить"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    )}
-                  </div>
-                  
-                  {selectedLoader ? (
-                    <>
-                      <div className="mb-2 flex items-center w-fit gap-1.5 px-2.5 py-1 bg-gray-50 dark:bg-[#16181c] rounded-xl text-sm text-gray-900 dark:text-gray-200 font-medium animate-fade-in">
-                        <LottieStar
-                          isFavorite={favLoader === selectedLoader}
-                          alwaysVisible={true}
-                          animationData={favLoader === selectedLoader ? noBookmarkAnimation : bookmarkAnimation}
-                          onClick={() => toggleFavoriteLoader(selectedLoader)}
-                          label={
-                            favLoader === selectedLoader ? (
-                              'Убрать из избранного'
-                            ) : (
-                              <span className="flex flex-col items-center">
-                                <span>Сделать избранным загрузчиком</span>
-                                <span className="text-[10px] opacity-60 font-normal mt-0.5">(будет в будущем выбираться автоматически)</span>
-                              </span>
-                            )
-                          }
-                        />
-                        <span>{getLoaderName(selectedLoader)}</span>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="space-y-1">
-                      {loaders.map((loader, i) => (
-                        <div
-                          key={loader}
-                          style={{ animationDelay: `${i * 50}ms` }}
-                          className="flex items-center gap-1 group/row animate-fade-in-up"
-                        >
-                          {selectedMcVersion && (
-                            <LottieStar
-                              isFavorite={favLoader === loader}
-                              animationData={favLoader === loader ? noBookmarkAnimation : bookmarkAnimation}
-                              onClick={() => toggleFavoriteLoader(loader)}
-                              label={
-                                favLoader === loader ? (
-                                  'Убрать из избранного'
-                                ) : (
-                                  <span className="flex flex-col items-center">
-                                    <span>Сделать избранным загрузчиком</span>
-                                    <span className="text-[10px] opacity-60 font-normal mt-0.5">(будет в будущем выбираться автоматически)</span>
-                                  </span>
-                                )
-                              }
-                            />
-                          )}
-                          <button
-                            onClick={() => setSelectedLoader(loader)}
-                            disabled={!selectedMcVersion}
-                            className={`flex-1 text-left px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                              !selectedMcVersion
-                                ? 'bg-gray-200/30 dark:bg-[#16181c]/30 text-gray-400 dark:text-gray-600 cursor-not-allowed'
-                                : selectedLoader === loader
-                                  ? 'bg-modrinth-green text-black'
-                                  : 'bg-transparent dark:bg-transparent text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#202225]'
-                            }`}
-                          >
-                            {getLoaderName(loader)}
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
+              {matchingVersions.length > 0 && selectedMcVersion && selectedLoader && (
+                <DownloadCompatibleVersions
+                  versions={matchingVersions}
+                  selectedVersionId={selectedCompatibleVersionId || matchingVersions[0]?.id}
+                  onSelectVersionId={setSelectedCompatibleVersionId}
+                />
               )}
 
-              {matchingVersion && matchingVersion.files && matchingVersion.files.length > 0 && (
-                <div
-                  className={`grid grid-cols-[min-content_1fr_auto_auto] items-center gap-2 rounded-2xl p-2 w-full animate-fade-in-up transition-all duration-300 ${
-                    (favMcVersion && getVersionGameVersions(matchingVersion).includes(favMcVersion)) && (favLoader && getVersionLoaders(matchingVersion).includes(favLoader))
-                      ? 'border border-yellow-500/20 dark:border-yellow-500/30 bg-yellow-50/40 dark:bg-yellow-500/5 shadow-[0_0_15px_rgba(234,179,8,0.15)]'
-                      : 'border border-gray-200 dark:border-[#2e3035] bg-gray-50 dark:bg-[#16181c]'
-                  }`}
-                >
-                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-bold text-sm flex-shrink-0 ${versionChannelLetterRingClass(matchingVersion.version_type || 'release')}`}>
-                    {(matchingVersion.version_type || 'release')[0].toUpperCase()}
-                  </div>
-                  
-                  <div className="flex min-w-0 flex-col gap-0.5">
-                    <h4 className="my-0 truncate text-nowrap text-sm font-extrabold leading-none text-gray-900 dark:text-white">
-                      {matchingVersion.version_number}
-                    </h4>
-                    <p className="m-0 truncate text-nowrap text-xs font-semibold text-gray-500 dark:text-gray-400">
-                      {matchingVersion.name}
-                    </p>
-                  </div>
-                  
-                  <StyledTooltip label={
-                    <span className="flex flex-col items-center">
-                      <span>{`${matchingVersion.files[0].filename} (${formatFileSizeRu(matchingVersion.files[0].size)})`}</span>
-                      <span className="text-[10px] opacity-60 font-normal mt-0.5">(напрямую с официального сайта)</span>
-                    </span>
-                  }>
-                    <a
-                      href={matchingVersion.files[0].url}
-                      download
-                      className={`px-3 py-2 font-bold text-xs rounded-xl flex items-center justify-center gap-1.5 hover:brightness-[1.08] active:scale-[0.98] transition-all flex-shrink-0 ${
-                        accent ? '' : 'bg-modrinth-green text-black'
-                      }`}
-                      style={downloadBtnAccentStyle}
-                    >
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                      </svg>
-                      <span>Скачать</span>
-                    </a>
-                  </StyledTooltip>
-
-                  <StyledTooltip label="Посмотреть список изменений">
-                    <a
-                      href={`/${contentRoute}/${mod.slug}/version/${matchingVersion.id}`}
-                      onClick={() => setIsOpen(false)}
-                      className="w-9 h-9 flex items-center justify-center rounded-xl bg-gray-200 dark:bg-[#2e3035] hover:bg-gray-300 dark:hover:bg-[#3b3d45] active:scale-[0.95] text-gray-700 dark:text-gray-300 transition-all flex-shrink-0"
-                      aria-label="View version"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
-                      </svg>
-                    </a>
-                  </StyledTooltip>
-                </div>
+              {matchingVersion && selectedMcVersion && selectedLoader && (
+                <DownloadVersionBundledFiles
+                  files={matchingVersion.files}
+                  contentType={contentType}
+                  loader={selectedLoader}
+                />
               )}
 
               {showDependencyDownloads && matchingVersion && selectedLoader && selectedMcVersion && (
                 <DownloadVersionDependencies
+                  key={matchingVersion.id}
                   dependencies={Array.isArray(matchingVersion.dependencies) ? matchingVersion.dependencies : []}
                   loader={selectedLoader}
                   gameVersion={selectedMcVersion}
-                  primaryFilename={matchingVersion.files?.[0]?.filename}
+                  contentType={contentType}
                   projectSlug={mod.slug}
                   projectTitle={mod.title}
                   versionNumber={matchingVersion.version_number || matchingVersion.id}
+                  onResolved={setDepItems}
                 />
               )}
 
             </div>
+
+            {showBundleFooter && matchingVersion && matchingVersion.files && matchingVersion.files.length > 0 && (
+              <div className="border-t border-gray-200 p-4 pt-4 dark:border-[#2e3035]">
+                <div className="flex flex-col gap-2 p-2 min-[480px]:flex-row min-[480px]:flex-wrap min-[480px]:justify-end">
+                  <DownloadFooterButton
+                    onClick={handleDownloadZip}
+                    loading={zipLoading}
+                    disabled={depsZipLoading}
+                    tooltip={zipDownloadTooltip}
+                    tooltipSide="top"
+                  >
+                    Скачать всё в одном .zip
+                  </DownloadFooterButton>
+                  <DownloadFooterButton
+                    variant="primary"
+                    onClick={handleDownloadWithDeps}
+                    loading={depsZipLoading}
+                    disabled={zipLoading}
+                    loadingLabel="Скачивание…"
+                    tooltip={depsDownloadTooltip}
+                    tooltipSide="top"
+                  >
+                    Скачать всё по отдельности
+                  </DownloadFooterButton>
+                </div>
+              </div>
+            )}
           </div>
         </div>,
         portalTarget
