@@ -1,9 +1,10 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, usePathname } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import ResourceCard from './ResourceCard'
 import ResourceCardSkeleton from './ResourceCardSkeleton'
+import { syncCatalogReturnOnCatalogPage } from '@/lib/catalogReturn'
 
 const getSettingKey = (type, isProfile) => {
   if (isProfile) return 'profiles'
@@ -23,6 +24,7 @@ const getSettingKey = (type, isProfile) => {
 
 export default function ResourceList({ resources, type = 'mod', isProfile = false }) {
   const searchParams = useSearchParams()
+  const pathname = usePathname()
   const [showSkeleton, setShowSkeleton] = useState(false)
   const prevParamsRef = useRef(searchParams.toString())
   const [layout, setLayout] = useState(null)
@@ -31,6 +33,12 @@ export default function ResourceList({ resources, type = 'mod', isProfile = fals
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    if (!mounted || showSkeleton) return
+    const search = searchParams.toString()
+    syncCatalogReturnOnCatalogPage(`${pathname}${search ? `?${search}` : ''}`)
+  }, [mounted, pathname, searchParams, showSkeleton])
 
   useEffect(() => {
     const readLayout = () => {

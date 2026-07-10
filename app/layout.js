@@ -13,6 +13,7 @@ import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
 import ExtensionBanner from './components/ExtensionBanner'
 import AppSettingsSync from './components/AppSettingsSync'
+import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { PALETTES } from '../lib/paletteManager'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 
@@ -132,6 +133,7 @@ export default function RootLayout({ children }) {
         >
           <AppTooltipProvider>
           <AppSettingsSync />
+          <CatalogReturnLifecycle />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <TopNav />

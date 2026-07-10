@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import CatalogReturnButton from './CatalogReturnButton'
 import { formatDownloads, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { filterAvatar } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
@@ -87,7 +88,8 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
   return (
     <>
       <div className="mb-4 md:mb-6 flex items-center gap-2 text-sm flex-wrap">
-        <Link 
+        <CatalogReturnButton contentType={contentType} slug={resource.slug} />
+        <Link
           href={`/${contentTypeRoute}`}
           className="text-gray-600 dark:text-gray-400 hover:text-modrinth-green transition-colors duration-200 font-medium"
         >

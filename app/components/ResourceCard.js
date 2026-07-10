@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import CatalogReturnLink from './CatalogReturnLink'
 import { formatDownloads, modrinthHoverAccentHex } from '@/lib/modrinth'
 import { getPublicUsername } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
@@ -125,8 +125,9 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
     const href = `/${basePath}/${resource.slug}`
 
     return (
-      <Link
+      <CatalogReturnLink
         href={href}
+        catalogSlug={resource.slug}
         className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]"
       >
         <article className="flex h-full flex-col overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark">
@@ -206,7 +207,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             </div>
           </div>
         </article>
-      </Link>
+      </CatalogReturnLink>
     )
   }
 
@@ -242,11 +243,11 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
 
         <div className="flex-1 min-w-0">
           <div className="mb-1 flex items-baseline gap-2 flex-wrap">
-            <Link href={`/${basePath}/${resource.slug}`}>
+            <CatalogReturnLink href={`/${basePath}/${resource.slug}`} catalogSlug={resource.slug}>
               <h3 className="text-lg md:text-xl font-bold transition-colors cursor-pointer hover:text-modrinth-green">
                 {resource.title}
               </h3>
-            </Link>
+            </CatalogReturnLink>
           </div>
           <p className="text-sm text-gray-400 mb-2 line-clamp-2">{resource.description}</p>
           <div className="flex flex-wrap gap-1.5 items-center">
@@ -329,7 +330,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
       
       <div className="flex-1 min-w-0">
         <div className="mb-1 flex items-baseline gap-2 flex-wrap">
-          <Link href={`/${basePath}/${resource.slug}`}>
+          <CatalogReturnLink href={`/${basePath}/${resource.slug}`} catalogSlug={resource.slug}>
             <h3
               className={`text-lg md:text-xl font-bold transition-colors cursor-pointer ${
                 pluginTitleHoverAccent
@@ -344,7 +345,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             >
               {resource.title}
             </h3>
-          </Link>
+          </CatalogReturnLink>
           <span className="text-xs text-gray-500">от {getPublicUsername(resource.author, resource.author_id)}</span>
         </div>
         <p className="text-sm text-gray-400 mb-2">
