@@ -2,6 +2,10 @@ User-agent: *
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /ads/
+Disallow: /LICENSE
+Disallow: /license
+Disallow: /banner.webp
 Disallow: /sw.js
 Disallow: /sw-v2.js
 
@@ -20,9 +24,17 @@ User-agent: Yandex
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /ads/
+Disallow: /LICENSE
+Disallow: /license
+Disallow: /banner.webp
 
 User-agent: Googlebot
 Allow: /
 Disallow: /api/
 Disallow: /_next/
+Disallow: /ads/
+Disallow: /LICENSE
+Disallow: /license
+Disallow: /banner.webp
 

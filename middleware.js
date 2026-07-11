@@ -1,7 +1,15 @@
 import { NextResponse } from 'next/server'
+import { isPhantomCrawlerPath } from './lib/relativeContentUrls'
 
 export function middleware(request) {
   const { pathname, search } = request.nextUrl
+
+  if (isPhantomCrawlerPath(pathname)) {
+    return new NextResponse(null, {
+      status: 410,
+      headers: { 'Cache-Control': 'public, max-age=86400' },
+    })
+  }
   
   const redirects = {
     '/mods': '/discover/mods',
@@ -35,6 +43,14 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
+    '/LICENSE',
+    '/license',
+    '/License',
+    '/Licence',
+    '/COPYING',
+    '/copying',
+    '/banner.webp',
+    '/ads/:path*',
     '/mods/:path*',
     '/resourcepacks/:path*',
     '/datapacks/:path*',
