@@ -150,7 +150,6 @@ export default function SettingsClient() {
         <p className="text-gray-400 mb-6 text-xs md:text-sm">Выберите предпочтительную цветовую тему для ModrinthProxy на этом устройстве.</p>
         
         <div className="theme-options">
-          {/* Синхронизация с системой */}
           <button
             onClick={() => setTheme('system')}
             className={`preview-radio ${theme === 'system' ? 'selected' : ''}`}
@@ -178,7 +177,6 @@ export default function SettingsClient() {
             </div>
           </button>
 
-          {/* Светлая */}
           <button
             onClick={() => setTheme('light')}
             className={`preview-radio ${theme === 'light' ? 'selected' : ''}`}
@@ -206,7 +204,6 @@ export default function SettingsClient() {
             </div>
           </button>
 
-          {/* Тёмная */}
           <button
             onClick={() => setTheme('dark')}
             className={`preview-radio ${theme === 'dark' ? 'selected' : ''}`}
@@ -316,7 +313,6 @@ export default function SettingsClient() {
         <p className="text-gray-400 mb-6 text-xs md:text-sm">Включение или отключение определенных функций на этом устройстве.</p>
         
         <div className="flex flex-col gap-6">
-          {/* Advanced rendering */}
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="advanced-rendering" className="flex-1 cursor-pointer select-none">
               <span className="block font-semibold text-white text-sm md:text-base">Визуальные эффекты</span>

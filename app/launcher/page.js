@@ -1,6 +1,8 @@
 import DownloadButtons from './DownloadButtons'
+import LauncherVersions from './LauncherVersions'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
+import { getAstralRinthData } from '@/lib/astralrinth'
 
 export const metadata = {
   title: 'Modrinth App - Скачать лаунчер',
@@ -8,7 +10,10 @@ export const metadata = {
 }
 
 export default async function AppPage() {
-  const launcherData = await getLauncherData();
+  const [launcherData, astralData] = await Promise.all([
+    getLauncherData(),
+    getAstralRinthData(),
+  ]);
 
   return (
     <div className="min-h-screen">
@@ -21,11 +26,11 @@ export default async function AppPage() {
               </h1>
               
               <h2 className="main-subheader text-xl md:text-2xl lg:text-3xl text-muted max-w-4xl mx-auto leading-relaxed mb-10">
-                Modrinth App — уникальный лаунчер с открытым исходным кодом, который позволяет играть в ваши любимые моды и поддерживать их в актуальном состоянии, всё в одном удобном пакете.
+                Скачайте Modrinth App — бесплатный лаунчер Minecraft с открытым исходным кодом для установки модов, модпаков, шейдеров и ресурспаков. Играйте с любимыми модами и держите их в актуальном состоянии — всё в одном удобном приложении.
               </h2>
-              
+
               <DownloadButtons launcherData={launcherData} />
-              
+
               <div className="relative max-w-5xl mx-auto mt-16">
                 <img 
                   src="https://cdn-raw.modrinth.com/app-landing/app-screenshot.webp" 
@@ -156,6 +161,8 @@ export default async function AppPage() {
         </div>
       </div>
 
+      <LauncherVersions />
+
       <div className="max-w-6xl mx-auto px-4 py-8" id="download-options">
 
         <div className="mb-8">
@@ -165,7 +172,7 @@ export default async function AppPage() {
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
-            <DownloadSection launcherData={launcherData} />
+            <DownloadSection launcherData={launcherData} astralData={astralData} />
           </div>
         </div>
 
@@ -180,11 +187,39 @@ export default async function AppPage() {
             <a href="/bmadnco" className="text-modrinth-green hover:underline">
               Как это работает
             </a>
-            {' • '}
-            <a href="/api/launcher" className="text-modrinth-green hover:underline font-semibold">
-              RAW
-            </a>
           </p>
+
+          <div className="mt-6 flex flex-col items-center gap-2">
+            <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
+              RAW API
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2.5">
+              <a
+                href="/api/launcher"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-modrinth-green dark:text-gray-300"
+              >
+                <svg className="h-4 w-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8 16-4-4 4-4m8 0 4 4-4 4" />
+                </svg>
+                Modrinth
+                <span className="text-gray-400 group-hover:text-modrinth-green/70">/api/launcher</span>
+              </a>
+              <a
+                href="/api/astralrinth"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-modrinth-green dark:text-gray-300"
+              >
+                <svg className="h-4 w-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="m8 16-4-4 4-4m8 0 4 4-4 4" />
+                </svg>
+                AstralRinth
+                <span className="text-gray-400 group-hover:text-modrinth-green/70">/api/astralrinth</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>

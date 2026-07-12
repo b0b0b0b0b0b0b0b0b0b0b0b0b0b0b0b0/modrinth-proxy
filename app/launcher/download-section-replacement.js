@@ -3,7 +3,27 @@
 import DownloadButtonWithPopover from '../components/DownloadButtonWithPopover'
 import { WindowsIcon, MacOSIcon, LinuxIcon } from '../components/icons'
 
-export const DownloadSection = ({ launcherData }) => {
+const ASTRALRINTH_FALLBACK = {
+  windows:
+    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_x64-setup.exe',
+  macos:
+    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_aarch64.dmg',
+  appimage:
+    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.AppImage',
+  deb: 'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.deb',
+  rpm: 'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App-0.10.1601-1.x86_64.rpm',
+}
+
+export const DownloadSection = ({ launcherData, astralData }) => {
+  const astral = astralData?.downloads
+  const astralUrls = {
+    windows: astral?.windows || ASTRALRINTH_FALLBACK.windows,
+    macos: astral?.macos || ASTRALRINTH_FALLBACK.macos,
+    appimage: astral?.linux?.appimage || ASTRALRINTH_FALLBACK.appimage,
+    deb: astral?.linux?.deb || ASTRALRINTH_FALLBACK.deb,
+    rpm: astral?.linux?.rpm || ASTRALRINTH_FALLBACK.rpm,
+  }
+
   if (!launcherData) {
     return (
       <div className="col-span-3 text-center py-12">
@@ -21,7 +41,7 @@ export const DownloadSection = ({ launcherData }) => {
         <DownloadButtonWithPopover
           buttonText="Скачать для Windows"
           officialUrl={launcherData.downloads.windows}
-          pirateUrl="https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_x64-setup.exe"
+          pirateUrl={astralUrls.windows}
         />
       </div>
 
@@ -34,7 +54,7 @@ export const DownloadSection = ({ launcherData }) => {
         <DownloadButtonWithPopover
           buttonText="Скачать для macOS"
           officialUrl={launcherData.downloads.macos}
-          pirateUrl="https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_aarch64.dmg"
+          pirateUrl={astralUrls.macos}
         />
       </div>
 
@@ -48,20 +68,20 @@ export const DownloadSection = ({ launcherData }) => {
           <DownloadButtonWithPopover
             buttonText="AppImage"
             officialUrl={launcherData.downloads.linux.appimage}
-            pirateUrl="https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.AppImage"
+            pirateUrl={astralUrls.appimage}
           />
           <div className="-mt-4">
             <DownloadButtonWithPopover
               buttonText="DEB"
               officialUrl={launcherData.downloads.linux.deb}
-              pirateUrl="https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.deb"
+              pirateUrl={astralUrls.deb}
             />
           </div>
           <div className="-mt-4">
             <DownloadButtonWithPopover
               buttonText="RPM"
               officialUrl={launcherData.downloads.linux.rpm}
-              pirateUrl="https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App-0.10.1601-1.x86_64.rpm"
+              pirateUrl={astralUrls.rpm}
             />
           </div>
         </div>

@@ -1,5 +1,7 @@
 'use client'
 
+import StyledTooltip from '../components/StyledTooltip'
+
 export default function DownloadButtons({ launcherData }) {
   const handleDownload = (url) => {
     const link = document.createElement('a');
@@ -27,12 +29,25 @@ export default function DownloadButtons({ launcherData }) {
         </svg>
         Скачать Modrinth App
       </button>
-      <button
-        onClick={handleScrollToOptions}
-        className="iconified-button outline-button btn btn-large bg-transparent border-2 border-gray-600 text-white font-bold py-4 px-8 rounded-2xl hover:border-modrinth-green hover:text-modrinth-green transition-all duration-300 text-lg cursor-pointer"
+      <StyledTooltip
+        side="bottom"
+        contentClassName="!px-4 !py-3"
+        label={
+          <span className="flex flex-col items-center gap-1 text-center leading-snug">
+            <span className="text-sm font-semibold text-white">Посмотреть другие варианты</span>
+            <span className="text-[11px] font-medium tracking-wide text-modrinth-green">
+              macOS · Linux · и другие
+            </span>
+          </span>
+        }
       >
-        Больше вариантов загрузки
-      </button>
+        <button
+          onClick={handleScrollToOptions}
+          className="iconified-button outline-button btn btn-large bg-transparent border-2 border-gray-600 text-white font-bold py-4 px-8 rounded-2xl hover:border-modrinth-green hover:text-modrinth-green transition-all duration-300 text-lg cursor-pointer"
+        >
+          У меня не Windows
+        </button>
+      </StyledTooltip>
     </div>
   );
 }
