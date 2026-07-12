@@ -966,6 +966,16 @@ body {
   animation: fade-in 0.2s ease-out;
 }
 
+@keyframes os-connector-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.os-connector-path {
+  animation: os-connector-flow 0.9s linear infinite;
+}
+
 .animate-fade-in-up {
   animation: fade-in-up 0.4s ease-out forwards;
   opacity: 0;

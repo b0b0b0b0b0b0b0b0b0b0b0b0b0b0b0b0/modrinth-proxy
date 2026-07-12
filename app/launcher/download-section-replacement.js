@@ -35,7 +35,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
   return (
     <>
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
-        <WindowsIcon />
+        <span id="download-os-windows" className="inline-flex"><WindowsIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">Windows</h3>
         <p className="text-gray-400 mb-6">Установщик для Windows 64-bit</p>
         <DownloadButtonWithPopover
@@ -48,7 +48,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
       <div className="divider hidden md:block"></div>
 
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
-        <MacOSIcon />
+        <span id="download-os-macos" className="inline-flex"><MacOSIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">macOS</h3>
         <p className="text-gray-400 mb-6">Универсальный DMG для macOS</p>
         <DownloadButtonWithPopover
@@ -61,7 +61,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
       <div className="divider hidden md:block"></div>
 
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
-        <LinuxIcon />
+        <span id="download-os-linux" className="inline-flex"><LinuxIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">Linux<span className="text-sm text-gray-500 ml-2">*</span></h3>
         <p className="text-gray-400 mb-6">AppImage, DEB и RPM пакеты</p>
         <div className="w-full">

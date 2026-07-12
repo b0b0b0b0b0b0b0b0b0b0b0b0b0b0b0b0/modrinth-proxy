@@ -1,5 +1,6 @@
 import DownloadButtons from './DownloadButtons'
 import LauncherVersions from './LauncherVersions'
+import DetectedOS from './DetectedOS'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
 import { getAstralRinthData } from '@/lib/astralrinth'
@@ -169,6 +170,7 @@ export default async function AppPage() {
           <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Варианты загрузки</h2>
             <p className="text-lg text-gray-600 dark:text-gray-400">Выберите версию для вашей операционной системы</p>
+            <DetectedOS />
           </div>
 
           <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
