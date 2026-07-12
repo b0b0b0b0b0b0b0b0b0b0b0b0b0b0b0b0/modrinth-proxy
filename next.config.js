@@ -75,6 +75,15 @@ const nextConfig = {
       { source: '/app/', destination: '/launcher' },
     ]
   },
+  async redirects() {
+    return [
+      {
+        source: '/admin/file_lookup',
+        destination: '/file-lookup',
+        permanent: true,
+      },
+    ]
+  },
   images: {
     domains: ['cdn.modrinth.com'],
     remotePatterns: [
