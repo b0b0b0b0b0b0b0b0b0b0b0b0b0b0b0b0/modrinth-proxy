@@ -113,6 +113,7 @@ export async function POST(request) {
         version_type: latest.version_type,
         game_versions: latest.game_versions,
         loaders: latest.loaders,
+        downloads: latest.downloads,
         date_published: latest.date_published,
       },
       latest_file: latestFile

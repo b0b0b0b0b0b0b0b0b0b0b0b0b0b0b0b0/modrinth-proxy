@@ -97,6 +97,7 @@ export async function GET(request) {
         game_versions: version.game_versions,
         loaders: version.loaders,
         downloads: version.downloads,
+        date_published: version.date_published,
         files: version.files,
       },
       project: {

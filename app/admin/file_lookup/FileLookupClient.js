@@ -3,10 +3,43 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { formatFileSize } from '@/lib/modrinth'
+import { compressVersionRanges, formatFileSize } from '@/lib/modrinth'
 import { normalizeContentRoute } from '@/lib/contextualVersions'
 import { getProjectTypeDisplayName } from '@/lib/author'
+import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import CopyButton from '../../components/CopyButton'
+import { DownloadIconButton } from '../../components/DownloadModalParts'
+import RelativeTime from '../../components/RelativeTime'
+
+const VERSION_CHANNEL_LABELS = {
+  release: 'Релиз',
+  beta: 'Бета',
+  alpha: 'Альфа',
+}
+
+const VERSION_CHANNEL_STYLES = {
+  release: 'bg-version-release-bg text-version-release-fg border-version-release-fg/30',
+  beta: 'bg-version-beta-bg text-version-beta-fg border-version-beta-fg/30',
+  alpha: 'bg-red-500/15 text-red-400 border-red-500/30',
+}
+
+function normalizeVersionChannel(versionType) {
+  return String(versionType || 'release').toLowerCase().replace(/\s+/g, '_')
+}
+
+function VersionChannelBadge({ versionType }) {
+  const type = normalizeVersionChannel(versionType)
+  const label = VERSION_CHANNEL_LABELS[type] || VERSION_CHANNEL_LABELS.release
+  return (
+    <span
+      className={`inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${
+        VERSION_CHANNEL_STYLES[type] || VERSION_CHANNEL_STYLES.release
+      }`}
+    >
+      {label}
+    </span>
+  )
+}
 
 function formatHashBuffer(buffer) {
   return Array.from(new Uint8Array(buffer))
@@ -16,15 +49,7 @@ function formatHashBuffer(buffer) {
 
 function pickDefaultGameVersion(versions) {
   if (!Array.isArray(versions) || versions.length === 0) return ''
-  return [...versions].sort((a, b) => {
-    const pa = a.split('.').map((n) => parseInt(n, 10) || 0)
-    const pb = b.split('.').map((n) => parseInt(n, 10) || 0)
-    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
-      const diff = (pb[i] || 0) - (pa[i] || 0)
-      if (diff !== 0) return diff
-    }
-    return 0
-  })[0]
+  return [...versions].sort(compareMinecraftVersionsDesc)[0]
 }
 
 function pickLookupHash(hashes) {
@@ -32,6 +57,11 @@ function pickLookupHash(hashes) {
   if (hashes?.sha256) return { hash: hashes.sha256, algorithm: 'sha256' }
   if (hashes?.sha1) return { hash: hashes.sha1, algorithm: 'sha1' }
   return null
+}
+
+function pickUpdateLoaders(version) {
+  const loaders = (version?.loaders || []).filter((loader) => loader !== 'minecraft')
+  return loaders.length ? loaders : version?.loaders || []
 }
 
 function HashRow({ label, value }) {
@@ -55,6 +85,85 @@ function Spinner({ label }) {
   )
 }
 
+function VersionChip({ children }) {
+  return (
+    <span
+      className="rounded-full px-2 py-0.5 text-xs font-semibold whitespace-nowrap"
+      style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+    >
+      {children}
+    </span>
+  )
+}
+
+function VersionRow({ version, href, file }) {
+  if (!version) return null
+  const loaders = (version.loaders || []).filter((loader) => loader !== 'minecraft')
+
+  return (
+    <div className="space-y-2.5">
+      <div className="flex flex-wrap items-center gap-2">
+        <VersionChannelBadge versionType={version.version_type} />
+        {href ? (
+          <Link href={href} className="font-bold text-sm text-white hover:text-modrinth-green hover:underline">
+            {version.version_number}
+          </Link>
+        ) : (
+          <div className="font-bold text-sm text-white">{version.version_number}</div>
+        )}
+      </div>
+
+      {version.name ? <p className="text-sm text-gray-400">{version.name}</p> : null}
+
+      {version.game_versions?.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="shrink-0 text-xs text-gray-500">Minecraft:</span>
+          <div className="flex flex-wrap gap-1">
+            {compressVersionRanges(version.game_versions)
+              .slice(0, 4)
+              .map((range) => (
+                <VersionChip key={range}>{range}</VersionChip>
+              ))}
+          </div>
+        </div>
+      ) : null}
+
+      {loaders.length > 0 ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="shrink-0 text-xs text-gray-500">Платформа:</span>
+          <div className="flex flex-wrap gap-1">
+            {loaders.map((loader) => (
+              <VersionChip key={loader}>{loader}</VersionChip>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {file?.url ? (
+        <div className="flex flex-wrap items-center gap-2 pt-0.5">
+          <span className="shrink-0 text-xs text-gray-500">Файл:</span>
+          <DownloadIconButton
+            href={file.url}
+            download={file.filename}
+            label={`Скачать ${file.filename}`}
+          />
+          <span className="min-w-0 truncate text-xs text-gray-400">{file.filename}</span>
+          {file.size ? (
+            <span className="text-xs text-gray-600">· {formatFileSize(file.size)}</span>
+          ) : null}
+        </div>
+      ) : null}
+
+      {version.date_published ? (
+        <div className="text-xs text-gray-500">
+          Опубликовано:{' '}
+          <RelativeTime dateString={version.date_published} className="text-gray-400" />
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 async function fetchLookup(hash, algorithm) {
   const response = await fetch(
     `/api/file-lookup?hash=${encodeURIComponent(hash)}&algorithm=${algorithm}`
@@ -62,19 +171,14 @@ async function fetchLookup(hash, algorithm) {
 
   if (response.status === 429) {
     const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10)
-    return {
-      error: `Слишком много запросов. Подожди ${retryAfter} сек. и попробуй снова.`,
-    }
+    return { error: `Слишком много запросов. Подожди ${retryAfter} сек. и попробуй снова.` }
   }
-
   if (response.status === 404) {
     return { error: 'Файл не найден в каталоге Modrinth.' }
   }
-
   if (!response.ok) {
     return { error: 'Не удалось выполнить поиск по Modrinth.' }
   }
-
   return { result: await response.json() }
 }
 
@@ -87,19 +191,14 @@ async function fetchUpdateCheck(payload) {
 
   if (response.status === 429) {
     const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10)
-    return {
-      error: `Слишком много запросов. Подожди ${retryAfter} сек.`,
-    }
+    return { error: `Слишком много запросов. Подожди ${retryAfter} сек.` }
   }
-
   if (response.status === 404) {
-    return { error: 'Не удалось проверить обновление для этих параметров.' }
+    return { error: null, result: null }
   }
-
   if (!response.ok) {
     return { error: 'Не удалось проверить обновление.' }
   }
-
   return { result: await response.json() }
 }
 
@@ -124,12 +223,6 @@ function pickMatchedFile(files, hashes) {
   )
 }
 
-function loaderOptions(version) {
-  const loaders = version?.loaders || []
-  const filtered = loaders.filter((loader) => loader !== 'minecraft')
-  return filtered.length ? filtered : loaders
-}
-
 export default function FileLookupClient() {
   const fileInputRef = useRef(null)
   const lastLookupAtRef = useRef(0)
@@ -142,8 +235,6 @@ export default function FileLookupClient() {
   const [dragActive, setDragActive] = useState(false)
   const [hashInput, setHashInput] = useState('')
   const [hashInputError, setHashInputError] = useState('')
-  const [updateLoader, setUpdateLoader] = useState('')
-  const [updateGameVersion, setUpdateGameVersion] = useState('')
   const [updateCheck, setUpdateCheck] = useState(null)
   const [updateError, setUpdateError] = useState('')
   const [loadingUpdate, setLoadingUpdate] = useState(false)
@@ -153,8 +244,6 @@ export default function FileLookupClient() {
     setLookupResult(null)
     setLookupError('')
     setHashInputError('')
-    setUpdateLoader('')
-    setUpdateGameVersion('')
     setUpdateCheck(null)
     setUpdateError('')
   }
@@ -162,9 +251,7 @@ export default function FileLookupClient() {
   const waitForLookupSlot = async () => {
     const elapsed = Date.now() - lastLookupAtRef.current
     const wait = LOOKUP_COOLDOWN_MS - elapsed
-    if (wait > 0) {
-      await new Promise((resolve) => setTimeout(resolve, wait))
-    }
+    if (wait > 0) await new Promise((resolve) => setTimeout(resolve, wait))
     lastLookupAtRef.current = Date.now()
   }
 
@@ -278,19 +365,13 @@ export default function FileLookupClient() {
     setHashInputError('Поддерживаются SHA512 (128), SHA256 (64) или SHA1 (40) символов.')
   }
 
-  useEffect(() => {
-    if (!lookupResult?.version) return
-    const loaders = loaderOptions(lookupResult.version)
-    const gameVersions = lookupResult.version.game_versions || []
-    setUpdateLoader(loaders[0] || '')
-    setUpdateGameVersion(pickDefaultGameVersion(gameVersions))
-    setUpdateCheck(null)
-    setUpdateError('')
-  }, [lookupResult?.version?.id])
-
   const runUpdateCheck = useCallback(async () => {
     const hashInfo = pickLookupHash(fileHashes)
-    if (!hashInfo || !lookupResult?.version?.id || !updateLoader || !updateGameVersion) return
+    const version = lookupResult?.version
+    const gameVersion = pickDefaultGameVersion(version?.game_versions)
+    const loaders = pickUpdateLoaders(version)
+
+    if (!hashInfo || !version?.id || !gameVersion || loaders.length === 0) return
 
     setLoadingUpdate(true)
     setUpdateError('')
@@ -301,9 +382,9 @@ export default function FileLookupClient() {
       const { result, error } = await fetchUpdateCheck({
         hash: hashInfo.hash,
         algorithm: hashInfo.algorithm,
-        loaders: [updateLoader],
-        game_versions: [updateGameVersion],
-        current_version_id: lookupResult.version.id,
+        loaders,
+        game_versions: [gameVersion],
+        current_version_id: version.id,
       })
 
       if (error) {
@@ -316,12 +397,12 @@ export default function FileLookupClient() {
     } finally {
       setLoadingUpdate(false)
     }
-  }, [fileHashes, lookupResult?.version?.id, updateLoader, updateGameVersion])
+  }, [fileHashes, lookupResult?.version])
 
   useEffect(() => {
-    if (!lookupResult || !fileHashes || !updateLoader || !updateGameVersion || loadingLookup) return
+    if (!lookupResult || !fileHashes || loadingLookup) return
     runUpdateCheck()
-  }, [lookupResult, fileHashes, updateLoader, updateGameVersion, loadingLookup, runUpdateCheck])
+  }, [lookupResult, fileHashes, loadingLookup, runUpdateCheck])
 
   const projectPath = lookupResult?.project
     ? `/${normalizeContentRoute(lookupResult.project.project_type)}/${lookupResult.project.slug}`
@@ -338,10 +419,9 @@ export default function FileLookupClient() {
       : null
 
   const matchedFile = pickMatchedFile(lookupResult?.version?.files, fileHashes)
-  const loaderChoices = lookupResult ? loaderOptions(lookupResult.version) : []
-  const gameVersionChoices = lookupResult?.version?.game_versions || []
-  const showUpdateFilters = loaderChoices.length > 1 || gameVersionChoices.length > 1
-
+  const checkedMcVersion = lookupResult?.version
+    ? pickDefaultGameVersion(lookupResult.version.game_versions)
+    : ''
   const hasResults = loadingHash || loadingLookup || fileHashes || lookupResult || lookupError
 
   return (
@@ -445,144 +525,81 @@ export default function FileLookupClient() {
                   <p className="mt-0.5 text-sm text-gray-500">
                     {getProjectTypeDisplayName(lookupResult.project.project_type)}
                   </p>
-                  <div className="mt-2">
-                    {versionPath ? (
-                      <Link
-                        href={versionPath}
-                        className="text-sm text-modrinth-green hover:underline"
-                      >
-                        {lookupResult.version.version_number}
-                      </Link>
-                    ) : (
-                      <span className="text-sm text-modrinth-green">
-                        {lookupResult.version.version_number}
-                      </span>
-                    )}
-                    {lookupResult.version.name ? (
-                      <p className="mt-1 text-sm text-gray-500">{lookupResult.version.name}</p>
-                    ) : null}
-                  </div>
                 </div>
               </div>
 
-              {(lookupResult.version.loaders?.length > 0 ||
-                lookupResult.version.game_versions?.length > 0) && (
-                <div className="flex flex-wrap gap-2">
-                  {lookupResult.version.loaders?.map((loader) => (
-                    <span
-                      key={loader}
-                      className="rounded-lg bg-gray-800 px-2.5 py-0.5 text-xs text-gray-400"
-                    >
-                      {loader}
-                    </span>
-                  ))}
-                  {lookupResult.version.game_versions?.map((version) => (
-                    <span
-                      key={version}
-                      className="rounded-lg bg-gray-800 px-2.5 py-0.5 text-xs text-gray-400"
-                    >
-                      {version}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              {matchedFile ? (
-                <div className="space-y-1 border-t border-gray-800 pt-4">
-                  <p className="text-sm text-gray-500">{matchedFile.filename}</p>
-                  <p className="text-sm text-gray-600">
-                    {matchedFile.size ? formatFileSize(matchedFile.size) : null}
-                    {matchedFile.size && lookupResult.version.version_type ? ' · ' : null}
-                    {lookupResult.version.version_type ? (
-                      <span className="capitalize">{lookupResult.version.version_type}</span>
-                    ) : null}
+              <div className="border-t border-gray-800 pt-4 space-y-3">
+                <div>
+                  <p className="text-sm font-medium text-gray-200">Нашёл твой файл на Modrinth</p>
+                  <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
+                    {selectedFile ? (
+                      <>
+                        Хеш файла{' '}
+                        <span className="font-mono text-gray-400">{selectedFile.name}</span> совпал с
+                        этой версией — это то, что у тебя сейчас:
+                      </>
+                    ) : matchedFile?.filename ? (
+                      <>
+                        По введённому хешу совпал файл{' '}
+                        <span className="font-mono text-gray-400">{matchedFile.filename}</span> из
+                        проекта ниже:
+                      </>
+                    ) : (
+                      <>По введённому хешу совпала эта версия мода на Modrinth:</>
+                    )}
                   </p>
-                  {matchedFile.url ? (
-                    <a
-                      href={matchedFile.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block text-sm text-modrinth-green hover:underline"
-                    >
-                      Скачать с CDN Modrinth
-                    </a>
-                  ) : null}
                 </div>
-              ) : null}
+                <VersionRow
+                  version={lookupResult.version}
+                  href={versionPath}
+                  file={matchedFile}
+                />
+              </div>
 
               {fileHashes && lookupResult.version.id ? (
                 <div className="space-y-3 border-t border-gray-800 pt-4">
-                  <p className="text-sm font-medium text-gray-400">Обновление</p>
-
-                  {showUpdateFilters ? (
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                      {loaderChoices.length > 1 ? (
-                        <select
-                          value={updateLoader}
-                          onChange={(event) => setUpdateLoader(event.target.value)}
-                          className="rounded-xl border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
-                        >
-                          {loaderChoices.map((loader) => (
-                            <option key={loader} value={loader}>
-                              {loader}
-                            </option>
-                          ))}
-                        </select>
-                      ) : null}
-                      {gameVersionChoices.length > 1 ? (
-                        <select
-                          value={updateGameVersion}
-                          onChange={(event) => setUpdateGameVersion(event.target.value)}
-                          className="rounded-xl border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
-                        >
-                          {gameVersionChoices.map((version) => (
-                            <option key={version} value={version}>
-                              Minecraft {version}
-                            </option>
-                          ))}
-                        </select>
-                      ) : null}
-                    </div>
+                  {loadingUpdate ? (
+                    <Spinner
+                      label={
+                        checkedMcVersion
+                          ? `Проверяем обновления для Minecraft ${checkedMcVersion}…`
+                          : 'Проверяем обновления…'
+                      }
+                    />
                   ) : null}
-
-                  {loadingUpdate ? <Spinner label="Проверяем обновление…" /> : null}
-
-                  {!loadingUpdate && updateCheck && !updateError ? (
-                    updateCheck.update_available ? (
-                      <div className="space-y-1 text-sm">
-                        <p className="text-amber-300">
-                          Есть новее:{' '}
-                          {latestVersionPath ? (
-                            <Link href={latestVersionPath} className="text-modrinth-green hover:underline">
-                              {updateCheck.latest_version.version_number}
-                            </Link>
-                          ) : (
-                            <span className="text-modrinth-green">
-                              {updateCheck.latest_version.version_number}
-                            </span>
-                          )}
-                        </p>
-                        {updateCheck.latest_version.name ? (
-                          <p className="text-gray-500">{updateCheck.latest_version.name}</p>
-                        ) : null}
-                        {updateCheck.latest_file?.url ? (
-                          <a
-                            href={updateCheck.latest_file.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block text-modrinth-green hover:underline"
-                          >
-                            Скачать {updateCheck.latest_file.filename}
-                          </a>
-                        ) : null}
-                      </div>
-                    ) : (
-                      <p className="text-sm text-gray-500">
-                        Последняя версия для {updateLoader} · Minecraft {updateGameVersion}
+                  {!loadingUpdate && updateCheck?.update_available ? (
+                    <>
+                      <p className="text-sm text-gray-300">
+                        {checkedMcVersion ? (
+                          <>
+                            Для твоей версии Minecraft{' '}
+                            <span className="font-semibold text-white">{checkedMcVersion}</span>{' '}
+                            доступно обновление:
+                          </>
+                        ) : (
+                          'Доступно обновление:'
+                        )}
                       </p>
-                    )
+                      <VersionRow
+                        version={updateCheck.latest_version}
+                        href={latestVersionPath}
+                        file={updateCheck.latest_file}
+                      />
+                    </>
                   ) : null}
-
+                  {!loadingUpdate && updateCheck && !updateCheck.update_available && !updateError ? (
+                    <p className="text-sm text-gray-500">
+                      {checkedMcVersion ? (
+                        <>
+                          Для Minecraft{' '}
+                          <span className="font-medium text-gray-400">{checkedMcVersion}</span>{' '}
+                          — это последняя версия мода.
+                        </>
+                      ) : (
+                        'У тебя последняя версия.'
+                      )}
+                    </p>
+                  ) : null}
                   {updateError ? <p className="text-sm text-amber-400">{updateError}</p> : null}
                 </div>
               ) : null}
