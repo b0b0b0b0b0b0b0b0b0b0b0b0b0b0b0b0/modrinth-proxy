@@ -1,16 +1,37 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { formatFileSize } from '@/lib/modrinth'
-import { getProjectTypePath, getProjectTypeDisplayName } from '@/lib/author'
+import { normalizeContentRoute } from '@/lib/contextualVersions'
+import { getProjectTypeDisplayName } from '@/lib/author'
 import CopyButton from '../../components/CopyButton'
 
 function formatHashBuffer(buffer) {
   return Array.from(new Uint8Array(buffer))
     .map((byte) => byte.toString(16).padStart(2, '0'))
     .join('')
+}
+
+function pickDefaultGameVersion(versions) {
+  if (!Array.isArray(versions) || versions.length === 0) return ''
+  return [...versions].sort((a, b) => {
+    const pa = a.split('.').map((n) => parseInt(n, 10) || 0)
+    const pb = b.split('.').map((n) => parseInt(n, 10) || 0)
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const diff = (pb[i] || 0) - (pa[i] || 0)
+      if (diff !== 0) return diff
+    }
+    return 0
+  })[0]
+}
+
+function pickLookupHash(hashes) {
+  if (hashes?.sha512) return { hash: hashes.sha512, algorithm: 'sha512' }
+  if (hashes?.sha256) return { hash: hashes.sha256, algorithm: 'sha256' }
+  if (hashes?.sha1) return { hash: hashes.sha1, algorithm: 'sha1' }
+  return null
 }
 
 function HashRow({ label, value }) {
@@ -57,6 +78,31 @@ async function fetchLookup(hash, algorithm) {
   return { result: await response.json() }
 }
 
+async function fetchUpdateCheck(payload) {
+  const response = await fetch('/api/file-lookup/update', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+
+  if (response.status === 429) {
+    const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10)
+    return {
+      error: `Слишком много запросов. Подожди ${retryAfter} сек.`,
+    }
+  }
+
+  if (response.status === 404) {
+    return { error: 'Не удалось проверить обновление для этих параметров.' }
+  }
+
+  if (!response.ok) {
+    return { error: 'Не удалось проверить обновление.' }
+  }
+
+  return { result: await response.json() }
+}
+
 const LOOKUP_COOLDOWN_MS = 2500
 
 async function lookupByHash(sha512) {
@@ -78,6 +124,12 @@ function pickMatchedFile(files, hashes) {
   )
 }
 
+function loaderOptions(version) {
+  const loaders = version?.loaders || []
+  const filtered = loaders.filter((loader) => loader !== 'minecraft')
+  return filtered.length ? filtered : loaders
+}
+
 export default function FileLookupClient() {
   const fileInputRef = useRef(null)
   const lastLookupAtRef = useRef(0)
@@ -90,12 +142,21 @@ export default function FileLookupClient() {
   const [dragActive, setDragActive] = useState(false)
   const [hashInput, setHashInput] = useState('')
   const [hashInputError, setHashInputError] = useState('')
+  const [updateLoader, setUpdateLoader] = useState('')
+  const [updateGameVersion, setUpdateGameVersion] = useState('')
+  const [updateCheck, setUpdateCheck] = useState(null)
+  const [updateError, setUpdateError] = useState('')
+  const [loadingUpdate, setLoadingUpdate] = useState(false)
 
   const resetResults = () => {
     setFileHashes(null)
     setLookupResult(null)
     setLookupError('')
     setHashInputError('')
+    setUpdateLoader('')
+    setUpdateGameVersion('')
+    setUpdateCheck(null)
+    setUpdateError('')
   }
 
   const waitForLookupSlot = async () => {
@@ -111,6 +172,8 @@ export default function FileLookupClient() {
     setLoadingLookup(true)
     setLookupError('')
     setLookupResult(null)
+    setUpdateCheck(null)
+    setUpdateError('')
 
     try {
       await waitForLookupSlot()
@@ -215,8 +278,53 @@ export default function FileLookupClient() {
     setHashInputError('Поддерживаются SHA512 (128), SHA256 (64) или SHA1 (40) символов.')
   }
 
+  useEffect(() => {
+    if (!lookupResult?.version) return
+    const loaders = loaderOptions(lookupResult.version)
+    const gameVersions = lookupResult.version.game_versions || []
+    setUpdateLoader(loaders[0] || '')
+    setUpdateGameVersion(pickDefaultGameVersion(gameVersions))
+    setUpdateCheck(null)
+    setUpdateError('')
+  }, [lookupResult?.version?.id])
+
+  const runUpdateCheck = useCallback(async () => {
+    const hashInfo = pickLookupHash(fileHashes)
+    if (!hashInfo || !lookupResult?.version?.id || !updateLoader || !updateGameVersion) return
+
+    setLoadingUpdate(true)
+    setUpdateError('')
+    setUpdateCheck(null)
+
+    try {
+      await waitForLookupSlot()
+      const { result, error } = await fetchUpdateCheck({
+        hash: hashInfo.hash,
+        algorithm: hashInfo.algorithm,
+        loaders: [updateLoader],
+        game_versions: [updateGameVersion],
+        current_version_id: lookupResult.version.id,
+      })
+
+      if (error) {
+        setUpdateError(error)
+        return
+      }
+      setUpdateCheck(result)
+    } catch {
+      setUpdateError('Не удалось проверить обновление.')
+    } finally {
+      setLoadingUpdate(false)
+    }
+  }, [fileHashes, lookupResult?.version?.id, updateLoader, updateGameVersion])
+
+  useEffect(() => {
+    if (!lookupResult || !fileHashes || !updateLoader || !updateGameVersion || loadingLookup) return
+    runUpdateCheck()
+  }, [lookupResult, fileHashes, updateLoader, updateGameVersion, loadingLookup, runUpdateCheck])
+
   const projectPath = lookupResult?.project
-    ? `/${getProjectTypePath(lookupResult.project.project_type)}/${lookupResult.project.slug}`
+    ? `/${normalizeContentRoute(lookupResult.project.project_type)}/${lookupResult.project.slug}`
     : null
 
   const versionPath =
@@ -224,7 +332,15 @@ export default function FileLookupClient() {
       ? `${projectPath}/version/${encodeURIComponent(lookupResult.version.version_number)}`
       : null
 
+  const latestVersionPath =
+    projectPath && updateCheck?.latest_version?.version_number
+      ? `${projectPath}/version/${encodeURIComponent(updateCheck.latest_version.version_number)}`
+      : null
+
   const matchedFile = pickMatchedFile(lookupResult?.version?.files, fileHashes)
+  const loaderChoices = lookupResult ? loaderOptions(lookupResult.version) : []
+  const gameVersionChoices = lookupResult?.version?.game_versions || []
+  const showUpdateFilters = loaderChoices.length > 1 || gameVersionChoices.length > 1
 
   const hasResults = loadingHash || loadingLookup || fileHashes || lookupResult || lookupError
 
@@ -391,6 +507,83 @@ export default function FileLookupClient() {
                       Скачать с CDN Modrinth
                     </a>
                   ) : null}
+                </div>
+              ) : null}
+
+              {fileHashes && lookupResult.version.id ? (
+                <div className="space-y-3 border-t border-gray-800 pt-4">
+                  <p className="text-sm font-medium text-gray-400">Обновление</p>
+
+                  {showUpdateFilters ? (
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      {loaderChoices.length > 1 ? (
+                        <select
+                          value={updateLoader}
+                          onChange={(event) => setUpdateLoader(event.target.value)}
+                          className="rounded-xl border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
+                        >
+                          {loaderChoices.map((loader) => (
+                            <option key={loader} value={loader}>
+                              {loader}
+                            </option>
+                          ))}
+                        </select>
+                      ) : null}
+                      {gameVersionChoices.length > 1 ? (
+                        <select
+                          value={updateGameVersion}
+                          onChange={(event) => setUpdateGameVersion(event.target.value)}
+                          className="rounded-xl border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
+                        >
+                          {gameVersionChoices.map((version) => (
+                            <option key={version} value={version}>
+                              Minecraft {version}
+                            </option>
+                          ))}
+                        </select>
+                      ) : null}
+                    </div>
+                  ) : null}
+
+                  {loadingUpdate ? <Spinner label="Проверяем обновление…" /> : null}
+
+                  {!loadingUpdate && updateCheck && !updateError ? (
+                    updateCheck.update_available ? (
+                      <div className="space-y-1 text-sm">
+                        <p className="text-amber-300">
+                          Есть новее:{' '}
+                          {latestVersionPath ? (
+                            <Link href={latestVersionPath} className="text-modrinth-green hover:underline">
+                              {updateCheck.latest_version.version_number}
+                            </Link>
+                          ) : (
+                            <span className="text-modrinth-green">
+                              {updateCheck.latest_version.version_number}
+                            </span>
+                          )}
+                        </p>
+                        {updateCheck.latest_version.name ? (
+                          <p className="text-gray-500">{updateCheck.latest_version.name}</p>
+                        ) : null}
+                        {updateCheck.latest_file?.url ? (
+                          <a
+                            href={updateCheck.latest_file.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block text-modrinth-green hover:underline"
+                          >
+                            Скачать {updateCheck.latest_file.filename}
+                          </a>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-gray-500">
+                        Последняя версия для {updateLoader} · Minecraft {updateGameVersion}
+                      </p>
+                    )
+                  ) : null}
+
+                  {updateError ? <p className="text-sm text-amber-400">{updateError}</p> : null}
                 </div>
               ) : null}
             </div>
