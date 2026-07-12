@@ -102,7 +102,7 @@ export default function Footer() {
                 </svg>
                 <span className="font-medium">Что за бот у вас?</span>
               </a>
-              <a href="/file-lookup" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
+              <a href="/admin/file_lookup" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>

@@ -73,15 +73,7 @@ const nextConfig = {
     return [
       { source: '/app', destination: '/launcher' },
       { source: '/app/', destination: '/launcher' },
-    ]
-  },
-  async redirects() {
-    return [
-      {
-        source: '/admin/file_lookup',
-        destination: '/file-lookup',
-        permanent: true,
-      },
+      { source: '/file-lookup', destination: '/admin/file_lookup' },
     ]
   },
   images: {
