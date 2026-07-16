@@ -31,10 +31,20 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
       : (organization?.members ?? [])
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
   const allowedLoaderIds = resolvedContentType ? buildAllowedLoaderIds(resolvedContentType) : null
-  const loaders = (resource.loaders || [])
+  const projectTypes = Array.isArray(resource.project_types)
+    ? resource.project_types
+    : resource.project_type
+      ? [resource.project_type]
+      : []
+  const loaders = [
+    ...(resource.loaders || []),
+    ...(projectTypes.includes('resourcepack') ? ['resourcepack'] : []),
+  ]
+    .filter((l, index, arr) => arr.indexOf(l) === index)
     .filter((l) => {
       if (l === 'minecraft') return false
       if (l === 'datapack' && resolvedContentType !== 'datapack') return false
+      if (l === 'resourcepack' && resolvedContentType !== 'datapack' && resolvedContentType !== 'resourcepack') return false
       return true
     })
     .filter(l => !allowedLoaderIds?.size || allowedLoaderIds.has(l))

@@ -10,7 +10,7 @@ import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
   filterVersionsByContentType,
   getVersionGameVersions,
-  getVersionLoaders,
+  getVersionPlatformIds,
 } from '@/lib/contextualVersions'
 import { LOADERS } from '@/lib/loaders'
 import VersionsDropdown from './VersionsDropdown'
@@ -49,7 +49,7 @@ export default function VersionsList({
     themeMounted && accent && resolvedTheme === 'dark' ? accent : null
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedMcVersion, setSelectedMcVersion] = useState('all')
+  const [selectedMcVersions, setSelectedMcVersions] = useState([])
   const [selectedLoaders, setSelectedLoaders] = useState([])
   const [selectedChannel, setSelectedChannel] = useState('all')
   const [showOnlyReleases, setShowOnlyReleases] = useState(true)
@@ -70,8 +70,8 @@ export default function VersionsList({
     }
   }
 
-  const handleVersionChange = (version) => {
-    setSelectedMcVersion(version)
+  const handleVersionsChange = (nextVersions) => {
+    setSelectedMcVersions(nextVersions)
     setCurrentPage(1)
   }
 
@@ -102,7 +102,7 @@ export default function VersionsList({
   const loaders = useMemo(() => {
     const loadersSet = new Set()
     contextualVersions.forEach(v => {
-      getVersionLoaders(v).forEach(l => loadersSet.add(l))
+      getVersionPlatformIds(v).forEach(l => loadersSet.add(l))
     })
     return Array.from(loadersSet)
   }, [contextualVersions])
@@ -133,6 +133,16 @@ export default function VersionsList({
     })
   }, [mcVersions])
 
+  const hasSnapshotVersions = releaseVersions.length < mcVersions.length
+
+  useEffect(() => {
+    if (!showOnlyReleases) return
+    setSelectedMcVersions((prev) => {
+      const next = prev.filter((v) => releaseVersions.includes(v))
+      return next.length === prev.length ? prev : next
+    })
+  }, [showOnlyReleases, releaseVersions])
+
   const filteredVersions = useMemo(() => {
     return contextualVersions.filter(version => {
       if (searchQuery) {
@@ -142,17 +152,18 @@ export default function VersionsList({
         if (!matchName && !matchVersion) return false
       }
 
-      if (selectedMcVersion !== 'all') {
-        if (!getVersionGameVersions(version).includes(selectedMcVersion)) return false
+      if (selectedMcVersions.length > 0) {
+        const gameVersions = getVersionGameVersions(version)
+        if (!selectedMcVersions.some((v) => gameVersions.includes(v))) return false
       }
 
-      if (showOnlyReleases && selectedMcVersion === 'all') {
+      if (showOnlyReleases && selectedMcVersions.length === 0) {
         const hasReleaseVersion = getVersionGameVersions(version).some(v => releaseVersions.includes(v))
         if (!hasReleaseVersion) return false
       }
 
       if (selectedLoaders.length > 0) {
-        const hasSelectedLoader = getVersionLoaders(version).some(l => selectedLoaders.includes(l))
+        const hasSelectedLoader = getVersionPlatformIds(version).some(l => selectedLoaders.includes(l))
         if (!hasSelectedLoader) return false
       }
 
@@ -166,7 +177,7 @@ export default function VersionsList({
 
       return true
     })
-  }, [contextualVersions, searchQuery, selectedMcVersion, selectedLoaders, selectedChannel, showOnlyReleases, releaseVersions])
+  }, [contextualVersions, searchQuery, selectedMcVersions, selectedLoaders, selectedChannel, showOnlyReleases, releaseVersions])
 
   const totalPages = Math.ceil(filteredVersions.length / versionsPerPage)
   const paginatedVersions = filteredVersions.slice(
@@ -202,14 +213,6 @@ export default function VersionsList({
           </div>
 
           <div className="flex flex-wrap gap-2 md:gap-3 text-sm md:text-base">
-            <VersionsDropdown 
-              versions={showOnlyReleases ? releaseVersions : mcVersions}
-              selectedVersion={selectedMcVersion}
-              onVersionChange={handleVersionChange}
-              showOnlyReleases={showOnlyReleases}
-              onShowOnlyReleasesChange={handleShowOnlyReleasesChange}
-            />
-
             {showPlatforms && loaders.length > 0 && (
               <LoadersDropdown 
                 loaders={loaders}
@@ -217,6 +220,15 @@ export default function VersionsList({
                 onLoadersChange={handleLoadersChange}
               />
             )}
+
+            <VersionsDropdown 
+              versions={showOnlyReleases ? releaseVersions : mcVersions}
+              selectedVersions={selectedMcVersions}
+              onVersionsChange={handleVersionsChange}
+              showOnlyReleases={showOnlyReleases}
+              onShowOnlyReleasesChange={handleShowOnlyReleasesChange}
+              hasSnapshotVersions={hasSnapshotVersions}
+            />
 
             {showChannelFilter && (
               <ChannelsDropdown 
@@ -287,7 +299,7 @@ export default function VersionsList({
                           </span>
                         ))}
                         {showPlatforms &&
-                          version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
+                          getVersionPlatformIds(version).map((loaderId) => {
                           const loaderData = LOADERS.find(l => l.id === loaderId)
                           if (!loaderData) return null
                           
@@ -345,7 +357,7 @@ export default function VersionsList({
 
                       {showPlatforms && (
                         <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
-                          {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
+                          {getVersionPlatformIds(version).map((loaderId) => {
                             const loaderData = LOADERS.find(l => l.id === loaderId)
                             if (!loaderData) return null
                             
@@ -400,7 +412,7 @@ export default function VersionsList({
                           </div>
                           {showPlatforms && (
                             <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
-                              {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
+                              {getVersionPlatformIds(version).map((loaderId) => {
                                 const loaderData = LOADERS.find(l => l.id === loaderId)
                                 if (!loaderData) return null
                                 

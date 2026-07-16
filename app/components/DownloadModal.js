@@ -608,7 +608,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       'optifine': 'OptiFine',
       'canvas': 'Canvas',
       'vanilla': 'Vanilla',
-      'datapack': 'Datapack',
+      'datapack': 'Датапак',
+      'resourcepack': 'Ресурспак',
+      'minecraft': 'Minecraft',
     }
     return names[loader] || loader
   }

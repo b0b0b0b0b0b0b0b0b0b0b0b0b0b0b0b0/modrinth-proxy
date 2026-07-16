@@ -3,6 +3,24 @@
 import { useState, useRef, useEffect } from 'react'
 import { LOADERS } from '@/lib/loaders'
 
+function FilterCheckbox({ checked }) {
+  return (
+    <div
+      className={`w-4 h-4 shrink-0 rounded border-2 flex items-center justify-center transition ${
+        checked
+          ? 'bg-modrinth-green border-modrinth-green'
+          : 'border-gray-400 dark:border-gray-600'
+      }`}
+    >
+      {checked && (
+        <svg className="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+        </svg>
+      )}
+    </div>
+  )
+}
+
 export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersChange }) {
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -42,6 +60,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
   return (
     <div className="relative" ref={dropdownRef}>
       <button
+        type="button"
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 text-sm font-medium border transition capitalize rounded-xl bg-gray-100 text-gray-900 border-gray-200 hover:border-modrinth-green dark:bg-gray-800 dark:text-white dark:border-gray-700"
       >
@@ -61,25 +80,23 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
               {loaders.filter(l => l !== 'minecraft').map(loaderId => {
                 const loaderData = LOADERS.find(l => l.id === loaderId)
                 if (!loaderData) return null
-                
+                const checked = selectedLoaders.includes(loaderId)
+
                 return (
                   <button
                     key={loaderId}
+                    type="button"
                     onClick={() => toggleLoader(loaderId)}
-                    className="flex items-center justify-between px-3 py-2 text-sm transition text-left rounded-xl hover:bg-gray-100 dark:hover:bg-[#34363c]"
+                    className="flex items-center gap-2 px-3 py-2 text-sm transition text-left rounded-xl hover:bg-gray-100 dark:hover:bg-[#34363c]"
                     style={{ color: loaderData.color || 'var(--text-primary)' }}
                   >
-                    <span className="flex items-center gap-2">
+                    <FilterCheckbox checked={checked} />
+                    <span className="flex items-center gap-2 min-w-0">
                       <div className="w-4 h-4 flex-shrink-0">
                         {loaderData.icon}
                       </div>
-                      {loaderData.name}
+                      <span className="truncate">{loaderData.name}</span>
                     </span>
-                    {selectedLoaders.includes(loaderId) && (
-                      <svg className="w-5 h-5 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 6L9 17l-5-5" />
-                      </svg>
-                    )}
                   </button>
                 )
               })}
