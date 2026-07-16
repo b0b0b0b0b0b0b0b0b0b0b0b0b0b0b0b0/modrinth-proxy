@@ -43,20 +43,19 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 bg-gray-800 text-white text-sm border border-gray-700 hover:border-modrinth-green transition capitalize"
-        style={{ borderRadius: '0.75rem' }}
+        className="flex items-center gap-2 px-3 py-2 text-sm font-medium border transition capitalize rounded-xl bg-gray-100 text-gray-900 border-gray-200 hover:border-modrinth-green dark:bg-gray-800 dark:text-white dark:border-gray-700"
       >
-        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 3H2l8 9.46V19l4 2v-8.54z" />
         </svg>
         <span>{getLabel()}</span>
-        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-64 bg-gray-800 border border-gray-700 shadow-2xl z-50 overflow-hidden animate-fade-in" style={{ borderRadius: '0.75rem' }}>
+        <div className="absolute top-full left-0 mt-2 w-64 border shadow-2xl z-50 overflow-hidden animate-fade-in rounded-xl border-gray-200 bg-white dark:border-[#2e3035] dark:bg-[#27292e]">
           <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-1">
               {loaders.filter(l => l !== 'minecraft').map(loaderId => {
@@ -67,8 +66,8 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
                   <button
                     key={loaderId}
                     onClick={() => toggleLoader(loaderId)}
-                    className="flex items-center justify-between px-3 py-2 text-sm hover:bg-gray-700 transition text-left"
-                    style={{ borderRadius: '0.75rem', color: loaderData.color || 'var(--text-primary)' }}
+                    className="flex items-center justify-between px-3 py-2 text-sm transition text-left rounded-xl hover:bg-gray-100 dark:hover:bg-[#34363c]"
+                    style={{ color: loaderData.color || 'var(--text-primary)' }}
                   >
                     <span className="flex items-center gap-2">
                       <div className="w-4 h-4 flex-shrink-0">

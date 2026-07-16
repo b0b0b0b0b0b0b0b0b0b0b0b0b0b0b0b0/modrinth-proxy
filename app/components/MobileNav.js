@@ -179,12 +179,12 @@ export default function MobileNav({ onFilterClick }) {
   return (
     <>
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
-        <div className="flex items-center justify-center gap-2 px-4 py-3 bg-modrinth-darker backdrop-blur-xl shadow-[0_-4px_20px_rgba(236,127,171,0.15)] rounded-t-[24px]">
+        <div className="flex items-center justify-center gap-2 px-4 py-3 bg-modrinth-darker backdrop-blur-xl shadow-[0_-4px_20px_rgba(var(--color-green-rgb),0.15)] rounded-t-[24px]">
           <Link
             href="/"
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               pathname === '/' 
-                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105' 
+                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105' 
                 : 'bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green'
             }`}
           >
@@ -199,7 +199,7 @@ export default function MobileNav({ onFilterClick }) {
             onClick={() => setIsOpen(!isOpen)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               isOpen 
-                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105' 
+                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105' 
                 : 'bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green'
             }`}
           >
@@ -243,7 +243,7 @@ export default function MobileNav({ onFilterClick }) {
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
           
           <div 
-            className="absolute bottom-0 left-0 right-0 bg-modrinth-darker rounded-t-[32px] shadow-[0_-8px_40px_rgba(236,127,171,0.25)] pb-safe animate-slide-up"
+            className="absolute bottom-0 left-0 right-0 bg-modrinth-darker rounded-t-[32px] shadow-[0_-8px_40px_rgba(var(--color-green-rgb),0.25)] pb-safe animate-slide-up"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-center pt-4 pb-3">
@@ -267,7 +267,7 @@ export default function MobileNav({ onFilterClick }) {
                       onClick={() => setIsOpen(false)}
                       className={`group relative flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
                         active
-                          ? 'bg-gradient-to-br ' + item.color + ' shadow-lg shadow-[rgba(236,127,171,0.3)] scale-105'
+                          ? 'bg-gradient-to-br ' + item.color + ' shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105'
                           : 'bg-modrinth-dark hover:bg-modrinth-darker hover:scale-105'
                       }`}
                     >
@@ -280,7 +280,7 @@ export default function MobileNav({ onFilterClick }) {
                         {item.label}
                       </span>
                       {active && (
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-modrinth-green rounded-full shadow-lg shadow-[rgba(236,127,171,0.5)] animate-pulse"></div>
+                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-modrinth-green rounded-full shadow-lg shadow-[rgba(var(--color-green-rgb),0.5)] animate-pulse"></div>
                       )}
                     </Link>
                   )

@@ -259,6 +259,11 @@ html:not(.dark) .hover\:text-white:hover {
   color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
 }
 
+html:not(.dark) .group:hover .group-hover\:text-white {
+  --tw-text-opacity: 1;
+  color: rgb(17 24 39 / var(--tw-text-opacity, 1)) !important;
+}
+
 html:not(.dark) .landing-hero {
   background: var(--bg-primary) !important;
 }
