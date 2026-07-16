@@ -4,9 +4,9 @@ import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { useTheme } from 'next-themes'
-import { compressVersionRanges, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { compressVersionRanges, formatFileSize, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
-import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
+import { compareMinecraftVersionsDesc, versionsForCompressedRange } from '@/lib/minecraftVersionSort'
 import {
   filterVersionsByContentType,
   getVersionGameVersions,
@@ -19,6 +19,7 @@ import ChannelsDropdown from './ChannelsDropdown'
 import RelativeTime from './RelativeTime'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
 import VersionEnvironmentDisplay from './VersionEnvironmentDisplay'
+import StyledTooltip from './StyledTooltip'
 
 const ROW_GRID_XL_WITH_ENV =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(48px,68px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
@@ -27,11 +28,29 @@ const ROW_GRID_XL_NO_ENV =
 const ROW_GRID_XL_RESOURCEPACK =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
 
+function sameStringList(a, b) {
+  if (a.length !== b.length) return false
+  return a.every((value, index) => value === b[index])
+}
+
+function normalizeLoaderParam(id) {
+  if (id === 'resourcepack') return 'minecraft'
+  return id
+}
+
+function serializeFilters(gameVersions, loaders) {
+  const params = new URLSearchParams()
+  gameVersions.forEach((version) => params.append('g', version))
+  loaders.forEach((loader) => {
+    if (!loader || loader === 'all') return
+    params.append('l', normalizeLoaderParam(loader))
+  })
+  return params.toString()
+}
 export default function VersionsList({
   versions,
   contentType,
   slug,
-  initialLoader = 'all',
   projectColor,
 }) {
   const router = useRouter()
@@ -49,22 +68,58 @@ export default function VersionsList({
     themeMounted && accent && resolvedTheme === 'dark' ? accent : null
 
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedMcVersions, setSelectedMcVersions] = useState([])
-  const [selectedLoaders, setSelectedLoaders] = useState([])
+  const [selectedMcVersions, setSelectedMcVersions] = useState(() =>
+    searchParams.getAll('g').filter(Boolean)
+  )
+  const [selectedLoaders, setSelectedLoaders] = useState(() =>
+    searchParams
+      .getAll('l')
+      .filter((id) => id && id !== 'all')
+      .map(normalizeLoaderParam)
+  )
   const [selectedChannel, setSelectedChannel] = useState('all')
   const [showOnlyReleases, setShowOnlyReleases] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
+  const [filtersReady, setFiltersReady] = useState(false)
   const versionsPerPage = 20
+
+  useEffect(() => {
+    const nextGames = searchParams.getAll('g').filter(Boolean)
+    const nextLoaders = searchParams
+      .getAll('l')
+      .filter((id) => id && id !== 'all')
+      .map(normalizeLoaderParam)
+
+    if (nextGames.some((version) => !/^\d+\.\d+(\.\d+)?$/.test(version))) {
+      setShowOnlyReleases(false)
+    }
+
+    setSelectedMcVersions((prev) => (sameStringList(prev, nextGames) ? prev : nextGames))
+    setSelectedLoaders((prev) => (sameStringList(prev, nextLoaders) ? prev : nextLoaders))
+    setFiltersReady(true)
+  }, [searchParams])
+
+  const writeFiltersToUrl = (gameVersions, loaders) => {
+    const nextQuery = serializeFilters(gameVersions, loaders)
+    const currentQuery = serializeFilters(
+      searchParams.getAll('g').filter(Boolean),
+      searchParams.getAll('l').filter((id) => id && id !== 'all').map(normalizeLoaderParam),
+    )
+    if (nextQuery === currentQuery) return
+    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false })
+  }
 
   const handleLoadersChange = (newLoaders) => {
     setSelectedLoaders(newLoaders)
     setCurrentPage(1)
+    writeFiltersToUrl(selectedMcVersions, newLoaders)
   }
 
   const handleLoaderClick = (e, loaderId) => {
+    e.preventDefault()
     e.stopPropagation()
     if (selectedLoaders.includes(loaderId)) {
-      handleLoadersChange(selectedLoaders.filter(l => l !== loaderId))
+      handleLoadersChange(selectedLoaders.filter((l) => l !== loaderId))
     } else {
       handleLoadersChange([...selectedLoaders, loaderId])
     }
@@ -73,6 +128,26 @@ export default function VersionsList({
   const handleVersionsChange = (nextVersions) => {
     setSelectedMcVersions(nextVersions)
     setCurrentPage(1)
+    writeFiltersToUrl(nextVersions, selectedLoaders)
+  }
+
+  const handleGameVersionChipClick = (e, range, rawVersions) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const matched = versionsForCompressedRange(range, rawVersions)
+    if (matched.length === 0) return
+
+    const allSelected = matched.every((version) => selectedMcVersions.includes(version))
+    const next = allSelected
+      ? selectedMcVersions.filter((version) => !matched.includes(version))
+      : [...new Set([...selectedMcVersions, ...matched])]
+
+    handleVersionsChange(next)
+  }
+
+  const isGameVersionChipActive = (range, rawVersions) => {
+    const matched = versionsForCompressedRange(range, rawVersions)
+    return matched.length > 0 && matched.every((version) => selectedMcVersions.includes(version))
   }
 
   const handleShowOnlyReleasesChange = (value) => {
@@ -84,6 +159,40 @@ export default function VersionsList({
     setSelectedChannel(channel)
     setCurrentPage(1)
   }
+
+  const hasActiveFilters =
+    selectedMcVersions.length > 0 ||
+    selectedLoaders.length > 0 ||
+    selectedChannel !== 'all'
+
+  const clearAllFilters = () => {
+    setSelectedMcVersions([])
+    setSelectedLoaders([])
+    setSelectedChannel('all')
+    setCurrentPage(1)
+    writeFiltersToUrl([], [])
+  }
+
+  const removeGameVersionFilter = (version) => {
+    handleVersionsChange(selectedMcVersions.filter((v) => v !== version))
+  }
+
+  const removeLoaderFilter = (loaderId) => {
+    handleLoadersChange(selectedLoaders.filter((l) => l !== loaderId))
+  }
+
+  const removeChannelFilter = () => {
+    handleChannelChange('all')
+  }
+
+  const chipClassName =
+    'bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer'
+
+  const chipXIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" className="w-4 h-4 shrink-0">
+      <path fillRule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L10 8.586l4.293-4.293a1 1 0 1 1 1.414 1.414L11.414 10l4.293 4.293a1 1 0 0 1-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L8.586 10 4.293 5.707a1 1 0 0 1 0-1.414" clipRule="evenodd" />
+    </svg>
+  )
 
   const contextualVersions = useMemo(
     () => filterVersionsByContentType(versions, contentType),
@@ -136,12 +245,14 @@ export default function VersionsList({
   const hasSnapshotVersions = releaseVersions.length < mcVersions.length
 
   useEffect(() => {
-    if (!showOnlyReleases) return
+    if (!showOnlyReleases || !filtersReady) return
     setSelectedMcVersions((prev) => {
       const next = prev.filter((v) => releaseVersions.includes(v))
-      return next.length === prev.length ? prev : next
+      if (next.length === prev.length) return prev
+      writeFiltersToUrl(next, selectedLoaders)
+      return next
     })
-  }, [showOnlyReleases, releaseVersions])
+  }, [showOnlyReleases, releaseVersions, filtersReady])
 
   const filteredVersions = useMemo(() => {
     return contextualVersions.filter(version => {
@@ -243,6 +354,55 @@ export default function VersionsList({
               {filteredVersions.length} версий
             </div>
           </div>
+
+          {hasActiveFilters && (
+            <div className="flex flex-wrap items-center gap-1">
+              {(selectedMcVersions.length + selectedLoaders.length + (selectedChannel !== 'all' ? 1 : 0)) >= 2 && (
+                <button type="button" onClick={clearAllFilters} className={chipClassName}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m15 9-6 6M9 9l6 6" />
+                  </svg>
+                  Очистить фильтры
+                </button>
+              )}
+
+              {selectedMcVersions.map((version) => (
+                <button
+                  key={`g-${version}`}
+                  type="button"
+                  onClick={() => removeGameVersionFilter(version)}
+                  className={chipClassName}
+                >
+                  {chipXIcon}
+                  {version}
+                </button>
+              ))}
+
+              {selectedLoaders.map((loaderId) => {
+                const loaderData = LOADERS.find((l) => l.id === loaderId)
+                return (
+                  <button
+                    key={`l-${loaderId}`}
+                    type="button"
+                    onClick={() => removeLoaderFilter(loaderId)}
+                    className={chipClassName}
+                    style={loaderData?.color ? { color: loaderData.color } : undefined}
+                  >
+                    {chipXIcon}
+                    {loaderData?.name || loaderId}
+                  </button>
+                )
+              })}
+
+              {selectedChannel !== 'all' && (
+                <button type="button" onClick={removeChannelFilter} className={chipClassName}>
+                  {chipXIcon}
+                  {selectedChannel === 'release' ? 'Релиз' : selectedChannel === 'beta' ? 'Бета' : selectedChannel === 'alpha' ? 'Альфа' : selectedChannel}
+                </button>
+              )}
+            </div>
+          )}
         </div>
         
         <div
@@ -278,38 +438,60 @@ export default function VersionsList({
                           {version.version_type[0].toUpperCase()}
                         </div>
 
-                        <Link 
-                          href={`/${contentType}/${slug}/version/${version.id}`}
-                          className="relative z-10 min-w-0 max-[390px]:text-center group-hover:underline"
-                        >
-                          <div className="font-bold text-sm">{version.version_number || version.name}</div>
-                          {version.name && (
-                            <div className="text-xs font-medium text-gray-400">{version.name}</div>
-                          )}
-                        </Link>
+                        {(() => {
+                          const versionLabel = version.version_number || version.name
+                          const tooltipLabel =
+                            version.name && version.version_number && version.name !== version.version_number
+                              ? `${version.version_number} - ${version.name}`
+                              : versionLabel
+
+                          return (
+                            <StyledTooltip label={tooltipLabel} side="top">
+                              <Link
+                                href={`/${contentType}/${slug}/version/${version.id}`}
+                                className="relative z-10 min-w-0 max-[390px]:text-center group-hover:underline"
+                              >
+                                <div className="overflow-hidden text-ellipsis font-medium text-sm">
+                                  {versionLabel}
+                                </div>
+                              </Link>
+                            </StyledTooltip>
+                          )
+                        })()}
 
                       <div className="relative z-10 hidden sm:flex xl:hidden flex-wrap gap-1 items-start content-start">
-                        {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => (
-                          <span 
+                        {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => {
+                          const active = isGameVersionChipActive(range, version.game_versions)
+                          return (
+                          <button
                             key={i}
-                            className="px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap"
-                            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+                            type="button"
+                            onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
+                            className={`px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
+                              active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
+                            }`}
+                            style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
                           >
                             {range}
-                          </span>
-                        ))}
+                          </button>
+                          )
+                        })}
                         {showPlatforms &&
                           getVersionPlatformIds(version).map((loaderId) => {
                           const loaderData = LOADERS.find(l => l.id === loaderId)
                           if (!loaderData) return null
+                          const active = selectedLoaders.includes(loaderId)
                           
                           return (
-                            <span 
+                            <button
                               key={loaderId}
+                              type="button"
                               onClick={(e) => handleLoaderClick(e, loaderId)}
-                              className="px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10"
+                              className={`px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
+                                active ? 'bg-modrinth-green/20' : ''
+                              }`}
                               style={{ 
-                                backgroundColor: 'var(--bg-tertiary)', 
+                                backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
                                 color: loaderData.color || 'var(--text-muted)' 
                               }}
                             >
@@ -317,7 +499,7 @@ export default function VersionsList({
                                 {loaderData.icon}
                               </div>
                               {loaderData.name}
-                            </span>
+                            </button>
                           )
                         })}
                       </div>
@@ -344,15 +526,22 @@ export default function VersionsList({
                       </div>
 
                       <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
-                        {compressVersionRanges(version.game_versions).map((range, i) => (
-                          <span 
+                        {compressVersionRanges(version.game_versions).map((range, i) => {
+                          const active = isGameVersionChipActive(range, version.game_versions)
+                          return (
+                          <button
                             key={i}
-                            className="px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap"
-                            style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+                            type="button"
+                            onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
+                            className={`px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
+                              active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
+                            }`}
+                            style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
                           >
                             {range}
-                          </span>
-                        ))}
+                          </button>
+                          )
+                        })}
                       </div>
 
                       {showPlatforms && (
@@ -360,14 +549,18 @@ export default function VersionsList({
                           {getVersionPlatformIds(version).map((loaderId) => {
                             const loaderData = LOADERS.find(l => l.id === loaderId)
                             if (!loaderData) return null
+                            const active = selectedLoaders.includes(loaderId)
                             
                             return (
-                              <span 
+                              <button
                                 key={loaderId}
+                                type="button"
                                 onClick={(e) => handleLoaderClick(e, loaderId)}
-                                className="px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10"
+                                className={`px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
+                                  active ? 'bg-modrinth-green/20' : ''
+                                }`}
                                 style={{ 
-                                  backgroundColor: 'var(--bg-tertiary)', 
+                                  backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
                                   color: loaderData.color || 'var(--text-muted)' 
                                 }}
                               >
@@ -375,7 +568,7 @@ export default function VersionsList({
                                   {loaderData.icon}
                                 </div>
                                 {loaderData.name}
-                              </span>
+                              </button>
                             )
                           })}
                         </div>
@@ -404,25 +597,40 @@ export default function VersionsList({
 
                         <div className="relative z-10 sm:hidden flex flex-col gap-1 text-xs text-gray-400 font-medium mt-2 max-[390px]:items-center max-[390px]:justify-center min-[391px]:col-span-2">
                           <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
-                            {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => (
-                              <span key={i} className="px-2 py-0.5 text-xs rounded-full whitespace-nowrap" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}>
+                            {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => {
+                              const active = isGameVersionChipActive(range, version.game_versions)
+                              return (
+                              <button
+                                key={i}
+                                type="button"
+                                onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
+                                className={`px-2 py-0.5 text-xs rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 ${
+                                  active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
+                                }`}
+                                style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+                              >
                                 {range}
-                              </span>
-                            ))}
+                              </button>
+                              )
+                            })}
                           </div>
                           {showPlatforms && (
                             <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
                               {getVersionPlatformIds(version).map((loaderId) => {
                                 const loaderData = LOADERS.find(l => l.id === loaderId)
                                 if (!loaderData) return null
+                                const active = selectedLoaders.includes(loaderId)
                                 
                                 return (
-                                  <span 
+                                  <button
                                     key={loaderId}
+                                    type="button"
                                     onClick={(e) => handleLoaderClick(e, loaderId)}
-                                    className="px-2 py-0.5 text-xs rounded-full hover:underline cursor-pointer capitalize inline-flex items-center gap-1 relative z-10" 
+                                    className={`px-2 py-0.5 text-xs rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
+                                      active ? 'bg-modrinth-green/20' : ''
+                                    }`}
                                     style={{ 
-                                      backgroundColor: 'var(--bg-tertiary)', 
+                                      backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
                                       color: loaderData.color || 'var(--text-muted)' 
                                     }}
                                   >
@@ -430,7 +638,7 @@ export default function VersionsList({
                                       {loaderData.icon}
                                     </div>
                                     {loaderData.name}
-                                  </span>
+                                  </button>
                                 )
                               })}
                             </div>
@@ -449,17 +657,46 @@ export default function VersionsList({
                         </div>
 
                         {primaryFile && (
-                          <a
-                            href={primaryFile.url}
-                            download
-                            onClick={(e) => e.stopPropagation()}
-                            className="relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full hover:bg-modrinth-green hover:text-black transition-all group/btn max-[390px]:mx-auto sm:mx-0"
-                            title="Скачать"
+                          <StyledTooltip
+                            side="top"
+                            contentClassName="!max-w-[260px]"
+                            label={
+                              <div className="flex flex-col gap-0.5 text-left">
+                                <div className="text-[13px] font-semibold leading-snug break-all">
+                                  <span className="font-medium opacity-75">Скачать:</span>{' '}
+                                  {primaryFile.filename || 'файл'}
+                                </div>
+                                {primaryFile.size != null && primaryFile.size > 0 && (
+                                  <div className="text-[11px] font-normal opacity-65 leading-tight">
+                                    {formatFileSize(primaryFile.size)}
+                                  </div>
+                                )}
+                              </div>
+                            }
                           >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                            </svg>
-                          </a>
+                            <a
+                              href={primaryFile.url}
+                              download
+                              onClick={(e) => e.stopPropagation()}
+                              className={`relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all group/btn max-[390px]:mx-auto sm:mx-0 ${
+                                accent
+                                  ? 'hover:[background-color:var(--version-dl-bg)] hover:[color:var(--version-dl-fg)]'
+                                  : 'hover:bg-modrinth-green hover:text-black'
+                              }`}
+                              style={
+                                accent
+                                  ? {
+                                      '--version-dl-bg': accent.accentHex,
+                                      '--version-dl-fg': accent.activeFgHex,
+                                    }
+                                  : undefined
+                              }
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                              </svg>
+                            </a>
+                          </StyledTooltip>
                         )}
                       </div>
                     </div>

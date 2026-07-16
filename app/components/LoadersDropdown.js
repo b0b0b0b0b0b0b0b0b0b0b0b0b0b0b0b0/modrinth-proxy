@@ -62,7 +62,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium border transition capitalize rounded-xl bg-gray-100 text-gray-900 border-gray-200 hover:border-modrinth-green dark:bg-gray-800 dark:text-white dark:border-gray-700"
+        className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition capitalize rounded-xl bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
       >
         <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 3H2l8 9.46V19l4 2v-8.54z" />
@@ -77,7 +77,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
         <div className="absolute top-full left-0 mt-2 w-64 border shadow-2xl z-50 overflow-hidden animate-fade-in rounded-xl border-gray-200 bg-white dark:border-[#2e3035] dark:bg-[#27292e]">
           <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-1">
-              {loaders.filter(l => l !== 'minecraft').map(loaderId => {
+              {loaders.map(loaderId => {
                 const loaderData = LOADERS.find(l => l.id === loaderId)
                 if (!loaderData) return null
                 const checked = selectedLoaders.includes(loaderId)

@@ -47,7 +47,7 @@ const CONTENT_TYPE_ROUTES = {
   servers: 'servers',
 }
 
-export default function ResourceHeader({ resource, contentType, versions = [] }) {
+export default function ResourceHeader({ resource, contentType, versions = [], mutedDownload = false }) {
   const contentTypeName = CONTENT_TYPE_NAMES[contentType] || 'Ресурсы'
   const contentTypeRoute = CONTENT_TYPE_ROUTES[contentType] || contentType
   const isServer = contentType === 'server' || contentType === 'servers' || resource.project_type === 'minecraft_java_server'
@@ -71,7 +71,7 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
   ]
 
   const downloads = resource.downloads
-  const downloadAccent = resolveModrinthProjectAccent(resource.color)
+  const downloadAccent = mutedDownload ? null : resolveModrinthProjectAccent(resource.color)
   const showDownloadPromoSlot =
     (contentType === 'mod' || contentType === 'plugin') &&
     (downloads == null || downloads < MINEPLUGIN_PROMO_MAX_DOWNLOADS)
@@ -232,11 +232,11 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
                 <div className="w-full lg:flex lg:flex-col lg:items-end lg:gap-2">
                   {showPromoBelowDownload ? (
                     <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
-                      <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
+                      <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} muted={mutedDownload} />
                       <DownloadPromoConnector className="hidden lg:flex pb-px" />
                     </div>
                   ) : (
-                    <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} />
+                    <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} muted={mutedDownload} />
                   )}
 
                 <div className="mt-3 w-full lg:mt-0">
@@ -262,11 +262,11 @@ export default function ResourceHeader({ resource, contentType, versions = [] })
 
                     {showPromoBelowDownload ? (
                       <div className="flex shrink-0 flex-col items-center gap-1">
-                        <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} />
+                        <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
                         <DownloadPromoConnector />
                       </div>
                     ) : (
-                      <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} />
+                      <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
                     )}
                   </div>
                 </div>

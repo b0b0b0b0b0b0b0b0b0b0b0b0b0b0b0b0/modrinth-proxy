@@ -1481,6 +1481,61 @@ button.text-white {
   scale: 0.95;
 }
 
+.modrinth-download-button--muted {
+  background-color: var(--bg-tertiary, #2d2d2d);
+  border-color: var(--border-color, #404040);
+  color: var(--text-secondary, #c0c0c0);
+  font-weight: 600;
+  font-variation-settings: 'wght' 600;
+  box-shadow: none;
+}
+
+.modrinth-download-button--muted:hover {
+  filter: brightness(1.08);
+  scale: 1.01;
+}
+
+.gradle-code {
+  color: #e5e7eb;
+}
+
+.gradle-code .gradle-keyword {
+  color: #c4b5fd;
+}
+
+.gradle-code .gradle-string {
+  color: #86efac;
+}
+
+.gradle-code .gradle-comment {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+.gradle-code .gradle-punct {
+  color: #93c5fd;
+}
+
+html:not(.dark) .gradle-code {
+  color: #1f2937;
+}
+
+html:not(.dark) .gradle-code .gradle-keyword {
+  color: #7c3aed;
+}
+
+html:not(.dark) .gradle-code .gradle-string {
+  color: #15803d;
+}
+
+html:not(.dark) .gradle-code .gradle-comment {
+  color: #6b7280;
+}
+
+html:not(.dark) .gradle-code .gradle-punct {
+  color: #2563eb;
+}
+
 .modrinth-download-button svg,
 .modrinth-modal-download-button svg {
   width: 1.5rem;
@@ -1874,7 +1929,6 @@ input[type="url"]:-webkit-autofill {
   white-space: nowrap;
 }
 
-/* Settings Page & Layout Customizations */
 .universal-card {
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-color);
@@ -1990,7 +2044,6 @@ input[type="url"]:-webkit-autofill {
   color: var(--color-green);
 }
 
-/* Sidebar Customizations */
 html.search-sidebar-right .flex.gap-6:has(> .w-80) {
   flex-direction: row-reverse !important;
 }
@@ -2008,7 +2061,6 @@ html.search-sidebar-right .flex.gap-6:has(> .w-80) {
   }
 }
 
-/* Advanced Rendering Toggle Control */
 html.no-advanced-rendering *,
 html.no-advanced-rendering *::before,
 html.no-advanced-rendering *::after {
@@ -2050,7 +2102,6 @@ html.no-advanced-rendering .nav-indicator {
   background: rgba(128, 128, 128, 0.45);
 }
 
-/* Color Theme Customizations */
 .theme-options {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));

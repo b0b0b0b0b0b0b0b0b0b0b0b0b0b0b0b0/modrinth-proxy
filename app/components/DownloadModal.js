@@ -149,9 +149,12 @@ function pickCompatibleVersionsByChannel(versions) {
     .map(([, version]) => version)
 }
 
-export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
+export default function DownloadModal({ mod, versions, contentType = 'mods', muted = false }) {
   const router = useRouter()
-  const accent = useMemo(() => resolveModrinthProjectAccent(mod?.color), [mod?.color])
+  const accent = useMemo(
+    () => (muted ? null : resolveModrinthProjectAccent(mod?.color)),
+    [mod?.color, muted]
+  )
   const downloadBtnAccentStyle = accent
     ? { backgroundColor: accent.accentHex, color: accent.activeFgHex }
     : undefined
@@ -610,7 +613,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
       'vanilla': 'Vanilla',
       'datapack': 'Датапак',
       'resourcepack': 'Ресурспак',
-      'minecraft': 'Minecraft',
+      'minecraft': 'Ресурспак',
     }
     return names[loader] || loader
   }
@@ -702,7 +705,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods' }) {
           type="button"
           onClick={() => setIsOpen(true)}
           data-download-modal
-          className={`modrinth-download-button w-full lg:w-auto text-base${accent ? ' hover:!brightness-[1.08]' : ''}`}
+          className={`modrinth-download-button w-full lg:w-auto text-base${
+            muted ? ' modrinth-download-button--muted' : accent ? ' hover:!brightness-[1.08]' : ''
+          }`}
           style={downloadBtnAccentStyle}
         >
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

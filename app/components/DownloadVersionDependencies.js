@@ -210,16 +210,11 @@ export default function DownloadVersionDependencies({
   const onResolvedRef = useRef(onResolved)
   onResolvedRef.current = onResolved
 
-  const propRelevantDeps = useMemo(
-    () => filterRelevantDependencies(dependencies),
-    [dependencies],
-  )
-
   const isDatapack = isDatapackDownloadContext(contentType, loader)
 
   useEffect(() => {
-    if (propRelevantDeps.length > 0) {
-      setResolvedDependencies(normalizeDependencies(dependencies))
+    if (Array.isArray(dependencies)) {
+      setResolvedDependencies(dependencies)
       setDepsLoading(false)
       return undefined
     }
@@ -254,7 +249,7 @@ export default function DownloadVersionDependencies({
     return () => {
       cancelled = true
     }
-  }, [dependencies, propRelevantDeps.length, projectSlug, versionNumber])
+  }, [dependencies, projectSlug, versionNumber])
 
   const relevantDeps = useMemo(
     () => filterRelevantDependencies(resolvedDependencies),
@@ -332,7 +327,7 @@ export default function DownloadVersionDependencies({
 
   return (
     <>
-      <div className="animate-fade-in-up flex flex-col gap-2.5">
+      <div className="animate-fade-in-up mb-6 flex flex-col gap-2.5 rounded-2xl border border-gray-800 bg-modrinth-dark p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="m-0 flex items-center gap-1.5 text-base font-semibold text-gray-900 dark:text-white">
             Зависимости

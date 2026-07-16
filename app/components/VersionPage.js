@@ -1,7 +1,14 @@
 import Link from 'next/link'
-import { formatDownloads, formatFileSize, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import {
+  compressVersionRanges,
+  formatDownloads,
+  formatFileSize,
+  resolveModrinthProjectAccent,
+} from '@/lib/modrinth'
 import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
 import { LOADERS } from '@/lib/loaders'
+import { getVersionPlatformIds } from '@/lib/contextualVersions'
+import { IconDownload, IconHardDrive } from '@/lib/icons'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
@@ -10,8 +17,29 @@ import ContentNavigation from './ContentNavigation'
 import ResourceHeader from './ResourceHeader'
 import RelativeTime from './RelativeTime'
 import DownloadVersionDependencies from './DownloadVersionDependencies'
+import VersionDeveloperInfo from './VersionDeveloperInfo'
+import ProjectLinksCard from './ProjectLinksCard'
+import StyledTooltip from './StyledTooltip'
 
 const DEPENDENCY_CONTENT_TYPES = new Set(['mod', 'plugin', 'datapack'])
+
+const VERSION_TYPE_STYLES = {
+  release: {
+    label: 'Release',
+    className: 'bg-green-900/40 text-green-400 border-green-800',
+  },
+  beta: {
+    label: 'Beta',
+    className: 'bg-orange-900/40 text-orange-400 border-orange-800',
+  },
+  alpha: {
+    label: 'Alpha',
+    className: 'bg-red-900/40 text-red-400 border-red-800',
+  },
+}
+
+const PILL_CLASS =
+  'inline-flex items-center gap-1 px-2 py-1 text-sm font-normal rounded-full border border-gray-300 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 [&_svg]:shrink-0 [&_svg]:h-4 [&_svg]:w-4'
 
 function pickVersionLoader(version) {
   return (version.loaders || []).find((loader) => loader !== 'minecraft') || ''
@@ -23,127 +51,89 @@ function pickVersionGameVersion(version) {
   return release || gameVersions[0] || ''
 }
 
-class VersionPageData {
-  constructor(project, version) {
-    this.project = project
-    this.version = version
-  }
-
-  getPrimaryFile() {
-    return this.version.files.find(f => f.primary) || this.version.files[0]
-  }
-
-  getSecondaryFiles() {
-    return this.version.files.filter(f => !f.primary)
-  }
-
-  getVersionTypeInfo() {
-    const types = {
-      release: { color: 'green', label: 'Release' },
-      beta: { color: 'yellow', label: 'Beta' },
-      alpha: { color: 'red', label: 'Alpha' }
-    }
-    return types[this.version.version_type] || types.release
-  }
+function getVersionTypeInfo(versionType) {
+  return VERSION_TYPE_STYLES[versionType] || VERSION_TYPE_STYLES.release
 }
 
-class VersionMetadata {
-  constructor(version, author) {
-    this.version = version
-    this.author = author ? filterUserPublic(author) : null
+function getSupportedEnvironmentBadges(project) {
+  const clientSide = project?.client_side
+  const serverSide = project?.server_side
+  const badges = []
+
+  const serverOk = serverSide === 'required' || serverSide === 'optional'
+  const clientOk = clientSide === 'required' || clientSide === 'optional'
+
+  if (serverOk) {
+    badges.push({
+      id: 'server',
+      label: 'Сервер',
+      icon: <IconHardDrive className="h-4 w-4" aria-hidden />,
+    })
+  }
+  if (clientOk) {
+    badges.push({
+      id: 'client',
+      label: 'Одиночная игра',
+      icon: (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          aria-hidden
+        >
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </svg>
+      ),
+    })
   }
 
-  render() {
-    const versionType = this.getVersionTypeInfo()
-    
-    return (
-      <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4">
-        <h2 className="text-xl font-bold mb-3">Метаданные</h2>
-        <div className="space-y-3.5">
-          <MetadataItem
-            label="Канал релиза"
-            value={
-              <span className={`inline-block px-3 py-1 rounded-full bg-${versionType.color}-900 text-${versionType.color}-300 font-semibold text-sm`}>
-                {versionType.label}
-              </span>
-            }
-          />
-          <MetadataItem label="Номер версии" value={this.version.version_number} />
-          <MetadataItem
-            label="Загрузчики"
-            value={
-              <div className="flex flex-wrap gap-1.5">
-                {this.version.loaders.filter(l => l !== 'minecraft').map(loaderId => {
-                  const loaderData = LOADERS.find(l => l.id === loaderId)
-                  if (!loaderData) return null
-                  
-                  return (
-                    <span 
-                      key={loaderId} 
-                      className="inline-flex items-center gap-1.5 text-sm font-medium"
-                      style={{ color: loaderData.color || 'var(--text-secondary)' }}
-                    >
-                      <div className="w-4 h-4 flex-shrink-0">
-                        {loaderData.icon}
-                      </div>
-                      {loaderData.name}
-                    </span>
-                  )
-                })}
-              </div>
-            }
-          />
-          <MetadataItem
-            label="Версии игры"
-            value={
-              <span className="text-sm">
-                {formatVersionsCompact(this.version.game_versions)}
-              </span>
-            }
-          />
-          <MetadataItem label="Загрузок" value={formatDownloads(this.version.downloads)} />
-          <MetadataItem label="Дата публикации" value={<RelativeTime dateString={this.version.date_published} />} />
-          <MetadataItem
-            label="Загрузил"
-                          value={
-                <div className="flex items-center gap-2">
-                  {this.author && (
-                    <>
-                      {this.author.avatar_url && (
-                        <img
-                          src={this.author.avatar_url}
-                          alt={this.author.username}
-                          className="w-6 h-6 rounded-full"
-                          referrerPolicy="no-referrer"
-                        />
-                      )}
-                      <Link href={`/user/${this.author.id}`} className="font-semibold hover:text-modrinth-green transition-colors">
-                        {this.author.username}
-                      </Link>
-                    </>
+  return badges
+}
+
+function VersionMetadata({ version, author }) {
+  const safeAuthor = author ? filterUserPublic(author) : null
+
+  return (
+    <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4">
+      <h2 className="text-xl font-bold mb-3">Метаданные</h2>
+      <div className="space-y-3.5">
+        <MetadataItem
+          label="Загрузил"
+          value={
+            <div className="flex items-center gap-2">
+              {safeAuthor ? (
+                <>
+                  {safeAuthor.avatar_url && (
+                    <img
+                      src={safeAuthor.avatar_url}
+                      alt={safeAuthor.username}
+                      className="w-6 h-6 rounded-full"
+                      referrerPolicy="no-referrer"
+                    />
                   )}
-                  {!this.author && (
-                    <span className="text-gray-400">{this.version.author_id}</span>
-                  )}
-                </div>
-              }
-          />
-          <MetadataItem label="ID версии" value={
-            <CopyButton text={this.version.id} />
-          } />
-        </div>
+                  <Link
+                    href={`/user/${safeAuthor.id}`}
+                    className="font-semibold hover:text-modrinth-green transition-colors"
+                  >
+                    {safeAuthor.username}
+                  </Link>
+                </>
+              ) : (
+                <span className="text-gray-400">{version.author_id}</span>
+              )}
+            </div>
+          }
+        />
+        <MetadataItem label="ID версии" value={<CopyButton text={version.id} />} />
       </div>
-    )
-  }
-
-  getVersionTypeInfo() {
-    const types = {
-      release: { color: 'green', label: 'Release' },
-      beta: { color: 'yellow', label: 'Beta' },
-      alpha: { color: 'red', label: 'Alpha' }
-    }
-    return types[this.version.version_type] || types.release
-  }
+    </div>
+  )
 }
 
 function MetadataItem({ label, value }) {
@@ -155,50 +145,72 @@ function MetadataItem({ label, value }) {
   )
 }
 
-function formatVersionsCompact(versions) {
-  if (!versions || versions.length === 0) return ''
-  
-  const releaseVersions = versions.filter(v => {
-    return /^\d+\.\d+(\.\d+)?$/.test(v) && !v.includes('-')
-  }).sort((a, b) => {
-    const aParts = a.split('.').map(n => parseInt(n) || 0)
-    const bParts = b.split('.').map(n => parseInt(n) || 0)
-    for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
-      const diff = (aParts[i] || 0) - (bParts[i] || 0)
-      if (diff !== 0) return diff
-    }
-    return 0
-  })
-  
-  const snapshotVersions = versions.filter(v => /^\d+w\d+[a-z]/.test(v)).sort((a, b) => {
-    const aMatch = a.match(/^(\d+)w(\d+)/)
-    const bMatch = b.match(/^(\d+)w(\d+)/)
-    if (aMatch && bMatch) {
-      const aYear = parseInt(aMatch[1])
-      const bYear = parseInt(bMatch[1])
-      if (aYear !== bYear) return bYear - aYear
-      return parseInt(bMatch[2]) - parseInt(aMatch[2])
-    }
-    return b.localeCompare(a)
-  })
-  
-  const parts = []
-  
-  if (releaseVersions.length > 0) {
-    const minVersion = releaseVersions[0]
-    const maxVersion = releaseVersions[releaseVersions.length - 1]
-    if (minVersion === maxVersion) {
-      parts.push(minVersion)
-    } else {
-      parts.push(`${minVersion}–${maxVersion}`)
-    }
+function VersionCompatibility({ version, project }) {
+  const gameRanges = compressVersionRanges(version.game_versions || [])
+  const platforms = getVersionPlatformIds(version).filter((id) => id !== 'minecraft')
+  const environments = getSupportedEnvironmentBadges(project)
+
+  if (gameRanges.length === 0 && platforms.length === 0 && environments.length === 0) {
+    return null
   }
-  
-  if (snapshotVersions.length > 0) {
-    parts.push(snapshotVersions[0])
-  }
-  
-  return parts.join(', ')
+
+  return (
+    <section id="compatibility" className="mb-6">
+      <h3 className="mt-0 mb-2 text-lg font-semibold">Совместимость</h3>
+      <div className="grid gap-3 md:gap-4 md:grid-cols-3">
+        {gameRanges.length > 0 && (
+          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+            <div className="text-sm text-gray-600 dark:text-gray-300">Minecraft: Java Edition</div>
+            <div className="flex gap-1 flex-wrap mt-2">
+              {gameRanges.map((range) => (
+                <span key={range} className={PILL_CLASS}>
+                  {range}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {platforms.length > 0 && (
+          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+            <div className="text-sm text-gray-600 dark:text-gray-300">Платформы</div>
+            <div className="flex gap-1 flex-wrap mt-2">
+              {platforms.map((loaderId) => {
+                const loaderData = LOADERS.find((l) => l.id === loaderId)
+                if (!loaderData) return null
+                return (
+                  <span
+                    key={loaderId}
+                    className={PILL_CLASS}
+                    style={{ color: loaderData.color || undefined }}
+                  >
+                    <span className="w-4 h-4 flex-shrink-0" style={{ color: loaderData.color || undefined }}>
+                      {loaderData.icon}
+                    </span>
+                    {loaderData.name}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
+        )}
+
+        {environments.length > 0 && (
+          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+            <div className="text-sm text-gray-600 dark:text-gray-300">Поддерживаемые среды</div>
+            <div className="flex gap-1 flex-wrap mt-2">
+              {environments.map((env) => (
+                <span key={env.id} className={PILL_CLASS}>
+                  {env.icon}
+                  {env.label}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  )
 }
 
 class FilesList {
@@ -209,10 +221,10 @@ class FilesList {
 
   render() {
     return (
-      <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
+      <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 mb-6">
         <h2 className="text-xl font-bold mb-3">Файлы</h2>
         <div className="space-y-2">
-          {this.files.map(file => (
+          {this.files.map((file) => (
             <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} />
           ))}
         </div>
@@ -227,10 +239,10 @@ function FileItem({ file, projectAccent }) {
   const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
 
   const rowChrome = `${
-        isPrimary
-          ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]'
-          : 'hover:bg-[var(--bg-hover)]'
-      }`
+    isPrimary
+      ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]'
+      : 'hover:bg-[var(--bg-hover)]'
+  }`
   const rowStyleInactive = !isPrimary ? { backgroundColor: 'var(--bg-tertiary)' } : {}
 
   const inner = (
@@ -277,10 +289,7 @@ function FileItem({ file, projectAccent }) {
   )
 
   return (
-    <div
-      className={`rounded-xl p-2 transition ${rowChrome}`}
-      style={rowStyleInactive}
-    >
+    <div className={`rounded-xl p-2 transition ${rowChrome}`} style={rowStyleInactive}>
       {dl ? (
         <a href={dl} download className="flex items-center justify-between gap-3 text-inherit no-underline hover:no-underline">
           {inner}
@@ -293,74 +302,143 @@ function FileItem({ file, projectAccent }) {
 }
 
 export default function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
-  const pageData = new VersionPageData(project, version)
-  const primaryFile = pageData.getPrimaryFile()
-  const versionType = pageData.getVersionTypeInfo()
-  const metadata = new VersionMetadata(version, author)
+  const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]
+  const versionType = getVersionTypeInfo(version.version_type)
   const projectAccent = resolveModrinthProjectAccent(project.color)
-  const filesList = new FilesList(version.files, projectAccent)
+  const filesList = new FilesList(version.files || [], projectAccent)
+  const downloadStyle = projectAccent
+    ? { backgroundColor: projectAccent.accentHex, color: projectAccent.activeFgHex }
+    : undefined
 
   return (
     <div className="max-w-7xl mx-auto">
-      <ResourceHeader resource={project} contentType={contentType} versions={versions} />
-      
-      <ContentNavigation slug={project.slug} contentType={singularName} versionsCount={versions.length || 0} galleryCount={galleryCount || 0} projectColor={project.color} />
+      <ResourceHeader resource={project} contentType={contentType} versions={versions} mutedDownload />
 
-      <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
-        <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
-          <Link 
-            href={`/${singularName}/${project.slug}?tab=versions`}
-            className="hover:text-modrinth-green transition-colors"
-          >
-            Все версии
-          </Link>
-          <span>→</span>
-          <span className="text-white font-semibold">{version.name}</span>
-        </div>
-        <h2 className="text-xl font-bold mb-2">{version.name}</h2>
-        <div className="flex items-center gap-3">
-          <span className={`px-3 py-1 rounded-full text-sm font-semibold bg-${versionType.color}-900 text-${versionType.color}-300`}>
-            {versionType.label}
-          </span>
-          <RelativeTime dateString={version.date_published} className="text-gray-400 text-sm" />
-        </div>
-      </div>
+      <ContentNavigation
+        slug={project.slug}
+        contentType={singularName}
+        versionsCount={versions.length || 0}
+        galleryCount={galleryCount || 0}
+        projectColor={project.color}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div>
-          {version.changelog && (
-            <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
-              <h2 className="text-xl font-bold mb-3">Список изменений</h2>
-              <div className="prose prose-invert prose-sm max-w-none text-gray-300">
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                >
-                  {filterVersionChangelog(version.changelog)}
-                </ReactMarkdown>
+          <div className="flex flex-col gap-4 mb-4">
+            <div className="flex flex-wrap gap-4 justify-between items-center">
+              <div className="flex flex-col gap-1.5 min-w-0">
+                <div className="flex flex-wrap gap-2 items-center">
+                  <h2 className="m-0 leading-tight font-semibold text-xl sm:text-2xl">
+                    {version.version_number}
+                  </h2>
+                  <span
+                    className={`inline-flex items-center gap-1 px-2 py-1.5 leading-none rounded-full border text-sm font-normal ${versionType.className}`}
+                  >
+                    {versionType.label}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-2 flex-col sm:flex-row text-sm text-gray-500 dark:text-gray-400">
+                  {version.name && version.name !== version.version_number && (
+                    <>
+                      <span className="text-gray-700 dark:text-gray-300">{version.name}</span>
+                      <span className="bg-gray-400 dark:bg-gray-600 size-1.5 rounded-full hidden sm:block" />
+                    </>
+                  )}
+                  <span className="flex items-center gap-2">
+                    <RelativeTime dateString={version.date_published} />
+                    <span className="bg-gray-400 dark:bg-gray-600 size-1.5 rounded-full" />
+                    <span className="flex items-center gap-1">
+                      <IconDownload className="size-5" />
+                      {formatDownloads(version.downloads)}
+                    </span>
+                  </span>
+                </div>
               </div>
+
+              {primaryFile?.url && (
+                <div className="flex gap-2 flex-wrap items-center">
+                  <StyledTooltip
+                    contentClassName="!max-w-[260px]"
+                    label={
+                      <div className="flex flex-col gap-0.5 text-left">
+                        <div className="text-[13px] font-semibold leading-snug break-all">
+                          <span className="font-medium opacity-75">Скачать:</span>{' '}
+                          {primaryFile.filename || 'файл'}
+                        </div>
+                        {primaryFile.size != null && primaryFile.size > 0 && (
+                          <div className="text-[11px] font-normal opacity-65 leading-tight">
+                            {formatFileSize(primaryFile.size)}
+                          </div>
+                        )}
+                      </div>
+                    }
+                  >
+                    <a
+                      href={primaryFile.url}
+                      download={primaryFile.filename || true}
+                      className={`inline-flex items-center gap-2 h-9 px-3 rounded-xl font-semibold text-base transition hover:brightness-110 active:scale-95 ${
+                        projectAccent ? '' : 'bg-modrinth-green text-black'
+                      }`}
+                      style={downloadStyle}
+                    >
+                      <IconDownload className="size-5" />
+                      Скачать
+                    </a>
+                  </StyledTooltip>
+                </div>
+              )}
             </div>
-          )}
+
+            <hr className="w-full border-none h-px bg-gray-300 dark:bg-gray-800 m-0" />
+
+            <VersionCompatibility version={version} project={project} />
+
+            {version.changelog && (
+              <section id="changes">
+                <h3 className="mt-0 mb-2 text-lg font-semibold">Список изменений</h3>
+                <div className="p-4 bg-gray-100 dark:bg-[var(--bg-tertiary)] rounded-2xl border border-solid border-gray-300 dark:border-gray-800">
+                  <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                      {filterVersionChangelog(version.changelog)}
+                    </ReactMarkdown>
+                  </div>
+                </div>
+              </section>
+            )}
+          </div>
+
+          <VersionDeveloperInfo
+            projectId={version.project_id || project.id}
+            versionId={version.id}
+          />
 
           {filesList.render()}
 
           {DEPENDENCY_CONTENT_TYPES.has(contentType) && (
-            <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 mb-6">
-              <DownloadVersionDependencies
-                dependencies={Array.isArray(version.dependencies) ? version.dependencies : []}
-                loader={pickVersionLoader(version)}
-                gameVersion={pickVersionGameVersion(version)}
-                contentType={contentType}
-                projectSlug={project.slug}
-                projectTitle={project.title}
-                versionNumber={version.version_number || version.id}
-              />
-            </div>
+            <DownloadVersionDependencies
+              dependencies={Array.isArray(version.dependencies) ? version.dependencies : []}
+              loader={pickVersionLoader(version)}
+              gameVersion={pickVersionGameVersion(version)}
+              contentType={contentType}
+              projectSlug={project.slug}
+              projectTitle={project.title}
+              versionNumber={version.version_number || version.id}
+            />
           )}
         </div>
 
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          {metadata.render()}
+        <div className="lg:sticky lg:top-4 lg:self-start space-y-4">
+          <div className="text-sm">
+            <Link
+              href={`/${singularName}/${project.slug}/versions`}
+              className="text-gray-500 hover:text-modrinth-green transition-colors"
+            >
+              ← Все версии
+            </Link>
+          </div>
+          <ProjectLinksCard resource={project} includeSource />
+          <VersionMetadata version={version} author={author} />
         </div>
       </div>
     </div>

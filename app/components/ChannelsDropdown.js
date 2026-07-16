@@ -74,7 +74,7 @@ export default function ChannelsDropdown({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium border transition rounded-xl bg-gray-100 text-gray-900 border-gray-200 hover:border-modrinth-green dark:bg-gray-800 dark:text-white dark:border-gray-700"
+        className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition rounded-xl bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
       >
         <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 3H2l8 9.46V19l4 2v-8.54z" />
