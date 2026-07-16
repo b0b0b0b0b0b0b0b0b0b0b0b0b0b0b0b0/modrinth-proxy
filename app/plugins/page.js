@@ -15,6 +15,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('plugins', searchParams, { basePath: 'plugins' })
@@ -22,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function PluginsPage({ searchParams }) {
   const query = searchParams.q || '';
-  const version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
@@ -107,9 +108,8 @@ export default async function PluginsPage({ searchParams }) {
 
   const facets = [['project_type:plugin']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (loaders.length > 0) {
     loaders.forEach(l => facets.push([`categories:${l}`]));
@@ -174,7 +174,7 @@ export default async function PluginsPage({ searchParams }) {
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {
-      searchAlternatives = await findCatalogSearchAlternatives('plugins', query, { version })
+      searchAlternatives = await findCatalogSearchAlternatives('plugins', query, { version: versions })
     } catch (err) {
       console.error('Failed to load search alternatives:', err)
     }
@@ -185,7 +185,7 @@ export default async function PluginsPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     
     loaders.forEach(loader => {
       params.append('g', `categories:${loader}`)
@@ -254,7 +254,7 @@ export default async function PluginsPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions} 
                   categoryPath="plugins"
                   searchParams={searchParams}
                 />
@@ -279,7 +279,7 @@ export default async function PluginsPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="plugins"
-            version={version}
+            version={versions}
             catalogKey="plugins"
             alternatives={searchAlternatives}
           />

@@ -15,6 +15,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'modpacks' })
@@ -22,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function ModpacksPage({ searchParams }) {
   const query = searchParams.q || '';
-  const version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const environment = searchParams.e || '';
   const page = parseInt(searchParams.page || '1');
@@ -92,9 +93,8 @@ export default async function ModpacksPage({ searchParams }) {
 
   const facets = [['project_type:modpack']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (loaders.length > 0) {
     facets.push(loaders.map(l => `categories:${l}`));
@@ -161,7 +161,7 @@ export default async function ModpacksPage({ searchParams }) {
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {
-      searchAlternatives = await findCatalogSearchAlternatives('modpacks', query, { version })
+      searchAlternatives = await findCatalogSearchAlternatives('modpacks', query, { version: versions })
     } catch (err) {
       console.error('Failed to load search alternatives:', err)
     }
@@ -172,7 +172,7 @@ export default async function ModpacksPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     if (environment) params.set('e', environment);
     
     loaders.forEach(loader => {
@@ -236,7 +236,7 @@ export default async function ModpacksPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions} 
                   categoryPath="modpacks"
                   searchParams={searchParams}
                 />
@@ -261,7 +261,7 @@ export default async function ModpacksPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="modpacks"
-            version={version}
+            version={versions}
             catalogKey="modpacks"
             alternatives={searchAlternatives}
           />

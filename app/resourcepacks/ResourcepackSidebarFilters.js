@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
+import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
 
 const CATEGORIES = [
   { id: 'combat', name: 'Бой' },
@@ -65,20 +66,17 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     
     fParams.forEach(processParam)
     
-    const version = searchParams.get('v') || ''
-    
-    return { categories, features, resolutions, version }
+    return { categories, features, resolutions }
   }
   
   const { 
     categories: initialCategories, 
     features: initialFeatures, 
     resolutions: initialResolutions,
-    version: initialVersion 
   } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
-  const [selectedVersion, setSelectedVersion] = useState(initialVersion)
+  const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
   const [selectedFeatures, setSelectedFeatures] = useState(initialFeatures)
   const [selectedResolutions, setSelectedResolutions] = useState(initialResolutions)
@@ -88,10 +86,9 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
-    const urlVersion = searchParams.get('v') || ''
     
     setSearchQuery(urlQuery)
-    setSelectedVersion(urlVersion)
+    setSelectedVersions(parseVersionParams(searchParams))
     setSelectedCategories(parsedFilters.categories)
     setSelectedFeatures(parsedFilters.features)
     setSelectedResolutions(parsedFilters.resolutions)
@@ -108,10 +105,9 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     }
     
     if (updates.v !== undefined) {
-      if (updates.v) params.set('v', updates.v)
+      appendVersionParams(params, updates.v)
     } else {
-      const v = searchParams.get('v')
-      if (v) params.set('v', v)
+      appendVersionParams(params, parseVersionParams(searchParams))
     }
     
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
@@ -127,6 +123,14 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     
     router.push(`/resourcepacks?${params.toString()}`)
     onFilterChange?.()
+  }
+
+  const toggleVersion = (version) => {
+    const next = selectedVersions.includes(version)
+      ? selectedVersions.filter((v) => v !== version)
+      : [...selectedVersions, version]
+    setSelectedVersions(next)
+    updateFilters({ v: next })
   }
 
   const toggleCategory = (categoryId) => {
@@ -292,28 +296,26 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
                 ? versions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
                 : versions
               
-              return filteredVersions.map(version => (
+              return filteredVersions.map(version => {
+                const isSelected = selectedVersions.includes(version)
+                return (
                 <button
                   key={version}
-                  onClick={() => {
-                    const newVersion = selectedVersion === version ? '' : version
-                    setSelectedVersion(newVersion)
-                    updateFilters({ v: newVersion })
-                  }}
-                  className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
-                    selectedVersion === version
+                  onClick={() => toggleVersion(version)}
+                  className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
+                    isSelected
                       ? 'bg-modrinth-green text-black font-semibold'
                       : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
                   <span>{version}</span>
-                  {selectedVersion === version && (
+                  {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   )}
                 </button>
-              ))
+              )})
             })()}
           </div>
 
@@ -340,12 +342,12 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
           </div>
         </div>
 
-        {(selectedVersion || selectedCategories.length > 0 || selectedFeatures.length > 0 || selectedResolutions.length > 0 || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedCategories.length > 0 || selectedFeatures.length > 0 || selectedResolutions.length > 0 || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
-                setSelectedVersion('')
+                setSelectedVersions([])
                 setSelectedCategories([])
                 setSelectedFeatures([])
                 setSelectedResolutions([])

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SHADER_LOADERS } from '@/lib/loaders'
+import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
 
 export default function ShaderSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -54,17 +55,16 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
       }
     })
     
-    const version = searchParams.get('v') || ''
     const lParam = searchParams.get('l')
     const openSource = lParam === 'open_source:true'
     
-    return { styles, features, performance, loaders, version, openSource }
+    return { styles, features, performance, loaders, openSource }
   }
   
-  const { styles: initialStyles, features: initialFeatures, performance: initialPerformance, loaders: initialLoaders, version: initialVersion, openSource: initialOpenSource } = parseFacets()
+  const { styles: initialStyles, features: initialFeatures, performance: initialPerformance, loaders: initialLoaders, openSource: initialOpenSource } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
-  const [selectedVersion, setSelectedVersion] = useState(initialVersion)
+  const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedStyles, setSelectedStyles] = useState(initialStyles)
   const [selectedFeatures, setSelectedFeatures] = useState(initialFeatures)
   const [selectedPerformance, setSelectedPerformance] = useState(initialPerformance)
@@ -76,10 +76,9 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
-    const urlVersion = searchParams.get('v') || ''
     
     setSearchQuery(urlQuery)
-    setSelectedVersion(urlVersion)
+    setSelectedVersions(parseVersionParams(searchParams))
     setSelectedStyles(parsedFilters.styles)
     setSelectedFeatures(parsedFilters.features)
     setSelectedPerformance(parsedFilters.performance)
@@ -96,8 +95,11 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
       params.set('q', searchQuery)
     }
     
-    const currentVersion = updates.v !== undefined ? updates.v : selectedVersion
-    if (currentVersion) params.set('v', currentVersion)
+    if (updates.v !== undefined) {
+      appendVersionParams(params, updates.v)
+    } else {
+      appendVersionParams(params, parseVersionParams(searchParams))
+    }
     
     const currentStyles = updates.s !== undefined ? updates.s : selectedStyles
     const currentFeatures = updates.feat !== undefined ? updates.feat : selectedFeatures
@@ -117,6 +119,14 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     
     router.push(`/shaders?${params.toString()}`)
     onFilterChange?.()
+  }
+
+  const toggleVersion = (version) => {
+    const next = selectedVersions.includes(version)
+      ? selectedVersions.filter((v) => v !== version)
+      : [...selectedVersions, version]
+    setSelectedVersions(next)
+    updateFilters({ v: next })
   }
 
   const toggleStyle = (styleId) => {
@@ -273,28 +283,26 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
                 ? versions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
                 : versions
               
-              return filteredVersions.map(version => (
+              return filteredVersions.map(version => {
+                const isSelected = selectedVersions.includes(version)
+                return (
               <button
                 key={version}
-                onClick={() => {
-                  const newVersion = selectedVersion === version ? '' : version
-                  setSelectedVersion(newVersion)
-                  updateFilters({ v: newVersion })
-                }}
-                  className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
-                  selectedVersion === version
+                onClick={() => toggleVersion(version)}
+                  className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
+                  isSelected
                     ? 'bg-modrinth-green text-black font-semibold'
                     : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                 }`}
               >
                   <span>{version}</span>
-                  {selectedVersion === version && (
+                  {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   )}
               </button>
-              ))
+              )})
             })()}
         </div>
 
@@ -373,12 +381,12 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </button>
         </div>
 
-        {(selectedVersion || selectedStyles.length > 0 || selectedFeatures.length > 0 || selectedPerformance.length > 0 || selectedLoaders.length > 0 || openSource || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedStyles.length > 0 || selectedFeatures.length > 0 || selectedPerformance.length > 0 || selectedLoaders.length > 0 || openSource || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {
               setSearchQuery('')
-              setSelectedVersion('')
+              setSelectedVersions([])
               setSelectedStyles([])
               setSelectedFeatures([])
               setSelectedPerformance([])

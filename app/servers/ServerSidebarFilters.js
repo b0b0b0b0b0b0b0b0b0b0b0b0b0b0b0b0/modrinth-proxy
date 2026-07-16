@@ -275,7 +275,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                         setSelectedVersion(newVersion)
                         updateFilters({ v: newVersion })
                       }}
-                      className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
+                      className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
                         selectedVersion === version
                           ? 'bg-modrinth-green text-black font-semibold'
                           : 'text-gray-400 hover:bg-gray-800 hover:text-white'

@@ -15,6 +15,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('datapacks', searchParams, { basePath: 'discover/datapacks' })
@@ -22,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function DatapacksPage({ searchParams }) {
   const query = searchParams.q || '';
-  const version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const lParam = searchParams.l
   const openSourceState = lParam === 'open_source:true' ? 'selected' : lParam === 'open_source:false' ? 'excluded' : 'none';
@@ -60,9 +61,8 @@ export default async function DatapacksPage({ searchParams }) {
 
   const facets = [['project_type:datapack']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (categories.length > 0) {
     categories.forEach(c => facets.push([`categories:${c}`]));
@@ -119,7 +119,7 @@ export default async function DatapacksPage({ searchParams }) {
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {
-      searchAlternatives = await findCatalogSearchAlternatives('datapacks', query, { version })
+      searchAlternatives = await findCatalogSearchAlternatives('datapacks', query, { version: versions })
     } catch (err) {
       console.error('Failed to load search alternatives:', err)
     }
@@ -130,7 +130,7 @@ export default async function DatapacksPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     categories.forEach(c => params.append('f', `categories:${c}`));
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
     if (openSourceState === 'selected') params.set('l', 'open_source:true');
@@ -175,7 +175,7 @@ export default async function DatapacksPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions} 
                   categoryPath="discover/datapacks"
                   searchParams={searchParams}
                 />
@@ -200,7 +200,7 @@ export default async function DatapacksPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="discover/datapacks"
-            version={version}
+            version={versions}
             catalogKey="datapacks"
             alternatives={searchAlternatives}
           />

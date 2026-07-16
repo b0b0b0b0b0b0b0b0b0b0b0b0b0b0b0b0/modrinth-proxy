@@ -75,15 +75,25 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     }
   })
   
-  const version = searchParams.get('sgv') || searchParams.get('v')
-  if (version) {
+  const sgv = searchParams.get('sgv')
+  if (sgv) {
     activeFilters.push({
-      type: searchParams.get('sgv') ? 'sgv' : 'version',
-      id: version,
-      label: version,
-      param: searchParams.get('sgv') ? 'sgv' : 'v'
+      type: 'sgv',
+      id: sgv,
+      label: sgv,
+      param: 'sgv'
     })
   }
+
+  const versions = searchParams.getAll('v').filter(Boolean)
+  versions.forEach((v) => {
+    activeFilters.push({
+      type: 'version',
+      id: v,
+      label: v,
+      param: v,
+    })
+  })
   
   if (config.hasOpenSource) {
     const lParams = Array.isArray(searchParams.getAll('l')) ? searchParams.getAll('l') : (searchParams.get('l') ? [searchParams.get('l')] : [])
@@ -167,7 +177,6 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       if (processedKeys.has(key)) return
       processedKeys.add(key)
       
-      if (filterToRemove.type === 'version' && key === 'v') return
       if (filterToRemove.type === 'sgv' && key === 'sgv') return
       if (filterToRemove.type === 'environment' && key === 'e') return
       if (filterToRemove.type === 'sst' && key === 'sst') {
@@ -181,7 +190,8 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
           (filterToRemove.type === 'sr' && key === 'sr') ||
           (filterToRemove.type === 'sl' && key === 'sl') ||
           ((filterToRemove.type === 'platform' || filterToRemove.type === 'loader') && key === 'g') ||
-          (filterToRemove.type === 'openSource' && key === 'l')) {
+          (filterToRemove.type === 'openSource' && key === 'l') ||
+          (filterToRemove.type === 'version' && key === 'v')) {
         const allValues = searchParams.getAll(key)
         const filteredValues = allValues.filter(v => v !== filterToRemove.param)
         const uniqueValues = [...new Set(filteredValues)]

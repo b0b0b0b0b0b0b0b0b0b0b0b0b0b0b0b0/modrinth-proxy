@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MOD_LOADERS, MAIN_LOADERS_COUNT } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
+import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
 
 const MOD_CATEGORIES = CATEGORIES.filter(cat =>
   ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
@@ -46,15 +47,13 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
       }
     })
     
-    const version = searchParams.get('v') || ''
-    
-    return { loaders, categories, version }
+    return { loaders, categories, versions: parseVersionParams(searchParams) }
   }
   
-  const { loaders: initialLoaders, categories: initialCategories, version: initialVersion } = parseFacets()
+  const { loaders: initialLoaders, categories: initialCategories, versions: initialVersionsSelected } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
-  const [selectedVersion, setSelectedVersion] = useState(initialVersion)
+  const [selectedVersions, setSelectedVersions] = useState(initialVersionsSelected)
   const [selectedLoaders, setSelectedLoaders] = useState(initialLoaders)
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
   const [selectedEnvironment, setSelectedEnvironment] = useState(searchParams.get('e') || '')
@@ -65,11 +64,10 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
-    const urlVersion = searchParams.get('v') || ''
     const urlEnvironment = searchParams.get('e') || ''
     
     setSearchQuery(urlQuery)
-    setSelectedVersion(urlVersion)
+    setSelectedVersions(parsedFilters.versions)
     setSelectedLoaders(parsedFilters.loaders)
     setSelectedCategories(parsedFilters.categories)
     setSelectedEnvironment(urlEnvironment)
@@ -86,10 +84,9 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     }
     
     if (updates.v !== undefined) {
-      if (updates.v) params.set('v', updates.v)
+      appendVersionParams(params, updates.v)
     } else {
-      const v = searchParams.get('v')
-      if (v) params.set('v', v)
+      appendVersionParams(params, parseVersionParams(searchParams))
     }
     
     const currentLoaders = updates.l !== undefined ? updates.l : selectedLoaders
@@ -110,6 +107,14 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     
     router.push(`/mods?${params.toString()}`)
     onFilterChange?.()
+  }
+
+  const toggleVersion = (version) => {
+    const next = selectedVersions.includes(version)
+      ? selectedVersions.filter((v) => v !== version)
+      : [...selectedVersions, version]
+    setSelectedVersions(next)
+    updateFilters({ v: next })
   }
 
   const toggleLoader = (loaderId) => {
@@ -180,28 +185,26 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                 ? versions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
                 : versions
               
-              return filteredVersions.map(version => (
+              return filteredVersions.map(version => {
+                const isSelected = selectedVersions.includes(version)
+                return (
               <button
                 key={version}
-                onClick={() => {
-                  const newVersion = selectedVersion === version ? '' : version
-                  setSelectedVersion(newVersion)
-                  updateFilters({ v: newVersion })
-                }}
-                  className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
-                  selectedVersion === version
+                onClick={() => toggleVersion(version)}
+                  className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
+                  isSelected
                     ? 'bg-modrinth-green text-black font-semibold'
                     : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                 }`}
               >
                   <span>{version}</span>
-                  {selectedVersion === version && (
+                  {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   )}
                 </button>
-              ))
+              )})
             })()}
           </div>
 
@@ -332,12 +335,12 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
           </div>
         </div>
 
-        {(selectedVersion || selectedLoaders.length > 0 || selectedCategories.length > 0 || selectedEnvironment || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || selectedEnvironment || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {
               setSearchQuery('')
-              setSelectedVersion('')
+              setSelectedVersions([])
               setSelectedLoaders([])
               setSelectedCategories([])
               setSelectedEnvironment('')

@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
+import { appendVersionParams } from '@/lib/catalogVersionParams'
 
 export default function SearchInput({ 
   defaultValue = '',
@@ -45,8 +46,7 @@ export default function SearchInput({
           params.set('q', query.trim())
         }
         
-        const v = searchParams.get('v')
-        if (v) params.set('v', v)
+        appendVersionParams(params, searchParams.getAll('v'))
         
         const gParams = searchParams.getAll('g')
         gParams.forEach(g => params.append('g', g))
@@ -83,8 +83,7 @@ export default function SearchInput({
       params.set('q', query.trim())
     }
     
-    const v = searchParams.get('v')
-    if (v) params.set('v', v)
+    appendVersionParams(params, searchParams.getAll('v'))
     
     const gParams = searchParams.getAll('g')
     gParams.forEach(g => params.append('g', g))

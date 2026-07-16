@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { CATEGORIES } from '@/lib/categories'
+import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
 
 export default function DatapackSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -25,17 +26,16 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
       }
     })
     
-    const version = searchParams.get('v') || ''
     const lParam = searchParams.get('l')
     const openSource = lParam === 'open_source:true'
     
-    return { categories, version, openSource }
+    return { categories, openSource }
   }
   
-  const { categories: initialCategories, version: initialVersion, openSource: initialOpenSource } = parseFacets()
+  const { categories: initialCategories, openSource: initialOpenSource } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
-  const [selectedVersion, setSelectedVersion] = useState(initialVersion)
+  const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
   const [openSource, setOpenSource] = useState(initialOpenSource)
   const [showAllVersions, setShowAllVersions] = useState(false)
@@ -44,10 +44,9 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
-    const urlVersion = searchParams.get('v') || ''
     
     setSearchQuery(urlQuery)
-    setSelectedVersion(urlVersion)
+    setSelectedVersions(parseVersionParams(searchParams))
     setSelectedCategories(parsedFilters.categories)
     setOpenSource(parsedFilters.openSource)
   }, [searchParams])
@@ -63,10 +62,9 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
     }
     
     if (updates.v !== undefined) {
-      if (updates.v) params.set('v', updates.v)
+      appendVersionParams(params, updates.v)
     } else {
-      const v = searchParams.get('v')
-      if (v) params.set('v', v)
+      appendVersionParams(params, parseVersionParams(searchParams))
     }
     
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
@@ -80,6 +78,14 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
     
     router.push(`/datapacks?${params.toString()}`)
     onFilterChange?.()
+  }
+
+  const toggleVersion = (version) => {
+    const next = selectedVersions.includes(version)
+      ? selectedVersions.filter((v) => v !== version)
+      : [...selectedVersions, version]
+    setSelectedVersions(next)
+    updateFilters({ v: next })
   }
 
   const toggleCategory = (categoryId) => {
@@ -161,28 +167,26 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
                 ? versions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
                 : versions
               
-              return filteredVersions.map(version => (
+              return filteredVersions.map(version => {
+                const isSelected = selectedVersions.includes(version)
+                return (
                 <button
                   key={version}
-                  onClick={() => {
-                    const newVersion = selectedVersion === version ? '' : version
-                    setSelectedVersion(newVersion)
-                    updateFilters({ v: newVersion })
-                  }}
-                  className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
-                    selectedVersion === version
+                  onClick={() => toggleVersion(version)}
+                  className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
+                    isSelected
                       ? 'bg-modrinth-green text-black font-semibold'
                       : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
                   <span>{version}</span>
-                  {selectedVersion === version && (
+                  {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   )}
                 </button>
-              ))
+              )})
             })()}
           </div>
 
@@ -232,12 +236,12 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
           </button>
         </div>
 
-        {(selectedVersion || selectedCategories.length > 0 || openSource || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedCategories.length > 0 || openSource || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
-                setSelectedVersion('')
+                setSelectedVersions([])
                 setSelectedCategories([])
                 setOpenSource(false)
                 const sort = searchParams.get('sort')

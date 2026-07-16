@@ -14,6 +14,7 @@ import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('resourcepacks', searchParams, { basePath: 'resourcepacks' })
@@ -21,7 +22,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function ResourcepacksPage({ searchParams }) {
   const query = searchParams.q || '';
-  const version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
@@ -77,9 +78,8 @@ export default async function ResourcepacksPage({ searchParams }) {
 
   const facets = [['project_type:resourcepack']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (categories.length > 0) {
     categories.forEach(c => facets.push([`categories:${c}`]));
@@ -142,7 +142,7 @@ export default async function ResourcepacksPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     categories.forEach(c => params.append('f', `categories:${c}`));
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
     features.forEach(f => params.append('f', `categories:${f}`));
@@ -189,7 +189,7 @@ export default async function ResourcepacksPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions} 
                   categoryPath="resourcepacks"
                   searchParams={searchParams}
                 />
@@ -214,7 +214,7 @@ export default async function ResourcepacksPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="resourcepacks"
-            version={version}
+            version={versions}
             catalogKey="resourcepacks"
             alternatives={searchAlternatives}
           />

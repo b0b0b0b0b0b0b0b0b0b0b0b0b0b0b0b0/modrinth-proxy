@@ -15,6 +15,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('shaders', searchParams, { basePath: 'discover/shaders' })
@@ -22,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function ShadersPage({ searchParams }) {
   const query = searchParams.q || '';
-  const version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
@@ -91,9 +92,8 @@ export default async function ShadersPage({ searchParams }) {
 
   const facets = [['project_type:shader']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (styles.length > 0) {
     styles.forEach(s => facets.push([`categories:${s}`]));
@@ -162,7 +162,7 @@ export default async function ShadersPage({ searchParams }) {
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {
-      searchAlternatives = await findCatalogSearchAlternatives('shaders', query, { version })
+      searchAlternatives = await findCatalogSearchAlternatives('shaders', query, { version: versions })
     } catch (err) {
       console.error('Failed to load search alternatives:', err)
     }
@@ -173,7 +173,7 @@ export default async function ShadersPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     styles.forEach(s => params.append('f', `categories:${s}`));
     excludedStyles.forEach(s => params.append('f', `categories!=${s}`));
     features.forEach(f => params.append('f', `categories:${f}`));
@@ -224,7 +224,7 @@ export default async function ShadersPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions} 
                   categoryPath="discover/shaders"
                   searchParams={searchParams}
                 />
@@ -249,7 +249,7 @@ export default async function ShadersPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="discover/shaders"
-            version={version}
+            version={versions}
             catalogKey="shaders"
             alternatives={searchAlternatives}
           />

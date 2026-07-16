@@ -49,30 +49,32 @@ export default function SortDropdown({
     
     if (isServer) {
       if (query) params.set('q', query)
-      if (version) params.set('sgv', version)
+      if (version) params.set('sgv', Array.isArray(version) ? version[0] : version)
       
       Object.entries(searchParams).forEach(([key, val]) => {
-        if (key !== 'sort' && key !== 'page' && key !== 'v' && key !== 'sgv') {
-          if (Array.isArray(val)) {
-            val.forEach(v => params.append(key, v))
-          } else if (val) {
-            params.set(key, val)
-          }
+        if (key === 'sort' || key === 'page' || key === 'v' || key === 'sgv' || key === 'q') return
+        if (Array.isArray(val)) {
+          val.forEach(v => params.append(key, v))
+        } else if (val) {
+          params.set(key, val)
         }
       })
       
       if (value !== 'relevance') params.set('sort', value)
     } else {
       if (query) params.set('q', query)
-      if (version) params.set('v', version)
+      if (Array.isArray(version)) {
+        version.filter(Boolean).forEach((v) => params.append('v', v))
+      } else if (version) {
+        params.set('v', version)
+      }
       
       Object.entries(searchParams).forEach(([key, val]) => {
-        if (key !== 'sort' && key !== 'page') {
-          if (Array.isArray(val)) {
-            val.forEach(v => params.append(key, v))
-          } else if (val) {
-            params.set(key, val)
-          }
+        if (key === 'sort' || key === 'page' || key === 'v' || key === 'q') return
+        if (Array.isArray(val)) {
+          val.forEach(v => params.append(key, v))
+        } else if (val) {
+          params.set(key, val)
         }
       })
       

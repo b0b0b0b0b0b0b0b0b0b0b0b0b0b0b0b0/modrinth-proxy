@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MODPACK_LOADERS } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
+import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
 
 const MODPACK_CATEGORIES = CATEGORIES.filter(cat => 
   ['adventure', 'challenging', 'combat', 'kitchen-sink', 'lightweight', 'magic', 'multiplayer', 'optimization', 'quests', 'technology'].includes(cat.id)
@@ -18,7 +19,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
   const MC_VERSIONS_FULL = initialVersions?.full || hookVersions.full
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
-  const [selectedVersion, setSelectedVersion] = useState(searchParams.get('v') || '')
+  const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedLoaders, setSelectedLoaders] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
   const [environment, setEnvironment] = useState(searchParams.get('e') || '')
@@ -29,11 +30,10 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
-    const urlVersion = searchParams.get('v') || ''
     const urlEnvironment = searchParams.get('e') || ''
     
     setSearchQuery(urlQuery)
-    setSelectedVersion(urlVersion)
+    setSelectedVersions(parseVersionParams(searchParams))
     setSelectedLoaders(parsedFilters.loaders)
     setSelectedCategories(parsedFilters.categories)
     setOpenSource(parsedFilters.openSource)
@@ -91,9 +91,9 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     }
     
     if (updates.v !== undefined) {
-      if (updates.v) params.set('v', updates.v)
-    } else if (selectedVersion) {
-      params.set('v', selectedVersion)
+      appendVersionParams(params, updates.v)
+    } else {
+      appendVersionParams(params, parseVersionParams(searchParams))
     }
 
     const finalLoaders = updates.l !== undefined ? updates.l : selectedLoaders
@@ -121,6 +121,14 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     
     router.push(`/modpacks?${params.toString()}`)
     onFilterChange?.()
+  }
+
+  const toggleVersion = (version) => {
+    const next = selectedVersions.includes(version)
+      ? selectedVersions.filter((v) => v !== version)
+      : [...selectedVersions, version]
+    setSelectedVersions(next)
+    updateFilters({ v: next })
   }
 
   const toggleLoader = (loaderId) => {
@@ -259,28 +267,26 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
                 ? versions.filter(v => v.toLowerCase().includes(versionSearch.toLowerCase()))
                 : versions
               
-              return filteredVersions.map(version => (
+              return filteredVersions.map(version => {
+                const isSelected = selectedVersions.includes(version)
+                return (
                 <button
                   key={version}
-                  onClick={() => {
-                    const newVersion = selectedVersion === version ? '' : version
-                    setSelectedVersion(newVersion)
-                    updateFilters({ v: newVersion })
-                  }}
-                  className={`w-full text-left px-3 py-1.5 rounded text-sm transition-all group flex items-center justify-between ${
-                    selectedVersion === version
+                  onClick={() => toggleVersion(version)}
+                  className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
+                    isSelected
                       ? 'bg-modrinth-green text-black font-semibold'
                       : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
                   <span>{version}</span>
-                  {selectedVersion === version && (
+                  {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                       <path d="M20 6 9 17l-5-5" />
                     </svg>
                   )}
                 </button>
-              ))
+              )})
             })()}
           </div>
 
@@ -359,12 +365,12 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
           </button>
         </div>
 
-        {(selectedVersion || selectedLoaders.length > 0 || selectedCategories.length > 0 || environment || openSource || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || environment || openSource || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
-                setSelectedVersion('')
+                setSelectedVersions([])
                 setSelectedLoaders([])
                 setSelectedCategories([])
                 setEnvironment('')

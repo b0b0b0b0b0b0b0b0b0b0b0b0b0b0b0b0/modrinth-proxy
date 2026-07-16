@@ -15,6 +15,7 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import ResourceList from '@/app/components/ResourceList'
+import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('mods', searchParams, { basePath: 'mods' })
@@ -22,7 +23,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function ModsPage({ searchParams }) {
   const query = searchParams.q || '';
-  let version = searchParams.v || '';
+  const versions = parseVersionParams(searchParams);
   const environment = searchParams.e || '';
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
@@ -72,9 +73,8 @@ export default async function ModsPage({ searchParams }) {
 
   const facets = [['project_type:mod']];
   
-  if (version) {
-    facets.push([`versions:${version}`]);
-  }
+  const versionsFacet = versionFacets(versions);
+  if (versionsFacet) facets.push(versionsFacet);
   
   if (loaders.length > 0) {
     facets.push(loaders.map(l => `categories:${l}`));
@@ -137,7 +137,7 @@ export default async function ModsPage({ searchParams }) {
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {
-      searchAlternatives = await findCatalogSearchAlternatives('mods', query, { version })
+      searchAlternatives = await findCatalogSearchAlternatives('mods', query, { version: versions })
     } catch (err) {
       console.error('Failed to load search alternatives:', err)
     }
@@ -148,7 +148,7 @@ export default async function ModsPage({ searchParams }) {
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
-    if (version) params.set('v', version);
+    appendVersionParams(params, versions);
     loaders.forEach(l => params.append('g', `categories:${l}`));
     excludedLoaders.forEach(l => params.append('g', `categories!=${l}`));
     categories.forEach(c => params.append('f', `categories:${c}`));
@@ -194,7 +194,7 @@ export default async function ModsPage({ searchParams }) {
                 <SortDropdown 
                   currentSort={sortBy} 
                   query={query} 
-                  version={version} 
+                  version={versions}
                   categoryPath="mods"
                   searchParams={searchParams}
                 />
