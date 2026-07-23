@@ -219,7 +219,7 @@ export default async function ModsPage({ searchParams }) {
           <CatalogSearchAlternatives
             query={query}
             categoryPath="mods"
-            version={version}
+            version={versions}
             catalogKey="mods"
             alternatives={searchAlternatives}
           />
