@@ -1,5 +1,6 @@
 import DownloadButtons from './DownloadButtons'
 import LauncherVersions from './LauncherVersions'
+import LauncherLastUpdate from './LauncherLastUpdate'
 import DetectedOS from './DetectedOS'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
@@ -195,32 +196,7 @@ export default async function AppPage() {
             <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
               RAW API
             </span>
-            <div className="flex flex-wrap items-center justify-center gap-2.5">
-              <a
-                href="/api/launcher"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-modrinth-green dark:text-gray-300"
-              >
-                <svg className="h-4 w-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m8 16-4-4 4-4m8 0 4 4-4 4" />
-                </svg>
-                Modrinth
-                <span className="text-gray-400 group-hover:text-modrinth-green/70">/api/launcher</span>
-              </a>
-              <a
-                href="/api/astralrinth"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 rounded-xl px-3.5 py-2 text-sm font-medium text-gray-700 transition-colors duration-200 hover:text-modrinth-green dark:text-gray-300"
-              >
-                <svg className="h-4 w-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="m8 16-4-4 4-4m8 0 4 4-4 4" />
-                </svg>
-                AstralRinth
-                <span className="text-gray-400 group-hover:text-modrinth-green/70">/api/astralrinth</span>
-              </a>
-            </div>
+            <LauncherLastUpdate launcherData={launcherData} astralData={astralData} />
           </div>
         </div>
       </div>
