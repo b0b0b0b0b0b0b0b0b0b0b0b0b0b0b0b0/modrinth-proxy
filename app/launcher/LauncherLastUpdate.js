@@ -1,24 +1,12 @@
 'use client'
 
 import StyledTooltip from '../components/StyledTooltip'
-
-function formatRu(dateString) {
-  const date = new Date(dateString)
-  if (isNaN(date.getTime())) return null
-  return new Intl.DateTimeFormat('ru-RU', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  }).format(date)
-}
+import { formatRelativeRussian } from '../components/RelativeTime'
 
 function ApiLink({ href, label, path, data }) {
   const version = data?.version
-  const published = data?.published_at ? formatRu(data.published_at) : null
-  const checked = data?.checked_at ? formatRu(data.checked_at) : null
+  const published = data?.published_at ? formatRelativeRussian(data.published_at) : null
+  const checked = data?.checked_at ? formatRelativeRussian(data.checked_at) : null
 
   const tooltip = (
     <span className="flex flex-col gap-1 text-left leading-snug">
