@@ -6,8 +6,9 @@ import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { formatDate, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { filterVersionChangelog } from '@/lib/contentFilter'
+import RelativeTime from './RelativeTime'
 
 function changelogBarClass(versionType) {
   if (versionType === 'release') return 'release'
@@ -126,7 +127,7 @@ export default function ChangelogVersionEntries({
                   {version.version_type}
                 </span>
                 <span className="text-sm text-gray-500">
-                  {formatDate(version.date_published)}
+                  <RelativeTime dateString={version.date_published} />
                 </span>
               </div>
             }

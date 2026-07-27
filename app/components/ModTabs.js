@@ -3,7 +3,8 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
-import { formatDate, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { resolveModrinthProjectAccent } from '@/lib/modrinth'
+import RelativeTime from './RelativeTime'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
   filterVersionsByContentType,
@@ -229,7 +230,9 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                       >
                         {version.version_type}
                       </span>
-                      <span className="text-sm text-gray-500">{formatDate(version.date_published)}</span>
+                      <span className="text-sm text-gray-500">
+                        <RelativeTime dateString={version.date_published} />
+                      </span>
                     </div>
                   }
                 >
