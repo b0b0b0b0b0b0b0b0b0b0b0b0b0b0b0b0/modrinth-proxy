@@ -2,6 +2,7 @@ import Link from 'next/link'
 import MarkCommitsRead from '../components/MarkCommitsRead'
 import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
+import RelativeTime from '../components/RelativeTime'
 import nextDynamic from 'next/dynamic'
 
 const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
@@ -34,53 +35,6 @@ async function getCommits() {
   } catch (error) {
     console.error('Error fetching commits:', error)
     return []
-  }
-}
-
-function getPluralForm(number, one, few, many) {
-  const absNumber = Math.abs(number)
-  const lastDigit = absNumber % 10
-  const lastTwoDigits = absNumber % 100
-
-  if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
-    return many
-  }
-  if (lastDigit === 1) {
-    return one
-  }
-  if (lastDigit >= 2 && lastDigit <= 4) {
-    return few
-  }
-  return many
-}
-
-function formatDate(dateString) {
-  const date = new Date(dateString)
-  const now = new Date()
-  const diffMs = now - date
-
-  if (diffMs < 0) {
-    return 'только что'
-  }
-
-  const diffMins = Math.floor(diffMs / 60000)
-  const diffHours = Math.floor(diffMs / 3600000)
-  const diffDays = Math.floor(diffMs / 86400000)
-  const diffMonths = Math.floor(diffDays / 30)
-  const diffYears = Math.floor(diffDays / 365)
-
-  if (diffMins < 1) {
-    return 'только что'
-  } else if (diffMins < 60) {
-    return `${diffMins} ${getPluralForm(diffMins, 'минуту', 'минуты', 'минут')} назад`
-  } else if (diffHours < 24) {
-    return `${diffHours} ${getPluralForm(diffHours, 'час', 'часа', 'часов')} назад`
-  } else if (diffDays < 31) {
-    return `${diffDays} ${getPluralForm(diffDays, 'день', 'дня', 'дней')} назад`
-  } else if (diffMonths < 12) {
-    return `${diffMonths} ${getPluralForm(diffMonths, 'месяц', 'месяца', 'месяцев')} назад`
-  } else {
-    return `${diffYears} ${getPluralForm(diffYears, 'год', 'года', 'лет')} назад`
   }
 }
 
@@ -168,7 +122,7 @@ export default async function NewsPage() {
                       isLast={isLast}
                       header={
                         <span className="text-sm text-gray-500">
-                          {formatDate(commit.commit.author.date)}
+                          <RelativeTime dateString={commit.commit.author.date} />
                         </span>
                       }
                     >
