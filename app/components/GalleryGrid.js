@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useState } from 'react'
 import GalleryModal from './GalleryModal'
+import RelativeTime from './RelativeTime'
 
 function findNeighborIndex(gallery, fromIndex, direction) {
   if (!gallery.length) return fromIndex
@@ -130,7 +131,7 @@ export default function GalleryGrid({ gallery }) {
                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   />
                 </svg>
-                {formatDate(item.created)}
+                <RelativeTime dateString={item.created} className="text-inherit" />
               </div>
             </div>
           </div>
@@ -150,13 +151,4 @@ export default function GalleryGrid({ gallery }) {
       )}
     </>
   )
-}
-
-function formatDate(dateString) {
-  const date = new Date(dateString)
-  return date.toLocaleDateString('ru-RU', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
 }
