@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import CatalogReturnButton from './CatalogReturnButton'
-import { formatDownloads, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { formatDownloads, resolveModrinthProjectAccent, pruneVersionsForDownloadPicker, slimVersionsForHeader } from '@/lib/modrinth'
+import { ACTIVITY_DAYS } from '@/lib/projectActivity'
 import { filterAvatar } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
@@ -48,6 +49,16 @@ const CONTENT_TYPE_ROUTES = {
 }
 
 export default function ResourceHeader({ resource, contentType, versions = [], mutedDownload = false }) {
+  const safeVersions = Array.isArray(versions) ? versions : []
+
+  const activityCutoff = Date.now() - ACTIVITY_DAYS * 24 * 60 * 60 * 1000
+  const activityVersions = safeVersions
+    .map((v) => v?.date_published ?? v?.published)
+    .filter((date) => date && new Date(date).getTime() >= activityCutoff)
+    .map((date) => ({ date_published: date }))
+
+  const downloadVersions = slimVersionsForHeader(pruneVersionsForDownloadPicker(safeVersions))
+
   const contentTypeName = CONTENT_TYPE_NAMES[contentType] || 'Ресурсы'
   const contentTypeRoute = CONTENT_TYPE_ROUTES[contentType] || contentType
   const isServer = contentType === 'server' || contentType === 'servers' || resource.project_type === 'minecraft_java_server'
@@ -104,7 +115,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
         style={{ borderBottomColor: 'var(--bg-tertiary)' }}
       >
         {!isServer && (
-          <ProjectActivityBackground versions={versions} />
+          <ProjectActivityBackground versions={activityVersions} />
         )}
         <div className="relative z-[1]">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-start">
@@ -232,11 +243,11 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                 <div className="w-full lg:flex lg:flex-col lg:items-end lg:gap-2">
                   {showPromoBelowDownload ? (
                     <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
-                      <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} muted={mutedDownload} />
+                      <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                       <DownloadPromoConnector className="hidden lg:flex pb-px" />
                     </div>
                   ) : (
-                    <DownloadModal mod={resource} versions={versions} contentType={contentTypeRoute} muted={mutedDownload} />
+                    <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                   )}
 
                 <div className="mt-3 w-full lg:mt-0">
