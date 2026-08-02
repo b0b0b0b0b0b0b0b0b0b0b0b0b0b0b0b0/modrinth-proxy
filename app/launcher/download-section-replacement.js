@@ -5,13 +5,13 @@ import { WindowsIcon, MacOSIcon, LinuxIcon } from '../components/icons'
 
 const ASTRALRINTH_FALLBACK = {
   windows:
-    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_x64-setup.exe',
+    'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_x64-setup.exe',
   macos:
-    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_aarch64.dmg',
+    'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_aarch64.dmg',
   appimage:
-    'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.AppImage',
-  deb: 'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.deb',
-  rpm: 'https://git.astralium.su/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App-0.10.1601-1.x86_64.rpm',
+    'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.AppImage',
+  deb: 'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App_0.10.1601_amd64.deb',
+  rpm: 'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App-0.10.1601-1.x86_64.rpm',
 }
 
 export const DownloadSection = ({ launcherData, astralData }) => {
