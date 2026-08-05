@@ -4,6 +4,7 @@ import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
 import RelativeTime from '../components/RelativeTime'
 import nextDynamic from 'next/dynamic'
+import { getSiteCommits, GITHUB_REPO_URL } from '@/lib/commits'
 
 const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
   ssr: false,
@@ -13,30 +14,6 @@ const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
     </div>
   )
 })
-
-async function getCommits() {
-  try {
-    const res = await fetch(
-      'https://api.github.com/repos/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/commits',
-      {
-        next: { revalidate: 1800 },
-        headers: {
-          'Accept': 'application/vnd.github.v3+json',
-        }
-      }
-    )
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch commits')
-    }
-
-    const commits = await res.json()
-    return commits.slice(0, 20)
-  } catch (error) {
-    console.error('Error fetching commits:', error)
-    return []
-  }
-}
 
 function getShortSha(sha) {
   return sha.substring(0, 7)
@@ -79,7 +56,7 @@ export const metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function NewsPage() {
-  const commits = await getCommits()
+  const commits = await getSiteCommits()
   const disclaimer = pickDisclaimer()
 
   return (
@@ -174,7 +151,7 @@ export default async function NewsPage() {
           <div className="relative inline-block">
             <div className="absolute inset-0 bg-gradient-to-r from-modrinth-green/30 to-modrinth-green-light/30 blur-2xl"></div>
             <Link
-              href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy"
+              href={GITHUB_REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-flex items-center gap-3 bg-gradient-to-r from-modrinth-green to-modrinth-green-light hover:from-modrinth-green/90 hover:to-modrinth-green-light/90 text-black px-8 py-4 rounded-xl font-bold text-lg transition-colors"
