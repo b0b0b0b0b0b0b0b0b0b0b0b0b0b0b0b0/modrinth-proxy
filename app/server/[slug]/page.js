@@ -11,9 +11,7 @@ import ServerGallery from '@/app/components/ServerGallery'
 import ServerSidebarLink from '@/app/components/ServerSidebarLink'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
 import AuthorsSection from '@/app/components/AuthorsSection'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import MarkdownContent from '@/app/components/MarkdownContent'
 
 export async function generateMetadata({ params }) {
   try {
@@ -151,14 +149,7 @@ export default async function ServerPage({ params }) {
           <ServerGallery gallery={server.gallery} />
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
-              <div className="prose prose-invert prose-sm max-w-none">
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                >
-                  {server.body || ''}
-                </ReactMarkdown>
-              </div>
+              <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={server.body || ''} />
             </div>
           </div>
         </div>

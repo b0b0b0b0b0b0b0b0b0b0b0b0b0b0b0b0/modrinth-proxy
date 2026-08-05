@@ -5,9 +5,7 @@ import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBl
 import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import MarkdownContent from '@/app/components/MarkdownContent'
 
 export async function generateMetadata({ params }) {
   try {
@@ -140,14 +138,7 @@ export default async function ModPage({ params }) {
         <div className="min-w-0">
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
-              <div className="prose prose-invert prose-sm max-w-none">
-                <ReactMarkdown 
-                  remarkPlugins={[remarkGfm]}
-                  rehypePlugins={[rehypeRaw]}
-                >
-                  {mod.body}
-                </ReactMarkdown>
-              </div>
+              <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={mod.body} />
             </div>
           </div>
         </div>
