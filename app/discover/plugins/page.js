@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
-import { fetchFilteredCatalogPage } from '@/lib/catalogPagination'
+import { loadCatalogPage } from '@/lib/loadCatalogPage'
 import PluginSidebarFilters from '@/app/plugins/PluginSidebarFilters'
 import MobileMenu from '@/app/plugins/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
@@ -127,50 +127,22 @@ export default async function PluginsPage({ searchParams }) {
     facets.push(['open_source:true'])
   }
 
-  let data = null;
-  let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
-  let layoutCorrection = null;
   let searchAlternatives = []
-  let error = null;
-  
-  try {
-    const initialData = await searchMods({ query, facets, limit: 1, offset: 0, index: sortBy });
-    layoutCorrection = initialData.layoutCorrection ?? null;
-    const totalHits = initialData.total_hits;
-    
-    let totalBlockedCount = 0, totalBlockedByProject = 0, totalBlockedByOrganization = 0;
-    let currentOffset = 0;
-    const batchSize = 100;
-    const maxBatches = Math.ceil(totalHits / batchSize);
-    
-    for (let i = 0; i < Math.min(maxBatches, 10); i++) {
-      const batchData = await searchMods({ query, facets, limit: batchSize, offset: currentOffset, index: sortBy });
-      const filtered = filterModsList(batchData.hits);
-      totalBlockedCount += filtered.blockedCount;
-      totalBlockedByProject += filtered.blockedByProject;
-      totalBlockedByOrganization += filtered.blockedByOrganization;
-      
-      if (currentOffset + batchData.hits.length >= totalHits) {
-        break;
-      }
-      
-      currentOffset += batchSize;
-    }
-    
-    blockedCount = totalBlockedCount;
-    blockedByProject = totalBlockedByProject;
-    blockedByOrganization = totalBlockedByOrganization;
-    
-    data = await fetchFilteredCatalogPage({
-      searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
-      page,
-      limit,
-      filterList: filterModsList,
-    })
-  } catch (err) {
-    console.error('Failed to load plugins:', err);
-    error = err;
-  }
+
+  const {
+    data,
+    layoutCorrection,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'plugins',
+  })
 
   if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
     try {

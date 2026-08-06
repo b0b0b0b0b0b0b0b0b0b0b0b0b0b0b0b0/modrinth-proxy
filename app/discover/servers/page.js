@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY } from '@/lib/serverCategories'
 import { searchServers, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
-import { fetchFilteredCatalogPage } from '@/lib/catalogPagination'
+import { loadCatalogPage } from '@/lib/loadCatalogPage'
 import ServerSidebarFilters from '@/app/servers/ServerSidebarFilters'
 import MobileMenu from '@/app/servers/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
@@ -173,47 +173,19 @@ export default async function ServersPage({ searchParams }) {
 
   const newFilters = parts.join(' AND ');
 
-  let data = null;
-  let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
-  let error = null;
-  
-  try {
-    const initialData = await searchServers({ query, newFilters, limit: 1, offset: 0, index: sortBy });
-    const totalHits = initialData.total_hits;
-    
-    let totalBlockedCount = 0, totalBlockedByProject = 0, totalBlockedByOrganization = 0;
-    let currentOffset = 0;
-    const batchSize = 100;
-    const maxBatches = Math.ceil(totalHits / batchSize);
-    
-    for (let i = 0; i < Math.min(maxBatches, 10); i++) {
-      const batchData = await searchServers({ query, newFilters, limit: batchSize, offset: currentOffset, index: sortBy });
-      const filtered = filterModsList(batchData.hits);
-      totalBlockedCount += filtered.blockedCount;
-      totalBlockedByProject += filtered.blockedByProject;
-      totalBlockedByOrganization += filtered.blockedByOrganization;
-      
-      if (currentOffset + batchData.hits.length >= totalHits) {
-        break;
-      }
-      
-      currentOffset += batchSize;
-    }
-    
-    blockedCount = totalBlockedCount;
-    blockedByProject = totalBlockedByProject;
-    blockedByOrganization = totalBlockedByOrganization;
-    
-    data = await fetchFilteredCatalogPage({
-      searchBatch: (opts) => searchServers({ query, newFilters, index: sortBy, ...opts }),
-      page,
-      limit,
-      filterList: filterModsList,
-    })
-  } catch (err) {
-    console.error('Failed to load servers:', err);
-    error = err;
-  }
+  const {
+    data,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchServers({ query, newFilters, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'servers',
+  })
 
   const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
 
