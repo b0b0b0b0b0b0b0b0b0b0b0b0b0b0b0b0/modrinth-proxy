@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function Footer() {
   return (
     <footer className="relative mb-20 lg:mb-0 overflow-hidden">
@@ -28,6 +30,7 @@ export default function Footer() {
             <h3 className="text-lg font-bold text-white mb-3">
               Полностью открытый проект
             </h3>
+            <div className="flex flex-col items-center gap-3 md:items-start">
             <a 
               href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" 
               target="_blank" 
@@ -71,6 +74,16 @@ export default function Footer() {
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"></path>
               </svg>
             </a>
+            <Link
+              href="/license"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 transition hover:text-modrinth-green"
+            >
+              <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Лицензия AGPL-3.0</span>
+            </Link>
+            </div>
             <div className="mt-4">
               <p className="text-gray-400 text-sm leading-relaxed">
                 Нашли баг? Есть предложения? 

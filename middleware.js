@@ -43,12 +43,6 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    '/LICENSE',
-    '/license',
-    '/License',
-    '/Licence',
-    '/COPYING',
-    '/copying',
     '/banner.webp',
     '/ads/:path*',
     '/mods/:path*',
