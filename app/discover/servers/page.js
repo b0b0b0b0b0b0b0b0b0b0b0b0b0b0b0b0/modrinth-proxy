@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY } from '@/lib/serverCategories'
 import { searchServers, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -10,6 +10,7 @@ import ActiveFilters from '@/app/components/ActiveFilters'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
 import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
+import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
 
@@ -173,22 +174,6 @@ export default async function ServersPage({ searchParams }) {
 
   const newFilters = parts.join(' AND ');
 
-  const {
-    data,
-    blockedCount,
-    blockedByProject,
-    blockedByOrganization,
-    error,
-  } = await loadCatalogPage({
-    searchBatch: (opts) => searchServers({ query, newFilters, index: sortBy, ...opts }),
-    page,
-    limit,
-    filterList: filterModsList,
-    logLabel: 'servers',
-  })
-
-  const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
-
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
@@ -216,6 +201,26 @@ export default async function ServersPage({ searchParams }) {
     params.set('page', newPage.toString());
     return `/discover/servers?${params.toString()}`;
   };
+
+  const {
+    data,
+    effectivePage,
+    totalPages,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchServers({ query, newFilters, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'servers',
+  })
+
+  if (!error && effectivePage !== page) {
+    redirect(buildPageUrl(effectivePage))
+  }
 
   return (
     <>
@@ -300,59 +305,23 @@ export default async function ServersPage({ searchParams }) {
             </div>
           ) : (
             <>
-              {totalPages > 1 && (
-                <div className="flex justify-center gap-2 mb-6">
-                  {page > 1 && (
-                    <Link
-                      href={buildPageUrl(page - 1)}
-                      className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                    >
-                      ← Назад
-                    </Link>
-                  )}
-                  
-                  <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                    {page} / {totalPages}
-                  </span>
-
-                  {page < totalPages && (
-                    <Link
-                      href={buildPageUrl(page + 1)}
-                      className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                    >
-                      Вперёд →
-                    </Link>
-                  )}
-                </div>
-              )}
+              <CatalogPagination
+                page={page}
+                totalPages={totalPages}
+                pathname="/discover/servers"
+                searchParams={searchParams}
+                className="mb-6"
+              />
 
               <ResourceList resources={data.hits} type="server" />
 
-              {totalPages > 1 && (
-                <div className="flex justify-center gap-2 mt-8">
-                  {page > 1 && (
-                    <Link
-                      href={buildPageUrl(page - 1)}
-                      className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                    >
-                      ← Назад
-                    </Link>
-                  )}
-                  
-                  <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                    {page} / {totalPages}
-                  </span>
-
-                  {page < totalPages && (
-                    <Link
-                      href={buildPageUrl(page + 1)}
-                      className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                    >
-                      Вперёд →
-                    </Link>
-                  )}
-                </div>
-              )}
+              <CatalogPagination
+                page={page}
+                totalPages={totalPages}
+                pathname="/discover/servers"
+                searchParams={searchParams}
+                className="mt-8"
+              />
             </>
           )}
         </div>

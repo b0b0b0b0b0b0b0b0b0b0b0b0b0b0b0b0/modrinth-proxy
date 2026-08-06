@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -14,6 +14,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
+import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
 
@@ -92,33 +93,6 @@ export default async function ModsPage({ searchParams }) {
     facets.push(['client_side:required', 'client_side:optional']);
   }
 
-  let searchAlternatives = []
-
-  const {
-    data,
-    layoutCorrection,
-    blockedCount,
-    blockedByProject,
-    blockedByOrganization,
-    error,
-  } = await loadCatalogPage({
-    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
-    page,
-    limit,
-    filterList: filterModsList,
-    logLabel: 'mods',
-  })
-
-  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
-    try {
-      searchAlternatives = await findCatalogSearchAlternatives('mods', query, { version: versions })
-    } catch (err) {
-      console.error('Failed to load search alternatives:', err)
-    }
-  }
-
-  const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
-
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
@@ -132,6 +106,37 @@ export default async function ModsPage({ searchParams }) {
     params.set('page', newPage.toString());
     return `/discover/mods?${params.toString()}`;
   };
+
+  let searchAlternatives = []
+
+  const {
+    data,
+    effectivePage,
+    totalPages,
+    layoutCorrection,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'mods',
+  })
+
+  if (!error && effectivePage !== page) {
+    redirect(buildPageUrl(effectivePage))
+  }
+
+  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
+    try {
+      searchAlternatives = await findCatalogSearchAlternatives('mods', query, { version: versions })
+    } catch (err) {
+      console.error('Failed to load search alternatives:', err)
+    }
+  }
 
   return (
     <>
@@ -212,59 +217,23 @@ export default async function ModsPage({ searchParams }) {
         </>
       ) : (
         <>
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mb-6">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/mods"
+            searchParams={searchParams}
+            className="mb-6"
+          />
 
           <ResourceList resources={data.hits} type="mod" />
 
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mt-8">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/mods"
+            searchParams={searchParams}
+            className="mt-8"
+          />
         </>
       )}
         </div>

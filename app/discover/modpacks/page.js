@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -7,6 +7,7 @@ import ModpackSidebarFilters from '@/app/modpacks/ModpackSidebarFilters'
 import MobileMenu from '@/app/modpacks/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
+import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
@@ -114,33 +115,6 @@ export default async function ModpacksPage({ searchParams }) {
     facets.push(['open_source:true'])
   }
 
-  let searchAlternatives = []
-
-  const {
-    data,
-    layoutCorrection,
-    blockedCount,
-    blockedByProject,
-    blockedByOrganization,
-    error,
-  } = await loadCatalogPage({
-    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
-    page,
-    limit,
-    filterList: filterModsList,
-    logLabel: 'modpacks',
-  })
-
-  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
-    try {
-      searchAlternatives = await findCatalogSearchAlternatives('modpacks', query, { version: versions })
-    } catch (err) {
-      console.error('Failed to load search alternatives:', err)
-    }
-  }
-
-  const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
-
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
@@ -172,6 +146,37 @@ export default async function ModpacksPage({ searchParams }) {
     params.set('page', newPage.toString());
     return `/discover/modpacks?${params.toString()}`;
   };
+
+  let searchAlternatives = []
+
+  const {
+    data,
+    effectivePage,
+    totalPages,
+    layoutCorrection,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'modpacks',
+  })
+
+  if (!error && effectivePage !== page) {
+    redirect(buildPageUrl(effectivePage))
+  }
+
+  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
+    try {
+      searchAlternatives = await findCatalogSearchAlternatives('modpacks', query, { version: versions })
+    } catch (err) {
+      console.error('Failed to load search alternatives:', err)
+    }
+  }
 
   return (
     <>
@@ -252,59 +257,23 @@ export default async function ModpacksPage({ searchParams }) {
         </>
       ) : (
         <>
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mb-6">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/modpacks"
+            searchParams={searchParams}
+            className="mb-6"
+          />
 
           <ResourceList resources={data.hits} type="modpack" />
 
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mt-8">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/modpacks"
+            searchParams={searchParams}
+            className="mt-8"
+          />
         </>
       )}
         </div>

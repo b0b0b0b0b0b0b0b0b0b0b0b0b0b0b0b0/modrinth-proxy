@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -7,6 +7,7 @@ import ShaderSidebarFilters from '@/app/shaders/ShaderSidebarFilters'
 import MobileMenu from '@/app/shaders/MobileMenu'
 import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
+import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
@@ -115,33 +116,6 @@ export default async function ShadersPage({ searchParams }) {
     facets.push(['open_source:true']);
   }
 
-  let searchAlternatives = []
-
-  const {
-    data,
-    layoutCorrection,
-    blockedCount,
-    blockedByProject,
-    blockedByOrganization,
-    error,
-  } = await loadCatalogPage({
-    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
-    page,
-    limit,
-    filterList: filterModsList,
-    logLabel: 'shaders',
-  })
-
-  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
-    try {
-      searchAlternatives = await findCatalogSearchAlternatives('shaders', query, { version: versions })
-    } catch (err) {
-      console.error('Failed to load search alternatives:', err)
-    }
-  }
-
-  const totalPages = data ? Math.ceil(data.total_hits / limit) : 0;
-
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
     if (query) params.set('q', query);
@@ -160,6 +134,37 @@ export default async function ShadersPage({ searchParams }) {
     params.set('page', newPage.toString());
     return `/discover/shaders?${params.toString()}`;
   };
+
+  let searchAlternatives = []
+
+  const {
+    data,
+    effectivePage,
+    totalPages,
+    layoutCorrection,
+    blockedCount,
+    blockedByProject,
+    blockedByOrganization,
+    error,
+  } = await loadCatalogPage({
+    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
+    page,
+    limit,
+    filterList: filterModsList,
+    logLabel: 'shaders',
+  })
+
+  if (!error && effectivePage !== page) {
+    redirect(buildPageUrl(effectivePage))
+  }
+
+  if (!error && query.trim() && data?.hits?.length === 0 && blockedCount === 0) {
+    try {
+      searchAlternatives = await findCatalogSearchAlternatives('shaders', query, { version: versions })
+    } catch (err) {
+      console.error('Failed to load search alternatives:', err)
+    }
+  }
 
   return (
     <>
@@ -240,59 +245,23 @@ export default async function ShadersPage({ searchParams }) {
         </>
       ) : (
         <>
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mb-6">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/shaders"
+            searchParams={searchParams}
+            className="mb-6"
+          />
 
           <ResourceList resources={data.hits} type="shader" />
 
-          {totalPages > 1 && (
-            <div className="flex justify-center gap-2 mt-8">
-              {page > 1 && (
-                <Link
-                  href={buildPageUrl(page - 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  ← Назад
-                </Link>
-              )}
-              
-              <span className="px-4 py-2 bg-modrinth-dark border border-modrinth-green rounded-lg">
-                {page} / {totalPages}
-              </span>
-
-              {page < totalPages && (
-                <Link
-                  href={buildPageUrl(page + 1)}
-                  className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
-                >
-                  Вперёд →
-                </Link>
-              )}
-            </div>
-          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname="/discover/shaders"
+            searchParams={searchParams}
+            className="mt-8"
+          />
         </>
       )}
         </div>
