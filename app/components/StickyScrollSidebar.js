@@ -16,33 +16,33 @@ export default function StickyScrollSidebar({ children, className = '' }) {
   const scrollRef = useRef(null)
   const trackRef = useRef(null)
   const rafRef = useRef(0)
+  const maxHeightRef = useRef(null)
   const [fade, setFade] = useState({ top: false, bottom: false, active: false })
   const [engaged, setEngaged] = useState(false)
   const [showTrack, setShowTrack] = useState(false)
 
   const updateFade = useCallback((scroller, overflow) => {
-    if (!overflow) {
-      setFade({ top: false, bottom: false, active: false })
-      return
-    }
+    const next = overflow
+      ? {
+          active: true,
+          top: scroller.scrollTop > 6,
+          bottom: scroller.scrollTop + scroller.clientHeight < scroller.scrollHeight - 6,
+        }
+      : { top: false, bottom: false, active: false }
 
-    setFade({
-      active: true,
-      top: scroller.scrollTop > 6,
-      bottom: scroller.scrollTop + scroller.clientHeight < scroller.scrollHeight - 6,
-    })
+    setFade((prev) =>
+      prev.active === next.active && prev.top === next.top && prev.bottom === next.bottom ? prev : next,
+    )
   }, [])
 
   const updateTrack = useCallback((scroller, overflow) => {
     const track = trackRef.current
     if (!track) return
 
-    if (!overflow) {
-      setShowTrack(false)
-      return
-    }
+    setShowTrack((prev) => (prev === overflow ? prev : overflow))
 
-    setShowTrack(true)
+    if (!overflow) return
+
     const ratio = scroller.clientHeight / scroller.scrollHeight
     const thumbHeight = Math.max(36, scroller.clientHeight * ratio)
     const travel = Math.max(0, scroller.clientHeight - thumbHeight - 20)
@@ -61,10 +61,13 @@ export default function StickyScrollSidebar({ children, className = '' }) {
     if (!root || !scroller) return
 
     if (window.innerWidth < 1024) {
-      scroller.style.maxHeight = ''
-      scroller.style.overflowY = ''
-      setFade({ top: false, bottom: false, active: false })
-      setShowTrack(false)
+      if (maxHeightRef.current !== null) {
+        scroller.style.maxHeight = ''
+        scroller.style.overflowY = ''
+        maxHeightRef.current = null
+      }
+      setFade((prev) => (prev.active ? { top: false, bottom: false, active: false } : prev))
+      setShowTrack((prev) => (prev ? false : prev))
       return
     }
 
@@ -73,31 +76,28 @@ export default function StickyScrollSidebar({ children, className = '' }) {
 
     const parentRect = parent.getBoundingClientRect()
     const rootRect = root.getBoundingClientRect()
-    const stickTop = Math.max(rootRect.top, TOP_OFFSET)
+    const stickTop = rootRect.top <= TOP_OFFSET + 2 ? TOP_OFFSET : rootRect.top
     const footerTop = getFooterTop()
     const viewportLimit = window.innerHeight - TOP_OFFSET - BOTTOM_OFFSET
     const containerLimit = parentRect.bottom - stickTop - BOTTOM_OFFSET
     const footerLimit = footerTop - stickTop - FOOTER_GAP
-    const nearColumnEnd = parentRect.bottom <= window.innerHeight + TOP_OFFSET
-    const footerEntering = footerTop <= window.innerHeight + 48
-
-    if (nearColumnEnd || footerEntering) {
-      scroller.style.maxHeight = 'none'
-      scroller.style.overflowY = 'visible'
-      setFade({ top: false, bottom: false, active: false })
-      setShowTrack(false)
-      return
-    }
 
     const limits = [viewportLimit, containerLimit]
     if (Number.isFinite(footerLimit)) {
       limits.push(footerLimit)
     }
 
-    const maxH = Math.max(180, Math.min(...limits.filter((value) => value > 0)))
+    const positiveLimits = limits.filter((value) => value > 0)
+    const maxH = positiveLimits.length
+      ? Math.max(180, Math.min(...positiveLimits))
+      : viewportLimit
 
-    scroller.style.maxHeight = `${maxH}px`
-    scroller.style.overflowY = 'auto'
+    const maxHeightPx = `${maxH}px`
+    if (maxHeightRef.current !== maxHeightPx) {
+      scroller.style.maxHeight = maxHeightPx
+      scroller.style.overflowY = 'auto'
+      maxHeightRef.current = maxHeightPx
+    }
 
     const overflow = scroller.scrollHeight - maxH > 4
 
@@ -119,13 +119,7 @@ export default function StickyScrollSidebar({ children, className = '' }) {
 
     const observer = new ResizeObserver(scheduleLayout)
     observer.observe(scroller)
-    observer.observe(root)
     if (root.parentElement) observer.observe(root.parentElement)
-    const footer = document.querySelector('footer')
-    if (footer) observer.observe(footer)
-
-    const mutationObserver = new MutationObserver(scheduleLayout)
-    mutationObserver.observe(scroller, { childList: true, subtree: true, characterData: true })
 
     window.addEventListener('scroll', scheduleLayout, { passive: true })
     window.addEventListener('resize', scheduleLayout)
@@ -133,7 +127,6 @@ export default function StickyScrollSidebar({ children, className = '' }) {
     return () => {
       window.cancelAnimationFrame(rafRef.current)
       observer.disconnect()
-      mutationObserver.disconnect()
       window.removeEventListener('scroll', scheduleLayout)
       window.removeEventListener('resize', scheduleLayout)
     }
