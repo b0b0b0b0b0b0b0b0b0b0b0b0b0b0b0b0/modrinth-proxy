@@ -4,8 +4,10 @@ import {
   formatDownloads,
   formatFileSize,
   resolveModrinthProjectAccent,
+  getProjectDisclosures,
 } from '@/lib/modrinth'
 import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
+import { findArchivedDisclosure } from '@/lib/projectDisclosures'
 import { LOADERS } from '@/lib/loaders'
 import { getVersionPlatformIds } from '@/lib/contextualVersions'
 import { IconDownload, IconHardDrive } from '@/lib/icons'
@@ -14,6 +16,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import CopyButton from './CopyButton'
 import ContentNavigation from './ContentNavigation'
+import ProjectArchivedBanner from './ProjectArchivedBanner'
 import ResourceHeader from './ResourceHeader'
 import RelativeTime from './RelativeTime'
 import DownloadVersionDependencies from './DownloadVersionDependencies'
@@ -301,7 +304,9 @@ function FileItem({ file, projectAccent }) {
   )
 }
 
-export default function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
+export default async function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
+  const disclosures = project?.slug ? await getProjectDisclosures(project.slug) : []
+  const archived = findArchivedDisclosure(disclosures)
   const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]
   const versionType = getVersionTypeInfo(version.version_type)
   const projectAccent = resolveModrinthProjectAccent(project.color)
@@ -313,6 +318,10 @@ export default function VersionPage({ project, version, author, contentType, plu
   return (
     <div className="max-w-7xl mx-auto">
       <ResourceHeader resource={project} contentType={contentType} versions={versions} mutedDownload />
+
+      {archived ? (
+        <ProjectArchivedBanner title={project.title} note={archived.note} />
+      ) : null}
 
       <ContentNavigation
         slug={project.slug}

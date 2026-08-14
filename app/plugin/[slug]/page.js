@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import ResourceSidebar from '@/app/components/ResourceSidebar'
-import ContentNavigation from '@/app/components/ContentNavigation'
+import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
+import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
 
@@ -125,7 +125,7 @@ export default async function PluginPage({ params }) {
     <div className="max-w-7xl mx-auto">
       <ResourceHeader resource={plugin} contentType="plugin" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="plugin" versionsCount={versions.length || plugin.versions?.length || 0} galleryCount={plugin.gallery?.length || 0} projectColor={plugin.color} />
+      <ContentNavigationWithBanner resource={plugin} contentType="plugin" versionsCount={versions.length || plugin.versions?.length || 0} galleryCount={plugin.gallery?.length || 0} projectColor={plugin.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
@@ -137,7 +137,7 @@ export default async function PluginPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
+          <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
         </div>
       </div>
     </div>

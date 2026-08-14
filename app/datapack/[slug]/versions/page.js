@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import ResourceSidebar from '@/app/components/ResourceSidebar'
-import ContentNavigation from '@/app/components/ContentNavigation'
+import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
+import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
@@ -70,7 +70,7 @@ export default async function DatapackVersionsPage({ params, searchParams = {} }
       <IconPreload iconUrl={pack.icon_url} />
       <ResourceHeader resource={pack} contentType="datapack" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="datapack" versionsCount={versions.length} galleryCount={pack.gallery?.length || 0} projectColor={pack.color} />
+      <ContentNavigationWithBanner resource={pack} contentType="datapack" versionsCount={versions.length} galleryCount={pack.gallery?.length || 0} projectColor={pack.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
@@ -78,7 +78,7 @@ export default async function DatapackVersionsPage({ params, searchParams = {} }
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} organization={organization} teamMembers={teamMembers} contentType="datapack" />
+          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={teamMembers} contentType="datapack" />
         </div>
       </div>
     </div>

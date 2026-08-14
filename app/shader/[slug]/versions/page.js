@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import ResourceSidebar from '@/app/components/ResourceSidebar'
-import ContentNavigation from '@/app/components/ContentNavigation'
+import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
+import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
@@ -59,14 +59,14 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
       <IconPreload iconUrl={shader.icon_url} />
       <ResourceHeader resource={shader} contentType="shader" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="shader" versionsCount={versions.length} galleryCount={shader.gallery?.length || 0} projectColor={shader.color} />
+      <ContentNavigationWithBanner resource={shader} contentType="shader" versionsCount={versions.length} galleryCount={shader.gallery?.length || 0} projectColor={shader.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
           <VersionsList versions={versions} contentType="shader" slug={slug} initialLoader={searchParams.l || 'all'} projectColor={shader.color} />
         </div>
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={shader} organization={organization} teamMembers={teamMembers} />
+          <ResourceSidebarContainer resource={shader} organization={organization} teamMembers={teamMembers} />
         </div>
       </div>
     </div>

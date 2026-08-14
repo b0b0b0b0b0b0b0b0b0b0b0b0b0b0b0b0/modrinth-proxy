@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
-import ContentNavigation from '@/app/components/ContentNavigation'
-import ResourceSidebar from '@/app/components/ResourceSidebar'
+import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
+import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
 import IconPreload from '@/app/components/IconPreload'
@@ -111,7 +111,7 @@ export default async function ResourcepackGalleryPage({ params }) {
       <IconPreload iconUrl={pack.icon_url} />
       <ResourceHeader resource={pack} contentType="resourcepack" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="resourcepack" versionsCount={versions.length} galleryCount={gallery.length} projectColor={pack.color} />
+      <ContentNavigationWithBanner resource={pack} contentType="resourcepack" versionsCount={versions.length} galleryCount={gallery.length} projectColor={pack.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
@@ -119,7 +119,7 @@ export default async function ResourcepackGalleryPage({ params }) {
         </div>
         
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={pack} organization={organization} teamMembers={[]} />
+          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} />
         </div>
       </div>
     </div>

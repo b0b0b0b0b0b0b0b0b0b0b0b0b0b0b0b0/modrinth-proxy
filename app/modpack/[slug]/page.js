@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, formatDownloads, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import ResourceSidebar from '@/app/components/ResourceSidebar'
-import ContentNavigation from '@/app/components/ContentNavigation'
+import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
+import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
 
@@ -126,7 +126,7 @@ export default async function ModpackPage({ params }) {
     <div className="max-w-7xl mx-auto">
       <ResourceHeader resource={modpack} contentType="modpack" versions={versions} />
       
-      <ContentNavigation slug={slug} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} projectColor={modpack.color} />
+      <ContentNavigationWithBanner resource={modpack} contentType="modpack" versionsCount={versions.length} galleryCount={modpack.gallery?.length || 0} projectColor={modpack.color} />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
@@ -138,7 +138,7 @@ export default async function ModpackPage({ params }) {
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebar resource={modpack} organization={organization} teamMembers={teamMembers} />
+          <ResourceSidebarContainer resource={modpack} organization={organization} teamMembers={teamMembers} />
         </div>
       </div>
     </div>

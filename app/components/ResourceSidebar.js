@@ -17,13 +17,15 @@ import AuthorsSection from './AuthorsSection'
 import StyledTooltip from './StyledTooltip'
 import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 import ProjectLinksCard from './ProjectLinksCard'
+import ProjectDisclosureItems from './ProjectDisclosureItems'
+import { DisclosureIcon } from './ProjectDisclosureIcons'
 
 function contentTypeFromPathname(pathname) {
   const match = pathname?.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\//)
   return match?.[1] ?? null
 }
 
-export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null }) {
+export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosures = [] }) {
   const pathname = usePathname()
   const resolvedContentType = contentType ?? contentTypeFromPathname(pathname)
   const authorMembers =
@@ -200,35 +202,42 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
       )}
 
       <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-4">
-        <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
-          <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <h3 className="text-lg font-bold m-0 mb-3 text-[var(--text-primary)]">
           Сведения
         </h3>
-        <div className="space-y-2 text-sm">
+        <div className="flex flex-col gap-3 text-sm [&>div>svg]:shrink-0 [&>div>svg]:mt-px [&>div]:flex [&>div]:gap-2 [&>div]:items-start [&>div>div]:min-w-0">
+          <ProjectDisclosureItems disclosures={disclosures} />
+
           {resource.license && (resource.license.id || resource.license.name) && (
-            <div>
-              <span className="font-semibold text-[var(--text-gray)]">Лицензия:</span>
-              <span className="ml-1">
+            <div className="flex gap-2 items-start text-[var(--text-primary)]">
+              <DisclosureIcon type="license" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
+              <div className="min-w-0">
+                <span>Лицензия </span>
                 <LicenseLink license={resource.license} />
-              </span>
+              </div>
             </div>
           )}
+
           {resource.published && (
-            <div>
-              <span className="font-semibold text-[var(--text-gray)]">Опубликован:</span>
-              <span className="text-[var(--text-primary)] ml-1">{formatTimeAgo(resource.published)}</span>
-            </div>
+            <StyledTooltip label={formatExactDate(resource.published)}>
+              <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
+                <DisclosureIcon type="published" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
+                <div>Размещён {formatTimeAgo(resource.published)}</div>
+              </div>
+            </StyledTooltip>
           )}
+
           {resource.updated && (
-            <div>
-              <span className="font-semibold text-[var(--text-gray)]">Обновлён:</span>
-              <span className="text-[var(--text-primary)] ml-1">{formatTimeAgo(resource.updated)}</span>
-            </div>
+            <StyledTooltip label={formatExactDate(resource.updated)}>
+              <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
+                <DisclosureIcon type="updated" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
+                <div>Обновлён {formatTimeAgo(resource.updated)}</div>
+              </div>
+            </StyledTooltip>
           )}
+
           {projectId && (
-            <div className="flex flex-wrap items-center gap-1">
+            <div className="flex flex-wrap items-center gap-1 pt-1 border-t border-gray-800">
               <span className="font-semibold text-[var(--text-gray)]">ID проекта:</span>
               <CopyButton text={projectId} inline />
             </div>
@@ -304,6 +313,18 @@ function getEnvironment(clientSide, serverSide) {
   if (server) return 'Сервер'
 
   return null
+}
+
+function formatExactDate(dateString) {
+  const date = new Date(dateString)
+  if (Number.isNaN(date.getTime())) return dateString
+  return date.toLocaleString('ru-RU', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  })
 }
 
 function formatTimeAgo(dateString) {
