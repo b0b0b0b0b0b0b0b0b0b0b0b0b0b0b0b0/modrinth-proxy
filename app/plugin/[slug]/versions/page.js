@@ -87,9 +87,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
           <VersionsList versions={versions} contentType="plugin" slug={slug} initialLoader={initialLoader} projectColor={plugin.color} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
-        </div>
+        <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
       </div>
     </div>
   )

@@ -118,9 +118,7 @@ export default async function PluginGalleryPage({ params }) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={[]} contentType="plugin" />
-        </div>
+        <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={[]} contentType="plugin" />
       </div>
     </div>
   )

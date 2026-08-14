@@ -18,6 +18,7 @@ import CopyButton from './CopyButton'
 import ContentNavigation from './ContentNavigation'
 import ProjectArchivedBanner from './ProjectArchivedBanner'
 import ResourceHeader from './ResourceHeader'
+import StickyScrollSidebar from './StickyScrollSidebar'
 import RelativeTime from './RelativeTime'
 import DownloadVersionDependencies from './DownloadVersionDependencies'
 import VersionDeveloperInfo from './VersionDeveloperInfo'
@@ -437,7 +438,7 @@ export default async function VersionPage({ project, version, author, contentTyp
           )}
         </div>
 
-        <div className="lg:sticky lg:top-4 lg:self-start space-y-4">
+        <StickyScrollSidebar className="space-y-4">
           <div className="text-sm">
             <Link
               href={`/${singularName}/${project.slug}/versions`}
@@ -448,7 +449,7 @@ export default async function VersionPage({ project, version, author, contentTyp
           </div>
           <ProjectLinksCard resource={project} includeSource />
           <VersionMetadata version={version} author={author} />
-        </div>
+        </StickyScrollSidebar>
       </div>
     </div>
   )

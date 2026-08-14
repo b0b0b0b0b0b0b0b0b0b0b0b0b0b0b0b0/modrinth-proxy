@@ -118,9 +118,7 @@ export default async function ModpackGalleryPage({ params }) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={modpack} organization={organization} teamMembers={[]} />
-        </div>
+        <ResourceSidebarContainer resource={modpack} organization={organization} teamMembers={[]} />
       </div>
     </div>
   )

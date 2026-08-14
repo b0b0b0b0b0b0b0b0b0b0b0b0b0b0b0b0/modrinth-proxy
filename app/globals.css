@@ -1081,6 +1081,76 @@ body {
   background: var(--color-green);
 }
 
+@media (min-width: 1024px) {
+  .sidebar-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sidebar-scroll-shell {
+    opacity: 0.35;
+    transition: opacity 0.28s ease;
+  }
+
+  .sidebar-scroll-root--engaged .sidebar-scroll-shell,
+  .sidebar-scroll-shell--active {
+    opacity: 1;
+  }
+
+  .sidebar-scroll-track {
+    position: absolute;
+    inset: 10px 1px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--scrollbar) 18%, transparent);
+    overflow: hidden;
+  }
+
+  .sidebar-scroll-track::after {
+    content: '';
+    position: absolute;
+    top: var(--sidebar-thumb-top, 0px);
+    left: 0;
+    right: 0;
+    height: var(--sidebar-thumb-height, 40px);
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-green) 85%, white 15%) 0%,
+      var(--color-green) 100%
+    );
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--color-green) 35%, transparent),
+      0 2px 10px color-mix(in srgb, var(--color-green) 25%, transparent);
+    transition: top 0.08s ease-out, height 0.12s ease-out, opacity 0.2s ease;
+  }
+
+  .sidebar-scroll-fade {
+    height: 3rem;
+    z-index: 10;
+  }
+
+  .sidebar-scroll-fade--top {
+    background: linear-gradient(
+      to bottom,
+      var(--bg-primary) 0%,
+      color-mix(in srgb, var(--bg-primary) 88%, transparent) 45%,
+      transparent 100%
+    );
+  }
+
+  .sidebar-scroll-fade--bottom {
+    background: linear-gradient(
+      to top,
+      var(--bg-primary) 0%,
+      color-mix(in srgb, var(--bg-primary) 88%, transparent) 45%,
+      transparent 100%
+    );
+  }
+}
+
 .prose {
   color: var(--text-secondary);
   word-wrap: break-word !important;

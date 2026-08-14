@@ -118,9 +118,7 @@ export default async function ResourcepackGalleryPage({ params }) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} />
-        </div>
+        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} />
       </div>
     </div>
   )

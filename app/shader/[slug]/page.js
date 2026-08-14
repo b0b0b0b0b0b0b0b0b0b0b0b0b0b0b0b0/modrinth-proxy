@@ -136,9 +136,7 @@ export default async function ShaderPage({ params }) {
           </div>
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={shader} organization={organization} teamMembers={teamMembers} />
-        </div>
+        <ResourceSidebarContainer resource={shader} organization={organization} teamMembers={teamMembers} />
       </div>
     </div>
   )

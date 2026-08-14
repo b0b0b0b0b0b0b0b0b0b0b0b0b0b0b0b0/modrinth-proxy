@@ -118,9 +118,7 @@ export default async function DatapackGalleryPage({ params }) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} contentType="datapack" />
-        </div>
+        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} contentType="datapack" />
       </div>
     </div>
   )

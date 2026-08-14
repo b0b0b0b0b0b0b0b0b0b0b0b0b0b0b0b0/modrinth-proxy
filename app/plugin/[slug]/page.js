@@ -136,9 +136,7 @@ export default async function PluginPage({ params }) {
           </div>
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
-        </div>
+        <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={teamMembers} contentType="plugin" />
       </div>
     </div>
   )

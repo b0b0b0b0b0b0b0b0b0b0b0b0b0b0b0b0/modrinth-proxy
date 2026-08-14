@@ -132,9 +132,7 @@ export default async function ModChangelogPage({ params }) {
           </div>
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={mod} organization={organization} teamMembers={teamMembers} />
-        </div>
+        <ResourceSidebarContainer resource={mod} organization={organization} teamMembers={teamMembers} />
       </div>
     </div>
   )

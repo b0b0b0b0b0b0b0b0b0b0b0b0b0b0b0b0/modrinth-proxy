@@ -65,9 +65,7 @@ export default async function ResourcepackVersionsPage({ params, searchParams = 
         <div className="min-w-0">
           <VersionsList versions={versions} contentType="resourcepack" slug={slug} initialLoader={searchParams.l || 'all'} projectColor={pack.color} />
         </div>
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={teamMembers} />
-        </div>
+        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={teamMembers} />
       </div>
     </div>
   )

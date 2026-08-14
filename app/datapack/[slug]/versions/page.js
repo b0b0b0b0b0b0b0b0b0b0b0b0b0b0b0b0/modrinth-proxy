@@ -77,9 +77,7 @@ export default async function DatapackVersionsPage({ params, searchParams = {} }
           <VersionsList versions={versions} contentType="datapack" slug={slug} initialLoader={initialLoader} projectColor={pack.color} />
         </div>
         
-        <div className="lg:sticky lg:top-4 lg:self-start">
-          <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={teamMembers} contentType="datapack" />
-        </div>
+        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={teamMembers} contentType="datapack" />
       </div>
     </div>
   )
