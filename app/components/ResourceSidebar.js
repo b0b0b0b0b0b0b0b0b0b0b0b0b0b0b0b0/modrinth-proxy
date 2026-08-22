@@ -17,7 +17,6 @@ import AuthorsSection from './AuthorsSection'
 import StyledTooltip from './StyledTooltip'
 import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 import ProjectLinksCard from './ProjectLinksCard'
-import ProjectDisclosureItems from './ProjectDisclosureItems'
 import { DisclosureIcon } from './ProjectDisclosureIcons'
 
 function contentTypeFromPathname(pathname) {
@@ -25,7 +24,7 @@ function contentTypeFromPathname(pathname) {
   return match?.[1] ?? null
 }
 
-export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosures = [] }) {
+export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosureItems = null }) {
   const pathname = usePathname()
   const resolvedContentType = contentType ?? contentTypeFromPathname(pathname)
   const authorMembers =
@@ -206,7 +205,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           Сведения
         </h3>
         <div className="flex flex-col gap-3 text-sm [&>div>svg]:shrink-0 [&>div>svg]:mt-px [&>div]:flex [&>div]:gap-2 [&>div]:items-start [&>div>div]:min-w-0">
-          <ProjectDisclosureItems disclosures={disclosures} />
+          {disclosureItems}
 
           {resource.license && (resource.license.id || resource.license.name) && (
             <div className="flex gap-2 items-start text-[var(--text-primary)]">

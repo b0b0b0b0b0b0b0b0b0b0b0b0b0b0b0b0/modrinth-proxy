@@ -1,4 +1,7 @@
 import Link from 'next/link'
+import { SITE_VERSION } from '@/lib/siteVersion'
+import { IconSiteVersion } from '@/lib/icons'
+import StyledTooltip from './StyledTooltip'
 
 export default function Footer() {
   return (
@@ -133,6 +136,15 @@ export default function Footer() {
                 </svg>
                 <span className="font-medium">Modrinth App</span>
               </a>
+              <StyledTooltip label="Новости и список обновлений сайта" side="top">
+                <Link
+                  href="/news"
+                  className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group"
+                >
+                  <IconSiteVersion className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
+                  <span className="font-medium">Версия сайта: {SITE_VERSION}</span>
+                </Link>
+              </StyledTooltip>
             </div>
           </div>
         </div>

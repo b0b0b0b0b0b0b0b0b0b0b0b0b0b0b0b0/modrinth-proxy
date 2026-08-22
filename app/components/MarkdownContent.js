@@ -1,7 +1,12 @@
 import { renderMarkdownToHtml } from '@/lib/renderMarkdown'
 
 export default function MarkdownContent({ content, className }) {
-  const html = renderMarkdownToHtml(content)
+  let html = ''
+  try {
+    html = renderMarkdownToHtml(content)
+  } catch {
+    html = ''
+  }
 
   return (
     <div
