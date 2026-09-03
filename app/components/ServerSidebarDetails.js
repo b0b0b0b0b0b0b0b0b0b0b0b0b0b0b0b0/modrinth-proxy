@@ -147,6 +147,16 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                   address={javaAddress} 
                   tooltip={javaAddress === bedrockAddress ? 'Копировать адрес сервера' : 'Копировать адрес Java-сервера'} 
                 />
+                <button
+                  type="button"
+                  onClick={() => window.open(`https://ping.modrinth.black/?s=${encodeURIComponent(javaAddress)}`, '_blank', 'noopener,noreferrer')}
+                  className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-modrinth-green/25 bg-modrinth-green/8 px-3 py-2 text-sm font-semibold text-modrinth-green transition-all hover:border-modrinth-green/50 hover:bg-modrinth-green/15 active:scale-[0.97]"
+                >
+                  <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+                    <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16" />
+                  </svg>
+                  Пингануть сервер
+                </button>
               </div>
             )}
             {server.minecraft_java_server?.content && server.minecraft_java_server.content.kind !== 'vanilla' && (server.minecraft_java_server.content.project_name || server.minecraft_java_server.content.version_id) && (
