@@ -6,6 +6,7 @@ import {
   formatOrganizationDownloadsRu,
   pluralRu,
 } from '@/lib/organizations'
+import { TeamMemberPresenter } from '@/lib/teamMembers'
 import {
   filterModContent,
   filterModsList,
@@ -100,13 +101,17 @@ export default async function OrganizationPage({ params }) {
   }
 
   const presenter = new OrganizationPresenter(organization)
+  const members = filterOrganizationMembers(organization.members || [])
+  const ownerUsername =
+    members.find((member) => TeamMemberPresenter.isPrimaryOwner(member))?.user?.username ||
+    members[0]?.user?.username ||
+    null
   const rawProjects = await getOrganizationProjects(organization.id)
   const filteredProjects = filterModsList(rawProjects)
   const projects = filteredProjects.hits.map((project) => ({
     ...filterModContent(project),
-    author: presenter.name,
+    ...(ownerUsername ? { author: ownerUsername } : {}),
   }))
-  const members = filterOrganizationMembers(organization.members || [])
   const stats = new OrganizationStats(organization, projects)
 
   const memberLabel = pluralRu(stats.memberCount, 'участник', 'участника', 'участников')
