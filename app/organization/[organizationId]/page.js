@@ -102,7 +102,10 @@ export default async function OrganizationPage({ params }) {
   const presenter = new OrganizationPresenter(organization)
   const rawProjects = await getOrganizationProjects(organization.id)
   const filteredProjects = filterModsList(rawProjects)
-  const projects = filteredProjects.hits.map((project) => filterModContent(project))
+  const projects = filteredProjects.hits.map((project) => ({
+    ...filterModContent(project),
+    author: presenter.name,
+  }))
   const members = filterOrganizationMembers(organization.members || [])
   const stats = new OrganizationStats(organization, projects)
 
