@@ -37,8 +37,12 @@ export function middleware(request) {
     newUrl.searchParams.set('sst', 'online')
     return NextResponse.redirect(newUrl, 307)
   }
-  
-  return NextResponse.next()
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set('x-modrinth-pathname', pathname + search)
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  })
 }
 
 export const config = {
@@ -53,5 +57,12 @@ export const config = {
     '/plugins/:path*',
     '/servers/:path*',
     '/discover/servers',
+    '/mod/:path*',
+    '/plugin/:path*',
+    '/modpack/:path*',
+    '/resourcepack/:path*',
+    '/shader/:path*',
+    '/datapack/:path*',
+    '/server/:path*',
   ],
 }

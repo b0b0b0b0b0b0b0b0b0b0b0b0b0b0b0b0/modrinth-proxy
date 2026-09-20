@@ -1,5 +1,8 @@
+import { headers } from 'next/headers'
+import { permanentRedirect } from 'next/navigation'
 import { getMod, resolveProjectFeaturedBackdropUrl } from '@/lib/modrinth'
 import { isOrganizationBlocked, isProjectBlocked } from '@/lib/contentFilter'
+import { rewriteProjectPathToCanonical } from '@/lib/projectType'
 import ProjectBackdrop from './ProjectBackdrop'
 
 export default async function ProjectBackdropLayoutShell({ slug, children }) {
@@ -9,18 +12,24 @@ export default async function ProjectBackdropLayoutShell({ slug, children }) {
     return children
   }
 
-  let backdropSrc = null
+  let project = null
   try {
-    const project = await getMod(safeSlug)
-    const org =
-      project && typeof project === 'object'
-        ? (project.organization ?? project.organization_id)
-        : undefined
-    if (project && !isProjectBlocked(project.slug, project.id) && !isOrganizationBlocked(org)) {
+    project = await getMod(safeSlug)
+  } catch {
+    project = null
+  }
+
+  let backdropSrc = null
+  if (project && !isProjectBlocked(project.slug, project.id)) {
+    const org = project.organization ?? project.organization_id
+    if (!isOrganizationBlocked(org)) {
+      const currentPath = headers().get('x-modrinth-pathname')
+      const canonicalPath = rewriteProjectPathToCanonical(currentPath, project)
+      if (canonicalPath) {
+        permanentRedirect(canonicalPath)
+      }
       backdropSrc = resolveProjectFeaturedBackdropUrl(project)
     }
-  } catch {
-    backdropSrc = null
   }
 
   const showBackdrop =

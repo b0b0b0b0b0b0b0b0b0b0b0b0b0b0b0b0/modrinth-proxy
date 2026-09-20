@@ -9,6 +9,7 @@ import {
   forceManyBody,
   forceSimulation,
 } from 'd3-force'
+import { resolveCanonicalProjectHref } from '@/lib/projectType'
 
 const EDGE_COLORS = {
   required: '#4ade80',
@@ -21,16 +22,6 @@ const LEGEND = [
   { type: 'optional', color: EDGE_COLORS.optional, label: 'Опциональная' },
   { type: 'embedded', color: EDGE_COLORS.embedded, label: 'Встроенная' },
 ]
-
-const PROJECT_ROUTES = {
-  mod: 'mod',
-  plugin: 'plugin',
-  modpack: 'modpack',
-  resourcepack: 'resourcepack',
-  shader: 'shader',
-  datapack: 'datapack',
-  minecraft_java_server: 'server',
-}
 
 function nodeR(node) {
   return node.isRoot ? 28 : 22
@@ -46,9 +37,7 @@ function clampLabel(text, max) {
 }
 
 function projectPath(project) {
-  if (!project?.slug) return '/'
-  const segment = PROJECT_ROUTES[project.project_type] ?? 'mod'
-  return `/${segment}/${project.slug}`
+  return resolveCanonicalProjectHref(project) || '/'
 }
 
 async function loadDependencies(slug, versionNumber) {
