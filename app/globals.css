@@ -945,6 +945,37 @@ body {
   animation: slide-in-left 0.3s ease-out;
 }
 
+@keyframes thought-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-thought-float {
+  animation: thought-float 3.5s ease-in-out infinite;
+}
+
+@keyframes thought-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+  }
+  70% {
+    transform: scale(1.02) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-thought-pop {
+  animation: thought-pop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }
@@ -1372,6 +1403,28 @@ body {
 
 .prose span {
   font-size: inherit !important;
+}
+
+.prose summary,
+.prose details summary {
+  cursor: pointer !important;
+  user-select: auto;
+  transition: color 0.15s ease;
+}
+
+.prose details[open] > summary ~ * {
+  animation: details-smooth-appear 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes details-smooth-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .blocked-content {
@@ -2147,8 +2200,7 @@ html.no-advanced-rendering .nav-indicator {
 }
 
 .nav-links-scroll {
-  overflow-x: clip;
-  overflow-y: hidden;
+  overflow: visible;
   overscroll-behavior-x: none;
   touch-action: pan-y pinch-zoom;
 }
