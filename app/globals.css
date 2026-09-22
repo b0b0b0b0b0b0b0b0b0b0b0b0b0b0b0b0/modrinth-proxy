@@ -990,6 +990,24 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
+html:not(.dark) .feedback-thought {
+  color: #1f2937;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 16px 36px -16px rgba(15, 23, 42, 0.28);
+}
+
+html:not(.dark) .feedback-thought button[aria-label="Закрыть"] {
+  color: #6b7280;
+}
+
+html:not(.dark) .feedback-thought button[aria-label="Закрыть"]:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: #111827;
+}
+
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom);
 }
