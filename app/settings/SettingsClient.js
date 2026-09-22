@@ -125,6 +125,7 @@ export default function SettingsClient() {
   const handleResetAll = () => {
     setIsResetting(true)
     localStorage.clear()
+    sessionStorage.clear()
     setTimeout(() => {
       window.location.reload()
     }, 1000)
