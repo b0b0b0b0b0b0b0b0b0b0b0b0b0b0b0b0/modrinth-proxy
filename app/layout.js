@@ -13,6 +13,7 @@ import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
 import ExtensionBanner from './components/ExtensionBanner'
 import FeedbackThoughtBanner from './components/FeedbackThoughtBanner'
+import HalloweenEffects from './components/HalloweenEffects'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { PALETTES } from '../lib/paletteManager'
@@ -164,6 +165,7 @@ export default function RootLayout({ children }) {
           <Footer />
           <ExtensionBanner />
           <FeedbackThoughtBanner />
+          <HalloweenEffects />
           </AppTooltipProvider>
         </ThemeProvider>
       </body>
