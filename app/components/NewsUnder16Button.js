@@ -7,6 +7,7 @@ const UNDER_16_PLUGIN_PATHS = [
   '/plugin/borderplus',
   '/plugin/h1-(hp)',
   '/plugin/cutiedrops',
+  '/plugin/soulbuyer',
 ]
 
 export default function NewsUnder16Button() {

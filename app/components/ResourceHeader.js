@@ -18,7 +18,7 @@ import ProjectActivityBackground from './ProjectActivityBackground'
 
 const MINEPLUGIN_PROMO_MAX_DOWNLOADS = 100_000
 
-const AUTHOR_PLUGIN_SLUGS = new Set(['borderplus', 'h1-(hp)', 'cutiedrops'])
+const AUTHOR_PLUGIN_SLUGS = new Set(['borderplus', 'h1-(hp)', 'cutiedrops', 'soulbuyer'])
 
 const CONTENT_TYPE_NAMES = {
   mod: 'Моды',
