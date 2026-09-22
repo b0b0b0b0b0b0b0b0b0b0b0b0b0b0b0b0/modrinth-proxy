@@ -39,7 +39,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
   if (!hasLinks) return null
 
   return (
-    <div className="bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-2xl p-4">
+    <div className="ny-snow-host bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-2xl p-4">
       <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
         <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
