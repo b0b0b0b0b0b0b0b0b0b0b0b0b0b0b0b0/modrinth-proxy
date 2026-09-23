@@ -45,19 +45,23 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     const decoded = decodeURIComponent(param)
     if (decoded.startsWith('categories:')) {
       const categoryId = decoded.substring(11)
-      const known =
-        config.categories?.some((cat) => cat.id === categoryId) ||
-        CATEGORIES.some((cat) => cat.id === categoryId)
-      if (known) {
-        if (!activeFilters.some(f => f.type === 'sc' && f.id === categoryId)) {
-          activeFilters.push({
-            type: 'category',
-            id: categoryId,
-            label: getCategoryName(categoryId, config),
-            param: param
-          })
-        }
+      if (!activeFilters.some(f => f.type === 'sc' && f.id === categoryId)) {
+        activeFilters.push({
+          type: 'category',
+          id: categoryId,
+          label: getCategoryName(categoryId, config),
+          param: param
+        })
       }
+    } else if (decoded.startsWith('categories!=')) {
+      const categoryId = decoded.substring(12)
+      activeFilters.push({
+        type: 'category',
+        id: categoryId,
+        label: getCategoryName(categoryId, config),
+        excluded: true,
+        param: param
+      })
     }
   })
   
@@ -75,6 +79,19 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
           type: isPlatform ? 'platform' : 'loader',
           id: id,
           label: isPlatform ? getPlatformName(id, config) : getLoaderName(id, config),
+          param: param
+        })
+      }
+    } else if (decoded.startsWith('categories!=')) {
+      const id = decoded.substring(12)
+      const isPlatform = config.platforms && config.platforms.some(p => p.id === id)
+      const isLoader = config.loaders && config.loaders.some(l => l.id === id)
+      if (isPlatform || isLoader) {
+        activeFilters.push({
+          type: isPlatform ? 'platform' : 'loader',
+          id: id,
+          label: isPlatform ? getPlatformName(id, config) : getLoaderName(id, config),
+          excluded: true,
           param: param
         })
       }

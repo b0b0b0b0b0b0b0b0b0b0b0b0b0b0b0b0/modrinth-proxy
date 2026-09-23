@@ -17,6 +17,7 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { PLUGIN_PLATFORM_ID_LIST } from '@/lib/loaders'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
@@ -117,6 +118,9 @@ export default async function PluginsPage({ searchParams }) {
 
   appendDisclosureExclusionFacets(facets, searchParams, 'plugins')
   appendOpenSourceFacets(facets, searchParams)
+  appendNegatedFacets(facets, excludedLoaders)
+  appendNegatedFacets(facets, excludedPlatforms)
+  appendNegatedFacets(facets, excludedCategories)
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();

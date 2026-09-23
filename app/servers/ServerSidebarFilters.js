@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY, SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
 import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 export default function ServerSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -42,14 +44,16 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
 
     const version = searchParams.get('sgv') || searchParams.get('v') || ''
 
-    return { categories, version }
+    const f = parseFacetList(searchParams.getAll('f'))
+    return { categories, version, excludedCategories: f.excluded }
   }
 
-  const { categories: initialCategories, version: initialVersion } = parseFacets()
+  const { categories: initialCategories, version: initialVersion, excludedCategories: initialExcludedCategories } = parseFacets()
 
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersion, setSelectedVersion] = useState(initialVersion)
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
+  const [excludedCategories, setExcludedCategories] = useState(initialExcludedCategories)
   const [selectedStatus, setSelectedStatus] = useState(searchParams.get('sst') || 'online')
   const [selectedRegions, setSelectedRegions] = useState(searchParams.getAll('sr') || [])
   const [selectedLanguages, setSelectedLanguages] = useState(searchParams.getAll('sl') || [])
@@ -79,6 +83,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     setSearchQuery(urlQuery)
     setSelectedVersion(urlVersion)
     setSelectedCategories(parsedFilters.categories)
+    setExcludedCategories(parsedFilters.excludedCategories)
     setSelectedStatus(searchParams.get('sst') || 'online')
     setSelectedRegions(searchParams.getAll('sr') || [])
     setSelectedLanguages(searchParams.getAll('sl') || [])
@@ -106,6 +111,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     }
 
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
+    const currentExcludedCategories = updates.xc !== undefined ? updates.xc : excludedCategories
     currentCategories.forEach(c => {
       if (c === 'type-vanilla') {
         params.append('sct', 'vanilla')
@@ -115,6 +121,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         params.append('sc', c)
       }
     })
+    appendFacetParams(params, 'f', [], currentExcludedCategories)
 
     const currentStatus = updates.sst !== undefined ? updates.sst : selectedStatus
     if (currentStatus) {
@@ -140,16 +147,17 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
   }
 
   const toggleCategory = (categoryId) => {
-    let newCategories = [...selectedCategories]
+    const next = toggleIncluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
+  }
 
-    if (newCategories.includes(categoryId)) {
-      newCategories = newCategories.filter(c => c !== categoryId)
-    } else {
-      newCategories.push(categoryId)
-    }
-
-    setSelectedCategories(newCategories)
-    updateFilters({ c: newCategories })
+  const excludeCategory = (categoryId) => {
+    const next = toggleExcluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
   }
 
   const SectionHeader = ({ sectionKey, label }) => (
@@ -169,28 +177,16 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     </button>
   )
 
-  const CategoryButton = ({ cat }) => {
-    const isSelected = selectedCategories.includes(cat.id)
-    return (
-      <button
-        key={cat.id}
-        onClick={() => toggleCategory(cat.id)}
-        className={`w-full text-left px-2.5 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 group ${
-          isSelected
-            ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-            : 'bg-transparent text-gray-400 hover:bg-gray-800/50 hover:text-white'
-        }`}
-      >
-        <div className="h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-white transition-colors">{cat.icon}</div>
-        <span className="truncate text-sm flex-1">{cat.name}</span>
-        {isSelected && (
-          <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        )}
-      </button>
-    )
-  }
+  const CategoryButton = ({ cat }) => (
+    <CatalogFilterOption
+      icon={cat.icon}
+      label={cat.name}
+      selected={selectedCategories.includes(cat.id)}
+      excluded={excludedCategories.includes(cat.id)}
+      onInclude={() => toggleCategory(cat.id)}
+      onExclude={() => excludeCategory(cat.id)}
+    />
+  )
 
   return (
     <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
@@ -499,13 +495,14 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersion || selectedCategories.length > 0 || searchQuery || selectedStatus !== 'online' || selectedRegions.length > 0 || selectedLanguages.length > 0 || parseDisclosureExclusions(searchParams).length > 0) && (
+        {(selectedVersion || selectedCategories.length > 0 || excludedCategories.length > 0 || searchQuery || selectedStatus !== 'online' || selectedRegions.length > 0 || selectedLanguages.length > 0 || parseDisclosureExclusions(searchParams).length > 0) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
                 setSelectedVersion('')
                 setSelectedCategories([])
+                setExcludedCategories([])
                 setSelectedStatus('online')
                 setSelectedRegions([])
                 setSelectedLanguages([])

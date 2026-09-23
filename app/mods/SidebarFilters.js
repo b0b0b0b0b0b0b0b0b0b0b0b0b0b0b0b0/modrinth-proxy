@@ -6,10 +6,12 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MOD_LOADERS, MAIN_LOADERS_COUNT } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 const MOD_CATEGORIES = CATEGORIES.filter(cat =>
   ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
@@ -28,38 +30,25 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
   const MC_VERSIONS_FULL = initialVersions?.full || hookVersions.full
   
   const parseFacets = () => {
-    const gParams = searchParams.getAll('g')
-    const fParams = searchParams.getAll('f')
-    const loaders = []
-    const categories = []
-    
-    gParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        loaders.push(value)
-      }
-    })
-    
-    fParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        categories.push(value)
-      }
-    })
-    
-    return { loaders, categories, versions: parseVersionParams(searchParams) }
+    const loaders = parseFacetList(searchParams.getAll('g'))
+    const categories = parseFacetList(searchParams.getAll('f'))
+    return {
+      loaders: loaders.included,
+      excludedLoaders: loaders.excluded,
+      categories: categories.included,
+      excludedCategories: categories.excluded,
+      versions: parseVersionParams(searchParams),
+    }
   }
   
-  const { loaders: initialLoaders, categories: initialCategories, versions: initialVersionsSelected } = parseFacets()
+  const { loaders: initialLoaders, excludedLoaders: initialExcludedLoaders, categories: initialCategories, excludedCategories: initialExcludedCategories, versions: initialVersionsSelected } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(initialVersionsSelected)
   const [selectedLoaders, setSelectedLoaders] = useState(initialLoaders)
+  const [excludedLoaders, setExcludedLoaders] = useState(initialExcludedLoaders)
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
+  const [excludedCategories, setExcludedCategories] = useState(initialExcludedCategories)
   const [selectedEnvironment, setSelectedEnvironment] = useState(searchParams.get('e') || '')
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
@@ -73,7 +62,9 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     setSearchQuery(urlQuery)
     setSelectedVersions(parsedFilters.versions)
     setSelectedLoaders(parsedFilters.loaders)
+    setExcludedLoaders(parsedFilters.excludedLoaders)
     setSelectedCategories(parsedFilters.categories)
+    setExcludedCategories(parsedFilters.excludedCategories)
     setSelectedEnvironment(urlEnvironment)
   }, [searchParams])
 
@@ -94,10 +85,12 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     }
     
     const currentLoaders = updates.l !== undefined ? updates.l : selectedLoaders
+    const currentExcludedLoaders = updates.xl !== undefined ? updates.xl : excludedLoaders
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
+    const currentExcludedCategories = updates.xc !== undefined ? updates.xc : excludedCategories
     
-    currentLoaders.forEach(l => params.append('g', `categories:${l}`))
-    currentCategories.forEach(c => params.append('f', `categories:${c}`))
+    appendFacetParams(params, 'g', currentLoaders, currentExcludedLoaders)
+    appendFacetParams(params, 'f', currentCategories, currentExcludedCategories)
     
     if (updates.e !== undefined) {
       if (updates.e) params.set('e', updates.e)
@@ -124,29 +117,31 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
   }
 
   const toggleLoader = (loaderId) => {
-    let newLoaders = [...selectedLoaders]
-    
-    if (newLoaders.includes(loaderId)) {
-      newLoaders = newLoaders.filter(l => l !== loaderId)
-    } else {
-      newLoaders.push(loaderId)
-    }
-    
-    setSelectedLoaders(newLoaders)
-    updateFilters({ l: newLoaders })
+    const next = toggleIncluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
+  }
+
+  const excludeLoader = (loaderId) => {
+    const next = toggleExcluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
   }
 
   const toggleCategory = (categoryId) => {
-    let newCategories = [...selectedCategories]
-    
-    if (newCategories.includes(categoryId)) {
-      newCategories = newCategories.filter(c => c !== categoryId)
-    } else {
-      newCategories.push(categoryId)
-    }
-    
-    setSelectedCategories(newCategories)
-    updateFilters({ c: newCategories })
+    const next = toggleIncluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
+  }
+
+  const excludeCategory = (categoryId) => {
+    const next = toggleExcluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
   }
 
   const handleSearch = (e) => {
@@ -245,29 +240,17 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             Загрузчик
           </h3>
           <div className="flex flex-col gap-1">
-            {(showAllLoaders ? MOD_LOADERS : MOD_LOADERS.slice(0, MAIN_LOADERS_COUNT)).map(loader => {
-              const isSelected = selectedLoaders.includes(loader.id)
-              
-              return (
-                <button
-                  key={loader.id}
-                  onClick={() => toggleLoader(loader.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4 flex-shrink-0">{loader.icon}</div>
-                  <span className="truncate text-sm flex-1">{loader.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {(showAllLoaders ? MOD_LOADERS : MOD_LOADERS.slice(0, MAIN_LOADERS_COUNT)).map(loader => (
+              <CatalogFilterOption
+                key={loader.id}
+                icon={loader.icon}
+                label={loader.name}
+                selected={selectedLoaders.includes(loader.id)}
+                excluded={excludedLoaders.includes(loader.id)}
+                onInclude={() => toggleLoader(loader.id)}
+                onExclude={() => excludeLoader(loader.id)}
+              />
+            ))}
             {MOD_LOADERS.length > MAIN_LOADERS_COUNT && (
               <button
                 onClick={() => setShowAllLoaders(!showAllLoaders)}
@@ -287,29 +270,17 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             Категории
           </h3>
           <div className="flex flex-col gap-1 pr-2">
-            {MOD_CATEGORIES.map(cat => {
-              const isSelected = selectedCategories.includes(cat.id)
-              
-              return (
-              <button
+            {MOD_CATEGORIES.map(cat => (
+              <CatalogFilterOption
                 key={cat.id}
-                onClick={() => toggleCategory(cat.id)}
-                  className={`w-full text-left px-2 py-1.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4 flex-shrink-0">{cat.icon}</div>
-                  <span className="truncate text-sm flex-1">{cat.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+                icon={cat.icon}
+                label={cat.name}
+                selected={selectedCategories.includes(cat.id)}
+                excluded={excludedCategories.includes(cat.id)}
+                onInclude={() => toggleCategory(cat.id)}
+                onExclude={() => excludeCategory(cat.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -345,7 +316,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || selectedEnvironment || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || excludedLoaders.length > 0 || selectedCategories.length > 0 || excludedCategories.length > 0 || selectedEnvironment || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {

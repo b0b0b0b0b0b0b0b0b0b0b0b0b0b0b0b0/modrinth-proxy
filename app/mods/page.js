@@ -16,6 +16,7 @@ import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternative
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import ResourceList from '@/app/components/ResourceList'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
@@ -92,7 +93,9 @@ export default async function ModsPage({ searchParams }) {
     facets.push(['client_side:required', 'client_side:optional']);
   }
   appendDisclosureExclusionFacets(facets, searchParams, 'mods');
-  appendOpenSourceFacets(facets, searchParams);
+  appendOpenSourceFacets(facets, searchParams)
+  appendNegatedFacets(facets, excludedLoaders)
+  appendNegatedFacets(facets, excludedCategories);
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;

@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendFacetParams, parseFacetList, pickIds, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 const CATEGORIES = [
   {
@@ -130,49 +132,37 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
   const MC_VERSIONS_FULL = initialVersions?.full || hookVersions.full
   
   const parseFacets = () => {
-    const fParams = searchParams.getAll('f')
-    
-    const categories = []
-    const features = []
-    const resolutions = []
-    
     const categoryIds = CATEGORIES.map(c => c.id)
     const featureIds = RESOURCEPACK_CATEGORIES.map(f => f.id)
     const resolutionIds = RESOLUTIONS.map(r => r.id)
-    
-    const processParam = (param) => {
-      if (!param) return
-      let decoded = decodeURIComponent(param.replace(/\+/g, '%2B'))
-      
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        
-        if (categoryIds.includes(value)) {
-          categories.push(value)
-        } else if (featureIds.includes(value)) {
-          features.push(value)
-        } else if (resolutionIds.includes(value)) {
-          resolutions.push(value)
-        }
-      }
+    const f = parseFacetList(searchParams.getAll('f'))
+    return {
+      categories: pickIds(f.included, categoryIds),
+      excludedCategories: pickIds(f.excluded, categoryIds),
+      features: pickIds(f.included, featureIds),
+      excludedFeatures: pickIds(f.excluded, featureIds),
+      resolutions: pickIds(f.included, resolutionIds),
+      excludedResolutions: pickIds(f.excluded, resolutionIds),
     }
-    
-    fParams.forEach(processParam)
-    
-    return { categories, features, resolutions }
   }
   
   const { 
-    categories: initialCategories, 
-    features: initialFeatures, 
+    categories: initialCategories,
+    excludedCategories: initialExcludedCategories,
+    features: initialFeatures,
+    excludedFeatures: initialExcludedFeatures,
     resolutions: initialResolutions,
+    excludedResolutions: initialExcludedResolutions,
   } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
+  const [excludedCategories, setExcludedCategories] = useState(initialExcludedCategories)
   const [selectedFeatures, setSelectedFeatures] = useState(initialFeatures)
+  const [excludedFeatures, setExcludedFeatures] = useState(initialExcludedFeatures)
   const [selectedResolutions, setSelectedResolutions] = useState(initialResolutions)
+  const [excludedResolutions, setExcludedResolutions] = useState(initialExcludedResolutions)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
 
@@ -183,8 +173,11 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     setSearchQuery(urlQuery)
     setSelectedVersions(parseVersionParams(searchParams))
     setSelectedCategories(parsedFilters.categories)
+    setExcludedCategories(parsedFilters.excludedCategories)
     setSelectedFeatures(parsedFilters.features)
+    setExcludedFeatures(parsedFilters.excludedFeatures)
     setSelectedResolutions(parsedFilters.resolutions)
+    setExcludedResolutions(parsedFilters.excludedResolutions)
   }, [searchParams])
 
   const updateFilters = (updates) => {
@@ -204,12 +197,18 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     }
     
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
+    const currentExcludedCategories = updates.xc !== undefined ? updates.xc : excludedCategories
     const currentFeatures = updates.feat !== undefined ? updates.feat : selectedFeatures
+    const currentExcludedFeatures = updates.xf !== undefined ? updates.xf : excludedFeatures
     const currentResolutions = updates.r !== undefined ? updates.r : selectedResolutions
-    
-    currentCategories.forEach(c => params.append('f', `categories:${c}`))
-    currentFeatures.forEach(f => params.append('f', `categories:${f}`))
-    currentResolutions.forEach(r => params.append('f', `categories:${r}`))
+    const currentExcludedResolutions = updates.xr !== undefined ? updates.xr : excludedResolutions
+
+    appendFacetParams(
+      params,
+      'f',
+      [...currentCategories, ...currentFeatures, ...currentResolutions],
+      [...currentExcludedCategories, ...currentExcludedFeatures, ...currentExcludedResolutions],
+    )
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
@@ -229,30 +228,45 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
   }
 
   const toggleCategory = (categoryId) => {
-    const newCategories = selectedCategories.includes(categoryId)
-      ? selectedCategories.filter(c => c !== categoryId)
-      : [...selectedCategories, categoryId]
-    
-    setSelectedCategories(newCategories)
-    updateFilters({ c: newCategories })
+    const next = toggleIncluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
+  }
+
+  const excludeCategory = (categoryId) => {
+    const next = toggleExcluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
   }
 
   const toggleFeature = (featureId) => {
-    const newFeatures = selectedFeatures.includes(featureId)
-      ? selectedFeatures.filter(f => f !== featureId)
-      : [...selectedFeatures, featureId]
-    
-    setSelectedFeatures(newFeatures)
-    updateFilters({ feat: newFeatures })
+    const next = toggleIncluded(featureId, selectedFeatures, excludedFeatures)
+    setSelectedFeatures(next.included)
+    setExcludedFeatures(next.excluded)
+    updateFilters({ feat: next.included, xf: next.excluded })
+  }
+
+  const excludeFeature = (featureId) => {
+    const next = toggleExcluded(featureId, selectedFeatures, excludedFeatures)
+    setSelectedFeatures(next.included)
+    setExcludedFeatures(next.excluded)
+    updateFilters({ feat: next.included, xf: next.excluded })
   }
 
   const toggleResolution = (resolutionId) => {
-    const newResolutions = selectedResolutions.includes(resolutionId)
-      ? selectedResolutions.filter(r => r !== resolutionId)
-      : [...selectedResolutions, resolutionId]
-    
-    setSelectedResolutions(newResolutions)
-    updateFilters({ r: newResolutions })
+    const next = toggleIncluded(resolutionId, selectedResolutions, excludedResolutions)
+    setSelectedResolutions(next.included)
+    setExcludedResolutions(next.excluded)
+    updateFilters({ r: next.included, xr: next.excluded })
+  }
+
+  const excludeResolution = (resolutionId) => {
+    const next = toggleExcluded(resolutionId, selectedResolutions, excludedResolutions)
+    setSelectedResolutions(next.included)
+    setExcludedResolutions(next.excluded)
+    updateFilters({ r: next.included, xr: next.excluded })
   }
 
   return (
@@ -266,29 +280,17 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             Категории
           </h3>
           <div className="space-y-1.5 pr-2">
-            {CATEGORIES.map(cat => {
-              const isSelected = selectedCategories.includes(cat.id)
-              
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => toggleCategory(cat.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="inline-flex h-4 w-4 shrink-0 items-center justify-center">{cat.icon}</div>
-                  <span className="truncate text-sm flex-1">{cat.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {CATEGORIES.map(cat => (
+              <CatalogFilterOption
+                key={cat.id}
+                icon={cat.icon}
+                label={cat.name}
+                selected={selectedCategories.includes(cat.id)}
+                excluded={excludedCategories.includes(cat.id)}
+                onInclude={() => toggleCategory(cat.id)}
+                onExclude={() => excludeCategory(cat.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -300,29 +302,17 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             Особенности
           </h3>
           <div className="space-y-1.5 pr-2">
-            {RESOURCEPACK_CATEGORIES.map(feature => {
-              const isSelected = selectedFeatures.includes(feature.id)
-              
-              return (
-                <button
-                  key={feature.id}
-                  onClick={() => toggleFeature(feature.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4 flex-shrink-0">{feature.icon}</div>
-                  <span className="truncate text-sm flex-1">{feature.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {RESOURCEPACK_CATEGORIES.map(feature => (
+              <CatalogFilterOption
+                key={feature.id}
+                icon={feature.icon}
+                label={feature.name}
+                selected={selectedFeatures.includes(feature.id)}
+                excluded={excludedFeatures.includes(feature.id)}
+                onInclude={() => toggleFeature(feature.id)}
+                onExclude={() => excludeFeature(feature.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -334,28 +324,16 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             Разрешение
           </h3>
           <div className="space-y-1.5">
-            {RESOLUTIONS.map(res => {
-              const isSelected = selectedResolutions.includes(res.id)
-              
-              return (
-                <button
-                  key={res.id}
-                  onClick={() => toggleResolution(res.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <span className="truncate text-sm flex-1">{res.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {RESOLUTIONS.map(res => (
+              <CatalogFilterOption
+                key={res.id}
+                label={res.name}
+                selected={selectedResolutions.includes(res.id)}
+                excluded={excludedResolutions.includes(res.id)}
+                onInclude={() => toggleResolution(res.id)}
+                onExclude={() => excludeResolution(res.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -442,15 +420,18 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersions.length > 0 || selectedCategories.length > 0 || selectedFeatures.length > 0 || selectedResolutions.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedCategories.length > 0 || excludedCategories.length > 0 || selectedFeatures.length > 0 || excludedFeatures.length > 0 || selectedResolutions.length > 0 || excludedResolutions.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
                 setSelectedVersions([])
                 setSelectedCategories([])
+                setExcludedCategories([])
                 setSelectedFeatures([])
+                setExcludedFeatures([])
                 setSelectedResolutions([])
+                setExcludedResolutions([])
                 const sort = searchParams.get('sort')
                 saveVisibleDisclosureExclusions([], '/resourcepacks')
                 saveStoredOpenSource('none')

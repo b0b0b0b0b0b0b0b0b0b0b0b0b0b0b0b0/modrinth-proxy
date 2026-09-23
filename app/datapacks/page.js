@@ -16,6 +16,7 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
@@ -69,6 +70,7 @@ export default async function DatapacksPage({ searchParams }) {
   }
   appendDisclosureExclusionFacets(facets, searchParams, 'datapacks');
   appendOpenSourceFacets(facets, searchParams);
+  appendNegatedFacets(facets, excludedCategories)
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;

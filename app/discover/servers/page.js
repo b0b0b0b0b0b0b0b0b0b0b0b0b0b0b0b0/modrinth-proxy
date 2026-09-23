@@ -163,6 +163,13 @@ export default async function ServersPage({ searchParams }) {
     parts.push(`categories NOT IN [${exclCommunity.map(c => `"${c}"`).join(', ')}]`);
   }
 
+  const exclKinds = excludedCategories
+    .map((c) => (c === 'type-vanilla' ? 'vanilla' : c === 'type-modded' ? 'modpack' : null))
+    .filter(Boolean)
+  if (exclKinds.length > 0) {
+    parts.push(`minecraft_java_server.content.kind NOT IN [${exclKinds.map(c => `"${c}"`).join(', ')}]`);
+  }
+
   const exclOther = excludedCategories.filter(c => 
     !SERVER_FEATURES.some(f => f.id === c) &&
     !SERVER_GAMEPLAY.some(g => g.id === c) &&
@@ -200,6 +207,10 @@ export default async function ServersPage({ searchParams }) {
     slParams.forEach(l => {
       params.append('sl', l);
     });
+
+    fParams.forEach((param) => {
+      params.append('f', param)
+    })
     
     if (sort && sort !== 'relevance') params.set('sort', sort);
     appendDisclosureExclusionParams(params, searchParams);

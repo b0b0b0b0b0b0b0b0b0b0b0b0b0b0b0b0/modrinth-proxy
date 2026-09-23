@@ -17,6 +17,7 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
@@ -113,6 +114,10 @@ export default async function ShadersPage({ searchParams }) {
   
   appendDisclosureExclusionFacets(facets, searchParams, 'shaders');
   appendOpenSourceFacets(facets, searchParams);
+  appendNegatedFacets(facets, excludedStyles)
+  appendNegatedFacets(facets, excludedFeatures)
+  appendNegatedFacets(facets, excludedPerformance)
+  appendNegatedFacets(facets, excludedLoaders)
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();

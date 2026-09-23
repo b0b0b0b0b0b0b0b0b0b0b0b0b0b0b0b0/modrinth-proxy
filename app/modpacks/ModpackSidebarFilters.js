@@ -6,10 +6,12 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MODPACK_LOADERS } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 const MODPACK_CATEGORIES = CATEGORIES.filter(cat => 
   ['adventure', 'challenging', 'combat', 'kitchen-sink', 'lightweight', 'magic', 'multiplayer', 'optimization', 'quests', 'technology'].includes(cat.id)
@@ -25,7 +27,9 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedLoaders, setSelectedLoaders] = useState([])
+  const [excludedLoaders, setExcludedLoaders] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
+  const [excludedCategories, setExcludedCategories] = useState([])
   const [environment, setEnvironment] = useState(searchParams.get('e') || '')
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
@@ -38,39 +42,21 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     setSearchQuery(urlQuery)
     setSelectedVersions(parseVersionParams(searchParams))
     setSelectedLoaders(parsedFilters.loaders)
+    setExcludedLoaders(parsedFilters.excludedLoaders)
     setSelectedCategories(parsedFilters.categories)
+    setExcludedCategories(parsedFilters.excludedCategories)
     setEnvironment(urlEnvironment)
   }, [searchParams])
 
   const parseFacets = () => {
-    const loaders = []
-    const categories = []
-
-    const gParams = searchParams.getAll('g')
-    gParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.startsWith('categories:')) {
-        const loaderId = decoded.substring(11)
-        if (!loaders.includes(loaderId)) {
-          loaders.push(loaderId)
-        }
-      }
-    })
-
-    const fParams = searchParams.getAll('f')
-    fParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.startsWith('categories:')) {
-        const catId = decoded.substring(11)
-        if (!categories.includes(catId)) {
-          categories.push(catId)
-        }
-      }
-    })
-
-    return { loaders, categories }
+    const g = parseFacetList(searchParams.getAll('g'))
+    const f = parseFacetList(searchParams.getAll('f'))
+    return {
+      loaders: g.included,
+      excludedLoaders: g.excluded,
+      categories: f.included,
+      excludedCategories: f.excluded,
+    }
   }
 
   const updateFilters = (updates) => {
@@ -89,14 +75,11 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     }
 
     const finalLoaders = updates.l !== undefined ? updates.l : selectedLoaders
-    finalLoaders.forEach(loader => {
-      params.append('g', `categories:${loader}`)
-    })
-
+    const finalExcludedLoaders = updates.xl !== undefined ? updates.xl : excludedLoaders
     const finalCategories = updates.c !== undefined ? updates.c : selectedCategories
-    finalCategories.forEach(cat => {
-      params.append('f', `categories:${cat}`)
-    })
+    const finalExcludedCategories = updates.xc !== undefined ? updates.xc : excludedCategories
+    appendFacetParams(params, 'g', finalLoaders, finalExcludedLoaders)
+    appendFacetParams(params, 'f', finalCategories, finalExcludedCategories)
 
     const finalEnv = updates.e !== undefined ? updates.e : environment
     if (finalEnv) {
@@ -121,19 +104,31 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
   }
 
   const toggleLoader = (loaderId) => {
-    const newLoaders = selectedLoaders.includes(loaderId)
-      ? selectedLoaders.filter(l => l !== loaderId)
-      : [...selectedLoaders, loaderId]
-    setSelectedLoaders(newLoaders)
-    updateFilters({ l: newLoaders })
+    const next = toggleIncluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
+  }
+
+  const excludeLoader = (loaderId) => {
+    const next = toggleExcluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
   }
 
   const toggleCategory = (categoryId) => {
-    const newCategories = selectedCategories.includes(categoryId)
-      ? selectedCategories.filter(c => c !== categoryId)
-      : [...selectedCategories, categoryId]
-    setSelectedCategories(newCategories)
-    updateFilters({ c: newCategories })
+    const next = toggleIncluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
+  }
+
+  const excludeCategory = (categoryId) => {
+    const next = toggleExcluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
   }
 
   const handleSearch = (e) => {
@@ -147,29 +142,17 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Категории</h3>
           <div className="space-y-1.5 pr-2">
-            {MODPACK_CATEGORIES.map(cat => {
-              const isSelected = selectedCategories.includes(cat.id)
-              
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => toggleCategory(cat.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{cat.icon}</div>
-                  <span className="truncate text-sm flex-1">{cat.name}</span>
-                  {isSelected && (
-                    <svg className="h-4 w-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {MODPACK_CATEGORIES.map(cat => (
+              <CatalogFilterOption
+                key={cat.id}
+                icon={cat.icon}
+                label={cat.name}
+                selected={selectedCategories.includes(cat.id)}
+                excluded={excludedCategories.includes(cat.id)}
+                onInclude={() => toggleCategory(cat.id)}
+                onExclude={() => excludeCategory(cat.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -305,29 +288,17 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Загрузчик</h3>
           <div className="space-y-1.5">
-            {MODPACK_LOADERS.map(loader => {
-              const isSelected = selectedLoaders.includes(loader.id)
-              
-              return (
-                <button
-                  key={loader.id}
-                  onClick={() => toggleLoader(loader.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{loader.icon}</div>
-                  <span className="truncate text-sm flex-1">{loader.name}</span>
-                  {isSelected && (
-                    <svg className="h-4 w-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {MODPACK_LOADERS.map(loader => (
+              <CatalogFilterOption
+                key={loader.id}
+                icon={loader.icon}
+                label={loader.name}
+                selected={selectedLoaders.includes(loader.id)}
+                excluded={excludedLoaders.includes(loader.id)}
+                onInclude={() => toggleLoader(loader.id)}
+                onExclude={() => excludeLoader(loader.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -335,14 +306,16 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || environment || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || excludedLoaders.length > 0 || selectedCategories.length > 0 || excludedCategories.length > 0 || environment || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
                 setSelectedVersions([])
                 setSelectedLoaders([])
+                setExcludedLoaders([])
                 setSelectedCategories([])
+                setExcludedCategories([])
                 setEnvironment('')
                 const sort = searchParams.get('sort')
                 saveVisibleDisclosureExclusions([], '/modpacks')

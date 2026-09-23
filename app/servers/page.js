@@ -13,6 +13,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 
 export async function generateMetadata({ searchParams }) {
   const { title, description } = buildServerCatalogSeo({ searchParams })
@@ -74,6 +75,7 @@ export default async function ServersPage({ searchParams }) {
   if (categories.length > 0) {
     facets.push(categories.map(c => `categories:${c}`));
   }
+  appendNegatedFacets(facets, excludedCategories)
   appendDisclosureExclusionFacets(facets, searchParams, 'servers');
 
   let data = null;

@@ -16,6 +16,7 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
@@ -97,6 +98,9 @@ export default async function ResourcepacksPage({ searchParams }) {
   }
   appendDisclosureExclusionFacets(facets, searchParams, 'resourcepacks');
   appendOpenSourceFacets(facets, searchParams);
+  appendNegatedFacets(facets, excludedCategories)
+  appendNegatedFacets(facets, excludedFeatures)
+  appendNegatedFacets(facets, excludedResolutions)
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();

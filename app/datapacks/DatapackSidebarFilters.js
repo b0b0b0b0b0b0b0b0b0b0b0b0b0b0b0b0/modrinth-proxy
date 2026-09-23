@@ -5,10 +5,12 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { CATEGORIES } from '@/lib/categories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 export default function DatapackSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -18,26 +20,16 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
   const MC_VERSIONS_FULL = initialVersions?.full || hookVersions.full
   
   const parseFacets = () => {
-    const fParams = searchParams.getAll('f')
-    const categories = []
-    
-    fParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        categories.push(value)
-      }
-    })
-    
-    return { categories }
+    const f = parseFacetList(searchParams.getAll('f'))
+    return { categories: f.included, excludedCategories: f.excluded }
   }
   
-  const { categories: initialCategories } = parseFacets()
+  const { categories: initialCategories, excludedCategories: initialExcludedCategories } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedCategories, setSelectedCategories] = useState(initialCategories)
+  const [excludedCategories, setExcludedCategories] = useState(initialExcludedCategories)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
 
@@ -48,6 +40,7 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
     setSearchQuery(urlQuery)
     setSelectedVersions(parseVersionParams(searchParams))
     setSelectedCategories(parsedFilters.categories)
+    setExcludedCategories(parsedFilters.excludedCategories)
   }, [searchParams])
 
   const updateFilters = (updates) => {
@@ -67,7 +60,8 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
     }
     
     const currentCategories = updates.c !== undefined ? updates.c : selectedCategories
-    currentCategories.forEach(c => params.append('f', `categories:${c}`))
+    const currentExcludedCategories = updates.xc !== undefined ? updates.xc : excludedCategories
+    appendFacetParams(params, 'f', currentCategories, currentExcludedCategories)
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
@@ -87,12 +81,17 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
   }
 
   const toggleCategory = (categoryId) => {
-    const newCategories = selectedCategories.includes(categoryId)
-      ? selectedCategories.filter(c => c !== categoryId)
-      : [...selectedCategories, categoryId]
-    
-    setSelectedCategories(newCategories)
-    updateFilters({ c: newCategories })
+    const next = toggleIncluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
+  }
+
+  const excludeCategory = (categoryId) => {
+    const next = toggleExcluded(categoryId, selectedCategories, excludedCategories)
+    setSelectedCategories(next.included)
+    setExcludedCategories(next.excluded)
+    updateFilters({ c: next.included, xc: next.excluded })
   }
 
   return (
@@ -106,29 +105,17 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
             Категории
           </h3>
           <div className="space-y-1.5 pr-2">
-            {CATEGORIES.map(cat => {
-              const isSelected = selectedCategories.includes(cat.id)
-              
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => toggleCategory(cat.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4 flex-shrink-0">{cat.icon}</div>
-                  <span className="truncate text-sm flex-1">{cat.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {CATEGORIES.map(cat => (
+              <CatalogFilterOption
+                key={cat.id}
+                icon={cat.icon}
+                label={cat.name}
+                selected={selectedCategories.includes(cat.id)}
+                excluded={excludedCategories.includes(cat.id)}
+                onInclude={() => toggleCategory(cat.id)}
+                onExclude={() => excludeCategory(cat.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -215,13 +202,14 @@ export default function DatapackSidebarFilters({ onFilterChange, isMobile = fals
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersions.length > 0 || selectedCategories.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedCategories.length > 0 || excludedCategories.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')
                 setSelectedVersions([])
                 setSelectedCategories([])
+                setExcludedCategories([])
                 const sort = searchParams.get('sort')
                 saveVisibleDisclosureExclusions([], '/datapacks')
                 saveStoredOpenSource('none')

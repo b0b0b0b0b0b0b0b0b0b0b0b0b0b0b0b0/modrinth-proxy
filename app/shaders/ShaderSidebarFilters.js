@@ -6,10 +6,12 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SHADER_LOADERS } from '@/lib/loaders'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendFacetParams, parseFacetList, pickIds, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 
 export default function ShaderSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -19,57 +21,35 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   const MC_VERSIONS_FULL = initialVersions?.full || hookVersions.full
   
   const parseFacets = () => {
-    const fParams = searchParams.getAll('f')
-    const gParams = searchParams.getAll('g')
-    
-    const styles = []
-    const features = []
-    const performance = []
-    const loaders = []
-    
     const styleIds = SHADER_STYLES.map(s => s.id)
     const featureIds = SHADER_FEATURES.map(f => f.id)
     const performanceIds = SHADER_PERFORMANCE.map(p => p.id)
-    
-    const processParam = (param) => {
-      if (!param) return
-      let decoded = decodeURIComponent(param)
-      
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        
-        if (styleIds.includes(value)) {
-          styles.push(value)
-        } else if (featureIds.includes(value)) {
-          features.push(value)
-        } else if (performanceIds.includes(value)) {
-          performance.push(value)
-        }
-      }
+    const f = parseFacetList(searchParams.getAll('f'))
+    const g = parseFacetList(searchParams.getAll('g'))
+    return {
+      styles: pickIds(f.included, styleIds),
+      excludedStyles: pickIds(f.excluded, styleIds),
+      features: pickIds(f.included, featureIds),
+      excludedFeatures: pickIds(f.excluded, featureIds),
+      performance: pickIds(f.included, performanceIds),
+      excludedPerformance: pickIds(f.excluded, performanceIds),
+      loaders: g.included,
+      excludedLoaders: g.excluded,
     }
-    
-    fParams.forEach(processParam)
-    
-    gParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded.includes('categories:')) {
-        const value = decoded.replace('categories:', '')
-        loaders.push(value)
-      }
-    })
-    
-    return { styles, features, performance, loaders }
   }
   
-  const { styles: initialStyles, features: initialFeatures, performance: initialPerformance, loaders: initialLoaders } = parseFacets()
+  const { styles: initialStyles, excludedStyles: initialExcludedStyles, features: initialFeatures, excludedFeatures: initialExcludedFeatures, performance: initialPerformance, excludedPerformance: initialExcludedPerformance, loaders: initialLoaders, excludedLoaders: initialExcludedLoaders } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
   const [selectedStyles, setSelectedStyles] = useState(initialStyles)
+  const [excludedStyles, setExcludedStyles] = useState(initialExcludedStyles)
   const [selectedFeatures, setSelectedFeatures] = useState(initialFeatures)
+  const [excludedFeatures, setExcludedFeatures] = useState(initialExcludedFeatures)
   const [selectedPerformance, setSelectedPerformance] = useState(initialPerformance)
+  const [excludedPerformance, setExcludedPerformance] = useState(initialExcludedPerformance)
   const [selectedLoaders, setSelectedLoaders] = useState(initialLoaders)
+  const [excludedLoaders, setExcludedLoaders] = useState(initialExcludedLoaders)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
 
@@ -80,9 +60,13 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     setSearchQuery(urlQuery)
     setSelectedVersions(parseVersionParams(searchParams))
     setSelectedStyles(parsedFilters.styles)
+    setExcludedStyles(parsedFilters.excludedStyles)
     setSelectedFeatures(parsedFilters.features)
+    setExcludedFeatures(parsedFilters.excludedFeatures)
     setSelectedPerformance(parsedFilters.performance)
+    setExcludedPerformance(parsedFilters.excludedPerformance)
     setSelectedLoaders(parsedFilters.loaders)
+    setExcludedLoaders(parsedFilters.excludedLoaders)
   }, [searchParams])
 
   const updateFilters = (updates) => {
@@ -101,14 +85,21 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     }
     
     const currentStyles = updates.s !== undefined ? updates.s : selectedStyles
+    const currentExcludedStyles = updates.xs !== undefined ? updates.xs : excludedStyles
     const currentFeatures = updates.feat !== undefined ? updates.feat : selectedFeatures
+    const currentExcludedFeatures = updates.xf !== undefined ? updates.xf : excludedFeatures
     const currentPerformance = updates.p !== undefined ? updates.p : selectedPerformance
+    const currentExcludedPerformance = updates.xp !== undefined ? updates.xp : excludedPerformance
     const currentLoaders = updates.l !== undefined ? updates.l : selectedLoaders
-    
-    currentStyles.forEach(s => params.append('f', `categories:${s}`))
-    currentFeatures.forEach(f => params.append('f', `categories:${f}`))
-    currentPerformance.forEach(p => params.append('f', `categories:${p}`))
-    currentLoaders.forEach(l => params.append('g', `categories:${l}`))
+    const currentExcludedLoaders = updates.xl !== undefined ? updates.xl : excludedLoaders
+
+    appendFacetParams(
+      params,
+      'f',
+      [...currentStyles, ...currentFeatures, ...currentPerformance],
+      [...currentExcludedStyles, ...currentExcludedFeatures, ...currentExcludedPerformance],
+    )
+    appendFacetParams(params, 'g', currentLoaders, currentExcludedLoaders)
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
@@ -128,35 +119,59 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   }
 
   const toggleStyle = (styleId) => {
-    const newStyles = selectedStyles.includes(styleId)
-      ? selectedStyles.filter(s => s !== styleId)
-      : [...selectedStyles, styleId]
-    setSelectedStyles(newStyles)
-    updateFilters({ s: newStyles })
+    const next = toggleIncluded(styleId, selectedStyles, excludedStyles)
+    setSelectedStyles(next.included)
+    setExcludedStyles(next.excluded)
+    updateFilters({ s: next.included, xs: next.excluded })
+  }
+
+  const excludeStyle = (styleId) => {
+    const next = toggleExcluded(styleId, selectedStyles, excludedStyles)
+    setSelectedStyles(next.included)
+    setExcludedStyles(next.excluded)
+    updateFilters({ s: next.included, xs: next.excluded })
   }
 
   const toggleFeature = (featureId) => {
-    const newFeatures = selectedFeatures.includes(featureId)
-      ? selectedFeatures.filter(f => f !== featureId)
-      : [...selectedFeatures, featureId]
-    setSelectedFeatures(newFeatures)
-    updateFilters({ feat: newFeatures })
+    const next = toggleIncluded(featureId, selectedFeatures, excludedFeatures)
+    setSelectedFeatures(next.included)
+    setExcludedFeatures(next.excluded)
+    updateFilters({ feat: next.included, xf: next.excluded })
+  }
+
+  const excludeFeature = (featureId) => {
+    const next = toggleExcluded(featureId, selectedFeatures, excludedFeatures)
+    setSelectedFeatures(next.included)
+    setExcludedFeatures(next.excluded)
+    updateFilters({ feat: next.included, xf: next.excluded })
   }
 
   const togglePerformance = (performanceId) => {
-    const newPerformance = selectedPerformance.includes(performanceId)
-      ? selectedPerformance.filter(p => p !== performanceId)
-      : [...selectedPerformance, performanceId]
-    setSelectedPerformance(newPerformance)
-    updateFilters({ p: newPerformance })
+    const next = toggleIncluded(performanceId, selectedPerformance, excludedPerformance)
+    setSelectedPerformance(next.included)
+    setExcludedPerformance(next.excluded)
+    updateFilters({ p: next.included, xp: next.excluded })
+  }
+
+  const excludePerformance = (performanceId) => {
+    const next = toggleExcluded(performanceId, selectedPerformance, excludedPerformance)
+    setSelectedPerformance(next.included)
+    setExcludedPerformance(next.excluded)
+    updateFilters({ p: next.included, xp: next.excluded })
   }
 
   const toggleLoader = (loaderId) => {
-    const newLoaders = selectedLoaders.includes(loaderId)
-      ? selectedLoaders.filter(l => l !== loaderId)
-      : [...selectedLoaders, loaderId]
-    setSelectedLoaders(newLoaders)
-    updateFilters({ l: newLoaders })
+    const next = toggleIncluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
+  }
+
+  const excludeLoader = (loaderId) => {
+    const next = toggleExcluded(loaderId, selectedLoaders, excludedLoaders)
+    setSelectedLoaders(next.included)
+    setExcludedLoaders(next.excluded)
+    updateFilters({ l: next.included, xl: next.excluded })
   }
 
   return (
@@ -165,87 +180,51 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Категории</h3>
           <div className="space-y-1.5 pr-2">
-            {SHADER_STYLES.map(style => {
-              const isSelected = selectedStyles.includes(style.id)
-              
-              return (
-                <button
-                  key={style.id}
-                  onClick={() => toggleStyle(style.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{style.icon}</div>
-                  <span className="truncate text-sm flex-1">{style.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {SHADER_STYLES.map(style => (
+              <CatalogFilterOption
+                key={style.id}
+                icon={style.icon}
+                label={style.name}
+                selected={selectedStyles.includes(style.id)}
+                excluded={excludedStyles.includes(style.id)}
+                onInclude={() => toggleStyle(style.id)}
+                onExclude={() => excludeStyle(style.id)}
+              />
+            ))}
           </div>
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Особенности</h3>
           <div className="space-y-1.5 pr-2">
-            {SHADER_FEATURES.map(feature => {
-              const isSelected = selectedFeatures.includes(feature.id)
-              
-              return (
-                <button
-                  key={feature.id}
-                  onClick={() => toggleFeature(feature.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{feature.icon}</div>
-                  <span className="truncate text-sm flex-1">{feature.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {SHADER_FEATURES.map(feature => (
+              <CatalogFilterOption
+                key={feature.id}
+                icon={feature.icon}
+                label={feature.name}
+                selected={selectedFeatures.includes(feature.id)}
+                excluded={excludedFeatures.includes(feature.id)}
+                onInclude={() => toggleFeature(feature.id)}
+                onExclude={() => excludeFeature(feature.id)}
+              />
+            ))}
           </div>
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Производительность</h3>
           <div className="space-y-1.5">
-            {SHADER_PERFORMANCE.map(perf => {
-              const isSelected = selectedPerformance.includes(perf.id)
-              
-              return (
-                <button
-                  key={perf.id}
-                  onClick={() => togglePerformance(perf.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{perf.icon}</div>
-                  <span className="truncate text-sm flex-1">{perf.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {SHADER_PERFORMANCE.map(perf => (
+              <CatalogFilterOption
+                key={perf.id}
+                icon={perf.icon}
+                label={perf.name}
+                selected={selectedPerformance.includes(perf.id)}
+                excluded={excludedPerformance.includes(perf.id)}
+                onInclude={() => togglePerformance(perf.id)}
+                onExclude={() => excludePerformance(perf.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -330,29 +309,17 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">Загрузчик</h3>
           <div className="space-y-1.5">
-            {SHADER_LOADERS.map(loader => {
-              const isSelected = selectedLoaders.includes(loader.id)
-              
-              return (
-                <button
-                  key={loader.id}
-                  onClick={() => toggleLoader(loader.id)}
-                  className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-                    isSelected
-                      ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                      : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-                  }`}
-                >
-                  <div className="h-4 w-4">{loader.icon}</div>
-                  <span className="truncate text-sm flex-1">{loader.name}</span>
-                  {isSelected && (
-                    <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                      <path d="M20 6 9 17l-5-5" />
-                    </svg>
-                  )}
-                </button>
-              )
-            })}
+            {SHADER_LOADERS.map(loader => (
+              <CatalogFilterOption
+                key={loader.id}
+                icon={loader.icon}
+                label={loader.name}
+                selected={selectedLoaders.includes(loader.id)}
+                excluded={excludedLoaders.includes(loader.id)}
+                onInclude={() => toggleLoader(loader.id)}
+                onExclude={() => excludeLoader(loader.id)}
+              />
+            ))}
           </div>
         </div>
 
@@ -360,16 +327,20 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
 
         <AdvancedExclusionsFilter />
 
-        {(selectedVersions.length > 0 || selectedStyles.length > 0 || selectedFeatures.length > 0 || selectedPerformance.length > 0 || selectedLoaders.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
+        {(selectedVersions.length > 0 || selectedStyles.length > 0 || excludedStyles.length > 0 || selectedFeatures.length > 0 || excludedFeatures.length > 0 || selectedPerformance.length > 0 || excludedPerformance.length > 0 || selectedLoaders.length > 0 || excludedLoaders.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {
               setSearchQuery('')
               setSelectedVersions([])
               setSelectedStyles([])
+              setExcludedStyles([])
               setSelectedFeatures([])
+              setExcludedFeatures([])
               setSelectedPerformance([])
+              setExcludedPerformance([])
               setSelectedLoaders([])
+              setExcludedLoaders([])
               const sort = searchParams.get('sort')
               saveVisibleDisclosureExclusions([], '/shaders')
               saveStoredOpenSource('none')
