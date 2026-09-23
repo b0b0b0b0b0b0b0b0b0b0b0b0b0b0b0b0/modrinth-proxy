@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { SITE_VERSION } from '@/lib/siteVersion'
 
 export default function NewsCounter() {
   const [unreadCount, setUnreadCount] = useState(0)
@@ -9,7 +10,7 @@ export default function NewsCounter() {
     const checkUnread = async () => {
       try {
         const lastSeenSha = localStorage.getItem('lastSeenCommitSha')
-        const res = await fetch('/api/commits')
+        const res = await fetch(`/api/commits?v=${encodeURIComponent(SITE_VERSION)}`, { cache: 'no-store' })
         const commits = await res.json()
         
         if (!Array.isArray(commits)) {

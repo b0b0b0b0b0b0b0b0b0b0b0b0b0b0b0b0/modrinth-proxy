@@ -1,6 +1,7 @@
 import { getSiteCommits } from '@/lib/commits'
+import { SITE_VERSION } from '@/lib/siteVersion'
 
-export const revalidate = 1800
+export const dynamic = 'force-dynamic'
 
 export async function GET() {
   try {
@@ -10,7 +11,8 @@ export async function GET() {
     }
     return Response.json(commits, {
       headers: {
-        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=86400',
+        'Cache-Control': 'private, no-store',
+        'X-Site-Version': String(SITE_VERSION),
       },
     })
   } catch (error) {

@@ -17,6 +17,7 @@ import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
+import { warmSiteCommits } from '@/lib/commits'
 import { PALETTES } from '../lib/paletteManager'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 
@@ -59,6 +60,7 @@ const POSTERITY_COMMENT_BODY = ` _    _
    ~~  ~~  ~~`
 
 export default function RootLayout({ children }) {
+  warmSiteCommits()
   const activeColorPalettesStoreDisclaimerUpdate = {}
   for (const key of Object.keys(PALETTES)) {
     activeColorPalettesStoreDisclaimerUpdate[key] = PALETTES[key].variables

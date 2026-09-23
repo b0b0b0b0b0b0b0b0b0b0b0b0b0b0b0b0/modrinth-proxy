@@ -62,9 +62,7 @@ export default function DisclosureLinkMismatchBanner() {
     try {
       if (dontShowAgain) localStorage.setItem(FOREVER_KEY, '1')
       else sessionStorage.setItem(SESSION_KEY, '1')
-    } catch {
-      /* ignore */
-    }
+    } catch {}
     setHidden(true)
   }
 

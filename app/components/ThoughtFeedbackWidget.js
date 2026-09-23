@@ -22,16 +22,12 @@ export default function ThoughtFeedbackWidget() {
   return (
     <div className="fixed bottom-20 left-4 z-40 sm:bottom-6 sm:left-6 max-w-[calc(100vw-2rem)] sm:max-w-sm animate-thought-pop pointer-events-auto">
       <div className="animate-thought-float relative">
-        {/* Glow behind the thought bubble */}
         <div className="absolute -inset-2 bg-gradient-to-r from-modrinth-green/30 via-modrinth-green-light/20 to-purple-500/20 rounded-[2.5rem] blur-xl opacity-75 animate-pulse pointer-events-none" />
 
-        {/* Main Thought Cloud Container */}
         <div className="relative overflow-hidden rounded-[2.2rem] border border-modrinth-green/40 bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-black/95 p-4 sm:p-5 shadow-[0_15px_40px_rgba(0,0,0,0.6)] backdrop-blur-xl group">
-          {/* Subtle background shine */}
           <div className="absolute -right-12 -top-12 h-32 w-32 rounded-full bg-modrinth-green/10 blur-2xl group-hover:bg-modrinth-green/20 transition-all duration-500" />
           <div className="absolute -left-12 -bottom-12 h-32 w-32 rounded-full bg-modrinth-green-light/10 blur-2xl" />
 
-          {/* Close Button */}
           <button
             type="button"
             onClick={handleDismiss}
@@ -44,7 +40,6 @@ export default function ThoughtFeedbackWidget() {
             </svg>
           </button>
 
-          {/* Header Badge */}
           <div className="mb-2.5 flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-modrinth-green/40 bg-modrinth-green/15 px-3 py-1 text-xs font-bold text-modrinth-green shadow-sm backdrop-blur-md">
               <span className="text-sm">💭</span>
@@ -52,7 +47,6 @@ export default function ThoughtFeedbackWidget() {
             </span>
           </div>
 
-          {/* Content */}
           <div className="relative pr-4">
             <h3 className="mb-1 text-sm sm:text-base font-bold text-white tracking-wide leading-snug">
               Есть предложения или нашли баг?
@@ -61,7 +55,6 @@ export default function ThoughtFeedbackWidget() {
               Нас уже больше <span className="font-semibold text-modrinth-green">10 000 человек в день</span>! Напишите нам в GitHub Issues — мы читаем все предложения и оперативно чиним ошибки.
             </p>
 
-            {/* Action Link */}
             <div className="flex items-center gap-2">
               <a
                 href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/issues"
@@ -81,7 +74,6 @@ export default function ThoughtFeedbackWidget() {
           </div>
         </div>
 
-        {/* Thought Bubble Tail (Comic-style thought circles) */}
         <div className="absolute -bottom-3 left-8 flex flex-col items-center gap-1">
           <div className="h-3.5 w-3.5 rounded-full border border-modrinth-green/40 bg-gray-900/90 shadow-md backdrop-blur-md" />
           <div className="ml-1 h-2 w-2 rounded-full border border-modrinth-green/30 bg-gray-900/80 shadow-sm" />

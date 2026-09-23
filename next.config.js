@@ -94,6 +94,9 @@ const nextConfig = {
   staticPageGenerationTimeout: 300,
   trailingSlash: false,
   poweredByHeader: false,
+  experimental: {
+    instrumentationHook: true,
+  },
   async headers() {
     return [
       {
