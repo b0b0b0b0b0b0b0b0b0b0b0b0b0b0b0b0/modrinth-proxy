@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getAuthorInfo, getAuthorProjects, formatAuthorStats, getProjectTypeDisplayName } from '@/lib/author'
 import { getUserCollections } from '@/lib/collections'
 import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
@@ -97,6 +97,10 @@ export default async function UserPage({ params, searchParams }) {
     }
   } catch (error) {
     notFound()
+  }
+
+  if (!projectType && stats.projectCount === 0 && collections.length > 0) {
+    redirect(`/user/${author.id}/collections`)
   }
 
   return (

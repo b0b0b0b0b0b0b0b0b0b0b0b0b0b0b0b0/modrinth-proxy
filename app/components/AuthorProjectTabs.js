@@ -13,14 +13,16 @@ export default function AuthorProjectTabs({
   section = 'projects',
 }) {
   const tabs = useMemo(() => {
-    const items = [
-      {
+    const items = []
+
+    if (totalProjects > 0) {
+      items.push({
         key: 'all',
         href: profileBasePath,
         label: 'Все',
         isActive: section === 'projects' && !currentType,
-      },
-    ]
+      })
+    }
 
     Object.entries(typeStats || {}).forEach(([type, count]) => {
       if (count > 0) {
@@ -43,7 +45,7 @@ export default function AuthorProjectTabs({
     }
 
     return items
-  }, [collectionCount, currentType, profileBasePath, section, typeStats])
+  }, [collectionCount, currentType, profileBasePath, section, totalProjects, typeStats])
 
   if (totalProjects === 0 && collectionCount === 0) return null
 

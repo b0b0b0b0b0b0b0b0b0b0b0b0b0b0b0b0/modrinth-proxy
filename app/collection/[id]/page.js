@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAuthorInfo } from '@/lib/author'
-import { getCollection, getProjectsByIds } from '@/lib/collections'
+import { COLLECTION_PAGE_SIZE, getCollection, getProjectsByIds } from '@/lib/collections'
 import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
-import { formatDownloads } from '@/lib/modrinth'
+import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 
 export async function generateMetadata({ params }) {
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function CollectionPage({ params }) {
+export default async function CollectionPage({ params, searchParams }) {
   const collection = await getCollection(params.id)
   if (!collection) notFound()
 
@@ -43,11 +43,14 @@ export default async function CollectionPage({ params }) {
   }
   const owner = filterUserPublic(ownerRaw)
 
-  const rawProjects = await getProjectsByIds(collection.projects)
+  const projectIds = collection.projects || []
+  const projectCount = projectIds.length
+  const totalPages = Math.max(1, Math.ceil(projectCount / COLLECTION_PAGE_SIZE))
+  const page = Math.min(totalPages, Math.max(1, parseInt(searchParams?.page || '1', 10) || 1))
+  const pageIds = projectIds.slice((page - 1) * COLLECTION_PAGE_SIZE, page * COLLECTION_PAGE_SIZE)
+  const rawProjects = await getProjectsByIds(pageIds)
   const filtered = filterModsList(rawProjects)
   const projects = filtered.hits.map((project) => filterModContent(project))
-  const downloads = projects.reduce((sum, project) => sum + (project.downloads || 0), 0)
-  const projectCount = projects.length
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -78,11 +81,6 @@ export default async function CollectionPage({ params }) {
               {' '}
               проект{projectCount === 1 ? '' : projectCount < 5 ? 'а' : 'ов'}
             </span>
-            <span>
-              <span className="font-semibold text-white">{formatDownloads(downloads)}</span>
-              {' '}
-              загрузок
-            </span>
             {owner ? (
               <Link href={`/user/${owner.id}`} className="text-modrinth-green hover:underline">
                 {owner.username}
@@ -92,8 +90,30 @@ export default async function CollectionPage({ params }) {
         </div>
       </div>
 
-      {projects.length > 0 ? (
-        <ResourceList resources={projects} type="mod" isProfile={true} />
+      {projectCount > 0 ? (
+        <>
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname={`/collection/${collection.id}`}
+            searchParams={searchParams}
+            className="mb-6"
+          />
+          {projects.length > 0 ? (
+            <ResourceList resources={projects} type="mod" isProfile={true} />
+          ) : (
+            <div className="py-16 text-center">
+              <h3 className="text-xl font-semibold text-gray-300">На этой странице нет доступных проектов</h3>
+            </div>
+          )}
+          <CatalogPagination
+            page={page}
+            totalPages={totalPages}
+            pathname={`/collection/${collection.id}`}
+            searchParams={searchParams}
+            className="mt-8"
+          />
+        </>
       ) : (
         <div className="py-16 text-center">
           <h3 className="text-xl font-semibold text-gray-300">В коллекции нет доступных проектов</h3>
