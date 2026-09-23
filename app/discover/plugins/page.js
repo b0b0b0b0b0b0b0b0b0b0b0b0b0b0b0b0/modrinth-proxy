@@ -17,6 +17,9 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { PLUGIN_PLATFORM_ID_LIST } from '@/lib/loaders'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('plugins', searchParams, { basePath: 'discover/plugins' })
@@ -48,10 +51,8 @@ export default async function PluginsPage({ searchParams }) {
   const excludedPlatforms = []
   const categories = []
   const excludedCategories = []
-  let includeOpenSource = false
-  let excludeOpenSource = false
 
-  const platformIds = ['bungeecord', 'waterfall', 'velocity', 'geyser']
+  const platformIds = PLUGIN_PLATFORM_ID_LIST
 
   const gParams = Array.isArray(searchParams.g) ? searchParams.g : (searchParams.g ? [searchParams.g] : [])
   gParams.forEach(param => {
@@ -97,16 +98,6 @@ export default async function PluginsPage({ searchParams }) {
     }
   })
 
-  const lParams = Array.isArray(searchParams.l) ? searchParams.l : (searchParams.l ? [searchParams.l] : [])
-  lParams.forEach(param => {
-    const decoded = decodeURIComponent(param)
-    if (decoded === 'open_source:true') {
-      includeOpenSource = true
-    } else if (decoded === 'open_source!=true') {
-      excludeOpenSource = true
-    }
-  })
-
   const facets = [['project_type:plugin']];
   
   const versionsFacet = versionFacets(versions);
@@ -124,9 +115,8 @@ export default async function PluginsPage({ searchParams }) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
 
-  if (includeOpenSource) {
-    facets.push(['open_source:true'])
-  }
+  appendDisclosureExclusionFacets(facets, searchParams)
+  appendOpenSourceFacets(facets, searchParams)
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
@@ -153,14 +143,10 @@ export default async function PluginsPage({ searchParams }) {
       params.append('f', `categories!=${cat}`)
     })
 
-    if (includeOpenSource) {
-      params.append('l', 'open_source:true')
-    } else if (excludeOpenSource) {
-      params.append('l', 'open_source!=true')
-    }
-    
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     
+    copyOpenSourceParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams)
     params.set('page', newPage.toString());
     return `/discover/plugins?${params.toString()}`;
   };

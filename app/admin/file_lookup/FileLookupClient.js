@@ -18,9 +18,9 @@ const VERSION_CHANNEL_LABELS = {
 }
 
 const VERSION_CHANNEL_STYLES = {
-  release: 'bg-version-release-bg text-version-release-fg border-version-release-fg/30',
-  beta: 'bg-version-beta-bg text-version-beta-fg border-version-beta-fg/30',
-  alpha: 'bg-red-500/15 text-red-400 border-red-500/30',
+  release: 'bg-version-release-bg text-version-release-fg border-version-release-fg/25',
+  beta: 'bg-version-beta-bg text-version-beta-fg border-version-beta-fg/25',
+  alpha: 'bg-version-alpha-bg text-version-alpha-fg border-version-alpha-fg/25',
 }
 
 function normalizeVersionChannel(versionType) {

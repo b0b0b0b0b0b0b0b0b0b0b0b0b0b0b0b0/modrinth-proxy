@@ -10,10 +10,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'version-release-bg': 'rgba(27, 217, 106, 0.2)',
-        'version-release-fg': '#1bd96a',
-        'version-beta-bg': 'rgba(255, 163, 71, 0.2)',
-        'version-beta-fg': '#ffa347',
+        'version-release-bg': 'rgba(27, 217, 106, 0.1)',
+        'version-release-fg': '#2ee07a',
+        'version-beta-bg': 'rgba(176, 122, 74, 0.14)',
+        'version-beta-fg': '#c49a6c',
+        'version-alpha-bg': 'rgba(139, 124, 246, 0.12)',
+        'version-alpha-fg': '#9b8ff5',
         black: 'var(--bg-black)',
         modrinth: {
           green: 'rgba(var(--color-green-rgb), <alpha-value>)',

@@ -5,18 +5,111 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
+import LicenseFilter from '@/app/components/LicenseFilter'
 
 const CATEGORIES = [
-  { id: 'combat', name: 'Бой' },
-  { id: 'cursed', name: 'Проклятое' },
-  { id: 'decoration', name: 'Декорации' },
-  { id: 'modded', name: 'Модифицированное' },
-  { id: 'realistic', name: 'Реалистичное' },
-  { id: 'simplistic', name: 'Минималистичное' },
-  { id: 'themed', name: 'Тематическое' },
-  { id: 'tweaks', name: 'Изменения' },
-  { id: 'utility', name: 'Утилиты' },
-  { id: 'vanilla-like', name: 'Ванильное' },
+  {
+    id: 'combat',
+    name: 'Бой',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="M17.573 20.038 3.849 7.913 2.753 2.755 7.838 4.06 19.47 18.206l-1.898 1.832zM7.45 14.455l-3.043 3.661 1.887 1.843 3.717-3.25M16.75 10.82l3.333-2.913 1.123-5.152-5.091 1.28-2.483 2.985" />
+        <path d="m21.131 16.602-5.187 5.01 2.596-2.508 2.667 2.761M2.828 16.602l5.188 5.01-2.597-2.508-2.667 2.761" />
+      </svg>
+    ),
+  },
+  {
+    id: 'cursed',
+    name: 'Проклятое',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <rect width="10" height="14" x="7" y="7.5" rx="5" />
+        <path d="m2 12.5 2 2h3M22 12.5l-2 2h-3M3 21.5l2-3 2-1M21 21.5l-2-3-2-1M3 8.5l2 2 2 1M21 8.5l-2 2-2 1M12 7.5v14M15.38 8.82A3 3 0 0 0 16 7h0a3 3 0 0 0-3-3h-2a3 3 0 0 0-3 3h0a3 3 0 0 0 .61 1.82M9 4.5l-1-2M15 4.5l1-2" />
+      </svg>
+    ),
+  },
+  {
+    id: 'decoration',
+    name: 'Декорации',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        <path d="M9 22V12h6v10" />
+      </svg>
+    ),
+  },
+  {
+    id: 'modded',
+    name: 'Модифицированное',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+        <path d="M12 8v8M8 12h8" />
+      </svg>
+    ),
+  },
+  {
+    id: 'realistic',
+    name: 'Реалистичное',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z" />
+        <circle cx="12" cy="13" r="3" />
+      </svg>
+    ),
+  },
+  {
+    id: 'simplistic',
+    name: 'Минималистичное',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16" />
+      </svg>
+    ),
+  },
+  {
+    id: 'themed',
+    name: 'Тематическое',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="m12 19 7-7 3 3-7 7z" />
+        <path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18zM2 2l7.586 7.586" />
+        <circle cx="11" cy="11" r="2" />
+      </svg>
+    ),
+  },
+  {
+    id: 'tweaks',
+    name: 'Изменения',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4z" />
+      </svg>
+    ),
+  },
+  {
+    id: 'utility',
+    name: 'Утилиты',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <rect width="20" height="14" x="2" y="7" rx="2" ry="2" />
+        <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      </svg>
+    ),
+  },
+  {
+    id: 'vanilla-like',
+    name: 'Ванильное',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
+        <path d="m7 11 4.08 10.35a1 1 0 0 0 1.84 0L17 11M17 7A5 5 0 0 0 7 7M17 7a2 2 0 0 1 0 4H7a2 2 0 0 1 0-4" />
+      </svg>
+    ),
+  },
 ]
 
 const RESOLUTIONS = [
@@ -120,6 +213,8 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
+    copyOpenSourceParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams)
     
     router.push(`/resourcepacks?${params.toString()}`)
     onFilterChange?.()
@@ -184,6 +279,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
                       : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
+                  <div className="inline-flex h-4 w-4 shrink-0 items-center justify-center">{cat.icon}</div>
                   <span className="truncate text-sm flex-1">{cat.name}</span>
                   {isSelected && (
                     <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
@@ -342,7 +438,11 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
           </div>
         </div>
 
-        {(selectedVersions.length > 0 || selectedCategories.length > 0 || selectedFeatures.length > 0 || selectedResolutions.length > 0 || searchQuery) && (
+        <LicenseFilter />
+
+        <AdvancedExclusionsFilter />
+
+        {(selectedVersions.length > 0 || selectedCategories.length > 0 || selectedFeatures.length > 0 || selectedResolutions.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
@@ -352,7 +452,9 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
                 setSelectedFeatures([])
                 setSelectedResolutions([])
                 const sort = searchParams.get('sort')
-                router.push(sort ? `/resourcepacks?sort=${sort}` : '/resourcepacks')
+                saveStoredDisclosureExclusions([])
+                saveStoredOpenSource('none')
+                router.push(catalogResetUrl('/resourcepacks', { sort }))
               }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"
             >

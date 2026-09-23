@@ -2,8 +2,11 @@
 
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
+import { CATEGORIES } from '@/lib/categories'
 import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEnvironmentName } from '@/lib/filterConfig'
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
+import { getDisclosureExclusionLabel, parseDisclosureExclusions, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 
 export default function ActiveFilters({ categoryPath = 'plugins' }) {
   const searchParams = useSearchParams()
@@ -42,7 +45,10 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     const decoded = decodeURIComponent(param)
     if (decoded.startsWith('categories:')) {
       const categoryId = decoded.substring(11)
-      if (config.categories && config.categories.some(cat => cat.id === categoryId)) {
+      const known =
+        config.categories?.some((cat) => cat.id === categoryId) ||
+        CATEGORIES.some((cat) => cat.id === categoryId)
+      if (known) {
         if (!activeFilters.some(f => f.type === 'sc' && f.id === categoryId)) {
           activeFilters.push({
             type: 'category',
@@ -94,21 +100,27 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       param: v,
     })
   })
+
+  parseDisclosureExclusions(searchParams).forEach((id) => {
+    activeFilters.push({
+      type: 'disclosure',
+      id,
+      label: getDisclosureExclusionLabel(id),
+      param: `disclosure_types!=${id}`,
+    })
+  })
   
   if (config.hasOpenSource) {
-    const lParams = Array.isArray(searchParams.getAll('l')) ? searchParams.getAll('l') : (searchParams.get('l') ? [searchParams.get('l')] : [])
-    lParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded === 'open_source:true') {
-        activeFilters.push({
-          type: 'openSource',
-          id: 'open_source',
-          label: 'Открытый исходный код',
-          param: param
-        })
-      }
-    })
+    const state = parseOpenSourceFilter(searchParams)
+    if (state === 'selected' || state === 'excluded') {
+      activeFilters.push({
+        type: 'openSource',
+        id: 'open_source',
+        label: 'Открытый исходный код',
+        excluded: state === 'excluded',
+        param: state === 'selected' ? 'open_source:true' : 'open_source',
+      })
+    }
   }
   
   if (config.hasEnvironment) {
@@ -177,6 +189,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       if (processedKeys.has(key)) return
       processedKeys.add(key)
       
+      if (filterToRemove.type === 'openSource' && key === 'l') return
       if (filterToRemove.type === 'sgv' && key === 'sgv') return
       if (filterToRemove.type === 'environment' && key === 'e') return
       if (filterToRemove.type === 'sst' && key === 'sst') {
@@ -190,10 +203,10 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
           (filterToRemove.type === 'sr' && key === 'sr') ||
           (filterToRemove.type === 'sl' && key === 'sl') ||
           ((filterToRemove.type === 'platform' || filterToRemove.type === 'loader') && key === 'g') ||
-          (filterToRemove.type === 'openSource' && key === 'l') ||
-          (filterToRemove.type === 'version' && key === 'v')) {
+          (filterToRemove.type === 'version' && key === 'v') ||
+          (filterToRemove.type === 'disclosure' && key === 'a')) {
         const allValues = searchParams.getAll(key)
-        const filteredValues = allValues.filter(v => v !== filterToRemove.param)
+        const filteredValues = allValues.filter((v) => decodeURIComponent(v) !== filterToRemove.param && v !== filterToRemove.param)
         const uniqueValues = [...new Set(filteredValues)]
         uniqueValues.forEach(v => params.append(key, v))
       } else {
@@ -219,7 +232,6 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     if (sort && sort !== 'relevance') {
       params.set('sort', sort)
     }
-    
     if (categoryPath === 'discover/servers' || categoryPath === 'servers') {
       params.set('sst', 'online')
     }
@@ -232,6 +244,10 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       {activeFilters.length >= 2 && (
         <Link
           href={clearAllUrl()}
+          onClick={() => {
+            saveStoredDisclosureExclusions([])
+            saveStoredOpenSource('none')
+          }}
           className="bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -246,11 +262,30 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         <Link
           key={`${filter.type}-${filter.id}-${index}`}
           href={buildUrlWithoutFilter(filter)}
-          className="bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer"
+          onClick={() => {
+            if (filter.type === 'disclosure') {
+              saveStoredDisclosureExclusions(
+                parseDisclosureExclusions(searchParams).filter((id) => id !== filter.id),
+              )
+            }
+            if (filter.type === 'openSource') saveStoredOpenSource('none')
+          }}
+          className={`px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer ${
+            filter.type === 'disclosure' || filter.excluded
+              ? 'bg-red-500/15 text-red-400 hover:bg-red-500/25'
+              : 'bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white'
+          }`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" className="w-4 h-4 shrink-0">
-            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L10 8.586l4.293-4.293a1 1 0 1 1 1.414 1.414L11.414 10l4.293 4.293a1 1 0 0 1-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L8.586 10 4.293 5.707a1 1 0 0 1 0-1.414" clipRule="evenodd"></path>
-          </svg>
+          {filter.type === 'disclosure' || filter.excluded ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4 shrink-0">
+              <circle cx="12" cy="12" r="10" />
+              <path d="m4.9 4.9 14.2 14.2" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" className="w-4 h-4 shrink-0">
+              <path fillRule="evenodd" d="M4.293 4.293a1 1 0 0 1 1.414 0L10 8.586l4.293-4.293a1 1 0 1 1 1.414 1.414L11.414 10l4.293 4.293a1 1 0 0 1-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 0 1-1.414-1.414L8.586 10 4.293 5.707a1 1 0 0 1 0-1.414" clipRule="evenodd"></path>
+            </svg>
+          )}
           {filter.label}
         </Link>
       ))}

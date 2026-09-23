@@ -2247,15 +2247,15 @@ input[type="url"]:-webkit-autofill {
 }
 
 .changelog-item .changelog-bar.release {
-  --changelog-bar-color: var(--color-green);
+  --changelog-bar-color: #2ee07a;
 }
 
 .changelog-item .changelog-bar.beta {
-  --changelog-bar-color: #ffa347;
+  --changelog-bar-color: #c49a6c;
 }
 
 .changelog-item .changelog-bar.alpha {
-  --changelog-bar-color: #f87171;
+  --changelog-bar-color: #9b8ff5;
 }
 
 .changelog-item .changelog-version-body {

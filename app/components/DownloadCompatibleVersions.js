@@ -3,6 +3,28 @@
 import RelativeTime from './RelativeTime'
 import { DownloadIconButton, VersionChannelBadge } from './DownloadModalParts'
 import { formatFileSize } from '@/lib/modrinth'
+import { versionChannelCardClass } from '@/lib/versionChannelStyles'
+import StyledTooltip from './StyledTooltip'
+
+function ChannelHelpIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      className="size-4"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
+      />
+    </svg>
+  )
+}
 
 function VersionCardContent({ version, primaryFile, showFilename = false }) {
   return (
@@ -45,8 +67,29 @@ export default function DownloadCompatibleVersions({
       aria-label={isChannelPicker ? 'Совместимые версии' : undefined}
     >
       {isChannelPicker && (
-        <h3 className="relative top-0.5 m-0 text-base font-semibold text-gray-900 dark:text-white">
+        <h3 className="relative top-0.5 m-0 flex items-center gap-1.5 text-base font-semibold text-gray-900 dark:text-white">
           Совместимые версии
+          <StyledTooltip
+            side="right"
+            contentClassName="!text-left !max-w-[18rem]"
+            label={
+              <span className="flex flex-col gap-1.5">
+                <span>Под одну версию Minecraft и платформу иногда лежит несколько сборок.</span>
+                <span>Release — стабильная. Если она есть, бери её.</span>
+                <span>Beta — почти готово, но могут быть баги. Для теста.</span>
+                <span>Alpha — сырая. Только если понимаешь, что ставишь.</span>
+                <span>Выбранная строка идёт в «скачать всё в .zip» и «по отдельности». Круглая кнопка качает только этот файл.</span>
+              </span>
+            }
+          >
+            <button
+              type="button"
+              className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green/50 dark:text-gray-500 dark:hover:text-gray-300"
+              aria-label="Какую версию выбрать"
+            >
+              <ChannelHelpIcon />
+            </button>
+          </StyledTooltip>
         </h3>
       )}
 
@@ -55,9 +98,7 @@ export default function DownloadCompatibleVersions({
           const checked = version.id === selectedVersionId
           const primaryFile = version.files?.find((file) => file.primary) || version.files?.[0]
 
-          const cardClass = checked
-            ? 'border-modrinth-green bg-modrinth-green/[0.08] dark:bg-modrinth-green/[0.12]'
-            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50/80 dark:border-[#2e3035] dark:hover:border-[#3a3d44] dark:hover:bg-[#1e2024]/90'
+          const cardClass = versionChannelCardClass(version.version_type, checked)
 
           const cardShellClass =
             'grid items-center gap-3 rounded-2xl border border-solid px-3 py-3 transition-[border-color,background-color,box-shadow] grid-cols-[minmax(0,1fr)_2.25rem]'
@@ -96,7 +137,7 @@ export default function DownloadCompatibleVersions({
                   onSelectVersionId(version.id)
                 }
               }}
-              className={`${cardShellClass} cursor-pointer ${cardClass}`}
+              className={`${cardShellClass} cursor-default ${cardClass}`}
             >
               <VersionCardContent
                 version={version}
@@ -108,7 +149,7 @@ export default function DownloadCompatibleVersions({
                 className="flex h-9 w-9 shrink-0 items-center justify-center"
                 onClick={(event) => event.stopPropagation()}
               >
-                {checked && primaryFile?.url && (
+                {primaryFile?.url && (
                   <DownloadIconButton
                     href={primaryFile.url}
                     download={primaryFile.filename}

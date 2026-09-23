@@ -16,6 +16,8 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('datapacks', searchParams, { basePath: 'datapacks' })
@@ -25,8 +27,6 @@ export default async function DatapacksPage({ searchParams }) {
   const query = searchParams.q || '';
   const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
-  const lParam = searchParams.l
-  const openSourceState = lParam === 'open_source:true' ? 'selected' : lParam === 'open_source:false' ? 'excluded' : 'none';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
   
@@ -67,10 +67,8 @@ export default async function DatapacksPage({ searchParams }) {
   if (categories.length > 0) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
-  
-  if (openSourceState === 'selected') {
-    facets.push(['open_source:true']);
-  }
+  appendDisclosureExclusionFacets(facets, searchParams);
+  appendOpenSourceFacets(facets, searchParams);
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
@@ -133,9 +131,9 @@ export default async function DatapacksPage({ searchParams }) {
     appendVersionParams(params, versions);
     categories.forEach(c => params.append('f', `categories:${c}`));
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
-    if (openSourceState === 'selected') params.set('l', 'open_source:true');
-    else if (openSourceState === 'excluded') params.set('l', 'open_source:false');
     if (sortBy !== 'relevance') params.set('sort', sortBy);
+    copyOpenSourceParams(params, searchParams);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/datapacks?${params.toString()}`;
   };

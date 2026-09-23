@@ -16,6 +16,8 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'modpacks' })
@@ -46,8 +48,6 @@ export default async function ModpacksPage({ searchParams }) {
   const excludedLoaders = []
   const categories = []
   const excludedCategories = []
-  let includeOpenSource = false
-  let excludeOpenSource = false
 
   const gParams = Array.isArray(searchParams.g) ? searchParams.g : (searchParams.g ? [searchParams.g] : [])
   gParams.forEach(param => {
@@ -81,16 +81,6 @@ export default async function ModpacksPage({ searchParams }) {
     }
   })
 
-  const lParams = Array.isArray(searchParams.l) ? searchParams.l : (searchParams.l ? [searchParams.l] : [])
-  lParams.forEach(param => {
-    const decoded = decodeURIComponent(param)
-    if (decoded === 'open_source:true') {
-      includeOpenSource = true
-    } else if (decoded === 'open_source!=true') {
-      excludeOpenSource = true
-    }
-  })
-
   const facets = [['project_type:modpack']];
   
   const versionsFacet = versionFacets(versions);
@@ -110,9 +100,8 @@ export default async function ModpacksPage({ searchParams }) {
     facets.push(['server_side:required']);
   }
 
-  if (includeOpenSource) {
-    facets.push(['open_source:true'])
-  }
+  appendDisclosureExclusionFacets(facets, searchParams)
+  appendOpenSourceFacets(facets, searchParams)
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
@@ -189,14 +178,9 @@ export default async function ModpacksPage({ searchParams }) {
       params.append('f', `categories!=${cat}`)
     })
 
-    if (includeOpenSource) {
-      params.append('l', 'open_source:true')
-    } else if (excludeOpenSource) {
-      params.append('l', 'open_source!=true')
-    }
-    
     if (sortBy !== 'relevance') params.set('sort', sortBy);
-    
+    copyOpenSourceParams(params, searchParams);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/modpacks?${params.toString()}`;
   };

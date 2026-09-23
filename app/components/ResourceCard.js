@@ -2,7 +2,7 @@ import CatalogReturnLink from './CatalogReturnLink'
 import { formatDownloads, modrinthHoverAccentHex } from '@/lib/modrinth'
 import { getPublicUsername } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
-import { LOADERS } from '@/lib/loaders'
+import { LOADERS, getLoaderById } from '@/lib/loaders'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SERVER_CATEGORIES, SERVER_REGIONS } from '@/lib/serverCategories'
@@ -41,7 +41,9 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
     ]
     
     const cat = allCategories.find(c => c.id === categoryId)
-    return cat ? { icon: cat.icon, name: cat.name } : null
+    if (cat) return { icon: cat.icon, name: cat.name }
+    const loader = getLoaderById(categoryId)
+    return loader ? { icon: loader.icon, name: loader.name } : null
   }
 
   const loaderIds = LOADERS.map(l => l.id)

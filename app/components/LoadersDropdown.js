@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { LOADERS } from '@/lib/loaders'
+import { resolveLoader } from '@/lib/loaders'
 
 function FilterCheckbox({ checked }) {
   return (
@@ -51,8 +51,8 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
   const getLabel = () => {
     if (selectedLoaders.length === 0) return 'Платформы'
     if (selectedLoaders.length === 1) {
-      const loaderData = LOADERS.find(l => l.id === selectedLoaders[0])
-      return loaderData ? loaderData.name : selectedLoaders[0]
+      const loaderData = resolveLoader(selectedLoaders[0])
+      return loaderData.name
     }
     return `${selectedLoaders.length} выбрано`
   }
@@ -78,8 +78,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
           <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-1">
               {loaders.map(loaderId => {
-                const loaderData = LOADERS.find(l => l.id === loaderId)
-                if (!loaderData) return null
+                const loaderData = resolveLoader(loaderId)
                 const checked = selectedLoaders.includes(loaderId)
 
                 return (

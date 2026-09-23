@@ -11,8 +11,9 @@ import {
   filterVersionsByContentType,
   getVersionGameVersions,
   getVersionPlatformIds,
+  orderLoaderIds,
 } from '@/lib/contextualVersions'
-import { LOADERS } from '@/lib/loaders'
+import { resolveLoader } from '@/lib/loaders'
 import VersionsDropdown from './VersionsDropdown'
 import LoadersDropdown from './LoadersDropdown'
 import ChannelsDropdown from './ChannelsDropdown'
@@ -213,8 +214,8 @@ export default function VersionsList({
     contextualVersions.forEach(v => {
       getVersionPlatformIds(v).forEach(l => loadersSet.add(l))
     })
-    return Array.from(loadersSet)
-  }, [contextualVersions])
+    return orderLoaderIds(Array.from(loadersSet), contentType)
+  }, [contextualVersions, contentType])
 
   const channelTypesPresent = useMemo(() => {
     const s = new Set()
@@ -380,7 +381,7 @@ export default function VersionsList({
               ))}
 
               {selectedLoaders.map((loaderId) => {
-                const loaderData = LOADERS.find((l) => l.id === loaderId)
+                const loaderData = resolveLoader(loaderId)
                 return (
                   <button
                     key={`l-${loaderId}`}
@@ -478,8 +479,7 @@ export default function VersionsList({
                         })}
                         {showPlatforms &&
                           getVersionPlatformIds(version).map((loaderId) => {
-                          const loaderData = LOADERS.find(l => l.id === loaderId)
-                          if (!loaderData) return null
+                          const loaderData = resolveLoader(loaderId)
                           const active = selectedLoaders.includes(loaderId)
                           
                           return (
@@ -547,8 +547,7 @@ export default function VersionsList({
                       {showPlatforms && (
                         <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
                           {getVersionPlatformIds(version).map((loaderId) => {
-                            const loaderData = LOADERS.find(l => l.id === loaderId)
-                            if (!loaderData) return null
+                            const loaderData = resolveLoader(loaderId)
                             const active = selectedLoaders.includes(loaderId)
                             
                             return (
@@ -617,8 +616,7 @@ export default function VersionsList({
                           {showPlatforms && (
                             <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
                               {getVersionPlatformIds(version).map((loaderId) => {
-                                const loaderData = LOADERS.find(l => l.id === loaderId)
-                                if (!loaderData) return null
+                                const loaderData = resolveLoader(loaderId)
                                 const active = selectedLoaders.includes(loaderId)
                                 
                                 return (

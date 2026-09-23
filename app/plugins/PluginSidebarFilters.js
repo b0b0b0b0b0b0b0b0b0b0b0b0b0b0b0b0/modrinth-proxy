@@ -5,6 +5,11 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { getFilterConfig } from '@/lib/filterConfig'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
+import LicenseFilter from '@/app/components/LicenseFilter'
+import { PLUGIN_PLATFORM_ID_LIST } from '@/lib/loaders'
 
 const config = getFilterConfig('plugins')
 const PLUGIN_LOADERS = config.loaders
@@ -23,7 +28,6 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
   const [selectedLoaders, setSelectedLoaders] = useState([])
   const [selectedPlatforms, setSelectedPlatforms] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
-  const [openSource, setOpenSource] = useState(false)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
 
@@ -36,16 +40,14 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
     setSelectedLoaders(parsedFilters.loaders)
     setSelectedPlatforms(parsedFilters.platforms)
     setSelectedCategories(parsedFilters.categories)
-    setOpenSource(parsedFilters.openSource)
   }, [searchParams])
 
   const parseFacets = () => {
     const loaders = []
     const platforms = []
     const categories = []
-    let openSource = false
 
-    const platformIds = ['bungeecord', 'waterfall', 'velocity', 'geyser']
+    const platformIds = PLUGIN_PLATFORM_ID_LIST
 
     const gParams = searchParams.getAll('g')
     gParams.forEach(param => {
@@ -77,16 +79,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
       }
     })
 
-    const lParams = searchParams.getAll('l')
-    lParams.forEach(param => {
-      if (!param) return
-      const decoded = decodeURIComponent(param)
-      if (decoded === 'open_source:true') {
-        openSource = true
-      }
-    })
-
-    return { loaders, platforms, categories, openSource }
+    return { loaders, platforms, categories }
   }
 
   const updateFilters = (updates) => {
@@ -119,13 +112,10 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
       params.append('f', `categories:${cat}`)
     })
 
-    const finalOpenSource = updates.os !== undefined ? updates.os : openSource
-    if (finalOpenSource) {
-      params.append('l', 'open_source:true')
-    }
-    
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
+    copyOpenSourceParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams)
     
     router.push(`/plugins?${params.toString()}`)
     onFilterChange?.()
@@ -337,30 +327,11 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">Прочее</h3>
-          <button
-            onClick={() => {
-              const newOpenSource = !openSource
-              setOpenSource(newOpenSource)
-              updateFilters({ os: newOpenSource })
-            }}
-            className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-              openSource
-                ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-            }`}
-          >
-            <span className="truncate text-sm flex-1">Открытый исходный код</span>
-            {openSource && (
-              <svg className="h-4 w-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <LicenseFilter />
 
-        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedPlatforms.length > 0 || selectedCategories.length > 0 || openSource || searchQuery) && (
+        <AdvancedExclusionsFilter />
+
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedPlatforms.length > 0 || selectedCategories.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
@@ -369,9 +340,10 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
                 setSelectedLoaders([])
                 setSelectedPlatforms([])
                 setSelectedCategories([])
-                setOpenSource(false)
                 const sort = searchParams.get('sort')
-                router.push(sort ? `/plugins?sort=${sort}` : '/plugins')
+                saveStoredDisclosureExclusions([])
+                saveStoredOpenSource('none')
+                router.push(catalogResetUrl('/plugins', { sort }))
               }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"
             >

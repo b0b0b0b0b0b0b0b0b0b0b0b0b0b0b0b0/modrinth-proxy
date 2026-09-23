@@ -13,7 +13,7 @@ import {
 } from '@/lib/contextualVersions'
 import { filterVersionChangelog } from '@/lib/contentFilter'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
-import { LOADERS } from '@/lib/loaders'
+import { resolveLoader } from '@/lib/loaders'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
 import ChannelsDropdown from './ChannelsDropdown'
 import { ChangelogTimelineRow } from './ChangelogVersionEntries'
@@ -387,8 +387,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                             </span>
                           ))}
                           {version.loaders.filter(l => l !== 'minecraft').map((loaderId) => {
-                            const loaderData = LOADERS.find(l => l.id === loaderId)
-                            if (!loaderData) return null
+                            const loaderData = resolveLoader(loaderId)
                             
                             return (
                               <span 

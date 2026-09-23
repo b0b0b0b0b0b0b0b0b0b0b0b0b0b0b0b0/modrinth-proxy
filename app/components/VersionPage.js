@@ -8,7 +8,7 @@ import {
 } from '@/lib/modrinth'
 import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
 import { findArchivedDisclosure } from '@/lib/projectDisclosures'
-import { LOADERS } from '@/lib/loaders'
+import { resolveLoader } from '@/lib/loaders'
 import { getVersionPlatformIds } from '@/lib/contextualVersions'
 import { IconDownload, IconHardDrive } from '@/lib/icons'
 import ReactMarkdown from 'react-markdown'
@@ -180,8 +180,7 @@ function VersionCompatibility({ version, project }) {
             <div className="text-sm text-gray-600 dark:text-gray-300">Платформы</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {platforms.map((loaderId) => {
-                const loaderData = LOADERS.find((l) => l.id === loaderId)
-                if (!loaderData) return null
+                const loaderData = resolveLoader(loaderId)
                 return (
                   <span
                     key={loaderId}

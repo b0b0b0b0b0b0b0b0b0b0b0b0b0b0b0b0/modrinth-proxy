@@ -17,6 +17,8 @@ import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('mods', searchParams, { basePath: 'discover/mods' })
@@ -92,6 +94,8 @@ export default async function ModsPage({ searchParams }) {
   } else if (environment === 'client') {
     facets.push(['client_side:required', 'client_side:optional']);
   }
+  appendDisclosureExclusionFacets(facets, searchParams);
+  appendOpenSourceFacets(facets, searchParams);
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
@@ -103,6 +107,8 @@ export default async function ModsPage({ searchParams }) {
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
     if (environment) params.set('e', environment);
     if (sortBy !== 'relevance') params.set('sort', sortBy);
+    copyOpenSourceParams(params, searchParams);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/mods?${params.toString()}`;
   };

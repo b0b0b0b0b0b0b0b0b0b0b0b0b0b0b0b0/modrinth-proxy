@@ -16,6 +16,8 @@ import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionN
 import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('resourcepacks', searchParams, { basePath: 'discover/resourcepacks' })
@@ -93,6 +95,8 @@ export default async function ResourcepacksPage({ searchParams }) {
   if (resolutions.length > 0) {
     resolutions.forEach(r => facets.push([`categories:${r}`]));
   }
+  appendDisclosureExclusionFacets(facets, searchParams);
+  appendOpenSourceFacets(facets, searchParams);
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
@@ -105,6 +109,8 @@ export default async function ResourcepacksPage({ searchParams }) {
     resolutions.forEach(r => params.append('f', `categories:${r}`));
     excludedResolutions.forEach(r => params.append('f', `categories!=${r}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
+    copyOpenSourceParams(params, searchParams);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/resourcepacks?${params.toString()}`;
   };

@@ -19,8 +19,8 @@ const CHANNEL_OPTIONS = [
   {
     id: 'alpha',
     label: 'Альфа',
-    textClass: 'text-red-400',
-    activeRing: 'ring-1 ring-red-400/40',
+    textClass: 'text-version-alpha-fg',
+    activeRing: 'ring-1 ring-version-alpha-fg/40',
   },
 ]
 

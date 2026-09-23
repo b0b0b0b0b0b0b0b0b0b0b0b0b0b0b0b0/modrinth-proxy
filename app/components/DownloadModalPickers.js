@@ -132,6 +132,8 @@ export default function DownloadModalPickers({
   selectedLoader,
   filteredMcVersions,
   loaders,
+  compatibleLoaders,
+  projectTitle,
   versionSearch,
   onVersionSearchChange,
   showAllVersions,
@@ -329,41 +331,62 @@ export default function DownloadModalPickers({
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 custom-scrollbar"
           style={{ maxHeight: PICKER_LIST_MAX_HEIGHT }}
         >
-          {loaders.map((loader) => (
-            <div key={loader} className="group/row flex items-center gap-1">
-              <LottieStar
-                isFavorite={favLoader === loader}
-                animationData={favLoader === loader ? noBookmarkAnimation : bookmarkAnimation}
-                onClick={() => onToggleFavoriteLoader(loader)}
-                label={
-                  favLoader === loader ? (
-                    'Убрать из избранного'
-                  ) : (
-                    <span className="flex flex-col items-center">
-                      <span>Сделать избранным загрузчиком</span>
-                      <span className="text-[10px] font-normal opacity-60 mt-0.5">
-                        (будет выбираться автоматически)
-                      </span>
-                    </span>
-                  )
-                }
-              />
+          {loaders.map((loader) => {
+            const compatible = !selectedMcVersion || compatibleLoaders.includes(loader)
+            const selected = selectedLoader === loader
+            const name = getLoaderName(loader)
+            const unavailableHint = selectedMcVersion
+              ? `${projectTitle || 'Проект'} не поддерживает ${name} для ${selectedMcVersion}`
+              : ''
+
+            const option = (
               <button
                 type="button"
+                disabled={!compatible}
                 onClick={() => {
+                  if (!compatible) return
                   onSelectLoader(loader)
                   onOpenPickerChange(null)
                 }}
                 className={`flex-1 rounded-lg px-3 py-2 text-left text-sm font-medium transition-all ${
-                  selectedLoader === loader
+                  selected
                     ? 'bg-modrinth-green text-black'
-                    : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]'
+                    : compatible
+                      ? 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]'
+                      : 'cursor-not-allowed text-red-500 opacity-40'
                 }`}
               >
-                {getLoaderName(loader)}
+                {name}
               </button>
-            </div>
-          ))}
+            )
+
+            return (
+              <div key={loader} className="group/row flex items-center gap-1">
+                <LottieStar
+                  isFavorite={favLoader === loader}
+                  animationData={favLoader === loader ? noBookmarkAnimation : bookmarkAnimation}
+                  onClick={() => onToggleFavoriteLoader(loader)}
+                  label={
+                    favLoader === loader ? (
+                      'Убрать из избранного'
+                    ) : (
+                      <span className="flex flex-col items-center">
+                        <span>Сделать избранным загрузчиком</span>
+                        <span className="text-[10px] font-normal opacity-60 mt-0.5">
+                          (будет выбираться автоматически)
+                        </span>
+                      </span>
+                    )
+                  }
+                />
+                {compatible ? option : (
+                  <StyledTooltip label={unavailableHint} side="left">
+                    <span className="flex-1 min-w-0">{option}</span>
+                  </StyledTooltip>
+                )}
+              </div>
+            )
+          })}
         </div>
       </PickerDropdownPortal>
     </div>

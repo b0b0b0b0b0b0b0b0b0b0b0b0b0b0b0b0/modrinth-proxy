@@ -6,6 +6,10 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MOD_LOADERS, MAIN_LOADERS_COUNT } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
+import LicenseFilter from '@/app/components/LicenseFilter'
 
 const MOD_CATEGORIES = CATEGORIES.filter(cat =>
   ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
@@ -104,6 +108,8 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
+    copyOpenSourceParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams)
     
     router.push(`/mods?${params.toString()}`)
     onFilterChange?.()
@@ -335,7 +341,11 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
           </div>
         </div>
 
-        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || selectedEnvironment || searchQuery) && (
+        <LicenseFilter />
+
+        <AdvancedExclusionsFilter />
+
+        {(selectedVersions.length > 0 || selectedLoaders.length > 0 || selectedCategories.length > 0 || selectedEnvironment || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {
@@ -345,7 +355,9 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
               setSelectedCategories([])
               setSelectedEnvironment('')
               const sort = searchParams.get('sort')
-              router.push(sort ? `/mods?sort=${sort}` : '/mods')
+              saveStoredDisclosureExclusions([])
+              saveStoredOpenSource('none')
+              router.push(catalogResetUrl('/mods', { sort }))
             }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"
           >

@@ -1,10 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
+import { withCatalogDiscoveryQuery } from '@/lib/catalogDiscoveryQuery'
+
 export default function Navigation() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const catalogHref = (path) => withCatalogDiscoveryQuery(path, searchParams)
   const [indicator, setIndicator] = useState({ left: 0, width: 0, height: 0, opacity: 0, color: 'modrinth-green' })
   const prevPathnameRef = useRef(null)
   const navRef = useRef(null)
@@ -192,7 +196,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/mods'] = el}
-        href="/discover/mods" 
+        href={catalogHref('/discover/mods')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/mods') || isActive('/mods') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-[color:var(--color-green-hover)] dark:group-hover:text-modrinth-green-light'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -205,7 +209,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/resourcepacks'] = el}
-        href="/discover/resourcepacks" 
+        href={catalogHref('/discover/resourcepacks')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-purple-500/10 dark:hover:bg-purple-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/resourcepacks') || isActive('/resourcepacks') ? 'text-purple-600 dark:text-purple-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-purple-600 dark:group-hover:text-purple-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -218,7 +222,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/datapacks'] = el}
-        href="/discover/datapacks" 
+        href={catalogHref('/discover/datapacks')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-orange-500/10 dark:hover:bg-orange-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/datapacks') || isActive('/datapacks') ? 'text-orange-600 dark:text-orange-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-orange-600 dark:group-hover:text-orange-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -230,7 +234,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/shaders'] = el}
-        href="/discover/shaders" 
+        href={catalogHref('/discover/shaders')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-cyan-500/10 dark:hover:bg-cyan-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/shaders') || isActive('/shaders') ? 'text-cyan-600 dark:text-cyan-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-cyan-600 dark:group-hover:text-cyan-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -244,7 +248,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/modpacks'] = el}
-        href="/discover/modpacks" 
+        href={catalogHref('/discover/modpacks')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-red-500/10 dark:hover:bg-red-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/modpacks') || isActive('/modpacks') ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-red-600 dark:group-hover:text-red-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -258,7 +262,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/plugins'] = el}
-        href="/discover/plugins" 
+        href={catalogHref('/discover/plugins')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-blue-500/10 dark:hover:bg-blue-500/10">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/plugins') || isActive('/plugins') ? 'text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-blue-600 dark:group-hover:text-blue-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -270,7 +274,7 @@ export default function Navigation() {
       
       <Link 
         ref={el => linksRef.current['/discover/servers'] = el}
-        href="/discover/servers" 
+        href={catalogHref('/discover/servers')} 
         className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-indigo-500/10 dark:hover:bg-indigo-950/30">
         <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/servers') || isActive('/servers') || pathname.startsWith('/server/') ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">

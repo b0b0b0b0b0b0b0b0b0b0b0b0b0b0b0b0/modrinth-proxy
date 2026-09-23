@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { LOADERS } from '@/lib/loaders'
+import { resolveLoader } from '@/lib/loaders'
 import { buildAllowedLoaderIds } from '@/lib/contextualVersions'
 import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
 import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
@@ -91,8 +91,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                 <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">Платформы</h3>
                 <div className="flex flex-wrap gap-2">
                   {loaders.map((loaderId) => {
-                    const loader = LOADERS.find(l => l.id === loaderId)
-                    if (!loader) return null
+                    const loader = resolveLoader(loaderId)
                     
                     const contentTypeRoute = browseRoute
                     const filterUrl = `/${contentTypeRoute}?g=categories:${loaderId}`

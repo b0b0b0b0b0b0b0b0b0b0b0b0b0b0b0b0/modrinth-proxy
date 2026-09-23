@@ -1,11 +1,13 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
+import { withCatalogDiscoveryQuery } from '@/lib/catalogDiscoveryQuery'
 
 export default function MobileNav({ onFilterClick }) {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
   
   const isActive = (path) => {
@@ -263,7 +265,7 @@ export default function MobileNav({ onFilterClick }) {
                   return (
                     <Link
                       key={item.href}
-                      href={item.href}
+                      href={withCatalogDiscoveryQuery(item.href, searchParams)}
                       onClick={() => setIsOpen(false)}
                       className={`group relative flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
                         active

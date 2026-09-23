@@ -53,6 +53,12 @@ export default function SearchInput({
         
         const fParams = searchParams.getAll('f')
         fParams.forEach(f => params.append('f', f))
+
+        const aParams = searchParams.getAll('a')
+        aParams.forEach(a => params.append('a', a))
+
+        const lParams = searchParams.getAll('l')
+        lParams.forEach(l => params.append('l', l))
         
         const env = searchParams.get('e')
         if (env) params.set('e', env)
@@ -90,6 +96,12 @@ export default function SearchInput({
     
     const fParams = searchParams.getAll('f')
     fParams.forEach(f => params.append('f', f))
+
+    const aParams = searchParams.getAll('a')
+    aParams.forEach(a => params.append('a', a))
+
+    const lParams = searchParams.getAll('l')
+    lParams.forEach(l => params.append('l', l))
     
     const env = searchParams.get('e')
     if (env) params.set('e', env)

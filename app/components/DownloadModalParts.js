@@ -2,25 +2,19 @@
 
 import StyledTooltip from './StyledTooltip'
 
+import { versionChannelBadgeClass } from '@/lib/versionChannelStyles'
+
 const VERSION_TYPE_LABELS = {
   release: 'Release',
   beta: 'Beta',
   alpha: 'Alpha',
 }
 
-const VERSION_TYPE_STYLES = {
-  release: 'bg-version-release-bg text-version-release-fg border-version-release-fg/30',
-  beta: 'bg-version-beta-bg text-version-beta-fg border-version-beta-fg/30',
-  alpha: 'bg-red-500/15 text-red-400 border-red-500/30',
-}
-
 export function VersionChannelBadge({ versionType = 'release' }) {
   const type = versionType || 'release'
   return (
     <span
-      className={`inline-flex shrink-0 items-center rounded-full border px-2 py-1 text-sm font-normal leading-none ${
-        VERSION_TYPE_STYLES[type] || VERSION_TYPE_STYLES.release
-      }`}
+      className={`inline-flex shrink-0 items-center rounded-full border px-2 py-1 text-sm font-normal leading-none ${versionChannelBadgeClass(type)}`}
     >
       {VERSION_TYPE_LABELS[type] || VERSION_TYPE_LABELS.release}
     </span>
@@ -67,7 +61,7 @@ export function DownloadIconButton({ href, download, label, className = '' }) {
         href={href}
         download={download}
         aria-label={label}
-        className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-200/80 dark:text-gray-300 dark:hover:bg-[#2e3035] ${className}`}
+        className={`inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-200/80 dark:text-gray-300 dark:hover:bg-[#2e3035] ${className}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

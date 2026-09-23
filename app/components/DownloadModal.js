@@ -6,12 +6,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
-  filterVersionsForProject,
+  filterVersionsByContentType,
+  filterLoadersForContentType,
   getVersionGameVersions,
   getVersionLoaders,
+  listLoaderIdsForContentType,
   normalizeContentRoute,
 } from '@/lib/contextualVersions'
 import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
+import { getLoaderDisplayName } from '@/lib/loaders'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { downloadZipBundle, downloadFilesSequentially, buildModrinthExtractZipName } from '@/lib/downloadZip'
 import StyledTooltip from './StyledTooltip'
@@ -24,6 +27,10 @@ import DownloadVersionBundledFiles from './DownloadVersionBundledFiles'
 import Lottie from 'lottie-react'
 import bookmarkAnimation from '@/public/animations/bookmark.json'
 import noBookmarkAnimation from '@/public/animations/no_bookmark.json'
+
+function contentLoaders(version, contentType) {
+  return filterLoadersForContentType(getVersionLoaders(version), contentType)
+}
 
 function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible = false }) {
   const lottieRef = useRef(null)
@@ -191,8 +198,8 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
   const contentRoute = normalizeContentRoute(contentType)
 
   const contextualVersions = useMemo(
-    () => filterVersionsForProject(versions, mod, contentType),
-    [versions, mod, contentType],
+    () => filterVersionsByContentType(versions, contentType),
+    [versions, contentType],
   )
 
   const launcherUri = useMemo(() => {
@@ -262,7 +269,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
         const availableLoaders = new Set()
         contextualVersions.forEach(version => {
           if (getVersionGameVersions(version).includes(urlVersion)) {
-            getVersionLoaders(version).forEach(l => availableLoaders.add(l))
+            contentLoaders(version, contentType).forEach((l) => availableLoaders.add(l))
           }
         })
         if (urlLoader && availableLoaders.has(urlLoader)) {
@@ -275,7 +282,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
         const availableLoaders = new Set()
         contextualVersions.forEach(version => {
           if (getVersionGameVersions(version).includes(activeFavVersion)) {
-            getVersionLoaders(version).forEach(l => availableLoaders.add(l))
+            contentLoaders(version, contentType).forEach((l) => availableLoaders.add(l))
           }
         })
         if (activeFavLoader && availableLoaders.has(activeFavLoader)) {
@@ -390,7 +397,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     const availableLoaders = new Set()
     contextualVersions.forEach((v) => {
       if (getVersionGameVersions(v).includes(version)) {
-        getVersionLoaders(v).forEach((l) => availableLoaders.add(l))
+        contentLoaders(v, contentType).forEach((l) => availableLoaders.add(l))
       }
     })
     if (selectedLoader && availableLoaders.has(selectedLoader)) {
@@ -484,24 +491,42 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     return allMcVersionsForPicker.filter((v) => isReleaseVersion(v))
   }, [allMcVersionsForPicker, showAllVersions])
 
-  const allLoaders = useMemo(() => {
+  const catalogLoaderIds = useMemo(
+    () => listLoaderIdsForContentType(contentType),
+    [contentType],
+  )
+
+  const versionLoaderIds = useMemo(() => {
     const loadersSet = new Set()
     contextualVersions.forEach((version) => {
-      getVersionLoaders(version).forEach((l) => loadersSet.add(l))
+      contentLoaders(version, contentType).forEach((l) => loadersSet.add(l))
     })
     return Array.from(loadersSet)
-  }, [contextualVersions])
+  }, [contextualVersions, contentType])
+
+  const allLoaders = useMemo(() => {
+    const seen = new Set()
+    const ordered = []
+    const add = (id) => {
+      if (!id || seen.has(id)) return
+      seen.add(id)
+      ordered.push(id)
+    }
+    catalogLoaderIds.forEach(add)
+    versionLoaderIds.forEach(add)
+    return ordered
+  }, [catalogLoaderIds, versionLoaderIds])
 
   const loaders = useMemo(() => {
     if (!selectedMcVersion) return allLoaders
     const loadersSet = new Set()
     contextualVersions.forEach((version) => {
       if (getVersionGameVersions(version).includes(selectedMcVersion)) {
-        getVersionLoaders(version).forEach((l) => loadersSet.add(l))
+        contentLoaders(version, contentType).forEach((l) => loadersSet.add(l))
       }
     })
     return Array.from(loadersSet)
-  }, [contextualVersions, selectedMcVersion, allLoaders])
+  }, [contextualVersions, selectedMcVersion, allLoaders, contentType])
 
   const filteredMcVersions = useMemo(() => {
     if (!versionSearch) return mcVersions
@@ -592,31 +617,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     }
   }
 
-  const getLoaderName = (loader) => {
-    const names = {
-      'fabric': 'Fabric',
-      'forge': 'Forge',
-      'neoforge': 'NeoForge',
-      'quilt': 'Quilt',
-      'bukkit': 'Bukkit',
-      'paper': 'Paper',
-      'spigot': 'Spigot',
-      'purpur': 'Purpur',
-      'folia': 'Folia',
-      'sponge': 'Sponge',
-      'bungeecord': 'BungeeCord',
-      'velocity': 'Velocity',
-      'waterfall': 'Waterfall',
-      'iris': 'Iris',
-      'optifine': 'OptiFine',
-      'canvas': 'Canvas',
-      'vanilla': 'Vanilla',
-      'datapack': 'Датапак',
-      'resourcepack': 'Ресурспак',
-      'minecraft': 'Ресурспак',
-    }
-    return names[loader] || loader
-  }
+  const getLoaderName = (loader) => getLoaderDisplayName(loader)
 
   const downloadTooltipTitle =
     typeof mod?.title === 'string' ? mod.title.trim() : ''
@@ -837,7 +838,9 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                 selectedMcVersion={selectedMcVersion}
                 selectedLoader={selectedLoader}
                 filteredMcVersions={filteredMcVersions}
-                loaders={loaders}
+                loaders={allLoaders}
+                compatibleLoaders={selectedMcVersion ? loaders : versionLoaderIds}
+                projectTitle={downloadTooltipTitle}
                 versionSearch={versionSearch}
                 onVersionSearchChange={setVersionSearch}
                 showAllVersions={showAllVersions}

@@ -17,6 +17,8 @@ import CatalogEmptyResults from '@/app/components/CatalogEmptyResults'
 import CatalogSearchAlternatives from '@/app/components/CatalogSearchAlternatives'
 import { findCatalogSearchAlternatives } from '@/lib/catalogCrossSearch'
 import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
+import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('shaders', searchParams, { basePath: 'discover/shaders' })
@@ -88,9 +90,6 @@ export default async function ShadersPage({ searchParams }) {
     }
   });
 
-  const lParam = searchParams.l;
-  const openSourceState = lParam === 'open_source:true' ? 'selected' : lParam === 'open_source:false' ? 'excluded' : 'none';
-
   const facets = [['project_type:shader']];
   
   const versionsFacet = versionFacets(versions);
@@ -112,9 +111,8 @@ export default async function ShadersPage({ searchParams }) {
     loaders.forEach(l => facets.push([`categories:${l}`]));
   }
   
-  if (openSourceState === 'selected') {
-    facets.push(['open_source:true']);
-  }
+  appendDisclosureExclusionFacets(facets, searchParams);
+  appendOpenSourceFacets(facets, searchParams);
 
   const buildPageUrl = (newPage) => {
     const params = new URLSearchParams();
@@ -128,9 +126,9 @@ export default async function ShadersPage({ searchParams }) {
     excludedPerformance.forEach(p => params.append('f', `categories!=${p}`));
     loaders.forEach(l => params.append('g', `categories:${l}`));
     excludedLoaders.forEach(l => params.append('g', `categories!=${l}`));
-    if (openSourceState === 'selected') params.set('l', 'open_source:true');
-    else if (openSourceState === 'excluded') params.set('l', 'open_source:false');
     if (sortBy !== 'relevance') params.set('sort', sortBy);
+    copyOpenSourceParams(params, searchParams);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/shaders?${params.toString()}`;
   };

@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { filterVersionChangelog } from '@/lib/contentFilter'
 import RelativeTime from './RelativeTime'
 
@@ -116,13 +117,7 @@ export default function ChangelogVersionEntries({
                   )}
                 </h3>
                 <span
-                  className={`rounded px-2 py-0.5 text-xs ${
-                    version.version_type === 'release'
-                      ? 'bg-green-900 text-green-300'
-                      : version.version_type === 'beta'
-                        ? 'bg-yellow-900 text-yellow-300'
-                        : 'bg-red-900 text-red-300'
-                  }`}
+                    className={`rounded px-2 py-0.5 text-xs border ${versionChannelLetterRingClass(version.version_type)}`}
                 >
                   {version.version_type}
                 </span>

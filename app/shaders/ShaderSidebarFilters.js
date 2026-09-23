@@ -6,6 +6,10 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SHADER_LOADERS } from '@/lib/loaders'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
+import LicenseFilter from '@/app/components/LicenseFilter'
 
 export default function ShaderSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -55,13 +59,10 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
       }
     })
     
-    const lParam = searchParams.get('l')
-    const openSource = lParam === 'open_source:true'
-    
-    return { styles, features, performance, loaders, openSource }
+    return { styles, features, performance, loaders }
   }
   
-  const { styles: initialStyles, features: initialFeatures, performance: initialPerformance, loaders: initialLoaders, openSource: initialOpenSource } = parseFacets()
+  const { styles: initialStyles, features: initialFeatures, performance: initialPerformance, loaders: initialLoaders } = parseFacets()
   
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '')
   const [selectedVersions, setSelectedVersions] = useState(parseVersionParams(searchParams))
@@ -69,7 +70,6 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   const [selectedFeatures, setSelectedFeatures] = useState(initialFeatures)
   const [selectedPerformance, setSelectedPerformance] = useState(initialPerformance)
   const [selectedLoaders, setSelectedLoaders] = useState(initialLoaders)
-  const [openSource, setOpenSource] = useState(initialOpenSource)
   const [showAllVersions, setShowAllVersions] = useState(false)
   const [versionSearch, setVersionSearch] = useState('')
 
@@ -83,7 +83,6 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     setSelectedFeatures(parsedFilters.features)
     setSelectedPerformance(parsedFilters.performance)
     setSelectedLoaders(parsedFilters.loaders)
-    setOpenSource(parsedFilters.openSource)
   }, [searchParams])
 
   const updateFilters = (updates) => {
@@ -111,11 +110,10 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     currentPerformance.forEach(p => params.append('f', `categories:${p}`))
     currentLoaders.forEach(l => params.append('g', `categories:${l}`))
     
-    const currentOpenSource = updates.os !== undefined ? updates.os : openSource
-    if (currentOpenSource) params.set('l', 'open_source:true')
-    
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
+    copyOpenSourceParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams)
     
     router.push(`/shaders?${params.toString()}`)
     onFilterChange?.()
@@ -358,30 +356,11 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">Прочее</h3>
-          <button
-            onClick={() => {
-              const newOpenSource = !openSource
-              setOpenSource(newOpenSource)
-              updateFilters({ os: newOpenSource })
-            }}
-            className={`w-full text-left px-2 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
-              openSource
-                ? 'text-white hover:brightness-125 bg-modrinth-green/25'
-                : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
-            }`}
-          >
-            <span className="truncate text-sm flex-1">Открытый исходный код</span>
-            {openSource && (
-              <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-                <path d="M20 6 9 17l-5-5" />
-              </svg>
-            )}
-          </button>
-        </div>
+        <LicenseFilter />
 
-        {(selectedVersions.length > 0 || selectedStyles.length > 0 || selectedFeatures.length > 0 || selectedPerformance.length > 0 || selectedLoaders.length > 0 || openSource || searchQuery) && (
+        <AdvancedExclusionsFilter />
+
+        {(selectedVersions.length > 0 || selectedStyles.length > 0 || selectedFeatures.length > 0 || selectedPerformance.length > 0 || selectedLoaders.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
           <button
             onClick={() => {
@@ -391,9 +370,10 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
               setSelectedFeatures([])
               setSelectedPerformance([])
               setSelectedLoaders([])
-              setOpenSource(false)
               const sort = searchParams.get('sort')
-              router.push(sort ? `/shaders?sort=${sort}` : '/shaders')
+              saveStoredDisclosureExclusions([])
+              saveStoredOpenSource('none')
+              router.push(catalogResetUrl('/shaders', { sort }))
             }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"
           >

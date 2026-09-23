@@ -12,6 +12,7 @@ import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
+import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 
 export async function generateMetadata({ searchParams }) {
   const { title, description } = buildServerCatalogSeo({ searchParams })
@@ -73,6 +74,7 @@ export default async function ServersPage({ searchParams }) {
   if (categories.length > 0) {
     facets.push(categories.map(c => `categories:${c}`));
   }
+  appendDisclosureExclusionFacets(facets, searchParams);
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
@@ -127,6 +129,7 @@ export default async function ServersPage({ searchParams }) {
     categories.forEach(c => params.append('f', `categories:${c}`));
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/servers?${params.toString()}`;
   };

@@ -4,6 +4,8 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY, SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
+import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclusions, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 
 export default function ServerSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
   const router = useRouter()
@@ -131,6 +133,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
 
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
+    appendDisclosureExclusionParams(params, searchParams)
 
     router.push(`/discover/servers?${params.toString()}`)
     onFilterChange?.()
@@ -494,7 +497,9 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        {(selectedVersion || selectedCategories.length > 0 || searchQuery || selectedStatus !== 'online' || selectedRegions.length > 0 || selectedLanguages.length > 0) && (
+        <AdvancedExclusionsFilter />
+
+        {(selectedVersion || selectedCategories.length > 0 || searchQuery || selectedStatus !== 'online' || selectedRegions.length > 0 || selectedLanguages.length > 0 || parseDisclosureExclusions(searchParams).length > 0) && (
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
             <button
               onClick={() => {
@@ -505,7 +510,8 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 setSelectedRegions([])
                 setSelectedLanguages([])
                 const sort = searchParams.get('sort')
-                router.push(sort ? `/discover/servers?sst=online&sort=${sort}` : '/discover/servers?sst=online')
+                saveStoredDisclosureExclusions([])
+                router.push(catalogResetUrl('/discover/servers', { sort, sst: 'online' }))
               }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"
             >

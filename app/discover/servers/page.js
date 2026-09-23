@@ -9,10 +9,12 @@ import SortDropdown from '@/app/components/SortDropdown'
 import ActiveFilters from '@/app/components/ActiveFilters'
 import ReloadButton from '@/app/components/ReloadButton'
 import SearchInput from '@/app/components/SearchInput'
+import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
+import { appendDisclosureExclusionNewFilters, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 
 export async function generateMetadata({ searchParams }) {
   const { title, description } = buildServerCatalogSeo({ searchParams })
@@ -172,6 +174,8 @@ export default async function ServersPage({ searchParams }) {
     parts.push(`categories NOT IN [${exclOther.map(c => `"${c}"`).join(', ')}]`);
   }
 
+  appendDisclosureExclusionNewFilters(parts, searchParams);
+
   const newFilters = parts.join(' AND ');
 
   const buildPageUrl = (newPage) => {
@@ -198,6 +202,7 @@ export default async function ServersPage({ searchParams }) {
     });
     
     if (sort && sort !== 'relevance') params.set('sort', sort);
+    appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/servers?${params.toString()}`;
   };
@@ -251,6 +256,8 @@ export default async function ServersPage({ searchParams }) {
                 </div>
               </div>
             </div>
+
+            <SearchLayoutCorrectionNote />
             
             <div className="flex flex-col gap-2">
               <div className="flex items-center gap-2">
