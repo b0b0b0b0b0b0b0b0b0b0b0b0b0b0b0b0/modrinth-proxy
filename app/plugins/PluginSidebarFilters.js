@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { getFilterConfig } from '@/lib/filterConfig'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
-import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
@@ -115,7 +115,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
-    appendDisclosureExclusionParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams, '/plugins')
     
     router.push(`/plugins?${params.toString()}`)
     onFilterChange?.()
@@ -341,7 +341,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
                 setSelectedPlatforms([])
                 setSelectedCategories([])
                 const sort = searchParams.get('sort')
-                saveStoredDisclosureExclusions([])
+                saveVisibleDisclosureExclusions([], '/plugins')
                 saveStoredOpenSource('none')
                 router.push(catalogResetUrl('/plugins', { sort }))
               }}

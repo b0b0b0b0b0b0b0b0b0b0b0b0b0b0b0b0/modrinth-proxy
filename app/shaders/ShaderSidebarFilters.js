@@ -6,7 +6,7 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shaderCategories'
 import { SHADER_LOADERS } from '@/lib/loaders'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
-import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
@@ -113,7 +113,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
-    appendDisclosureExclusionParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams, '/shaders')
     
     router.push(`/shaders?${params.toString()}`)
     onFilterChange?.()
@@ -371,7 +371,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
               setSelectedPerformance([])
               setSelectedLoaders([])
               const sort = searchParams.get('sort')
-              saveStoredDisclosureExclusions([])
+              saveVisibleDisclosureExclusions([], '/shaders')
               saveStoredOpenSource('none')
               router.push(catalogResetUrl('/shaders', { sort }))
             }}

@@ -5,13 +5,14 @@ import { createPortal } from 'react-dom'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import {
   EPILEPSY_EXCLUSION_ID,
-  DISCLOSURE_EXCLUSION_TREE,
   appendDisclosureExclusionParams,
   ackEpilepsyExclusion,
   clearEpilepsyExclusionAck,
+  disclosureTreeForCatalog,
+  filterDisclosureIdsForCatalog,
   hideEpilepsyExclusionWarning,
   parseDisclosureExclusions,
-  saveStoredDisclosureExclusions,
+  saveVisibleDisclosureExclusions,
   shouldSkipEpilepsyWarning,
   toggleDisclosureExclusion,
 } from '@/lib/disclosureExclusions'
@@ -226,23 +227,27 @@ export default function AdvancedExclusionsFilter() {
   const hydrated = useRef(false)
   const [open, setOpen] = useState(true)
   const [expanded, setExpanded] = useState({ ai_content: true, telemetry: true })
-  const selected = parseDisclosureExclusions(searchParams)
+  const urlIds = parseDisclosureExclusions(searchParams)
+  const selected = filterDisclosureIdsForCatalog(urlIds, pathname)
+  const tree = disclosureTreeForCatalog(pathname)
   const queryString = searchParams.toString()
   const [warningOpen, setWarningOpen] = useState(false)
   const [pendingIds, setPendingIds] = useState(null)
 
-  const pushIds = (ids, persist) => {
-    if (persist) saveStoredDisclosureExclusions(ids)
+  const pushIds = (ids) => {
+    const visible = filterDisclosureIdsForCatalog(ids, pathname)
     const params = new URLSearchParams(queryString)
     params.delete('a')
     params.delete('page')
-    appendDisclosureExclusionParams(params, ids)
+    appendDisclosureExclusionParams(params, visible, pathname)
     const qs = params.toString()
     router.push(qs ? `${pathname}?${qs}` : pathname)
   }
 
   const applyIds = (ids) => {
-    pushIds(ids, true)
+    const visible = filterDisclosureIdsForCatalog(ids, pathname)
+    saveVisibleDisclosureExclusions(visible, pathname)
+    pushIds(visible)
   }
 
   const requestIds = (ids) => {
@@ -266,6 +271,11 @@ export default function AdvancedExclusionsFilter() {
 
   useEffect(() => {
     const urlIds = parseDisclosureExclusions(searchParams)
+    const visible = filterDisclosureIdsForCatalog(urlIds, pathname)
+    if (urlIds.length !== visible.length) {
+      pushIds(visible)
+      return
+    }
     if (!hydrated.current) {
       hydrated.current = true
       if (urlIds.length > 0) {
@@ -273,7 +283,7 @@ export default function AdvancedExclusionsFilter() {
           const withoutEpilepsy = urlIds.filter((id) => id !== EPILEPSY_EXCLUSION_ID)
           setPendingIds(urlIds)
           setWarningOpen(true)
-          pushIds(withoutEpilepsy, false)
+          pushIds(withoutEpilepsy)
           return
         }
         return
@@ -283,7 +293,7 @@ export default function AdvancedExclusionsFilter() {
     if (!urlIds.includes(EPILEPSY_EXCLUSION_ID) && !warningOpen) {
       clearEpilepsyExclusionAck()
     }
-  }, [queryString])
+  }, [queryString, pathname])
 
   return (
     <div className="overflow-hidden rounded-xl border border-gray-800 bg-modrinth-dark">
@@ -305,7 +315,7 @@ export default function AdvancedExclusionsFilter() {
             <span>Только прячет из поиска. Сохраняется в браузере. Ссылка с параметром a его не перезапишет.</span>
           </div>
           <div className="flex flex-col gap-1">
-            {DISCLOSURE_EXCLUSION_TREE.map((item) => {
+            {tree.map((item) => {
               const hasChildren = Boolean(item.children?.length)
               const childrenOpen = expanded[item.id]
               return (

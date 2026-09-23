@@ -101,7 +101,7 @@ export default async function ModpacksPage({ searchParams }) {
     facets.push(['server_side:required']);
   }
 
-  appendDisclosureExclusionFacets(facets, searchParams)
+  appendDisclosureExclusionFacets(facets, searchParams, 'modpacks')
   appendOpenSourceFacets(facets, searchParams)
 
   const buildPageUrl = (newPage) => {

@@ -91,7 +91,7 @@ export default async function ModsPage({ searchParams }) {
   } else if (environment === 'client') {
     facets.push(['client_side:required', 'client_side:optional']);
   }
-  appendDisclosureExclusionFacets(facets, searchParams);
+  appendDisclosureExclusionFacets(facets, searchParams, 'mods');
   appendOpenSourceFacets(facets, searchParams);
 
   let data = null;

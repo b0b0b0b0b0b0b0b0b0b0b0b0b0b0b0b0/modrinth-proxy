@@ -6,7 +6,7 @@ import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { MODPACK_LOADERS } from '@/lib/loaders'
 import { CATEGORIES } from '@/lib/categories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
-import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
@@ -106,7 +106,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
-    appendDisclosureExclusionParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams, '/modpacks')
     
     router.push(`/modpacks?${params.toString()}`)
     onFilterChange?.()
@@ -345,7 +345,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
                 setSelectedCategories([])
                 setEnvironment('')
                 const sort = searchParams.get('sort')
-                saveStoredDisclosureExclusions([])
+                saveVisibleDisclosureExclusions([], '/modpacks')
                 saveStoredOpenSource('none')
                 router.push(catalogResetUrl('/modpacks', { sort }))
               }}

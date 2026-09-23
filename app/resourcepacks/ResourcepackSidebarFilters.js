@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { RESOURCEPACK_CATEGORIES } from '@/lib/resourcepackCategories'
 import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionParams'
-import { appendDisclosureExclusionParams, catalogResetUrl, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
@@ -214,7 +214,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
-    appendDisclosureExclusionParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams, '/resourcepacks')
     
     router.push(`/resourcepacks?${params.toString()}`)
     onFilterChange?.()
@@ -452,7 +452,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
                 setSelectedFeatures([])
                 setSelectedResolutions([])
                 const sort = searchParams.get('sort')
-                saveStoredDisclosureExclusions([])
+                saveVisibleDisclosureExclusions([], '/resourcepacks')
                 saveStoredOpenSource('none')
                 router.push(catalogResetUrl('/resourcepacks', { sort }))
               }}

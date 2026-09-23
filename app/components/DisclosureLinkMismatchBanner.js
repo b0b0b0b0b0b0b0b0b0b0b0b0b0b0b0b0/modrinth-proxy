@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import {
   appendDisclosureExclusionParams,
+  filterDisclosureIdsForCatalog,
   loadStoredDisclosureExclusions,
   parseDisclosureExclusions,
   sameDisclosureExclusionIds,
@@ -42,8 +43,9 @@ export default function DisclosureLinkMismatchBanner() {
     }
   }, [])
 
-  const urlIds = parseDisclosureExclusions(searchParams)
-  if (!ready || hidden || stored.length === 0 || sameDisclosureExclusionIds(urlIds, stored)) {
+  const urlIds = filterDisclosureIdsForCatalog(parseDisclosureExclusions(searchParams), pathname)
+  const storedVisible = filterDisclosureIdsForCatalog(stored, pathname)
+  if (!ready || hidden || storedVisible.length === 0 || sameDisclosureExclusionIds(urlIds, storedVisible)) {
     return null
   }
 
@@ -51,7 +53,7 @@ export default function DisclosureLinkMismatchBanner() {
     const params = new URLSearchParams(searchParams.toString())
     params.delete('a')
     params.delete('page')
-    appendDisclosureExclusionParams(params, stored)
+    appendDisclosureExclusionParams(params, storedVisible, pathname)
     const qs = params.toString()
     router.push(qs ? `${pathname}?${qs}` : pathname)
   }

@@ -94,7 +94,7 @@ export default async function ResourcepacksPage({ searchParams }) {
   if (resolutions.length > 0) {
     resolutions.forEach(r => facets.push([`categories:${r}`]));
   }
-  appendDisclosureExclusionFacets(facets, searchParams);
+  appendDisclosureExclusionFacets(facets, searchParams, 'resourcepacks');
   appendOpenSourceFacets(facets, searchParams);
 
   let data = null;

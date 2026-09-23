@@ -111,7 +111,7 @@ export default async function ShadersPage({ searchParams }) {
     loaders.forEach(l => facets.push([`categories:${l}`]));
   }
   
-  appendDisclosureExclusionFacets(facets, searchParams);
+  appendDisclosureExclusionFacets(facets, searchParams, 'shaders');
   appendOpenSourceFacets(facets, searchParams);
 
   const buildPageUrl = (newPage) => {

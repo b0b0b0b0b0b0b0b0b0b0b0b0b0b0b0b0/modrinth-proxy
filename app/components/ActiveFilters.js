@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import { CATEGORIES } from '@/lib/categories'
 import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEnvironmentName } from '@/lib/filterConfig'
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
-import { getDisclosureExclusionLabel, parseDisclosureExclusions, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { getDisclosureExclusionLabel, filterDisclosureIdsForCatalog, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
 
 export default function ActiveFilters({ categoryPath = 'plugins' }) {
@@ -101,7 +101,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     })
   })
 
-  parseDisclosureExclusions(searchParams).forEach((id) => {
+  filterDisclosureIdsForCatalog(parseDisclosureExclusions(searchParams), categoryPath).forEach((id) => {
     activeFilters.push({
       type: 'disclosure',
       id,
@@ -245,7 +245,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         <Link
           href={clearAllUrl()}
           onClick={() => {
-            saveStoredDisclosureExclusions([])
+            saveVisibleDisclosureExclusions([], categoryPath)
             saveStoredOpenSource('none')
           }}
           className="bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer"
@@ -264,8 +264,9 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
           href={buildUrlWithoutFilter(filter)}
           onClick={() => {
             if (filter.type === 'disclosure') {
-              saveStoredDisclosureExclusions(
-                parseDisclosureExclusions(searchParams).filter((id) => id !== filter.id),
+              saveVisibleDisclosureExclusions(
+                filterDisclosureIdsForCatalog(parseDisclosureExclusions(searchParams), categoryPath).filter((id) => id !== filter.id),
+                categoryPath,
               )
             }
             if (filter.type === 'openSource') saveStoredOpenSource('none')

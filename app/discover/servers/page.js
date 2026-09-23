@@ -174,7 +174,7 @@ export default async function ServersPage({ searchParams }) {
     parts.push(`categories NOT IN [${exclOther.map(c => `"${c}"`).join(', ')}]`);
   }
 
-  appendDisclosureExclusionNewFilters(parts, searchParams);
+  appendDisclosureExclusionNewFilters(parts, searchParams, 'servers');
 
   const newFilters = parts.join(' AND ');
 

@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useMinecraftVersions } from '@/app/hooks/useMinecraftVersions'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY, SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
-import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclusions, saveStoredDisclosureExclusions } from '@/lib/disclosureExclusions'
+import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 
 export default function ServerSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
@@ -133,7 +133,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
 
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
-    appendDisclosureExclusionParams(params, searchParams)
+    appendDisclosureExclusionParams(params, searchParams, '/servers')
 
     router.push(`/discover/servers?${params.toString()}`)
     onFilterChange?.()
@@ -510,7 +510,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 setSelectedRegions([])
                 setSelectedLanguages([])
                 const sort = searchParams.get('sort')
-                saveStoredDisclosureExclusions([])
+                saveVisibleDisclosureExclusions([], '/servers')
                 router.push(catalogResetUrl('/discover/servers', { sort, sst: 'online' }))
               }}
               className="w-full bg-red-600/20 hover:bg-red-600/30 text-red-400 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors border border-red-600/30 flex items-center justify-center gap-1.5"

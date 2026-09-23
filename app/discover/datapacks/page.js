@@ -69,7 +69,7 @@ export default async function DatapacksPage({ searchParams }) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
   
-  appendDisclosureExclusionFacets(facets, searchParams);
+  appendDisclosureExclusionFacets(facets, searchParams, 'datapacks');
   appendOpenSourceFacets(facets, searchParams);
 
   const buildPageUrl = (newPage) => {

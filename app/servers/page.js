@@ -74,7 +74,7 @@ export default async function ServersPage({ searchParams }) {
   if (categories.length > 0) {
     facets.push(categories.map(c => `categories:${c}`));
   }
-  appendDisclosureExclusionFacets(facets, searchParams);
+  appendDisclosureExclusionFacets(facets, searchParams, 'servers');
 
   let data = null;
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;

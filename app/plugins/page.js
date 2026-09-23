@@ -114,7 +114,7 @@ export default async function PluginsPage({ searchParams }) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
 
-  appendDisclosureExclusionFacets(facets, searchParams)
+  appendDisclosureExclusionFacets(facets, searchParams, 'plugins')
   appendOpenSourceFacets(facets, searchParams)
 
   let data = null;
