@@ -4,7 +4,8 @@ import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
 import RelativeTime from '../components/RelativeTime'
 import nextDynamic from 'next/dynamic'
-import { getSiteCommits, GITHUB_REPO_URL } from '@/lib/commits'
+import { getSiteCommits } from '@/lib/commits'
+import { GITHUB_REPO_URL } from '@/lib/githubRepo'
 
 const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
   ssr: false,
