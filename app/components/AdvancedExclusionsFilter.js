@@ -226,7 +226,7 @@ export default function AdvancedExclusionsFilter() {
   const searchParams = useSearchParams()
   const hydrated = useRef(false)
   const [open, setOpen] = useState(true)
-  const [expanded, setExpanded] = useState({ ai_content: true, telemetry: true })
+  const [expanded, setExpanded] = useState({})
   const urlIds = parseDisclosureExclusions(searchParams)
   const selected = filterDisclosureIdsForCatalog(urlIds, pathname)
   const tree = disclosureTreeForCatalog(pathname)
@@ -312,7 +312,7 @@ export default function AdvancedExclusionsFilter() {
               <circle cx="12" cy="12" r="10" />
               <path d="M12 16v-4M12 8h.01" />
             </svg>
-            <span>Только прячет из поиска. Сохраняется в браузере. Ссылка с параметром a его не перезапишет.</span>
+            <span>Исключить данные проекты из поисковой выдачи?</span>
           </div>
           <div className="flex flex-col gap-1">
             {tree.map((item) => {
