@@ -12,6 +12,7 @@ export default async function sitemap() {
     '/datapacks',
     '/modpacks',
     '/servers',
+    '/collections',
     '/discover/servers',
     '/news',
     '/extension',

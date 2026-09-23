@@ -85,6 +85,9 @@ export default function NotFound() {
             <Link href="/datapacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
               Датапаки
             </Link>
+            <Link href="/collections" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
+              Коллекции
+            </Link>
           </div>
         </div>
       </div>
