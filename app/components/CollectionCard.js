@@ -12,7 +12,7 @@ export default function CollectionCard({ collection }) {
   return (
     <Link
       href={`/collection/${collection.id}`}
-      className="flex gap-4 rounded-xl border border-gray-800 bg-modrinth-dark p-4 transition-colors hover:border-gray-600 hover:bg-gray-900/40"
+      className="group flex gap-4 rounded-xl border border-gray-800 bg-modrinth-dark p-4 text-inherit no-underline outline-none transition-colors hover:border-[rgba(var(--color-green-rgb),0.4)] hover:bg-[rgba(var(--color-green-rgb),0.08)]"
     >
       {collection.icon_url ? (
         <img
@@ -29,7 +29,7 @@ export default function CollectionCard({ collection }) {
         </div>
       )}
       <div className="min-w-0 flex-1">
-        <h3 className="truncate text-lg font-semibold text-white">{collection.name}</h3>
+        <h3 className="truncate text-lg font-semibold text-white transition-colors group-hover:text-modrinth-green">{collection.name}</h3>
         {collection.description ? (
           <p className="mt-1 line-clamp-2 text-sm text-gray-400">{collection.description}</p>
         ) : null}
