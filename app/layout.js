@@ -146,7 +146,9 @@ export default function RootLayout({ children }) {
                 <Suspense fallback={<div className="w-9 h-9 flex-shrink-0"></div>}>
                   <Logo />
                 </Suspense>
-                <Navigation />
+                <Suspense fallback={null}>
+                  <Navigation />
+                </Suspense>
               </div>
             </div>
           </nav>
@@ -162,7 +164,9 @@ export default function RootLayout({ children }) {
           <main className="container">
             {children}
           </main>
-          <MobileNav />
+          <Suspense fallback={null}>
+            <MobileNav />
+          </Suspense>
           <Footer />
           <ExtensionBanner />
           <FeedbackThoughtBanner />
