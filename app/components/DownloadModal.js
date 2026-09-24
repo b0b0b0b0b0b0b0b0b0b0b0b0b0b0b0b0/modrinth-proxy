@@ -14,6 +14,7 @@ import {
   normalizeContentRoute,
 } from '@/lib/contextualVersions'
 import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
+import { fallbackDependenciesFromSiblings } from '@/lib/dependencies'
 import { getLoaderDisplayName } from '@/lib/loaders'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { downloadZipBundle, downloadFilesSequentially, buildModrinthExtractZipName } from '@/lib/downloadZip'
@@ -880,7 +881,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
               {showDependencyDownloads && matchingVersion && selectedLoader && selectedMcVersion && (
                 <DownloadVersionDependencies
                   key={matchingVersion.id}
-                  dependencies={Array.isArray(matchingVersion.dependencies) ? matchingVersion.dependencies : []}
+                  dependencies={fallbackDependenciesFromSiblings(matchingVersion, versions)}
                   loader={selectedLoader}
                   gameVersion={selectedMcVersion}
                   contentType={contentType}

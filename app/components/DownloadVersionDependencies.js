@@ -213,14 +213,15 @@ export default function DownloadVersionDependencies({
   const isDatapack = isDatapackDownloadContext(contentType, loader)
 
   useEffect(() => {
-    if (Array.isArray(dependencies)) {
-      setResolvedDependencies(dependencies)
+    const local = normalizeDependencies(dependencies)
+    if (filterRelevantDependencies(local).length > 0) {
+      setResolvedDependencies(local)
       setDepsLoading(false)
       return undefined
     }
 
     if (!projectSlug || !versionNumber) {
-      setResolvedDependencies([])
+      setResolvedDependencies(local)
       setDepsLoading(false)
       return undefined
     }
@@ -237,10 +238,13 @@ export default function DownloadVersionDependencies({
       .then((res) => (res.ok ? res.json() : []))
       .then((data) => {
         if (cancelled) return
-        setResolvedDependencies(Array.isArray(data) ? data : [])
+        const remote = Array.isArray(data) ? data : []
+        setResolvedDependencies(
+          filterRelevantDependencies(remote).length > 0 ? remote : local,
+        )
       })
       .catch(() => {
-        if (!cancelled) setResolvedDependencies([])
+        if (!cancelled) setResolvedDependencies(local)
       })
       .finally(() => {
         if (!cancelled) setDepsLoading(false)

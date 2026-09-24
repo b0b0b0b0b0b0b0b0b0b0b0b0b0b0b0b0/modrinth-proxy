@@ -9,6 +9,7 @@ import {
 import { filterVersionChangelog, filterUserPublic } from '@/lib/contentFilter'
 import { findArchivedDisclosure } from '@/lib/projectDisclosures'
 import { resolveLoader } from '@/lib/loaders'
+import { fallbackDependenciesFromSiblings } from '@/lib/dependencies'
 import { getVersionPlatformIds } from '@/lib/contextualVersions'
 import { IconDownload, IconHardDrive } from '@/lib/icons'
 import ReactMarkdown from 'react-markdown'
@@ -426,7 +427,7 @@ export default async function VersionPage({ project, version, author, contentTyp
 
           {DEPENDENCY_CONTENT_TYPES.has(contentType) && (
             <DownloadVersionDependencies
-              dependencies={Array.isArray(version.dependencies) ? version.dependencies : []}
+              dependencies={fallbackDependenciesFromSiblings(version, versions)}
               loader={pickVersionLoader(version)}
               gameVersion={pickVersionGameVersion(version)}
               contentType={contentType}
