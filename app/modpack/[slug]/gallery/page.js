@@ -40,7 +40,7 @@ export async function generateMetadata({ params }) {
 export default async function ModpackGalleryPage({ params }) {
   const { slug } = params
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <div className="mb-6">
@@ -71,7 +71,7 @@ export default async function ModpackGalleryPage({ params }) {
       getModVersions(slug),
     ])
     
-    if ((isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) {
+    if ((await isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) {
       return (
         <div className="text-center py-16 max-w-2xl mx-auto">
           <div className="mb-6">

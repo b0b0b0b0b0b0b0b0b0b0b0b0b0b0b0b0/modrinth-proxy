@@ -49,7 +49,7 @@ export default async function CollectionPage({ params, searchParams }) {
   const page = Math.min(totalPages, Math.max(1, parseInt(searchParams?.page || '1', 10) || 1))
   const pageIds = projectIds.slice((page - 1) * COLLECTION_PAGE_SIZE, page * COLLECTION_PAGE_SIZE)
   const rawProjects = await getProjectsByIds(pageIds)
-  const filtered = filterModsList(rawProjects)
+  const filtered = await filterModsList(rawProjects)
   const projects = filtered.hits.map((project) => filterModContent(project))
 
   return (

@@ -1,3 +1,4 @@
+import { isProjectAccessDenied } from '@/lib/contentFilter'
 import { toProjectInfo } from '@/lib/dependencies'
 import { getMod } from '@/lib/modrinth'
 
@@ -7,6 +8,9 @@ export async function GET(request) {
   if (!slugOrId) return Response.json({ error: 'slug or id required' }, { status: 400 })
   try {
     const project = await getMod(slugOrId)
+    if (await isProjectAccessDenied(slugOrId, project)) {
+      return Response.json({ error: 'project not found' }, { status: 404 })
+    }
     return Response.json(toProjectInfo(project))
   } catch {
     return Response.json({ error: 'project not found' }, { status: 404 })

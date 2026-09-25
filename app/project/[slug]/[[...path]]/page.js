@@ -13,7 +13,7 @@ export default async function ProjectRedirectPage({ params }) {
     notFound()
   }
 
-  if (isProjectBlocked(project.slug, project.id) || isOrganizationBlocked(project.organization)) {
+  if (await isProjectBlocked(project.slug, project.id) || isOrganizationBlocked(project.organization)) {
     notFound()
   }
 

@@ -46,7 +46,7 @@ export async function generateMetadata({ params }) {
 export default async function DatapackPage({ params }) {
   const { slug } = params;
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <div className="mb-6">
@@ -88,7 +88,7 @@ export default async function DatapackPage({ params }) {
     teamMembers = filterTeamMembers(teamMembers);
     organization = pack.organization ? await getOrganization(pack.organization) : null;
     
-    if ((isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) {
+    if ((await isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) {
       return (
         <div className="text-center py-16 max-w-2xl mx-auto">
           <div className="mb-6">

@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
 export default async function PluginVersionsPage({ params, searchParams }) {
   const { slug } = params;
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <Link 
@@ -68,7 +68,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
     teamMembers = filterTeamMembers(teamMembers);
     organization = plugin.organization ? await getOrganization(plugin.organization) : null;
     
-    if ((isProjectBlocked(plugin.slug, plugin.id) || isOrganizationBlocked(plugin.organization))) {
+    if ((await isProjectBlocked(plugin.slug, plugin.id) || isOrganizationBlocked(plugin.organization))) {
       notFound()
     }
   } catch (error) {

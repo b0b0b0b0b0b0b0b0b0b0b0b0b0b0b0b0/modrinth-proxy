@@ -1,3 +1,4 @@
+import { isProjectAccessDenied } from '@/lib/contentFilter'
 import { getMod, getVersionFromFileHash } from '@/lib/modrinth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
@@ -83,7 +84,7 @@ export async function GET(request) {
     }
 
     const project = await getMod(version.project_id)
-    if (!project) {
+    if (!project || await isProjectAccessDenied(project.slug, project)) {
       return Response.json({ error: 'project_not_found' }, { status: 404 })
     }
 

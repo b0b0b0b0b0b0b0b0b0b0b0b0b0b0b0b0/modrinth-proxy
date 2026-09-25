@@ -1,83 +1,63 @@
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getUser } from '@/lib/modrinth'
-import { filterModContent } from '@/lib/contentFilter'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import VersionPage from '@/app/components/VersionPage'
+import { blockedVersionMetadata, loadVersionPage } from '@/lib/loadVersionPage'
 
 export async function generateMetadata({ params }) {
-  try {
-    const shader = filterModContent(await getMod(params.slug))
-    const versions = await getModVersions(params.slug)
-    const version = versions.find(v => v.version_number === decodeURIComponent(params.versionNumber) || v.id === decodeURIComponent(params.versionNumber))
-    
-    if (!version) throw new Error('Version not found')
-    
-    const url = `https://modrinth.black/shader/${params.slug}/version/${params.versionNumber}`
-    const description = version.changelog ? version.changelog.slice(0, 150) : `Скачать версию ${version.version_number} шейдера ${shader.title}`
-    
-    return {
-      title: `${version.version_number} - ${shader.title}`,
-      description: description,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${version.version_number} - ${shader.title}`,
-        description: version.changelog ? version.changelog.slice(0, 150) : shader.description,
-        images: shader.icon_url ? [{ url: shader.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${version.version_number} - ${shader.title}`,
-        description: version.changelog ? version.changelog.slice(0, 150) : shader.description,
-        images: shader.icon_url ? [shader.icon_url] : [],
-      },
-      other: {
-        'theme-color': '#1bd96a',
-      },
-    }
-  } catch {
+  const data = await loadVersionPage(params.slug, params.versionNumber)
+  if (data.denied) return blockedVersionMetadata
+  if (data.missing) {
     return {
       title: 'Версия не найдена | ModrinthProxy',
       description: 'Запрашиваемая версия не найдена',
     }
   }
+
+  const { project, version } = data
+  const url = `https://modrinth.black/shader/${params.slug}/version/${params.versionNumber}`
+  const description = version.changelog ? version.changelog.slice(0, 150) : `Скачать версию ${version.version_number} шейдера ${project.title}`
+
+  return {
+    title: `${version.version_number} - ${project.title}`,
+    description,
+    robots: 'all',
+    openGraph: {
+      siteName: 'modrinth.black',
+      type: 'website',
+      url,
+      title: `${version.version_number} - ${project.title}`,
+      description: version.changelog ? version.changelog.slice(0, 150) : project.description,
+      images: project.icon_url ? [{ url: project.icon_url }] : [],
+    },
+    twitter: {
+      card: 'summary',
+      title: `${version.version_number} - ${project.title}`,
+      description: version.changelog ? version.changelog.slice(0, 150) : project.description,
+      images: project.icon_url ? [project.icon_url] : [],
+    },
+    other: {
+      'theme-color': '#1bd96a',
+    },
+  }
 }
 
 export default async function ShaderVersionPage({ params }) {
-  let shader, versions, version, author;
-  
-  try {
-    [shader, versions] = await Promise.all([
-      getMod(params.slug),
-      getModVersions(params.slug)
-    ])
-    
-    version = versions.find(v => v.version_number === decodeURIComponent(params.versionNumber) || v.id === decodeURIComponent(params.versionNumber))
-    
-    if (!version) {
-      notFound()
-    }
-    
-    if (version.author_id) {
-      author = await getUser(version.author_id)
-    }
-  } catch (error) {
-    notFound()
+  const data = await loadVersionPage(params.slug, params.versionNumber)
+  if (data.denied) {
+    return <ProjectAccessRestricted href="/shaders" label="Вернуться к шейдерам" />
   }
-
-  shader = filterModContent(shader)
+  if (data.missing) notFound()
 
   return (
-    <VersionPage 
-      project={shader}
-      version={version}
-      author={author}
+    <VersionPage
+      project={data.project}
+      version={data.version}
+      author={data.author}
       contentType="shader"
       pluralName="shaders"
       singularName="shader"
-      versions={versions}
-      galleryCount={shader.gallery?.length || 0}
+      versions={data.versions}
+      galleryCount={data.project.gallery?.length || 0}
     />
   )
 }

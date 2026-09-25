@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { OrganizationPresenter } from '@/lib/organizations'
 import StyledTooltip from './StyledTooltip'
+import UserProfileIds from './UserProfileIds'
 
 function BadgeItem({ badge }) {
   const tooltip = `${badge.name}. ${badge.description}`
@@ -38,7 +39,7 @@ function BadgeItem({ badge }) {
   )
 }
 
-export default function UserSidebar({ organizations = [], badges = [] }) {
+export default function UserSidebar({ organizations = [], badges = [], userId = null }) {
   const orgs = organizations.filter((org) => OrganizationPresenter.isPresent(org))
 
   return (
@@ -88,7 +89,8 @@ export default function UserSidebar({ organizations = [], badges = [] }) {
 
       <div className="rounded-2xl border border-gray-300 dark:border-gray-800 bg-modrinth-dark p-4 pt-3">
         <h2 className="m-0 mb-2 text-lg font-bold text-[var(--text-primary)]">Информация</h2>
-        <p className="m-0 text-xs text-gray-500 dark:text-gray-400">
+        <UserProfileIds userId={userId} />
+        <p className="m-0 mt-3 text-xs text-gray-500 dark:text-gray-400">
           Профиль создан на основе данных Modrinth API
         </p>
       </div>

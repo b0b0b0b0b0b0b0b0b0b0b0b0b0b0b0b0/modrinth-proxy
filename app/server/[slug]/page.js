@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 export default async function ServerPage({ params }) {
   const { slug } = params;
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <div className="mb-6">
@@ -74,7 +74,7 @@ export default async function ServerPage({ params }) {
       }
     }
 
-    if ((isProjectBlocked(server.slug, server.id) || isOrganizationBlocked(server.organization))) {
+    if ((await isProjectBlocked(server.slug, server.id) || isOrganizationBlocked(server.organization))) {
       return (
         <div className="text-center py-16 max-w-2xl mx-auto">
           <div className="mb-6">

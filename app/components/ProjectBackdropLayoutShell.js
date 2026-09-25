@@ -8,7 +8,7 @@ import ProjectBackdrop from './ProjectBackdrop'
 export default async function ProjectBackdropLayoutShell({ slug, children }) {
   const safeSlug = typeof slug === 'string' ? slug.trim() : typeof slug === 'number' ? String(slug) : ''
 
-  if (!safeSlug || isProjectBlocked(safeSlug)) {
+  if (!safeSlug || await isProjectBlocked(safeSlug)) {
     return children
   }
 
@@ -20,7 +20,7 @@ export default async function ProjectBackdropLayoutShell({ slug, children }) {
   }
 
   let backdropSrc = null
-  if (project && !isProjectBlocked(project.slug, project.id)) {
+  if (project && !await isProjectBlocked(project.slug, project.id)) {
     const org = project.organization ?? project.organization_id
     if (!isOrganizationBlocked(org)) {
       const currentPath = headers().get('x-modrinth-pathname')

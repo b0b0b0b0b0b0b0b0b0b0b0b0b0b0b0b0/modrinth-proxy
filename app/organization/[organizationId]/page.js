@@ -107,7 +107,7 @@ export default async function OrganizationPage({ params }) {
     members[0]?.user?.username ||
     null
   const rawProjects = await getOrganizationProjects(organization.id)
-  const filteredProjects = filterModsList(rawProjects)
+  const filteredProjects = await filterModsList(rawProjects)
   const projects = filteredProjects.hits.map((project) => ({
     ...filterModContent(project),
     ...(ownerUsername ? { author: ownerUsername } : {}),

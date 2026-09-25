@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
 export default async function ModVersionsPage({ params, searchParams }) {
   const { slug } = params;
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <div className="mb-6">
@@ -85,7 +85,7 @@ export default async function ModVersionsPage({ params, searchParams }) {
     organization = mod.organization ? await getOrganization(mod.organization) : null;
     teamMembers = filterTeamMembers(teamMembers);
     
-    if ((isProjectBlocked(mod.slug, mod.id) || isOrganizationBlocked(mod.organization))) {
+    if ((await isProjectBlocked(mod.slug, mod.id) || isOrganizationBlocked(mod.organization))) {
       return (
         <div className="text-center py-16 max-w-2xl mx-auto">
           <div className="mb-6">

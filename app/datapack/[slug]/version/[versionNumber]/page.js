@@ -1,83 +1,63 @@
 import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getUser } from '@/lib/modrinth'
-import { filterModContent } from '@/lib/contentFilter'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import VersionPage from '@/app/components/VersionPage'
+import { blockedVersionMetadata, loadVersionPage } from '@/lib/loadVersionPage'
 
 export async function generateMetadata({ params }) {
-  try {
-    const datapack = filterModContent(await getMod(params.slug))
-    const versions = await getModVersions(params.slug)
-    const version = versions.find(v => v.version_number === decodeURIComponent(params.versionNumber) || v.id === decodeURIComponent(params.versionNumber))
-    
-    if (!version) throw new Error('Version not found')
-    
-    const url = `https://modrinth.black/datapack/${params.slug}/version/${params.versionNumber}`
-    const description = version.changelog ? version.changelog.slice(0, 150) : `Скачать версию ${version.version_number} датапака ${datapack.title}`
-    
-    return {
-      title: `${version.version_number} - ${datapack.title}`,
-      description: description,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${version.version_number} - ${datapack.title}`,
-        description: version.changelog ? version.changelog.slice(0, 150) : datapack.description,
-        images: datapack.icon_url ? [{ url: datapack.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${version.version_number} - ${datapack.title}`,
-        description: version.changelog ? version.changelog.slice(0, 150) : datapack.description,
-        images: datapack.icon_url ? [datapack.icon_url] : [],
-      },
-      other: {
-        'theme-color': '#1bd96a',
-      },
-    }
-  } catch {
+  const data = await loadVersionPage(params.slug, params.versionNumber)
+  if (data.denied) return blockedVersionMetadata
+  if (data.missing) {
     return {
       title: 'Версия не найдена | ModrinthProxy',
       description: 'Запрашиваемая версия не найдена',
     }
   }
+
+  const { project, version } = data
+  const url = `https://modrinth.black/datapack/${params.slug}/version/${params.versionNumber}`
+  const description = version.changelog ? version.changelog.slice(0, 150) : `Скачать версию ${version.version_number} датапака ${project.title}`
+
+  return {
+    title: `${version.version_number} - ${project.title}`,
+    description,
+    robots: 'all',
+    openGraph: {
+      siteName: 'modrinth.black',
+      type: 'website',
+      url,
+      title: `${version.version_number} - ${project.title}`,
+      description: version.changelog ? version.changelog.slice(0, 150) : project.description,
+      images: project.icon_url ? [{ url: project.icon_url }] : [],
+    },
+    twitter: {
+      card: 'summary',
+      title: `${version.version_number} - ${project.title}`,
+      description: version.changelog ? version.changelog.slice(0, 150) : project.description,
+      images: project.icon_url ? [project.icon_url] : [],
+    },
+    other: {
+      'theme-color': '#1bd96a',
+    },
+  }
 }
 
 export default async function DatapackVersionPage({ params }) {
-  let datapack, versions, version, author;
-  
-  try {
-    [datapack, versions] = await Promise.all([
-      getMod(params.slug),
-      getModVersions(params.slug)
-    ])
-    
-    version = versions.find(v => v.version_number === decodeURIComponent(params.versionNumber) || v.id === decodeURIComponent(params.versionNumber))
-    
-    if (!version) {
-      notFound()
-    }
-    
-    if (version.author_id) {
-      author = await getUser(version.author_id)
-    }
-  } catch (error) {
-    notFound()
+  const data = await loadVersionPage(params.slug, params.versionNumber)
+  if (data.denied) {
+    return <ProjectAccessRestricted href="/datapacks" label="Вернуться к датапакам" />
   }
-
-  datapack = filterModContent(datapack)
+  if (data.missing) notFound()
 
   return (
-    <VersionPage 
-      project={datapack}
-      version={version}
-      author={author}
+    <VersionPage
+      project={data.project}
+      version={data.version}
+      author={data.author}
       contentType="datapack"
       pluralName="datapacks"
       singularName="datapack"
-      versions={versions}
-      galleryCount={datapack.gallery?.length || 0}
+      versions={data.versions}
+      galleryCount={data.project.gallery?.length || 0}
     />
   )
 }

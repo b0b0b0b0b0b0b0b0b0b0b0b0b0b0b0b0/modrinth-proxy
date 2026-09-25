@@ -40,7 +40,7 @@ export async function generateMetadata({ params }) {
 export default async function PluginGalleryPage({ params }) {
   const { slug } = params
   
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
         <div className="mb-6">
@@ -71,7 +71,7 @@ export default async function PluginGalleryPage({ params }) {
       getModVersions(slug),
     ])
     
-    if ((isProjectBlocked(plugin.slug, plugin.id) || isOrganizationBlocked(plugin.organization))) {
+    if ((await isProjectBlocked(plugin.slug, plugin.id) || isOrganizationBlocked(plugin.organization))) {
       return (
         <div className="text-center py-16 max-w-2xl mx-auto">
           <div className="mb-6">

@@ -82,7 +82,7 @@ export default async function AuthorCollectionsPage({ params }) {
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <UserSidebar organizations={organizations} badges={badges} />
+          <UserSidebar organizations={organizations} badges={badges} userId={author.id} />
         </div>
       </div>
     </div>

@@ -87,7 +87,7 @@ export default async function UserPage({ params, searchParams }) {
     const byType = projectType
       ? allProjects.hits.filter((project) => project.project_type === projectType)
       : allProjects.hits
-    const filteredProjects = filterModsList(byType)
+    const filteredProjects = await filterModsList(byType)
     projects = {
       hits: filteredProjects.hits.map((project) => ({
         ...filterModContent(project),
@@ -143,7 +143,7 @@ export default async function UserPage({ params, searchParams }) {
         </div>
 
         <div className="lg:sticky lg:top-4 lg:self-start">
-          <UserSidebar organizations={organizations} badges={badges} />
+          <UserSidebar organizations={organizations} badges={badges} userId={author.id} />
         </div>
       </div>
     </div>

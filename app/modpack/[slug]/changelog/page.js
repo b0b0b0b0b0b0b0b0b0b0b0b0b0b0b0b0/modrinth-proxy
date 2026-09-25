@@ -37,7 +37,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ModpackChangelogPage({ params }) {
   const { slug } = params;
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return <div className="text-center py-16"><Link href="/modpacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
   }
 
@@ -47,7 +47,7 @@ export default async function ModpackChangelogPage({ params }) {
     modpack = filterModContent(modpack);
     teamMembers = filterTeamMembers(teamMembers);
     organization = modpack.organization ? await getOrganization(modpack.organization) : null;
-    if ((isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) notFound()
+    if ((await isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) notFound()
   } catch (error) {
     notFound()
   }

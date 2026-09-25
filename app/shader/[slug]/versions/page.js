@@ -37,7 +37,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ShaderVersionsPage({ params, searchParams = {} }) {
   const { slug } = params;
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return <div className="text-center py-16"><Link href="/shaders" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
   }
 
@@ -49,7 +49,7 @@ export default async function ShaderVersionsPage({ params, searchParams = {} }) 
     shader = filterModContent(shader);
     teamMembers = filterTeamMembers(teamMembers);
     organization = shader.organization ? await getOrganization(shader.organization) : null;
-    if ((isProjectBlocked(shader.slug, shader.id) || isOrganizationBlocked(shader.organization))) notFound()
+    if ((await isProjectBlocked(shader.slug, shader.id) || isOrganizationBlocked(shader.organization))) notFound()
   } catch (error) {
     notFound()
   }

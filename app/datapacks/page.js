@@ -90,7 +90,7 @@ export default async function DatapacksPage({ searchParams }) {
     
     for (let i = 0; i < Math.min(maxBatches, 10); i++) {
       const batchData = await searchMods({ query, facets, limit: batchSize, offset: currentOffset, index: sortBy });
-      const filtered = filterModsList(batchData.hits);
+      const filtered = await filterModsList(batchData.hits);
       totalBlockedCount += filtered.blockedCount;
       totalBlockedByProject += filtered.blockedByProject;
       totalBlockedByOrganization += filtered.blockedByOrganization;

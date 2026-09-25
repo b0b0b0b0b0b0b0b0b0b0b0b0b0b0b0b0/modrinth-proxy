@@ -37,7 +37,7 @@ export async function generateMetadata({ params }) {
 
 export default async function ResourcepackVersionsPage({ params, searchParams = {} }) {
   const { slug } = params;
-  if (isProjectBlocked(slug)) {
+  if (await isProjectBlocked(slug)) {
     return <div className="text-center py-16"><Link href="/resourcepacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
   }
 
@@ -49,7 +49,7 @@ export default async function ResourcepackVersionsPage({ params, searchParams = 
     pack = filterModContent(pack);
     teamMembers = filterTeamMembers(teamMembers);
     organization = pack.organization ? await getOrganization(pack.organization) : null;
-    if ((isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) notFound()
+    if ((await isProjectBlocked(pack.slug, pack.id) || isOrganizationBlocked(pack.organization))) notFound()
   } catch (error) {
     notFound()
   }
