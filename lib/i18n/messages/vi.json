@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Ngôn ngữ",
-    "hint": "Mặc định là tiếng Nga. Có thể chọn tiếng Anh, Trung và Việt.",
+    "hint": "Mặc định là tiếng Nga. Có thể chọn Anh, Đức, Ý, Trung và Việt.",
     "auto": "Theo trình duyệt",
     "switcher": "Ngôn ngữ trang"
   },

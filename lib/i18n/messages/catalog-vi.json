@@ -336,6 +336,20 @@
     "discord": "Tham gia Discord",
     "donate": "Ủng hộ"
   },
+  "gh": {
+    "starOne": "{n} sao",
+    "starFew": "{n} sao",
+    "starMany": "{n} sao",
+    "issueOne": "{n} issue đang mở",
+    "issueFew": "{n} issue đang mở",
+    "issueMany": "{n} issue đang mở",
+    "prOne": "{n} pull request đang mở",
+    "prFew": "{n} pull request đang mở",
+    "prMany": "{n} pull request đang mở",
+    "forkOne": "{n} fork",
+    "forkFew": "{n} fork",
+    "forkMany": "{n} fork"
+  },
   "disc": {
     "ai_content": "Nội dung AI",
     "ai_content_code": "Mã AI",

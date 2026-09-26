@@ -336,6 +336,20 @@
     "discord": "Join Discord",
     "donate": "Donate"
   },
+  "gh": {
+    "starOne": "{n} star",
+    "starFew": "{n} stars",
+    "starMany": "{n} stars",
+    "issueOne": "{n} open issue",
+    "issueFew": "{n} open issues",
+    "issueMany": "{n} open issues",
+    "prOne": "{n} open pull request",
+    "prFew": "{n} open pull requests",
+    "prMany": "{n} open pull requests",
+    "forkOne": "{n} fork",
+    "forkFew": "{n} forks",
+    "forkMany": "{n} forks"
+  },
   "disc": {
     "ai_content": "AI content",
     "ai_content_code": "AI code",

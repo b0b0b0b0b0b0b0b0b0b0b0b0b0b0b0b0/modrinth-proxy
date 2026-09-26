@@ -336,6 +336,20 @@
     "discord": "Вступить в Discord",
     "donate": "Донат"
   },
+  "gh": {
+    "starOne": "{n} звезда",
+    "starFew": "{n} звезды",
+    "starMany": "{n} звёзд",
+    "issueOne": "{n} открытая задача",
+    "issueFew": "{n} открытые задачи",
+    "issueMany": "{n} открытых задач",
+    "prOne": "{n} открытый пул-реквест",
+    "prFew": "{n} открытых пул-реквеста",
+    "prMany": "{n} открытых пул-реквестов",
+    "forkOne": "{n} форк",
+    "forkFew": "{n} форка",
+    "forkMany": "{n} форков"
+  },
   "disc": {
     "ai_content": "ИИ-контент",
     "ai_content_code": "ИИ-код",

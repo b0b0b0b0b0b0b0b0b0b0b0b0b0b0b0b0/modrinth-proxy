@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Language",
-    "hint": "Russian is the default. English, Chinese, and Vietnamese are available.",
+    "hint": "Russian is the default. English, German, Italian, Chinese, and Vietnamese are available.",
     "auto": "Match browser",
     "switcher": "Site language"
   },

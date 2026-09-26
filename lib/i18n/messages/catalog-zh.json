@@ -336,6 +336,20 @@
     "discord": "加入 Discord",
     "donate": "捐赠"
   },
+  "gh": {
+    "starOne": "{n} 星标",
+    "starFew": "{n} 星标",
+    "starMany": "{n} 星标",
+    "issueOne": "{n} 个未关闭议题",
+    "issueFew": "{n} 个未关闭议题",
+    "issueMany": "{n} 个未关闭议题",
+    "prOne": "{n} 个未关闭拉取请求",
+    "prFew": "{n} 个未关闭拉取请求",
+    "prMany": "{n} 个未关闭拉取请求",
+    "forkOne": "{n} 个派生",
+    "forkFew": "{n} 个派生",
+    "forkMany": "{n} 个派生"
+  },
   "disc": {
     "ai_content": "AI 内容",
     "ai_content_code": "AI 代码",
