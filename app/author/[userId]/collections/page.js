@@ -16,18 +16,19 @@ const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTa
 })
 
 export async function generateMetadata({ params }) {
+  const { t } = getRequestT()
   try {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
-      return { title: 'Автор не найден | ModrinthProxy' }
+      return { title: t('author.notFound') }
     }
     return {
-      title: `${author.username} — коллекции`,
-      description: `Коллекции пользователя ${author.username}`,
+      title: t('author.metaCollections', { name: author.username }),
+      description: t('author.metaCollectionsDesc', { name: author.username }),
       robots: 'all',
     }
   } catch {
-    return { title: 'Автор не найден | ModrinthProxy' }
+    return { title: t('author.notFound') }
   }
 }
 
@@ -76,8 +77,8 @@ export default async function AuthorCollectionsPage({ params }) {
               </div>
             ) : (
               <div className="text-center py-16">
-                <h3 className="text-xl font-semibold text-gray-300 mb-2">Нет коллекций</h3>
-                <p className="text-gray-500">У этого пользователя пока нет публичных коллекций</p>
+                <h3 className="text-xl font-semibold text-gray-300 mb-2">{t('author.noCollections')}</h3>
+                <p className="text-gray-500">{t('author.noCollectionsHint')}</p>
               </div>
             )}
           </div>

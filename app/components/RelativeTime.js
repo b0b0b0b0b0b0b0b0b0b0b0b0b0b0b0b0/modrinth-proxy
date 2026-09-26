@@ -37,22 +37,6 @@ export function formatRelative(dateString, t) {
   return t('time.yearsAgo', { n: Math.floor(diffDays / 365) })
 }
 
-export function formatRelativeRussian(dateString) {
-  const t = (key, vars) => {
-    const ru = {
-      'time.minutesAgo': `${vars?.n} мин. назад`,
-      'time.hoursAgo': `${vars?.n} ч. назад`,
-      'time.yesterday': 'вчера',
-      'time.daysAgo': `${vars?.n} дн. назад`,
-      'time.weeksAgo': `${vars?.n} нед. назад`,
-      'time.monthsAgo': `${vars?.n} мес. назад`,
-      'time.yearsAgo': `${vars?.n} г. назад`,
-    }
-    return ru[key] || key
-  }
-  return formatRelative(dateString, t)
-}
-
 export default function RelativeTime({ dateString, className = '' }) {
   const t = useT()
   const { locale } = useI18n()

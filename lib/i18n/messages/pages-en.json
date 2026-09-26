@@ -25,6 +25,8 @@
     "anyLoader": "Works with any loader",
     "anyLoaderLead": "ModrinthProxy covers popular loaders and Minecraft versions.",
     "autoFilter": "Auto-filter by platform",
+    "mcRange": "Every version from {from} to {to}",
+    "mcSnapshot": "You'll also find mods for {version}.",
     "pluginsTitle": "Thousands of plugins for your server",
     "forServerOwners": "For server owners",
     "pluginsLead": "From tiny utilities to heavy game systems — pick plugins that make the server yours.",
@@ -402,6 +404,24 @@
   "fb": {
     "close": "Close",
     "offer": "Got an idea or found a bug?",
-    "write": "Write to us"
+    "write": "Write to us",
+    "title": "Got a thought?",
+    "lead": "Suggestions or a bug?",
+    "crowd": "We’re already over {n} people a day. GitHub Issues — we read them and fix fast.",
+    "issues": "Open an Issue"
+  },
+  "notfound": {
+    "metaTitle": "404 — Page not found | ModrinthProxy",
+    "metaDesc": "That page isn’t here",
+    "title": "Oops. Page not found",
+    "lead": "Looks like this page walked into the End with an Enderman. Deleted, or it never existed.",
+    "home": "Home",
+    "toMods": "To mods",
+    "orSections": "Or jump to a popular section:"
+  },
+  "console": {
+    "stop": "Stop. Stop. Stop.",
+    "warn": "Don’t paste anything into this console. That’s how accounts get stolen.",
+    "report": "If someone asked you to paste something here, tell the site admins immediately. "
   }
 }

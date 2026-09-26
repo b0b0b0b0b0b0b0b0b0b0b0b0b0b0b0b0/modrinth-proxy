@@ -20,8 +20,8 @@ const MOD_CATEGORIES = CATEGORIES.filter(cat =>
 )
 
 const ENVIRONMENTS = [
-  { id: 'client', name: 'Клиент' },
-  { id: 'server', name: 'Сервер' },
+  { id: 'client' },
+  { id: 'server' },
 ]
 
 export default function SidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {

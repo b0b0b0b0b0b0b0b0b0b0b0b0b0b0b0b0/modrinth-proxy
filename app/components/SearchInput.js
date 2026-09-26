@@ -3,13 +3,16 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { appendVersionParams } from '@/lib/catalogVersionParams'
+import { useT } from './I18nProvider'
 
 export default function SearchInput({ 
   defaultValue = '',
-  placeholder = 'Поиск...',
+  placeholder,
   categoryPath = 'mods',
   delay = 500,
 }) {
+  const t = useT()
+  const searchPlaceholder = placeholder || t('filter.search')
   const router = useRouter()
   const searchParams = useSearchParams()
   const [query, setQuery] = useState(defaultValue)
@@ -130,7 +133,7 @@ export default function SearchInput({
           type="text"
           value={query}
           onChange={handleChange}
-          placeholder={placeholder}
+          placeholder={searchPlaceholder}
           className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-modrinth-green transition-colors"
         />
       </div>

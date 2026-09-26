@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, formatDownloads, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked, normalizeProjectSlug } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -9,38 +10,10 @@ import MarkdownContent from '@/app/components/MarkdownContent'
 
 export async function generateMetadata({ params }) {
   try {
-    const slug = normalizeProjectSlug(params.slug)
-    const pack = await getMod(slug)
-    const url = `https://modrinth.black/resourcepack/${slug}`
-    const fullDescription = pack.description || `Скачать ${pack.title} для Minecraft. ${formatDownloads(pack.downloads)} загрузок. Поддержка версий: ${pack.game_versions?.slice(0, 3).join(', ')}.`
-    
-    return {
-      title: `${pack.title} - Майнкрафт Ресурспак`,
-      description: fullDescription,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${pack.title} - Майнкрафт Ресурспак`,
-        description: pack.description,
-        images: pack.icon_url ? [{ url: pack.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${pack.title} - Майнкрафт Ресурспак`,
-        description: pack.description,
-        images: pack.icon_url ? [pack.icon_url] : [],
-      },
-      other: {
-        'theme-color': '#1bd96a',
-      },
-    }
+    const pack = await getMod(params.slug)
+    return buildProjectOverviewMetadata('resourcepack', params.slug, pack)
   } catch {
-    return {
-      title: 'Ресурспак не найден | ModrinthProxy',
-      description: 'Запрашиваемый ресурспак не найден',
-    }
+    return buildProjectNotFoundMetadata('resourcepack')
   }
 }
 

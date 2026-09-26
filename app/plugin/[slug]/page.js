@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -10,36 +11,9 @@ import MarkdownContent from '@/app/components/MarkdownContent'
 export async function generateMetadata({ params }) {
   try {
     const plugin = await getMod(params.slug)
-    const url = `https://modrinth.black/plugin/${params.slug}`
-    const fullDescription = plugin.description || `Скачать ${plugin.title} для Minecraft. ${formatDownloads(plugin.downloads)} загрузок. Поддержка версий: ${plugin.game_versions?.slice(0, 3).join(', ')}.`
-    
-    return {
-      title: `${plugin.title} - Майнкрафт Плагин`,
-      description: fullDescription,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${plugin.title} - Майнкрафт Плагин`,
-        description: plugin.description,
-        images: plugin.icon_url ? [{ url: plugin.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${plugin.title} - Майнкрафт Плагин`,
-        description: plugin.description,
-        images: plugin.icon_url ? [plugin.icon_url] : [],
-      },
-      other: {
-        'theme-color': '#1bd96a',
-      },
-    }
+    return buildProjectOverviewMetadata('plugin', params.slug, plugin)
   } catch {
-    return {
-      title: 'Плагин не найден | ModrinthProxy',
-      description: 'Запрашиваемый плагин не найден',
-    }
+    return buildProjectNotFoundMetadata('plugin')
   }
 }
 

@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { useT } from './I18nProvider'
 
 export default function PlayfulThoughtCloud() {
+  const t = useT()
   const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const [coords, setCoords] = useState(null)
@@ -61,8 +63,8 @@ export default function PlayfulThoughtCloud() {
           <button
             type="button"
             onClick={handleDismiss}
-            title="Закрыть"
-            aria-label="Закрыть"
+            title={t('fb.close')}
+            aria-label={t('fb.close')}
             className="absolute right-2 top-2 flex h-5 w-5 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-800 hover:text-white"
           >
             <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +73,7 @@ export default function PlayfulThoughtCloud() {
           </button>
 
           <p className="mb-2 text-xs font-semibold leading-relaxed text-gray-200 pr-4">
-            У тебя есть предложение или нашёл баг?
+            {t('fb.offer')}
           </p>
 
           <div className="flex items-center">
@@ -82,7 +84,7 @@ export default function PlayfulThoughtCloud() {
               onClick={handleDismiss}
               className="inline-flex items-center gap-1.5 rounded-lg bg-modrinth-green px-3 py-1.5 text-xs font-bold text-black shadow transition-all duration-200 hover:bg-modrinth-green-light active:scale-95"
             >
-              <span>Напиши нам</span>
+              <span>{t('fb.write')}</span>
             </a>
           </div>
         </div>

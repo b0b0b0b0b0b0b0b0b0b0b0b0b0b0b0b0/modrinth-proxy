@@ -25,6 +25,8 @@
     "anyLoader": "Chạy với mọi loader",
     "anyLoaderLead": "ModrinthProxy phủ các loader phổ biến và phiên bản Minecraft.",
     "autoFilter": "Tự lọc theo nền tảng",
+    "mcRange": "Mọi phiên bản từ {from} đến {to}",
+    "mcSnapshot": "Cũng có mod cho {version}.",
     "pluginsTitle": "Hàng nghìn plugin cho máy chủ của bạn",
     "forServerOwners": "Dành cho chủ máy chủ",
     "pluginsLead": "Từ tiện ích nhỏ đến hệ thống chơi nặng — chọn plugin biến máy chủ thành của bạn.",

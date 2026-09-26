@@ -3,6 +3,7 @@
 import { useCallback, useMemo, useState } from 'react'
 import GalleryModal from './GalleryModal'
 import RelativeTime from './RelativeTime'
+import { useT } from './I18nProvider'
 
 function findNeighborIndex(gallery, fromIndex, direction) {
   if (!gallery.length) return fromIndex
@@ -24,6 +25,7 @@ function galleryFullUrl(item) {
 }
 
 export default function GalleryGrid({ gallery }) {
+  const t = useT()
   const [selectedIndex, setSelectedIndex] = useState(null)
 
   const hasMultiple = useMemo(
@@ -72,7 +74,7 @@ export default function GalleryGrid({ gallery }) {
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
           />
         </svg>
-        <p className="text-xl text-gray-400">В галерее пока нет изображений</p>
+        <p className="text-xl text-gray-400">{t('ui.galleryEmpty')}</p>
       </div>
     )
   }
@@ -95,8 +97,8 @@ export default function GalleryGrid({ gallery }) {
                   >
                     <path d="M12 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1 5h-2v6h2V7zm0 8h-2v2h2v-2z" />
                   </svg>
-                  <p className="text-sm font-medium text-red-300">Изображение заблокировано</p>
-                  <p className="mt-1 text-xs text-red-400">по требованию РКН</p>
+                  <p className="text-sm font-medium text-red-300">{t('ui.imageBlocked')}</p>
+                  <p className="mt-1 text-xs text-red-400">{t('ui.imageBlockedRkn')}</p>
                   {item.blockedHost && (
                     <p className="mt-2 text-xs text-gray-500">{item.blockedHost}</p>
                   )}

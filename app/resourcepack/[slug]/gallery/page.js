@@ -2,6 +2,7 @@ import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -11,29 +12,9 @@ import IconPreload from '@/app/components/IconPreload'
 export async function generateMetadata({ params }) {
   try {
     const pack = filterModContent(await getMod(params.slug))
-    const url = `https://modrinth.black/resourcepack/${params.slug}/gallery`
-    return {
-      title: `${pack.title} - Галерея | ModrinthProxy`,
-      description: `Просмотрите галерею изображений для ${pack.title}`,
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${pack.title} - Галерея | ModrinthProxy`,
-        description: `Просмотрите галерею изображений для ${pack.title}`,
-        images: pack.icon_url ? [{ url: pack.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${pack.title} - Галерея | ModrinthProxy`,
-        description: `Просмотрите галерею изображений для ${pack.title}`,
-        images: pack.icon_url ? [pack.icon_url] : [],
-      },
-    }
+    return buildProjectGalleryMetadata('resourcepack', params.slug, pack)
   } catch {
-    return {
-      title: 'Галерея не найдена',
-    }
+    return galleryNotFoundMetadata()
   }
 }
 

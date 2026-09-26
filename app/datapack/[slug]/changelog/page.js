@@ -2,6 +2,7 @@ import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -11,29 +12,9 @@ import ChangelogVersionEntries from '@/app/components/ChangelogVersionEntries'
 export async function generateMetadata({ params }) {
   try {
     const pack = await getMod(params.slug)
-    const url = `https://modrinth.black/datapack/${params.slug}/changelog`
-    return {
-      title: `${pack.title} - Изменения | ModrinthProxy`,
-      description: `История изменений датапака ${pack.title}`,
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${pack.title} - Изменения | ModrinthProxy`,
-        description: `История изменений датапака ${pack.title}`,
-        images: pack.icon_url ? [{ url: pack.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${pack.title} - Изменения | ModrinthProxy`,
-        description: `История изменений датапака ${pack.title}`,
-        images: pack.icon_url ? [pack.icon_url] : [],
-      },
-    }
+    return buildProjectChangelogMetadata('datapack', params.slug, pack)
   } catch {
-    return {
-      title: 'Датапак не найден | ModrinthProxy'
-    }
+    return buildProjectNotFoundMetadata('datapack')
   }
 }
 

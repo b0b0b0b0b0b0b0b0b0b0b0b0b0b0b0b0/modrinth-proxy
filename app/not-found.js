@@ -1,11 +1,16 @@
 import Link from 'next/link'
+import { getRequestT } from '@/lib/i18n/server'
 
-export const metadata = {
-  title: '404 - Страница не найдена | ModrinthProxy',
-  description: 'Запрашиваемая страница не найдена',
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: t('notfound.metaTitle'),
+    description: t('notfound.metaDesc'),
+  }
 }
 
 export default function NotFound() {
+  const { t } = getRequestT()
   return (
     <div className="min-h-[70vh] flex items-center justify-center px-4">
       <div className="text-center max-w-2xl mx-auto">
@@ -36,12 +41,11 @@ export default function NotFound() {
         </h1>
         
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-          Упс! Страница не найдена
+          {t('notfound.title')}
         </h2>
         
         <p className="text-gray-400 text-base md:text-lg mb-8 max-w-md mx-auto">
-          Похоже, эта страница отправилась в Край вместе с Эндерменом. 
-          Возможно, она была удалена или никогда не существовала.
+          {t('notfound.lead')}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -53,7 +57,7 @@ export default function NotFound() {
             <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
-            <span className="relative z-10">На главную</span>
+            <span className="relative z-10">{t('notfound.home')}</span>
           </Link>
           
           <Link 
@@ -63,30 +67,30 @@ export default function NotFound() {
             <svg className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
             </svg>
-            <span>К модам</span>
+            <span>{t('notfound.toMods')}</span>
           </Link>
         </div>
 
         <div className="mt-12 pt-8 border-t border-gray-800">
-          <p className="text-gray-500 text-sm mb-4">Или перейдите в популярные разделы:</p>
+          <p className="text-gray-500 text-sm mb-4">{t('notfound.orSections')}</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link href="/plugins" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Плагины
+              {t('nav.plugins')}
             </Link>
             <Link href="/modpacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Модпаки
+              {t('nav.modpacks')}
             </Link>
             <Link href="/shaders" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Шейдеры
+              {t('nav.shaders')}
             </Link>
             <Link href="/resourcepacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Ресурспаки
+              {t('nav.resourcepacks')}
             </Link>
             <Link href="/datapacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Датапаки
+              {t('nav.datapacks')}
             </Link>
             <Link href="/collections" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              Коллекции
+              {t('col.title')}
             </Link>
           </div>
         </div>

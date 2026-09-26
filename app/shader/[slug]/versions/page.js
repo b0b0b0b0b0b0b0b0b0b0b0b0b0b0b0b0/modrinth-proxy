@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -11,27 +12,9 @@ import IconPreload from '@/app/components/IconPreload'
 export async function generateMetadata({ params }) {
   try {
     const shader = await getMod(params.slug)
-    const url = `https://modrinth.black/shader/${params.slug}/versions`
-    return {
-      title: `${shader.title} - Версии | ModrinthProxy`,
-      description: `Все версии шейдера ${shader.title}.`,
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${shader.title} - Версии | ModrinthProxy`,
-        description: `Все версии шейдера ${shader.title}.`,
-        images: shader.icon_url ? [{ url: shader.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${shader.title} - Версии | ModrinthProxy`,
-        description: `Все версии шейдера ${shader.title}.`,
-        images: shader.icon_url ? [shader.icon_url] : [],
-      },
-    }
+    return buildProjectVersionsMetadata('shader', params.slug, shader)
   } catch {
-    return { title: 'Шейдер не найден | ModrinthProxy' }
+    return buildProjectNotFoundMetadata('shader')
   }
 }
 

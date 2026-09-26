@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -11,27 +12,9 @@ import IconPreload from '@/app/components/IconPreload'
 export async function generateMetadata({ params }) {
   try {
     const modpack = await getMod(params.slug)
-    const url = `https://modrinth.black/modpack/${params.slug}/versions`
-    return {
-      title: `${modpack.title} - Версии | ModrinthProxy`,
-      description: `Все версии модпака ${modpack.title}.`,
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${modpack.title} - Версии | ModrinthProxy`,
-        description: `Все версии модпака ${modpack.title}.`,
-        images: modpack.icon_url ? [{ url: modpack.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${modpack.title} - Версии | ModrinthProxy`,
-        description: `Все версии модпака ${modpack.title}.`,
-        images: modpack.icon_url ? [modpack.icon_url] : [],
-      },
-    }
+    return buildProjectVersionsMetadata('modpack', params.slug, modpack)
   } catch {
-    return { title: 'Модпак не найден | ModrinthProxy' }
+    return buildProjectNotFoundMetadata('modpack')
   }
 }
 

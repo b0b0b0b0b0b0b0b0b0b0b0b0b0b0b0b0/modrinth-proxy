@@ -25,6 +25,8 @@
     "anyLoader": "Funciona con cualquier loader",
     "anyLoaderLead": "ModrinthProxy cubre loaders populares y versiones de Minecraft.",
     "autoFilter": "Filtro automático por plataforma",
+    "mcRange": "Todas las versiones de {from} a {to}",
+    "mcSnapshot": "También hay mods para {version}.",
     "pluginsTitle": "Miles de plugins para tu servidor",
     "forServerOwners": "Para dueños de servidores",
     "pluginsLead": "Desde utilidades chiquitas hasta sistemas de juego pesados: elige plugins que hagan el servidor a tu modo.",

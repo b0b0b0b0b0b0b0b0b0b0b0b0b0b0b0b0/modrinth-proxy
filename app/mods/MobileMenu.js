@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import SidebarFilters from './SidebarFilters'
+import { useT } from '@/app/components/I18nProvider'
 
 export default function MobileMenu({ initialVersions = null }) {
+  const t = useT()
   const [isOpen, setIsOpen] = useState(false)
 
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function MobileMenu({ initialVersions = null }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold">Фильтры</h2>
+          <h2 className="text-xl font-bold">{t('filter.filtersTitle')}</h2>
           <button
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors"

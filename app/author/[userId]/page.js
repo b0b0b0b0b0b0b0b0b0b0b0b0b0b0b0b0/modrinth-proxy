@@ -16,14 +16,16 @@ const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTa
 import UserSidebar from '@/app/components/UserSidebar'
 import { buildUserProfileMetadata } from '@/lib/profileSeo'
 import { getRequestT } from '@/lib/i18n/server'
+import { projectTypeLabel } from '@/lib/i18n/label'
 
 export async function generateMetadata({ params, searchParams }) {
+  const { t } = getRequestT()
   try {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
       return {
-        title: 'Автор не найден | ModrinthProxy',
-        description: 'Запрашиваемый автор не найден',
+        title: t('author.notFound'),
+        description: t('author.notFoundDesc'),
       }
     }
 
@@ -42,8 +44,8 @@ export async function generateMetadata({ params, searchParams }) {
     )
   } catch {
     return {
-      title: 'Автор не найден | ModrinthProxy',
-      description: 'Запрашиваемый автор не найден',
+      title: t('author.notFound'),
+      description: t('author.notFoundDesc'),
     }
   }
 }
@@ -112,7 +114,7 @@ export default async function AuthorPage({ params, searchParams }) {
             ) : (
               <div className="text-center py-16">
                 <h3 className="text-xl font-semibold text-gray-300 mb-2">
-                  {projectType ? `Нет ${getProjectTypeDisplayName(projectType).toLowerCase()}` : 'Нет проектов'}
+                  {projectType ? t('author.noType', { type: projectTypeLabel(t, projectType, getProjectTypeDisplayName(projectType)).toLowerCase() }) : t('author.noProjects')}
                 </h3>
               </div>
             )}

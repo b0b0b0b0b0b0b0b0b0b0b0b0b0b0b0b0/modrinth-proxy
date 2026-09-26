@@ -25,6 +25,8 @@
     "anyLoader": "Darbojas ar jebkuru loaderi",
     "anyLoaderLead": "ModrinthProxy sedz populāros loaderus un Minecraft versijas.",
     "autoFilter": "Auto-filtrs pēc platformas",
+    "mcRange": "Visas versijas no {from} līdz {to}",
+    "mcSnapshot": "Modus atradīsi arī {version}.",
     "pluginsTitle": "Tūkstošiem spraudņu tavam serverim",
     "forServerOwners": "Serveru īpašniekiem",
     "pluginsLead": "No sīkiem rīkiem līdz smagām spēles sistēmām — izvēlies spraudņus, kas padara serveri par tavu.",

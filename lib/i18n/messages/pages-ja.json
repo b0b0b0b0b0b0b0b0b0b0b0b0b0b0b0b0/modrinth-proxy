@@ -25,6 +25,8 @@
     "anyLoader": "どのローダーでも利用できます",
     "anyLoaderLead": "ModrinthProxyは主要なローダーとMinecraftバージョンをカバーしています。",
     "autoFilter": "プラットフォームで自動フィルタ",
+    "mcRange": "{from} から {to} までの全バージョン",
+    "mcSnapshot": "{version} 向けのMODもあります。",
     "pluginsTitle": "サーバー向けの何千ものプラグイン",
     "forServerOwners": "サーバー運営者向け",
     "pluginsLead": "小さなユーティリティから本格的なゲームシステムまで——サーバーを自分のものにするプラグインを選びましょう。",

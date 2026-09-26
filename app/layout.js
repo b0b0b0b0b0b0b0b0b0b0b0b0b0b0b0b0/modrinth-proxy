@@ -23,6 +23,7 @@ import { PALETTES } from '../lib/paletteManager'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 import { LOCALE_COOKIE } from '../lib/i18n/config'
 import { resolveLocale } from '../lib/i18n/resolveLocale'
+import { getRequestT } from '../lib/i18n/server'
 
 const nunito = Nunito({
   subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
@@ -34,14 +35,17 @@ const nunito = Nunito({
   fallback: ['system-ui', 'arial'],
 })
 
-export const metadata = {
-  title: 'ModrinthProxy',
-  description: 'Удобный поиск и скачивание модов, плагинов, шейдеров для Minecraft на русском языке',
-  manifest: '/manifest.json',
-  icons: {
-    icon: '/icon.png?v=2',
-    apple: '/icon.png?v=2',
-  },
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: 'ModrinthProxy',
+    description: t('home.metaDesc'),
+    manifest: '/manifest.json',
+    icons: {
+      icon: '/icon.png?v=2',
+      apple: '/icon.png?v=2',
+    },
+  }
 }
 
 export const viewport = {
@@ -67,6 +71,10 @@ export default async function RootLayout({ children }) {
     cookies().get(LOCALE_COOKIE)?.value,
     headers().get('accept-language'),
   )
+  const { t } = getRequestT()
+  const consoleStop = t('console.stop')
+  const consoleWarn = t('console.warn')
+  const consoleReport = t('console.report')
   const activeColorPalettesStoreDisclaimerUpdate = {}
   for (const key of Object.keys(PALETTES)) {
     activeColorPalettesStoreDisclaimerUpdate[key] = PALETTES[key].variables
@@ -125,9 +133,9 @@ export default async function RootLayout({ children }) {
           {`(function(){
   function warn(){
     console.log("%c🐉","padding:50px 0px;font-size:300px;color:transparent;text-shadow:0 0 0 #22b369");
-    console.log("%cСтоп-стоп-стоп!", "color: #1a9456; font-size: 70px; font-weight: bold;");
-    console.log("%cНе вставляйте в это окошко ничего. Это очень опасно!", "color: #d6d6d6; font-size: 21px;");
-    console.log("%cЕсли вас кто-то попросил сюда вставить что-то, сообщите незамедлительно об этом администрации сайта! ", "color: red; font-size: 21px;");
+    console.log("%c"+${JSON.stringify(consoleStop)}, "color: #1a9456; font-size: 70px; font-weight: bold;");
+    console.log("%c"+${JSON.stringify(consoleWarn)}, "color: #d6d6d6; font-size: 21px;");
+    console.log("%c"+${JSON.stringify(consoleReport)}, "color: red; font-size: 21px;");
   }
   if (document.readyState === "complete") warn();
   else window.addEventListener("load", warn);

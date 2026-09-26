@@ -1,3 +1,5 @@
+import { catalogBlockedCopy } from '@/lib/i18n/catalogListing'
+
 export default function CatalogEmptyResults({
   data,
   blockedCount,
@@ -16,17 +18,13 @@ export default function CatalogEmptyResults({
         </svg>
         <p className="text-xl font-semibold text-red-400 mb-3">{blockedTitle}</p>
         <p className="text-gray-400 text-sm">
-          Из {data.total_hits.toLocaleString('ru-RU')} {foundLabel}, все {blockedCount} на текущей странице заблокированы по требованиям РКН
-          {blockedByProject > 0 && blockedByOrganization > 0 && (
-            <> ({blockedByProject} по проекту, {blockedByOrganization} по организации)</>
-          )}
-          {blockedByProject > 0 && blockedByOrganization === 0 && (
-            <> ({blockedByProject} по проекту)</>
-          )}
-          {blockedByProject === 0 && blockedByOrganization > 0 && (
-            <> ({blockedByOrganization} по организации)</>
-          )}
-          . Попробуйте изменить параметры поиска или фильтры.
+          {catalogBlockedCopy({
+            totalHits: data.total_hits,
+            foundLabel,
+            blockedCount,
+            blockedByProject,
+            blockedByOrganization,
+          })}
         </p>
       </div>
     )

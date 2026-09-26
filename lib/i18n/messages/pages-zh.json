@@ -25,6 +25,8 @@
     "anyLoader": "适用任意加载器",
     "anyLoaderLead": "ModrinthProxy 覆盖常见加载器与 Minecraft 版本。",
     "autoFilter": "按平台自动筛选",
+    "mcRange": "涵盖 {from} 到 {to} 的全部版本",
+    "mcSnapshot": "也有 {version} 的模组。",
     "pluginsTitle": "海量插件，服务你的服务器",
     "forServerOwners": "给服主",
     "pluginsLead": "从小工具到重度玩法系统——选能让服务器成为你的服务器的插件。",

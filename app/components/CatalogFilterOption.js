@@ -1,5 +1,7 @@
 'use client'
 
+import { useT } from './I18nProvider'
+
 function BanIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="h-4 w-4">
@@ -18,6 +20,7 @@ function CheckIcon() {
 }
 
 export default function CatalogFilterOption({ icon, label, selected = false, excluded = false, onInclude, onExclude }) {
+  const t = useT()
   return (
     <div className="group flex items-center gap-1">
       <button
@@ -38,7 +41,7 @@ export default function CatalogFilterOption({ icon, label, selected = false, exc
       </button>
       <button
         type="button"
-        aria-label="Исключить"
+        aria-label={t('filter.exclude')}
         onClick={onExclude}
         className={`rounded-xl px-2 py-1 text-gray-500 transition-all hover:bg-gray-800 hover:text-red-400 ${
           excluded ? 'text-red-400' : 'opacity-0 group-hover:opacity-100'

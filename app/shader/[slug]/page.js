@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
+import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -10,36 +11,9 @@ import MarkdownContent from '@/app/components/MarkdownContent'
 export async function generateMetadata({ params }) {
   try {
     const shader = await getMod(params.slug)
-    const url = `https://modrinth.black/shader/${params.slug}`
-    const fullDescription = shader.description || `Скачать ${shader.title} для Minecraft. ${formatDownloads(shader.downloads)} загрузок. Поддержка версий: ${shader.game_versions?.slice(0, 3).join(', ')}.`
-    
-    return {
-      title: `${shader.title} - Майнкрафт Шейдер`,
-      description: fullDescription,
-      robots: 'all',
-      openGraph: {
-        siteName: 'modrinth.black',
-        type: 'website',
-        url: url,
-        title: `${shader.title} - Майнкрафт Шейдер`,
-        description: shader.description,
-        images: shader.icon_url ? [{ url: shader.icon_url }] : [],
-      },
-      twitter: {
-        card: 'summary',
-        title: `${shader.title} - Майнкрафт Шейдер`,
-        description: shader.description,
-        images: shader.icon_url ? [shader.icon_url] : [],
-      },
-      other: {
-        'theme-color': '#1bd96a',
-      },
-    }
+    return buildProjectOverviewMetadata('shader', params.slug, shader)
   } catch {
-    return {
-      title: 'Шейдер не найден | ModrinthProxy',
-      description: 'Запрашиваемый шейдер не найден',
-    }
+    return buildProjectNotFoundMetadata('shader')
   }
 }
 

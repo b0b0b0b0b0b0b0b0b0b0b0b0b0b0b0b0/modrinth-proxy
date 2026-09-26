@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
-import { buildHomeModsVersionCopy } from '@/lib/minecraftVersionRange'
+import { getModsVersionRange } from '@/lib/minecraftVersionRange'
 import { useI18n, useMessage, useT } from './components/I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
 
@@ -51,7 +51,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
   const t = useT()
   const { locale } = useI18n()
   const rotate = useMessage('home.rotate')
-  const words = Array.isArray(rotate) && rotate.length ? rotate : ['модов', 'плагинов', 'шейдеров', 'ресурспаков', 'датапаков']
+  const words = Array.isArray(rotate) && rotate.length ? rotate : [t('nav.mods')]
   const projectsShown =
     platformStats?.projects > 0 ? platformStats.projects : STATS_FALLBACK.projects
   const filesShown =
@@ -61,8 +61,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
   const versionsShown =
     platformStats?.versions > 0 ? platformStats.versions : STATS_FALLBACK.versions
   const { release, full } = useMinecraftVersions()
-  const { stableLine, snapshotLine } = useMemo(
-    () => buildHomeModsVersionCopy(release, full),
+  const { fromVersion, toVersion, snapshotVersion } = useMemo(
+    () => getModsVersionRange(release, full),
     [release, full]
   )
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
@@ -296,8 +296,10 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </svg>
                   </div>
                   <div className="flex flex-col gap-1 text-gray-300">
-                    <span>{stableLine}</span>
-                    {snapshotLine ? <span className="text-gray-400 text-sm">{snapshotLine}</span> : null}
+                    <span>{t('home.mcRange', { from: fromVersion, to: toVersion })}</span>
+                    {snapshotVersion ? (
+                      <span className="text-gray-400 text-sm">{t('home.mcSnapshot', { version: snapshotVersion })}</span>
+                    ) : null}
                   </div>
                 </div>
                 <div className="flex items-center gap-3">

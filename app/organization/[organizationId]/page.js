@@ -4,7 +4,6 @@ import {
   OrganizationPresenter,
   OrganizationStats,
   formatOrganizationDownloadsRu,
-  pluralRu,
 } from '@/lib/organizations'
 import { TeamMemberPresenter } from '@/lib/teamMembers'
 import {
@@ -17,14 +16,16 @@ import { IconBuilding2, IconDownload, IconPackage, IconUsers } from '@/lib/icons
 import ResourceList from '@/app/components/ResourceList'
 import OrganizationMembersSidebar from '@/app/components/OrganizationMembersSidebar'
 import { getRequestT } from '@/lib/i18n/server'
+import { pluralize } from '@/lib/i18n/pluralize'
 
 export async function generateMetadata({ params }) {
+  const { t } = getRequestT()
   try {
     const organization = await getOrganization(params.organizationId)
     if (!organization?.id) {
       return {
-        title: 'Организация не найдена | ModrinthProxy',
-        description: 'Запрашиваемая организация не найдена',
+        title: t('orgPage.notFound'),
+        description: t('orgPage.notFoundDesc'),
       }
     }
 
@@ -43,21 +44,21 @@ export async function generateMetadata({ params }) {
     const presenter = new OrganizationPresenter(organization)
 
     return {
-      title: `${presenter.name} — Организация`,
-      description: presenter.description || `Проекты организации ${presenter.name} на ModrinthProxy`,
+      title: t('orgPage.metaTitle', { name: presenter.name }),
+      description: presenter.description || t('orgPage.metaDesc', { name: presenter.name }),
       robots: 'all',
       openGraph: {
         siteName: 'modrinth.black',
         type: 'website',
-        title: `${presenter.name} — Организация`,
-        description: presenter.description || `Проекты организации ${presenter.name}`,
+        title: t('orgPage.metaTitle', { name: presenter.name }),
+        description: presenter.description || t('orgPage.metaDescShort', { name: presenter.name }),
         images: presenter.iconUrl ? [{ url: presenter.iconUrl }] : [],
       },
     }
   } catch {
     return {
-      title: 'Организация не найдена | ModrinthProxy',
-      description: 'Запрашиваемая организация не найдена',
+      title: t('orgPage.notFound'),
+      description: t('orgPage.notFoundDesc'),
     }
   }
 }
@@ -76,7 +77,7 @@ function StatItem({ icon: Icon, children, withDivider = true }) {
 }
 
 export default async function OrganizationPage({ params }) {
-  const { t } = getRequestT()
+  const { t, locale } = getRequestT()
   const { organizationId } = params
 
   let organization
@@ -117,9 +118,9 @@ export default async function OrganizationPage({ params }) {
   }))
   const stats = new OrganizationStats(organization, projects)
 
-  const memberLabel = pluralRu(stats.memberCount, 'участник', 'участника', 'участников')
-  const projectLabel = pluralRu(stats.projectCount, 'проект', 'проекта', 'проектов')
-  const downloadLabel = pluralRu(stats.totalDownloads, 'загрузка', 'загрузки', 'загрузок')
+  const memberLabel = pluralize(stats.memberCount, locale, t('orgPage.memberOne'), t('orgPage.memberFew'), t('orgPage.memberMany'))
+  const projectLabel = pluralize(stats.projectCount, locale, t('orgPage.projectOne'), t('orgPage.projectFew'), t('orgPage.projectMany'))
+  const downloadLabel = pluralize(stats.totalDownloads, locale, t('orgPage.downloadOne'), t('orgPage.downloadFew'), t('orgPage.downloadMany'))
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -147,7 +148,7 @@ export default async function OrganizationPage({ params }) {
                     </h1>
                     <div className="ml-1 flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400">
                       <IconBuilding2 className="size-5 shrink-0" />
-                      <span>Организация</span>
+                      <span>{t('orgPage.badge')}</span>
                     </div>
                   </div>
                   {presenter.description && (
@@ -190,8 +191,8 @@ export default async function OrganizationPage({ params }) {
             <ResourceList resources={projects} type="mod" isProfile />
           ) : (
             <div className="text-center py-16">
-              <h3 className="text-xl font-semibold text-gray-300 mb-2">Нет проектов</h3>
-              <p className="text-gray-500">У этой организации пока нет опубликованных проектов.</p>
+              <h3 className="text-xl font-semibold text-gray-300 mb-2">{t('orgPage.empty')}</h3>
+              <p className="text-gray-500">{t('orgPage.emptyHint')}</p>
             </div>
           )}
         </div>
