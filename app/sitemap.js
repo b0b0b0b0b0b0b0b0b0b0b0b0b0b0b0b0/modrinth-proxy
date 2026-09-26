@@ -1,7 +1,8 @@
 import { searchMods } from '@/lib/modrinth'
+import { SITE_ORIGIN } from '@/lib/site'
 
 export default async function sitemap() {
-  const baseUrl = 'https://modrinth.black'
+  const baseUrl = SITE_ORIGIN
   
   const routes = [
     '',
