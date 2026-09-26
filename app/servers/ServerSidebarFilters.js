@@ -8,11 +8,11 @@ import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclus
 import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
-import { useT } from '@/app/components/I18nProvider'
-import { categoryLabel } from '@/lib/i18n/label'
+import { useI18n } from '@/app/components/I18nProvider'
+import { categoryLabel, languageDisplayName, serverRegionLabel } from '@/lib/i18n/label'
 
 export default function ServerSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
-  const t = useT()
+  const { t, locale } = useI18n()
   const router = useRouter()
   const searchParams = useSearchParams()
   const hookVersions = useMinecraftVersions()
@@ -348,7 +348,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                       <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
                       <circle cx="12" cy="10" r="3"></circle>
                     </svg>
-                    <span className="truncate text-sm flex-1">{reg.name}</span>
+                    <span className="truncate text-sm flex-1">{serverRegionLabel(t, reg.id, reg.name)}</span>
                     {isSelected && (
                       <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                         <path d="M20 6 9 17l-5-5" />
@@ -386,7 +386,15 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
               <div className="space-y-1 max-h-52 overflow-y-auto custom-scrollbar pr-2 mb-2">
                 {(() => {
                   const filtered = languageSearch
-                    ? SERVER_LANGUAGES.filter(l => l.name.toLowerCase().includes(languageSearch.toLowerCase()) || l.id.toLowerCase().includes(languageSearch.toLowerCase()))
+                    ? SERVER_LANGUAGES.filter((l) => {
+                        const q = languageSearch.toLowerCase()
+                        const display = languageDisplayName(locale, l.id)
+                        return (
+                          display.toLowerCase().includes(q) ||
+                          l.id.toLowerCase().includes(q) ||
+                          l.name.toLowerCase().includes(q)
+                        )
+                      })
                     : (showAllLanguages ? SERVER_LANGUAGES : SERVER_LANGUAGES.filter(l => ['ru', 'en'].includes(l.id) || selectedLanguages.includes(l.id)))
 
                   return filtered.map(lang => {
@@ -410,7 +418,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                             : 'bg-transparent text-gray-400 hover:bg-gray-800/50 hover:text-white'
                         }`}
                       >
-                        <span className="truncate text-sm flex-1">{lang.name}</span>
+                        <span className="truncate text-sm flex-1">{languageDisplayName(locale, lang.id)}</span>
                         {isSelected && (
                           <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                             <path d="M20 6 9 17l-5-5" />
@@ -440,7 +448,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                       )}
                     </div>
                     <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                      Показать все языки
+                      {t('filter.showAllLanguages')}
                     </span>
                   </button>
                 </div>
@@ -465,7 +473,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 }`}
               >
                 <div className={`h-2.5 w-2.5 rounded-full ${selectedStatus === 'online' ? 'bg-modrinth-green shadow-[0_0_8px_rgba(236,127,171,0.5)]' : 'bg-gray-600'}`}></div>
-                <span className="truncate text-sm flex-1">В сети</span>
+                <span className="truncate text-sm flex-1">{t('server.onlineBadge')}</span>
                 {selectedStatus === 'online' && (
                   <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M20 6 9 17l-5-5" />
@@ -485,7 +493,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 }`}
               >
                 <div className={`h-2.5 w-2.5 rounded-full ${selectedStatus === 'offline' ? 'bg-red-500' : 'bg-gray-600'}`}></div>
-                <span className="truncate text-sm flex-1">Не в сети</span>
+                <span className="truncate text-sm flex-1">{t('server.offline')}</span>
                 {selectedStatus === 'offline' && (
                   <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M20 6 9 17l-5-5" />

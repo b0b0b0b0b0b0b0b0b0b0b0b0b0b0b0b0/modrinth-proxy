@@ -7,11 +7,11 @@ import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEn
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
 import { getDisclosureExclusionLabel, filterDisclosureIdsForCatalog, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
-import { useT } from './I18nProvider'
-import { categoryLabel, labeled } from '@/lib/i18n/label'
+import { useI18n } from './I18nProvider'
+import { categoryLabel, languageDisplayName, labeled, serverRegionLabel } from '@/lib/i18n/label'
 
 export default function ActiveFilters({ categoryPath = 'plugins' }) {
-  const t = useT()
+  const { t, locale } = useI18n()
   const searchParams = useSearchParams()
   const config = getFilterConfig(categoryPath)
   const nameOf = (id) => categoryLabel(t, id, getCategoryName(id, config))
@@ -166,7 +166,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         activeFilters.push({
           type: 'sr',
           id: param,
-          label: regionObj.name,
+          label: serverRegionLabel(t, param, regionObj.name),
           param: param
         })
       }
@@ -180,7 +180,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         activeFilters.push({
           type: 'sl',
           id: param,
-          label: langObj.name,
+          label: languageDisplayName(locale, param) || langObj.name,
           param: param
         })
       }

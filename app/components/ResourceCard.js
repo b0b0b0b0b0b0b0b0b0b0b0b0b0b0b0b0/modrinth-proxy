@@ -11,7 +11,7 @@ import { SERVER_CATEGORIES, SERVER_REGIONS } from '@/lib/serverCategories'
 import { IconModrinthAppPlays } from '@/lib/icons'
 import RelativeTime from './RelativeTime'
 import { useT } from './I18nProvider'
-import { categoryLabel } from '@/lib/i18n/label'
+import { categoryLabel, serverRegionLabel } from '@/lib/i18n/label'
 
 function uniqueStrings(list) {
   if (!Array.isArray(list)) return []
@@ -264,7 +264,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                   <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"/>
                   <circle cx="12" cy="10" r="3"/>
                 </svg>
-                {regionData.name}
+                {serverRegionLabel(t, regionData.id, regionData.name)}
               </span>
             )}
             {serverCats.map(cat => (

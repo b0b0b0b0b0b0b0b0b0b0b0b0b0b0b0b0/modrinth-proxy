@@ -3,6 +3,7 @@
     "gameVersion": "Version du jeu",
     "search": "Rechercher…",
     "showAllVersions": "Afficher toutes les versions",
+    "showAllLanguages": "Afficher toutes les langues",
     "releasesOnly": "Afficher uniquement les versions stables",
     "loader": "Chargeur",
     "platform": "Plateforme",
