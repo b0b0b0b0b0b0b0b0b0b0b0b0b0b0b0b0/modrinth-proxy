@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Langue",
-    "hint": "Le russe est la langue par défaut. Tu peux choisir l’anglais, l’allemand, l’italien, le français, l’espagnol, le portugais, le polonais, le chinois, le japonais et le vietnamien.",
+    "hint": "Le russe est la langue par défaut. Tu peux aussi choisir le russe d’avant 1918, le letton, le suédois et les autres langues de la liste.",
     "auto": "Comme le navigateur",
     "switcher": "Langue du site"
   },

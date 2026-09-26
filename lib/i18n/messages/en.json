@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Language",
-    "hint": "Russian is the default. English, German, Italian, French, Spanish, Portuguese, Polish, Chinese, Japanese, and Vietnamese are available.",
+    "hint": "Russian is the default. Pre-reform Russian, Latvian, Swedish, and the other languages in the list are available.",
     "auto": "Match browser",
     "switcher": "Site language"
   },

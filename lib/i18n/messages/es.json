@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Idioma",
-    "hint": "El ruso es el predeterminado. Puedes elegir inglés, alemán, italiano, francés, español, portugués, polaco, chino, japonés y vietnamita.",
+    "hint": "El ruso es el predeterminado. También hay ruso prerreforma, letón, sueco y el resto de idiomas de la lista.",
     "auto": "Como el navegador",
     "switcher": "Idioma del sitio"
   },

@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Idioma",
-    "hint": "O russo é o padrão. Dá para escolher inglês, alemão, italiano, francês, espanhol, português, polonês, chinês, japonês e vietnamita.",
+    "hint": "O russo é o padrão. Dá para escolher russo pré-reforma, letão, sueco e os outros idiomas da lista.",
     "auto": "Como o navegador",
     "switcher": "Idioma do site"
   },

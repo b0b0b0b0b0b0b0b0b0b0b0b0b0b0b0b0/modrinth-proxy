@@ -1,12 +1,12 @@
 'use client'
 
-import { LOCALES } from '@/lib/i18n/config'
+import { LOCALES, localeFlagSrc } from '@/lib/i18n/config'
 import { useI18n } from './I18nProvider'
 
-function Flag({ code }) {
+function Flag({ locale }) {
   return (
     <img
-      src={`https://flagcdn.com/${code}.svg`}
+      src={localeFlagSrc(locale)}
       alt=""
       aria-hidden="true"
       className="h-4 w-6 shrink-0 rounded-sm object-cover"
@@ -68,7 +68,7 @@ export default function LanguageSettingsCard() {
               } ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer active:scale-[0.97]'}`}
             >
               <span className="flex min-w-0 flex-1 items-center gap-2">
-                <Flag code={item.flag} />
+                <Flag locale={item} />
                 <span className="flex min-w-0 flex-1 items-baseline gap-2 overflow-hidden">
                   <span className="truncate text-sm sm:text-base">{item.nativeName}</span>
                   {item.englishName !== item.nativeName ? (

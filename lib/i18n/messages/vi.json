@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Ngôn ngữ",
-    "hint": "Mặc định là tiếng Nga. Có thể chọn Anh, Đức, Ý, Pháp, Tây Ban Nha, Bồ Đào Nha, Ba Lan, Trung, Nhật và Việt.",
+    "hint": "Mặc định là tiếng Nga. Có thể chọn Nga trước cải cách, Latvia, Thụy Điển và các ngôn ngữ khác trong danh sách.",
     "auto": "Theo trình duyệt",
     "switcher": "Ngôn ngữ trang"
   },

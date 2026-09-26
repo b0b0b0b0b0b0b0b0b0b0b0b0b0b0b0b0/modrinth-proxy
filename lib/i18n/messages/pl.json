@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Język",
-    "hint": "Domyślny jest rosyjski. Możesz wybrać angielski, niemiecki, włoski, francuski, hiszpański, portugalski, polski, chiński, japoński i wietnamski.",
+    "hint": "Domyślny jest rosyjski. Możesz też wybrać rosyjski sprzed reformy, łotewski, szwedzki i pozostałe języki z listy.",
     "auto": "Jak w przeglądarce",
     "switcher": "Język strony"
   },

@@ -31,7 +31,7 @@
   },
   "lang": {
     "label": "Sprache",
-    "hint": "Russisch ist Standard. Englisch, Deutsch, Italienisch, Französisch, Spanisch, Portugiesisch, Polnisch, Chinesisch, Japanisch und Vietnamesisch sind wählbar.",
+    "hint": "Russisch ist Standard. Vorreform-Russisch, Lettisch, Schwedisch und die übrigen Sprachen in der Liste sind wählbar.",
     "auto": "Wie der Browser",
     "switcher": "Seitensprache"
   },

@@ -1,7 +1,7 @@
 'use client'
 
 import * as Popover from '@radix-ui/react-popover'
-import { enabledLocales, getLocaleMeta } from '@/lib/i18n/config'
+import { enabledLocales, getLocaleMeta, localeFlagSrc } from '@/lib/i18n/config'
 import { useI18n } from './I18nProvider'
 
 export default function LanguageSwitcher({ compact = false }) {
@@ -25,6 +25,12 @@ export default function LanguageSwitcher({ compact = false }) {
             <circle cx="12" cy="12" r="10" />
             <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
           </svg>
+          <img
+            src={localeFlagSrc(current)}
+            alt=""
+            aria-hidden="true"
+            className="h-3.5 w-5 shrink-0 rounded-sm object-cover"
+          />
           {!compact ? <span>{current.nativeName}</span> : <span>{current.short}</span>}
         </button>
       </Popover.Trigger>
@@ -51,9 +57,19 @@ export default function LanguageSwitcher({ compact = false }) {
                       : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
-                  <span className="flex flex-col">
+                  <span className="flex items-center gap-2">
+                    <img
+                      src={localeFlagSrc(item)}
+                      alt=""
+                      aria-hidden="true"
+                      className="h-4 w-6 shrink-0 rounded-sm object-cover"
+                    />
+                    <span className="flex flex-col">
                     <span>{item.nativeName}</span>
-                    <span className="text-[11px] font-medium uppercase tracking-wider text-gray-500">{item.short}</span>
+                    <span className={`text-[11px] font-medium tracking-wider text-gray-500 ${item.id === 'orv' ? '' : 'uppercase'}`}>
+                      {item.id === 'orv' ? item.englishName : item.short}
+                    </span>
+                    </span>
                   </span>
                   {active ? (
                     <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>

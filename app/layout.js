@@ -25,7 +25,7 @@ import { LOCALE_COOKIE } from '../lib/i18n/config'
 import { resolveLocale } from '../lib/i18n/resolveLocale'
 
 const nunito = Nunito({
-  subsets: ['latin', 'latin-ext', 'cyrillic'],
+  subsets: ['latin', 'latin-ext', 'cyrillic', 'cyrillic-ext'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-nunito',
   display: 'swap',
