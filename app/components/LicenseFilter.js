@@ -7,6 +7,7 @@ import {
   parseOpenSourceFilter,
   saveStoredOpenSource,
 } from '@/lib/openSourceFilter'
+import { useT } from './I18nProvider'
 
 function Chevron({ open }) {
   return (
@@ -34,6 +35,7 @@ function CheckIcon() {
 }
 
 export default function LicenseFilter() {
+  const t = useT()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -61,7 +63,7 @@ export default function LicenseFilter() {
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center gap-2 px-4 py-3 text-left"
       >
-        <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">Лицензия</h3>
+        <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">{t('filter.license')}</h3>
         <Chevron open={open} />
       </button>
       {open && (
@@ -78,13 +80,13 @@ export default function LicenseFilter() {
                     : 'bg-transparent text-gray-400 hover:bg-gray-800 hover:text-white'
               }`}
             >
-              <span className="min-w-0 flex-1 truncate">Открытый исходный код</span>
+              <span className="min-w-0 flex-1 truncate">{t('filter.openSource')}</span>
               {state === 'selected' && <CheckIcon />}
               {state === 'excluded' && <BanIcon />}
             </button>
             <button
               type="button"
-              aria-label="Исключить"
+              aria-label={t('filter.exclude')}
               onClick={() => applyState(state === 'excluded' ? 'none' : 'excluded')}
               className={`rounded-xl px-2 py-1 text-gray-500 transition-all hover:bg-gray-800 hover:text-red-400 ${
                 state === 'excluded' ? 'text-red-400' : ''

@@ -15,6 +15,7 @@ const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTa
 })
 import UserSidebar from '@/app/components/UserSidebar'
 import { buildUserProfileMetadata } from '@/lib/profileSeo'
+import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata({ params, searchParams }) {
   try {
@@ -48,14 +49,15 @@ export async function generateMetadata({ params, searchParams }) {
 }
 
 export default async function AuthorPage({ params, searchParams }) {
+  const { t } = getRequestT()
   const { userId } = params
   const projectType = searchParams.type || null
 
   if (isUserBlocked(userId)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-        <p className="text-gray-400">Данный пользователь недоступен.</p>
+        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
+        <p className="text-gray-400">{t('restricted.user')}</p>
       </div>
     )
   }

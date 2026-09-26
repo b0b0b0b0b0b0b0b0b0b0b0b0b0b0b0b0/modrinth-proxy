@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
 export default async function ShaderVersionPage({ params }) {
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
-    return <ProjectAccessRestricted href="/shaders" label="Вернуться к шейдерам" />
+    return <ProjectAccessRestricted href="/shaders" backKey="project.backToShaders" />
   }
   if (data.missing) notFound()
 

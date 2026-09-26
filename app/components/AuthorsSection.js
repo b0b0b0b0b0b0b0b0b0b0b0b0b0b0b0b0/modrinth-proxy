@@ -5,8 +5,21 @@ import { IconBuilding2, IconCrown } from '@/lib/icons'
 import { OrganizationPresenter } from '@/lib/organizations'
 import { TeamMemberPresenter } from '@/lib/teamMembers'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
+
+const ROLE_I18N = {
+  Owner: 'author.role.owner',
+  'Project Lead': 'author.role.projectLead',
+  'Team Lead': 'author.role.teamLead',
+  Developer: 'author.role.developer',
+  Artist: 'author.role.artist',
+  Maintainer: 'author.role.maintainer',
+  Member: 'author.role.member',
+  Contributor: 'author.role.contributor',
+}
 
 function OrganizationRow({ organization, linkClassName = '' }) {
+  const t = useT()
   const org = new OrganizationPresenter(organization)
   if (!org.id) return null
 
@@ -33,7 +46,7 @@ function OrganizationRow({ organization, linkClassName = '' }) {
         </p>
         <p className="m-0 flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400">
           <IconBuilding2 className="h-3.5 w-3.5 shrink-0" />
-          <span>Организация</span>
+          <span>{t('author.role.org')}</span>
         </p>
       </div>
     </Link>
@@ -41,6 +54,8 @@ function OrganizationRow({ organization, linkClassName = '' }) {
 }
 
 function TeamMemberRow({ member, linkClassName = '' }) {
+  const t = useT()
+  const roleKey = ROLE_I18N[member.role]
   return (
     <Link
       href={`/user/${member.user.id}`}
@@ -62,7 +77,7 @@ function TeamMemberRow({ member, linkClassName = '' }) {
         <p className="m-0 flex items-center gap-1 text-sm text-gray-900 dark:text-white font-medium group-hover:text-modrinth-green transition-colors">
           <span className="truncate">{member.user.username}</span>
           {TeamMemberPresenter.isPrimaryOwner(member) && (
-            <StyledTooltip label="Владелец проекта">
+            <StyledTooltip label={t('author.role.ownerTip')}>
               <span className="inline-flex shrink-0">
                 <IconCrown className="h-4 w-4 text-orange-400" />
               </span>
@@ -70,7 +85,7 @@ function TeamMemberRow({ member, linkClassName = '' }) {
           )}
         </p>
         <p className="m-0 text-xs text-gray-600 dark:text-gray-400">
-          {TeamMemberPresenter.roleLabel(member.role)}
+          {roleKey ? t(roleKey) : TeamMemberPresenter.roleLabel(member.role)}
         </p>
       </div>
     </Link>

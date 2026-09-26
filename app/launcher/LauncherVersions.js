@@ -3,12 +3,14 @@
 import { useMemo } from 'react'
 import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
 import { getModsVersionRange } from '@/lib/minecraftVersionRange'
+import { useT } from '../components/I18nProvider'
 
 function Version({ children }) {
   return <span className="font-semibold text-modrinth-green">{children}</span>
 }
 
 export default function LauncherVersions() {
+  const t = useT()
   const { release, full, loading } = useMinecraftVersions()
   const { toVersion, snapshotVersion } = useMemo(
     () => getModsVersionRange(release, full),
@@ -21,24 +23,20 @@ export default function LauncherVersions() {
         <div className="pointer-events-none absolute -top-28 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-modrinth-green/20 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">
-            <span className="text-modrinth-green">Лучший</span> лаунчер для модов Minecraft
+            <span className="text-modrinth-green">{t('app.best')}</span> {t('app.bestRest')}
           </h2>
           <p className="mt-5 text-lg text-gray-300 leading-relaxed">
-            Скачай лучший лаунчер для Minecraft и открой доступ к тысячам модов, плагинов,
-            шейдеров, ресурспаков и готовых модпаков под любую версию игры — от самых старых
-            легендарных сборок
+            {t('app.bestP1')}
             {!loading && toVersion ? (
-              <> до последней версии <Version>{toVersion}</Version></>
+              <> {t('app.bestToLatest')} <Version>{toVersion}</Version></>
             ) : (
-              <> до последних версий</>
+              <> {t('app.bestToLatestGeneric')}</>
             )}
-            . Мы всегда держим руку на пульсе и добавляем поддержку новых версий сразу после
-            выхода
+            {t('app.bestP2')}
             {!loading && snapshotVersion ? (
-              <>, так что даже свежий снапшот <Version>{snapshotVersion}</Version> уже ждёт тебя</>
+              <>{t('app.bestSnap')} <Version>{snapshotVersion}</Version> {t('app.bestSnapWait')}</>
             ) : null}
-            . Скачивай, устанавливай моды в пару кликов и играй в Minecraft так, как нравится
-            именно тебе — всё лучшее в одном лаунчере.
+            {t('app.bestP3')}
           </p>
         </div>
       </div>

@@ -16,6 +16,7 @@ import {
 import { IconBuilding2, IconDownload, IconPackage, IconUsers } from '@/lib/icons'
 import ResourceList from '@/app/components/ResourceList'
 import OrganizationMembersSidebar from '@/app/components/OrganizationMembersSidebar'
+import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata({ params }) {
   try {
@@ -32,9 +33,10 @@ export async function generateMetadata({ params }) {
       isOrganizationBlocked(organization.id) ||
       isOrganizationBlocked(organization.slug)
     ) {
+      const { t } = getRequestT()
       return {
-        title: 'Доступ ограничен | ModrinthProxy',
-        description: 'Данная организация недоступна',
+        title: t('restricted.metaTitle'),
+        description: t('restricted.orgMetaDesc'),
       }
     }
 
@@ -74,6 +76,7 @@ function StatItem({ icon: Icon, children, withDivider = true }) {
 }
 
 export default async function OrganizationPage({ params }) {
+  const { t } = getRequestT()
   const { organizationId } = params
 
   let organization
@@ -94,8 +97,8 @@ export default async function OrganizationPage({ params }) {
   ) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-        <p className="text-gray-400">Данная организация недоступна.</p>
+        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
+        <p className="text-gray-400">{t('restricted.org')}</p>
       </div>
     )
   }

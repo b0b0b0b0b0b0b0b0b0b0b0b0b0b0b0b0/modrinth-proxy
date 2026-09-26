@@ -10,12 +10,7 @@ import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import CopyButton from '../../components/CopyButton'
 import { DownloadIconButton } from '../../components/DownloadModalParts'
 import RelativeTime from '../../components/RelativeTime'
-
-const VERSION_CHANNEL_LABELS = {
-  release: 'Релиз',
-  beta: 'Бета',
-  alpha: 'Альфа',
-}
+import { useT } from '../../components/I18nProvider'
 
 const VERSION_CHANNEL_STYLES = {
   release: 'bg-version-release-bg text-version-release-fg border-version-release-fg/25',
@@ -28,8 +23,14 @@ function normalizeVersionChannel(versionType) {
 }
 
 function VersionChannelBadge({ versionType }) {
+  const t = useT()
   const type = normalizeVersionChannel(versionType)
-  const label = VERSION_CHANNEL_LABELS[type] || VERSION_CHANNEL_LABELS.release
+  const labels = {
+    release: t('lookup.release'),
+    beta: t('lookup.beta'),
+    alpha: t('lookup.alpha'),
+  }
+  const label = labels[type] || labels.release
   return (
     <span
       className={`inline-flex shrink-0 items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${
@@ -65,12 +66,13 @@ function pickUpdateLoaders(version) {
 }
 
 function HashRow({ label, value }) {
+  const t = useT()
   if (!value) return null
   return (
     <div className="flex flex-col gap-1 sm:flex-row sm:gap-4">
       <span className="w-16 shrink-0 text-sm text-gray-500">{label}</span>
       <div className="min-w-0 flex-1 break-all">
-        <CopyButton text={value} tooltipLabel={`Скопировать ${label}`} inline />
+        <CopyButton text={value} tooltipLabel={t('lookup.copy', { label })} inline />
       </div>
     </div>
   )
@@ -97,6 +99,7 @@ function VersionChip({ children }) {
 }
 
 function VersionRow({ version, href, file }) {
+  const t = useT()
   if (!version) return null
   const loaders = (version.loaders || []).filter((loader) => loader !== 'minecraft')
 
@@ -117,7 +120,7 @@ function VersionRow({ version, href, file }) {
 
       {version.game_versions?.length > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="shrink-0 text-xs text-gray-500">Minecraft:</span>
+          <span className="shrink-0 text-xs text-gray-500">{t('lookup.mc')}</span>
           <div className="flex flex-wrap gap-1">
             {compressVersionRanges(version.game_versions)
               .slice(0, 4)
@@ -130,7 +133,7 @@ function VersionRow({ version, href, file }) {
 
       {loaders.length > 0 ? (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="shrink-0 text-xs text-gray-500">Платформа:</span>
+          <span className="shrink-0 text-xs text-gray-500">{t('lookup.platform')}</span>
           <div className="flex flex-wrap gap-1">
             {loaders.map((loader) => (
               <VersionChip key={loader}>{loader}</VersionChip>
@@ -141,11 +144,11 @@ function VersionRow({ version, href, file }) {
 
       {file?.url ? (
         <div className="flex flex-wrap items-center gap-2 pt-0.5">
-          <span className="shrink-0 text-xs text-gray-500">Файл:</span>
+          <span className="shrink-0 text-xs text-gray-500">{t('lookup.file')}</span>
           <DownloadIconButton
             href={file.url}
             download={file.filename}
-            label={`Скачать ${file.filename}`}
+            label={t('lookup.download', { name: file.filename })}
           />
           <span className="min-w-0 truncate text-xs text-gray-400">{file.filename}</span>
           {file.size ? (
@@ -156,7 +159,7 @@ function VersionRow({ version, href, file }) {
 
       {version.date_published ? (
         <div className="text-xs text-gray-500">
-          Опубликовано:{' '}
+          {t('lookup.published')}{' '}
           <RelativeTime dateString={version.date_published} className="text-gray-400" />
         </div>
       ) : null}
@@ -164,25 +167,25 @@ function VersionRow({ version, href, file }) {
   )
 }
 
-async function fetchLookup(hash, algorithm) {
+async function fetchLookup(hash, algorithm, t) {
   const response = await fetch(
     `/api/file-lookup?hash=${encodeURIComponent(hash)}&algorithm=${algorithm}`
   )
 
   if (response.status === 429) {
     const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10)
-    return { error: `Слишком много запросов. Подожди ${retryAfter} сек. и попробуй снова.` }
+    return { error: t('lookup.rateLimit', { n: retryAfter }) }
   }
   if (response.status === 404) {
-    return { error: 'Файл не найден в каталоге Modrinth.' }
+    return { error: t('lookup.notFound') }
   }
   if (!response.ok) {
-    return { error: 'Не удалось выполнить поиск по Modrinth.' }
+    return { error: t('lookup.lookupFail') }
   }
   return { result: await response.json() }
 }
 
-async function fetchUpdateCheck(payload) {
+async function fetchUpdateCheck(payload, t) {
   const response = await fetch('/api/file-lookup/update', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -191,21 +194,21 @@ async function fetchUpdateCheck(payload) {
 
   if (response.status === 429) {
     const retryAfter = parseInt(response.headers.get('Retry-After') || '60', 10)
-    return { error: `Слишком много запросов. Подожди ${retryAfter} сек.` }
+    return { error: t('lookup.rateLimitShort', { n: retryAfter }) }
   }
   if (response.status === 404) {
     return { error: null, result: null }
   }
   if (!response.ok) {
-    return { error: 'Не удалось проверить обновление.' }
+    return { error: t('lookup.updateFail') }
   }
   return { result: await response.json() }
 }
 
 const LOOKUP_COOLDOWN_MS = 2500
 
-async function lookupByHash(sha512) {
-  return fetchLookup(sha512, 'sha512')
+async function lookupByHash(sha512, t) {
+  return fetchLookup(sha512, 'sha512', t)
 }
 
 function pickMatchedFile(files, hashes) {
@@ -224,6 +227,7 @@ function pickMatchedFile(files, hashes) {
 }
 
 export default function FileLookupClient() {
+  const t = useT()
   const fileInputRef = useRef(null)
   const lastLookupAtRef = useRef(0)
   const [selectedFile, setSelectedFile] = useState(null)
@@ -264,14 +268,14 @@ export default function FileLookupClient() {
 
     try {
       await waitForLookupSlot()
-      const { result, error } = await lookupByHash(sha512)
+      const { result, error } = await lookupByHash(sha512, t)
       if (error) {
         setLookupError(error)
         return
       }
       setLookupResult(result)
     } catch {
-      setLookupError('Не удалось выполнить поиск по Modrinth.')
+      setLookupError(t('lookup.lookupFail'))
     } finally {
       setLoadingLookup(false)
     }
@@ -295,7 +299,7 @@ export default function FileLookupClient() {
       setLoadingHash(false)
       await runLookup(sha512)
     } catch {
-      setLookupError('Не удалось посчитать хеши файла.')
+      setLookupError(t('lookup.hashFail'))
       setLoadingHash(false)
       setLoadingLookup(false)
     }
@@ -321,7 +325,7 @@ export default function FileLookupClient() {
     setSelectedFile(null)
 
     if (!/^[a-f0-9]+$/.test(normalized)) {
-      setHashInputError('Введите корректный hex-хеш.')
+      setHashInputError(t('lookup.badHash'))
       return
     }
 
@@ -336,7 +340,7 @@ export default function FileLookupClient() {
       try {
         await waitForLookupSlot()
         const algorithm = normalized.length === 64 ? 'sha256' : 'sha1'
-        const { result, error } = await fetchLookup(normalized, algorithm)
+        const { result, error } = await fetchLookup(normalized, algorithm, t)
 
         if (error) {
           setLookupError(error)
@@ -355,14 +359,14 @@ export default function FileLookupClient() {
         })
         setLookupResult(result)
       } catch {
-        setLookupError('Не удалось выполнить поиск по Modrinth.')
+        setLookupError(t('lookup.lookupFail'))
       } finally {
         setLoadingLookup(false)
       }
       return
     }
 
-    setHashInputError('Поддерживаются SHA512 (128), SHA256 (64) или SHA1 (40) символов.')
+    setHashInputError(t('lookup.hashLen'))
   }
 
   const runUpdateCheck = useCallback(async () => {
@@ -385,7 +389,7 @@ export default function FileLookupClient() {
         loaders,
         game_versions: [gameVersion],
         current_version_id: version.id,
-      })
+      }, t)
 
       if (error) {
         setUpdateError(error)
@@ -393,11 +397,11 @@ export default function FileLookupClient() {
       }
       setUpdateCheck(result)
     } catch {
-      setUpdateError('Не удалось проверить обновление.')
+      setUpdateError(t('lookup.updateFail'))
     } finally {
       setLoadingUpdate(false)
     }
-  }, [fileHashes, lookupResult?.version])
+  }, [fileHashes, lookupResult?.version, t])
 
   useEffect(() => {
     if (!lookupResult || !fileHashes || loadingLookup) return
@@ -458,7 +462,7 @@ export default function FileLookupClient() {
             d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5"
           />
         </svg>
-        <span className="text-sm text-gray-300">Перетащи файл или нажми для выбора</span>
+        <span className="text-sm text-gray-300">{t('lookup.drop')}</span>
       </button>
 
       {selectedFile ? (
@@ -475,7 +479,7 @@ export default function FileLookupClient() {
             setHashInput(event.target.value)
             setHashInputError('')
           }}
-          placeholder="SHA512, SHA256 или SHA1"
+          placeholder={t('lookup.placeholder')}
           spellCheck={false}
           className="min-w-0 flex-1 rounded-xl border border-gray-700 bg-gray-900 px-4 py-2.5 font-mono text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
         />
@@ -484,15 +488,15 @@ export default function FileLookupClient() {
           disabled={loadingLookup || !hashInput.trim()}
           className="rounded-xl bg-modrinth-green px-5 py-2.5 text-sm font-bold text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
         >
-          Найти
+          {t('lookup.find')}
         </button>
       </form>
       {hashInputError ? <p className="text-sm text-amber-400">{hashInputError}</p> : null}
 
       {hasResults ? (
         <div className="space-y-6 rounded-2xl border border-gray-700 bg-[var(--bg-tertiary)] p-5 dark:border-gray-800 md:p-6">
-          {loadingHash ? <Spinner label="Считаем хеши…" /> : null}
-          {loadingLookup ? <Spinner label="Ищем на Modrinth…" /> : null}
+          {loadingHash ? <Spinner label={t('lookup.hashing')} /> : null}
+          {loadingLookup ? <Spinner label={t('lookup.searching')} /> : null}
 
           {lookupResult ? (
             <div className="space-y-4">
@@ -530,22 +534,14 @@ export default function FileLookupClient() {
 
               <div className="border-t border-gray-800 pt-4 space-y-3">
                 <div>
-                  <p className="text-sm font-medium text-gray-200">Нашёл твой файл на Modrinth</p>
+                  <p className="text-sm font-medium text-gray-200">{t('lookup.found')}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-gray-500">
                     {selectedFile ? (
-                      <>
-                        Хеш файла{' '}
-                        <span className="font-mono text-gray-400">{selectedFile.name}</span> совпал с
-                        этой версией — это то, что у тебя сейчас:
-                      </>
+                      t('lookup.matchedFile', { name: selectedFile.name })
                     ) : matchedFile?.filename ? (
-                      <>
-                        По введённому хешу совпал файл{' '}
-                        <span className="font-mono text-gray-400">{matchedFile.filename}</span> из
-                        проекта ниже:
-                      </>
+                      t('lookup.matchedHashFile', { name: matchedFile.filename })
                     ) : (
-                      <>По введённому хешу совпала эта версия мода на Modrinth:</>
+                      t('lookup.matchedVersion')
                     )}
                   </p>
                 </div>
@@ -562,23 +558,17 @@ export default function FileLookupClient() {
                     <Spinner
                       label={
                         checkedMcVersion
-                          ? `Проверяем обновления для Minecraft ${checkedMcVersion}…`
-                          : 'Проверяем обновления…'
+                          ? t('lookup.checkingMc', { v: checkedMcVersion })
+                          : t('lookup.checking')
                       }
                     />
                   ) : null}
                   {!loadingUpdate && updateCheck?.update_available ? (
                     <>
                       <p className="text-sm text-gray-300">
-                        {checkedMcVersion ? (
-                          <>
-                            Для твоей версии Minecraft{' '}
-                            <span className="font-semibold text-white">{checkedMcVersion}</span>{' '}
-                            доступно обновление:
-                          </>
-                        ) : (
-                          'Доступно обновление:'
-                        )}
+                        {checkedMcVersion
+                          ? t('lookup.updateMc', { v: checkedMcVersion })
+                          : t('lookup.update')}
                       </p>
                       <VersionRow
                         version={updateCheck.latest_version}
@@ -589,15 +579,9 @@ export default function FileLookupClient() {
                   ) : null}
                   {!loadingUpdate && updateCheck && !updateCheck.update_available && !updateError ? (
                     <p className="text-sm text-gray-500">
-                      {checkedMcVersion ? (
-                        <>
-                          Для Minecraft{' '}
-                          <span className="font-medium text-gray-400">{checkedMcVersion}</span>{' '}
-                          — это последняя версия мода.
-                        </>
-                      ) : (
-                        'У тебя последняя версия.'
-                      )}
+                      {checkedMcVersion
+                        ? t('lookup.latestMc', { v: checkedMcVersion })
+                        : t('lookup.latest')}
                     </p>
                   ) : null}
                   {updateError ? <p className="text-sm text-amber-400">{updateError}</p> : null}
@@ -608,7 +592,7 @@ export default function FileLookupClient() {
 
           {fileHashes ? (
             <div className="space-y-3 border-t border-gray-800 pt-4">
-              <p className="text-sm font-medium text-gray-400">Хеши</p>
+              <p className="text-sm font-medium text-gray-400">{t('lookup.hashes')}</p>
               <HashRow label="SHA512" value={fileHashes.sha512} />
               <HashRow label="SHA256" value={fileHashes.sha256} />
               <HashRow label="SHA1" value={fileHashes.sha1} />
@@ -622,7 +606,7 @@ export default function FileLookupClient() {
       ) : null}
 
       <p className="text-xs text-gray-600">
-        Файл не загружается на сервер — хеши считаются в браузере.
+        {t('lookup.privacy')}
       </p>
     </div>
   )

@@ -4,30 +4,24 @@ import { useState } from 'react'
 import Link from 'next/link'
 import StyledTooltip from './StyledTooltip'
 
-import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
+import { SERVER_REGIONS } from '@/lib/serverCategories'
 import { compressSidebarGameVersions, formatServerSidebarVersions } from '@/lib/minecraftVersionSort'
 import CompressedGameVersionsChips from './CompressedGameVersionsChips'
 import CopyButton from './CopyButton'
+import { useI18n } from './I18nProvider'
+import { formatRelative } from './RelativeTime'
+import { intlLocale } from '@/lib/i18n/config'
+import { languageDisplayName, pluralCount, serverRegionLabel } from '@/lib/i18n/label'
 
-const mapLanguage = (code) => {
-  const lang = SERVER_LANGUAGES.find(l => l.id.toLowerCase() === code.toLowerCase())
-  return lang ? lang.name : code.toUpperCase()
+function mapRegion(t, region) {
+  if (!region) return null
+  const id = region.toLowerCase()
+  const aliased = id === 'eu' ? 'europe' : id === 'ru' ? 'russia' : id
+  const reg = SERVER_REGIONS.find((r) => r.id.toLowerCase() === aliased)
+  return serverRegionLabel(t, aliased, reg?.name || region.toUpperCase())
 }
 
-const mapRegion = (region) => {
-  const reg = SERVER_REGIONS.find(r => r.id.toLowerCase() === region.toLowerCase())
-  if (reg) return reg.name
-  
-  const fallbackMapping = {
-    'us_west': 'Западное побережье США',
-    'us_east': 'Восточное побережье США',
-    'eu': 'Европа',
-    'ru': 'Россия'
-  }
-  return fallbackMapping[region.toLowerCase()] || region.toUpperCase()
-}
-
-function ServerAddressCopy({ address, tooltip, variant = 'prominent' }) {
+function ServerAddressCopy({ address, tooltip, variant = 'prominent', ourIpLabel, copiedLabel }) {
   const [copied, setCopied] = useState(false)
   const subtle = variant === 'subtle'
 
@@ -47,14 +41,14 @@ function ServerAddressCopy({ address, tooltip, variant = 'prominent' }) {
     : 'h-3.5 w-3.5 shrink-0 text-gray-500 opacity-50 transition-opacity duration-150 group-hover:opacity-80'
 
   return (
-    <StyledTooltip label={copied ? 'Скопировано' : tooltip}>
+    <StyledTooltip label={copied ? copiedLabel : tooltip}>
       <button
         type="button"
         onClick={handleCopy}
         className="group flex w-full min-w-0 items-center gap-2 py-0.5 text-left outline-none"
       >
         {!subtle && (
-          <span className="shrink-0 text-xs font-medium text-gray-500">Наш IP</span>
+          <span className="shrink-0 text-xs font-medium text-gray-500">{ourIpLabel}</span>
         )}
         <span
           className={`min-w-0 flex-1 truncate leading-tight transition-colors duration-150 ${
@@ -99,6 +93,7 @@ function ServerAddressCopy({ address, tooltip, variant = 'prominent' }) {
 }
 
 export default function ServerSidebarDetails({ server, requiredContentVersion = null }) {
+  const { t, locale } = useI18n()
   const javaAddress = server.minecraft_java_server?.address?.trim() || ''
   const bedrockAddress = server.minecraft_bedrock_server?.address?.trim() || ''
 
@@ -126,26 +121,28 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
     versionRanges.length > 0 ? versionRanges : compressSidebarGameVersions(gameVersions)
 
   const regionName = server.minecraft_server?.region
-    ? mapRegion(server.minecraft_server.region)
+    ? mapRegion(t, server.minecraft_server.region)
     : null
 
   return (
     <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-4 shadow-lg">
-      <h2 className="text-lg font-bold text-white m-0">О сервере</h2>
+      <h2 className="text-lg font-bold text-white m-0">{t('project.aboutServer')}</h2>
 
       {(javaAddress || gameVersions.length > 0 || loaders.length > 0) && (
         <div className="space-y-3">
           <div>
             <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">
               {javaAddress && bedrockAddress && javaAddress === bedrockAddress
-                ? 'Minecraft: Java и Bedrock Edition'
-                : 'Minecraft: Java Edition'}
+                ? t('server.javaAndBedrock')
+                : t('server.javaEdition')}
             </h3>
             {javaAddress && (
               <div className="mb-3 pb-3 border-b border-gray-800/70">
                 <ServerAddressCopy 
                   address={javaAddress} 
-                  tooltip={javaAddress === bedrockAddress ? 'Копировать адрес сервера' : 'Копировать адрес Java-сервера'} 
+                  tooltip={javaAddress === bedrockAddress ? t('server.copyServer') : t('server.copyJava')}
+                  ourIpLabel={t('server.ourIp')}
+                  copiedLabel={t('copy.copied')}
                 />
                 <button
                   type="button"
@@ -155,15 +152,15 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                   <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
                     <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16" />
                   </svg>
-                  Пингануть сервер
+                  {t('server.ping')}
                 </button>
               </div>
             )}
             {server.minecraft_java_server?.content && server.minecraft_java_server.content.kind !== 'vanilla' && (server.minecraft_java_server.content.project_name || server.minecraft_java_server.content.version_id) && (
               <div className="flex flex-col gap-2 mb-3 pb-3 border-b border-gray-800/70">
-                <StyledTooltip label="Модпак необходимый для игры на сервере">
+                <StyledTooltip label={t('server.requiredPackTip')}>
                   <h3 className="text-base font-bold m-0 text-[var(--text-gray)] cursor-help hover:text-white transition-colors w-fit">
-                    Необходимая сборка
+                    {t('server.requiredPack')}
                   </h3>
                 </StyledTooltip>
                 <div className="flex gap-1.5 items-center justify-between px-3 pr-1.5 py-1.5 rounded-xl bg-gray-900/50 border border-gray-800/40">
@@ -182,13 +179,13 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                       </span>
                       {(requiredContentVersion?.version_number || server.minecraft_java_server.content.version_id) && (
                         <span className="truncate text-xs text-gray-400 font-medium">
-                          {requiredContentVersion?.version_number || 'Версия ' + server.minecraft_java_server.content.version_id}
+                          {requiredContentVersion?.version_number || t('server.versionPrefix', { id: server.minecraft_java_server.content.version_id })}
                         </span>
                       )}
                     </div>
                   </div>
                   {downloadUrl && (
-                    <StyledTooltip label="Скачать сборку сервера">
+                    <StyledTooltip label={t('server.downloadPack')}>
                       <a 
                         href={downloadUrl}
                         className="w-8 h-8 rounded-full bg-modrinth-green/10 hover:bg-modrinth-green/20 text-modrinth-green flex items-center justify-center transition-all active:scale-95"
@@ -205,7 +202,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
             {(displayRanges.length > 0 || recommendedVersion) && (
               <div className="pt-0.5">
                 <h3 className="text-base font-bold m-0 mb-2.5 text-[var(--text-gray)]">
-                  Версии для входа
+                  {t('server.joinVersions')}
                 </h3>
                 <CompressedGameVersionsChips
                   browseRoute="discover/servers"
@@ -220,7 +217,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
           </div>
           {loaders.length > 0 && (
             <div>
-              <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">Платформы</h3>
+              <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.platforms')}</h3>
               <div className="flex flex-wrap gap-1">
                 {loaders.map((loader) => (
                   <Link
@@ -240,36 +237,37 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       {bedrockAddress && javaAddress !== bedrockAddress && (
         <div className="flex flex-col gap-1.5">
           <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">
-            Minecraft: Bedrock Edition
+            {t('server.bedrockEdition')}
           </h3>
           <ServerAddressCopy
             address={bedrockAddress}
             variant="subtle"
-            tooltip="Копировать адрес Bedrock-сервера"
+            tooltip={t('server.copyBedrock')}
+            copiedLabel={t('copy.copied')}
           />
         </div>
       )}
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">Расположение сервера</h3>
+        <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('server.location')}</h3>
         <div className="flex flex-wrap gap-1.5 items-center">
           {server.minecraft_java_server?.ping?.data ? (
             <>
-              <StyledTooltip label="Сервер сейчас онлайн">
+              <StyledTooltip label={t('server.onlineTip')}>
                 <span className="bg-green-500/10 border border-green-500/30 px-2.5 py-1.5 leading-none rounded-full text-xs font-bold text-green-400 flex items-center gap-1 cursor-help">
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M2 20h.01M7 20v-4M12 20v-8M17 20V8M22 4v16" />
                   </svg>
-                  В сети
+                  {t('server.onlineBadge')}
                 </span>
               </StyledTooltip>
               {latencyMs != null && (
-                <StyledTooltip label={`Время отклика: ${latencyMs} мс. Замер с инфраструктуры Modrinth.`}>
+                <StyledTooltip label={t('server.latencyTip', { n: latencyMs })}>
                   <span className="bg-gray-800/60 border border-gray-700/40 px-2.5 py-1.5 leading-none rounded-full text-xs font-semibold text-gray-300 flex items-center gap-1 cursor-help hover:text-white transition-colors">
                     <svg className="w-5 h-5 text-modrinth-green shrink-0 relative -translate-y-[2px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} viewBox="0 0 24 24">
                       <path d="M12 20h.01M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 14 0" />
                     </svg>
-                    <span>{latencyMs} мс</span>
+                    <span>{t('server.latency', { n: latencyMs })}</span>
                   </span>
                 </StyledTooltip>
               )}
@@ -281,11 +279,11 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                 <path d="M16.72 11.06A10.94 10.94 0 0 1 19 12.5M5 12.5a10.94 10.94 0 0 1 5.83-2.84" />
                 <path d="M8.9 5.1a16.84 16.84 0 0 1 12.2 4.4M2.9 8.9a16.85 16.85 0 0 1 2.2-1.3" />
               </svg>
-              Вне сети
+              {t('server.offline')}
             </span>
           )}
           {regionName && (
-            <StyledTooltip label={`Расположение сервера ${regionName}`}>
+            <StyledTooltip label={t('server.locationNamed', { name: regionName })}>
               <span className="bg-gray-800/60 border border-gray-700/40 px-2.5 py-1.5 leading-none rounded-full text-xs font-semibold text-gray-300 cursor-default">
                 {regionName}
               </span>
@@ -296,11 +294,11 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
 
       {server.minecraft_server?.languages && server.minecraft_server.languages.length > 0 && (
         <div className="flex flex-col gap-2">
-          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">Поддерживаемые языки</h3>
+          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('server.languages')}</h3>
           <div className="flex flex-wrap gap-1.5">
             {server.minecraft_server.languages.map(lang => (
               <span key={lang} className="bg-gray-800/60 border border-gray-700/40 px-2.5 py-1.5 leading-none rounded-full text-xs font-semibold text-gray-300">
-                {mapLanguage(lang)}
+                {languageDisplayName(locale, lang)}
               </span>
             ))}
           </div>
@@ -308,29 +306,29 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       )}
       {(projectId || versionId) && (
         <div className="flex flex-col gap-2 pt-3 border-t border-gray-800/50">
-          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">Сведения</h3>
+          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('project.details')}</h3>
           <div className="space-y-2 text-xs md:text-sm">
             {followers > 0 && (
               <div className="flex justify-between border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">Подписчики</span>
-                <span className="font-semibold text-white">{formatFollowers(followers)}</span>
+                <span className="font-semibold text-[var(--text-gray)]">{t('server.followers')}</span>
+                <span className="font-semibold text-white">{formatFollowers(followers, locale, t)}</span>
               </div>
             )}
             {server.published && (
               <div className="flex justify-between border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">Размещён</span>
-                <span className="font-semibold text-white">{formatTimeAgo(server.published)}</span>
+                <span className="font-semibold text-[var(--text-gray)]">{t('version.published')}</span>
+                <span className="font-semibold text-white">{formatRelative(server.published, t) || '—'}</span>
               </div>
             )}
             {projectId && (
               <div className="flex justify-between items-center border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">ID проекта</span>
+                <span className="font-semibold text-[var(--text-gray)]">{t('server.projectId')}</span>
                 <CopyButton text={projectId} inline />
               </div>
             )}
             {versionId && (
               <div className="flex justify-between items-center border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">ID версии</span>
+                <span className="font-semibold text-[var(--text-gray)]">{t('server.versionId')}</span>
                 <CopyButton text={versionId} inline />
               </div>
             )}
@@ -339,8 +337,8 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       )}
       {pingData?.version_name && (
         <div className="flex flex-col gap-1.5 pt-3 border-t border-gray-850/80">
-          <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">Ядро / Версия</span>
-          <StyledTooltip label="Ядро на котором работает сервер">
+          <span className="text-[10px] font-semibold text-gray-500 uppercase tracking-wider">{t('project.core')}</span>
+          <StyledTooltip label={t('server.coreTip')}>
             <span className="text-xs font-semibold text-gray-400 cursor-help w-fit">{pingData.version_name}</span>
           </StyledTooltip>
         </div>
@@ -349,44 +347,13 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
   )
 }
 
-function formatFollowers(count) {
-  const mod10 = count % 10
-  const mod100 = count % 100
-  let word = 'подписчиков'
-  if (!(mod100 >= 11 && mod100 <= 19)) {
-    if (mod10 === 1) word = 'подписчик'
-    else if (mod10 >= 2 && mod10 <= 4) word = 'подписчика'
-  }
-  return `${count.toLocaleString('ru-RU')} ${word}`
-}
-
-function formatTimeAgo(dateString) {
-  const date = new Date(dateString)
-  const now = new Date()
-  const diffInSeconds = Math.floor((now - date) / 1000)
-  
-  const intervals = [
-    { seconds: 31536000, one: 'год', two: 'года', many: 'лет' },
-    { seconds: 2592000, one: 'месяц', two: 'месяца', many: 'месяцев' },
-    { seconds: 604800, one: 'неделю', two: 'недели', many: 'недель' },
-    { seconds: 86400, one: 'день', two: 'дня', many: 'дней' },
-    { seconds: 3600, one: 'час', two: 'часа', many: 'часов' },
-    { seconds: 60, one: 'минуту', two: 'минуты', many: 'минут' },
-  ]
-  
-  for (const interval of intervals) {
-    const count = Math.floor(diffInSeconds / interval.seconds)
-    if (count >= 1) {
-      const mod10 = count % 10
-      const mod100 = count % 100
-      let word = interval.many
-      if (!(mod100 >= 11 && mod100 <= 19)) {
-        if (mod10 === 1) word = interval.one
-        else if (mod10 >= 2 && mod10 <= 4) word = interval.two
-      }
-      return `${count} ${word} назад`
-    }
-  }
-  
-  return 'только что'
+function formatFollowers(count, locale, t) {
+  const word = pluralCount(
+    locale,
+    count,
+    t('server.followerOne'),
+    t('server.followerFew'),
+    t('server.followerMany'),
+  )
+  return `${count.toLocaleString(intlLocale(locale))} ${word}`
 }

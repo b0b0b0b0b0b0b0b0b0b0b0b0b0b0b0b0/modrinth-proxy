@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useT } from './I18nProvider'
 
 function FilterCheckbox({ checked }) {
   return (
@@ -28,6 +29,7 @@ export default function VersionsDropdown({
   onShowOnlyReleasesChange,
   hasSnapshotVersions = true,
 }) {
+  const t = useT()
   const [isOpen, setIsOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const dropdownRef = useRef(null)
@@ -60,9 +62,9 @@ export default function VersionsDropdown({
   }
 
   const getLabel = () => {
-    if (selectedVersions.length === 0) return 'Версии игры'
+    if (selectedVersions.length === 0) return t('filter.gameVersion')
     if (selectedVersions.length === 1) return selectedVersions[0]
-    return `${selectedVersions.length} выбрано`
+    return t('filter.selected', { n: selectedVersions.length })
   }
 
   return (
@@ -90,7 +92,7 @@ export default function VersionsDropdown({
               </svg>
               <input
                 type="text"
-                placeholder="Поиск..."
+                placeholder={t('filter.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-10 pr-3 py-2 text-sm border focus:border-modrinth-green focus:outline-none rounded-xl bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-700"
@@ -124,7 +126,7 @@ export default function VersionsDropdown({
                   className="flex items-center gap-2 px-3 py-2 text-sm transition w-full rounded-xl text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]"
                 >
                   <FilterCheckbox checked={showOnlyReleases} />
-                  <span>Показать только релизы</span>
+                  <span>{t('filter.releasesOnly')}</span>
                 </button>
               </div>
             )}

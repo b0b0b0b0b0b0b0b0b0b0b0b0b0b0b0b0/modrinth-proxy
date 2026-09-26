@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }) {
 export default async function ModpackChangelogPage({ params }) {
   const { slug } = params;
   if (await isProjectBlocked(slug)) {
-    return <div className="text-center py-16"><Link href="/modpacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
+    return <ProjectAccessRestricted href="/modpacks" backKey="project.backToModpacks" />
   }
 
   let modpack, versions, teamMembers, organization;

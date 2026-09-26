@@ -3,8 +3,10 @@
 import { useEffect, useState } from 'react'
 import CopyButton from './CopyButton'
 import CopyLabeledButton from './CopyLabeledButton'
+import { useT } from './I18nProvider'
 
 export default function UserProfileIds({ userId }) {
+  const t = useT()
   const [url, setUrl] = useState('')
 
   useEffect(() => {
@@ -17,15 +19,15 @@ export default function UserProfileIds({ userId }) {
   return (
     <div className="flex flex-col gap-3 text-sm">
       <div className="flex flex-wrap items-center gap-1">
-        <span className="font-semibold text-[var(--text-gray)]">ID пользователя:</span>
+        <span className="font-semibold text-[var(--text-gray)]">{t('copy.userId')}</span>
         <CopyButton text={userId} inline />
       </div>
       {url ? (
         <div>
           <CopyLabeledButton
             text={url}
-            label="Скопировать вечную ссылку"
-            tooltipLabel="Скопировать ссылку по ID пользователя в буфер обмена"
+            label={t('copy.permalink')}
+            tooltipLabel={t('copy.permalinkTip')}
           />
         </div>
       ) : null}

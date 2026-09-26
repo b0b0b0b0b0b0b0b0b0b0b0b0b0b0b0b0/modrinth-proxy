@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { useT } from '../components/I18nProvider'
 
 function detectOS() {
   if (typeof navigator === 'undefined') return null
@@ -29,6 +30,7 @@ const OS_END_OFFSET_X = {
 }
 
 export default function DetectedOS() {
+  const t = useT()
   const [os, setOs] = useState(null)
   const wordRef = useRef(null)
   const [path, setPath] = useState(null)
@@ -105,7 +107,7 @@ export default function DetectedOS() {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-modrinth-green opacity-60" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-modrinth-green" />
         </span>
-        А у тебя сейчас{' '}
+        {t('app.detected')}{' '}
         <span ref={wordRef} className="font-semibold text-modrinth-green">
           {os}
         </span>

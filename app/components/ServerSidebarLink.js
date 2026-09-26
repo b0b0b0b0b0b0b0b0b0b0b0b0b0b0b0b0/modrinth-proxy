@@ -2,6 +2,7 @@
 
 import StyledTooltip from './StyledTooltip'
 import { withReferralUtm } from '@/lib/referralUtm'
+import { useT } from './I18nProvider'
 
 function linkTooltipTarget(url) {
   try {
@@ -22,7 +23,8 @@ const linkButtonClassName =
   'flex gap-2 items-center w-fit text-gray-300 hover:text-white transition-colors text-sm leading-tight hover:underline bg-transparent border-0 p-0 cursor-pointer text-left font-inherit'
 
 export default function ServerSidebarLink({ link, icon }) {
-  const goToLabel = hasGoToTooltip(link) ? `Перейти на ${linkTooltipTarget(link.url)}` : link.name
+  const t = useT()
+  const goToLabel = hasGoToTooltip(link) ? t('server.linkHost', { host: linkTooltipTarget(link.url) }) : link.name
 
   const control = (
     <button

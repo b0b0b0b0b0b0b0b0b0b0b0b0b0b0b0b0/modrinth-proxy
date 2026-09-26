@@ -4,12 +4,14 @@ import Link from 'next/link'
 import * as Popover from '@radix-ui/react-popover'
 import { getServerCategoryName } from '@/lib/serverCategories'
 import { SERVER_CATEGORY_TAG_CLASS } from '@/lib/serverTagStyles'
+import { categoryLabel } from '@/lib/i18n/label'
+import { useT } from './I18nProvider'
 
-function CategoryTag({ catId }) {
+function CategoryTag({ catId, t }) {
   let name
   try {
     if (!catId || typeof catId !== 'string') return null
-    name = getServerCategoryName(catId)
+    name = categoryLabel(t, catId, getServerCategoryName(catId))
   } catch {
     return null
   }
@@ -22,6 +24,7 @@ function CategoryTag({ catId }) {
 }
 
 export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3 }) {
+  const t = useT()
   const valid = categoryIds.filter((id) => id && typeof id === 'string')
   if (valid.length === 0) return null
 
@@ -31,7 +34,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {visible.map((catId) => (
-        <CategoryTag key={catId} catId={catId} />
+        <CategoryTag key={catId} catId={catId} t={t} />
       ))}
       {overflow.length > 0 && (
         <Popover.Root>
@@ -39,7 +42,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
             <button
               type="button"
               className={`${SERVER_CATEGORY_TAG_CLASS} cursor-pointer hover:underline`}
-              aria-label={`Ещё ${overflow.length} тегов`}
+              aria-label={t('server.moreTags', { n: overflow.length })}
             >
               +{overflow.length}
             </button>
@@ -55,7 +58,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
             >
               <div className="flex flex-wrap gap-1.5">
                 {overflow.map((catId) => (
-                  <CategoryTag key={catId} catId={catId} />
+                  <CategoryTag key={catId} catId={catId} t={t} />
                 ))}
               </div>
             </Popover.Content>

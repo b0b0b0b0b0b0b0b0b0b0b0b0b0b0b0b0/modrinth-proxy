@@ -5,13 +5,18 @@ import DetectedOS from './DetectedOS'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
 import { getAstralRinthData } from '@/lib/astralrinth'
+import { getRequestT } from '@/lib/i18n/server'
 
-export const metadata = {
-  title: 'Modrinth App - Скачать лаунчер',
-  description: 'Скачайте официальный лаунчер Modrinth App для Windows, macOS и Linux',
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: t('app.metaTitle'),
+    description: t('app.metaDesc'),
+  }
 }
 
 export default async function AppPage() {
+  const { t } = getRequestT()
   const [launcherData, astralData] = await Promise.all([
     getLauncherData(),
     getAstralRinthData(),
@@ -24,11 +29,11 @@ export default async function AppPage() {
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h1 className="main-header text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 text-gray-900 dark:text-white max-w-[60rem] mx-auto leading-tight">
-                Скачайте Modrinth App для Windows
+                {t('app.h1')}
               </h1>
               
               <h2 className="main-subheader text-xl md:text-2xl lg:text-3xl text-muted max-w-4xl mx-auto leading-relaxed mb-10">
-                Скачайте Modrinth App — бесплатный лаунчер Minecraft с открытым исходным кодом для установки модов, модпаков, шейдеров и ресурспаков. Играйте с любимыми модами и держите их в актуальном состоянии — всё в одном удобном приложении.
+                {t('app.h2')}
               </h2>
 
               <DownloadButtons launcherData={launcherData} />
@@ -36,7 +41,7 @@ export default async function AppPage() {
               <div className="relative max-w-5xl mx-auto mt-16">
                 <img 
                   src="https://cdn-raw.modrinth.com/app-landing/app-screenshot.webp" 
-                  alt="Modrinth App Screenshot"
+                  alt={t('app.screenshotAlt')}
                   className="w-full h-auto"
                   referrerPolicy="no-referrer"
                 />
@@ -48,49 +53,49 @@ export default async function AppPage() {
 
       <div className="features-section max-w-7xl mx-auto">
         <h1 className="subheader text-4xl md:text-5xl lg:text-6xl font-black text-center mb-16 bg-gradient-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Не похож ни на один лаунчер,<br />который вы использовали раньше
+          {t('app.unlike1')}<br />{t('app.unlike2')}
         </h1>
 
         <div className="feature-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Управление модами</h3>
-              <p className="text-gray-600 dark:text-gray-400">Modrinth упрощает управление всеми вашими модами в одном месте. Вы можете устанавливать, удалять и обновлять моды одним кликом.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f1t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f1d')}</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Играйте с любимыми модами</h3>
-              <p className="text-gray-600 dark:text-gray-400">Используйте Modrinth App для скачивания и игры с вашими любимыми модами и модпаками.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f2t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f2d')}</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Делитесь модпаками</h3>
-              <p className="text-gray-600 dark:text-gray-400">Создавайте, делитесь и играйте в модпаки с любыми из тысяч модов и модпаков, размещенных здесь на Modrinth.</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f3t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f3d')}</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Производительность</h3>
-              <p className="text-gray-600 dark:text-gray-400">Modrinth App работает лучше, чем многие ведущие менеджеры модов, используя всего 150 МБ оперативной памяти!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f4t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f4d')}</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Интеграция с сайтом</h3>
-              <p className="text-gray-600 dark:text-gray-400">Modrinth App полностью интегрирован с сайтом, поэтому вы можете получить доступ ко всем вашим любимым проектам из приложения!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f5t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f5d')}</p>
             </div>
           </div>
 
           <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Импорт профилей</h3>
-              <p className="text-gray-600 dark:text-gray-400">Импортируйте все ваши любимые профили из лаунчера, который вы использовали раньше, и начните работу с Modrinth App за секунды!</p>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f6t')}</h3>
+              <p className="text-gray-600 dark:text-gray-400">{t('app.f6d')}</p>
             </div>
           </div>
         </div>
@@ -107,10 +112,10 @@ export default async function AppPage() {
                   </linearGradient>
                 </defs>
               </svg>
-              <h3 className="text-2xl font-bold text-white">Открытый исходный код</h3>
+              <h3 className="text-2xl font-bold text-white">{t('app.opensource')}</h3>
             </div>
             <div className="description text-gray-600 dark:text-gray-400">
-              Лаунчер Modrinth полностью открыт. Вы можете просмотреть исходный код на нашем{' '}
+              {t('app.opensourceLead')}{' '}
               <a href="https://github.com/modrinth/code" rel="noopener" target="_blank" className="text-modrinth-green hover:underline">GitHub</a>!
             </div>
           </div>
@@ -136,10 +141,10 @@ export default async function AppPage() {
                   </clipPath>
                 </defs>
               </svg>
-              <h3 className="text-2xl font-bold text-white">Офлайн режим</h3>
+              <h3 className="text-2xl font-bold text-white">{t('app.offline')}</h3>
             </div>
             <div className="description text-gray-600 dark:text-gray-400">
-              Играйте в свои моды, подключены ли вы к интернету или нет.
+              {t('app.offlineLead')}
             </div>
           </div>
 
@@ -154,10 +159,10 @@ export default async function AppPage() {
                   </linearGradient>
                 </defs>
               </svg>
-              <h3 className="text-2xl font-bold text-white">Отслеживание проектов</h3>
+              <h3 className="text-2xl font-bold text-white">{t('app.track')}</h3>
             </div>
             <div className="description text-gray-600 dark:text-gray-400">
-              Сохраняйте контент, который вам нравится, и получайте обновления одним кликом.
+              {t('app.trackLead')}
             </div>
           </div>
         </div>
@@ -169,8 +174,8 @@ export default async function AppPage() {
 
         <div className="mb-8">
           <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">Варианты загрузки</h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">Выберите версию для вашей операционной системы</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">{t('app.dlOptions')}</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-400">{t('app.dlPick')}</p>
             <DetectedOS />
           </div>
 
@@ -181,14 +186,14 @@ export default async function AppPage() {
 
         <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
-            modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth App belong to Rinth, Inc.
+            {t('app.legalEn')}
           </p>
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
-            Все ссылки для скачивания берутся напрямую с официальных серверов Modrinth.
+            {t('app.linksFrom')}
             <br />
-            Подробнее о проекте:{' '}
+            {t('app.moreAbout')}{' '}
             <a href="/bmadnco" className="text-modrinth-green hover:underline">
-              Как это работает
+              {t('app.howItWorks')}
             </a>
           </p>
 

@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -118,6 +119,7 @@ export default async function DatapacksPage({ searchParams }) {
     }
   }
 
+  const ui = catalogUi('datapacks', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />
@@ -127,21 +129,21 @@ export default async function DatapacksPage({ searchParams }) {
           <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold mb-2">Minecraft датапаки</h1>
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">{ui.title}</h1>
                 <p className="text-gray-400 text-sm md:text-base">
                   {data ? (
                     <>
-                      {data.total_hits.toLocaleString('ru-RU')} датапаков найдено
+                      {ui.found}
                       <CatalogSearchBlockedNote count={blockedCount} />
                     </>
                   ) : (
-                    'Загрузка...'
+                    ui.loading
                   )}
                 </p>
               </div>
               <SearchInput 
                 defaultValue={query}
-                placeholder="Поиск датапаков..."
+                placeholder={ui.search}
                 categoryPath="discover/datapacks"
               />
             </div>
@@ -168,8 +170,8 @@ export default async function DatapacksPage({ searchParams }) {
             <svg className="w-16 h-16 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h2 className="text-xl font-bold text-white mb-2">Не удалось загрузить датапаки</h2>
-            <p className="text-gray-400 mb-6">Попробуйте обновить страницу через несколько секунд</p>
+            <h2 className="text-xl font-bold text-white mb-2">{ui.fail}</h2>
+            <p className="text-gray-400 mb-6">{ui.retry}</p>
             <ReloadButton />
           </div>
         </div>
@@ -188,9 +190,9 @@ export default async function DatapacksPage({ searchParams }) {
               blockedCount={blockedCount}
               blockedByProject={blockedByProject}
               blockedByOrganization={blockedByOrganization}
-              foundLabel="найденных датапаков"
-              blockedTitle="Все датапаки на этой странице заблокированы"
-              emptyTitle="Датапаки не найдены"
+              foundLabel={ui.foundLabel}
+              blockedTitle={ui.blocked}
+              emptyTitle={ui.empty}
               hideEmptyMessage={searchAlternatives.length > 0}
             />
           </div>

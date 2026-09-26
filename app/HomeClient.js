@@ -3,9 +3,11 @@ import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
 import { buildHomeModsVersionCopy } from '@/lib/minecraftVersionRange'
+import { useI18n, useMessage, useT } from './components/I18nProvider'
+import { intlLocale } from '@/lib/i18n/config'
 
-function thousandsRu(n) {
-  return new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(n)
+function thousands(n, locale) {
+  return new Intl.NumberFormat(intlLocale(locale), { maximumFractionDigits: 0 }).format(n)
 }
 
 function compactCountEn(n) {
@@ -23,7 +25,7 @@ function compactCountEn(n) {
   if (n >= 1000) {
     return `${Math.floor(n / 1000)}K+`
   }
-  return `${thousandsRu(n)}+`
+  return `${thousands(n, 'ru')}+`
 }
 
 function CategoryTitle({ title, count, tone }) {
@@ -46,6 +48,10 @@ const STATS_FALLBACK = {
 }
 
 export default function HomeClient({ platformStats, categoryTotals }) {
+  const t = useT()
+  const { locale } = useI18n()
+  const rotate = useMessage('home.rotate')
+  const words = Array.isArray(rotate) && rotate.length ? rotate : ['модов', 'плагинов', 'шейдеров', 'ресурспаков', 'датапаков']
   const projectsShown =
     platformStats?.projects > 0 ? platformStats.projects : STATS_FALLBACK.projects
   const filesShown =
@@ -61,8 +67,6 @@ export default function HomeClient({ platformStats, categoryTotals }) {
   )
   const [currentWordIndex, setCurrentWordIndex] = useState(0)
   const [isClient, setIsClient] = useState(false)
-  const words = ['модов', 'плагинов', 'шейдеров', 'ресурспаков', 'датапаков']
-  
   useEffect(() => {
     setIsClient(true)
     
@@ -71,7 +75,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
     }, 3000)
     
     return () => clearInterval(interval)
-  }, [])
+  }, [words.length])
 
   return (
     <div className="relative min-h-screen" style={{ marginTop: '-34px', marginBottom: '-34px' }}>
@@ -87,7 +91,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           
           <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-2 sm:mb-3 md:mb-4 animate-fade-in-up animation-delay-400 font-black px-2 sm:px-4">
             <span className="text-gray-900 dark:text-white drop-shadow-2xl">
-              МЕСТО ДЛЯ МАЙНКРАФТ
+              {t('home.placeFor')}
             </span>
           </div>
 
@@ -116,7 +120,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           </div>
           
             <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-200 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
-              Открывайте, играйте и делитесь контентом Minecraft через нашу платформу, созданную сообществом для сообщества!
+              {t('home.lead')}
             </p>
           </div>
         </div>
@@ -125,73 +129,73 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           <div className="text-center mb-12">
           
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              Откройте для себя {thousandsRu(projectsShown)} творений
+              {t('home.discover', { n: thousands(projectsShown, locale) })}
             </h2>
             <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-base font-bold mb-4 border minecraft-players-badge" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
-              <span>Для игроков Minecraft</span>
+              <span>{t('home.forPlayers')}</span>
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              От магических биомов до проклятых подземелий — вы обязательно найдете контент, который выведет ваш геймплей на новый уровень.
+              {t('home.discoverLead')}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Прямой доступ к Modrinth
+                {t('home.directAccess')}
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy использует официальный API Modrinth для получения актуальной информации о проектах и файлах.
+                {t('home.directAccessLead')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                  
-                  <span className="text-gray-300">Актуальные версии и файлы</span>
+                  <span className="text-gray-300">{t('home.currentFiles')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                  
-                  <span className="text-gray-300">Прямые ссылки на скачивание</span>
+                  <span className="text-gray-300">{t('home.directLinks')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   
-                  <span className="text-gray-300">Без хранения файлов на сервере</span>
+                  <span className="text-gray-300">{t('home.noStore')}</span>
                 </div>
               </div>
             </div>
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
               <div className="text-center mb-6">
-                <h4 className="text-white font-semibold text-lg mb-2">Статистика проектов</h4>
-                <p className="text-gray-400 text-sm">Данные из официального API Modrinth</p>
+                <h4 className="text-white font-semibold text-lg mb-2">{t('home.statsTitle')}</h4>
+                <p className="text-gray-400 text-sm">{t('home.statsFromApi')}</p>
               </div>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-3xl font-black text-modrinth-green mb-2">
                     {compactCountEn(projectsShown)}
                   </div>
-                  <div className="text-gray-300 text-sm">Проектов</div>
+                  <div className="text-gray-300 text-sm">{t('home.projects')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-black text-blue-400 mb-2">
                     {compactCountEn(filesShown)}
                   </div>
-                  <div className="text-gray-300 text-sm">Файлов</div>
+                  <div className="text-gray-300 text-sm">{t('home.files')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-black text-purple-400 mb-2">
                     {compactCountEn(authorsShown)}
                   </div>
-                  <div className="text-gray-300 text-sm">Авторов</div>
+                  <div className="text-gray-300 text-sm">{t('home.authors')}</div>
                 </div>
                 <div className="text-center">
                   <div className="text-3xl font-black text-orange-400 mb-2">
                     {compactCountEn(versionsShown)}
                   </div>
-                  <div className="text-gray-300 text-sm">Версий</div>
+                  <div className="text-gray-300 text-sm">{t('home.versions')}</div>
                 </div>
               </div>
               <div className="mt-6 pt-6 border-t border-white/10 text-center">
                 <div className="text-2xl md:text-3xl font-black text-emerald-400">100%</div>
-                <div className="text-gray-300 text-sm mt-1">Бесплатно</div>
+                <div className="text-gray-300 text-sm mt-1">{t('home.free')}</div>
               </div>
             </div>
           </div>
@@ -200,8 +204,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             <div className="order-2 lg:order-1">
               <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
                 <div className="text-center mb-6">
-                  <h4 className="text-white font-semibold text-lg mb-2">Поддерживаемые платформы</h4>
-                  <p className="text-gray-400 text-sm">Все популярные загрузчики модов</p>
+                  <h4 className="text-white font-semibold text-lg mb-2">{t('home.platforms')}</h4>
+                  <p className="text-gray-400 text-sm">{t('home.platformsLead')}</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
                   <Link href="/mods?g=categories%3Aforge" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
@@ -279,10 +283,10 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             </div>
             <div className="order-1 lg:order-2">
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Совместимость с любыми загрузчиками
+                {t('home.anyLoader')}
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy поддерживает все популярные загрузчики модов и версии Minecraft.
+                {t('home.anyLoaderLead')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -302,7 +306,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                     </svg>
                   </div>
-                  <span className="text-gray-300">Автоматическая фильтрация по платформе</span>
+                  <span className="text-gray-300">{t('home.autoFilter')}</span>
                 </div>
               </div>
             </div>
@@ -315,43 +319,43 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           <div className="text-center mb-16">
             
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
-              Тысячи плагинов для вашего сервера
+              {t('home.pluginsTitle')}
             </h2>
             <div className="inline-block bg-yellow-100 dark:bg-yellow-500/20 text-orange-700 dark:text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-yellow-300/50 dark:border-transparent">
-              Для создателей серверов
+              {t('home.forServerOwners')}
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
-              От простых утилит до сложных игровых механик — найдите идеальные плагины для создания уникального игрового опыта на вашем сервере.
+              {t('home.pluginsLead')}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Поддержка всех серверных платформ
+                {t('home.allServerPlatforms')}
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy поддерживает плагины для всех популярных серверных платформ Minecraft.
+                {t('home.allServerPlatformsLead')}
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                 
-                  <span className="text-gray-300">Совместимость с Paper, Spigot, Bukkit</span>
+                  <span className="text-gray-300">{t('home.paperSpigot')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   
-                  <span className="text-gray-300">Поддержка современных платформ</span>
+                  <span className="text-gray-300">{t('home.modernPlatforms')}</span>
                 </div>
                 <div className="flex items-center gap-3">
                  
-                  <span className="text-gray-300">Актуальные версии плагинов</span>
+                  <span className="text-gray-300">{t('home.pluginVersions')}</span>
                 </div>
               </div>
             </div>
             <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
               <div className="text-center mb-6">
-                <h4 className="text-white font-semibold text-lg mb-2">Серверные платформы</h4>
-                <p className="text-gray-400 text-sm">Все популярные серверные ядра</p>
+                <h4 className="text-white font-semibold text-lg mb-2">{t('home.serverPlatforms')}</h4>
+                <p className="text-gray-400 text-sm">{t('home.serverCores')}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
                 <Link href="/plugins?g=categories%3Abukkit" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
@@ -426,11 +430,11 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
                 <span className="bg-gradient-to-r from-white via-modrinth-green to-blue-400 bg-clip-text text-transparent">
-                  Начните своё приключение
+                  {t('home.startAdventure')}
                 </span>
               </h2>
               <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                Тысячи модификаций ждут вас. От простых твиков до полного преобразования игры — <span className="text-modrinth-green font-semibold">найдите своё идеальное дополнение</span>
+                {t('home.startLead')} <span className="text-modrinth-green font-semibold">{t('home.startLeadEm')}</span>
               </p>
             </div>
 
@@ -442,8 +446,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </svg>
                 </div>
                 <div>
-                  <CategoryTitle title="Моды" count={categoryTotals?.mod} tone="modrinth-green" />
-                  <p className="text-sm text-gray-400">Добавьте новые возможности и механики в игру</p>
+                  <CategoryTitle title={t('home.catMods')} count={categoryTotals?.mod} tone="modrinth-green" />
+                  <p className="text-sm text-gray-400">{t('home.catModsDesc')}</p>
                 </div>
               </Link>
 
@@ -454,8 +458,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </svg>
                 </div>
                 <div>
-                  <CategoryTitle title="Плагины" count={categoryTotals?.plugin} tone="blue" />
-                  <p className="text-sm text-gray-400">Расширьте функционал вашего сервера</p>
+                  <CategoryTitle title={t('home.catPlugins')} count={categoryTotals?.plugin} tone="blue" />
+                  <p className="text-sm text-gray-400">{t('home.catPluginsDesc')}</p>
                 </div>
               </Link>
 
@@ -466,8 +470,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </svg>
                 </div>
                 <div>
-                  <CategoryTitle title="Шейдеры" count={categoryTotals?.shader} tone="cyan" />
-                  <p className="text-sm text-gray-400">Преобразите графику с реалистичным освещением</p>
+                  <CategoryTitle title={t('home.catShaders')} count={categoryTotals?.shader} tone="cyan" />
+                  <p className="text-sm text-gray-400">{t('home.catShadersDesc')}</p>
                 </div>
               </Link>
 
@@ -479,11 +483,11 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
                 <div>
                   <CategoryTitle
-                    title="Ресурспаки"
+                    title={t('home.catRp')}
                     count={categoryTotals?.resourcepack}
                     tone="purple"
                   />
-                  <p className="text-sm text-gray-400">Измените визуальный стиль и звуки игры</p>
+                  <p className="text-sm text-gray-400">{t('home.catRpDesc')}</p>
                 </div>
               </Link>
 
@@ -494,8 +498,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </svg>
                 </div>
                 <div>
-                  <CategoryTitle title="Датапаки" count={categoryTotals?.datapack} tone="orange" />
-                  <p className="text-sm text-gray-400">Добавьте новые рецепты и игровую механику</p>
+                  <CategoryTitle title={t('home.catDp')} count={categoryTotals?.datapack} tone="orange" />
+                  <p className="text-sm text-gray-400">{t('home.catDpDesc')}</p>
                 </div>
               </Link>
 
@@ -506,15 +510,15 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </svg>
                 </div>
                 <div>
-                  <CategoryTitle title="Модпаки" count={categoryTotals?.modpack} tone="red" />
-                  <p className="text-sm text-gray-400">Готовые сборки модов для быстрого старта</p>
+                  <CategoryTitle title={t('home.catMp')} count={categoryTotals?.modpack} tone="red" />
+                  <p className="text-sm text-gray-400">{t('home.catMpDesc')}</p>
                 </div>
               </Link>
             </div>
 
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-500">
-                Все файлы проверены и загружаются напрямую с официального Modrinth CDN
+                {t('home.filesChecked')}
               </p>
             </div>
             </div>

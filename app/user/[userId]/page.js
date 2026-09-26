@@ -15,14 +15,17 @@ const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTa
 })
 import UserSidebar from '@/app/components/UserSidebar'
 import { buildUserProfileMetadata } from '@/lib/profileSeo'
+import { getRequestT } from '@/lib/i18n/server'
+import { projectTypeLabel } from '@/lib/i18n/label'
 
 export async function generateMetadata({ params, searchParams }) {
+  const { t } = getRequestT()
   try {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
       return {
-        title: 'Автор не найден | ModrinthProxy',
-        description: 'Запрашиваемый автор не найден',
+        title: t('author.notFound'),
+        description: t('author.notFoundDesc'),
       }
     }
 
@@ -40,13 +43,14 @@ export async function generateMetadata({ params, searchParams }) {
     )
   } catch {
     return {
-      title: 'Автор не найден | ModrinthProxy',
-      description: 'Запрашиваемый автор не найден',
+      title: t('author.notFound'),
+      description: t('author.notFoundDesc'),
     }
   }
 }
 
 export default async function UserPage({ params, searchParams }) {
+  const { t } = getRequestT()
   const { userId } = params
   const projectType = searchParams.type || null
 
@@ -57,13 +61,13 @@ export default async function UserPage({ params, searchParams }) {
           <svg className="w-20 h-20 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
           </svg>
-          <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
+          <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
           <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-6 mb-6 text-left">
             <p className="text-gray-300 mb-3">
-              Данный пользователь недоступен в соответствии с региональными ограничениями и требованиями Роскомнадзора.
+              {t('author.restrictedP1')}
             </p>
             <p className="text-gray-400 text-sm">
-              К сожалению, некоторые пользователи были заблокированы на территории Российской Федерации по решению регулирующих органов. Мы вынуждены ограничить доступ к этому контенту для соблюдения действующего законодательства.
+              {t('author.restrictedP2')}
             </p>
           </div>
         </div>
@@ -130,12 +134,12 @@ export default async function UserPage({ params, searchParams }) {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-gray-300 mb-2">
-                  {projectType ? `Нет ${getProjectTypeDisplayName(projectType).toLowerCase()}` : 'Нет проектов'}
+                  {projectType ? t('author.noType', { type: projectTypeLabel(t, projectType, getProjectTypeDisplayName(projectType)).toLowerCase() }) : t('author.noProjects')}
                 </h3>
                 <p className="text-gray-500">
                   {projectType
-                    ? `У этого автора пока нет опубликованных ${getProjectTypeDisplayName(projectType).toLowerCase()}`
-                    : 'У этого автора пока нет опубликованных проектов'}
+                    ? t('author.emptyType', { type: projectTypeLabel(t, projectType, getProjectTypeDisplayName(projectType)).toLowerCase() })
+                    : t('author.empty')}
                 </p>
               </div>
             )}

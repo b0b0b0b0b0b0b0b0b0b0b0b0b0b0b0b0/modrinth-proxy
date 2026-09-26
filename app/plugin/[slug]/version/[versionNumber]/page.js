@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
 export default async function PluginVersionPage({ params }) {
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
-    return <ProjectAccessRestricted href="/plugins" label="Вернуться к плагинам" />
+    return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />
   }
   if (data.missing) notFound()
 

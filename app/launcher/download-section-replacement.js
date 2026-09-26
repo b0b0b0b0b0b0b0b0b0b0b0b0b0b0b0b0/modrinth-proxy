@@ -2,6 +2,7 @@
 
 import DownloadButtonWithPopover from '../components/DownloadButtonWithPopover'
 import { WindowsIcon, MacOSIcon, LinuxIcon } from '../components/icons'
+import { useT } from '../components/I18nProvider'
 
 const ASTRALRINTH_FALLBACK = {
   windows:
@@ -15,6 +16,7 @@ const ASTRALRINTH_FALLBACK = {
 }
 
 export const DownloadSection = ({ launcherData, astralData }) => {
+  const t = useT()
   const astral = astralData?.downloads
   const astralUrls = {
     windows: astral?.windows || ASTRALRINTH_FALLBACK.windows,
@@ -27,7 +29,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
   if (!launcherData) {
     return (
       <div className="col-span-3 text-center py-12">
-        <p className="text-gray-400">Не удалось загрузить информацию о версиях</p>
+        <p className="text-gray-400">{t('app.versionsFail')}</p>
       </div>
     )
   }
@@ -37,9 +39,9 @@ export const DownloadSection = ({ launcherData, astralData }) => {
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
         <span id="download-os-windows" className="inline-flex"><WindowsIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">Windows</h3>
-        <p className="text-gray-400 mb-6">Установщик для Windows 64-bit</p>
+        <p className="text-gray-400 mb-6">{t('app.winInstaller')}</p>
         <DownloadButtonWithPopover
-          buttonText="Скачать для Windows"
+          buttonText={t('app.dlWin')}
           officialUrl={launcherData.downloads.windows}
           pirateUrl={astralUrls.windows}
         />
@@ -50,9 +52,9 @@ export const DownloadSection = ({ launcherData, astralData }) => {
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
         <span id="download-os-macos" className="inline-flex"><MacOSIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">macOS</h3>
-        <p className="text-gray-400 mb-6">Универсальный DMG для macOS</p>
+        <p className="text-gray-400 mb-6">{t('app.macDmg')}</p>
         <DownloadButtonWithPopover
-          buttonText="Скачать для macOS"
+          buttonText={t('app.dlMac')}
           officialUrl={launcherData.downloads.macos}
           pirateUrl={astralUrls.macos}
         />
@@ -63,7 +65,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
       <div className="rounded-3xl p-8 flex flex-col items-center text-center w-full md:w-auto">
         <span id="download-os-linux" className="inline-flex"><LinuxIcon /></span>
         <h3 className="text-2xl font-bold text-white mb-2">Linux<span className="text-sm text-gray-500 ml-2">*</span></h3>
-        <p className="text-gray-400 mb-6">AppImage, DEB и RPM пакеты</p>
+        <p className="text-gray-400 mb-6">{t('app.linuxPkgs')}</p>
         <div className="w-full">
           <DownloadButtonWithPopover
             buttonText="AppImage"
@@ -96,7 +98,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
             </svg>
-            <span>Сторонние пакеты</span>
+            <span>{t('app.thirdParty')}</span>
           </div>
         </a>
       </div>

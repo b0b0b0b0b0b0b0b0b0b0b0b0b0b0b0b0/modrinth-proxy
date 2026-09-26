@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react'
 import { SETTINGS_SECTIONS } from './SettingsNav'
+import { useT } from '../components/I18nProvider'
 
 const SCROLL_OFFSET = 96
 
@@ -27,6 +28,7 @@ function resolveActiveSection() {
 }
 
 export default function SettingsMobileMenu() {
+  const t = useT()
   const [isOpen, setIsOpen] = useState(false)
   const [activeId, setActiveId] = useState(SETTINGS_SECTIONS[0].id)
 
@@ -68,19 +70,19 @@ export default function SettingsMobileMenu() {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-white">Разделы</h2>
+          <h2 className="text-xl font-bold text-white">{t('settings.nav.sections')}</h2>
           <button
             type="button"
             onClick={() => setIsOpen(false)}
             className="p-2 hover:bg-gray-800 rounded-lg transition-colors text-gray-400 hover:text-white"
-            aria-label="Закрыть"
+            aria-label={t('settings.nav.close')}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <nav className="space-y-1" aria-label="Быстрый переход по настройкам">
+        <nav className="space-y-1" aria-label={t('settings.nav.aria')}>
           {SETTINGS_SECTIONS.map((section) => (
             <button
               key={section.id}
@@ -89,7 +91,7 @@ export default function SettingsMobileMenu() {
               className={navButtonClass(activeId === section.id)}
               aria-current={activeId === section.id ? 'true' : undefined}
             >
-              {section.label}
+              {t(section.labelKey)}
             </button>
           ))}
         </nav>

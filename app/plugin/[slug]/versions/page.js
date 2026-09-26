@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
@@ -42,16 +42,7 @@ export default async function PluginVersionsPage({ params, searchParams }) {
   const { slug } = params;
   
   if (await isProjectBlocked(slug)) {
-    return (
-      <div className="text-center py-16 max-w-2xl mx-auto">
-        <Link 
-          href="/plugins"
-          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition"
-        >
-          <span>Вернуться к плагинам</span>
-        </Link>
-      </div>
-    )
+    return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />
   }
 
   const initialLoader = searchParams.l || 'all'

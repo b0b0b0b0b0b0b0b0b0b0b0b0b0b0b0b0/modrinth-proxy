@@ -15,27 +15,13 @@ import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
 import ServerCategoryTagsRow from './ServerCategoryTagsRow'
 import ProjectActivityBackground from './ProjectActivityBackground'
+import { getRequestT } from '@/lib/i18n/server'
+import { intlLocale } from '@/lib/i18n/config'
+import { categoryLabel, pluralCount } from '@/lib/i18n/label'
 
 const MINEPLUGIN_PROMO_MAX_DOWNLOADS = 100_000
 
 const AUTHOR_PLUGIN_SLUGS = new Set(['borderplus', 'h1-(hp)', 'cutiedrops', 'soulbuyer'])
-
-const CONTENT_TYPE_NAMES = {
-  mod: 'Моды',
-  mods: 'Моды',
-  modpack: 'Модпаки',
-  modpacks: 'Модпаки',
-  plugin: 'Плагины',
-  plugins: 'Плагины',
-  datapack: 'Датапаки',
-  datapacks: 'Датапаки',
-  resourcepack: 'Ресурспаки',
-  resourcepacks: 'Ресурспаки',
-  shader: 'Шейдеры',
-  shaders: 'Шейдеры',
-  server: 'Серверы',
-  servers: 'Серверы',
-}
 
 const CONTENT_TYPE_ROUTES = {
   mod: 'mods',
@@ -49,6 +35,8 @@ const CONTENT_TYPE_ROUTES = {
 }
 
 export default function ResourceHeader({ resource, contentType, versions = [], mutedDownload = false }) {
+  const { t, locale } = getRequestT()
+  const nf = intlLocale(locale)
   const safeVersions = Array.isArray(versions) ? versions : []
 
   const activityCutoff = Date.now() - ACTIVITY_DAYS * 24 * 60 * 60 * 1000
@@ -59,8 +47,8 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
 
   const downloadVersions = slimVersionsForHeader(pruneVersionsForDownloadPicker(safeVersions))
 
-  const contentTypeName = CONTENT_TYPE_NAMES[contentType] || 'Ресурсы'
   const contentTypeRoute = CONTENT_TYPE_ROUTES[contentType] || contentType
+  const contentTypeName = t(`nav.${contentTypeRoute}`) || t('project.resources')
   const isServer = contentType === 'server' || contentType === 'servers' || resource.project_type === 'minecraft_java_server'
   
   const playersOnline = resource.minecraft_java_server?.ping?.data?.players_online ?? resource.minecraft_java_server?.ping?.players_online
@@ -138,40 +126,30 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                      {playersOnline != null && (
                       <StyledTooltip label={(() => {
                         const count = playersOnline
-                        const mod10 = count % 10
-                        const mod100 = count % 100
-                        if (mod100 >= 11 && mod100 <= 19) {
-                          return `${count.toLocaleString('ru-RU')} игроков сейчас играют`
-                        }
-                        if (mod10 === 1) {
-                          return `${count.toLocaleString('ru-RU')} игрок сейчас играет`
-                        }
-                        if (mod10 >= 2 && mod10 <= 4) {
-                          return `${count.toLocaleString('ru-RU')} игрока сейчас играют`
-                        }
-                        return `${count.toLocaleString('ru-RU')} игроков сейчас играют`
+                        const n = count.toLocaleString(nf)
+                        return pluralCount(locale, count, t('project.playerNow', { n }), t('project.playersFew', { n }), t('project.playersNow', { n }))
                       })()}>
                         <div className="flex items-center gap-1.5 text-green-500 font-semibold bg-green-500/10 border border-green-500/25 px-2.5 py-1 rounded-full text-xs md:text-sm cursor-help hover:brightness-110 transition-all select-none">
                           <span className="relative flex h-2 w-2">
                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                           </span>
-                          <span>{playersOnline.toLocaleString('ru-RU')} в сети</span>
+                          <span>{playersOnline.toLocaleString(nf)} {t('project.online')}</span>
                         </div>
                       </StyledTooltip>
                     )}
                     {(plays2w != null || plays4w != null) && (
                       <div className="flex items-center gap-1.5 text-gray-600 dark:text-gray-400 bg-gray-800/40 border border-gray-700/35 px-2.5 py-1 rounded-full text-xs md:text-sm">
                         <div className="flex items-center">
-                          <StyledTooltip label={`${(plays2w || 0).toLocaleString('ru-RU')} запусков через Modrinth App за последние 2 недели`}>
+                          <StyledTooltip label={t('project.plays2w', { n: (plays2w || 0).toLocaleString(nf) })}>
                             <span className="font-semibold text-gray-900 dark:text-white cursor-help hover:text-modrinth-green transition-colors">
-                              {(plays2w || 0).toLocaleString('ru-RU')}
+                              {(plays2w || 0).toLocaleString(nf)}
                             </span>
                           </StyledTooltip>
                           <IconModrinthAppPlays className="w-4 h-4 text-gray-500 shrink-0 mx-1.5 -translate-y-0.5" aria-hidden />
-                          <StyledTooltip label={`${(plays4w || 0).toLocaleString('ru-RU')} запусков через Modrinth App за последний месяц`}>
+                          <StyledTooltip label={t('project.plays4w', { n: (plays4w || 0).toLocaleString(nf) })}>
                             <span className="font-semibold text-gray-900 dark:text-white cursor-help hover:text-modrinth-green transition-colors">
-                              {(plays4w || 0).toLocaleString('ru-RU')}
+                              {(plays4w || 0).toLocaleString(nf)}
                             </span>
                           </StyledTooltip>
                         </div>
@@ -215,7 +193,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                                 style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
                               >
                                 <div className="h-3.5 w-3.5 flex-shrink-0">{category.icon}</div>
-                                <span>{category.name}</span>
+                                <span>{categoryLabel(t, catId, category.name)}</span>
                               </Link>
                             )
                           } catch (e) {

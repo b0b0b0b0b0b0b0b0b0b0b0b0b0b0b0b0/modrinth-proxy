@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
@@ -41,13 +41,7 @@ export default async function DatapackChangelogPage({ params }) {
   const { slug } = params;
   
   if (await isProjectBlocked(slug)) {
-    return (
-      <div className="text-center py-16">
-        <Link href="/datapacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition">
-          <span>Вернуться к датапакам</span>
-        </Link>
-      </div>
-    )
+    return <ProjectAccessRestricted href="/datapacks" backKey="project.backToDatapacks" />
   }
 
   let pack, versions, teamMembers, organization;

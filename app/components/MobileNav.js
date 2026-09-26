@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { withCatalogDiscoveryQuery } from '@/lib/catalogDiscoveryQuery'
+import { useT } from './I18nProvider'
 
 export default function MobileNav({ onFilterClick }) {
+  const t = useT()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const [isOpen, setIsOpen] = useState(false)
@@ -26,49 +28,49 @@ export default function MobileNav({ onFilterClick }) {
   const navItems = [
     { 
       href: '/mods', 
-      label: 'Моды', 
+      labelKey: 'nav.mods', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path><path d="M3.29 7 12 12l8.71-5M12 22V12"></path></svg>,
       color: 'from-modrinth-green to-modrinth-green-light' 
     },
     { 
       href: '/resourcepacks', 
-      label: 'Ресурспаки', 
+      labelKey: 'nav.resourcepacks', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3"></path><path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7M14.5 17.5 4.5 15"></path></svg>,
       color: 'from-purple-500 to-pink-500' 
     },
     { 
       href: '/datapacks', 
-      label: 'Датапаки', 
+      labelKey: 'nav.datapacks', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path></svg>,
       color: 'from-orange-500 to-amber-500' 
     },
     { 
       href: '/shaders', 
-      label: 'Шейдеры', 
+      labelKey: 'nav.shaders', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><circle cx="6" cy="15" r="4"></circle><circle cx="18" cy="15" r="4"></circle><path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2M2.5 13 5 7c.7-1.3 1.4-2 3-2M21.5 13 19 7c-.7-1.3-1.5-2-3-2"></path></svg>,
       color: 'from-cyan-500 to-blue-500' 
     },
     { 
       href: '/modpacks', 
-      label: 'Модпаки', 
+      labelKey: 'nav.modpacks', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 22v-9M15.17 2.21a1.67 1.67 0 0 1 1.63 0L21 4.57a1.93 1.93 0 0 1 0 3.36L8.82 14.79a1.66 1.66 0 0 1-1.64 0L3 12.43a1.93 1.93 0 0 1 0-3.36z"></path><path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13"></path><path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.64 1.64 0 0 0 1.63 0z"></path></svg>,
       color: 'from-red-500 to-rose-500' 
     },
     { 
       href: '/plugins', 
-      label: 'Плагины', 
+      labelKey: 'nav.plugins', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path></svg>,
       color: 'from-blue-500 to-cyan-500' 
     },
     { 
       href: '/servers', 
-      label: 'Серверы', 
+      labelKey: 'nav.servers', 
       icon: <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24"><line x1="22" x2="2" y1="12" y2="12" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" /><line x1="6" x2="6.01" y1="16" y2="16" /><line x1="10" x2="10.01" y1="16" y2="16" /></svg>,
       color: 'from-indigo-500 to-violet-500' 
     },
     { 
       href: '/app', 
-      label: 'Modrinth App', 
+      labelKey: 'nav.app', 
       icon: <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
         <g>
           <g>
@@ -194,7 +196,7 @@ export default function MobileNav({ onFilterClick }) {
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
               <polyline points="9,22 9,12 15,12 15,22"></polyline>
             </svg>
-            <span>Главная</span>
+            <span>{t('nav.home')}</span>
           </Link>
           
           <button
@@ -208,7 +210,7 @@ export default function MobileNav({ onFilterClick }) {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <span>Меню</span>
+            <span>{t('nav.menu')}</span>
           </button>
           
           {showFilterButton && (
@@ -219,7 +221,7 @@ export default function MobileNav({ onFilterClick }) {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
               </svg>
-              <span>Фильтр</span>
+              <span>{t('nav.filter')}</span>
             </button>
           )}
 
@@ -231,7 +233,7 @@ export default function MobileNav({ onFilterClick }) {
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8M4 18h16" />
               </svg>
-              <span>Разделы</span>
+              <span>{t('nav.sections')}</span>
             </button>
           )}
         </div>
@@ -255,7 +257,7 @@ export default function MobileNav({ onFilterClick }) {
             <div className="px-4 pb-20">
               <div className="flex items-center justify-center gap-2 mb-4">
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
-                <h3 className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-modrinth-green to-modrinth-green-light px-3">Навигация</h3>
+                <h3 className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-modrinth-green to-modrinth-green-light px-3">{t('nav.navigation')}</h3>
                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
               </div>
               
@@ -279,7 +281,7 @@ export default function MobileNav({ onFilterClick }) {
                       <span className={`text-sm font-semibold text-center transition-colors duration-300 ${
                         active ? 'text-white' : 'text-gray-300 group-hover:text-modrinth-green'
                       }`}>
-                        {item.label}
+                        {t(item.labelKey)}
                       </span>
                       {active && (
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-modrinth-green rounded-full shadow-lg shadow-[rgba(var(--color-green-rgb),0.5)] animate-pulse"></div>

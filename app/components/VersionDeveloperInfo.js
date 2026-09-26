@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react'
 import CopyButton from './CopyButton'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 const GRADLE_KEYWORDS = new Set([
   'repositories',
@@ -51,7 +52,7 @@ function highlightGradle(code) {
   })
 }
 
-function CopyCodeButton({ text }) {
+function CopyCodeButton({ text, t }) {
   const [copied, setCopied] = useState(false)
 
   const handleCopy = async () => {
@@ -64,7 +65,7 @@ function CopyCodeButton({ text }) {
   }
 
   return (
-    <StyledTooltip label={copied ? 'Скопировано' : 'Скопировать код'}>
+    <StyledTooltip label={copied ? t('copy.copied') : t('version.devCopyCode')}>
       <button
         type="button"
         onClick={handleCopy}
@@ -86,6 +87,7 @@ function CopyCodeButton({ text }) {
 }
 
 export default function VersionDeveloperInfo({ projectId, versionId }) {
+  const t = useT()
   const [open, setOpen] = useState(false)
 
   const mavenCoords = projectId && versionId ? `maven.modrinth:${projectId}:${versionId}` : ''
@@ -99,23 +101,23 @@ export default function VersionDeveloperInfo({ projectId, versionId }) {
                 url = "https://api.modrinth.com/maven"
             }
         }
-        // forRepositories(fg.repository) // Раскомментируйте при использовании ForgeGradle
+${t('version.devCommentForge')}
         filter {
             includeGroup "maven.modrinth"
         }
     }
 }
 
-// Обычная зависимость Gradle
+${t('version.devCommentGradle')}
 dependencies {
     implementation "${mavenCoords}"
 }
 
-// Устаревшая зависимость Loom
+${t('version.devCommentLoom')}
 dependencies {
     modImplementation "${mavenCoords}"
 }`
-  }, [mavenCoords])
+  }, [mavenCoords, t])
 
   const highlightedGradle = useMemo(
     () => (buildGradle ? highlightGradle(buildGradle) : ''),
@@ -151,15 +153,14 @@ dependencies {
           />
         </svg>
         <h3 className="m-0 flex items-center gap-2 text-base font-semibold text-white">
-          Информация для разработчиков
+          {t('version.devTitle')}
         </h3>
       </button>
 
       {open && (
         <div className="flex flex-col border-t border-gray-800 p-4">
           <p className="mb-3 mt-0 leading-normal text-sm text-gray-300">
-            Проекты с Modrinth автоматически доступны через Maven-репозиторий для JVM-инструментов
-            сборки, например{' '}
+            {t('version.devP1a')}{' '}
             <a
               href="https://gradle.org/"
               className="text-modrinth-green hover:underline"
@@ -168,33 +169,31 @@ dependencies {
             >
               Gradle
             </a>
-            . Подробнее про Modrinth Maven API —{' '}
+            {t('version.devP1b')}{' '}
             <a
               href="https://support.modrinth.com/en/articles/8801191-modrinth-maven"
               className="text-modrinth-green hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              здесь
+              {t('version.devHere')}
             </a>
             .
           </p>
           <p className="mb-4 mt-0 leading-normal text-sm text-gray-300">
-            Примечание: если у автора есть свой Maven-репозиторий, лучше использовать его — там
-            есть транзитивные зависимости, которых нет в Modrinth Maven API. Смешивание Modrinth и
-            других Maven-репозиториев может дать дубликаты зависимостей из‑за разных group id.
+            {t('version.devP2')}
           </p>
 
-          <h4 className="mb-2 mt-0 font-medium text-white">Maven-координаты:</h4>
-          <CopyButton text={mavenCoords} tooltipLabel="Скопировать в буфер обмена" />
+          <h4 className="mb-2 mt-0 font-medium text-white">{t('version.devCoords')}</h4>
+          <CopyButton text={mavenCoords} tooltipLabel={t('copy.id')} />
 
-          <h4 className="mb-2 mt-4 font-medium text-white">ID версии:</h4>
-          <CopyButton text={versionId} tooltipLabel="Скопировать ID в буфер обмена" />
+          <h4 className="mb-2 mt-4 font-medium text-white">{t('version.devVersionId')}</h4>
+          <CopyButton text={versionId} tooltipLabel={t('copy.id')} />
 
-          <h4 className="mb-2 mt-4 font-medium text-white">build.gradle:</h4>
+          <h4 className="mb-2 mt-4 font-medium text-white">{t('version.devGradle')}</h4>
           <div className="relative">
             <div className="absolute right-2 top-2 z-10">
-              <CopyCodeButton text={buildGradle} />
+              <CopyCodeButton text={buildGradle} t={t} />
             </div>
             <pre
               className="gradle-code m-0 overflow-x-auto rounded-xl border border-gray-800 bg-[var(--bg-tertiary)] p-3 pr-12 text-sm font-mono leading-relaxed whitespace-pre"

@@ -5,30 +5,35 @@ import { COLLECTION_PAGE_SIZE, getCollection, getProjectsByIds } from '@/lib/col
 import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
 import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
+import { getRequestT } from '@/lib/i18n/server'
+import { intlLocale } from '@/lib/i18n/config'
+import { pluralize } from '@/lib/i18n/pluralize'
 
 export async function generateMetadata({ params }) {
+  const { t } = getRequestT()
   const collection = await getCollection(params.id)
   if (!collection) {
     return {
-      title: 'Коллекция не найдена | ModrinthProxy',
+      title: t('col.notFound'),
       robots: 'noindex',
     }
   }
   return {
-    title: `${collection.name} — коллекция`,
-    description: collection.description || `Коллекция ${collection.name}`,
+    title: t('col.metaTitle', { name: collection.name }),
+    description: collection.description || t('col.metaDesc', { name: collection.name }),
     robots: 'all',
     openGraph: {
       siteName: 'modrinth.black',
       type: 'website',
       title: collection.name,
-      description: collection.description || `Коллекция ${collection.name}`,
+      description: collection.description || t('col.metaDesc', { name: collection.name }),
       images: collection.icon_url ? [{ url: collection.icon_url }] : [],
     },
   }
 }
 
 export default async function CollectionPage({ params, searchParams }) {
+  const { t, locale } = getRequestT()
   const collection = await getCollection(params.id)
   if (!collection) notFound()
 
@@ -36,8 +41,8 @@ export default async function CollectionPage({ params, searchParams }) {
   if (ownerRaw && (isUserBlocked(ownerRaw.id) || isUserBlocked(ownerRaw.username))) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-        <p className="text-gray-400">Эта коллекция недоступна.</p>
+        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
+        <p className="text-gray-400">{t('restricted.collection')}</p>
       </div>
     )
   }
@@ -70,16 +75,20 @@ export default async function CollectionPage({ params, searchParams }) {
           </div>
         )}
         <div className="min-w-0 flex-1">
-          <p className="mb-1 text-sm font-semibold text-gray-500">Коллекция</p>
+          <p className="mb-1 text-sm font-semibold text-gray-500">{t('col.label')}</p>
           <h1 className="text-3xl font-bold text-white">{collection.name}</h1>
           {collection.description ? (
             <p className="mt-2 max-w-3xl text-gray-300">{collection.description}</p>
           ) : null}
           <div className="mt-3 flex flex-wrap gap-4 text-sm text-gray-400">
             <span>
-              <span className="font-semibold text-white">{projectCount}</span>
-              {' '}
-              проект{projectCount === 1 ? '' : projectCount < 5 ? 'а' : 'ов'}
+              {pluralize(
+                projectCount,
+                locale,
+                t('col.pOne', { n: projectCount.toLocaleString(intlLocale(locale)) }),
+                t('col.pFew', { n: projectCount.toLocaleString(intlLocale(locale)) }),
+                t('col.pMany', { n: projectCount.toLocaleString(intlLocale(locale)) }),
+              )}
             </span>
             {owner ? (
               <Link href={`/user/${owner.id}`} className="text-modrinth-green hover:underline">
@@ -103,7 +112,7 @@ export default async function CollectionPage({ params, searchParams }) {
             <ResourceList resources={projects} type="mod" isProfile={true} />
           ) : (
             <div className="py-16 text-center">
-              <h3 className="text-xl font-semibold text-gray-300">На этой странице нет доступных проектов</h3>
+              <h3 className="text-xl font-semibold text-gray-300">{t('col.pageEmpty')}</h3>
             </div>
           )}
           <CatalogPagination
@@ -116,7 +125,7 @@ export default async function CollectionPage({ params, searchParams }) {
         </>
       ) : (
         <div className="py-16 text-center">
-          <h3 className="text-xl font-semibold text-gray-300">В коллекции нет доступных проектов</h3>
+          <h3 className="text-xl font-semibold text-gray-300">{t('col.emptyProjects')}</h3>
         </div>
       )}
     </div>

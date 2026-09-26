@@ -11,6 +11,8 @@ import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } fro
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
+import { useT } from '@/app/components/I18nProvider'
+import { categoryLabel } from '@/lib/i18n/label'
 
 const CATEGORIES = [
   {
@@ -125,6 +127,7 @@ const RESOLUTIONS = [
 ]
 
 export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
+  const t = useT()
   const router = useRouter()
   const searchParams = useSearchParams()
   const hookVersions = useMinecraftVersions()
@@ -277,14 +280,14 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
             </svg>
-            Категории
+            {t('filter.categories')}
           </h3>
           <div className="space-y-1.5 pr-2">
             {CATEGORIES.map(cat => (
               <CatalogFilterOption
                 key={cat.id}
                 icon={cat.icon}
-                label={cat.name}
+                label={categoryLabel(t, cat.id, cat.name)}
                 selected={selectedCategories.includes(cat.id)}
                 excluded={excludedCategories.includes(cat.id)}
                 onInclude={() => toggleCategory(cat.id)}
@@ -299,14 +302,14 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
-            Особенности
+            {t('filter.features')}
           </h3>
           <div className="space-y-1.5 pr-2">
             {RESOURCEPACK_CATEGORIES.map(feature => (
               <CatalogFilterOption
                 key={feature.id}
                 icon={feature.icon}
-                label={feature.name}
+                label={categoryLabel(t, feature.id, feature.name)}
                 selected={selectedFeatures.includes(feature.id)}
                 excluded={excludedFeatures.includes(feature.id)}
                 onInclude={() => toggleFeature(feature.id)}
@@ -321,13 +324,13 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            Разрешение
+            {t('filter.resolution')}
           </h3>
           <div className="space-y-1.5">
             {RESOLUTIONS.map(res => (
               <CatalogFilterOption
                 key={res.id}
-                label={res.name}
+                label={categoryLabel(t, res.id, res.name)}
                 selected={selectedResolutions.includes(res.id)}
                 excluded={excludedResolutions.includes(res.id)}
                 onInclude={() => toggleResolution(res.id)}
@@ -342,13 +345,13 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
-            Версия игры
+            {t('filter.gameVersion')}
           </h3>
           
           <div className="mb-2 relative">
             <input
               type="text"
-              placeholder="Поиск..."
+              placeholder={t('filter.search')}
               value={versionSearch}
               onChange={(e) => setVersionSearch(e.target.value)}
               className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
@@ -410,7 +413,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
                 )}
               </div>
               <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                Показать все версии
+                {t('filter.showAllVersions')}
               </span>
             </button>
           </div>
@@ -442,7 +445,7 @@ export default function ResourcepackSidebarFilters({ onFilterChange, isMobile = 
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-              Сбросить фильтры
+              {t('filter.reset')}
             </button>
           </div>
         )}

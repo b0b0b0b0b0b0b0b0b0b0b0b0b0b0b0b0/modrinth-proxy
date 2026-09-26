@@ -7,10 +7,14 @@ import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEn
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
 import { getDisclosureExclusionLabel, filterDisclosureIdsForCatalog, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import { useT } from './I18nProvider'
+import { categoryLabel, labeled } from '@/lib/i18n/label'
 
 export default function ActiveFilters({ categoryPath = 'plugins' }) {
+  const t = useT()
   const searchParams = useSearchParams()
   const config = getFilterConfig(categoryPath)
+  const nameOf = (id) => categoryLabel(t, id, getCategoryName(id, config))
   const activeFilters = []
   const scParams = Array.isArray(searchParams.getAll('sc')) ? searchParams.getAll('sc') : (searchParams.get('sc') ? [searchParams.get('sc')] : [])
   scParams.forEach(param => {
@@ -19,7 +23,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'sc',
         id: param,
-        label: getCategoryName(param, config),
+        label: nameOf(param),
         param: param
       })
     }
@@ -33,7 +37,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'sct',
         id: param,
-        label: getCategoryName(id, config),
+        label: nameOf(id),
         param: param
       })
     }
@@ -49,7 +53,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
         activeFilters.push({
           type: 'category',
           id: categoryId,
-          label: getCategoryName(categoryId, config),
+          label: nameOf(categoryId),
           param: param
         })
       }
@@ -58,7 +62,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'category',
         id: categoryId,
-        label: getCategoryName(categoryId, config),
+        label: nameOf(categoryId),
         excluded: true,
         param: param
       })
@@ -122,7 +126,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     activeFilters.push({
       type: 'disclosure',
       id,
-      label: getDisclosureExclusionLabel(id),
+      label: labeled(t, `disc.${id}`, getDisclosureExclusionLabel(id)),
       param: `disclosure_types!=${id}`,
     })
   })
@@ -133,7 +137,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'openSource',
         id: 'open_source',
-        label: 'Открытый исходный код',
+        label: t('filter.openSource'),
         excluded: state === 'excluded',
         param: state === 'selected' ? 'open_source:true' : 'open_source',
       })
@@ -146,7 +150,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'environment',
         id: environment,
-        label: getEnvironmentName(environment),
+        label: labeled(t, `filter.env.${environment}`, getEnvironmentName(environment)),
         param: 'e'
       })
     }
@@ -187,7 +191,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       activeFilters.push({
         type: 'sst',
         id: sst,
-        label: 'Не в сети',
+        label: t('filter.offline'),
         param: sst
       })
     }
@@ -271,7 +275,7 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
             <circle cx="12" cy="12" r="10"></circle>
             <path d="m15 9-6 6M9 9l6 6"></path>
           </svg>
-          Очистить фильтры
+          {t('filter.clear')}
         </Link>
       )}
       

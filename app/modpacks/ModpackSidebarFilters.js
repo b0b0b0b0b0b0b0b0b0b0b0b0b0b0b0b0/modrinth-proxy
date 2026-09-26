@@ -12,12 +12,15 @@ import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } fro
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
+import { useT } from '@/app/components/I18nProvider'
+import { categoryLabel } from '@/lib/i18n/label'
 
 const MODPACK_CATEGORIES = CATEGORIES.filter(cat => 
   ['adventure', 'challenging', 'combat', 'kitchen-sink', 'lightweight', 'magic', 'multiplayer', 'optimization', 'quests', 'technology'].includes(cat.id)
 )
 
 export default function ModpackSidebarFilters({ isMobile = false, onFilterChange, initialVersions = null }) {
+  const t = useT()
   const router = useRouter()
   const searchParams = useSearchParams()
   const hookVersions = useMinecraftVersions()
@@ -140,13 +143,13 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
     <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
       <div className="space-y-4">
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">Категории</h3>
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.categories')}</h3>
           <div className="space-y-1.5 pr-2">
             {MODPACK_CATEGORIES.map(cat => (
               <CatalogFilterOption
                 key={cat.id}
                 icon={cat.icon}
-                label={cat.name}
+                label={categoryLabel(t, cat.id, cat.name)}
                 selected={selectedCategories.includes(cat.id)}
                 excluded={excludedCategories.includes(cat.id)}
                 onInclude={() => toggleCategory(cat.id)}
@@ -157,7 +160,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">Окружение</h3>
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.environment')}</h3>
           <div className="space-y-1.5">
             <button
               onClick={() => {
@@ -174,7 +177,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
               <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17 9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2"/>
               </svg>
-              <span className="truncate text-sm flex-1">Клиент</span>
+              <span className="truncate text-sm flex-1">{t('filter.env.client')}</span>
               {environment === 'client' && (
                 <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                   <path d="M20 6 9 17l-5-5" />
@@ -196,7 +199,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                 <path d="M22 12H2M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11M6 16h.01M10 16h.01"/>
               </svg>
-              <span className="truncate text-sm flex-1">Сервер</span>
+              <span className="truncate text-sm flex-1">{t('filter.env.server')}</span>
               {environment === 'server' && (
                 <svg className="h-4 w-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                   <path d="M20 6 9 17l-5-5" />
@@ -211,13 +214,13 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
-            Версия игры
+            {t('filter.gameVersion')}
           </h3>
           
           <div className="mb-2 relative">
             <input
               type="text"
-              placeholder="Поиск..."
+              placeholder={t('filter.search')}
               value={versionSearch}
               onChange={(e) => setVersionSearch(e.target.value)}
               className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
@@ -279,14 +282,14 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
                 )}
               </div>
               <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                Показать все версии
+                {t('filter.showAllVersions')}
               </span>
             </button>
           </div>
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h3 className="text-sm font-semibold text-gray-300 mb-3">Загрузчик</h3>
+          <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.loader')}</h3>
           <div className="space-y-1.5">
             {MODPACK_LOADERS.map(loader => (
               <CatalogFilterOption
@@ -327,7 +330,7 @@ export default function ModpackSidebarFilters({ isMobile = false, onFilterChange
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-              Сбросить фильтры
+              {t('filter.reset')}
             </button>
           </div>
         )}

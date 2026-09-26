@@ -1,6 +1,7 @@
 import { cache } from 'react'
 import { parseLicenseDocument, splitLicenseLinks } from '@/lib/parseLicenseDocument'
 import { readSiteLicenseText } from '@/lib/siteLicense'
+import { getRequestT } from '@/lib/i18n/server'
 
 export const getParsedSiteLicense = cache(() => parseLicenseDocument(readSiteLicenseText()))
 
@@ -63,22 +64,22 @@ function LicenseSectionBlock({ section }) {
   )
 }
 
-function LicenseTableOfContents({ document }) {
+function LicenseTableOfContents({ document, t }) {
   const items = [
-    { id: 'license-preamble', label: 'Preamble' },
+    { id: 'license-preamble', label: t('license.preamble') },
     ...document.sections.map((section) => ({
       id: section.id,
       label: `${section.number}. ${section.title}`,
     })),
-    { id: 'license-how-to-apply', label: 'How to Apply' },
+    { id: 'license-how-to-apply', label: t('license.apply') },
   ]
 
   return (
     <nav
-      aria-label="Содержание лицензии"
+      aria-label={t('license.tocAria')}
       className="rounded-xl border border-gray-800 bg-modrinth-dark/80 p-4 lg:sticky lg:top-24"
     >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">Содержание</p>
+      <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">{t('license.contents')}</p>
       <ol className="space-y-1 text-sm">
         {items.map((item) => (
           <li key={item.id}>
@@ -96,27 +97,28 @@ function LicenseTableOfContents({ document }) {
 }
 
 export default function LicenseDocument() {
+  const { t } = getRequestT()
   const document = getParsedSiteLicense()
 
   return (
     <div className="overflow-hidden rounded-2xl border border-gray-800 bg-modrinth-dark">
       <div className="border-b border-gray-800 px-5 py-4 md:px-6">
-        <h2 className="text-lg font-bold text-white">Полный текст лицензии</h2>
+        <h2 className="text-lg font-bold text-white">{t('license.fullText')}</h2>
         <p className="mt-1 text-sm text-gray-500">
-          Юридически значим только английский оригинал.
+          {t('license.legalEn')}
         </p>
       </div>
 
       <div className="grid gap-0 lg:grid-cols-[minmax(0,240px)_1fr]">
         <div className="border-b border-gray-800 p-4 lg:border-b-0 lg:border-r">
-          <LicenseTableOfContents document={document} />
+          <LicenseTableOfContents document={document} t={t} />
         </div>
 
         <article className="license-document px-5 py-6 md:px-8 md:py-8">
           {document.notice.length > 0 && (
             <div className="mb-8 rounded-xl border border-modrinth-green/25 bg-modrinth-green/[0.06] p-5">
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-modrinth-green/80">
-                Notice for modrinth-proxy
+                {t('license.notice')}
               </p>
               <LicenseParagraphs paragraphs={document.notice} className="text-sm leading-7 text-gray-200" />
             </div>
@@ -140,13 +142,13 @@ export default function LicenseDocument() {
           )}
 
           <section id="license-preamble" className="scroll-mt-24 mb-10">
-            <h3 className="mb-4 text-xl font-bold text-white">Preamble</h3>
+            <h3 className="mb-4 text-xl font-bold text-white">{t('license.preamble')}</h3>
             <LicenseParagraphs paragraphs={document.preamble} className="mb-4 text-[15px] leading-7 text-gray-300" />
           </section>
 
           <div className="mb-6">
             <h3 className="text-center text-sm font-semibold uppercase tracking-[0.2em] text-gray-500">
-              Terms and Conditions
+              {t('license.terms')}
             </h3>
           </div>
 
@@ -157,7 +159,7 @@ export default function LicenseDocument() {
           </div>
 
           <section id="license-how-to-apply" className="scroll-mt-24 mt-10 border-t border-gray-800 pt-8">
-            <h3 className="mb-4 text-xl font-bold text-white">How to Apply These Terms to Your New Programs</h3>
+            <h3 className="mb-4 text-xl font-bold text-white">{t('license.applyTitle')}</h3>
             <LicenseParagraphs
               paragraphs={document.howToApply.paragraphs}
               className="mb-4 text-[15px] leading-7 text-gray-300"
@@ -166,7 +168,7 @@ export default function LicenseDocument() {
             {document.howToApply.template.length > 0 && (
               <div className="my-6 overflow-hidden rounded-xl border border-gray-800 bg-black/30">
                 <div className="border-b border-gray-800 px-4 py-2 text-xs font-medium uppercase tracking-wider text-gray-500">
-                  Пример уведомления в исходниках
+                  {t('license.template')}
                 </div>
                 <pre className="overflow-x-auto whitespace-pre-wrap break-words px-4 py-4 font-mono text-xs leading-relaxed text-gray-400 md:text-sm">
                   {document.howToApply.template.join('\n')}

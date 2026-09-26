@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
 export default async function ResourcepackVersionPage({ params }) {
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
-    return <ProjectAccessRestricted href="/resourcepacks" label="Вернуться к ресурспакам" />
+    return <ProjectAccessRestricted href="/resourcepacks" backKey="project.backToResourcepacks" />
   }
   if (data.missing) notFound()
 

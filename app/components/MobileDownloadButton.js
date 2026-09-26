@@ -1,13 +1,15 @@
 'use client'
 
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 export default function MobileDownloadButton({ accent = null, resourceTitle, muted = false }) {
+  const t = useT()
   const titleTrimmed =
     typeof resourceTitle === 'string' ? resourceTitle.trim() : ''
   const downloadTooltip = titleTrimmed
-    ? `Скачать ${titleTrimmed}`
-    : 'Скачать'
+    ? t('project.downloadNamed', { title: titleTrimmed })
+    : t('version.download')
   const handleClick = () => {
     window.dispatchEvent(new Event('open-download-modal'))
   }
@@ -23,7 +25,7 @@ export default function MobileDownloadButton({ accent = null, resourceTitle, mut
           <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span className="max-[340px]:hidden">Скачать</span>
+          <span className="max-[340px]:hidden">{t('version.download')}</span>
         </button>
       </StyledTooltip>
     )
@@ -41,7 +43,7 @@ export default function MobileDownloadButton({ accent = null, resourceTitle, mut
           <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span className="max-[340px]:hidden">Скачать</span>
+          <span className="max-[340px]:hidden">{t('version.download')}</span>
         </button>
       </StyledTooltip>
     )
@@ -57,7 +59,7 @@ export default function MobileDownloadButton({ accent = null, resourceTitle, mut
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
-        <span className="max-[340px]:hidden">Скачать</span>
+        <span className="max-[340px]:hidden">{t('version.download')}</span>
       </button>
     </StyledTooltip>
   )

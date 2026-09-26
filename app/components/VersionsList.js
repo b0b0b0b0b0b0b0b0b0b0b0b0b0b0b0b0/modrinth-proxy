@@ -21,6 +21,7 @@ import RelativeTime from './RelativeTime'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
 import VersionEnvironmentDisplay from './VersionEnvironmentDisplay'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 const ROW_GRID_XL_WITH_ENV =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(48px,68px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
@@ -58,6 +59,7 @@ export default function VersionsList({
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const { resolvedTheme } = useTheme()
+  const t = useT()
   const [themeMounted, setThemeMounted] = useState(false)
   useEffect(() => setThemeMounted(true), [])
 
@@ -314,7 +316,7 @@ export default function VersionsList({
             </svg>
             <input
               type="text"
-              placeholder="Поиск версий..."
+              placeholder={t('version.search')}
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value)
@@ -352,7 +354,7 @@ export default function VersionsList({
 
 
             <div className="text-sm text-gray-400 flex items-center ml-auto">
-              {filteredVersions.length} версий
+              {t('version.count', { n: filteredVersions.length })}
             </div>
           </div>
 
@@ -364,7 +366,7 @@ export default function VersionsList({
                     <circle cx="12" cy="12" r="10" />
                     <path d="m15 9-6 6M9 9l6 6" />
                   </svg>
-                  Очистить фильтры
+                  {t('version.clear')}
                 </button>
               )}
 
@@ -399,7 +401,7 @@ export default function VersionsList({
               {selectedChannel !== 'all' && (
                 <button type="button" onClick={removeChannelFilter} className={chipClassName}>
                   {chipXIcon}
-                  {selectedChannel === 'release' ? 'Релиз' : selectedChannel === 'beta' ? 'Бета' : selectedChannel === 'alpha' ? 'Альфа' : selectedChannel}
+                  {selectedChannel === 'release' ? t('version.release') : selectedChannel === 'beta' ? t('version.beta') : selectedChannel === 'alpha' ? t('version.alpha') : selectedChannel}
                 </button>
               )}
             </div>
@@ -410,19 +412,19 @@ export default function VersionsList({
           className={`hidden sm:grid grid-cols-[40px_minmax(150px,1fr)_minmax(120px,180px)_minmax(100px,150px)_40px] gap-3 px-3 py-2 text-sm font-bold text-gray-300 border-b border-gray-800 ${gridRowXl}`}
         >
           <div></div>
-          <div>Название</div>
+          <div>{t('version.name')}</div>
           <div className="xl:hidden">Compatibility</div>
-          <div className="xl:hidden">Стата</div>
-          <div className="hidden xl:block">Версии игры</div>
-          {showPlatforms && <div className="hidden xl:block">Платформы</div>}
-          {showEnvironment && <div className="hidden xl:block text-center">Среда</div>}
-          <div className="hidden xl:block">Опубликовано</div>
-          <div className="hidden xl:block">Загрузок</div>
+          <div className="xl:hidden">{t('version.stats')}</div>
+          <div className="hidden xl:block">{t('version.gameVersions')}</div>
+          {showPlatforms && <div className="hidden xl:block">{t('version.platforms')}</div>}
+          {showEnvironment && <div className="hidden xl:block text-center">{t('version.environment')}</div>}
+          <div className="hidden xl:block">{t('version.published')}</div>
+          <div className="hidden xl:block">{t('version.downloads')}</div>
           <div></div>
         </div>
 
         {filteredVersions.length === 0 ? (
-          <p className="text-gray-400 text-center py-8">Версии не найдены</p>
+          <p className="text-gray-400 text-center py-8">{t('version.empty')}</p>
         ) : (
           <>
             <div>
@@ -661,8 +663,8 @@ export default function VersionsList({
                             label={
                               <div className="flex flex-col gap-0.5 text-left">
                                 <div className="text-[13px] font-semibold leading-snug break-all">
-                                  <span className="font-medium opacity-75">Скачать:</span>{' '}
-                                  {primaryFile.filename || 'файл'}
+                                  <span className="font-medium opacity-75">{t('version.downloadColon')}</span>{' '}
+                                  {primaryFile.filename || t('version.file')}
                                 </div>
                                 {primaryFile.size != null && primaryFile.size > 0 && (
                                   <div className="text-[11px] font-normal opacity-65 leading-tight">
@@ -718,7 +720,7 @@ export default function VersionsList({
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
-                  Назад
+                  {t('version.back')}
                 </button>
 
                 <div className="flex items-center gap-2">
@@ -788,7 +790,7 @@ export default function VersionsList({
                   disabled={currentPage === totalPages}
                   className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
                 >
-                  Вперёд
+                  {t('version.next')}
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>

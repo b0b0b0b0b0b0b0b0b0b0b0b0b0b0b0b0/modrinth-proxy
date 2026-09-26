@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useT } from './I18nProvider'
+import { labeled } from '@/lib/i18n/label'
 import {
   EPILEPSY_EXCLUSION_ID,
   appendDisclosureExclusionParams,
@@ -106,6 +108,7 @@ function isItemActive(selected, item) {
 }
 
 function PhotosensitivityWarningModal({ open, onConfirm }) {
+  const t = useT()
   const [portalTarget, setPortalTarget] = useState(null)
   const [dontShowAgain, setDontShowAgain] = useState(false)
 
@@ -138,25 +141,25 @@ function PhotosensitivityWarningModal({ open, onConfirm }) {
       >
         <div className="border-b border-gray-700 p-6">
           <h2 id="epilepsy-warning-title" className="m-0 text-2xl font-semibold">
-            Результаты не гарантированно безопасны
+            {t('disc.warnTitle')}
           </h2>
         </div>
         <div className="flex flex-col p-6">
           <p className="mb-4 mt-0 leading-normal text-gray-300">
-            Мы не можем гарантировать, что весь контент на сайте размечен правильно.
+            {t('disc.warn1')}
           </p>
           <p className="mb-4 mt-0 leading-normal text-gray-300">
-            Метки про триггеры светочувствительности ставят сами авторы. Эти проекты никто отдельно не проверял на безопасность.
+            {t('disc.warn2')}
           </p>
           <p className="mb-4 mt-0 leading-normal text-gray-300">
-            Любой контент с сайта — на свой риск. Береги себя! 💚
+            {t('disc.warn3')}
           </p>
           <div className="flex flex-col gap-3 min-[480px]:flex-row min-[480px]:items-center min-[480px]:justify-between">
             <button
               type="button"
               role="checkbox"
               aria-checked={dontShowAgain}
-              aria-label="Больше не показывать"
+              aria-label={t('disc.dontShow')}
               onClick={() => setDontShowAgain((value) => !value)}
               className="flex items-center gap-3 bg-transparent p-0 text-left text-sm font-medium text-gray-200"
             >
@@ -171,7 +174,7 @@ function PhotosensitivityWarningModal({ open, onConfirm }) {
                   </svg>
                 )}
               </span>
-              Больше не показывать
+              {t('disc.dontShow')}
             </button>
             <button
               type="button"
@@ -185,7 +188,7 @@ function PhotosensitivityWarningModal({ open, onConfirm }) {
                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10" />
                 <path d="m9 12 2 2 4-4" />
               </svg>
-              Понятно
+              {t('disc.ok')}
             </button>
           </div>
         </div>
@@ -196,6 +199,7 @@ function PhotosensitivityWarningModal({ open, onConfirm }) {
 }
 
 function ExclusionRow({ item, selected, onToggle, nested = false }) {
+  const t = useT()
   const active = isItemActive(selected, item)
   return (
     <button
@@ -212,7 +216,7 @@ function ExclusionRow({ item, selected, onToggle, nested = false }) {
           <ItemIcon id={item.id} />
         </span>
       )}
-      <span className="min-w-0 flex-1 truncate">{item.label}</span>
+      <span className="min-w-0 flex-1 truncate">{labeled(t, `disc.${item.id}`, item.label)}</span>
       <span className={`ml-auto ${active ? 'opacity-100 text-red-400' : 'opacity-0 text-red-400 group-hover:opacity-100'}`}>
         <BanIcon />
       </span>
@@ -221,6 +225,7 @@ function ExclusionRow({ item, selected, onToggle, nested = false }) {
 }
 
 export default function AdvancedExclusionsFilter() {
+  const t = useT()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -302,7 +307,7 @@ export default function AdvancedExclusionsFilter() {
         onClick={() => setOpen((value) => !value)}
         className="flex w-full items-center gap-2 px-4 py-3 text-left"
       >
-        <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">Расширенные исключения</h3>
+        <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">{t('filter.advanced')}</h3>
         <Chevron open={open} />
       </button>
       {open && (
@@ -312,7 +317,7 @@ export default function AdvancedExclusionsFilter() {
               <circle cx="12" cy="12" r="10" />
               <path d="M12 16v-4M12 8h.01" />
             </svg>
-            <span>Исключить данные проекты из поисковой выдачи?</span>
+            <span>{t('disc.excludeHint')}</span>
           </div>
           <div className="flex flex-col gap-1">
             {tree.map((item) => {
@@ -325,7 +330,7 @@ export default function AdvancedExclusionsFilter() {
                     {hasChildren && (
                       <button
                         type="button"
-                        aria-label={childrenOpen ? 'Скрыть' : 'Показать'}
+                        aria-label={childrenOpen ? t('disc.hide') : t('disc.show')}
                         onClick={() => setExpanded((prev) => ({ ...prev, [item.id]: !prev[item.id] }))}
                         className="rounded-xl px-2 py-1 text-gray-500 hover:bg-gray-800 hover:text-white"
                       >

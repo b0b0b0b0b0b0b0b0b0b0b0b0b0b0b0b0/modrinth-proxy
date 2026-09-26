@@ -2,14 +2,17 @@
 
 import { useState } from 'react'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 export default function CopyLabeledButton({
   text,
   label,
-  copiedLabel = 'Скопировано',
+  copiedLabel,
   tooltipLabel,
 }) {
+  const t = useT()
   const [copied, setCopied] = useState(false)
+  const done = copiedLabel || t('copy.copied')
 
   const handleCopy = async () => {
     try {
@@ -22,13 +25,13 @@ export default function CopyLabeledButton({
   }
 
   return (
-    <StyledTooltip label={copied ? copiedLabel : (tooltipLabel ?? label)}>
+    <StyledTooltip label={copied ? done : (tooltipLabel ?? label)}>
       <button
         type="button"
         onClick={handleCopy}
         className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-700 transition-colors hover:text-modrinth-green dark:text-gray-300"
       >
-        <span>{copied ? copiedLabel : label}</span>
+        <span>{copied ? done : label}</span>
         {copied ? (
           <svg
             className="h-4 w-4 flex-shrink-0 text-modrinth-green"

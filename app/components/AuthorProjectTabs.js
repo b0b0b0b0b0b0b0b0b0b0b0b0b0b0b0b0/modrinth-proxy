@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import { useMemo } from 'react'
 import { getProjectTypeDisplayName } from '@/lib/author'
+import { useT } from './I18nProvider'
+import { projectTypeLabel } from '@/lib/i18n/label'
 
 export default function AuthorProjectTabs({
   profileBasePath,
@@ -12,6 +14,7 @@ export default function AuthorProjectTabs({
   collectionCount = 0,
   section = 'projects',
 }) {
+  const t = useT()
   const tabs = useMemo(() => {
     const items = []
 
@@ -19,7 +22,7 @@ export default function AuthorProjectTabs({
       items.push({
         key: 'all',
         href: profileBasePath,
-        label: 'Все',
+        label: t('author.all'),
         isActive: section === 'projects' && !currentType,
       })
     }
@@ -29,7 +32,7 @@ export default function AuthorProjectTabs({
         items.push({
           key: type,
           href: `${profileBasePath}?type=${encodeURIComponent(type)}`,
-          label: getProjectTypeDisplayName(type),
+          label: projectTypeLabel(t, type, getProjectTypeDisplayName(type)),
           isActive: section === 'projects' && currentType === type,
         })
       }
@@ -39,13 +42,13 @@ export default function AuthorProjectTabs({
       items.push({
         key: 'collections',
         href: `${profileBasePath}/collections`,
-        label: 'Коллекции',
+        label: t('author.collections'),
         isActive: section === 'collections',
       })
     }
 
     return items
-  }, [collectionCount, currentType, profileBasePath, section, totalProjects, typeStats])
+  }, [collectionCount, currentType, profileBasePath, section, t, totalProjects, typeStats])
 
   if (totalProjects === 0 && collectionCount === 0) return null
 

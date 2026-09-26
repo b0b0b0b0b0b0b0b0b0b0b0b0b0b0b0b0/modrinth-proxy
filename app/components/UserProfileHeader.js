@@ -1,6 +1,8 @@
 import { formatDownloads } from '@/lib/modrinth'
+import { getRequestT } from '@/lib/i18n/server'
+import { pluralCount } from '@/lib/i18n/label'
 
-function formatJoinDate(dateString) {
+function formatJoinDate(dateString, t, locale) {
   const date = new Date(dateString)
   const now = new Date()
   const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24))
@@ -8,21 +10,13 @@ function formatJoinDate(dateString) {
   const diffInMonths = Math.floor(diffInDays / 30.44)
 
   if (diffInYears >= 1) {
-    return `${diffInYears} ${diffInYears === 1 ? 'год' : diffInYears < 5 ? 'года' : 'лет'} назад`
+    const unit = pluralCount(locale, diffInYears, t('author.yOne'), t('author.yFew'), t('author.yMany'))
+    return t('author.ago', { n: diffInYears, unit })
   }
-  if (diffInMonths < 1) return 'в этом месяце'
-  if (diffInMonths === 1) return 'месяц назад'
-  return `${diffInMonths} месяц${diffInMonths < 5 ? 'а' : 'ев'} назад`
-}
-
-function translateUserRole(role) {
-  const roles = {
-    admin: 'Администратор Modrinth',
-    moderator: 'Модератор Modrinth',
-    developer: 'Разработчик',
-    user: 'Пользователь',
-  }
-  return roles[role] || role
+  if (diffInMonths < 1) return t('author.thisMonth')
+  if (diffInMonths === 1) return t('author.monthAgo')
+  const unit = pluralCount(locale, diffInMonths, t('author.mOne'), t('author.mFew'), t('author.mMany'))
+  return t('author.ago', { n: diffInMonths, unit })
 }
 
 function getRoleBadgeStyle(role) {
@@ -36,6 +30,8 @@ function getRoleBadgeStyle(role) {
 }
 
 export default function UserProfileHeader({ author, stats }) {
+  const { t, locale } = getRequestT()
+  const projectsWord = pluralCount(locale, stats.projectCount, t('author.pOne'), t('author.pFew'), t('author.pMany'))
   return (
     <div className="p-6 mb-6">
       <div className="flex flex-col lg:flex-row gap-6">
@@ -68,7 +64,7 @@ export default function UserProfileHeader({ author, stats }) {
               <h1 className="text-2xl sm:text-3xl font-bold text-white">{author.username}</h1>
               {author.role && (
                 <span className={`px-3 py-1 rounded-full text-sm font-medium w-fit ${getRoleBadgeStyle(author.role)}`}>
-                  {translateUserRole(author.role)}
+                  {t(`author.role.${author.role}`) || author.role}
                 </span>
               )}
             </div>
@@ -80,21 +76,21 @@ export default function UserProfileHeader({ author, stats }) {
                   <path d="M3.29 7 12 12l8.71-5M12 22V12" />
                 </svg>
                 <span className="font-semibold text-white">{stats.projectCount}</span>
-                <span>проект{stats.projectCount === 1 ? '' : stats.projectCount < 5 ? 'а' : 'ов'}</span>
+                <span>{projectsWord}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4" />
                 </svg>
                 <span className="font-semibold text-white">{formatDownloads(stats.totalDownloads)}</span>
-                <span>загрузок</span>
+                <span>{t('author.downloads')}</span>
               </div>
               <div className="flex items-center gap-2 text-gray-400">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2" />
                 </svg>
-                <span className="hidden sm:inline">Присоединился </span>
-                <span>{formatJoinDate(author.created)}</span>
+                <span className="hidden sm:inline">{t('author.joined')}</span>
+                <span>{formatJoinDate(author.created, t, locale)}</span>
               </div>
             </div>
           </div>

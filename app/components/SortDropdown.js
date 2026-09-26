@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useT } from './I18nProvider'
 
 export default function SortDropdown({
   currentSort = 'relevance',
@@ -10,6 +11,7 @@ export default function SortDropdown({
   categoryPath = 'mods',
   searchParams = {}
 }) {
+  const t = useT()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
   const router = useRouter()
@@ -17,18 +19,18 @@ export default function SortDropdown({
   const isServer = categoryPath === 'discover/servers'
   
   const sortOptions = isServer ? [
-    { value: 'relevance', label: 'Релевантность' },
-    { value: 'plays', label: 'Запуски' },
-    { value: 'players', label: 'Игроки онлайн' },
-    { value: 'followers', label: 'Подписчики' },
-    { value: 'created', label: 'Дата публикации' },
-    { value: 'updated', label: 'Дата обновления' },
+    { value: 'relevance', label: t('sort.relevance') },
+    { value: 'plays', label: t('sort.plays') },
+    { value: 'players', label: t('sort.players') },
+    { value: 'followers', label: t('sort.follows') },
+    { value: 'created', label: t('sort.created') },
+    { value: 'updated', label: t('sort.updated') },
   ] : [
-    { value: 'relevance', label: 'Релевантность' },
-    { value: 'downloads', label: 'Скачивания' },
-    { value: 'newest', label: 'Дата публикации' },
-    { value: 'updated', label: 'Последнее обновление' },
-    { value: 'follows', label: 'Подписчики' },
+    { value: 'relevance', label: t('sort.relevance') },
+    { value: 'downloads', label: t('sort.downloads') },
+    { value: 'newest', label: t('sort.newest') },
+    { value: 'updated', label: t('sort.updated') },
+    { value: 'follows', label: t('sort.follows') },
   ]
 
   const currentOption = sortOptions.find(opt => opt.value === currentSort) || sortOptions[0]

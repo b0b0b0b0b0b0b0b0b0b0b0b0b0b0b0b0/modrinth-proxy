@@ -1,3 +1,5 @@
+'use client'
+
 import CatalogReturnLink from './CatalogReturnLink'
 import { formatDownloads, modrinthHoverAccentHex } from '@/lib/modrinth'
 import { getPublicUsername } from '@/lib/contentFilter'
@@ -8,6 +10,8 @@ import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shader
 import { SERVER_CATEGORIES, SERVER_REGIONS } from '@/lib/serverCategories'
 import { IconModrinthAppPlays } from '@/lib/icons'
 import RelativeTime from './RelativeTime'
+import { useT } from './I18nProvider'
+import { categoryLabel } from '@/lib/i18n/label'
 
 function uniqueStrings(list) {
   if (!Array.isArray(list)) return []
@@ -15,6 +19,7 @@ function uniqueStrings(list) {
 }
 
 export default function ResourceCard({ resource, type = 'mod', forceLayout = null }) {
+  const t = useT()
   const typeMap = {
     'mod': 'mod',
     'plugin': 'plugin',
@@ -41,7 +46,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
     ]
     
     const cat = allCategories.find(c => c.id === categoryId)
-    if (cat) return { icon: cat.icon, name: cat.name }
+    if (cat) return { icon: cat.icon, name: categoryLabel(t, categoryId, cat.name) }
     const loader = getLoaderById(categoryId)
     return loader ? { icon: loader.icon, name: loader.name } : null
   }
@@ -63,9 +68,9 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
     const client = clientSide === 'required' || clientSide === 'optional'
     const server = serverSide === 'required' || serverSide === 'optional'
     
-    if (client && server) return { type: 'both', label: 'Клиент или сервер' }
-    if (client) return { type: 'client', label: 'Клиент' }
-    if (server) return { type: 'server', label: 'Сервер' }
+    if (client && server) return { type: 'both', label: t('filter.env.clientOrServer') }
+    if (client) return { type: 'client', label: t('filter.env.client') }
+    if (server) return { type: 'server', label: t('filter.env.server') }
     
     return null
   }
@@ -164,7 +169,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             <h3 className="line-clamp-2 text-base font-bold leading-snug text-white transition-colors group-hover:text-modrinth-green">
               {resource.title}
             </h3>
-            <p className="mt-1 text-xs text-gray-500">от {getPublicUsername(resource.author, resource.author_id)}</p>
+            <p className="mt-1 text-xs text-gray-500">{t('card.by')}{getPublicUsername(resource.author, resource.author_id)}</p>
             <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-400">{resource.description}</p>
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
               {uniqueStrings(resource.display_categories).slice(0, 3).map((catId) => {
@@ -175,7 +180,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                       key={catId}
                       className="rounded-full bg-gray-800/90 px-2 py-0.5 text-[11px] text-gray-400"
                     >
-                      {catId}
+                      {categoryLabel(t, catId, catId)}
                     </span>
                   )
                 }
@@ -284,13 +289,13 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                 </span>
                 <span className="text-base leading-none tabular-nums">
                   <span className="text-white font-bold">{playersOnline.toLocaleString('ru-RU')}</span>
-                  <span className="text-modrinth-green ml-1.5 text-sm font-medium">в сети</span>
+                  <span className="text-modrinth-green ml-1.5 text-sm font-medium">{t('card.online')}</span>
                 </span>
               </div>
             ) : isOffline ? (
               <div className="flex items-center gap-1.5">
                 <span className="h-2 w-2 rounded-full bg-gray-600 flex-shrink-0"></span>
-                <span className="text-xs text-gray-500">офлайн</span>
+                <span className="text-xs text-gray-500">{t('card.offline')}</span>
               </div>
             ) : null}
 
@@ -301,13 +306,13 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                   {plays2w !== null && (
                     <span className="text-sm leading-tight">
                       <strong className="text-white">{plays2w.toLocaleString('ru-RU')}</strong>
-                      <span className="text-gray-500 ml-1 text-xs">за 2 нед.</span>
+                      <span className="text-gray-500 ml-1 text-xs">{t('card.weeks2')}</span>
                     </span>
                   )}
                   {plays4w !== null && (
                     <span className="text-sm leading-tight">
                       <strong className="text-white">{plays4w.toLocaleString('ru-RU')}</strong>
-                      <span className="text-gray-500 ml-1 text-xs">за мес.</span>
+                      <span className="text-gray-500 ml-1 text-xs">{t('card.month')}</span>
                     </span>
                   )}
                 </div>
@@ -348,7 +353,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               {resource.title}
             </h3>
           </CatalogReturnLink>
-          <span className="text-xs text-gray-500">от {getPublicUsername(resource.author, resource.author_id)}</span>
+          <span className="text-xs text-gray-500">{t('card.by')}{getPublicUsername(resource.author, resource.author_id)}</span>
         </div>
         <p className="text-sm text-gray-400 mb-2">
           {resource.description}
@@ -373,7 +378,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                   key={catId}
                   className="text-xs px-2 py-0.5 bg-gray-800 rounded-full text-gray-400"
                 >
-                  {catId}
+                  {categoryLabel(t, catId, catId)}
                 </span>
               )
             }

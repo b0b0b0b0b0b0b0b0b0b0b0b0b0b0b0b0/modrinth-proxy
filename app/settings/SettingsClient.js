@@ -8,6 +8,9 @@ import fixAnimation from '@/public/animations/fix.json'
 import { PALETTES } from '../../lib/paletteManager'
 import SettingsNav from './SettingsNav'
 import SettingsMobileMenu from './SettingsMobileMenu'
+import LanguageSettingsCard from '../components/LanguageSettingsCard'
+import { useT } from '../components/I18nProvider'
+import { LOCALE_COOKIE } from '@/lib/i18n/config'
 
 const DEFAULT_LAYOUTS = {
   mods: 'rows',
@@ -21,17 +24,18 @@ const DEFAULT_LAYOUTS = {
 }
 
 const LAYOUT_CATEGORIES = [
-  { id: 'mods', name: 'Страница модов' },
-  { id: 'plugins', name: 'Страница плагинов' },
-  { id: 'datapacks', name: 'Страница датапаков' },
-  { id: 'shaders', name: 'Страница шейдеров' },
-  { id: 'resourcepacks', name: 'Страница ресурспаков' },
-  { id: 'modpacks', name: 'Страница сборок' },
-  { id: 'servers', name: 'Страница серверов' },
-  { id: 'profiles', name: 'Профили пользователей' }
+  { id: 'mods', nameKey: 'settings.pageMods' },
+  { id: 'plugins', nameKey: 'settings.pagePlugins' },
+  { id: 'datapacks', nameKey: 'settings.pageDatapacks' },
+  { id: 'shaders', nameKey: 'settings.pageShaders' },
+  { id: 'resourcepacks', nameKey: 'settings.pageResourcepacks' },
+  { id: 'modpacks', nameKey: 'settings.pageModpacks' },
+  { id: 'servers', nameKey: 'settings.pageServers' },
+  { id: 'profiles', nameKey: 'settings.pageProfiles' },
 ]
 
 export default function SettingsClient() {
+  const t = useT()
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   const [isResetting, setIsResetting] = useState(false)
@@ -126,6 +130,7 @@ export default function SettingsClient() {
     setIsResetting(true)
     localStorage.clear()
     sessionStorage.clear()
+    document.cookie = `${LOCALE_COOKIE}=;path=/;max-age=0;samesite=lax`
     setTimeout(() => {
       window.location.reload()
     }, 1000)
@@ -146,15 +151,16 @@ export default function SettingsClient() {
       <div className="flex flex-col lg:flex-row gap-6">
       <SettingsNav />
       <div className="flex-1 min-w-0 space-y-6">
+      <LanguageSettingsCard />
       <section id="settings-color-theme" className="universal-card settings-section" aria-labelledby="color-theme-heading">
-        <h2 id="color-theme-heading" className="text-xl font-bold text-white mb-1">Цветовая тема</h2>
-        <p className="text-gray-400 mb-6 text-xs md:text-sm">Выберите предпочтительную цветовую тему для ModrinthProxy на этом устройстве.</p>
+        <h2 id="color-theme-heading" className="text-xl font-bold text-white mb-1">{t('settings.themeTitle')}</h2>
+        <p className="text-gray-400 mb-6 text-xs md:text-sm">{t('settings.themeHint')}</p>
         
         <div className="theme-options">
           <button
             onClick={() => setTheme('system')}
             className={`preview-radio ${theme === 'system' ? 'selected' : ''}`}
-            aria-label="Системная (Авто) тема"
+            aria-label={t('settings.themeSystemAria')}
           >
             <div className="preview system-mode">
               <div className="example-card">
@@ -174,14 +180,14 @@ export default function SettingsClient() {
                   <circle cx="12" cy="12" r="10" />
                 )}
               </svg>
-              Системная (Авто)
+              {t('settings.themeSystem')}
             </div>
           </button>
 
           <button
             onClick={() => setTheme('light')}
             className={`preview-radio ${theme === 'light' ? 'selected' : ''}`}
-            aria-label="Светлая тема"
+            aria-label={t('settings.themeLightAria')}
           >
             <div className="preview light-mode">
               <div className="example-card">
@@ -201,14 +207,14 @@ export default function SettingsClient() {
                   <circle cx="12" cy="12" r="10" />
                 )}
               </svg>
-              Светлая
+              {t('settings.themeLight')}
             </div>
           </button>
 
           <button
             onClick={() => setTheme('dark')}
             className={`preview-radio ${theme === 'dark' ? 'selected' : ''}`}
-            aria-label="Тёмная тема"
+            aria-label={t('settings.themeDarkAria')}
           >
             <div className="preview dark-mode">
               <div className="example-card">
@@ -228,16 +234,16 @@ export default function SettingsClient() {
                   <circle cx="12" cy="12" r="10" />
                 )}
               </svg>
-              Тёмная
+              {t('settings.themeDark')}
             </div>
           </button>
         </div>
       </section>
 
       <section id="settings-color-palette" className="universal-card settings-section" aria-labelledby="color-palette-heading">
-        <h2 id="color-palette-heading" className="text-xl font-bold text-white mb-1">Акцентный цвет</h2>
+        <h2 id="color-palette-heading" className="text-xl font-bold text-white mb-1">{t('settings.paletteTitle')}</h2>
         <p className="text-gray-400 mb-6 text-xs md:text-sm">
-          Цветовая часть айдентики — кнопки, ссылки, подсветка. Не весь образ сайта, только палитра.
+          {t('settings.paletteHint')}
         </p>
         <div className="flex flex-wrap justify-center gap-4 mt-4">
           {Object.values(PALETTES).map((palette, index) => {
@@ -301,7 +307,7 @@ export default function SettingsClient() {
                       <circle cx="12" cy="12" r="10" />
                     )}
                   </svg>
-                  <span className="truncate">{palette.name}</span>
+                  <span className="truncate">{t(`settings.palette.${palette.id}`)}</span>
                 </div>
               </button>
             )
@@ -310,16 +316,16 @@ export default function SettingsClient() {
       </section>
 
       <section id="settings-features" className="universal-card settings-section" aria-labelledby="toggle-features-heading">
-        <h2 id="toggle-features-heading" className="text-xl font-bold text-white mb-1">Настройка функций</h2>
-        <p className="text-gray-400 mb-6 text-xs md:text-sm">Включение или отключение определенных функций на этом устройстве.</p>
+        <h2 id="toggle-features-heading" className="text-xl font-bold text-white mb-1">{t('settings.featuresTitle')}</h2>
+        <p className="text-gray-400 mb-6 text-xs md:text-sm">{t('settings.featuresHint')}</p>
         
         <div className="flex flex-col gap-6">
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="advanced-rendering" className="flex-1 cursor-pointer select-none">
-              <span className="block font-semibold text-white text-sm md:text-base">Визуальные эффекты</span>
-              <span className="text-gray-400 text-xs md:text-sm">Включает размытие меню и фоновые изображения на страницах проектов. Отключите для ускорения работы сайта на слабых устройствах.</span>
+              <span className="block font-semibold text-white text-sm md:text-base">{t('settings.fxTitle')}</span>
+              <span className="text-gray-400 text-xs md:text-sm">{t('settings.fxHint')}</span>
             </label>
-            <StyledTooltip label={toggles['advanced-rendering'] ? 'Включено' : 'Выключено'}>
+            <StyledTooltip label={toggles['advanced-rendering'] ? t('settings.on') : t('settings.off')}>
               <button
                 id="advanced-rendering"
                 type="button"
@@ -340,10 +346,10 @@ export default function SettingsClient() {
 
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="search-layout-toggle" className="flex-1 cursor-pointer select-none">
-              <span className="block font-semibold text-white text-sm md:text-base">Панель фильтров поиска справа</span>
-              <span className="text-gray-400 text-xs md:text-sm">Отображать боковую панель фильтров справа от результатов поиска.</span>
+              <span className="block font-semibold text-white text-sm md:text-base">{t('settings.searchRightTitle')}</span>
+              <span className="text-gray-400 text-xs md:text-sm">{t('settings.searchRightHint')}</span>
             </label>
-            <StyledTooltip label={toggles['search-sidebar-right'] ? 'Включено' : 'Выключено'}>
+            <StyledTooltip label={toggles['search-sidebar-right'] ? t('settings.on') : t('settings.off')}>
               <button
                 id="search-layout-toggle"
                 type="button"
@@ -363,10 +369,10 @@ export default function SettingsClient() {
 
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="project-layout-toggle" className="flex-1 cursor-pointer select-none">
-              <span className="block font-semibold text-white text-sm md:text-base">Боковая панель контента слева</span>
-              <span className="text-gray-400 text-xs md:text-sm">Отображать боковую панель слева от основного описания проекта.</span>
+              <span className="block font-semibold text-white text-sm md:text-base">{t('settings.contentLeftTitle')}</span>
+              <span className="text-gray-400 text-xs md:text-sm">{t('settings.contentLeftHint')}</span>
             </label>
-            <StyledTooltip label={toggles['project-sidebar-left'] ? 'Включено' : 'Выключено'}>
+            <StyledTooltip label={toggles['project-sidebar-left'] ? t('settings.on') : t('settings.off')}>
               <button
                 id="project-layout-toggle"
                 type="button"
@@ -386,10 +392,10 @@ export default function SettingsClient() {
 
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="show-disclaimer-badge-toggle" className="flex-1 cursor-pointer select-none">
-              <span className="block font-semibold text-white text-sm md:text-base">Дисклеймер неофициального сайта</span>
-              <span className="text-gray-400 text-xs md:text-sm">Отображать плашку «Unofficial site, not affiliated with modrinth.com» вверху страниц. <span className="block mt-1 text-amber-500/80 font-medium">(Включено по умолчанию по запросу Modrinth)</span></span>
+              <span className="block font-semibold text-white text-sm md:text-base">{t('settings.disclaimerTitle')}</span>
+              <span className="text-gray-400 text-xs md:text-sm">{t('settings.disclaimerHint')} <span className="block mt-1 text-amber-500/80 font-medium">{t('settings.disclaimerNote')}</span></span>
             </label>
-            <StyledTooltip label={toggles['show-disclaimer-badge'] ? 'Включено' : 'Выключено'}>
+            <StyledTooltip label={toggles['show-disclaimer-badge'] ? t('settings.on') : t('settings.off')}>
               <button
                 id="show-disclaimer-badge-toggle"
                 type="button"
@@ -409,10 +415,10 @@ export default function SettingsClient() {
 
           <div className="flex flex-row flex-wrap items-center justify-between gap-4">
             <label htmlFor="hide-project-activity-graph-toggle" className="flex-1 cursor-pointer select-none">
-              <span className="block font-semibold text-white text-sm md:text-base">Выключить график активности на странице проектов</span>
-              <span className="text-gray-400 text-xs md:text-sm">Скрывает фоновый график релизов в шапке страниц модов, плагинов и других проектов.</span>
+              <span className="block font-semibold text-white text-sm md:text-base">{t('settings.graphTitle')}</span>
+              <span className="text-gray-400 text-xs md:text-sm">{t('settings.graphHint')}</span>
             </label>
-            <StyledTooltip label={toggles['hide-project-activity-graph'] ? 'Выключено' : 'Включено'}>
+            <StyledTooltip label={toggles['hide-project-activity-graph'] ? t('settings.off') : t('settings.on')}>
               <button
                 id="hide-project-activity-graph-toggle"
                 type="button"
@@ -433,20 +439,21 @@ export default function SettingsClient() {
       </section>
 
       <section id="settings-project-layouts" className="universal-card settings-section" aria-labelledby="project-layouts-heading">
-        <h2 id="project-layouts-heading" className="text-xl font-bold text-white mb-1">Отображение списков проектов</h2>
-        <p className="text-gray-400 mb-6 text-xs md:text-sm">Выберите предпочтительный вид отображения списков проектов для каждой страницы на этом устройстве.</p>
+        <h2 id="project-layouts-heading" className="text-xl font-bold text-white mb-1">{t('settings.layoutsTitle')}</h2>
+        <p className="text-gray-400 mb-6 text-xs md:text-sm">{t('settings.layoutsHint')}</p>
         
         <div className="project-lists">
           {LAYOUT_CATEGORIES.map((cat) => {
             const currentMode = layouts[cat.id] || 'rows'
+            const name = t(cat.nameKey)
             return (
               <div key={cat.id} className="flex flex-col gap-2">
-                <div className="text-sm font-semibold text-white">{cat.name}</div>
+                <div className="text-sm font-semibold text-white">{name}</div>
                 <div className="project-list-layouts">
                   <button
                     onClick={() => handleLayoutChange(cat.id, 'rows')}
                     className={`preview-radio ${currentMode === 'rows' ? 'selected' : ''}`}
-                    aria-label={`Вид списка для ${cat.name}`}
+                    aria-label={t('settings.listAria', { name })}
                   >
                     <div className="preview">
                       <div className="layout-list-mode">
@@ -467,14 +474,14 @@ export default function SettingsClient() {
                           <circle cx="12" cy="12" r="10" />
                         )}
                       </svg>
-                      Список
+                      {t('settings.list')}
                     </div>
                   </button>
 
                   <button
                     onClick={() => handleLayoutChange(cat.id, 'grid')}
                     className={`preview-radio ${currentMode === 'grid' ? 'selected' : ''}`}
-                    aria-label={`Вид сетки для ${cat.name}`}
+                    aria-label={t('settings.gridAria', { name })}
                   >
                     <div className="preview">
                       <div className="layout-gallery-mode">
@@ -495,7 +502,7 @@ export default function SettingsClient() {
                           <circle cx="12" cy="12" r="10" />
                         )}
                       </svg>
-                      Сетка
+                      {t('settings.grid')}
                     </div>
                   </button>
                 </div>
@@ -506,8 +513,8 @@ export default function SettingsClient() {
       </section>
 
       <section className="universal-card text-center flex flex-col items-center justify-center p-6 gap-3" aria-labelledby="reset-heading">
-        <h2 id="reset-heading" className="text-lg font-bold text-white mb-0">Что-то пошло не так?</h2>
-        <p className="text-gray-400 text-xs md:text-sm max-w-md m-0">Если интерфейс отображается некорректно или вы просто хотите вернуть настройки по умолчанию.</p>
+        <h2 id="reset-heading" className="text-lg font-bold text-white mb-0">{t('settings.resetTitle')}</h2>
+        <p className="text-gray-400 text-xs md:text-sm max-w-md m-0">{t('settings.resetHint')}</p>
         
         <button
           onClick={handleResetAll}
@@ -522,7 +529,7 @@ export default function SettingsClient() {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
-              <span>Сбрасываем...</span>
+              <span>{t('settings.resetting')}</span>
             </>
           ) : (
             <>
@@ -535,7 +542,7 @@ export default function SettingsClient() {
                   style={{ width: '100%', height: '100%' }}
                 />
               </div>
-              <span>Сбросить настройки</span>
+              <span>{t('settings.resetBtn')}</span>
             </>
           )}
         </button>

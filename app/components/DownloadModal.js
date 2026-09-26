@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import { useT } from './I18nProvider'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
   filterVersionsByContentType,
@@ -158,6 +159,7 @@ function pickCompatibleVersionsByChannel(versions) {
 }
 
 export default function DownloadModal({ mod, versions, contentType = 'mods', muted = false }) {
+  const t = useT()
   const router = useRouter()
   const accent = useMemo(
     () => (muted ? null : resolveModrinthProjectAccent(mod?.color)),
@@ -211,15 +213,20 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
 
   const showAppSection = contentRoute === 'mod' || contentRoute === 'modpack'
 
-  const alternateDownloadFormat = useMemo(
-    () =>
-      resolveAlternateProjectFormat({
-        project: mod,
-        contentType,
-        versions,
-      }),
-    [mod, versions, contentType],
-  )
+  const alternateDownloadFormat = useMemo(() => {
+    const raw = resolveAlternateProjectFormat({
+      project: mod,
+      contentType,
+      versions,
+    })
+    if (!raw) return null
+    const plugin = raw.href.startsWith('/plugin/')
+    return {
+      ...raw,
+      tooltip: t(plugin ? 'dl.altPlugin' : 'dl.altMod'),
+      linkLabel: t(plugin ? 'dl.altPluginOpen' : 'dl.altModOpen'),
+    }
+  }, [mod, versions, contentType, t])
 
   const handleInstallClick = () => {
     window.location.href = launcherUri
@@ -348,17 +355,17 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
   useEffect(() => {
     if (typeof document !== 'undefined') {
       if (isOpen) {
-        let typeName = 'Ресурс'
-        if (contentType === 'plugin' || contentType === 'plugins') typeName = 'Плагин'
-        else if (contentType === 'datapack' || contentType === 'datapacks') typeName = 'Датапак'
-        else if (contentType === 'resourcepack' || contentType === 'resourcepacks') typeName = 'Ресурспак'
-        else if (contentType === 'shader' || contentType === 'shaders') typeName = 'Шейдер'
-        else if (contentType === 'modpack' || contentType === 'modpacks') typeName = 'Модпак'
-        else if (contentType === 'mod' || contentType === 'mods') typeName = 'Мод'
+        let kindKey = 'dl.kind.resource'
+        if (contentType === 'plugin' || contentType === 'plugins') kindKey = 'dl.kind.plugin'
+        else if (contentType === 'datapack' || contentType === 'datapacks') kindKey = 'dl.kind.datapack'
+        else if (contentType === 'resourcepack' || contentType === 'resourcepacks') kindKey = 'dl.kind.resourcepack'
+        else if (contentType === 'shader' || contentType === 'shaders') kindKey = 'dl.kind.shader'
+        else if (contentType === 'modpack' || contentType === 'modpacks') kindKey = 'dl.kind.modpack'
+        else if (contentType === 'mod' || contentType === 'mods') kindKey = 'dl.kind.mod'
 
-        let newTitle = `Скачать ${mod?.title || ''} — Майнкрафт ${typeName}`
+        let newTitle = t('dl.titleMc', { title: mod?.title || '', type: t(kindKey) })
         if (selectedMcVersion) {
-          newTitle += ` на Minecraft ${selectedMcVersion}`
+          newTitle += t('dl.titleMcVer', { version: selectedMcVersion })
         }
         if (selectedLoader) {
           const names = {
@@ -387,7 +394,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
         }
       }
     }
-  }, [isOpen, selectedMcVersion, selectedLoader, mod?.title, contentType])
+  }, [isOpen, selectedMcVersion, selectedLoader, mod?.title, contentType, t])
 
   const selectMcVersion = (version) => {
     if (!version) {
@@ -623,8 +630,8 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
   const downloadTooltipTitle =
     typeof mod?.title === 'string' ? mod.title.trim() : ''
   const downloadTooltip = downloadTooltipTitle
-    ? `Скачать ${downloadTooltipTitle}`
-    : 'Скачать'
+    ? t('project.downloadNamed', { title: downloadTooltipTitle })
+    : t('version.download')
 
   const showDependencyDownloads =
     contentType === 'mod' ||
@@ -656,26 +663,24 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
 
     return (
       <span className="flex flex-col gap-1.5 text-left leading-snug">
-        <span className="font-bold">Всё в одном .zip</span>
+        <span className="font-bold">{t('dl.zipOne')}</span>
         <span className="text-xs opacity-90">
-          {depCount > 0
-            ? 'Один архив: основной файл и все зависимости внутри.'
-            : 'Один архив с файлами выбранной версии.'}
+          {depCount > 0 ? t('dl.zipOneHint') : t('dl.zipOneHintPlain')}
         </span>
         {depTitles.length > 0 && (
           <span className="text-[11px] leading-tight opacity-75">
-            Включая: {depTitles.slice(0, 3).join(', ')}
-            {depTitles.length > 3 ? ` и ещё ${depTitles.length - 3}` : ''}
+            {t('dl.including', { list: depTitles.slice(0, 3).join(', ') })}
+            {depTitles.length > 3 ? t('dl.andMore', { n: depTitles.length - 3 }) : ''}
           </span>
         )}
         {allFiles.length > 0 && (
           <span className="text-[11px] font-mono leading-tight opacity-75">
-            {allFiles.length} шт. в архиве
+            {t('dl.inZip', { n: allFiles.length })}
           </span>
         )}
       </span>
     )
-  }, [matchingVersion, depItems])
+  }, [matchingVersion, depItems, t])
 
   const depsDownloadTooltip = useMemo(() => {
     const depCount = depItems.length
@@ -684,21 +689,22 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
 
     return (
       <span className="flex flex-col gap-1.5 text-left leading-snug">
-        <span className="font-bold">Скачать по очереди</span>
+        <span className="font-bold">{t('dl.seq')}</span>
         <span className="text-xs opacity-90">
-          {totalFiles > 1
-            ? 'Каждый .jar скачается отдельно, один за другим — как несколько загрузок в браузере.'
-            : 'Один файл скачается напрямую, без архива.'}
+          {totalFiles > 1 ? t('dl.seqHint') : t('dl.seqHintPlain')}
         </span>
         {depTitles.length > 0 && (
           <span className="text-[11px] leading-tight opacity-75">
-            {mod?.title || 'Ресурс'}, затем: {depTitles.slice(0, 3).join(', ')}
-            {depTitles.length > 3 ? ` и ещё ${depTitles.length - 3}` : ''}
+            {t('dl.then', {
+              title: mod?.title || t('dl.resource'),
+              list: depTitles.slice(0, 3).join(', '),
+            })}
+            {depTitles.length > 3 ? t('dl.andMore', { n: depTitles.length - 3 }) : ''}
           </span>
         )}
       </span>
     )
-  }, [depItems, matchingVersion?.files?.length, mod?.title])
+  }, [depItems, matchingVersion?.files?.length, mod?.title, t])
 
   return (
     <>
@@ -715,7 +721,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
           <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
           </svg>
-          <span>Скачать</span>
+          <span>{t('version.download')}</span>
         </button>
       </StyledTooltip>
 
@@ -734,7 +740,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                 {mod.icon_url && (
                   <img src={mod.icon_url} alt={mod.title} className="w-10 h-10 rounded-lg" referrerPolicy="no-referrer" />
                 )}
-                <h2 className="text-lg font-bold text-gray-900 dark:text-white">Скачать {mod.title}</h2>
+                <h2 className="text-lg font-bold text-gray-900 dark:text-white">{t('project.downloadNamed', { title: mod.title })}</h2>
               </div>
               <div className="flex items-center gap-1.5">
                 {alternateDownloadFormat && (
@@ -771,7 +777,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                     </Link>
                   </StyledTooltip>
                 )}
-                <StyledTooltip label="Посмотреть все версии">
+                <StyledTooltip label={t('dl.viewAll')}>
                   <button
                     onClick={() => {
                       setIsOpen(false)
@@ -784,7 +790,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                     </svg>
                   </button>
                 </StyledTooltip>
-                <StyledTooltip label="Закрыть">
+                <StyledTooltip label={t('dl.close')}>
                   <button
                     onClick={() => setIsOpen(false)}
                     className="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors flex items-center justify-center text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -813,7 +819,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                         <path fillRule="evenodd" d="M503.16 323.56c11.39-42.09 12.16-87.65.04-132.8C466.57 54.23 326.04-26.8 189.33 9.78 83.81 38.02 11.39 128.07.69 230.47h43.3c10.3-83.14 69.75-155.74 155.76-178.76 106.3-28.45 215.38 28.96 253.42 129.67l-42.14 11.27c-19.39-46.85-58.46-81.2-104.73-95.83l-7.74 43.84c36.53 13.47 66.16 43.84 77 84.25 15.8 58.89-13.62 119.23-67 144.26l11.53 42.99c70.16-28.95 112.31-101.86 102.34-177.02l41.98-11.23a210.2 210.2 0 0 1-3.86 84.16z" clipRule="evenodd" />
                         <path d="M321.99 504.22C185.27 540.8 44.75 459.77 8.11 323.24A257.6 257.6 0 0 1 0 275.46h43.27c1.09 11.91 3.2 23.89 6.41 35.83 3.36 12.51 7.77 24.46 13.11 35.78l38.59-23.15c-3.25-7.5-5.99-15.32-8.17-23.45-24.04-89.6 29.2-181.7 118.92-205.71 17-4.55 34.1-6.32 50.8-5.61L255.19 133c-10.46.05-21.08 1.42-31.66 4.25-66.22 17.73-105.52 85.7-87.78 151.84 1.1 4.07 2.38 8.04 3.84 11.9l49.35-29.61-14.87-39.43 46.6-47.87 58.9-12.69 17.05 20.99-27.15 27.5-23.68 7.45-16.92 17.39 8.29 23.07s16.79 17.84 16.82 17.85l23.72-6.31 16.88-18.54 36.86-11.67 10.98 24.7-38.03 46.63-63.73 20.18-28.58-31.82-49.82 29.89c25.54 29.08 63.94 45.23 103.75 41.86l11.53 42.99c-59.41 7.86-117.44-16.73-153.49-61.91l-38.41 23.04c50.61 66.49 138.2 99.43 223.97 76.48 61.74-16.52 109.79-58.6 135.81-111.78l42.64 15.5c-30.89 66.28-89.84 118.94-166.07 139.34" />
                       </svg>
-                      <span>Установить в Modrinth App</span>
+                      <span>{t('dl.installApp')}</span>
                       <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
                       </svg>
@@ -824,13 +830,13 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                         className="text-sm text-blue-400 hover:text-blue-300 hover:underline transition-colors"
                         onClick={() => setIsOpen(false)}
                       >
-                        Нет Modrinth App?
+                        {t('dl.noApp')}
                       </a>
                     </div>
                   </div>
                   <div className="flex items-center gap-4 px-4 my-2">
                     <div className="flex h-[2px] w-full rounded-2xl bg-gray-200 dark:bg-gray-800"></div>
-                    <span className="flex-shrink-0 text-sm font-semibold text-gray-500 dark:text-gray-400">или</span>
+                    <span className="flex-shrink-0 text-sm font-semibold text-gray-500 dark:text-gray-400">{t('dl.or')}</span>
                     <div className="flex h-[2px] w-full rounded-2xl bg-gray-200 dark:bg-gray-800"></div>
                   </div>
                 </>
@@ -904,18 +910,18 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                     tooltip={zipDownloadTooltip}
                     tooltipSide="top"
                   >
-                    Скачать всё в одном .zip
+                    {t('dl.zipAll')}
                   </DownloadFooterButton>
                   <DownloadFooterButton
                     variant="primary"
                     onClick={handleDownloadWithDeps}
                     loading={depsZipLoading}
                     disabled={zipLoading}
-                    loadingLabel="Скачивание…"
+                    loadingLabel={t('dl.loading')}
                     tooltip={depsDownloadTooltip}
                     tooltipSide="top"
                   >
-                    Скачать всё по отдельности
+                    {t('dl.seqAll')}
                   </DownloadFooterButton>
                 </div>
               </div>

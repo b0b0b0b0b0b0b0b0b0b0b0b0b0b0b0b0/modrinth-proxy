@@ -1,8 +1,10 @@
 import Link from 'next/link'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { notFound } from 'next/navigation'
-import { getServer, getOrganization, getTeamMembers, getVersion, formatDate } from '@/lib/modrinth'
+import { getServer, getOrganization, getTeamMembers, getVersion } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import { getFilterConfig, getCategoryName } from '@/lib/filterConfig'
+import { getServerCategoryName } from '@/lib/serverCategories'
+import { categoryLabel } from '@/lib/i18n/label'
 import { buildServerPageMetadata, buildServerNotFoundMetadata } from '@/lib/serverPageSeo'
 import { SERVER_CATEGORY_TAG_CLASS } from '@/lib/serverTagStyles'
 import ResourceHeader from '@/app/components/ResourceHeader'
@@ -12,6 +14,7 @@ import ServerSidebarLink from '@/app/components/ServerSidebarLink'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
 import AuthorsSection from '@/app/components/AuthorsSection'
 import MarkdownContent from '@/app/components/MarkdownContent'
+import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata({ params }) {
   try {
@@ -23,36 +26,11 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function ServerPage({ params }) {
+  const { t } = getRequestT()
   const { slug } = params;
   
   if (await isProjectBlocked(slug)) {
-    return (
-      <div className="text-center py-16 max-w-2xl mx-auto">
-        <div className="mb-6">
-          <svg className="w-20 h-20 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-          <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-          <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-6 mb-6 text-left">
-            <p className="text-gray-300 mb-3">
-              Данный проект недоступен в соответствии с региональными ограничениями и требованиями Роскомнадзора.
-            </p>
-            <p className="text-gray-400 text-sm">
-              К сожалению, некоторые проекты были заблокированы на территории Российской Федерации по решению регулирующих органов. Мы вынуждены ограничить доступ к этому контенту для соблюдения действующего законодательства.
-            </p>
-          </div>
-        </div>
-        <Link 
-          href="/servers"
-          className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold hover:bg-modrinth-green-light transition"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Вернуться к серверам</span>
-        </Link>
-      </div>
-    )
+    return <ProjectAccessRestricted href="/servers" backKey="project.backToServers" />
   }
 
   let server, teamMembers, organization, requiredContentVersion = null;
@@ -75,33 +53,7 @@ export default async function ServerPage({ params }) {
     }
 
     if ((await isProjectBlocked(server.slug, server.id) || isOrganizationBlocked(server.organization))) {
-      return (
-        <div className="text-center py-16 max-w-2xl mx-auto">
-          <div className="mb-6">
-            <svg className="w-20 h-20 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-            <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-6 mb-6 text-left">
-              <p className="text-gray-300 mb-3">
-                Данный проект недоступен в соответствии с региональными ограничениями и требованиями Роскомнадзора.
-              </p>
-              <p className="text-gray-400 text-sm">
-                К сожалению, некоторые проекты были заблокированы на территории Российской Федерации по решению регулирующих органов. Мы вынуждены ограничить доступ к этому контенту для соблюдения действующего законодательства.
-              </p>
-            </div>
-          </div>
-          <Link 
-            href="/servers"
-            className="inline-flex items-center gap-2 bg-modrinth-green hover:bg-modrinth-green-light text-black px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:scale-105"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span>Вернуться к серверам</span>
-          </Link>
-        </div>
-      )
+      return <ProjectAccessRestricted href="/servers" backKey="project.backToServers" />
     }
   } catch (error) {
     notFound()
@@ -109,25 +61,25 @@ export default async function ServerPage({ params }) {
 
   const getLinks = (srv) => {
     const list = []
-    if (srv.discord_url) list.push({ name: 'Вступить в Discord', url: srv.discord_url, platform: 'discord' })
-    if (srv.source_url) list.push({ name: 'Source Code', url: srv.source_url, platform: 'source' })
-    if (srv.wiki_url) list.push({ name: 'Перейти в вики', url: srv.wiki_url, platform: 'wiki' })
-    if (srv.issues_url) list.push({ name: 'Issues', url: srv.issues_url, platform: 'issues' })
+    if (srv.discord_url) list.push({ name: t('links.discord'), url: srv.discord_url, platform: 'discord' })
+    if (srv.source_url) list.push({ name: t('links.source'), url: srv.source_url, platform: 'source' })
+    if (srv.wiki_url) list.push({ name: t('server.linkWiki'), url: srv.wiki_url, platform: 'wiki' })
+    if (srv.issues_url) list.push({ name: t('links.issues'), url: srv.issues_url, platform: 'issues' })
     
     if (srv.link_urls) {
       Object.keys(srv.link_urls).forEach(key => {
         const item = srv.link_urls[key]
         if (item && item.url && !list.some(x => x.url === item.url)) {
           const platform = typeof item.platform === 'string' ? item.platform : ''
-          let name = 'Link'
-          if (platform === 'discord') name = 'Вступить в Discord'
-          else if (platform === 'store') name = 'Перейти в магазин'
-          else if (platform === 'wiki') name = 'Перейти в вики'
-          else if (platform === 'issues') name = 'Issues'
-          else if (platform === 'site' || platform === 'website') name = 'Перейти на сайт'
+          let name = t('links.title')
+          if (platform === 'discord') name = t('links.discord')
+          else if (platform === 'store') name = t('server.linkStore')
+          else if (platform === 'wiki') name = t('server.linkWiki')
+          else if (platform === 'issues') name = t('links.issues')
+          else if (platform === 'site' || platform === 'website') name = t('server.linkSite')
           else if (platform) {
             const rawName = platform.charAt(0).toUpperCase() + platform.slice(1)
-            name = rawName === 'Site' || rawName === 'Website' ? 'Перейти на сайт' : rawName
+            name = rawName === 'Site' || rawName === 'Website' ? t('server.linkSite') : rawName
           }
           list.push({ name, url: item.url, platform: platform || 'link' })
         }
@@ -138,7 +90,6 @@ export default async function ServerPage({ params }) {
 
   const links = getLinks(server)
   const allTags = [...new Set([...(server.categories || []), ...(server.additional_categories || [])])]
-  const filterConfig = getFilterConfig('servers')
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -159,7 +110,7 @@ export default async function ServerPage({ params }) {
 
           {links.length > 0 && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
-              <h2 className="text-lg font-bold text-white m-0">Ссылки</h2>
+              <h2 className="text-lg font-bold text-white m-0">{t('links.title')}</h2>
               <div className="flex flex-col gap-3 font-semibold">
                 {links.map((link, idx) => (
                   <ServerSidebarLink key={idx} link={link} icon={<ServerLinkIcon platform={link.platform} />} />
@@ -170,7 +121,7 @@ export default async function ServerPage({ params }) {
 
           {allTags.length > 0 && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
-              <h2 className="text-lg font-bold text-white m-0">Теги</h2>
+              <h2 className="text-lg font-bold text-white m-0">{t('project.tags')}</h2>
               <div className="flex flex-wrap gap-1.5">
                 {allTags.map(tag => (
                   <Link
@@ -178,7 +129,7 @@ export default async function ServerPage({ params }) {
                     href={`/discover/servers?sc=${tag}`}
                     className={SERVER_CATEGORY_TAG_CLASS}
                   >
-                    {getCategoryName(tag, filterConfig)}
+                    {categoryLabel(t, tag, getServerCategoryName(tag) || tag)}
                   </Link>
                 ))}
               </div>
@@ -187,7 +138,7 @@ export default async function ServerPage({ params }) {
 
           {(organization || (teamMembers && teamMembers.length > 0)) && (
             <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
-              <h2 className="text-lg font-bold text-white m-0">Авторы</h2>
+              <h2 className="text-lg font-bold text-white m-0">{t('project.authors')}</h2>
               <AuthorsSection
                 organization={organization}
                 members={teamMembers}
@@ -198,37 +149,4 @@ export default async function ServerPage({ params }) {
       </div>
     </div>
   )
-}
-
-function formatTimeAgo(dateString) {
-  if (!dateString) return '—'
-  const date = new Date(dateString)
-  if (isNaN(date.getTime())) return '—'
-  const now = new Date()
-  const diffInSeconds = Math.floor((now - date) / 1000)
-  
-  const intervals = [
-    { seconds: 31536000, one: 'год', two: 'года', many: 'лет' },
-    { seconds: 2592000, one: 'месяц', two: 'месяца', many: 'месяцев' },
-    { seconds: 604800, one: 'неделю', two: 'недели', many: 'недель' },
-    { seconds: 86400, one: 'день', two: 'дня', many: 'дней' },
-    { seconds: 3600, one: 'час', two: 'часа', many: 'часов' },
-    { seconds: 60, one: 'минуту', two: 'минуты', many: 'минут' },
-  ]
-  
-  for (const interval of intervals) {
-    const count = Math.floor(diffInSeconds / interval.seconds)
-    if (count >= 1) {
-      const mod10 = count % 10
-      const mod100 = count % 100
-      let word = interval.many
-      if (!(mod100 >= 11 && mod100 <= 19)) {
-        if (mod10 === 1) word = interval.one
-        else if (mod10 >= 2 && mod10 <= 4) word = interval.two
-      }
-      return `${count} ${word} назад`
-    }
-  }
-  
-  return 'только что'
 }

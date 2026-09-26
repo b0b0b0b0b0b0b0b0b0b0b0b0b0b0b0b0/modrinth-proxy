@@ -4,49 +4,46 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import NewsCounter from './NewsCounter'
-
-const EXTERNAL_LINKS = [
-  {
-    href: 'https://client.modrinth.black',
-    tooltip: 'Скачать Minecraft клиент и сервер всех версий',
-    children: (
-      <>
-        Клиент<span className="top-nav-separator">/</span>Сервер
-      </>
-    ),
-  },
-  {
-    href: 'https://rp.modrinth.black',
-    tooltip: 'Перепаковка защищённых ресурспаков',
-    children: 'RP Перепак',
-  },
-  {
-    href: 'https://jar.modrinth.black',
-    tooltip: 'Перевод плагинов онлайн (InJarTranslator)',
-    children: 'Перевод Плагинов',
-  },
-  {
-    href: 'https://dm.modrinth.black',
-    tooltip: 'Редактор DeluxeMenu и AbstractMenus',
-    children: 'Редактор DeluxeMenu',
-  },
-  {
-    href: 'https://ping.modrinth.black',
-    tooltip: 'Пинг серверов (мб недоступен в РФ)',
-    children: 'Пинг Серверов',
-  },
-]
-
-const RAIL_MS = 520
-const ROT_MS = 300
-const PANEL_MS = 420
+import { useT } from './I18nProvider'
 
 export default function TopNav() {
+  const t = useT()
   const pathname = usePathname()
   const isSettings = pathname === '/settings'
   const isNews = pathname.startsWith('/news')
   const panelId = useId()
   const timersRef = useRef([])
+  const EXTERNAL_LINKS = [
+    {
+      href: 'https://client.modrinth.black',
+      tooltip: t('nav.clientServerTip'),
+      children: t('nav.clientServer'),
+    },
+    {
+      href: 'https://rp.modrinth.black',
+      tooltip: t('nav.rpRepackTip'),
+      children: t('nav.rpRepack'),
+    },
+    {
+      href: 'https://jar.modrinth.black',
+      tooltip: t('nav.pluginTranslateTip'),
+      children: t('nav.pluginTranslate'),
+    },
+    {
+      href: 'https://dm.modrinth.black',
+      tooltip: t('nav.deluxeMenuTip'),
+      children: t('nav.deluxeMenu'),
+    },
+    {
+      href: 'https://ping.modrinth.black',
+      tooltip: t('nav.pingServersTip'),
+      children: t('nav.pingServers'),
+    },
+  ]
+
+  const RAIL_MS = 520
+  const ROT_MS = 300
+  const PANEL_MS = 420
 
   const [railExtended, setRailExtended] = useState(false)
   const [chevronDown, setChevronDown] = useState(false)
@@ -150,8 +147,8 @@ export default function TopNav() {
               aria-controls={panelId}
               aria-label={
                 panelExpanded
-                  ? 'Скрыть ссылки на сервисы'
-                  : 'Показать ссылки на сервисы'
+                  ? t('nav.servicesHide')
+                  : t('nav.servicesShow')
               }
               onClick={toggle}
             >
@@ -189,8 +186,8 @@ export default function TopNav() {
             <Link
               href="/settings"
               className={iconLinkClass(isSettings)}
-              data-tooltip="Настройки"
-              aria-label="Настройки"
+              data-tooltip={t('nav.settings')}
+              aria-label={t('nav.settings')}
               aria-current={isSettings ? 'page' : undefined}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-5 h-5">
@@ -201,8 +198,8 @@ export default function TopNav() {
             <Link
               href="/news"
               className={`${iconLinkClass(isNews)} relative`}
-              data-tooltip="Новости"
-              aria-label="Новости"
+              data-tooltip={t('nav.news')}
+              aria-label={t('nav.news')}
               aria-current={isNews ? 'page' : undefined}
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-5 h-5">
@@ -240,7 +237,7 @@ export default function TopNav() {
         <div className="top-nav-links top-nav-links--desktop">
           <span
             className="top-nav-link top-nav-link-here"
-            data-tooltip="Я здесь"
+            data-tooltip={t('nav.here')}
           >
             <span className="top-nav-dot" aria-hidden />
             ModrinthProxy
@@ -261,8 +258,8 @@ export default function TopNav() {
           <Link
             href="/settings"
             className={iconLinkClass(isSettings)}
-            data-tooltip="Настройки"
-            aria-label="Настройки"
+            data-tooltip={t('nav.settings')}
+            aria-label={t('nav.settings')}
             aria-current={isSettings ? 'page' : undefined}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-5 h-5">
@@ -273,8 +270,8 @@ export default function TopNav() {
           <Link
             href="/news"
             className={`${iconLinkClass(isNews)} relative`}
-            data-tooltip="Новости"
-            aria-label="Новости"
+            data-tooltip={t('nav.news')}
+            aria-label={t('nav.news')}
             aria-current={isNews ? 'page' : undefined}
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-5 h-5">

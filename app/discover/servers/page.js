@@ -1,4 +1,5 @@
 import { redirect } from 'next/navigation'
+import { catalogUi } from '@/lib/i18n/catalogListing'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY } from '@/lib/serverCategories'
 import { searchServers, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -238,6 +239,7 @@ export default async function ServersPage({ searchParams }) {
     redirect(buildPageUrl(effectivePage))
   }
 
+  const ui = catalogUi('servers', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />
@@ -246,22 +248,22 @@ export default async function ServersPage({ searchParams }) {
         <div className="flex-1 min-w-0">
           <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col gap-3">
-              <h1 className="text-2xl md:text-3xl font-bold">Серверы майнкрафт</h1>
+              <h1 className="text-2xl md:text-3xl font-bold">{ui.title}</h1>
               <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
                 <p className="text-gray-400 text-sm md:text-base shrink-0">
                   {data ? (
                     <>
-                      {data.total_hits.toLocaleString('ru-RU')} серверов найдено
+                      {ui.found}
                       <CatalogSearchBlockedNote count={blockedCount} />
                     </>
                   ) : (
-                    'Загрузка...'
+                    ui.loading
                   )}
                 </p>
                 <div className="w-full sm:max-w-md sm:flex-1 sm:min-w-[220px]">
                   <SearchInput
                     defaultValue={query}
-                    placeholder="Поиск серверов..."
+                    placeholder={ui.search}
                     categoryPath="discover/servers"
                   />
                 </div>
@@ -290,8 +292,8 @@ export default async function ServersPage({ searchParams }) {
                 <svg className="w-16 h-16 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <h2 className="text-xl font-bold text-white mb-2">Не удалось загрузить серверы</h2>
-                <p className="text-gray-400 mb-6">Попробуйте обновить страницу через несколько секунд</p>
+                <h2 className="text-xl font-bold text-white mb-2">{ui.fail}</h2>
+                <p className="text-gray-400 mb-6">{ui.retry}</p>
                 <ReloadButton />
               </div>
             </div>
@@ -302,7 +304,7 @@ export default async function ServersPage({ searchParams }) {
                   <svg className="w-16 h-16 mx-auto text-red-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
-                  <p className="text-xl font-semibold text-red-400 mb-3">Все серверы на этой странице заблокированы</p>
+                  <p className="text-xl font-semibold text-red-400 mb-3">{ui.blocked}</p>
                   <p className="text-gray-400 text-sm">
                     Из {data.total_hits.toLocaleString('ru-RU')} найденных серверов, все {blockedCount} на текущей странице заблокированы по требованиям РКН
                     {blockedByProject > 0 && blockedByOrganization > 0 && (
@@ -318,7 +320,7 @@ export default async function ServersPage({ searchParams }) {
                   </p>
                 </div>
               ) : (
-                <p className="text-xl text-gray-400">Серверы не найдены</p>
+                <p className="text-xl text-gray-400">{ui.empty}</p>
               )}
             </div>
           ) : (

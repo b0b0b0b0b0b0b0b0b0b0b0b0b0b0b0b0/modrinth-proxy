@@ -1,6 +1,9 @@
+'use client'
+
 import MarkdownContent from './MarkdownContent'
 import { DisclosureIcon, ExternalLinkIcon } from './ProjectDisclosureIcons'
 import { getDisclosureDetails, getDisclosureTitle } from '@/lib/projectDisclosures'
+import { useT } from './I18nProvider'
 
 function DisclosureNote({ text }) {
   if (!text?.trim()) return null
@@ -54,10 +57,11 @@ function DerivativeSources({ sources }) {
 }
 
 export default function ProjectDisclosureItems({ disclosures = [] }) {
+  const t = useT()
   if (!disclosures.length) return null
 
   return disclosures.map((disclosure) => {
-    const title = getDisclosureTitle(disclosure)
+    const title = getDisclosureTitle(disclosure, t)
     const details = getDisclosureDetails(disclosure)
     const accentClassName = disclosure.type === 'epilepsy_triggers' ? 'text-orange-400' : ''
 

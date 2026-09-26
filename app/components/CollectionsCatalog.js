@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react'
 import CollectionCard from './CollectionCard'
+import { useT } from './I18nProvider'
 
 export default function CollectionsCatalog({ collections }) {
+  const t = useT()
   const [query, setQuery] = useState('')
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase()
@@ -22,7 +24,7 @@ export default function CollectionsCatalog({ collections }) {
           type="search"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Поиск по коллекциям..."
+          placeholder={t('col.search')}
           className="w-full rounded-xl border border-gray-700 bg-gray-800 px-4 py-2.5 pl-10 text-sm text-white placeholder-gray-500 focus:border-modrinth-green focus:outline-none"
         />
         <svg
@@ -43,8 +45,8 @@ export default function CollectionsCatalog({ collections }) {
         </div>
       ) : (
         <div className="py-16 text-center">
-          <h3 className="text-xl font-semibold text-gray-300">Ничего не найдено</h3>
-          <p className="mt-2 text-gray-500">Попробуй другой запрос</p>
+          <h3 className="text-xl font-semibold text-gray-300">{t('col.empty')}</h3>
+          <p className="mt-2 text-gray-500">{t('col.emptyHint')}</p>
         </div>
       )}
     </div>

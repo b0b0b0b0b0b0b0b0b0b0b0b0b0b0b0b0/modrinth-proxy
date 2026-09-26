@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
 export default async function ModpackVersionPage({ params }) {
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
-    return <ProjectAccessRestricted href="/modpacks" label="Вернуться к модпакам" />
+    return <ProjectAccessRestricted href="/modpacks" backKey="project.backToModpacks" />
   }
   if (data.missing) notFound()
 

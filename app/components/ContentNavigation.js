@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { useT } from './I18nProvider'
 
 export default function ContentNavigation({
   slug,
@@ -13,6 +14,7 @@ export default function ContentNavigation({
   galleryCount = 0,
   projectColor,
 }) {
+  const t = useT()
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -34,10 +36,10 @@ export default function ContentNavigation({
   }
 
   const tabs = [
-    { href: `/${contentType}/${slug}`, label: 'Описание' },
-    galleryCount > 0 && { href: `/${contentType}/${slug}/gallery`, label: `Галерея (${galleryCount})` },
-    { href: `/${contentType}/${slug}/changelog`, label: 'Изменения' },
-    { href: `/${contentType}/${slug}/versions`, label: `Версии${versionsCount > 0 ? ` (${versionsCount})` : ''}` },
+    { href: `/${contentType}/${slug}`, label: t('project.description') },
+    galleryCount > 0 && { href: `/${contentType}/${slug}/gallery`, label: t('project.gallery', { n: galleryCount }) },
+    { href: `/${contentType}/${slug}/changelog`, label: t('project.changelog') },
+    { href: `/${contentType}/${slug}/versions`, label: versionsCount > 0 ? t('project.versionsN', { n: versionsCount }) : t('project.versions') },
   ].filter(Boolean)
 
   return (

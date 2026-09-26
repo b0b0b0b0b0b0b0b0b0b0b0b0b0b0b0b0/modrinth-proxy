@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { resolveLoader } from '@/lib/loaders'
+import { useT } from './I18nProvider'
 
 function FilterCheckbox({ checked }) {
   return (
@@ -22,6 +23,7 @@ function FilterCheckbox({ checked }) {
 }
 
 export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersChange }) {
+  const t = useT()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -49,12 +51,12 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
   }
 
   const getLabel = () => {
-    if (selectedLoaders.length === 0) return 'Платформы'
+    if (selectedLoaders.length === 0) return t('filter.platform')
     if (selectedLoaders.length === 1) {
       const loaderData = resolveLoader(selectedLoaders[0])
       return loaderData.name
     }
-    return `${selectedLoaders.length} выбрано`
+    return t('filter.selected', { n: selectedLoaders.length })
   }
 
   return (

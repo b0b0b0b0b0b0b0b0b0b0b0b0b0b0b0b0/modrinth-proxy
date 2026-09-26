@@ -1,19 +1,21 @@
 import FileLookupClient from './FileLookupClient'
+import { getRequestT } from '@/lib/i18n/server'
 
-export const metadata = {
-  title: 'Поиск файла по хешу | ModrinthProxy',
-  description:
-    'Загрузите JAR, мод или любой файл — получите SHA512, SHA256 и SHA1, а также узнайте, есть ли этот файл на Modrinth и к какому проекту он относится.',
-  robots: { index: false, follow: false },
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: t('lookup.metaTitle'),
+    description: t('lookup.metaDesc'),
+    robots: { index: false, follow: false },
+  }
 }
 
 export default function FileLookupPage() {
+  const { t } = getRequestT()
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
-      <h1 className="mb-2 text-3xl font-extrabold text-white">Поиск файла по хешу</h1>
-      <p className="mb-8 text-sm text-gray-400 md:text-base">
-        Загрузи файл или вставь хеш — узнаешь, какой это проект и версия на Modrinth, и есть ли обновление.
-      </p>
+      <h1 className="mb-2 text-3xl font-extrabold text-white">{t('lookup.title')}</h1>
+      <p className="mb-8 text-sm text-gray-400 md:text-base">{t('lookup.lead')}</p>
       <FileLookupClient />
     </div>
   )

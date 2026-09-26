@@ -1,34 +1,39 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import { useT } from './I18nProvider'
 
-const CHANNEL_OPTIONS = [
-  { id: 'all', label: 'Все каналы', textClass: 'text-gray-900 dark:text-white', activeRing: '' },
+function channelOptions(t) {
+  return [
+  { id: 'all', label: t('version.allChannels'), textClass: 'text-gray-900 dark:text-white', activeRing: '' },
   {
     id: 'release',
-    label: 'Релиз',
+    label: t('version.release'),
     textClass: 'text-version-release-fg',
     activeRing: 'ring-1 ring-version-release-fg/40',
   },
   {
     id: 'beta',
-    label: 'Бета',
+    label: t('version.beta'),
     textClass: 'text-version-beta-fg',
     activeRing: 'ring-1 ring-version-beta-fg/40',
   },
   {
     id: 'alpha',
-    label: 'Альфа',
+    label: t('version.alpha'),
     textClass: 'text-version-alpha-fg',
     activeRing: 'ring-1 ring-version-alpha-fg/40',
   },
 ]
+}
 
 export default function ChannelsDropdown({
   selectedChannel,
   onChannelChange,
   channelTypesPresent,
 }) {
+  const t = useT()
+  const CHANNEL_OPTIONS = channelOptions(t)
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -61,7 +66,7 @@ export default function ChannelsDropdown({
     CHANNEL_OPTIONS.find((c) => c.id === selectedChannel) || CHANNEL_OPTIONS[0]
 
   const getLabel = () => {
-    if (selectedChannel === 'all') return 'Каналы'
+    if (selectedChannel === 'all') return t('version.channels')
     return selectedMeta.label
   }
 

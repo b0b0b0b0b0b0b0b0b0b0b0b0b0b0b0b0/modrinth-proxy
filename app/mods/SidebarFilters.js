@@ -12,6 +12,8 @@ import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } fro
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
+import { useT } from '@/app/components/I18nProvider'
+import { categoryLabel } from '@/lib/i18n/label'
 
 const MOD_CATEGORIES = CATEGORIES.filter(cat =>
   ['adventure', 'cursed', 'decoration', 'economy', 'equipment', 'food', 'game-mechanics', 'library', 'magic', 'management', 'minigame', 'mobs', 'optimization', 'social', 'storage', 'technology', 'transportation', 'utility', 'worldgen'].includes(cat.id)
@@ -23,6 +25,7 @@ const ENVIRONMENTS = [
 ]
 
 export default function SidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
+  const t = useT()
   const router = useRouter()
   const searchParams = useSearchParams()
   const hookVersions = useMinecraftVersions()
@@ -158,13 +161,13 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
             </svg>
-            Версия игры
+            {t('filter.gameVersion')}
           </h3>
           
           <div className="mb-2 relative">
             <input
               type="text"
-              placeholder="Поиск..."
+              placeholder={t('filter.search')}
               value={versionSearch}
               onChange={(e) => setVersionSearch(e.target.value)}
               className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
@@ -226,7 +229,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                 )}
               </div>
               <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                Показать все версии
+                {t('filter.showAllVersions')}
               </span>
               </button>
           </div>
@@ -237,7 +240,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
             </svg>
-            Загрузчик
+            {t('filter.loader')}
           </h3>
           <div className="flex flex-col gap-1">
             {(showAllLoaders ? MOD_LOADERS : MOD_LOADERS.slice(0, MAIN_LOADERS_COUNT)).map(loader => (
@@ -256,7 +259,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                 onClick={() => setShowAllLoaders(!showAllLoaders)}
                 className="text-sm text-gray-400 hover:text-white transition-colors py-2 text-left font-semibold"
               >
-                {showAllLoaders ? 'Показать меньше' : 'Показать больше'}
+                {showAllLoaders ? t('filter.showLess') : t('filter.showMore')}
               </button>
             )}
           </div>
@@ -267,14 +270,14 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
             </svg>
-            Категории
+            {t('filter.categories')}
           </h3>
           <div className="flex flex-col gap-1 pr-2">
             {MOD_CATEGORIES.map(cat => (
               <CatalogFilterOption
                 key={cat.id}
                 icon={cat.icon}
-                label={cat.name}
+                label={categoryLabel(t, cat.id, cat.name)}
                 selected={selectedCategories.includes(cat.id)}
                 excluded={excludedCategories.includes(cat.id)}
                 onInclude={() => toggleCategory(cat.id)}
@@ -289,7 +292,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
             </svg>
-            Окружение
+            {t('filter.environment')}
           </h3>
           <div className="space-y-2">
             {ENVIRONMENTS.map(env => (
@@ -306,7 +309,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                     : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
                 }`}
               >
-                {env.name}
+                {t(`filter.env.${env.id}`)}
               </button>
             ))}
           </div>
@@ -335,7 +338,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-            Сбросить фильтры
+            {t('filter.reset')}
           </button>
           </div>
         )}

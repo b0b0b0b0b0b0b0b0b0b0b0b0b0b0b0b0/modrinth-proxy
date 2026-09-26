@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -188,6 +189,7 @@ export default async function ModpacksPage({ searchParams }) {
     return `/modpacks?${params.toString()}`;
   };
 
+  const ui = catalogUi('modpacks', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />
@@ -197,21 +199,21 @@ export default async function ModpacksPage({ searchParams }) {
           <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-2xl md:text-3xl font-bold mb-2">Minecraft модпаки</h1>
+                <h1 className="text-2xl md:text-3xl font-bold mb-2">{ui.title}</h1>
                 <p className="text-gray-400 text-sm md:text-base">
                   {data ? (
                     <>
-                      {data.total_hits.toLocaleString('ru-RU')} модпаков найдено
+                      {ui.found}
                       <CatalogSearchBlockedNote count={blockedCount} />
                     </>
                   ) : (
-                    'Загрузка...'
+                    ui.loading
                   )}
                 </p>
               </div>
               <SearchInput 
                 defaultValue={query}
-                placeholder="Поиск модпаков..."
+                placeholder={ui.search}
                 categoryPath="modpacks"
               />
             </div>
@@ -238,8 +240,8 @@ export default async function ModpacksPage({ searchParams }) {
             <svg className="w-16 h-16 mx-auto text-orange-500 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <h2 className="text-xl font-bold text-white mb-2">Не удалось загрузить модпаки</h2>
-            <p className="text-gray-400 mb-6">Попробуйте обновить страницу через несколько секунд</p>
+            <h2 className="text-xl font-bold text-white mb-2">{ui.fail}</h2>
+            <p className="text-gray-400 mb-6">{ui.retry}</p>
             <ReloadButton />
           </div>
         </div>
@@ -258,9 +260,9 @@ export default async function ModpacksPage({ searchParams }) {
               blockedCount={blockedCount}
               blockedByProject={blockedByProject}
               blockedByOrganization={blockedByOrganization}
-              foundLabel="найденных модпаков"
-              blockedTitle="Все модпаки на этой странице заблокированы"
-              emptyTitle="Модпаки не найдены"
+              foundLabel={ui.foundLabel}
+              blockedTitle={ui.blocked}
+              emptyTitle={ui.empty}
               hideEmptyMessage={searchAlternatives.length > 0}
             />
           </div>
@@ -274,7 +276,7 @@ export default async function ModpacksPage({ searchParams }) {
                   href={buildPageUrl(page - 1)}
                   className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
                 >
-                  ← Назад
+                  {ui.back}
                 </Link>
               )}
               
@@ -287,7 +289,7 @@ export default async function ModpacksPage({ searchParams }) {
                   href={buildPageUrl(page + 1)}
                   className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
                 >
-                  Вперёд →
+                  {ui.next}
                 </Link>
               )}
             </div>
@@ -302,7 +304,7 @@ export default async function ModpacksPage({ searchParams }) {
                   href={buildPageUrl(page - 1)}
                   className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
                 >
-                  ← Назад
+                  {ui.back}
                 </Link>
               )}
               
@@ -315,7 +317,7 @@ export default async function ModpacksPage({ searchParams }) {
                   href={buildPageUrl(page + 1)}
                   className="px-4 py-2 bg-modrinth-dark border border-gray-700 rounded-lg hover:border-modrinth-green transition"
                 >
-                  Вперёд →
+                  {ui.next}
                 </Link>
               )}
             </div>

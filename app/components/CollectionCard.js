@@ -1,14 +1,22 @@
-import Link from 'next/link'
+'use client'
 
-function projectCountLabel(count) {
-  const n = Number(count) || 0
-  if (n === 1) return '1 проект'
-  if (n > 1 && n < 5) return `${n} проекта`
-  return `${n} проектов`
-}
+import Link from 'next/link'
+import { useI18n } from './I18nProvider'
+import { intlLocale } from '@/lib/i18n/config'
+import { pluralize } from '@/lib/i18n/pluralize'
 
 export default function CollectionCard({ collection }) {
+  const { t, locale } = useI18n()
   const count = collection.projects?.length || 0
+  const n = count.toLocaleString(intlLocale(locale))
+  const countLabel = pluralize(
+    count,
+    locale,
+    t('col.pOne', { n }),
+    t('col.pFew', { n }),
+    t('col.pMany', { n }),
+  )
+
   return (
     <Link
       href={`/collection/${collection.id}`}
@@ -33,7 +41,7 @@ export default function CollectionCard({ collection }) {
         {collection.description ? (
           <p className="mt-1 line-clamp-2 text-sm text-gray-400">{collection.description}</p>
         ) : null}
-        <p className="mt-2 text-sm text-gray-500">{projectCountLabel(count)}</p>
+        <p className="mt-2 text-sm text-gray-500">{countLabel}</p>
       </div>
     </Link>
   )

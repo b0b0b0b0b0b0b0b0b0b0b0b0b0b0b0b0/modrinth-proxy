@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 import {
   catalogReturnMatchesContent,
   clearCatalogReturn,
@@ -12,6 +13,7 @@ import {
 } from '@/lib/catalogReturn'
 
 export default function CatalogReturnButton({ contentType, slug }) {
+  const t = useT()
   const [back, setBack] = useState(null)
 
   useEffect(() => {
@@ -36,7 +38,7 @@ export default function CatalogReturnButton({ contentType, slug }) {
 
   if (!back) return null
 
-  const tooltip = `Вернуться к результатам поиска «${back.query}»`
+  const tooltip = t('searchBack.tip', { q: back.query })
 
   return (
     <>
@@ -56,7 +58,7 @@ export default function CatalogReturnButton({ contentType, slug }) {
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5m7 7-7-7 7-7" />
           </svg>
-          К поиску
+          {t('searchBack.label')}
         </Link>
       </StyledTooltip>
       <span className="text-gray-600">/</span>

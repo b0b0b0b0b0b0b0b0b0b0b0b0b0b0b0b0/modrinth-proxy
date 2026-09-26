@@ -4,22 +4,20 @@ import TiltCard from '@/app/components/TiltCard'
 import TiltCardDirectional from '@/app/components/TiltCardDirectional'
 import ProtectionBlock from './ProtectionBlock'
 import InfrastructureIcon from './InfrastructureIcon'
+import RichText from '@/app/components/RichText'
+import { getRequestT } from '@/lib/i18n/server'
+import { pluralize } from '@/lib/i18n/pluralize'
 
-export const metadata = {
-  title: 'О проекте - ModrinthProxy',
-  description: 'Как работает наш сервис и технические детали',
-}
-
-function pluralize(count, one, few, many) {
-  const mod10 = count % 10
-  const mod100 = count % 100
-  if (mod100 >= 11 && mod100 <= 19) return many
-  if (mod10 === 1) return one
-  if (mod10 >= 2 && mod10 <= 4) return few
-  return many
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: t('about.metaTitle'),
+    description: t('about.metaDesc'),
+  }
 }
 
 export default function AboutPage() {
+  const { t, locale } = getRequestT()
   const projectsCount = BLACKLIST_PROJECTS.length
   const orgsCount = BLACKLIST_ORGANIZATIONS.length
   const mediaCount = BLACKLIST_PATTERNS.length + BLACKLIST_AVATARS.length
@@ -30,7 +28,7 @@ export default function AboutPage() {
         <div className="text-center mb-12 animate-fade-in">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
             <span className="animated-title">
-              {'О проекте '.split('').map((char, i) => (
+              {t('about.titlePrefix').split('').map((char, i) => (
                 <span key={i} className={char === ' ' ? 'inline-block w-2' : ''}>{char === ' ' ? '\u00A0' : char}</span>
               ))}
             </span>
@@ -41,7 +39,7 @@ export default function AboutPage() {
             </span>
           </h1>
           <p className="text-xl text-gray-400">
-            Технические детали и принципы работы
+            {t('about.subtitle')}
           </p>
         </div>
 
@@ -58,14 +56,13 @@ export default function AboutPage() {
               </svg>
                 </div>
                 <span className="text-white drop-shadow-[0_0_20px_rgba(27,217,106,0.3)]">
-              Что это такое?
+              {t('about.what')}
                 </span>
             </h2>
               
               <div className="space-y-6">
                 <p className="text-xl md:text-2xl text-gray-200 leading-relaxed font-medium">
-                  ModrinthProxy — это <span className="text-modrinth-green font-bold">платформа</span> для поиска и скачивания модификаций для Minecraft. 
-                  Мы объединяем тысячи модов, плагинов, шейдеров и других материалов в одном удобном месте с русским интерфейсом.
+                  <RichText text={t('about.intro')} strongClassName="text-modrinth-green font-bold" />
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 mt-8">
@@ -77,8 +74,8 @@ export default function AboutPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-white mb-1">Каталог контента</h3>
-                        <p className="text-sm text-gray-400">Удобный доступ к информации из открытых источников. Мы собираем данные о модификациях и предоставляем их в структурированном виде.</p>
+                        <h3 className="font-bold text-white mb-1">{t('about.catTitle')}</h3>
+                        <p className="text-sm text-gray-400">{t('about.catDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -91,8 +88,8 @@ export default function AboutPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-white mb-1">Прямые ссылки</h3>
-                        <p className="text-sm text-gray-400">Мы не храним файлы модификаций на наших серверах. Все ссылки ведут напрямую на официальные источники от авторов.</p>
+                        <h3 className="font-bold text-white mb-1">{t('about.linksTitle')}</h3>
+                        <p className="text-sm text-gray-400">{t('about.linksDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -105,8 +102,8 @@ export default function AboutPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-white mb-1">Русский интерфейс</h3>
-                        <p className="text-sm text-gray-400">Полностью переведенный интерфейс, удобная навигация и понятные категории для русскоязычных пользователей.</p>
+                        <h3 className="font-bold text-white mb-1">{t('about.uiTitle')}</h3>
+                        <p className="text-sm text-gray-400">{t('about.uiDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -119,8 +116,8 @@ export default function AboutPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-bold text-white mb-1">Фильтрация контента</h3>
-                        <p className="text-sm text-gray-400">Применяем фильтры для соблюдения законодательства РФ. Блокировка запрещённого контента происходит автоматически.</p>
+                        <h3 className="font-bold text-white mb-1">{t('about.filterTitle')}</h3>
+                        <p className="text-sm text-gray-400">{t('about.filterDesc')}</p>
                       </div>
                     </div>
                   </div>
@@ -134,11 +131,9 @@ export default function AboutPage() {
                       </svg>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-white mb-2">Важная информация</h3>
+                      <h3 className="font-bold text-lg text-white mb-2">{t('about.important')}</h3>
                       <p className="text-gray-300 leading-relaxed">
-                        Наш сервис является <span className="font-semibold text-modrinth-green">информационным агрегатором</span> — мы собираем данные о модификациях и предоставляем удобный доступ к ним. 
-                        Все файлы хранятся на серверах авторов модификаций, мы лишь предоставляем ссылки и описания. 
-                        Это значит, что вы всегда получаете оригинальные, проверенные файлы напрямую от создателей контента.
+                        <RichText text={t('about.aggregator')} strongClassName="font-semibold text-modrinth-green" />
                       </p>
                     </div>
                   </div>
@@ -158,7 +153,7 @@ export default function AboutPage() {
                   </svg>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-purple-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent">
-                  Legal Information / Юридическая информация
+                  {t('about.legalTitle')}
                 </h2>
               </div>
               <div className="rounded-xl p-6 md:p-8">
@@ -175,7 +170,7 @@ export default function AboutPage() {
                   <div className="h-px bg-gradient-to-r from-transparent via-purple-500/30 to-transparent mt-6"></div>
                   <div className="bg-purple-950/30 rounded-lg p-4 mt-4">
                     <p className="text-gray-300 leading-relaxed text-sm">
-                      Эта информация служит для правообладателей и пользователей, чтобы четко обозначить независимость нашего проекта от официального Modrinth и Rinth, Inc. Мы уважаем права интеллектуальной собственности и используем товарные знаки исключительно в описательных целях для идентификации сервиса, с которым взаимодействует наш проект.
+                      {t('about.legalNote')}
                     </p>
                   </div>
                 </div>
@@ -189,7 +184,7 @@ export default function AboutPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              Как это работает?
+              {t('about.how')}
             </h2>
             <div className="text-gray-300 space-y-4 leading-relaxed">
               <div className="flex flex-col md:flex-row items-center gap-4 my-8">
@@ -201,8 +196,8 @@ export default function AboutPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-xl text-white mb-2">Запрос</h3>
-                    <p className="text-sm text-gray-300">Вы ищете мод, плагин или шейдер на нашем сайте</p>
+                    <h3 className="font-bold text-xl text-white mb-2">{t('about.step1t')}</h3>
+                    <p className="text-sm text-gray-300">{t('about.step1d')}</p>
                   </div>
                 </TiltCardDirectional>
 
@@ -225,8 +220,8 @@ export default function AboutPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-xl text-white mb-2">Поиск</h3>
-                    <p className="text-sm text-gray-300">Система находит информацию в базах данных</p>
+                    <h3 className="font-bold text-xl text-white mb-2">{t('about.step2t')}</h3>
+                    <p className="text-sm text-gray-300">{t('about.step2d')}</p>
                   </div>
                 </TiltCardDirectional>
 
@@ -249,19 +244,17 @@ export default function AboutPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-xl text-white mb-2">Результат</h3>
-                    <p className="text-sm text-gray-300">Прямая ссылка на официальный файл автора</p>
+                    <h3 className="font-bold text-xl text-white mb-2">{t('about.step3t')}</h3>
+                    <p className="text-sm text-gray-300">{t('about.step3d')}</p>
                   </div>
                 </TiltCardDirectional>
               </div>
               <p>
-                Технически, наш сервис является <span className="font-semibold text-blue-400">промежуточным звеном</span> между пользователем и источниками данных. 
-                Мы предоставляем удобный интерфейс на русском языке и применяем фильтрацию контента.
+                <RichText text={t('about.middle')} strongClassName="font-semibold text-blue-400" />
               </p>
               <div className="bg-blue-950/30 border border-blue-700/30 rounded-lg p-4 mt-4">
                 <p className="text-sm text-blue-200">
-                  <strong>Важно:</strong> Все ссылки на скачивание ведут на серверы авторов модификаций. 
-                  Наши серверы не взаимодействуют с файлами - мы только предоставляем информацию.
+                  <RichText text={t('about.dlNote')} />
                 </p>
               </div>
             </div>
@@ -272,57 +265,52 @@ export default function AboutPage() {
               <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
               </svg>
-              Соблюдение законодательства РФ
+              {t('about.law')}
             </h2>
             <div className="text-gray-300 space-y-4 leading-relaxed">
               <p>
-                Мы стремимся соблюдать действующее законодательство Российской Федерации и применяем меры по фильтрации контента:
+                {t('about.lawLead')}
               </p>
               <ul className="space-y-3 ml-4">
                 <li className="flex items-start gap-3">
                   <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
-                    <strong className="text-white">Блокировка проектов:</strong> Проекты, содержащие запрещенный контент, 
-                    автоматически исключаются из поиска и недоступны для просмотра.
+                    <RichText text={t('about.blockProjects')} />
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
-                    <strong className="text-white">Фильтрация изображений:</strong> Изображения с запрещенной символикой 
-                    автоматически заменяются на нейтральные заглушки.
+                    <RichText text={t('about.blockImages')} />
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
-                    <strong className="text-white">Замена текста:</strong> Запрещенные термины автоматически заменяются 
-                    на нейтральные символы в описаниях и названиях.
+                    <RichText text={t('about.blockText')} />
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                   <div>
-                    <strong className="text-white">Блокировка организаций:</strong> Проекты от определенных организаций 
-                    могут быть ограничены в доступе.
+                    <RichText text={t('about.blockOrgs')} />
                   </div>
                 </li>
               </ul>
 
               <div className="mt-8 bg-gradient-to-br from-purple-950/50 to-indigo-950/50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-purple-300 mb-6 text-center">Статистика фильтрации контента</h3>
+                <h3 className="text-xl font-bold text-purple-300 mb-6 text-center">{t('about.stats')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   <TiltCard className="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border border-red-600/30 hover:border-red-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(239, 68, 68, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-red-400 mb-2 animate-pulse-slow">
                         {projectsCount}
                       </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(projectsCount, 'Проект', 'Проекта', 'Проектов')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(projectsCount, locale, t('about.projectOne'), t('about.projectFew'), t('about.projectMany'))}</div>
+                      <div className="text-sm text-gray-400">{t('about.blocked')}</div>
                       <div className="mt-3 pt-3 border-t border-red-800/50">
                         <p className="text-xs text-red-300/80 leading-relaxed">
-                          Отдельные моды, плагины, шейдеры, ресурспаки, датапаки и модпаки, содержащие запрещённый контент. 
-                          Эти материалы скрыты из поиска и каталога, доступ к их страницам ограничен.
+                          {t('about.projectsHint')}
                         </p>
                       </div>
                     </div>
@@ -333,12 +321,11 @@ export default function AboutPage() {
                       <div className="text-5xl font-bold text-orange-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.2s' }}>
                         {orgsCount}
                       </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(orgsCount, 'Организация', 'Организации', 'Организаций')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(orgsCount, locale, t('about.orgOne'), t('about.orgFew'), t('about.orgMany'))}</div>
+                      <div className="text-sm text-gray-400">{t('about.blocked')}</div>
                       <div className="mt-3 pt-3 border-t border-orange-800/50">
                         <p className="text-xs text-orange-300/80 leading-relaxed">
-                          Разработчики и команды, все проекты которых полностью скрыты. 
-                          Их моды, ресурспаки, шейдеры и другие материалы не отображаются на сайте и учитываются отдельно от индивидуально заблокированных проектов.
+                          {t('about.orgsHint')}
                         </p>
                       </div>
                     </div>
@@ -349,12 +336,11 @@ export default function AboutPage() {
                       <div className="text-5xl font-bold text-yellow-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.4s' }}>
                         {mediaCount}
                       </div>
-                      <div className="text-lg font-semibold text-white mb-1">{pluralize(mediaCount, 'Медиафайл', 'Медиафайла', 'Медиафайлов')}</div>
-                      <div className="text-sm text-gray-400">Заблокировано</div>
+                      <div className="text-lg font-semibold text-white mb-1">{pluralize(mediaCount, locale, t('about.mediaOne'), t('about.mediaFew'), t('about.mediaMany'))}</div>
+                      <div className="text-sm text-gray-400">{t('about.blocked')}</div>
                       <div className="mt-3 pt-3 border-t border-yellow-800/50">
                         <p className="text-xs text-yellow-300/80 leading-relaxed">
-                          Изображения с запрещённой символикой: аватары авторов, иконки проектов, скриншоты в галереях и картинки в описаниях. 
-                          Заблокированные медиафайлы заменяются на нейтральные заглушки.
+                          {t('about.mediaHint')}
                         </p>
                       </div>
                     </div>
@@ -364,8 +350,7 @@ export default function AboutPage() {
 
               <div className="bg-purple-950/30 border border-purple-700/30 rounded-lg p-4 mt-4">
                 <p className="text-sm text-purple-200">
-                  Все фильтры работают автоматически на стороне нашего сервера. Мы регулярно обновляем списки 
-                  блокировок в соответствии с требованиями законодательства.
+                  {t('about.autoFilters')}
                 </p>
               </div>
 
@@ -380,12 +365,12 @@ export default function AboutPage() {
                   </div>
                   
                   <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-lg font-bold text-white mb-2">Связь с администрацией</h3>
+                    <h3 className="text-lg font-bold text-white mb-2">{t('about.contact')}</h3>
                     <p className="text-gray-300 text-sm leading-relaxed mb-3">
-                      Данный email предназначен <span className="font-semibold text-white">исключительно для официальных запросов</span> от государственных органов (РКН, прокуратура, суды и другие уполномоченные структуры) по вопросам блокировок и фильтрации контента.
+                      <RichText text={t('about.contactLead')} />
                     </p>
                     <p className="text-gray-400 text-xs leading-relaxed mb-3 italic">
-                      Пожалуйста, не используйте этот адрес для обращений авторов контента, коммерческих предложений, рекламных запросов или других неофициальных целей. Такие обращения не будут рассмотрены.
+                      {t('about.contactNote')}
                     </p>
                     <div className="flex justify-center md:justify-start">
                       <EmailCopyButton email="black-minecraft@proton.me" />
@@ -399,7 +384,7 @@ export default function AboutPage() {
           <section className="p-8 md:p-12">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Технический стек
+                {t('about.stack')}
               </h2>
             </div>
 
@@ -413,7 +398,7 @@ export default function AboutPage() {
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold text-white">Next.js 14</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">React-фреймворк с серверным рендерингом. Построен на последних возможностях React, включая Server Components и Actions.</p>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{t('about.nextDesc')}</p>
                   </div>
                 </div>
 
@@ -448,7 +433,7 @@ export default function AboutPage() {
                       </svg>
                     </div>
                     <h3 className="text-xl font-semibold text-white">Open Source</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">Исходный код полностью открыт и доступен на GitHub для изучения и участия в разработке.</p>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{t('about.ossDesc')}</p>
                   </div>
                 </div>
 
@@ -457,8 +442,8 @@ export default function AboutPage() {
                     <div className="w-10 h-10 flex items-center justify-center mb-1">
                       <InfrastructureIcon />
                     </div>
-                    <h3 className="text-xl font-semibold text-white">Облачная инфраструктура</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">Развертывание на современной облачной платформе обеспечивает высокую производительность и надежность работы сервиса.</p>
+                    <h3 className="text-xl font-semibold text-white">{t('about.cloud')}</h3>
+                    <p className="text-sm text-gray-400 leading-relaxed max-w-xs">{t('about.cloudDesc')}</p>
                   </div>
                 </div>
               </div>

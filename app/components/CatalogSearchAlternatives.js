@@ -1,5 +1,8 @@
 import Link from 'next/link'
-import { buildCatalogSearchUrl, formatCatalogCount } from '@/lib/catalogCrossSearch'
+import { buildCatalogSearchUrl } from '@/lib/catalogCrossSearch'
+import { intlLocale } from '@/lib/i18n/config'
+import { getRequestT } from '@/lib/i18n/server'
+import { pluralize } from '@/lib/i18n/pluralize'
 
 const CATALOG_ROW_STYLE = {
   mods: 'bg-modrinth-green/15 text-modrinth-green border-modrinth-green/30 hover:bg-modrinth-green/25',
@@ -10,6 +13,17 @@ const CATALOG_ROW_STYLE = {
   modpacks: 'bg-red-500/15 text-red-300 border-red-500/30 hover:bg-red-500/25',
 }
 
+function formatAltCount(t, locale, key, count) {
+  const n = Number(count).toLocaleString(intlLocale(locale))
+  return pluralize(
+    count,
+    locale,
+    t(`catalog.searchAlt.${key}One`, { n }),
+    t(`catalog.searchAlt.${key}Few`, { n }),
+    t(`catalog.searchAlt.${key}Many`, { n }),
+  )
+}
+
 export default function CatalogSearchAlternatives({
   query,
   categoryPath,
@@ -17,14 +31,15 @@ export default function CatalogSearchAlternatives({
   catalogKey,
   alternatives = [],
 }) {
+  const { t, locale } = getRequestT()
   if (!alternatives.length || !catalogKey) return null
 
   return (
     <article className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 md:p-6">
       <p className="text-lg md:text-xl text-gray-400 mb-5">
-        Такс... короче я обошёл вболь и поперк. это точно тот раздел?
+        {t('catalog.searchAlt.intro')}
         <br />
-        Я нашёл в других разделах, смотри:
+        {t('catalog.searchAlt.found')}
       </p>
       <ul className="space-y-3">
         {alternatives.map((alt) => {
@@ -41,10 +56,10 @@ export default function CatalogSearchAlternatives({
                 <span
                   className={`inline-block px-3 py-1 rounded-lg border font-semibold text-base transition-colors ${pillStyle}`}
                 >
-                  {alt.label}
+                  {t(`nav.${alt.key}`)}
                 </span>
                 <span className="text-gray-500 text-sm">
-                  {formatCatalogCount(alt.totalHits, alt.noun)}
+                  {formatAltCount(t, locale, alt.key, alt.totalHits)}
                 </span>
               </Link>
             </li>

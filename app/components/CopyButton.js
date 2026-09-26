@@ -2,9 +2,12 @@
 
 import { useState } from 'react'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
-export default function CopyButton({ text, tooltipLabel = 'Скопировать ID в буфер обмена', inline = false }) {
+export default function CopyButton({ text, tooltipLabel, inline = false }) {
+  const t = useT()
   const [copied, setCopied] = useState(false)
+  const idleLabel = tooltipLabel || t('copy.id')
 
   const handleCopy = async () => {
     try {
@@ -17,7 +20,7 @@ export default function CopyButton({ text, tooltipLabel = 'Скопироват�
   }
 
   return (
-    <StyledTooltip label={copied ? 'Скопировано' : tooltipLabel}>
+    <StyledTooltip label={copied ? t('copy.copied') : idleLabel}>
     <button
       type="button"
       onClick={handleCopy}

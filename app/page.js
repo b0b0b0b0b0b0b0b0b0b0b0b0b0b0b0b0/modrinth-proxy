@@ -3,10 +3,14 @@ import {
   getModrinthPlatformStatistics,
   getModrinthProjectTypeTotals,
 } from '@/lib/modrinthCatalogTotals'
+import { getRequestT } from '@/lib/i18n/server'
 
-export const metadata = {
-  title: 'ModrinthProxy',
-  description: 'Скачать моды, плагины, шейдеры, ресурспаки и датапаки для Minecraft. Удобный каталог на русском языке. Тысячи модификаций для любой версии.',
+export async function generateMetadata() {
+  const { t } = getRequestT()
+  return {
+    title: t('home.metaTitle'),
+    description: t('home.metaDesc'),
+  }
 }
 
 export default async function Home() {

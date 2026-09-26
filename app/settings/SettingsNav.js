@@ -2,11 +2,14 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { useT } from '../components/I18nProvider'
+
 export const SETTINGS_SECTIONS = [
-  { id: 'settings-color-theme', label: 'Цветовая тема' },
-  { id: 'settings-color-palette', label: 'Акцентный цвет' },
-  { id: 'settings-features', label: 'Настройка функций' },
-  { id: 'settings-project-layouts', label: 'Отображение списков проектов' },
+  { id: 'settings-language', labelKey: 'settings.nav.language' },
+  { id: 'settings-color-theme', labelKey: 'settings.nav.theme' },
+  { id: 'settings-color-palette', labelKey: 'settings.nav.palette' },
+  { id: 'settings-features', labelKey: 'settings.nav.features' },
+  { id: 'settings-project-layouts', labelKey: 'settings.nav.layouts' },
 ]
 
 const SCROLL_OFFSET = 96
@@ -33,6 +36,7 @@ function resolveActiveSection() {
 }
 
 export default function SettingsNav() {
+  const t = useT()
   const [activeId, setActiveId] = useState(SETTINGS_SECTIONS[0].id)
   const scrollLockRef = useRef(null)
   const scrollUnlockTimerRef = useRef(null)
@@ -79,8 +83,8 @@ export default function SettingsNav() {
     <div className="hidden lg:block w-80 flex-shrink-0">
       <div className="lg:sticky lg:top-4 lg:self-start">
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
-          <h2 className="text-sm font-semibold text-gray-300 mb-3">Разделы</h2>
-          <nav className="space-y-1" aria-label="Быстрый переход по настройкам">
+          <h2 className="text-sm font-semibold text-gray-300 mb-3">{t('settings.nav.sections')}</h2>
+          <nav className="space-y-1" aria-label={t('settings.nav.aria')}>
             {SETTINGS_SECTIONS.map((section) => (
               <button
                 key={section.id}
@@ -89,7 +93,7 @@ export default function SettingsNav() {
                 className={navButtonClass(activeId === section.id)}
                 aria-current={activeId === section.id ? 'true' : undefined}
               >
-                {section.label}
+                {t(section.labelKey)}
               </button>
             ))}
           </nav>

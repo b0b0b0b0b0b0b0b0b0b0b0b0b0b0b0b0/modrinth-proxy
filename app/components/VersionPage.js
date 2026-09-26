@@ -25,6 +25,7 @@ import DownloadVersionDependencies from './DownloadVersionDependencies'
 import VersionDeveloperInfo from './VersionDeveloperInfo'
 import ProjectLinksCard from './ProjectLinksCard'
 import StyledTooltip from './StyledTooltip'
+import { getRequestT } from '@/lib/i18n/server'
 
 const DEPENDENCY_CONTENT_TYPES = new Set(['mod', 'plugin', 'datapack'])
 
@@ -60,7 +61,7 @@ function getVersionTypeInfo(versionType) {
   return VERSION_TYPE_STYLES[versionType] || VERSION_TYPE_STYLES.release
 }
 
-function getSupportedEnvironmentBadges(project) {
+function getSupportedEnvironmentBadges(project, t) {
   const clientSide = project?.client_side
   const serverSide = project?.server_side
   const badges = []
@@ -71,14 +72,14 @@ function getSupportedEnvironmentBadges(project) {
   if (serverOk) {
     badges.push({
       id: 'server',
-      label: 'Сервер',
+      label: t('filter.env.server'),
       icon: <IconHardDrive className="h-4 w-4" aria-hidden />,
     })
   }
   if (clientOk) {
     badges.push({
       id: 'client',
-      label: 'Одиночная игра',
+      label: t('filter.env.singleplayer'),
       icon: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -101,15 +102,15 @@ function getSupportedEnvironmentBadges(project) {
   return badges
 }
 
-function VersionMetadata({ version, author }) {
+function VersionMetadata({ version, author, t }) {
   const safeAuthor = author ? filterUserPublic(author) : null
 
   return (
     <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4">
-      <h2 className="text-xl font-bold mb-3">Метаданные</h2>
+      <h2 className="text-xl font-bold mb-3">{t('version.metadata')}</h2>
       <div className="space-y-3.5">
         <MetadataItem
-          label="Загрузил"
+          label={t('version.uploadedBy')}
           value={
             <div className="flex items-center gap-2">
               {safeAuthor ? (
@@ -135,7 +136,7 @@ function VersionMetadata({ version, author }) {
             </div>
           }
         />
-        <MetadataItem label="ID версии" value={<CopyButton text={version.id} />} />
+        <MetadataItem label={t('version.versionId')} value={<CopyButton text={version.id} />} />
       </div>
     </div>
   )
@@ -150,10 +151,10 @@ function MetadataItem({ label, value }) {
   )
 }
 
-function VersionCompatibility({ version, project }) {
+function VersionCompatibility({ version, project, t }) {
   const gameRanges = compressVersionRanges(version.game_versions || [])
   const platforms = getVersionPlatformIds(version).filter((id) => id !== 'minecraft')
-  const environments = getSupportedEnvironmentBadges(project)
+  const environments = getSupportedEnvironmentBadges(project, t)
 
   if (gameRanges.length === 0 && platforms.length === 0 && environments.length === 0) {
     return null
@@ -161,7 +162,7 @@ function VersionCompatibility({ version, project }) {
 
   return (
     <section id="compatibility" className="mb-6">
-      <h3 className="mt-0 mb-2 text-lg font-semibold">Совместимость</h3>
+      <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.compatibility')}</h3>
       <div className="grid gap-3 md:gap-4 md:grid-cols-3">
         {gameRanges.length > 0 && (
           <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
@@ -178,7 +179,7 @@ function VersionCompatibility({ version, project }) {
 
         {platforms.length > 0 && (
           <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
-            <div className="text-sm text-gray-600 dark:text-gray-300">Платформы</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.platforms')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {platforms.map((loaderId) => {
                 const loaderData = resolveLoader(loaderId)
@@ -201,7 +202,7 @@ function VersionCompatibility({ version, project }) {
 
         {environments.length > 0 && (
           <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
-            <div className="text-sm text-gray-600 dark:text-gray-300">Поддерживаемые среды</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.environments')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {environments.map((env) => (
                 <span key={env.id} className={PILL_CLASS}>
@@ -218,18 +219,19 @@ function VersionCompatibility({ version, project }) {
 }
 
 class FilesList {
-  constructor(files, projectAccent) {
+  constructor(files, projectAccent, t) {
     this.files = files
     this.projectAccent = projectAccent
+    this.t = t
   }
 
   render() {
     return (
       <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 mb-6">
-        <h2 className="text-xl font-bold mb-3">Файлы</h2>
+        <h2 className="text-xl font-bold mb-3">{this.t('version.files')}</h2>
         <div className="space-y-2">
           {this.files.map((file) => (
-            <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} />
+            <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} t={this.t} />
           ))}
         </div>
       </div>
@@ -237,7 +239,7 @@ class FilesList {
   }
 }
 
-function FileItem({ file, projectAccent }) {
+function FileItem({ file, projectAccent, t }) {
   const isPrimary = file.primary
   const useAccent = Boolean(isPrimary && projectAccent)
   const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
@@ -262,7 +264,7 @@ function FileItem({ file, projectAccent }) {
           </div>
           {isPrimary && (
             <span className="inline-block px-2 py-0.5 bg-blue-900 text-blue-300 text-xs rounded-full font-semibold">
-              Основной
+              {t('version.primary')}
             </span>
           )}
         </div>
@@ -287,7 +289,7 @@ function FileItem({ file, projectAccent }) {
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
         </svg>
-        <span className="text-sm">Скачать</span>
+        <span className="text-sm">{t('version.download')}</span>
       </span>
     </>
   )
@@ -306,12 +308,13 @@ function FileItem({ file, projectAccent }) {
 }
 
 export default async function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
+  const { t } = getRequestT()
   const disclosures = project?.slug ? await getProjectDisclosures(project.slug) : []
   const archived = findArchivedDisclosure(disclosures)
   const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]
   const versionType = getVersionTypeInfo(version.version_type)
   const projectAccent = resolveModrinthProjectAccent(project.color)
-  const filesList = new FilesList(version.files || [], projectAccent)
+  const filesList = new FilesList(version.files || [], projectAccent, t)
   const downloadStyle = projectAccent
     ? { backgroundColor: projectAccent.accentHex, color: projectAccent.activeFgHex }
     : undefined
@@ -373,8 +376,8 @@ export default async function VersionPage({ project, version, author, contentTyp
                     label={
                       <div className="flex flex-col gap-0.5 text-left">
                         <div className="text-[13px] font-semibold leading-snug break-all">
-                          <span className="font-medium opacity-75">Скачать:</span>{' '}
-                          {primaryFile.filename || 'файл'}
+                          <span className="font-medium opacity-75">{t('version.downloadColon')}</span>{' '}
+                          {primaryFile.filename || t('version.file')}
                         </div>
                         {primaryFile.size != null && primaryFile.size > 0 && (
                           <div className="text-[11px] font-normal opacity-65 leading-tight">
@@ -393,7 +396,7 @@ export default async function VersionPage({ project, version, author, contentTyp
                       style={downloadStyle}
                     >
                       <IconDownload className="size-5" />
-                      Скачать
+                      {t('version.download')}
                     </a>
                   </StyledTooltip>
                 </div>
@@ -402,11 +405,11 @@ export default async function VersionPage({ project, version, author, contentTyp
 
             <hr className="w-full border-none h-px bg-gray-300 dark:bg-gray-800 m-0" />
 
-            <VersionCompatibility version={version} project={project} />
+            <VersionCompatibility version={version} project={project} t={t} />
 
             {version.changelog && (
               <section id="changes">
-                <h3 className="mt-0 mb-2 text-lg font-semibold">Список изменений</h3>
+                <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.changelog')}</h3>
                 <div className="p-4 bg-gray-100 dark:bg-[var(--bg-tertiary)] rounded-2xl border border-solid border-gray-300 dark:border-gray-800">
                   <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
@@ -444,11 +447,11 @@ export default async function VersionPage({ project, version, author, contentTyp
               href={`/${singularName}/${project.slug}/versions`}
               className="text-gray-500 hover:text-modrinth-green transition-colors"
             >
-              ← Все версии
+              {t('version.allVersions')}
             </Link>
           </div>
           <ProjectLinksCard resource={project} includeSource />
-          <VersionMetadata version={version} author={author} />
+          <VersionMetadata version={version} author={author} t={t} />
         </StickyScrollSidebar>
       </div>
     </div>

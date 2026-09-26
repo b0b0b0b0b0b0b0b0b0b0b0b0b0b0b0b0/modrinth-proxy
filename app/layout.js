@@ -2,7 +2,7 @@ import './globals.css'
 import { Nunito } from "next/font/google"
 import Script from 'next/script'
 import { Suspense } from 'react'
-import Link from 'next/link'
+import { cookies, headers } from 'next/headers'
 import { ThemeProvider } from 'next-themes'
 import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
@@ -17,11 +17,15 @@ import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
+import { I18nProvider } from './components/I18nProvider'
+import DisclaimerBadge from './components/DisclaimerBadge'
 import { PALETTES } from '../lib/paletteManager'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
+import { LOCALE_COOKIE } from '../lib/i18n/config'
+import { resolveLocale } from '../lib/i18n/resolveLocale'
 
 const nunito = Nunito({
-  subsets: ['latin', 'cyrillic'],
+  subsets: ['latin', 'latin-ext', 'cyrillic'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-nunito',
   display: 'swap',
@@ -58,14 +62,18 @@ const POSTERITY_COMMENT_BODY = ` _    _
   \\ \\_\\\\ //_/ /
    ~~  ~~  ~~`
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const locale = resolveLocale(
+    cookies().get(LOCALE_COOKIE)?.value,
+    headers().get('accept-language'),
+  )
   const activeColorPalettesStoreDisclaimerUpdate = {}
   for (const key of Object.keys(PALETTES)) {
     activeColorPalettesStoreDisclaimerUpdate[key] = PALETTES[key].variables
   }
 
   return (
-    <html lang="ru" className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{ __html: CHUNK_LOAD_RECOVERY_INLINE }}
@@ -135,6 +143,7 @@ export default function RootLayout({ children }) {
           storageKey="modrinth-theme"
         >
           <AppTooltipProvider>
+          <I18nProvider locale={locale}>
           <AppSettingsSync />
           <CatalogReturnLifecycle />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
@@ -152,15 +161,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </nav>
-          <div className="relative z-10 flex justify-center pb-2 -mt-1 rounded-b-2xl pt-[5px]">
-            <div className="disclaimer-badge">
-              <svg className="w-3 h-3 flex-shrink-0 relative z-10" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <span className="relative z-10">Unofficial site, not affiliated with modrinth.com.</span>
-              <Link href="/bmadnco" className="relative z-10 font-semibold transition-colors duration-200">What is this?</Link>
-            </div>
-          </div>
+          <DisclaimerBadge />
           <main className="container">
             {children}
           </main>
@@ -172,6 +173,7 @@ export default function RootLayout({ children }) {
           <FeedbackThoughtBanner />
           <HalloweenEffects />
           <NewYearEffects />
+          </I18nProvider>
           </AppTooltipProvider>
         </ThemeProvider>
       </body>

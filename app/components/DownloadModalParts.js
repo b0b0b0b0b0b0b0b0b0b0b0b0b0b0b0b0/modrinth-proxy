@@ -1,7 +1,7 @@
 'use client'
 
 import StyledTooltip from './StyledTooltip'
-
+import { useT } from './I18nProvider'
 import { versionChannelBadgeClass } from '@/lib/versionChannelStyles'
 
 const VERSION_TYPE_LABELS = {
@@ -22,14 +22,16 @@ export function VersionChannelBadge({ versionType = 'release' }) {
 }
 
 export function ResourcePackBadge() {
+  const t = useT()
   return (
     <span className="inline-flex max-w-[50%] shrink-0 truncate rounded-full border border-gray-300 bg-gray-100 px-2 py-1 text-sm font-normal leading-none text-gray-600 dark:border-[#2e3035] dark:bg-[#34363c] dark:text-gray-400">
-      Ресурспак
+      {t('dl.packBadge')}
     </span>
   )
 }
 
 export function DatapackResourcePackBanner() {
+  const t = useT()
   return (
     <div className="relative grid grid-cols-[1.5rem_minmax(0,1fr)] items-start gap-x-2 rounded-2xl border border-solid border-blue-500/40 bg-blue-500/10 p-4 text-gray-900 dark:border-blue-400/35 dark:bg-blue-500/10 dark:text-white">
       <svg
@@ -47,8 +49,7 @@ export function DatapackResourcePackBanner() {
         <path d="M12 16v-4M12 8h.01" />
       </svg>
       <p className="m-0 text-sm leading-snug text-gray-800 dark:text-white/85">
-        Этот датапак также требует ресурспак. Скачайте его и поместите в папку{' '}
-        <code className="rounded bg-black/5 px-1 py-0.5 text-sm dark:bg-white/10">resourcepacks</code>.
+        {t('dl.datapackNeedsPack')}
       </p>
     </div>
   )
@@ -91,9 +92,11 @@ export function DownloadFooterButton({
   tooltip,
   tooltipSide = 'top',
   className = '',
-  loadingLabel = 'Подготовка…',
+  loadingLabel,
   children,
 }) {
+  const t = useT()
+  const resolvedLoadingLabel = loadingLabel || t('dl.preparing')
   const isPrimary = variant === 'primary'
   const button = (
     <button
@@ -138,7 +141,7 @@ export function DownloadFooterButton({
           />
         </svg>
       )}
-      {loading ? loadingLabel : children}
+      {loading ? resolvedLoadingLabel : children}
     </button>
   )
 

@@ -10,7 +10,7 @@ export async function generateMetadata({ params }) {
 export default async function DatapackVersionPage({ params }) {
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
-    return <ProjectAccessRestricted href="/datapacks" label="Вернуться к датапакам" />
+    return <ProjectAccessRestricted href="/datapacks" backKey="project.backToDatapacks" />
   }
   if (data.missing) notFound()
 

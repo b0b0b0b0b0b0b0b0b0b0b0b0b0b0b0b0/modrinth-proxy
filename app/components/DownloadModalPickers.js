@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 const PICKER_DROPDOWN_MAX_HEIGHT = 260
 const PICKER_LIST_MAX_HEIGHT = 220
@@ -181,6 +182,7 @@ export default function DownloadModalPickers({
     return () => document.removeEventListener('mousedown', handlePointerDown)
   }, [openPicker, onOpenPickerChange])
 
+  const t = useT()
   const openVersionPicker = () => {
     onOpenPickerChange(versionOpen ? null : 'version')
   }
@@ -201,7 +203,7 @@ export default function DownloadModalPickers({
                 <input
                   type="text"
                   autoFocus
-                  placeholder="Выберите версию"
+                  placeholder={t('dl.pickVersion')}
                   value={versionSearch}
                   onChange={(event) => onVersionSearchChange(event.target.value)}
                   className="h-9 w-full rounded-xl border-none bg-transparent py-2 pl-3 pr-9 text-sm font-medium text-gray-900 outline-none placeholder:text-gray-500 focus:ring-4 focus:ring-modrinth-green/20 min-[480px]:text-base dark:text-white dark:placeholder:text-gray-400"
@@ -223,7 +225,7 @@ export default function DownloadModalPickers({
                       : 'text-gray-500 dark:text-gray-400'
                   }`}
                 >
-                  {selectedMcVersion || 'Выберите версию'}
+                  {selectedMcVersion || t('dl.pickVersion')}
                 </span>
                 <ChevronIcon open={false} />
               </button>
@@ -243,7 +245,7 @@ export default function DownloadModalPickers({
               }`}
             >
               <span className="min-w-0 truncate text-sm font-semibold leading-tight min-[480px]:text-base">
-                {selectedLoader ? getLoaderName(selectedLoader) : 'Выберите платформу'}
+                {selectedLoader ? getLoaderName(selectedLoader) : t('dl.pickLoader')}
               </span>
               <ChevronIcon open={loaderOpen} />
             </button>
@@ -258,18 +260,18 @@ export default function DownloadModalPickers({
       >
         <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-b border-gray-200 px-3 py-2 dark:border-[#2e3035]">
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-            Версия
+            {t('dl.version')}
           </span>
           {hasSnapshotVersions && (
             <StyledTooltip
-              label={showAllVersions ? 'Скрыть снапшоты' : 'Показать также снапшоты'}
+              label={showAllVersions ? t('dl.hideSnapshots') : t('dl.showSnapshots')}
             >
               <button
                 type="button"
                 onClick={onToggleShowAllVersions}
                 className="ml-auto text-xs font-semibold text-modrinth-green transition-colors hover:text-modrinth-green-light"
               >
-                {showAllVersions ? 'Только релизы' : 'Показать все'}
+                {showAllVersions ? t('dl.releasesOnly') : t('dl.showAll')}
               </button>
             </StyledTooltip>
           )}
@@ -286,12 +288,12 @@ export default function DownloadModalPickers({
                 onClick={() => onToggleFavoriteMcVersion(version)}
                 label={
                   favMcVersion === version ? (
-                    'Убрать из избранного'
+                    t('dl.unfav')
                   ) : (
                     <span className="flex flex-col items-center">
-                      <span>Сделать избранной версией</span>
+                      <span>{t('dl.favVersion')}</span>
                       <span className="text-[10px] font-normal opacity-60 mt-0.5">
-                        (будет выбираться автоматически)
+                        {t('dl.autoPick')}
                       </span>
                     </span>
                   )
@@ -324,7 +326,7 @@ export default function DownloadModalPickers({
       >
         <div className="border-b border-gray-200 px-3 py-2 dark:border-[#2e3035]">
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
-            Платформа
+            {t('dl.platform')}
           </span>
         </div>
         <div
@@ -336,7 +338,7 @@ export default function DownloadModalPickers({
             const selected = selectedLoader === loader
             const name = getLoaderName(loader)
             const unavailableHint = selectedMcVersion
-              ? `${projectTitle || 'Проект'} не поддерживает ${name} для ${selectedMcVersion}`
+              ? t('dl.unsupported', { title: projectTitle || t('dl.project'), name, version: selectedMcVersion })
               : ''
 
             const option = (
@@ -368,12 +370,12 @@ export default function DownloadModalPickers({
                   onClick={() => onToggleFavoriteLoader(loader)}
                   label={
                     favLoader === loader ? (
-                      'Убрать из избранного'
+                      t('dl.unfav')
                     ) : (
                       <span className="flex flex-col items-center">
-                        <span>Сделать избранным загрузчиком</span>
+                        <span>{t('dl.favLoader')}</span>
                         <span className="text-[10px] font-normal opacity-60 mt-0.5">
-                          (будет выбираться автоматически)
+                          {t('dl.autoPick')}
                         </span>
                       </span>
                     )

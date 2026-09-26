@@ -8,6 +8,7 @@ import CollectionCard from '@/app/components/CollectionCard'
 import UserProfileHeader from '@/app/components/UserProfileHeader'
 import dynamic from 'next/dynamic'
 import UserSidebar from '@/app/components/UserSidebar'
+import { getRequestT } from '@/lib/i18n/server'
 
 const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTabs'), {
   ssr: false,
@@ -31,13 +32,14 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function AuthorCollectionsPage({ params }) {
+  const { t } = getRequestT()
   const { userId } = params
 
   if (isUserBlocked(userId)) {
     return (
       <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">Доступ ограничен</h1>
-        <p className="text-gray-400">Данный пользователь недоступен.</p>
+        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
+        <p className="text-gray-400">{t('restricted.user')}</p>
       </div>
     )
   }

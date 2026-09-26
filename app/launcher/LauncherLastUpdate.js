@@ -1,23 +1,25 @@
 'use client'
 
 import StyledTooltip from '../components/StyledTooltip'
-import { formatRelativeRussian } from '../components/RelativeTime'
+import { formatRelative } from '../components/RelativeTime'
+import { useT } from '../components/I18nProvider'
 
 function ApiLink({ href, label, path, data }) {
+  const t = useT()
   const version = data?.version
-  const published = data?.published_at ? formatRelativeRussian(data.published_at) : null
-  const checked = data?.checked_at ? formatRelativeRussian(data.checked_at) : null
+  const published = data?.published_at ? formatRelative(data.published_at, t) : null
+  const checked = data?.checked_at ? formatRelative(data.checked_at, t) : null
 
   const tooltip = (
     <span className="flex flex-col gap-1 text-left leading-snug">
       {version ? <span className="font-semibold text-white">v{version}</span> : null}
       {published ? (
-        <span className="text-[11px] text-gray-300">релиз: {published}</span>
+        <span className="text-[11px] text-gray-300">{t('app.release')} {published}</span>
       ) : null}
       {checked ? (
-        <span className="text-[11px] text-gray-300">проверено: {checked}</span>
+        <span className="text-[11px] text-gray-300">{t('app.checked')} {checked}</span>
       ) : (
-        <span className="text-[11px] text-gray-400">ещё не проверяли</span>
+        <span className="text-[11px] text-gray-400">{t('app.notChecked')}</span>
       )}
     </span>
   )

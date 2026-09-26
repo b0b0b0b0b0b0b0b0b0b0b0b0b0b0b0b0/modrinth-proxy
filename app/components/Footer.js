@@ -1,9 +1,13 @@
+'use client'
+
 import Link from 'next/link'
 import { SITE_VERSION } from '@/lib/siteVersion'
 import { IconSiteVersion } from '@/lib/icons'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 export default function Footer() {
+  const t = useT()
   return (
     <footer className="relative mb-20 lg:mb-0 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-modrinth-green to-transparent opacity-50"></div>
@@ -22,16 +26,15 @@ export default function Footer() {
               ModrinthProxy
             </h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Делаем Minecraft лучше для каждого игрока. 
-              Моды, шейдеры, плагины — всё, что нужно для идеальной игры.
+              {t('footer.tagline')}
               <br/>
-              <span className="text-modrinth-green/80 font-medium">Minecraft в каждый дом.</span>
+              <span className="text-modrinth-green/80 font-medium">{t('footer.homes')}</span>
             </p>
           </div>
 
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold text-white mb-3">
-              Полностью открытый проект
+              {t('footer.opensource')}
             </h3>
             <div className="flex flex-col items-center gap-3 md:items-start">
             <a 
@@ -84,12 +87,12 @@ export default function Footer() {
               <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
-              <span>Лицензия AGPL-3.0</span>
+              <span>{t('footer.license')}</span>
             </Link>
             </div>
             <div className="mt-4">
               <p className="text-gray-400 text-sm leading-relaxed">
-                Нашли баг? Есть предложения? 
+                {t('footer.bugs')} 
                 <br/>
                 <a href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy/issues" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-modrinth-green hover:text-modrinth-green-light transition-colors font-medium group">
                   <span>GitHub Issues</span>
@@ -103,38 +106,38 @@ export default function Footer() {
 
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold text-white mb-3">
-              О проекте
+              {t('footer.about')}
             </h3>
             <div className="flex flex-col gap-2 items-center md:items-start">
               <a href="/bmadnco" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="font-medium">Как это работает</span>
+                <span className="font-medium">{t('footer.how')}</span>
               </a>
               <a href="/protect-bot" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
-                <span className="font-medium">Что за бот у вас?</span>
+                <span className="font-medium">{t('footer.bot')}</span>
               </a>
               <a href="/admin/file_lookup" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                <span className="font-medium">Поиск файла по хешу</span>
+                <span className="font-medium">{t('footer.fileLookup')}</span>
               </a>
               <a href="/collections" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                 </svg>
-                <span className="font-medium">Коллекции</span>
+                <span className="font-medium">{t('footer.collections')}</span>
               </a>
               <a href="/extension" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                 </svg>
-                <span className="font-medium">Браузерное расширение</span>
+                <span className="font-medium">{t('footer.extension')}</span>
               </a>
               <a href="/app" className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group">
                 <svg className="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,13 +145,13 @@ export default function Footer() {
                 </svg>
                 <span className="font-medium">Modrinth App</span>
               </a>
-              <StyledTooltip label="Новости и список обновлений сайта" side="top">
+              <StyledTooltip label={t('footer.siteVersionTip')} side="top">
                 <Link
                   href="/news"
                   className="flex items-center justify-center md:justify-start gap-2 text-gray-400 hover:text-modrinth-green text-sm transition-colors group"
                 >
                   <IconSiteVersion className="w-4 h-4 group-hover:scale-110 transition-transform shrink-0" />
-                  <span className="font-medium">Версия сайта: {SITE_VERSION}</span>
+                  <span className="font-medium">{t('footer.siteVersion', { version: SITE_VERSION })}</span>
                 </Link>
               </StyledTooltip>
             </div>

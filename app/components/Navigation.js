@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { withCatalogDiscoveryQuery } from '@/lib/catalogDiscoveryQuery'
+import { useT } from './I18nProvider'
 
 export default function Navigation() {
+  const t = useT()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const catalogHref = (path) => withCatalogDiscoveryQuery(path, searchParams)
@@ -203,7 +205,7 @@ export default function Navigation() {
             <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16"></path>
             <path d="M3.29 7 12 12l8.71-5M12 22V12"></path>
           </svg>
-          <span>Моды</span>
+          <span>{t('nav.mods')}</span>
         </span>
       </Link>
       
@@ -216,7 +218,7 @@ export default function Navigation() {
             <path d="M18.37 2.63 14 7l-1.59-1.59a2 2 0 0 0-2.82 0L8 7l9 9 1.59-1.59a2 2 0 0 0 0-2.82L17 10l4.37-4.37a2.12 2.12 0 1 0-3-3"></path>
             <path d="M9 8c-2 3-4 3.5-7 4l8 10c2-1 6-5 6-7M14.5 17.5 4.5 15"></path>
           </svg>
-          <span>Ресурспаки</span>
+          <span>{t('nav.resourcepacks')}</span>
         </span>
       </Link>
       
@@ -228,7 +230,7 @@ export default function Navigation() {
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"></path>
           </svg>
-          <span>Датапаки</span>
+          <span>{t('nav.datapacks')}</span>
         </span>
       </Link>
       
@@ -242,7 +244,7 @@ export default function Navigation() {
             <circle cx="18" cy="15" r="4"></circle>
             <path d="M14 15a2 2 0 0 0-2-2 2 2 0 0 0-2 2M2.5 13 5 7c.7-1.3 1.4-2 3-2M21.5 13 19 7c-.7-1.3-1.5-2-3-2"></path>
           </svg>
-          <span>Шейдеры</span>
+          <span>{t('nav.shaders')}</span>
         </span>
       </Link>
       
@@ -256,7 +258,7 @@ export default function Navigation() {
             <path d="M20 13v3.87a2.06 2.06 0 0 1-1.11 1.83l-6 3.08a1.93 1.93 0 0 1-1.78 0l-6-3.08A2.06 2.06 0 0 1 4 16.87V13"></path>
             <path d="M21 12.43a1.93 1.93 0 0 0 0-3.36L8.83 2.2a1.64 1.64 0 0 0-1.63 0L3 4.57a1.93 1.93 0 0 0 0 3.36l12.18 6.86a1.64 1.64 0 0 0 1.63 0z"></path>
           </svg>
-          <span>Модпаки</span>
+          <span>{t('nav.modpacks')}</span>
         </span>
       </Link>
       
@@ -268,7 +270,7 @@ export default function Navigation() {
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <path d="M12 22v-5M9 8V2M15 8V2M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path>
           </svg>
-          <span>Плагины</span>
+          <span>{t('nav.plugins')}</span>
         </span>
       </Link>
       
@@ -283,7 +285,7 @@ export default function Navigation() {
             <line x1="6" x2="6.01" y1="16" y2="16" />
             <line x1="10" x2="10.01" y1="16" y2="16" />
           </svg>
-          <span>Серверы</span>
+          <span>{t('nav.servers')}</span>
         </span>
       </Link>
 
@@ -367,7 +369,7 @@ export default function Navigation() {
               </g>
             </g>
           </svg>
-          <span>Modrinth App</span>
+          <span>{t('nav.app')}</span>
         </span>
       </Link>
       </div>

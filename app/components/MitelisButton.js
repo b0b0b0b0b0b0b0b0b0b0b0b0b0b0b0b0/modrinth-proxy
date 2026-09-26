@@ -2,8 +2,10 @@
 
 import { useRef, useEffect, useState } from 'react'
 import Lottie from 'lottie-react'
+import { useT } from './I18nProvider'
 
 export default function MitelisButton({ animationData }) {
+  const t = useT()
   const lottieRef = useRef(null)
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function MitelisButton({ animationData }) {
             />
           </div>
         )}
-        <span className="text-lg pr-2">Узнать больше о mitelis.net</span>
+        <span className="text-lg pr-2">{t('about.mitelisMore')}</span>
       </div>
     </a>
   )

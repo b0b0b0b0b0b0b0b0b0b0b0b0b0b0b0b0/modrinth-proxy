@@ -1,4 +1,7 @@
+'use client'
+
 import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
+import { useT } from './I18nProvider'
 
 function ExternalIcon() {
   return (
@@ -8,9 +11,9 @@ function ExternalIcon() {
   )
 }
 
-function translateDonationPlatform(platform) {
+function translateDonationPlatform(platform, t) {
   const platforms = {
-    Other: 'Донат',
+    Other: t('links.donate'),
     Patreon: 'Patreon',
     'Ko-fi': 'Ko-fi',
     PayPal: 'PayPal',
@@ -18,10 +21,11 @@ function translateDonationPlatform(platform) {
     'GitHub Sponsors': 'GitHub Sponsors',
     'Buy Me a Coffee': 'Buy Me a Coffee',
   }
-  return platforms[platform] || 'Донат'
+  return platforms[platform] || t('links.donate')
 }
 
 export default function ProjectLinksCard({ resource, includeSource = false }) {
+  const t = useT()
   const hasGitHubSource = Boolean(parseGitHubRepoFromSourceUrl(resource?.source_url))
   const showSource = includeSource
     ? Boolean(resource?.source_url)
@@ -44,7 +48,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
         <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
         </svg>
-        Ссылки
+        {t('links.title')}
       </h3>
       <div className="space-y-2">
         {resource.issues_url && (
@@ -52,7 +56,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
             <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <span className="group-hover:underline">Сообщить о проблеме</span>
+            <span className="group-hover:underline">{t('links.issues')}</span>
             <ExternalIcon />
           </a>
         )}
@@ -61,7 +65,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
             <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6l-6 6 6 6M16 18l6-6-6-6" />
             </svg>
-            <span className="group-hover:underline">Исходный код</span>
+            <span className="group-hover:underline">{t('links.source')}</span>
             <ExternalIcon />
           </a>
         )}
@@ -70,7 +74,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
             <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
-            <span className="group-hover:underline">Wiki</span>
+            <span className="group-hover:underline">{t('links.wiki')}</span>
             <ExternalIcon />
           </a>
         )}
@@ -79,7 +83,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
             <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
               <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z" />
             </svg>
-            <span className="group-hover:underline">Вступить в Discord</span>
+            <span className="group-hover:underline">{t('links.discord')}</span>
             <ExternalIcon />
           </a>
         )}
@@ -92,7 +96,7 @@ export default function ProjectLinksCard({ resource, includeSource = false }) {
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
                 </svg>
-                <span className="group-hover:underline">{translateDonationPlatform(donation.platform)}</span>
+                <span className="group-hover:underline">{translateDonationPlatform(donation.platform, t)}</span>
                 <ExternalIcon />
               </a>
             ))}

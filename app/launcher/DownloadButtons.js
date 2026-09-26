@@ -2,8 +2,10 @@
 
 import StyledTooltip from '../components/StyledTooltip'
 import { PirateIcon } from '../components/icons'
+import { useT } from '../components/I18nProvider'
 
 export default function DownloadButtons({ launcherData }) {
+  const t = useT()
   const handleDownload = (url) => {
     const link = document.createElement('a');
     link.href = url;
@@ -29,16 +31,16 @@ export default function DownloadButtons({ launcherData }) {
         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4875 4875" fill="currentColor">
           <path d="M0 0h2311v2310H0zm2564 0h2311v2310H2564zM0 2564h2311v2311H0zm2564 0h2311v2311H2564"></path>
         </svg>
-        Скачать Modrinth App
+        {t('app.download')}
       </button>
       <StyledTooltip
         side="bottom"
         contentClassName="!px-4 !py-3"
         label={
           <span className="flex flex-col items-center gap-1 text-center leading-snug">
-            <span className="text-sm font-semibold text-white">Посмотреть другие варианты</span>
+            <span className="text-sm font-semibold text-white">{t('app.otherTip')}</span>
             <span className="text-[11px] font-medium tracking-wide text-modrinth-green">
-              macOS · Linux · и другие
+              {t('app.otherOs')}
             </span>
           </span>
         }
@@ -47,7 +49,7 @@ export default function DownloadButtons({ launcherData }) {
           onClick={handleScrollToOptions}
           className="iconified-button outline-button btn btn-large bg-transparent border-2 border-gray-600 text-white font-bold py-4 px-8 rounded-2xl hover:border-modrinth-green hover:text-modrinth-green transition-all duration-300 text-lg cursor-pointer"
         >
-          У меня не Windows
+          {t('app.notWindows')}
         </button>
       </StyledTooltip>
     </div>
@@ -58,9 +60,9 @@ export default function DownloadButtons({ launcherData }) {
         contentClassName="!px-4 !py-3"
         label={
           <span className="flex flex-col items-center gap-1 text-center leading-snug">
-            <span className="text-sm font-semibold text-white">Играй без лицензии Minecraft</span>
+            <span className="text-sm font-semibold text-white">{t('app.noLicenseTip')}</span>
             <span className="max-w-[15rem] text-[11px] font-medium text-gray-300">
-              AstralRinth — тот же лаунчер, но с офлайн-режимом
+              {t('app.astralTip')}
             </span>
           </span>
         }
@@ -71,8 +73,8 @@ export default function DownloadButtons({ launcherData }) {
         >
           <PirateIcon className="w-4 h-4 text-modrinth-green" />
           <span>
-            Нет лицензии Minecraft? Есть{' '}
-            <span className="font-semibold text-modrinth-green">AstralRinth</span> с офлайн-режимом
+            {t('app.noLicense')}{' '}
+            <span className="font-semibold text-modrinth-green">AstralRinth</span> {t('app.withOffline')}
           </span>
           <svg
             className="w-4 h-4 text-gray-500 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-modrinth-green"

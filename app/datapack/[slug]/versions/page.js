@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
@@ -41,7 +41,7 @@ export default async function DatapackVersionsPage({ params, searchParams = {} }
   const { slug } = params;
   
   if (await isProjectBlocked(slug)) {
-    return <div className="text-center py-16"><Link href="/datapacks" className="inline-flex items-center gap-2 bg-modrinth-green text-black px-6 py-3 rounded-lg font-semibold">Вернуться</Link></div>
+    return <ProjectAccessRestricted href="/datapacks" backKey="project.backToDatapacks" />
   }
 
   const initialLoader = searchParams.l || 'all'

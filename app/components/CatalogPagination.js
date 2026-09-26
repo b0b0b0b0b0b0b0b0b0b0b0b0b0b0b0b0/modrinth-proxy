@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import StyledTooltip from '@/app/components/StyledTooltip'
+import { useI18n } from '@/app/components/I18nProvider'
+import { intlLocale } from '@/lib/i18n/config'
 import { buildCatalogPageUrl, getPaginationItems } from '@/lib/pagination'
 
 const buttonBase =
@@ -23,7 +25,7 @@ function NavLink({ href, label, children }) {
   )
 }
 
-function EditableCurrentPage({ page, totalPages, pathname, searchParams }) {
+function EditableCurrentPage({ page, totalPages, pathname, searchParams, t }) {
   const router = useRouter()
   const [editing, setEditing] = useState(false)
   const [value, setValue] = useState(String(page))
@@ -81,13 +83,13 @@ function EditableCurrentPage({ page, totalPages, pathname, searchParams }) {
         }}
         onBlur={cancel}
         className={`${buttonBase} w-[4.5rem] border-modrinth-green bg-modrinth-dark text-center font-medium text-modrinth-green-light outline-none ring-2 ring-modrinth-green/40`}
-        aria-label="Введите номер страницы"
+        aria-label={t('catalog.pager.enterPage')}
       />
     )
   }
 
   return (
-    <StyledTooltip label="Нажмите, чтобы перейти на страницу">
+    <StyledTooltip label={t('catalog.pager.jump')}>
       <button
         type="button"
         onClick={() => setEditing(true)}
@@ -107,20 +109,22 @@ export default function CatalogPagination({
   searchParams,
   className = '',
 }) {
+  const { t, locale } = useI18n()
   if (totalPages <= 1) return null
 
+  const nf = intlLocale(locale)
   const items = getPaginationItems(page, totalPages, { siblings: 2, boundaries: 1 })
   const hrefForPage = (targetPage) => buildCatalogPageUrl(pathname, searchParams, targetPage)
 
   return (
     <nav
-      aria-label="Пагинация каталога"
+      aria-label={t('catalog.pager.nav')}
       className={`flex flex-col items-center gap-3 ${className}`.trim()}
     >
       <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2">
         {page > 1 && (
-          <NavLink href={hrefForPage(page - 1)} label="Предыдущая страница">
-            <span className="hidden sm:inline">Назад</span>
+          <NavLink href={hrefForPage(page - 1)} label={t('catalog.pager.prev')}>
+            <span className="hidden sm:inline">{t('catalog.pager.back')}</span>
             <span className="sm:hidden">‹</span>
           </NavLink>
         )}
@@ -141,9 +145,10 @@ export default function CatalogPagination({
               totalPages={totalPages}
               pathname={pathname}
               searchParams={searchParams}
+              t={t}
             />
           ) : (
-            <StyledTooltip key={item.key} label={`Страница ${item.page.toLocaleString('ru-RU')}`}>
+            <StyledTooltip key={item.key} label={t('catalog.pager.pageN', { n: item.page.toLocaleString(nf) })}>
               <Link
                 href={hrefForPage(item.page)}
                 className={`${buttonBase} border-gray-700 bg-modrinth-dark text-gray-300 hover:border-modrinth-green hover:text-white`}
@@ -155,15 +160,18 @@ export default function CatalogPagination({
         )}
 
         {page < totalPages && (
-          <NavLink href={hrefForPage(page + 1)} label="Следующая страница">
-            <span className="hidden sm:inline">Вперёд</span>
+          <NavLink href={hrefForPage(page + 1)} label={t('catalog.pager.nextAria')}>
+            <span className="hidden sm:inline">{t('catalog.pager.next')}</span>
             <span className="sm:hidden">›</span>
           </NavLink>
         )}
       </div>
 
       <p className="text-xs text-gray-500 sm:text-sm">
-        Страница {page.toLocaleString('ru-RU')} из {totalPages.toLocaleString('ru-RU')}
+        {t('catalog.pager.pageOf', {
+          page: page.toLocaleString(nf),
+          total: totalPages.toLocaleString(nf),
+        })}
       </p>
     </nav>
   )

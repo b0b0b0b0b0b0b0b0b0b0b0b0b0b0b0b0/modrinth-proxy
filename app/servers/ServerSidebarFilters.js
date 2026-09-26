@@ -8,8 +8,11 @@ import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclus
 import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
+import { useT } from '@/app/components/I18nProvider'
+import { categoryLabel } from '@/lib/i18n/label'
 
 export default function ServerSidebarFilters({ onFilterChange, isMobile = false, initialVersions = null }) {
+  const t = useT()
   const router = useRouter()
   const searchParams = useSearchParams()
   const hookVersions = useMinecraftVersions()
@@ -180,7 +183,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
   const CategoryButton = ({ cat }) => (
     <CatalogFilterOption
       icon={cat.icon}
-      label={cat.name}
+      label={categoryLabel(t, cat.id, cat.name)}
       selected={selectedCategories.includes(cat.id)}
       excluded={excludedCategories.includes(cat.id)}
       onInclude={() => toggleCategory(cat.id)}
@@ -193,7 +196,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
       <div className="space-y-4">
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="type" label="Тип" />
+          <SectionHeader sectionKey="type" label={t('filter.type')} />
           {openSections.type && (
             <div className="p-4 pt-0 space-y-1">
               {SERVER_TYPES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
@@ -202,7 +205,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="features" label="Особенности" />
+          <SectionHeader sectionKey="features" label={t('filter.features')} />
           {openSections.features && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
               {SERVER_FEATURES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
@@ -211,7 +214,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="gameplay" label="Геймплей" />
+          <SectionHeader sectionKey="gameplay" label={t('filter.gameplay')} />
           {openSections.gameplay && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
               {SERVER_GAMEPLAY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
@@ -220,7 +223,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="config" label="Конфигурация" />
+          <SectionHeader sectionKey="config" label={t('filter.config')} />
           {openSections.config && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
               {SERVER_CONFIG.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
@@ -229,7 +232,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="community" label="Сообщество" />
+          <SectionHeader sectionKey="community" label={t('filter.community')} />
           {openSections.community && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
               {SERVER_COMMUNITY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
@@ -238,13 +241,13 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="version" label="Версия игры" />
+          <SectionHeader sectionKey="version" label={t('filter.gameVersion')} />
           {openSections.version && (
             <div className="p-4 pt-0">
               <div className="mb-2 relative">
                 <input
                   type="text"
-                  placeholder="Поиск..."
+                  placeholder={t('filter.search')}
                   value={versionSearch}
                   onChange={(e) => setVersionSearch(e.target.value)}
                   className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
@@ -308,7 +311,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                     )}
                   </div>
                   <span className="text-sm text-gray-400 group-hover:text-white transition-colors">
-                    Показать все версии
+                    {t('filter.showAllVersions')}
                   </span>
                 </button>
               </div>
@@ -317,7 +320,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="region" label="Регион" />
+          <SectionHeader sectionKey="region" label={t('filter.region')} />
           {openSections.region && (
             <div className="p-4 pt-0 space-y-1">
               {SERVER_REGIONS.map(reg => {
@@ -359,13 +362,13 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="language" label="Язык" />
+          <SectionHeader sectionKey="language" label={t('filter.language')} />
           {openSections.language && (
             <div className="p-4 pt-0">
               <div className="mb-2 relative">
                 <input
                   type="text"
-                  placeholder="Поиск..."
+                  placeholder={t('filter.search')}
                   value={languageSearch}
                   onChange={(e) => setLanguageSearch(e.target.value)}
                   className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
@@ -447,7 +450,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="status" label="Статус" />
+          <SectionHeader sectionKey="status" label={t('filter.status')} />
           {openSections.status && (
             <div className="p-4 pt-0 space-y-1">
               <button
@@ -515,7 +518,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
-              Сбросить фильтры
+              {t('filter.reset')}
             </button>
           </div>
         )}

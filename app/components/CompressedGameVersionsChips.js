@@ -4,6 +4,7 @@ import Link from 'next/link'
 import * as Popover from '@radix-ui/react-popover'
 import { facetMcVersionQuery, versionsForCompressedRange } from '@/lib/minecraftVersionSort'
 import StyledTooltip from './StyledTooltip'
+import { useT } from './I18nProvider'
 
 const chipLinkCls =
   'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-2 py-1 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform hover:underline active:scale-[0.95] outline-none'
@@ -18,8 +19,9 @@ function versionHref(browseRoute, versionSearchParam, v) {
   return `/${browseRoute}?${versionSearchParam}=${encodeURIComponent(v)}`
 }
 
-function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam, recommendedVersion }) {
+function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam, recommendedVersion, t }) {
   const expanded = versionsForCompressedRange(range, rawVersions)
+  const supports = (v) => t('server.supports', { v })
 
   let tooltipBody
   if (expanded.length > 1) {
@@ -32,17 +34,17 @@ function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam,
       </span>
     )
   } else if (expanded.length === 1) {
-    tooltipBody = <>Поддерживает {expanded[0]}</>
+    tooltipBody = <>{supports(expanded[0])}</>
   } else {
-    tooltipBody = <>Поддерживает {range}</>
+    tooltipBody = <>{supports(range)}</>
   }
 
   const ariaLabel =
     expanded.length > 1
       ? `${range}: ${expanded.join(', ')}`
       : expanded.length === 1
-        ? `Поддерживает ${expanded[0]}`
-        : `Поддерживает ${range}`
+        ? supports(expanded[0])
+        : supports(range)
 
   const v = facetMcVersionQuery(range, rawVersions)
   const duplicateRecommended =
@@ -77,14 +79,14 @@ function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam,
   )
 }
 
-function RecommendedVersionChip({ version, browseRoute, versionSearchParam }) {
+function RecommendedVersionChip({ version, browseRoute, versionSearchParam, t }) {
   return (
     <Link
       href={versionHref(browseRoute, versionSearchParam, version)}
       className={chipLinkCls}
     >
       {version}
-      <span className="text-[var(--text-muted)] opacity-80"> (рекомендуется)</span>
+      <span className="text-[var(--text-muted)] opacity-80"> ({t('server.recommended')})</span>
     </Link>
   )
 }
@@ -98,6 +100,7 @@ export default function CompressedGameVersionsChips({
   recommendedVersion = null,
   className = '',
 }) {
+  const t = useT()
   if (!ranges?.length && !recommendedVersion) return null
 
   const visible = ranges.slice(0, maxVisible)
@@ -110,6 +113,7 @@ export default function CompressedGameVersionsChips({
           version={recommendedVersion}
           browseRoute={browseRoute}
           versionSearchParam={versionSearchParam}
+          t={t}
         />
       )}
       {visible.map((range, idx) => (
@@ -120,6 +124,7 @@ export default function CompressedGameVersionsChips({
           rawVersions={rawVersions}
           versionSearchParam={versionSearchParam}
           recommendedVersion={recommendedVersion}
+          t={t}
         />
       ))}
       {overflow.length > 0 && (
@@ -128,7 +133,7 @@ export default function CompressedGameVersionsChips({
             <button
               type="button"
               className={`${chipMoreCls} hover:underline`}
-              aria-label={`Ещё ${overflow.length}`}
+              aria-label={t('server.more', { n: overflow.length })}
             >
               +{overflow.length}
             </button>
@@ -151,6 +156,7 @@ export default function CompressedGameVersionsChips({
                     rawVersions={rawVersions}
                     versionSearchParam={versionSearchParam}
                     recommendedVersion={recommendedVersion}
+                    t={t}
                   />
                 ))}
               </div>
