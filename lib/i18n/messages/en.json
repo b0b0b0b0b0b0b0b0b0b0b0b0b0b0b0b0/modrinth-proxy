@@ -92,6 +92,7 @@
     "pageHint": "Personalize catalog layout and features on this device.",
     "metaTitle": "Site settings | ModrinthProxy",
     "metaDesc": "Change how ModrinthProxy looks and behaves on this device.",
+    "languageTitle": "Language",
     "languageWarn": "If a translation is missing, some UI stays in English or Russian. The site is not fully translated yet.",
     "languageStandard": "Available languages",
     "languageSoon": "Later",

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { useT } from './I18nProvider'
 
 const STORAGE_KEY = 'feedbackThoughtDismissed'
 const Y_KEY = 'feedbackThoughtY'
@@ -124,6 +125,7 @@ function easeInOutCubic(t) {
 }
 
 export default function FeedbackThoughtBanner() {
+  const t = useT()
   const pathname = usePathname()
   const rootRef = useRef(null)
   const posRef = useRef({ x: 0, y: 0 })
@@ -387,8 +389,8 @@ export default function FeedbackThoughtBanner() {
           <button
             type="button"
             onClick={handleDismiss}
-            title="Закрыть"
-            aria-label="Закрыть"
+            title={t('fb.close')}
+            aria-label={t('fb.close')}
             className="absolute right-3 top-2.5 flex h-5 w-5 cursor-pointer items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
           >
             <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -397,7 +399,7 @@ export default function FeedbackThoughtBanner() {
           </button>
 
           <p className="mb-2.5 pr-5 text-xs font-semibold leading-relaxed">
-            У тебя есть предложение или нашёл баг?
+            {t('fb.offer')}
           </p>
 
           <button
@@ -405,7 +407,7 @@ export default function FeedbackThoughtBanner() {
             onClick={handleOpenIssues}
             className="inline-flex cursor-pointer items-center rounded-full bg-modrinth-green px-3 py-1.5 text-xs font-bold text-black shadow transition-all duration-200 hover:bg-modrinth-green-light active:scale-95"
           >
-            Напиши нам
+            {t('fb.write')}
           </button>
         </div>
       </div>

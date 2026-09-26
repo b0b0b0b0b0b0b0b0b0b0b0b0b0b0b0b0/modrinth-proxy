@@ -92,6 +92,7 @@
     "pageHint": "在此设备上自定义目录显示和功能。",
     "metaTitle": "网站设置 | ModrinthProxy",
     "metaDesc": "按此设备的偏好调整 ModrinthProxy 的外观与行为。",
+    "languageTitle": "语言",
     "languageWarn": "若缺少翻译，部分界面会回退为英语或俄语。站点尚未全部译完。",
     "languageStandard": "可用语言",
     "languageSoon": "稍后",

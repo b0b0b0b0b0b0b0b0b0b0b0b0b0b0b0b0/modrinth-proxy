@@ -3,8 +3,10 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
+import { useT } from './I18nProvider'
 
 export default function ExtensionBanner() {
+  const t = useT()
   const pathname = usePathname()
   const [visible, setVisible] = useState(false)
 
@@ -41,14 +43,14 @@ export default function ExtensionBanner() {
         <div className="relative">
           <div className="min-w-0 flex-1">
             <h3 className="mb-1 flex flex-wrap items-center gap-2 text-base font-bold text-white sm:text-lg">
-              Расширение для Chrome
+              {t('ext.bannerTitle')}
             </h3>
             <p className="mb-3 text-xs leading-relaxed text-gray-300 sm:mb-4 sm:text-sm">
-              Установите в Chrome и автоматически переходите с Modrinth на быстрый русскоязычный интерфейс
+              {t('ext.bannerHint')}
             </p>
 
             <div className="sm:hidden">
-              <span className="text-xs italic text-gray-400">Доступно только с ПК</span>
+              <span className="text-xs italic text-gray-400">{t('ext.pcOnly')}</span>
             </div>
 
             <div className="mt-3 hidden justify-center sm:flex">
@@ -59,7 +61,7 @@ export default function ExtensionBanner() {
                 <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
                   <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
                 </svg>
-                Что за расширение?
+                {t('ext.whatBtn')}
               </Link>
             </div>
           </div>
