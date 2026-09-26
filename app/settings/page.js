@@ -11,11 +11,8 @@ export async function generateMetadata() {
 }
 
 export default function SettingsPage() {
-  const { t } = getRequestT()
   return (
     <div className="max-w-7xl mx-auto py-8">
-      <h1 className="text-3xl font-extrabold text-white mb-2" id="settings-title">{t('settings.pageTitle')}</h1>
-      <p className="text-gray-400 mb-8 text-sm md:text-base">{t('settings.pageHint')}</p>
       <SettingsClient />
     </div>
   )

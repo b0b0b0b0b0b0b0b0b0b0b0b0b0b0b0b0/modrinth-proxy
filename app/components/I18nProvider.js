@@ -1,6 +1,7 @@
 'use client'
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { LOCALE_COOKIE, DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/config'
 import { getMessage, translate } from '@/lib/i18n/translate'
 
@@ -16,6 +17,7 @@ function writeLocaleCookie(locale) {
 }
 
 export function I18nProvider({ locale: initialLocale, children }) {
+  const router = useRouter()
   const [locale, setLocaleState] = useState(
     isEnabledLocale(initialLocale) ? initialLocale : DEFAULT_LOCALE,
   )
@@ -27,8 +29,10 @@ export function I18nProvider({ locale: initialLocale, children }) {
 
   const setLocale = useCallback((next) => {
     if (!isEnabledLocale(next)) return
+    writeLocaleCookie(next)
     setLocaleState(next)
-  }, [])
+    router.refresh()
+  }, [router])
 
   const t = useCallback((key, vars) => translate(locale, key, vars), [locale])
   const m = useCallback((key) => getMessage(locale, key), [locale])

@@ -138,15 +138,21 @@ export default function SettingsClient() {
 
   if (!mounted) {
     return (
-      <div className="animate-pulse space-y-6">
-        <div className="h-48 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
-        <div className="h-96 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
-      </div>
+      <>
+        <h1 className="text-3xl font-extrabold text-white mb-2" id="settings-title">{t('settings.pageTitle')}</h1>
+        <p className="text-gray-400 mb-8 text-sm md:text-base">{t('settings.pageHint')}</p>
+        <div className="animate-pulse space-y-6">
+          <div className="h-48 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
+          <div className="h-96 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
+        </div>
+      </>
     )
   }
 
   return (
     <>
+      <h1 className="text-3xl font-extrabold text-white mb-2" id="settings-title">{t('settings.pageTitle')}</h1>
+      <p className="text-gray-400 mb-8 text-sm md:text-base">{t('settings.pageHint')}</p>
       <SettingsMobileMenu />
       <div className="flex flex-col lg:flex-row gap-6">
       <SettingsNav />
