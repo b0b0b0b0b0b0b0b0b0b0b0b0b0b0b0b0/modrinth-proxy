@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Décommenter si tu utilises ForgeGradle",
     "devCommentGradle": "// Dépendance Gradle classique",
     "devCommentLoom": "// Dépendance Loom dépréciée",
-    "devCopyCode": "Copier le code"
+    "devCopyCode": "Copier le code",
+    "extraResources": "Ressources supplémentaires",
+    "fileCol": "Fichier",
+    "typeCol": "Type",
+    "sizeCol": "Taille",
+    "fileTypeUnknown": "Inconnu",
+    "fileTypeRequiredPack": "Pack de ressources obligatoire",
+    "fileTypeOptionalPack": "Pack de ressources facultatif"
   },
   "col": {
     "label": "Collection",
@@ -333,9 +340,15 @@
     "title": "Liens",
     "issues": "Signaler des problèmes",
     "source": "Code source",
-    "wiki": "Wiki",
+    "wiki": "Aller au wiki",
     "discord": "Rejoindre Discord",
-    "donate": "Faire un don"
+    "donate": "Faire un don",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Sponsoriser sur GitHub",
+    "donatePatreon": "Soutenir sur Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} étoile",

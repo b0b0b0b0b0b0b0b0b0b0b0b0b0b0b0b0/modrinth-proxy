@@ -26,6 +26,7 @@ import { DownloadFooterButton } from './DownloadModalParts'
 import DownloadModalPickers from './DownloadModalPickers'
 import DownloadCompatibleVersions from './DownloadCompatibleVersions'
 import DownloadVersionBundledFiles from './DownloadVersionBundledFiles'
+import { getInstallBundleFiles } from '@/lib/downloadBundledFiles'
 import Lottie from 'lottie-react'
 import bookmarkAnimation from '@/public/animations/bookmark.json'
 import noBookmarkAnimation from '@/public/animations/no_bookmark.json'
@@ -584,16 +585,16 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
   const buildZipName = () =>
     buildModrinthExtractZipName(mod?.title || mod?.slug, matchingVersion?.version_number)
 
-  const getVersionFiles = () => {
-    if (!matchingVersion?.files?.length) return []
-    return matchingVersion.files.map((file) => ({
+  const installFiles = useMemo(
+    () => getInstallBundleFiles(matchingVersion?.files, contentType, selectedLoader),
+    [matchingVersion?.files, contentType, selectedLoader],
+  )
+
+  const getAllDownloadFiles = () => {
+    const primaryFiles = installFiles.map((file) => ({
       url: file.url,
       filename: file.filename,
     }))
-  }
-
-  const getAllDownloadFiles = () => {
-    const primaryFiles = getVersionFiles()
     const depFiles = depItems.map((item) => ({
       url: item.url,
       filename: item.filename,
@@ -633,6 +634,26 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     ? t('project.downloadNamed', { title: downloadTooltipTitle })
     : t('version.download')
 
+  const versionDependencies = useMemo(
+    () => (matchingVersion ? fallbackDependenciesFromSiblings(matchingVersion, versions) : []),
+    [matchingVersion, versions],
+  )
+
+  const handleResolvedDeps = (files) => {
+    setDepItems((prev) => {
+      if (prev === files) return prev
+      if (!Array.isArray(files)) return prev.length === 0 ? prev : []
+      if (prev.length !== files.length) return files
+      const same = prev.every((item, index) => (
+        item?.url === files[index]?.url &&
+        item?.filename === files[index]?.filename &&
+        item?.versionId === files[index]?.versionId &&
+        item?.projectId === files[index]?.projectId
+      ))
+      return same ? prev : files
+    })
+  }
+
   const showDependencyDownloads =
     contentType === 'mod' ||
     contentType === 'mods' ||
@@ -646,17 +667,17 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     contentType !== 'resourcepack' &&
     contentType !== 'resourcepacks'
 
-  const bundleFileCount = useMemo(() => {
-    const primaryCount = matchingVersion?.files?.length || 0
-    return primaryCount + depItems.length
-  }, [matchingVersion?.files?.length, depItems.length])
+  const bundleFileCount = useMemo(
+    () => installFiles.length + depItems.length,
+    [installFiles.length, depItems.length],
+  )
 
   const showBundleFooter = bundleFileCount > 1
 
   const zipDownloadTooltip = useMemo(() => {
     const depCount = depItems.length
     const allFiles = [
-      ...(matchingVersion?.files || []).map((file) => file.filename),
+      ...installFiles.map((file) => file.filename),
       ...depItems.map((item) => item.filename),
     ].filter(Boolean)
     const depTitles = depItems.map((item) => item.title).filter(Boolean)
@@ -680,12 +701,12 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
         )}
       </span>
     )
-  }, [matchingVersion, depItems, t])
+  }, [matchingVersion, installFiles, depItems, t])
 
   const depsDownloadTooltip = useMemo(() => {
     const depCount = depItems.length
     const depTitles = depItems.map((item) => item.title).filter(Boolean)
-    const totalFiles = (matchingVersion?.files?.length || 0) + depCount
+    const totalFiles = installFiles.length + depCount
 
     return (
       <span className="flex flex-col gap-1.5 text-left leading-snug">
@@ -704,7 +725,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
         )}
       </span>
     )
-  }, [depItems, matchingVersion?.files?.length, mod?.title, t])
+  }, [depItems, installFiles.length, mod?.title, t])
 
   return (
     <>
@@ -887,14 +908,14 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
               {showDependencyDownloads && matchingVersion && selectedLoader && selectedMcVersion && (
                 <DownloadVersionDependencies
                   key={matchingVersion.id}
-                  dependencies={fallbackDependenciesFromSiblings(matchingVersion, versions)}
+                  dependencies={versionDependencies}
                   loader={selectedLoader}
                   gameVersion={selectedMcVersion}
                   contentType={contentType}
                   projectSlug={mod.slug}
                   projectTitle={mod.title}
                   versionNumber={matchingVersion.version_number || matchingVersion.id}
-                  onResolved={setDepItems}
+                  onResolved={handleResolvedDeps}
                 />
               )}
 

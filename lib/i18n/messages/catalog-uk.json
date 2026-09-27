@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Uncomment if using ForgeGradle",
     "devCommentGradle": "// Regular Gradle dependency",
     "devCommentLoom": "// Deprecated Loom dependency",
-    "devCopyCode": "Скопіювати код"
+    "devCopyCode": "Скопіювати код",
+    "extraResources": "Додаткові ресурси",
+    "fileCol": "Файл",
+    "typeCol": "Тип",
+    "sizeCol": "Розмір",
+    "fileTypeUnknown": "Невідомо",
+    "fileTypeRequiredPack": "Обовʼязковий ресурспак",
+    "fileTypeOptionalPack": "Необовʼязковий ресурспак"
   },
   "col": {
     "label": "Добірка",
@@ -333,9 +340,15 @@
     "title": "Посилання",
     "issues": "Повідомити про вади",
     "source": "Вихідний код",
-    "wiki": "Вікі",
+    "wiki": "Перейти до вікі",
     "discord": "Приєднатися до Discord",
-    "donate": "Підтримати"
+    "donate": "Підтримати",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Спонсорувати на GitHub",
+    "donatePatreon": "Підтримати на Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} зірка",

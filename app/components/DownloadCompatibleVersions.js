@@ -62,7 +62,7 @@ export default function DownloadCompatibleVersions({
 
   return (
     <div
-      className="flex flex-col gap-2.5 animate-fade-in-up"
+      className="flex flex-col gap-2.5"
       role={isChannelPicker ? 'radiogroup' : undefined}
       aria-label={isChannelPicker ? 'Совместимые версии' : undefined}
     >

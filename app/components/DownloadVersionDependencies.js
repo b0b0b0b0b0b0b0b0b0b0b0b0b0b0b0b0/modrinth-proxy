@@ -17,6 +17,24 @@ const clientCache = new Map()
 
 const RELEVANT_TYPES = new Set(['required', 'optional', 'embedded'])
 
+function sameResolvedFiles(a, b) {
+  if (a === b) return true
+  if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false
+  for (let i = 0; i < a.length; i++) {
+    const left = a[i]
+    const right = b[i]
+    if (
+      left?.url !== right?.url ||
+      left?.filename !== right?.filename ||
+      left?.versionId !== right?.versionId ||
+      left?.projectId !== right?.projectId
+    ) {
+      return false
+    }
+  }
+  return true
+}
+
 function normalizeDependencies(dependencies) {
   return Array.isArray(dependencies) ? dependencies : []
 }
@@ -209,18 +227,40 @@ export default function DownloadVersionDependencies({
   const [depsLoading, setDepsLoading] = useState(false)
   const onResolvedRef = useRef(onResolved)
   onResolvedRef.current = onResolved
+  const lastEmittedRef = useRef(null)
+
+  const publishResolved = (files) => {
+    const next = Array.isArray(files) ? files : []
+    if (sameResolvedFiles(lastEmittedRef.current, next)) return
+    lastEmittedRef.current = next
+    onResolvedRef.current?.(next)
+  }
 
   const isDatapack = isDatapackDownloadContext(contentType, loader)
+  const incomingDepsKey = useMemo(
+    () => buildCacheKey(normalizeDependencies(dependencies), projectSlug || '', String(versionNumber || '')),
+    [dependencies, projectSlug, versionNumber],
+  )
+  const dependenciesRef = useRef(dependencies)
+  const projectSlugRef = useRef(projectSlug)
+  const versionNumberRef = useRef(versionNumber)
+  dependenciesRef.current = dependencies
+  projectSlugRef.current = projectSlug
+  versionNumberRef.current = versionNumber
 
   useEffect(() => {
-    const local = normalizeDependencies(dependencies)
+    const local = normalizeDependencies(dependenciesRef.current)
+    const slug = projectSlugRef.current
+    const version = versionNumberRef.current
     if (filterRelevantDependencies(local).length > 0) {
-      setResolvedDependencies(local)
+      setResolvedDependencies((prev) =>
+        buildCacheKey(prev, 'x', 'x') === buildCacheKey(local, 'x', 'x') ? prev : local,
+      )
       setDepsLoading(false)
       return undefined
     }
 
-    if (!projectSlug || !versionNumber) {
+    if (!slug || !version) {
       setResolvedDependencies(local)
       setDepsLoading(false)
       return undefined
@@ -230,8 +270,8 @@ export default function DownloadVersionDependencies({
     setDepsLoading(true)
 
     const params = new URLSearchParams({
-      slug: projectSlug,
-      version: String(versionNumber),
+      slug,
+      version: String(version),
     })
 
     fetch(`/api/dependencies?${params.toString()}`)
@@ -239,12 +279,17 @@ export default function DownloadVersionDependencies({
       .then((data) => {
         if (cancelled) return
         const remote = Array.isArray(data) ? data : []
-        setResolvedDependencies(
-          filterRelevantDependencies(remote).length > 0 ? remote : local,
+        const next = filterRelevantDependencies(remote).length > 0 ? remote : local
+        setResolvedDependencies((prev) =>
+          buildCacheKey(prev, 'x', 'x') === buildCacheKey(next, 'x', 'x') ? prev : next,
         )
       })
       .catch(() => {
-        if (!cancelled) setResolvedDependencies(local)
+        if (!cancelled) {
+          setResolvedDependencies((prev) =>
+            buildCacheKey(prev, 'x', 'x') === buildCacheKey(local, 'x', 'x') ? prev : local,
+          )
+        }
       })
       .finally(() => {
         if (!cancelled) setDepsLoading(false)
@@ -253,7 +298,7 @@ export default function DownloadVersionDependencies({
     return () => {
       cancelled = true
     }
-  }, [dependencies, projectSlug, versionNumber])
+  }, [incomingDepsKey])
 
   const relevantDeps = useMemo(
     () => filterRelevantDependencies(resolvedDependencies),
@@ -262,6 +307,9 @@ export default function DownloadVersionDependencies({
 
   const canShowGraph = Boolean(projectSlug && versionNumber)
   const hasDeps = relevantDeps.length > 0
+
+  const resolvedDependenciesRef = useRef(resolvedDependencies)
+  resolvedDependenciesRef.current = resolvedDependencies
 
   const cacheKey = useMemo(
     () => (hasDeps && loader && gameVersion ? buildCacheKey(resolvedDependencies, loader, gameVersion) : ''),
@@ -272,7 +320,7 @@ export default function DownloadVersionDependencies({
     if (!cacheKey) {
       setItems([])
       setLoading(false)
-      onResolvedRef.current?.([])
+      publishResolved([])
       return undefined
     }
 
@@ -282,7 +330,7 @@ export default function DownloadVersionDependencies({
       const files = Array.isArray(cached) ? flattenDepTree(cached) : cached.files || []
       setItems(tree)
       setLoading(false)
-      onResolvedRef.current?.(files)
+      publishResolved(files)
       return undefined
     }
 
@@ -292,7 +340,7 @@ export default function DownloadVersionDependencies({
     fetch('/api/download-dependencies', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ dependencies: resolvedDependencies, loader, gameVersion }),
+      body: JSON.stringify({ dependencies: resolvedDependenciesRef.current, loader, gameVersion }),
     })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
@@ -303,12 +351,12 @@ export default function DownloadVersionDependencies({
           : flattenDepTree(tree)
         clientCache.set(cacheKey, { tree, files })
         setItems(tree)
-        onResolvedRef.current?.(files)
+        publishResolved(files)
       })
       .catch(() => {
         if (!cancelled) {
           setItems([])
-          onResolvedRef.current?.([])
+          publishResolved([])
         }
       })
       .finally(() => {
@@ -318,7 +366,7 @@ export default function DownloadVersionDependencies({
     return () => {
       cancelled = true
     }
-  }, [cacheKey, resolvedDependencies, loader, gameVersion])
+  }, [cacheKey, loader, gameVersion])
 
   const showResourcePackNotice = useMemo(() => {
     if (!isDatapack) return false
@@ -331,7 +379,7 @@ export default function DownloadVersionDependencies({
 
   return (
     <>
-      <div className="animate-fade-in-up mb-6 flex flex-col gap-2.5 rounded-2xl border border-gray-800 bg-modrinth-dark p-4">
+      <div className="mb-6 flex flex-col gap-2.5 rounded-2xl border border-gray-800 bg-modrinth-dark p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="m-0 flex items-center gap-1.5 text-base font-semibold text-gray-900 dark:text-white">
             Зависимости

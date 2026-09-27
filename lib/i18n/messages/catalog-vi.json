@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Bỏ comment nếu dùng ForgeGradle",
     "devCommentGradle": "// Dependency Gradle thông thường",
     "devCommentLoom": "// Dependency Loom đã lỗi thời",
-    "devCopyCode": "Sao chép mã"
+    "devCopyCode": "Sao chép mã",
+    "extraResources": "Tài nguyên bổ sung",
+    "fileCol": "Tệp",
+    "typeCol": "Loại",
+    "sizeCol": "Kích thước",
+    "fileTypeUnknown": "Không rõ",
+    "fileTypeRequiredPack": "Gói tài nguyên bắt buộc",
+    "fileTypeOptionalPack": "Gói tài nguyên tùy chọn"
   },
   "col": {
     "label": "Bộ sưu tập",
@@ -333,9 +340,15 @@
     "title": "Liên kết",
     "issues": "Báo lỗi",
     "source": "Mã nguồn",
-    "wiki": "Wiki",
+    "wiki": "Xem wiki",
     "discord": "Tham gia Discord",
-    "donate": "Ủng hộ"
+    "donate": "Ủng hộ",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Tài trợ trên GitHub",
+    "donatePatreon": "Ủng hộ trên Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} sao",

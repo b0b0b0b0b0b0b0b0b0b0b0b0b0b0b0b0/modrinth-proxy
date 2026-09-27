@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Раскройте при станѣ ForgeGradle",
     "devCommentGradle": "// Обычная зависимость Gradle",
     "devCommentLoom": "// Устарѣвшая зависимость Loom",
-    "devCopyCode": "Снять письмена"
+    "devCopyCode": "Снять письмена",
+    "extraResources": "Прибавочныя приклады",
+    "fileCol": "Оттискъ",
+    "typeCol": "Родъ",
+    "sizeCol": "Величина",
+    "fileTypeUnknown": "Неведомо",
+    "fileTypeRequiredPack": "Нужный ресурспакъ",
+    "fileTypeOptionalPack": "Необязательный ресурспакъ"
   },
   "col": {
     "label": "Кабинетъ",
@@ -333,9 +340,15 @@
     "title": "Ссылки",
     "issues": "Подать жалобу",
     "source": "Подлинникъ",
-    "wiki": "Wiki",
+    "wiki": "Итить въ вики",
     "discord": "Вступить въ Discord",
-    "donate": "Пожертвованіе"
+    "donate": "Пожертвованіе",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Спонсировать на GitHub",
+    "donatePatreon": "Поддержать на Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} звѣзда",

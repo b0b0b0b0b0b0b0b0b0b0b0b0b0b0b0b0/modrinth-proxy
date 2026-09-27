@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Uncomment if using ForgeGradle",
     "devCommentGradle": "// Regular Gradle dependency",
     "devCommentLoom": "// Deprecated Loom dependency",
-    "devCopyCode": "Kopēt kodu"
+    "devCopyCode": "Kopēt kodu",
+    "extraResources": "Papildu resursi",
+    "fileCol": "Fails",
+    "typeCol": "Veids",
+    "sizeCol": "Izmērs",
+    "fileTypeUnknown": "Nezināms",
+    "fileTypeRequiredPack": "Obligātais resursu komplekts",
+    "fileTypeOptionalPack": "Neobligāts resursu komplekts"
   },
   "col": {
     "label": "Kolekcija",
@@ -333,9 +340,15 @@
     "title": "Saites",
     "issues": "Ziņot par problēmām",
     "source": "Pirmkods",
-    "wiki": "Wiki",
+    "wiki": "Doties uz viki",
     "discord": "Pievienoties Discord",
-    "donate": "Ziedot"
+    "donate": "Ziedot",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Sponsorēt GitHub",
+    "donatePatreon": "Atbalstīt Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} zvaigzne",

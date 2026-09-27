@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Avkommentera om du använder ForgeGradle",
     "devCommentGradle": "// Vanligt Gradle-beroende",
     "devCommentLoom": "// Föråldrat Loom-beroende",
-    "devCopyCode": "Kopiera kod"
+    "devCopyCode": "Kopiera kod",
+    "extraResources": "Ytterligare resurser",
+    "fileCol": "Fil",
+    "typeCol": "Typ",
+    "sizeCol": "Storlek",
+    "fileTypeUnknown": "Okänd",
+    "fileTypeRequiredPack": "Obligatoriskt resurspaket",
+    "fileTypeOptionalPack": "Valfritt resurspaket"
   },
   "col": {
     "label": "Samling",
@@ -333,9 +340,15 @@
     "title": "Länkar",
     "issues": "Rapportera problem",
     "source": "Källkod",
-    "wiki": "Wiki",
+    "wiki": "Gå till wikin",
     "discord": "Gå med i Discord",
-    "donate": "Donera"
+    "donate": "Donera",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Sponsra på GitHub",
+    "donatePatreon": "Stöd på Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} stjärna",

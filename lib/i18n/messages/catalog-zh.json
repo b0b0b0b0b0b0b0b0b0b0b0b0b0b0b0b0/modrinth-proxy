@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // 使用 ForgeGradle 时取消注释",
     "devCommentGradle": "// 普通 Gradle 依赖",
     "devCommentLoom": "// 已过时的 Loom 依赖",
-    "devCopyCode": "复制代码"
+    "devCopyCode": "复制代码",
+    "extraResources": "附加资源",
+    "fileCol": "文件",
+    "typeCol": "类型",
+    "sizeCol": "大小",
+    "fileTypeUnknown": "未知",
+    "fileTypeRequiredPack": "必需资源包",
+    "fileTypeOptionalPack": "可选资源包"
   },
   "col": {
     "label": "收藏",
@@ -333,9 +340,15 @@
     "title": "链接",
     "issues": "反馈问题",
     "source": "源代码",
-    "wiki": "Wiki",
+    "wiki": "前往 Wiki",
     "discord": "加入 Discord",
-    "donate": "捐赠"
+    "donate": "捐赠",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "在 GitHub 上赞助",
+    "donatePatreon": "在 Patreon 上支持",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} 星标",

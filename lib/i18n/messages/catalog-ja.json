@@ -266,7 +266,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Uncomment if using ForgeGradle",
     "devCommentGradle": "// Regular Gradle dependency",
     "devCommentLoom": "// Deprecated Loom dependency",
-    "devCopyCode": "コードをコピー"
+    "devCopyCode": "コードをコピー",
+    "extraResources": "追加リソース",
+    "fileCol": "ファイル",
+    "typeCol": "種類",
+    "sizeCol": "サイズ",
+    "fileTypeUnknown": "不明",
+    "fileTypeRequiredPack": "必須リソースパック",
+    "fileTypeOptionalPack": "任意リソースパック"
   },
   "col": {
     "label": "コレクション",
@@ -333,9 +340,15 @@
     "title": "リンク",
     "issues": "問題を報告",
     "source": "ソースコード",
-    "wiki": "Wiki",
+    "wiki": "Wiki を見る",
     "discord": "Discordに参加",
-    "donate": "寄付"
+    "donate": "寄付",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "GitHub でスポンサー",
+    "donatePatreon": "Patreon で支援",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n}つのスター",

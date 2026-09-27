@@ -392,7 +392,14 @@
     "devCommentForge": "        // forRepositories(fg.repository) // Раскомментируйте при использовании ForgeGradle",
     "devCommentGradle": "// Обычная зависимость Gradle",
     "devCommentLoom": "// Устаревшая зависимость Loom",
-    "devCopyCode": "Скопировать код"
+    "devCopyCode": "Скопировать код",
+    "extraResources": "Дополнительные ресурсы",
+    "fileCol": "Файл",
+    "typeCol": "Тип",
+    "sizeCol": "Размер",
+    "fileTypeUnknown": "Неизвестно",
+    "fileTypeRequiredPack": "Обязательный ресурспак",
+    "fileTypeOptionalPack": "Необязательный ресурспак"
   },
   "col": {
     "label": "Коллекция",
@@ -486,9 +493,15 @@
     "title": "Ссылки",
     "issues": "Сообщить о проблеме",
     "source": "Исходный код",
-    "wiki": "Wiki",
+    "wiki": "Перейти в вики",
     "discord": "Вступить в Discord",
-    "donate": "Донат"
+    "donate": "Донат",
+    "donateBmac": "Buy Me a Coffee",
+    "donateGithub": "Спонсировать на GitHub",
+    "donatePatreon": "Поддержать на Patreon",
+    "donatePaypal": "PayPal",
+    "donateKofi": "Ko-fi",
+    "donateOpenCollective": "Open Collective"
   },
   "gh": {
     "starOne": "{n} звезда",

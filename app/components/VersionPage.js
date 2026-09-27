@@ -26,6 +26,7 @@ import VersionDeveloperInfo from './VersionDeveloperInfo'
 import ProjectLinksCard from './ProjectLinksCard'
 import StyledTooltip from './StyledTooltip'
 import { getRequestT } from '@/lib/i18n/server'
+import { getSupplementaryVersionFiles } from '@/lib/downloadBundledFiles'
 
 const DEPENDENCY_CONTENT_TYPES = new Set(['mod', 'plugin', 'datapack'])
 
@@ -218,92 +219,80 @@ function VersionCompatibility({ version, project, t }) {
   )
 }
 
-class FilesList {
-  constructor(files, projectAccent, t) {
-    this.files = files
-    this.projectAccent = projectAccent
-    this.t = t
-  }
-
-  render() {
-    return (
-      <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 mb-6">
-        <h2 className="text-xl font-bold mb-3">{this.t('version.files')}</h2>
-        <div className="space-y-2">
-          {this.files.map((file) => (
-            <FileItem key={file.hashes.sha1} file={file} projectAccent={this.projectAccent} t={this.t} />
-          ))}
-        </div>
-      </div>
-    )
-  }
+function versionFileTypeLabel(file, t) {
+  if (file?.file_type === 'required-resource-pack') return t('version.fileTypeRequiredPack')
+  if (file?.file_type === 'optional-resource-pack') return t('version.fileTypeOptionalPack')
+  return t('version.fileTypeUnknown')
 }
 
-function FileItem({ file, projectAccent, t }) {
-  const isPrimary = file.primary
-  const useAccent = Boolean(isPrimary && projectAccent)
-  const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
+function fileRowKey(file, index) {
+  return file?.hashes?.sha1 || file?.hashes?.sha512 || file?.url || `${file?.filename || 'file'}-${index}`
+}
 
-  const rowChrome = `${
-    isPrimary
-      ? 'bg-[rgba(27,217,106,.25)] hover:bg-[rgba(27,217,106,.3)]'
-      : 'hover:bg-[var(--bg-hover)]'
-  }`
-  const rowStyleInactive = !isPrimary ? { backgroundColor: 'var(--bg-tertiary)' } : {}
-
-  const inner = (
-    <>
-      <div className="flex items-center gap-3 flex-1 min-w-0">
-        <svg className="w-5 h-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5zM14 2v6h6" />
-        </svg>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1 mb-0.5">
-            <span className="font-semibold text-white truncate">{file.filename}</span>
-            <span className="text-sm text-gray-400 flex-shrink-0">({formatFileSize(file.size)})</span>
-          </div>
-          {isPrimary && (
-            <span className="inline-block px-2 py-0.5 bg-blue-900 text-blue-300 text-xs rounded-full font-semibold">
-              {t('version.primary')}
-            </span>
-          )}
-        </div>
-      </div>
-      <span
-        className={`pointer-events-none flex-shrink-0 inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold ${
-          isPrimary
-            ? useAccent
-              ? ''
-              : 'bg-modrinth-green text-black'
-            : 'bg-modrinth-dark text-gray-400'
-        }`}
-        style={
-          useAccent
-            ? {
-                backgroundColor: projectAccent.accentHex,
-                color: projectAccent.activeFgHex,
-              }
-            : undefined
-        }
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-        </svg>
-        <span className="text-sm">{t('version.download')}</span>
-      </span>
-    </>
-  )
+function SupplementaryVersionFiles({ files, t }) {
+  const extras = getSupplementaryVersionFiles(files)
+  if (extras.length === 0) return null
 
   return (
-    <div className={`rounded-xl p-2 transition ${rowChrome}`} style={rowStyleInactive}>
-      {dl ? (
-        <a href={dl} download className="flex items-center justify-between gap-3 text-inherit no-underline hover:no-underline">
-          {inner}
-        </a>
-      ) : (
-        <div className="flex items-center justify-between gap-3">{inner}</div>
-      )}
-    </div>
+    <section id="supplementary-resources" className="mb-6">
+      <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.extraResources')}</h3>
+      <div className="overflow-hidden rounded-2xl border border-solid border-gray-800">
+        <div className="overflow-x-auto overflow-y-hidden">
+          <table className="w-full min-w-[36rem] border-separate border-spacing-0 table-fixed">
+            <thead>
+              <tr className="bg-[var(--bg-tertiary)]">
+                <th className="h-12 px-4 text-left text-sm font-semibold text-gray-200" style={{ width: '20rem' }}>
+                  {t('version.fileCol')}
+                </th>
+                <th className="h-12 px-3 text-left text-sm font-semibold text-gray-200" style={{ width: '14rem' }}>
+                  {t('version.typeCol')}
+                </th>
+                <th className="h-12 px-3 text-left text-sm font-semibold text-gray-200" style={{ width: '5rem' }}>
+                  {t('version.sizeCol')}
+                </th>
+                <th className="h-12 px-4 text-left" style={{ width: '14rem' }} />
+              </tr>
+            </thead>
+            <tbody>
+              {extras.map((file, index) => {
+                const dl = typeof file.url === 'string' && file.url.trim() ? file.url.trim() : null
+                return (
+                  <tr key={fileRowKey(file, index)} className="bg-modrinth-dark">
+                    <td className="h-14 overflow-hidden border-0 border-t border-solid border-gray-800 px-4 text-left text-sm text-gray-400">
+                      <span className="block truncate" title={file.filename}>
+                        {file.filename}
+                      </span>
+                    </td>
+                    <td className="h-14 overflow-hidden border-0 border-t border-solid border-gray-800 px-3 text-left text-sm text-gray-400">
+                      {versionFileTypeLabel(file, t)}
+                    </td>
+                    <td className="h-14 overflow-hidden border-0 border-t border-solid border-gray-800 px-3 text-left text-sm text-gray-400 whitespace-nowrap">
+                      {formatFileSize(file.size)}
+                    </td>
+                    <td className="h-14 overflow-hidden border-0 border-t border-solid border-gray-800 px-4 text-left">
+                      {dl ? (
+                        <div className="flex items-center justify-end">
+                          <a
+                            href={dl}
+                            download={file.filename || true}
+                            className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-[var(--bg-tertiary)] px-2.5 text-base font-semibold leading-5 text-gray-200 no-underline hover:brightness-110"
+                          >
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="size-5 shrink-0" aria-hidden>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4" />
+                            </svg>
+                            {t('version.download')}
+                          </a>
+                        </div>
+                      ) : null}
+                    </td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -314,7 +303,6 @@ export default async function VersionPage({ project, version, author, contentTyp
   const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]
   const versionType = getVersionTypeInfo(version.version_type)
   const projectAccent = resolveModrinthProjectAccent(project.color)
-  const filesList = new FilesList(version.files || [], projectAccent, t)
   const downloadStyle = projectAccent
     ? { backgroundColor: projectAccent.accentHex, color: projectAccent.activeFgHex }
     : undefined
@@ -426,7 +414,7 @@ export default async function VersionPage({ project, version, author, contentTyp
             versionId={version.id}
           />
 
-          {filesList.render()}
+          <SupplementaryVersionFiles files={version.files || []} t={t} />
 
           {DEPENDENCY_CONTENT_TYPES.has(contentType) && (
             <DownloadVersionDependencies

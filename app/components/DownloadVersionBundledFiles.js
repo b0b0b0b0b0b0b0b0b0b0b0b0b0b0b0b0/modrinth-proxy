@@ -51,7 +51,7 @@ export default function DownloadVersionBundledFiles({ files, contentType, loader
   const showResourcePackNotice = versionHasBundledResourcePack(files)
 
   return (
-    <div className="animate-fade-in-up flex flex-col gap-2.5">
+    <div className="flex flex-col gap-2.5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="m-0 flex items-center gap-1.5 text-base font-semibold text-gray-900 dark:text-white">
           Зависимости
