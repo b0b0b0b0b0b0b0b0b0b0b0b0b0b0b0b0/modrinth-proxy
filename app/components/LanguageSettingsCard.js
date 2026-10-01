@@ -24,23 +24,25 @@ export default function LanguageSettingsCard() {
         {t('settings.languageTitle')}
       </h2>
 
-      <div className="relative mt-2 mb-4 grid grid-cols-[1.5rem_minmax(0,1fr)] items-start gap-x-2 rounded-2xl border border-solid border-orange-500/45 bg-orange-500/[0.12] p-4 text-gray-200">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="none"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          className="h-6 w-6 flex-none text-orange-400"
-          aria-hidden
-        >
-          <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0M12 9v4M12 17h.01" />
-        </svg>
-        <p className="m-0 min-w-0 text-sm font-normal leading-tight text-gray-200/90">
+      <div className="relative mt-2 mb-4 flex items-center gap-3 rounded-2xl border border-solid border-orange-500/40 bg-orange-500/[0.12] px-3 py-2.5">
+        <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-orange-500/20 text-orange-600 dark:text-orange-400">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            className="size-5"
+            aria-hidden
+          >
+            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0M12 9v4M12 17h.01" />
+          </svg>
+        </span>
+        <p className="m-0 min-w-0 text-sm font-normal leading-snug text-[var(--text-primary)]">
           {t('settings.languageWarn')}
         </p>
       </div>
