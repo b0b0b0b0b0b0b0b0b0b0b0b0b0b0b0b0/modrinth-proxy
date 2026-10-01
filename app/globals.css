@@ -1223,8 +1223,309 @@ html:not(.dark) .newyear-drift path {
 }
 
 html:not(.dark) .halloween-ghost {
-  color: rgba(255, 255, 255, 0.92);
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.12));
+  color: #d8cfe8;
+  filter:
+    drop-shadow(0 0 0.8px rgba(48, 32, 64, 0.7))
+    drop-shadow(1px 3px 0 rgba(48, 32, 64, 0.22))
+    drop-shadow(0 0 12px rgba(255, 120, 40, 0.45));
+}
+
+html:not(.dark) .halloween-ghost svg path:first-child {
+  stroke: rgba(52, 36, 72, 0.55);
+  stroke-width: 1.4;
+}
+
+html:not(.dark) .halloween-eye {
+  background: #ff8a12;
+  box-shadow:
+    0 0 0 1.5px rgba(90, 36, 0, 0.55),
+    0 0 10px 3px rgba(255, 110, 0, 0.95),
+    0 0 22px 8px rgba(230, 70, 0, 0.45);
+}
+
+html:not(.dark) .halloween-ember {
+  width: 6px;
+  height: 6px;
+  background: #e25a00;
+  box-shadow:
+    0 0 8px 3px rgba(255, 100, 0, 0.95),
+    0 0 18px 7px rgba(255, 70, 0, 0.4);
+}
+
+html:not(.dark) .halloween-pumpkin {
+  filter:
+    drop-shadow(0 0 0.6px rgba(80, 32, 0, 0.55))
+    drop-shadow(0 0 12px rgba(230, 90, 0, 0.7))
+    drop-shadow(0 3px 5px rgba(0, 0, 0, 0.28));
+}
+
+html:not(.dark) .halloween-jsbat img {
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 8px rgba(255, 110, 20, 0.4));
+}
+
+.bday-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 24;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bday-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(540px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  padding: 10px 12px;
+  border-radius: 18px;
+  color: #fff8f0;
+  background: rgba(42, 28, 48, 0.92);
+  border: 1px solid rgba(255, 182, 193, 0.35);
+  box-shadow: 0 12px 32px -12px rgba(80, 20, 60, 0.55);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.bday-banner-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.bday-banner-title {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.bday-banner-text {
+  margin: 3px 0 0;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.bday-banner-play {
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  font-weight: 500;
+  opacity: 0.82;
+}
+
+.bday-banner-score {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 4px;
+  min-width: 2.6rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.bday-banner-score .bday-cookie-svg {
+  width: 22px;
+  height: 22px;
+}
+
+.bday-banner-close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bday-banner-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.bday-banner .bday-cake {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.bday-confetti {
+  position: absolute;
+  top: -12px;
+  border-radius: 2px;
+  opacity: 0.92;
+  animation-name: bday-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.bday-confetti--1 {
+  border-radius: 50%;
+}
+
+.bday-confetti--2 {
+  border-radius: 1px 6px;
+}
+
+.bday-balloon {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.35);
+  animation-name: bday-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
+}
+
+.bday-balloon svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bday-pin {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 34px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.bday-cake,
+.bday-hat {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+}
+
+.bday-hat-tilt {
+  display: block;
+  transform: rotate(var(--bday-tilt, -22deg));
+  transform-origin: 50% 88%;
+  animation: bday-hat-wobble 3.6s ease-in-out infinite;
+}
+
+.bday-game {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bday-cookie {
+  position: absolute;
+  top: -8%;
+  z-index: 36;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: grab;
+  animation-name: bday-cookie-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  filter: drop-shadow(0 4px 6px rgba(40, 20, 10, 0.35));
+}
+
+.bday-cookie:hover,
+.bday-cookie:focus-visible {
+  cursor: grabbing;
+  filter: drop-shadow(0 0 10px rgba(255, 180, 80, 0.65)) drop-shadow(0 4px 6px rgba(40, 20, 10, 0.35));
+}
+
+.bday-cookie-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@keyframes bday-fall {
+  0% { transform: translate3d(0, 0, 0) rotate(var(--bday-rot, 0deg)); opacity: 0; }
+  10% { opacity: 0.95; }
+  100% { transform: translate3d(18px, 108vh, 0) rotate(calc(var(--bday-rot, 0deg) + 220deg)); opacity: 0.2; }
+}
+
+@keyframes bday-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-4deg); }
+  50% { transform: translate3d(10px, -14px, 0) rotate(5deg); }
+}
+
+@keyframes bday-hat-wobble {
+  0%, 100% { transform: rotate(var(--bday-tilt, -22deg)); }
+  50% { transform: rotate(calc(var(--bday-tilt, -22deg) + 10deg)); }
+}
+
+@keyframes bday-cookie-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% { opacity: 1; }
+  100% {
+    transform: translate3d(var(--bday-drift, 24px), 115vh, 0) rotate(calc(var(--bday-spin, 1) * 240deg));
+    opacity: 0.85;
+  }
+}
+
+@media (max-width: 1023px) {
+  .bday-balloon--desk {
+    display: none;
+  }
+  .bday-confetti:nth-child(n+16) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bday-confetti,
+  .bday-balloon,
+  .bday-cookie {
+    animation: none;
+    display: none;
+  }
+  .bday-hat-tilt {
+    animation: none;
+  }
+}
+
+html:not(.dark) .bday-banner {
+  color: #3b2438;
+  background: rgba(255, 246, 250, 0.94);
+  border: 1px solid rgba(214, 90, 130, 0.28);
+  box-shadow: 0 12px 28px -14px rgba(80, 20, 50, 0.35);
+}
+
+html:not(.dark) .bday-banner-close:hover {
+  background: rgba(59, 36, 56, 0.08);
+}
+
+html:not(.dark) .bday-balloon {
+  color: rgba(60, 40, 70, 0.45);
+  filter: drop-shadow(0 3px 5px rgba(40, 20, 40, 0.2));
+}
+
+html:not(.dark) .bday-confetti {
+  box-shadow: 0 0 0 1px rgba(40, 20, 40, 0.18);
 }
 
 html:not(.dark) .feedback-thought {

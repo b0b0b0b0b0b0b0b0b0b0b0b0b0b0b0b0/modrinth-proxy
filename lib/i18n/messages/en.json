@@ -150,5 +150,12 @@
     "resetHint": "If the UI looks wrong, or you just want the defaults back.",
     "resetBtn": "Reset settings",
     "resetting": "Resetting…"
+  },
+  "birthday": {
+    "banner": "Virtual cake, real mods — still free.",
+    "close": "Close",
+    "play": "Catch the cookies with your mouse. Crunch-crunch.",
+    "score": "{n}",
+    "title": "It's ModrinthProxy's birthday."
   }
 }

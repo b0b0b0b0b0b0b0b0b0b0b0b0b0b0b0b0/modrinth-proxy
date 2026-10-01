@@ -150,5 +150,12 @@
     "resetHint": "如果界面显示不对，或你只想恢复默认设置。",
     "resetBtn": "重置设置",
     "resetting": "正在重置…"
+  },
+  "birthday": {
+    "banner": "蛋糕是虚拟的，模组是真的——而且全部免费。",
+    "close": "关闭",
+    "play": "用鼠标抓住饼干。咔嚓咔嚓。",
+    "score": "{n}",
+    "title": "今天是 ModrinthProxy 的生日。"
   }
 }

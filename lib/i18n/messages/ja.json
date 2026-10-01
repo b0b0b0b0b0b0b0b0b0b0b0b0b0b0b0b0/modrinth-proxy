@@ -150,5 +150,12 @@
     "resetHint": "UIがおかしいとき、または既定に戻したいとき。",
     "resetBtn": "設定をリセット",
     "resetting": "リセット中…"
+  },
+  "birthday": {
+    "banner": "ケーキはバーチャル、Modは本物。ずっと無料です。",
+    "close": "閉じる",
+    "play": "マウスでクッキーをキャッチ。ポリポリ。",
+    "score": "{n}",
+    "title": "今日は ModrinthProxy の誕生日。"
   }
 }

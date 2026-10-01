@@ -150,5 +150,12 @@
     "resetHint": "Se l’interfaccia è storto, o vuoi solo i valori predefiniti.",
     "resetBtn": "Reimposta impostazioni",
     "resetting": "Reimpostazione…"
+  },
+  "birthday": {
+    "banner": "Torta virtuale, mod vere — tutto gratis.",
+    "close": "Chiudi",
+    "play": "Prendi i biscotti col mouse. Croc-croc.",
+    "score": "{n}",
+    "title": "Oggi è il compleanno di ModrinthProxy."
   }
 }

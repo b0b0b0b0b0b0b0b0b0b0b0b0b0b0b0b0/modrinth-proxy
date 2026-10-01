@@ -150,5 +150,12 @@
     "resetHint": "Nếu giao diện lệch, hoặc bạn chỉ muốn về mặc định.",
     "resetBtn": "Đặt lại cài đặt",
     "resetting": "Đang đặt lại…"
+  },
+  "birthday": {
+    "banner": "Bánh ảo, mod thật — vẫn miễn phí.",
+    "close": "Đóng",
+    "play": "Bắt bánh quy bằng chuột. Giòn-giòn.",
+    "score": "{n}",
+    "title": "Hôm nay là sinh nhật ModrinthProxy."
   }
 }

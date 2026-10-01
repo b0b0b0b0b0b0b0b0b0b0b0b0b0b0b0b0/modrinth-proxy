@@ -15,6 +15,7 @@ import ExtensionBanner from './components/ExtensionBanner'
 import FeedbackThoughtBanner from './components/FeedbackThoughtBanner'
 import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
+import BirthdayEffects from './components/BirthdayEffects'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { I18nProvider } from './components/I18nProvider'
@@ -181,6 +182,7 @@ export default async function RootLayout({ children }) {
           <FeedbackThoughtBanner />
           <HalloweenEffects />
           <NewYearEffects />
+          <BirthdayEffects />
           </I18nProvider>
           </AppTooltipProvider>
         </ThemeProvider>

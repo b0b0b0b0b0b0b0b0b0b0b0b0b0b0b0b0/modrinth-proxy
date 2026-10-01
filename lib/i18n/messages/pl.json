@@ -150,5 +150,12 @@
     "resetHint": "Jeśli interfejs wygląda źle, albo chcesz wrócić do ustawień domyślnych.",
     "resetBtn": "Resetuj ustawienia",
     "resetting": "Resetowanie…"
+  },
+  "birthday": {
+    "banner": "Wirtualny tort, prawdziwe mody — nadal za darmo.",
+    "close": "Zamknij",
+    "play": "Łap ciasteczka myszką. Chrup-chrup.",
+    "score": "{n}",
+    "title": "Dziś urodziny ModrinthProxy."
   }
 }

@@ -150,5 +150,12 @@
     "resetHint": "Se a interface ficou estranha, ou você só quer os padrões de volta.",
     "resetBtn": "Redefinir configurações",
     "resetting": "Redefinindo…"
+  },
+  "birthday": {
+    "banner": "Bolo virtual, mods de verdade — tudo grátis.",
+    "close": "Fechar",
+    "play": "Pegue os biscoitos com o mouse. Croc-croc.",
+    "score": "{n}",
+    "title": "Hoje é o aniversário do ModrinthProxy."
   }
 }
