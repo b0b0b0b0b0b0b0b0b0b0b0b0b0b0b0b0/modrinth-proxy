@@ -158,39 +158,37 @@ export default function DownloadTrendChart({ trend }) {
   const header = (
     <div className="flex flex-wrap items-center justify-between gap-3">
       <h2 className="text-base font-bold text-white">{t('trend.title')}</h2>
-      {model.known > 0 ? (
-        <div className="inline-flex rounded-lg border border-gray-800 p-0.5">
-          {PERIODS.map((p) => {
-            const enabled = enabledPeriods.includes(p)
-            const active = p === period
-            return (
-              <button
-                key={p}
-                type="button"
-                disabled={!enabled}
-                onClick={() => setPeriod(p)}
-                aria-pressed={active}
-                className={[
-                  'rounded-md px-2.5 py-1 text-xs font-semibold transition-colors',
-                  active
-                    ? 'bg-modrinth-green text-black'
-                    : enabled
-                      ? 'text-gray-400 hover:text-white'
-                      : 'cursor-not-allowed text-gray-600 opacity-50',
-                ].join(' ')}
-              >
-                {t('trend.period', { n: p })}
-              </button>
-            )
-          })}
-        </div>
-      ) : null}
+      <div className="inline-flex rounded-lg border border-gray-800 p-0.5">
+        {PERIODS.map((p) => {
+          const enabled = enabledPeriods.includes(p)
+          const active = p === period
+          return (
+            <button
+              key={p}
+              type="button"
+              disabled={!enabled}
+              onClick={() => setPeriod(p)}
+              aria-pressed={active}
+              className={[
+                'rounded-md px-2.5 py-1 text-xs font-semibold transition-colors',
+                active
+                  ? 'bg-modrinth-green text-black'
+                  : enabled
+                    ? 'text-gray-400 hover:text-white'
+                    : 'cursor-not-allowed text-gray-600 opacity-50',
+              ].join(' ')}
+            >
+              {t('trend.period', { n: p })}
+            </button>
+          )
+        })}
+      </div>
     </div>
   )
 
   const todayTile = (
     <Tile
-      label={model.known > 0 ? t('trend.today') : t('trend.sinceStart')}
+      label={t('trend.today')}
       value={today.value === null ? '—' : `+${formats.compact.format(today.value)}`}
       hint={
         <span className="inline-flex items-center gap-1.5">
@@ -204,19 +202,7 @@ export default function DownloadTrendChart({ trend }) {
     />
   )
 
-  if (model.known === 0) {
-    return (
-      <section className="mb-6 rounded-lg border border-gray-800 bg-modrinth-dark p-4 md:p-6">
-        {header}
-        <div className="mt-4 grid grid-cols-1 items-center gap-3 sm:grid-cols-[minmax(0,12rem)_1fr]">
-          {todayTile}
-          <p className="text-sm leading-relaxed text-gray-400">
-            {t('trend.collecting', { date: sinceLabel })}
-          </p>
-        </div>
-      </section>
-    )
-  }
+  if (model.known === 0) return null
 
   const { view, average, scale } = model
   const innerWidth = width - MARGIN.left - MARGIN.right
