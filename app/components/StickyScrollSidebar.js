@@ -4,12 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 
 const TOP_OFFSET = 16
 const BOTTOM_OFFSET = 20
-const FOOTER_GAP = 16
-
-function getFooterTop() {
-  const footer = document.querySelector('footer')
-  return footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY
-}
 
 export default function StickyScrollSidebar({ children, className = '' }) {
   const rootRef = useRef(null)
@@ -74,23 +68,25 @@ export default function StickyScrollSidebar({ children, className = '' }) {
     const parent = root.parentElement
     if (!parent) return
 
-    const parentRect = parent.getBoundingClientRect()
-    const rootRect = root.getBoundingClientRect()
-    const stickTop = rootRect.top <= TOP_OFFSET + 2 ? TOP_OFFSET : rootRect.top
-    const footerTop = getFooterTop()
-    const viewportLimit = window.innerHeight - TOP_OFFSET - BOTTOM_OFFSET
-    const containerLimit = parentRect.bottom - stickTop - BOTTOM_OFFSET
-    const footerLimit = footerTop - stickTop - FOOTER_GAP
+    const neighborHeight = Math.max(
+      0,
+      ...[...parent.children]
+        .filter((el) => el !== root && el.lastElementChild)
+        .map((el) => el.lastElementChild.getBoundingClientRect().bottom - el.getBoundingClientRect().top),
+    )
 
-    const limits = [viewportLimit, containerLimit]
-    if (Number.isFinite(footerLimit)) {
-      limits.push(footerLimit)
+    if (neighborHeight <= scroller.scrollHeight) {
+      if (maxHeightRef.current !== null) {
+        scroller.style.maxHeight = ''
+        scroller.style.overflowY = ''
+        maxHeightRef.current = null
+      }
+      updateFade(scroller, false)
+      updateTrack(scroller, false)
+      return
     }
 
-    const positiveLimits = limits.filter((value) => value > 0)
-    const maxH = positiveLimits.length
-      ? Math.max(180, Math.min(...positiveLimits))
-      : viewportLimit
+    const maxH = Math.max(180, window.innerHeight - TOP_OFFSET - BOTTOM_OFFSET)
 
     const maxHeightPx = `${maxH}px`
     if (maxHeightRef.current !== maxHeightPx) {
