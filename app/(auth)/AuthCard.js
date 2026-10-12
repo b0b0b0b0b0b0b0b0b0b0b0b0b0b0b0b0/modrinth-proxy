@@ -246,7 +246,32 @@ export default function AuthCard() {
                   {t(isRegister ? 'account.registerLead' : 'account.loginLead')}
                 </p>
 
-                <form onSubmit={submit} className="mt-5 space-y-4">
+                <motion.div
+                  {...rise(0.05)}
+                  className="mt-4 flex gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-400 text-black">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6l-8-3ZM12 8v5M12 16.5v.01" />
+                    </svg>
+                  </span>
+                  <div className="min-w-0 text-xs leading-relaxed text-gray-400">
+                    <div className="text-sm font-bold text-white">{t('account.notModrinthTitle')}</div>
+                    <p className="mt-0.5">
+                      {t(isRegister ? 'account.notModrinthRegister' : 'account.notModrinthLogin')}{' '}
+                      <Link
+                        href="/bmadnco"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-amber-400 hover:underline"
+                      >
+                        {t('disclaimer.what')}
+                      </Link>
+                    </p>
+                  </div>
+                </motion.div>
+
+                <form onSubmit={submit} className="mt-4 space-y-4">
                   <label className="block">
                     <span className="mb-1.5 block text-xs font-medium text-gray-400">{t('account.username')}</span>
                     <span className="group relative block">

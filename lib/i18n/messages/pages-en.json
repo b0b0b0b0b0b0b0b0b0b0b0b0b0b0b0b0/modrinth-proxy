@@ -520,6 +520,9 @@
     "pageOf": "Page {page} of {pages}",
     "historyNote": "History is kept for {n} days; older entries are removed automatically.",
     "errCaptcha": "Couldn’t verify the request. Try again.",
-    "errSignupLimit": "Too many accounts were created from your network today. Try again tomorrow."
+    "errSignupLimit": "Too many accounts were created from your network today. Try again tomorrow.",
+    "notModrinthTitle": "This is not a Modrinth account",
+    "notModrinthRegister": "ModrinthProxy is an independent site with no ties to modrinth.com. This account works only here. Don’t reuse your Modrinth password — make a new one.",
+    "notModrinthLogin": "This is a separate ModrinthProxy account. Your modrinth.com username and password won’t work here, and you shouldn’t enter them."
   }
 }
