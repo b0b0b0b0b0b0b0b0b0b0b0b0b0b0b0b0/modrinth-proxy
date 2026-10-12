@@ -15,12 +15,12 @@ const CONFETTI = Array.from({ length: 28 }, (_, i) => ({
   color: i % 6,
 }))
 
-const BALLOONS = [
-  { left: 4, bottom: 8, delay: 0, duration: 7.2, size: 42, color: 0 },
-  { left: 14, bottom: 18, delay: 1.4, duration: 8.4, size: 34, color: 1, desk: true },
-  { left: 78, bottom: 10, delay: 0.8, duration: 7.8, size: 40, color: 2 },
-  { left: 90, bottom: 22, delay: 2.1, duration: 9, size: 32, color: 3, desk: true },
-  { left: 48, bottom: 4, delay: 3, duration: 8, size: 28, color: 4, desk: true },
+const BALLOON_SLOTS = [
+  { min: 3, max: 12 },
+  { min: 13, max: 22, desk: true },
+  { min: 72, max: 82 },
+  { min: 85, max: 92, desk: true },
+  { min: 42, max: 56, desk: true },
 ]
 
 const COLORS = ['#ff6b9d', '#62c4ff', '#7ee0a0', '#ffd166', '#c084fc', '#ff8a5b']
@@ -151,6 +151,56 @@ function playCrunch() {
   burst(t + 0.055, 880 + Math.random() * 420)
 }
 
+function playPop() {
+  const AC = window.AudioContext || window.webkitAudioContext
+  if (!AC) return
+  if (!crunchCtx) crunchCtx = new AC()
+  if (crunchCtx.state === 'suspended') crunchCtx.resume()
+  const t = crunchCtx.currentTime
+  const rate = crunchCtx.sampleRate
+  const buf = crunchCtx.createBuffer(1, Math.floor(rate * 0.09), rate)
+  const ch = buf.getChannelData(0)
+  for (let i = 0; i < ch.length; i++) {
+    ch[i] = (Math.random() * 2 - 1) * (1 - i / ch.length) ** 3
+  }
+  const src = crunchCtx.createBufferSource()
+  src.buffer = buf
+  const lp = crunchCtx.createBiquadFilter()
+  lp.type = 'lowpass'
+  lp.frequency.setValueAtTime(5200, t)
+  lp.frequency.exponentialRampToValueAtTime(420, t + 0.08)
+  const ng = crunchCtx.createGain()
+  ng.gain.value = 0.5
+  src.connect(lp)
+  lp.connect(ng)
+  ng.connect(crunchCtx.destination)
+  src.start(t)
+  const osc = crunchCtx.createOscillator()
+  osc.frequency.setValueAtTime(520, t)
+  osc.frequency.exponentialRampToValueAtTime(90, t + 0.1)
+  const og = crunchCtx.createGain()
+  og.gain.setValueAtTime(0.28, t)
+  og.gain.exponentialRampToValueAtTime(0.001, t + 0.12)
+  osc.connect(og)
+  og.connect(crunchCtx.destination)
+  osc.start(t)
+  osc.stop(t + 0.13)
+}
+
+function spawnBalloon(slot, key) {
+  const zone = BALLOON_SLOTS[slot]
+  return {
+    key,
+    left: zone.min + Math.random() * (zone.max - zone.min),
+    bottom: 3 + Math.random() * 26,
+    size: 28 + Math.round(Math.random() * 16),
+    color: Math.floor(Math.random() * COLORS.length),
+    duration: 6.8 + Math.random() * 2.6,
+    delay: -Math.random() * 5,
+    desk: Boolean(zone.desk),
+  }
+}
+
 function spawnCookie(id) {
   return {
     id,
@@ -266,10 +316,43 @@ export default function BirthdayEffects() {
   const [on, setOn] = useState(false)
   const [pins, setPins] = useState([])
   const [eaten, setEaten] = useState(0)
+  const [balloons, setBalloons] = useState([])
+  const balloonSeq = useRef(0)
+  const balloonTimers = useRef(new Set())
 
   useEffect(() => {
     setEaten(readCookieScore())
   }, [])
+
+  useEffect(() => {
+    if (!on) return
+    const timers = balloonTimers.current
+    setBalloons(BALLOON_SLOTS.map((_, slot) => spawnBalloon(slot, ++balloonSeq.current)))
+    return () => {
+      timers.forEach((id) => window.clearTimeout(id))
+      timers.clear()
+    }
+  }, [on])
+
+  const later = (fn, ms) => {
+    const id = window.setTimeout(() => {
+      balloonTimers.current.delete(id)
+      fn()
+    }, ms)
+    balloonTimers.current.add(id)
+  }
+
+  const setSlot = (slot, value) => setBalloons((list) => list.map((b, i) => (i === slot ? value : b)))
+
+  const popBalloon = (slot, event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    if (!balloons[slot] || balloons[slot].popped) return
+    playPop()
+    setSlot(slot, { ...balloons[slot], popped: true })
+    later(() => setSlot(slot, null), 220)
+    later(() => setSlot(slot, spawnBalloon(slot, ++balloonSeq.current)), 2500 + Math.random() * 4500)
+  }
 
   useEffect(() => {
     if (!isBirthdaySeason()) return
@@ -335,22 +418,25 @@ export default function BirthdayEffects() {
               }}
             />
           ))}
-          {BALLOONS.map((b, i) => (
-            <span
-              key={`b${i}`}
-              className={`bday-balloon${b.desk ? ' bday-balloon--desk' : ''}`}
-              style={{
-                left: `${b.left}%`,
-                bottom: `${b.bottom}%`,
-                width: b.size,
-                animationDelay: `${b.delay}s`,
-                animationDuration: `${b.duration}s`,
-                color: 'rgba(40, 30, 50, 0.45)',
-              }}
-            >
-              <Balloon color={COLORS[b.color]} />
-            </span>
-          ))}
+          {balloons.map((b, slot) =>
+            b ? (
+              <span
+                key={b.key}
+                className={`bday-balloon${b.desk ? ' bday-balloon--desk' : ''}${b.popped ? ' bday-balloon--pop' : ''}`}
+                style={{
+                  left: `${b.left}%`,
+                  '--bday-bottom': `${b.bottom}%`,
+                  width: b.size,
+                  animationDelay: `${b.delay}s`,
+                  animationDuration: `${b.duration}s`,
+                  color: 'rgba(40, 30, 50, 0.45)',
+                }}
+                onPointerDown={(event) => popBalloon(slot, event)}
+              >
+                <Balloon color={COLORS[b.color]} />
+              </span>
+            ) : null,
+          )}
           {pins.map((pin) => (
             <span
               key={pin.id}

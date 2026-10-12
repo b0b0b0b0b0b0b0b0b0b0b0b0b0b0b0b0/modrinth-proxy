@@ -1286,8 +1286,7 @@ html:not(.dark) .halloween-jsbat img {
   padding: 10px 12px;
   border-radius: 18px;
   color: #fff8f0;
-  background: rgba(42, 28, 48, 0.92);
-  border: 1px solid rgba(255, 182, 193, 0.35);
+  background: rgba(42, 28, 48, 0.68);
   box-shadow: 0 12px 32px -12px rgba(80, 20, 60, 0.55);
   backdrop-filter: blur(12px) saturate(140%);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
@@ -1385,6 +1384,10 @@ html:not(.dark) .halloween-jsbat img {
 
 .bday-balloon {
   position: absolute;
+  bottom: var(--bday-bottom, 8%);
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
   color: rgba(255, 255, 255, 0.35);
   animation-name: bday-float;
   animation-timing-function: ease-in-out;
@@ -1396,6 +1399,16 @@ html:not(.dark) .halloween-jsbat img {
   display: block;
   width: 100%;
   height: auto;
+  transform-origin: 50% 30%;
+  animation: bday-balloon-in 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+.bday-balloon--pop {
+  pointer-events: none;
+}
+
+.bday-balloon--pop svg {
+  animation: bday-balloon-pop 0.2s ease-out forwards;
 }
 
 .bday-pin {
@@ -1470,6 +1483,17 @@ html:not(.dark) .halloween-jsbat img {
   50% { transform: translate3d(10px, -14px, 0) rotate(5deg); }
 }
 
+@keyframes bday-balloon-in {
+  0% { transform: translate3d(0, 40px, 0) scale(0.3); opacity: 0; }
+  100% { transform: translate3d(0, 0, 0) scale(1); opacity: 1; }
+}
+
+@keyframes bday-balloon-pop {
+  0% { transform: scale(1); opacity: 1; }
+  45% { transform: scale(1.45); opacity: 0.9; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
 @keyframes bday-hat-wobble {
   0%, 100% { transform: rotate(var(--bday-tilt, -22deg)); }
   50% { transform: rotate(calc(var(--bday-tilt, -22deg) + 10deg)); }
@@ -1488,6 +1512,16 @@ html:not(.dark) .halloween-jsbat img {
 }
 
 @media (max-width: 1023px) {
+  .bday-banner {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    z-index: 39;
+  }
+  .bday-game {
+    z-index: 60;
+  }
+  .bday-balloon {
+    bottom: calc(var(--bday-bottom, 8%) + 220px + env(safe-area-inset-bottom, 0px));
+  }
   .bday-balloon--desk {
     display: none;
   }
@@ -1510,8 +1544,7 @@ html:not(.dark) .halloween-jsbat img {
 
 html:not(.dark) .bday-banner {
   color: #3b2438;
-  background: rgba(255, 246, 250, 0.94);
-  border: 1px solid rgba(214, 90, 130, 0.28);
+  background: rgba(255, 246, 250, 0.72);
   box-shadow: 0 12px 28px -14px rgba(80, 20, 50, 0.35);
 }
 
