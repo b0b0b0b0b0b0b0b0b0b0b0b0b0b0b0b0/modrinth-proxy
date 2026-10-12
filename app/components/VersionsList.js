@@ -23,6 +23,8 @@ import VersionEnvironmentDisplay from './VersionEnvironmentDisplay'
 import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
 
+const RELEASE_GAME_VERSION_RE = /^\d+\.\d+(\.\d+)?$/
+
 const ROW_GRID_XL_WITH_ENV =
   'xl:grid-cols-[40px_minmax(150px,1fr)_minmax(100px,200px)_minmax(100px,200px)_minmax(48px,68px)_minmax(100px,150px)_minmax(80px,100px)_40px]'
 const ROW_GRID_XL_NO_ENV =
@@ -151,6 +153,57 @@ export default function VersionsList({
   const isGameVersionChipActive = (range, rawVersions) => {
     const matched = versionsForCompressedRange(range, rawVersions)
     return matched.length > 0 && matched.every((version) => selectedMcVersions.includes(version))
+  }
+
+  const renderGameVersionChips = (gameVersions, limit, chipClass) => {
+    const all = Array.isArray(gameVersions) ? gameVersions : []
+    const releases = all.filter((gameVersion) => RELEASE_GAME_VERSION_RE.test(gameVersion))
+    const source = releases.length > 0 ? releases : all
+    const ranges = compressVersionRanges(source)
+    const rest = ranges.slice(limit)
+    const prereleases = all.length - source.length
+
+    return (
+      <>
+        {ranges.slice(0, limit).map((range) => {
+          const active = isGameVersionChipActive(range, source)
+          return (
+            <button
+              key={range}
+              type="button"
+              onClick={(e) => handleGameVersionChipClick(e, range, source)}
+              className={`${chipClass} rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
+                active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
+              }`}
+              style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+            >
+              {range}
+            </button>
+          )
+        })}
+        {rest.length > 0 ? (
+          <StyledTooltip
+            label={
+              <span className="block text-left leading-snug">
+                <span className="block">{rest.join(', ')}</span>
+                {prereleases > 0 ? (
+                  <span className="mt-1 block opacity-70">{t('version.prereleases', { n: prereleases })}</span>
+                ) : null}
+              </span>
+            }
+            contentClassName="!max-w-[min(320px,calc(100vw-24px))]"
+          >
+            <span
+              tabIndex={0}
+              className={`${chipClass} rounded-full whitespace-nowrap cursor-default relative z-10`}
+              style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+            >
+              +{rest.length}
+            </span>
+          </StyledTooltip>
+        ) : null}
+      </>
+    )
   }
 
   const handleShowOnlyReleasesChange = (value) => {
@@ -463,22 +516,7 @@ export default function VersionsList({
                         })()}
 
                       <div className="relative z-10 hidden sm:flex xl:hidden flex-wrap gap-1 items-start content-start">
-                        {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => {
-                          const active = isGameVersionChipActive(range, version.game_versions)
-                          return (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
-                            className={`px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
-                              active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
-                            }`}
-                            style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
-                          >
-                            {range}
-                          </button>
-                          )
-                        })}
+                        {renderGameVersionChips(version.game_versions, 2, 'px-2 py-1 text-xs font-semibold')}
                         {showPlatforms &&
                           getVersionPlatformIds(version).map((loaderId) => {
                           const loaderData = resolveLoader(loaderId)
@@ -528,22 +566,7 @@ export default function VersionsList({
                       </div>
 
                       <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
-                        {compressVersionRanges(version.game_versions).map((range, i) => {
-                          const active = isGameVersionChipActive(range, version.game_versions)
-                          return (
-                          <button
-                            key={i}
-                            type="button"
-                            onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
-                            className={`px-2 py-1 text-xs font-semibold rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
-                              active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
-                            }`}
-                            style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
-                          >
-                            {range}
-                          </button>
-                          )
-                        })}
+                        {renderGameVersionChips(version.game_versions, 5, 'px-2 py-1 text-xs font-semibold')}
                       </div>
 
                       {showPlatforms && (
@@ -598,22 +621,7 @@ export default function VersionsList({
 
                         <div className="relative z-10 sm:hidden flex flex-col gap-1 text-xs text-gray-400 font-medium mt-2 max-[390px]:items-center max-[390px]:justify-center min-[391px]:col-span-2">
                           <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
-                            {compressVersionRanges(version.game_versions).slice(0, 2).map((range, i) => {
-                              const active = isGameVersionChipActive(range, version.game_versions)
-                              return (
-                              <button
-                                key={i}
-                                type="button"
-                                onClick={(e) => handleGameVersionChipClick(e, range, version.game_versions)}
-                                className={`px-2 py-0.5 text-xs rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 ${
-                                  active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
-                                }`}
-                                style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
-                              >
-                                {range}
-                              </button>
-                              )
-                            })}
+                            {renderGameVersionChips(version.game_versions, 2, 'px-2 py-0.5 text-xs')}
                           </div>
                           {showPlatforms && (
                             <div className="flex flex-wrap gap-1 max-[390px]:justify-center">

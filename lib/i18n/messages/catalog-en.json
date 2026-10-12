@@ -399,7 +399,8 @@
     "sizeCol": "Size",
     "fileTypeUnknown": "Unknown",
     "fileTypeRequiredPack": "Required resource pack",
-    "fileTypeOptionalPack": "Optional resource pack"
+    "fileTypeOptionalPack": "Optional resource pack",
+    "prereleases": "Snapshots and pre-releases: {n}"
   },
   "col": {
     "label": "Collection",

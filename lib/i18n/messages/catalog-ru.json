@@ -399,7 +399,8 @@
     "sizeCol": "Размер",
     "fileTypeUnknown": "Неизвестно",
     "fileTypeRequiredPack": "Обязательный ресурспак",
-    "fileTypeOptionalPack": "Необязательный ресурспак"
+    "fileTypeOptionalPack": "Необязательный ресурспак",
+    "prereleases": "Снапшоты и пре-релизы: {n}"
   },
   "col": {
     "label": "Коллекция",
