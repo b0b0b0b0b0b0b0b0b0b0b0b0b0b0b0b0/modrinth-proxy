@@ -1,6 +1,7 @@
 'use client'
 
 import CatalogReturnLink from './CatalogReturnLink'
+import { FavoriteCount } from './ProjectReactions'
 import { formatDownloads, modrinthHoverAccentHex } from '@/lib/modrinth'
 import { getPublicUsername } from '@/lib/contentFilter'
 import { CATEGORIES } from '@/lib/categories'
@@ -18,7 +19,7 @@ function uniqueStrings(list) {
   return [...new Set(list)]
 }
 
-export default function ResourceCard({ resource, type = 'mod', forceLayout = null }) {
+export default function ResourceCard({ resource, type = 'mod', forceLayout = null, favoriteCount = 0 }) {
   const t = useT()
   const typeMap = {
     'mod': 'mod',
@@ -418,6 +419,8 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               <strong className="text-white">{formatDownloads(resource.follows || resource.followers)}</strong>
             </p>
           </div>
+
+          <FavoriteCount count={favoriteCount} muted className="text-gray-400" numberClassName="text-sm font-bold text-white" />
         </div>
         
         {(resource.date_modified || resource.updated) && (

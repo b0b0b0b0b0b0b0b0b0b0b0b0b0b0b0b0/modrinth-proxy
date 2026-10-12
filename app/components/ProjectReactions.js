@@ -5,7 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import Lottie from 'lottie-react'
 import heartAnimation from '@/public/animations/heart.json'
 import StyledTooltip from './StyledTooltip'
-import { useT } from './I18nProvider'
+import { useI18n, useT } from './I18nProvider'
+import { intlLocale } from '@/lib/i18n/config'
 
 const stores = new Map()
 
@@ -128,10 +129,49 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
           onDOMLoaded={rest}
           className={[
             'pointer-events-none h-full w-full transition-[filter,opacity] duration-150',
-            favorite ? '' : 'opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0',
+            favorite ? 'opacity-60 grayscale group-hover:opacity-90' : '',
           ].join(' ')}
         />
       </button>
     </StyledTooltip>
   )
+}
+
+export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray-400', numberClassName = 'font-semibold text-gray-900 dark:text-white', muted = false }) {
+  const { t, locale } = useI18n()
+  const lottieRef = useRef(null)
+
+  const rest = useCallback(() => {
+    const player = lottieRef.current
+    if (player) player.goToAndStop(player.getDuration(true) - 1, true)
+  }, [])
+
+  if (!(count > 0)) return null
+
+  return (
+    <StyledTooltip label={t('account.favoritesCount', { n: count })}>
+      <div
+        className={`group/fav flex cursor-default items-center gap-1 ${className}`}
+        onMouseEnter={() => lottieRef.current?.goToAndPlay(0, true)}
+        onMouseLeave={rest}
+      >
+        <Lottie
+          lottieRef={lottieRef}
+          animationData={heartAnimation}
+          loop={false}
+          autoplay={false}
+          onDOMLoaded={rest}
+          className={`pointer-events-none -my-1.5 h-7 w-7 transition-[filter,opacity] duration-150 ${muted ? 'opacity-60 grayscale group-hover/fav:opacity-100 group-hover/fav:grayscale-0' : ''}`}
+        />
+        <span className={numberClassName}>
+          {new Intl.NumberFormat(intlLocale(locale), { notation: 'compact', maximumFractionDigits: 1 }).format(count)}
+        </span>
+      </div>
+    </StyledTooltip>
+  )
+}
+
+export function ProjectFavoriteCount({ projectId }) {
+  const { state } = useProjectState(projectId)
+  return <FavoriteCount count={state?.favorites ?? 0} />
 }

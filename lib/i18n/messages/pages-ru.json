@@ -494,6 +494,7 @@
     "errSignupLimit": "С твоей сети сегодня уже создано слишком много аккаунтов. Попробуй завтра.",
     "notModrinthTitle": "Это не аккаунт Modrinth",
     "notModrinthRegister": "ModrinthProxy — независимый сайт, с modrinth.com мы никак не связаны. Аккаунт работает только здесь. Не вводи пароль от Modrinth — придумай новый.",
-    "notModrinthLogin": "Здесь свой аккаунт ModrinthProxy. Логин и пароль от modrinth.com не подойдут — и вводить их сюда не надо."
+    "notModrinthLogin": "Здесь свой аккаунт ModrinthProxy. Логин и пароль от modrinth.com не подойдут — и вводить их сюда не надо.",
+    "favoritesCount": "В избранном на ModrinthProxy: {n}"
   }
 }

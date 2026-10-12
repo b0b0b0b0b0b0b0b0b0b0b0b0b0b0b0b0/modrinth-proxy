@@ -494,6 +494,7 @@
     "errSignupLimit": "Too many accounts were created from your network today. Try again tomorrow.",
     "notModrinthTitle": "This is not a Modrinth account",
     "notModrinthRegister": "ModrinthProxy is an independent site with no ties to modrinth.com. This account works only here. Don’t reuse your Modrinth password — make a new one.",
-    "notModrinthLogin": "This is a separate ModrinthProxy account. Your modrinth.com username and password won’t work here, and you shouldn’t enter them."
+    "notModrinthLogin": "This is a separate ModrinthProxy account. Your modrinth.com username and password won’t work here, and you shouldn’t enter them.",
+    "favoritesCount": "In favorites on ModrinthProxy: {n}"
   }
 }

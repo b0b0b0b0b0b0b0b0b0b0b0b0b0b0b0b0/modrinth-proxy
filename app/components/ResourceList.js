@@ -29,6 +29,22 @@ export default function ResourceList({ resources, type = 'mod', isProfile = fals
   const prevParamsRef = useRef(searchParams.toString())
   const [layout, setLayout] = useState(null)
   const [mounted, setMounted] = useState(false)
+  const [favoriteCounts, setFavoriteCounts] = useState({})
+  const resourceIds = resources.map((resource) => resource.project_id || resource.id).filter(Boolean).join(',')
+
+  useEffect(() => {
+    if (!resourceIds) return undefined
+    let alive = true
+    fetch(`/api/account/favorites?ids=${encodeURIComponent(resourceIds)}`)
+      .then((response) => (response.ok ? response.json() : {}))
+      .then((counts) => {
+        if (alive) setFavoriteCounts(counts || {})
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [resourceIds])
 
   useEffect(() => {
     setMounted(true)
@@ -114,6 +130,7 @@ export default function ResourceList({ resources, type = 'mod', isProfile = fals
           resource={resource} 
           type={!isProfile || type !== 'mod' ? type : (resource.project_type || type)}
           forceLayout={activeLayout}
+          favoriteCount={favoriteCounts[resource.project_id || resource.id] || 0}
         />
       ))}
     </div>

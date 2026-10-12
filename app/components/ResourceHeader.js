@@ -13,7 +13,7 @@ import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckP
 import AuthorPluginPromo from './AuthorPluginPromo'
 import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
-import { ProjectFavoriteButton } from './ProjectReactions'
+import { ProjectFavoriteButton, ProjectFavoriteCount } from './ProjectReactions'
 import ServerCategoryTagsRow from './ServerCategoryTagsRow'
 import ProjectActivityBackground from './ProjectActivityBackground'
 import { getRequestT } from '@/lib/i18n/server'
@@ -156,6 +156,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                         </div>
                       </div>
                     )}
+                    <ProjectFavoriteCount projectId={resource.id} />
                     <ProjectFavoriteButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
                     {allResourceCategories.length > 0 && (
                       <ServerCategoryTagsRow categoryIds={allResourceCategories} maxVisible={3} />
@@ -179,6 +180,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                         <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.followers || resource.follows)}</span>
                       </div>
                     )}
+                    <ProjectFavoriteCount projectId={resource.id} />
                     {allResourceCategories.length > 0 && (
                       <div className="hidden sm:flex flex-wrap gap-1.5">
                         {allResourceCategories.slice(0, 4).map((catId) => {
@@ -255,6 +257,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                           <span className="font-semibold text-gray-900 dark:text-white">{formatDownloads(resource.followers || resource.follows)}</span>
                         </div>
                       )}
+                      <ProjectFavoriteCount projectId={resource.id} />
                     </div>
 
                     {showPromoBelowDownload ? (
