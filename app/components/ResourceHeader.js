@@ -13,6 +13,7 @@ import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckP
 import AuthorPluginPromo from './AuthorPluginPromo'
 import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
+import { ProjectFavoriteButton } from './ProjectReactions'
 import ServerCategoryTagsRow from './ServerCategoryTagsRow'
 import ProjectActivityBackground from './ProjectActivityBackground'
 import { getRequestT } from '@/lib/i18n/server'
@@ -155,6 +156,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                         </div>
                       </div>
                     )}
+                    <ProjectFavoriteButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
                     {allResourceCategories.length > 0 && (
                       <ServerCategoryTagsRow categoryIds={allResourceCategories} maxVisible={3} />
                     )}
@@ -221,11 +223,17 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                 <div className="w-full lg:flex lg:flex-col lg:items-end lg:gap-2">
                   {showPromoBelowDownload ? (
                     <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
-                      <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
+                      <div className="flex items-center gap-2">
+                        <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
+                        <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
+                      </div>
                       <DownloadPromoConnector className="hidden lg:flex pb-px" />
                     </div>
                   ) : (
-                    <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
+                    <div className="flex items-center gap-2">
+                      <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
+                      <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
+                    </div>
                   )}
 
                 <div className="mt-3 w-full lg:mt-0">
@@ -251,11 +259,17 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
 
                     {showPromoBelowDownload ? (
                       <div className="flex shrink-0 flex-col items-center gap-1">
-                        <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
+                        <div className="flex items-center gap-2">
+                          <ProjectFavoriteButton projectId={resource.id} className="lg:hidden" />
+                          <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
+                        </div>
                         <DownloadPromoConnector />
                       </div>
                     ) : (
-                      <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
+                      <div className="flex shrink-0 items-center gap-2">
+                        <ProjectFavoriteButton projectId={resource.id} className="lg:hidden" />
+                        <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
+                      </div>
                     )}
                   </div>
                 </div>

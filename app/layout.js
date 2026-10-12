@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
+import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
@@ -157,6 +158,7 @@ export default async function RootLayout({ children }) {
           <CatalogReturnLifecycle />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
+          <DownloadHistoryTracker />
           <TopNav />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">

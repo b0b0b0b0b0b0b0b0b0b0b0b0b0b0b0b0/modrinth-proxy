@@ -7,6 +7,7 @@ import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
+import DownloadTrend from '@/app/components/DownloadTrend'
 
 export async function generateMetadata({ params }) {
   try {
@@ -51,6 +52,7 @@ export default async function DatapackPage({ params }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6">
         <div className="min-w-0">
+          <DownloadTrend resource={pack} />
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
               <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={pack.body} />
