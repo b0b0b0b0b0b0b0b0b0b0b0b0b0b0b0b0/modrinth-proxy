@@ -7,7 +7,7 @@ import { compressVersionRanges, formatFileSize } from '@/lib/modrinth'
 import { normalizeContentRoute } from '@/lib/contextualVersions'
 import { getProjectTypeDisplayName } from '@/lib/author'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
-import CopyButton from '../../components/CopyButton'
+import StyledTooltip from '../../components/StyledTooltip'
 import { DownloadIconButton } from '../../components/DownloadModalParts'
 import RelativeTime from '../../components/RelativeTime'
 import { useT } from '../../components/I18nProvider'
@@ -65,16 +65,59 @@ function pickUpdateLoaders(version) {
   return loaders.length ? loaders : version?.loaders || []
 }
 
+function shortenHash(value) {
+  return value.length > 24 ? `${value.slice(0, 12)}…${value.slice(-8)}` : value
+}
+
 function HashRow({ label, value }) {
   const t = useT()
+  const [copied, setCopied] = useState(false)
   if (!value) return null
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(value)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch (err) {
+      console.error('Failed to copy:', err)
+    }
+  }
+
   return (
-    <div className="flex flex-col gap-1 sm:flex-row sm:gap-4">
-      <span className="w-16 shrink-0 text-sm text-gray-500">{label}</span>
-      <div className="min-w-0 flex-1 break-all">
-        <CopyButton text={value} tooltipLabel={t('lookup.copy', { label })} inline />
-      </div>
-    </div>
+    <StyledTooltip label={copied ? t('copy.copied') : t('lookup.copy', { label })}>
+      <button
+        type="button"
+        onClick={handleCopy}
+        className="group flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-gray-800/60"
+      >
+        <span className="w-14 shrink-0 text-[11px] font-semibold uppercase tracking-wide text-gray-500">
+          {label}
+        </span>
+        <span className="min-w-0 flex-1 truncate font-mono text-xs text-gray-400 transition-colors group-hover:text-gray-200">
+          {shortenHash(value)}
+        </span>
+        <svg
+          className={`h-3.5 w-3.5 shrink-0 ${copied ? 'text-modrinth-green' : 'text-gray-500 group-hover:text-gray-300'}`}
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+          aria-hidden
+        >
+          {copied ? (
+            <path d="M20 6 9 17l-5-5" />
+          ) : (
+            <>
+              <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+            </>
+          )}
+        </svg>
+      </button>
+    </StyledTooltip>
   )
 }
 
@@ -532,6 +575,70 @@ export default function FileLookupClient() {
                 </div>
               </div>
 
+              {fileHashes && lookupResult.version.id ? (
+                <div className="space-y-3">
+                  {loadingUpdate ? (
+                    <Spinner
+                      label={
+                        checkedMcVersion
+                          ? t('lookup.checkingMc', { v: checkedMcVersion })
+                          : t('lookup.checking')
+                      }
+                    />
+                  ) : null}
+                  {!loadingUpdate && updateCheck?.update_available ? (
+                    <div className="space-y-3 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-400 text-black">
+                          <svg
+                            className="h-4 w-4"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            viewBox="0 0 24 24"
+                            aria-hidden
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 19.5v-15m0 0-6.75 6.75M12 4.5l6.75 6.75" />
+                          </svg>
+                        </span>
+                        <p className="text-sm font-medium text-gray-200">
+                          {checkedMcVersion
+                            ? t('lookup.updateMc', { v: checkedMcVersion })
+                            : t('lookup.update')}
+                        </p>
+                      </div>
+                      <VersionRow
+                        version={updateCheck.latest_version}
+                        href={latestVersionPath}
+                        file={updateCheck.latest_file}
+                      />
+                    </div>
+                  ) : null}
+                  {!loadingUpdate && updateCheck && !updateCheck.update_available && !updateError ? (
+                    <div className="flex items-center gap-3 rounded-xl border border-modrinth-green/30 bg-modrinth-green/10 px-4 py-3">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-modrinth-green text-black">
+                        <svg
+                          className="h-4 w-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2.5"
+                          viewBox="0 0 24 24"
+                          aria-hidden
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                        </svg>
+                      </span>
+                      <p className="text-sm font-medium text-gray-200">
+                        {checkedMcVersion
+                          ? t('lookup.latestMc', { v: checkedMcVersion })
+                          : t('lookup.latest')}
+                      </p>
+                    </div>
+                  ) : null}
+                  {updateError ? <p className="text-sm text-amber-400">{updateError}</p> : null}
+                </div>
+              ) : null}
+
               <div className="border-t border-gray-800 pt-4 space-y-3">
                 <div>
                   <p className="text-sm font-medium text-gray-200">{t('lookup.found')}</p>
@@ -551,51 +658,17 @@ export default function FileLookupClient() {
                   file={matchedFile}
                 />
               </div>
-
-              {fileHashes && lookupResult.version.id ? (
-                <div className="space-y-3 border-t border-gray-800 pt-4">
-                  {loadingUpdate ? (
-                    <Spinner
-                      label={
-                        checkedMcVersion
-                          ? t('lookup.checkingMc', { v: checkedMcVersion })
-                          : t('lookup.checking')
-                      }
-                    />
-                  ) : null}
-                  {!loadingUpdate && updateCheck?.update_available ? (
-                    <>
-                      <p className="text-sm text-gray-300">
-                        {checkedMcVersion
-                          ? t('lookup.updateMc', { v: checkedMcVersion })
-                          : t('lookup.update')}
-                      </p>
-                      <VersionRow
-                        version={updateCheck.latest_version}
-                        href={latestVersionPath}
-                        file={updateCheck.latest_file}
-                      />
-                    </>
-                  ) : null}
-                  {!loadingUpdate && updateCheck && !updateCheck.update_available && !updateError ? (
-                    <p className="text-sm text-gray-500">
-                      {checkedMcVersion
-                        ? t('lookup.latestMc', { v: checkedMcVersion })
-                        : t('lookup.latest')}
-                    </p>
-                  ) : null}
-                  {updateError ? <p className="text-sm text-amber-400">{updateError}</p> : null}
-                </div>
-              ) : null}
             </div>
           ) : null}
 
           {fileHashes ? (
-            <div className="space-y-3 border-t border-gray-800 pt-4">
-              <p className="text-sm font-medium text-gray-400">{t('lookup.hashes')}</p>
-              <HashRow label="SHA512" value={fileHashes.sha512} />
-              <HashRow label="SHA256" value={fileHashes.sha256} />
-              <HashRow label="SHA1" value={fileHashes.sha1} />
+            <div className="border-t border-gray-800 pt-4">
+              <p className="mb-1.5 text-xs font-medium text-gray-500">{t('lookup.hashes')}</p>
+              <div className="-mx-3">
+                <HashRow label="SHA512" value={fileHashes.sha512} />
+                <HashRow label="SHA256" value={fileHashes.sha256} />
+                <HashRow label="SHA1" value={fileHashes.sha1} />
+              </div>
             </div>
           ) : null}
 
