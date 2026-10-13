@@ -280,7 +280,7 @@
     "accMinT": "Guardamos o mínimo",
     "accMinD": "Não pedimos e-mail. Seu endereço IP não é vinculado à conta nem fica guardado no banco de dados de contas.",
     "accStoredT": "O que exatamente é guardado",
-    "accStored1": "**Usuário e senha.** A senha é guardada como hash — uma impressão irreversível a partir da qual não dá para descobrir a senha, nem nós conseguimos. Se você entra com o GitHub, no lugar da senha guardamos apenas o número da sua conta GitHub.",
+    "accStored1": "**Usuário e senha.** A senha é guardada como hash — uma impressão irreversível a partir da qual não dá para descobrir a senha, nem nós conseguimos. Se você entra com o GitHub/Telegram, no lugar da senha guardamos apenas o número da sua conta GitHub/Telegram.",
     "accStored2": "**Favoritos e downloads.** O que você marcou com o coração e o que baixou. O histórico de downloads some sozinho após 30 dias; os dados para avisos de atualização, após seis meses.",
     "accStored3": "**Proteção contra spam.** No cadastro, guardamos por um dia uma impressão anônima da rede, para que não criem contas em massa a partir de um mesmo endereço. O IP em si não é registrado."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub vinculado — dá para entrar com um clique.",
     "githubTaken": "Este GitHub já está vinculado a outra conta.",
     "githubClaimTitle": "O nome {name} já está cadastrado aqui",
-    "githubClaimText": "Se a conta é sua, entre abaixo com a senha e o GitHub será vinculado sozinho. Depois é só um clique.",
+    "githubClaimText": "Se a conta é sua, entre abaixo com a senha e o {provider} será vinculado sozinho. Depois é só um clique.",
     "githubClaimCreate": "Não é minha conta — criar uma nova",
     "editUsername": "Editar usuário",
     "saveUsername": "Salvar",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Tudo o que está nos favoritos será removido: {n}. Não dá para desfazer com um clique — só adicionando de novo ou colando um código salvo.",
     "clearFavoritesConfirm": "Sim, limpar",
     "favLoginTitle": "Os corações moram na sua conta",
-    "favLoginText": "Crie uma conta e tudo o que você marcar com o coração fica em um só lugar. De quebra, histórico de downloads e avisos de novas versões. Meio minuto, sem e-mail."
+    "favLoginText": "Crie uma conta e tudo o que você marcar com o coração fica em um só lugar. De quebra, histórico de downloads e avisos de novas versões. Meio minuto, sem e-mail.",
+    "telegramContinue": "Continuar com Telegram",
+    "errTelegram": "Não foi possível entrar com o Telegram. Tente de novo.",
+    "telegramLink": "Vincular Telegram",
+    "telegramLinked": "Telegram vinculado — dá para entrar com um clique.",
+    "telegramTaken": "Este Telegram já está vinculado a outra conta."
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",

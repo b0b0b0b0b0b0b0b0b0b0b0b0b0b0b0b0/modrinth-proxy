@@ -280,7 +280,7 @@
     "accMinT": "Wir speichern das Minimum",
     "accMinD": "Wir fragen nicht nach einer E-Mail. Deine IP-Adresse wird nicht mit dem Konto verknüpft und nicht in der Kontodatenbank gespeichert.",
     "accStoredT": "Was genau gespeichert wird",
-    "accStored1": "**Benutzername und Passwort.** Das Passwort liegt als Hash vor — ein nicht umkehrbarer Abdruck, aus dem sich das Passwort nicht zurückgewinnen lässt, auch nicht von uns. Bei Anmeldung über GitHub wird statt eines Passworts nur die Nummer deines GitHub-Kontos gespeichert.",
+    "accStored1": "**Benutzername und Passwort.** Das Passwort liegt als Hash vor — ein nicht umkehrbarer Abdruck, aus dem sich das Passwort nicht zurückgewinnen lässt, auch nicht von uns. Bei Anmeldung über GitHub/Telegram wird statt eines Passworts nur die Nummer deines GitHub/Telegram-Kontos gespeichert.",
     "accStored2": "**Favoriten und Downloads.** Was du mit Herz markiert und was du heruntergeladen hast. Der Download-Verlauf wird nach 30 Tagen automatisch gelöscht, Daten für Update-Hinweise nach einem halben Jahr.",
     "accStored3": "**Spam-Schutz.** Bei der Registrierung wird einen Tag lang ein anonymisierter Netzwerk-Abdruck gespeichert, damit von einer Adresse nicht massenhaft Konten angelegt werden. Die IP selbst wird nicht aufgezeichnet."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub ist verknüpft — Anmeldung mit einem Klick.",
     "githubTaken": "Dieses GitHub-Konto ist schon mit einem anderen Konto verknüpft.",
     "githubClaimTitle": "Der Name {name} ist hier schon registriert",
-    "githubClaimText": "Wenn das dein Konto ist, melde dich unten mit Passwort an — GitHub wird dann automatisch verknüpft. Danach reicht ein Klick.",
+    "githubClaimText": "Wenn das dein Konto ist, melde dich unten mit Passwort an — {provider} wird dann automatisch verknüpft. Danach reicht ein Klick.",
     "githubClaimCreate": "Nicht mein Konto — neues erstellen",
     "editUsername": "Benutzernamen ändern",
     "saveUsername": "Speichern",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Alles in deinen Favoriten wird entfernt: {n}. Das lässt sich nicht mit einem Klick rückgängig machen — nur neu hinzufügen oder einen gespeicherten Code einfügen.",
     "clearFavoritesConfirm": "Ja, leeren",
     "favLoginTitle": "Herzen wohnen im Konto",
-    "favLoginText": "Erstell ein Konto — und alles, was du mit Herz markierst, liegt an einem Ort. Dazu gibt es Download-Verlauf und Hinweise auf neue Versionen. Eine halbe Minute, ohne E-Mail."
+    "favLoginText": "Erstell ein Konto — und alles, was du mit Herz markierst, liegt an einem Ort. Dazu gibt es Download-Verlauf und Hinweise auf neue Versionen. Eine halbe Minute, ohne E-Mail.",
+    "telegramContinue": "Weiter mit Telegram",
+    "errTelegram": "Anmeldung über Telegram hat nicht geklappt. Probier es noch mal.",
+    "telegramLink": "Telegram verknüpfen",
+    "telegramLinked": "Telegram ist verknüpft — Anmeldung mit einem Klick.",
+    "telegramTaken": "Dieses Telegram-Konto ist schon mit einem anderen Konto verknüpft."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",

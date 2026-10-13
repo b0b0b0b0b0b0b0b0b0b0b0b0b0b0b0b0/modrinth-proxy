@@ -280,7 +280,7 @@
     "accMinT": "Chỉ lưu tối thiểu",
     "accMinD": "Chúng tôi không hỏi email. Địa chỉ IP không gắn với tài khoản và không được lưu trong cơ sở dữ liệu tài khoản.",
     "accStoredT": "Cụ thể lưu những gì",
-    "accStored1": "**Tên đăng nhập và mật khẩu.** Mật khẩu được lưu dưới dạng hash — một dấu vết không thể đảo ngược, không ai lần ra được mật khẩu, kể cả chúng tôi. Nếu bạn đăng nhập bằng GitHub, thay cho mật khẩu chỉ lưu số tài khoản GitHub của bạn.",
+    "accStored1": "**Tên đăng nhập và mật khẩu.** Mật khẩu được lưu dưới dạng hash — một dấu vết không thể đảo ngược, không ai lần ra được mật khẩu, kể cả chúng tôi. Nếu bạn đăng nhập bằng GitHub/Telegram, thay cho mật khẩu chỉ lưu số tài khoản GitHub/Telegram của bạn.",
     "accStored2": "**Yêu thích và lượt tải.** Những gì bạn thả tim và những gì bạn đã tải. Lịch sử tải xuống tự xóa sau 30 ngày, dữ liệu cho thông báo cập nhật sau nửa năm.",
     "accStored3": "**Chống spam.** Khi đăng ký, một dấu vết mạng đã ẩn danh được giữ trong một ngày để không ai tạo tài khoản hàng loạt từ cùng một địa chỉ. Bản thân IP không được ghi lại."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "Đã liên kết GitHub — có thể đăng nhập bằng một nút.",
     "githubTaken": "GitHub này đã được liên kết với tài khoản khác.",
     "githubClaimTitle": "Tên {name} đã được đăng ký ở đây",
-    "githubClaimText": "Nếu đó là tài khoản của bạn, hãy đăng nhập bằng mật khẩu bên dưới, GitHub sẽ tự liên kết. Sau đó chỉ cần một nút bấm.",
+    "githubClaimText": "Nếu đó là tài khoản của bạn, hãy đăng nhập bằng mật khẩu bên dưới, {provider} sẽ tự liên kết. Sau đó chỉ cần một nút bấm.",
     "githubClaimCreate": "Không phải tài khoản của tôi — tạo mới",
     "editUsername": "Đổi tên đăng nhập",
     "saveUsername": "Lưu",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Mọi thứ trong mục yêu thích sẽ bị xóa: {n}. Không thể hoàn tác bằng một nút — chỉ có thể thêm lại hoặc dán mã đã lưu.",
     "clearFavoritesConfirm": "Có, xóa hết",
     "favLoginTitle": "Trái tim được lưu trong tài khoản",
-    "favLoginText": "Tạo tài khoản — mọi thứ bạn thả tim sẽ nằm ở một nơi. Bạn còn có lịch sử tải xuống và thông báo phiên bản mới. Nửa phút, không cần email."
+    "favLoginText": "Tạo tài khoản — mọi thứ bạn thả tim sẽ nằm ở một nơi. Bạn còn có lịch sử tải xuống và thông báo phiên bản mới. Nửa phút, không cần email.",
+    "telegramContinue": "Tiếp tục với Telegram",
+    "errTelegram": "Không đăng nhập được bằng Telegram. Hãy thử lại.",
+    "telegramLink": "Liên kết Telegram",
+    "telegramLinked": "Đã liên kết Telegram — có thể đăng nhập bằng một nút.",
+    "telegramTaken": "Telegram này đã được liên kết với tài khoản khác."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",

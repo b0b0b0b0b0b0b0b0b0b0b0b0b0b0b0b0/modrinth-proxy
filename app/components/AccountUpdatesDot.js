@@ -40,8 +40,8 @@ export default function AccountUpdatesDot() {
 
   if (count <= 0) return null
   return (
-    <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-modrinth-green px-1 text-[10px] font-bold leading-none text-black">
-      {count > 9 ? '9+' : count}
+    <span className="absolute -right-3 -top-2 z-20 flex h-[18px] min-w-[18px] animate-pulse items-center justify-center rounded-full bg-modrinth-green px-1 text-[9px] font-bold text-black shadow-lg">
+      {count > 9 ? '9+' : `+${count}`}
     </span>
   )
 }

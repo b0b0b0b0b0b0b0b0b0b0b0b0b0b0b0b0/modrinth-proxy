@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
 import { safeNext } from '@/lib/safeNext'
+import { signInWithTelegram } from '@/lib/telegramPopup'
 import { useCaptcha } from './useCaptcha'
 
 const ERROR_KEYS = {
@@ -18,7 +19,14 @@ const ERROR_KEYS = {
   captcha: 'account.errCaptcha',
   signup_limit: 'account.errSignupLimit',
   github: 'account.errGithub',
+  telegram: 'account.errTelegram',
 }
+
+const PROVIDER_NAMES = { github: 'GitHub', telegram: 'Telegram' }
+const AUTO_BUTTON =
+  'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-[var(--bg-primary)] text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green disabled:opacity-50 dark:border-gray-800'
+const TELEGRAM_ICON =
+  'M21.94 4.3 18.6 20.05c-.25 1.1-.9 1.38-1.83.86l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.37-8.47c.4-.36-.09-.56-.63-.2L5.78 13.5.8 11.95c-1.08-.34-1.1-1.08.23-1.6L20.5 2.84c.9-.33 1.69.21 1.44 1.46Z'
 
 const GITHUB_ICON =
   'M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z'
@@ -70,7 +78,7 @@ function FieldIcon({ path }) {
 const inputClass =
   'w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] py-3 pl-10 pr-4 text-sm text-white outline-none transition-[border-color,box-shadow] placeholder:text-gray-600 focus:border-modrinth-green focus:shadow-[0_0_0_3px_rgba(var(--color-green-rgb),0.18)] dark:border-gray-800'
 
-export default function AuthCard({ github = false, githubClaim = null }) {
+export default function AuthCard({ github = false, telegram = null, claim = null }) {
   const t = useT()
   const router = useRouter()
   const pathname = usePathname()
@@ -82,7 +90,8 @@ export default function AuthCard({ github = false, githubClaim = null }) {
   const mode = pathname === '/register' ? 'register' : 'login'
   const isRegister = mode === 'register'
 
-  const [username, setUsername] = useState(githubClaim || '')
+  const [held, setHeld] = useState(claim)
+  const [username, setUsername] = useState(claim?.name || '')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(() => ({ text: initialError ? t(initialError) : '', id: 0 }))
@@ -96,12 +105,29 @@ export default function AuthCard({ github = false, githubClaim = null }) {
 
   const fail = (key) => setError((prev) => ({ text: t(key), id: prev.id + 1 }))
 
-  const createFromGithub = async () => {
+  const telegramLogin = async () => {
+    if (busy || done) return
+    setError((prev) => ({ text: '', id: prev.id }))
+    const outcome = await signInWithTelegram(telegram, next)
+    if (outcome.result === 'session') {
+      setDone(true)
+      router.push(next || '/account')
+      router.refresh()
+    } else if (outcome.result === 'held') {
+      setHeld({ name: outcome.name, provider: 'telegram' })
+      setUsername(outcome.name)
+      if (isRegister) router.push(`/login${query}`)
+    } else if (outcome.result === 'error') {
+      fail(Object.hasOwn(ERROR_KEYS, outcome.error) ? ERROR_KEYS[outcome.error] : 'account.errTelegram')
+    }
+  }
+
+  const createFromHeld = async () => {
     if (busy || done) return
     setBusy(true)
     setError((prev) => ({ text: '', id: prev.id }))
     try {
-      const response = await fetch('/api/auth/github/create', { method: 'POST' })
+      const response = await fetch('/api/auth/claim', { method: 'POST' })
       if (response.ok) {
         setDone(true)
         router.push(next || '/account')
@@ -132,7 +158,7 @@ export default function AuthCard({ github = false, githubClaim = null }) {
           password,
           website,
           captcha: proof,
-          linkGithub: Boolean(githubClaim) && !isRegister,
+          linkHeld: Boolean(held) && !isRegister,
         }),
       })
       if (response.ok) {
@@ -276,37 +302,52 @@ export default function AuthCard({ github = false, githubClaim = null }) {
                   </div>
                 </motion.div>
 
-                {githubClaim ? (
+                {held ? (
                   <div className="mt-5 rounded-xl border border-modrinth-green/30 bg-modrinth-green/10 p-3">
-                    <div className="text-sm font-bold text-white">{t('account.githubClaimTitle', { name: githubClaim })}</div>
-                    <p className="mt-0.5 text-xs leading-relaxed text-gray-400">{t('account.githubClaimText')}</p>
+                    <div className="text-sm font-bold text-white">{t('account.githubClaimTitle', { name: held.name })}</div>
+                    <p className="mt-0.5 text-xs leading-relaxed text-gray-400">{t('account.githubClaimText', { provider: PROVIDER_NAMES[held.provider] || 'GitHub' })}</p>
                     <button
                       type="button"
-                      onClick={createFromGithub}
+                      onClick={createFromHeld}
                       disabled={busy || done}
                       className="mt-2 text-xs font-semibold text-modrinth-green hover:underline disabled:opacity-60"
                     >
                       {t('account.githubClaimCreate')}
                     </button>
                   </div>
-                ) : github ? (
+                ) : github || telegram ? (
                   <>
                     <div className="mt-5 flex items-center justify-between gap-3">
                       <div className="min-w-0">
                         <div className="text-sm font-bold text-white">{t('account.githubAuto')}</div>
                         <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">{t('account.githubHint')}</p>
                       </div>
-                      <StyledTooltip label={t('account.githubContinue')}>
-                        <a
-                          href={`/api/auth/github${query}`}
-                          aria-label={t('account.githubContinue')}
-                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-[var(--bg-primary)] text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green dark:border-gray-800"
-                        >
-                          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-                            <path d={GITHUB_ICON} />
-                          </svg>
-                        </a>
-                      </StyledTooltip>
+                      <div className="flex shrink-0 items-center gap-2">
+                        {telegram ? (
+                          <StyledTooltip label={t('account.telegramContinue')}>
+                            <button
+                              type="button"
+                              onClick={telegramLogin}
+                              disabled={busy || done}
+                              aria-label={t('account.telegramContinue')}
+                              className={AUTO_BUTTON}
+                            >
+                              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                                <path d={TELEGRAM_ICON} />
+                              </svg>
+                            </button>
+                          </StyledTooltip>
+                        ) : null}
+                        {github ? (
+                          <StyledTooltip label={t('account.githubContinue')}>
+                            <a href={`/api/auth/github${query}`} aria-label={t('account.githubContinue')} className={AUTO_BUTTON}>
+                              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                                <path d={GITHUB_ICON} />
+                              </svg>
+                            </a>
+                          </StyledTooltip>
+                        ) : null}
+                      </div>
                     </div>
                     <div className="mt-5 flex items-center gap-3 text-[11px] uppercase tracking-wide text-gray-600">
                       <span className="h-px flex-1 bg-gray-800" />

@@ -280,7 +280,7 @@
     "accMinT": "Nous gardons le minimum",
     "accMinD": "Nous ne demandons pas d’e-mail. Ton adresse IP n’est pas liée au compte et n’est pas stockée dans la base des comptes.",
     "accStoredT": "Ce qui est stocké exactement",
-    "accStored1": "**Identifiant et mot de passe.** Le mot de passe est conservé sous forme de hash — une empreinte irréversible qui ne permet pas de retrouver le mot de passe, même pour nous. Si tu te connectes via GitHub, seul le numéro de ton compte GitHub est conservé à la place du mot de passe.",
+    "accStored1": "**Identifiant et mot de passe.** Le mot de passe est conservé sous forme de hash — une empreinte irréversible qui ne permet pas de retrouver le mot de passe, même pour nous. Si tu te connectes via GitHub/Telegram, seul le numéro de ton compte GitHub/Telegram est conservé à la place du mot de passe.",
     "accStored2": "**Favoris et téléchargements.** Ce que tu as marqué d’un cœur et ce que tu as téléchargé. L’historique des téléchargements s’efface tout seul au bout de 30 jours, les données pour les alertes de mise à jour au bout de six mois.",
     "accStored3": "**Protection anti-spam.** À l’inscription, une empreinte réseau anonymisée est conservée un jour pour empêcher la création de comptes en masse depuis une même adresse. L’IP elle-même n’est pas enregistrée."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub est lié — connexion en un clic.",
     "githubTaken": "Ce compte GitHub est déjà lié à un autre compte.",
     "githubClaimTitle": "Le nom {name} est déjà enregistré ici",
-    "githubClaimText": "Si c’est ton compte, connecte-toi ci-dessous avec ton mot de passe et GitHub y sera lié automatiquement. Ensuite, un clic suffira.",
+    "githubClaimText": "Si c’est ton compte, connecte-toi ci-dessous avec ton mot de passe et {provider} y sera lié automatiquement. Ensuite, un clic suffira.",
     "githubClaimCreate": "Ce n’est pas mon compte — en créer un nouveau",
     "editUsername": "Modifier l’identifiant",
     "saveUsername": "Enregistrer",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Tout ce qui est dans tes favoris sera retiré : {n}. Impossible d’annuler en un clic — il faudra tout rajouter ou coller un code sauvegardé.",
     "clearFavoritesConfirm": "Oui, vider",
     "favLoginTitle": "Les cœurs vivent dans ton compte",
-    "favLoginText": "Crée un compte et tout ce que tu marques d’un cœur est rangé au même endroit. Tu gagnes aussi l’historique des téléchargements et les alertes de nouvelles versions. Trente secondes, sans e-mail."
+    "favLoginText": "Crée un compte et tout ce que tu marques d’un cœur est rangé au même endroit. Tu gagnes aussi l’historique des téléchargements et les alertes de nouvelles versions. Trente secondes, sans e-mail.",
+    "telegramContinue": "Continuer avec Telegram",
+    "errTelegram": "La connexion via Telegram a échoué. Réessaie.",
+    "telegramLink": "Lier Telegram",
+    "telegramLinked": "Telegram est lié — connexion en un clic.",
+    "telegramTaken": "Ce compte Telegram est déjà lié à un autre compte."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",

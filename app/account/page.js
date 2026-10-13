@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { getSessionUser } from '@/lib/auth'
 import { githubAuthEnabled } from '@/lib/githubAuth'
+import { telegramBotId } from '@/lib/telegramAuth'
 import { buildFavoritesCode, getDownloadsPage, getFavorites, getUpdates, HISTORY_RETENTION_DAYS } from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
@@ -10,6 +11,7 @@ import RelativeTime from '../components/RelativeTime'
 import { ClearFavoritesButton, RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
 import LogoutButton from './LogoutButton'
+import TelegramLinkButton from './TelegramLinkButton'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 
@@ -143,6 +145,9 @@ export default async function AccountPage({ searchParams }) {
 
   if (!user) redirect('/login')
 
+  const githubEnabled = githubAuthEnabled()
+  const telegramBot = telegramBotId()
+
   const updates = await getUpdates(user.id)
   const favorites = getFavorites(user.id)
   const downloads = getDownloadsPage(user.id, parseInt(searchParams?.page, 10))
@@ -158,18 +163,29 @@ export default async function AccountPage({ searchParams }) {
         <LogoutButton />
       </div>
 
-      {user.github_id ? (
-        <p className="mt-2 text-xs text-gray-500">{t('account.githubLinked')}</p>
-      ) : githubAuthEnabled() ? (
-        <div className="mt-2 flex flex-wrap items-center gap-2">
-          <a href="/api/auth/github?next=/account" className={GHOST_BUTTON}>
-            {t('account.githubLink')}
-          </a>
-          <span className={`text-xs ${searchParams?.github === 'taken' ? 'text-amber-400' : 'text-gray-500'}`}>
-            {t(searchParams?.github === 'taken' ? 'account.githubTaken' : 'account.githubLinkHint')}
-          </span>
-        </div>
-      ) : null}
+      <div className="mt-2 space-y-1.5">
+        {user.github_id ? (
+          <p className="text-xs text-gray-500">{t('account.githubLinked')}</p>
+        ) : null}
+        {user.telegram_id ? (
+          <p className="text-xs text-gray-500">{t('account.telegramLinked')}</p>
+        ) : null}
+        {(githubEnabled && !user.github_id) || (telegramBot && !user.telegram_id) ? (
+          <div className="flex flex-wrap items-center gap-2">
+            {githubEnabled && !user.github_id ? (
+              <a href="/api/auth/github?next=/account" className={GHOST_BUTTON}>
+                {t('account.githubLink')}
+              </a>
+            ) : null}
+            {telegramBot && !user.telegram_id ? (
+              <TelegramLinkButton botId={telegramBot} className={GHOST_BUTTON} />
+            ) : null}
+            <span className={`text-xs ${searchParams?.taken === 'github' ? 'text-amber-400' : 'text-gray-500'}`}>
+              {t(searchParams?.taken === 'github' ? 'account.githubTaken' : 'account.githubLinkHint')}
+            </span>
+          </div>
+        ) : null}
+      </div>
 
       <div className="mt-5 flex gap-1 overflow-x-auto rounded-xl border border-gray-800 bg-modrinth-dark p-1">
         {TABS.map((value) => {

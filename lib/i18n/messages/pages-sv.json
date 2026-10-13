@@ -280,7 +280,7 @@
     "accMinT": "Vi sparar så lite som möjligt",
     "accMinD": "Vi frågar inte efter e-post. Din IP-adress kopplas inte till kontot och sparas inte i kontodatabasen.",
     "accStoredT": "Vad som sparas, mer exakt",
-    "accStored1": "**Användarnamn och lösenord.** Lösenordet sparas som en hash — ett oåterkalleligt avtryck som inte går att räkna tillbaka till lösenordet, inte ens för oss. Loggar du in med GitHub sparas bara numret på ditt GitHub-konto i stället för ett lösenord.",
+    "accStored1": "**Användarnamn och lösenord.** Lösenordet sparas som en hash — ett oåterkalleligt avtryck som inte går att räkna tillbaka till lösenordet, inte ens för oss. Loggar du in med GitHub/Telegram sparas bara numret på ditt GitHub/Telegram-konto i stället för ett lösenord.",
     "accStored2": "**Favoriter och nedladdningar.** Det du har hjärtmarkerat och det du har laddat ner. Nedladdningshistoriken raderas automatiskt efter 30 dagar, uppgifter för uppdateringsaviseringar efter ett halvår.",
     "accStored3": "**Skydd mot spam.** Vid registrering sparas ett anonymiserat nätverksavtryck i ett dygn, så att konton inte kan massskapas från samma adress. Själva IP-adressen sparas inte."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub är kopplat — du kan logga in med ett klick.",
     "githubTaken": "Det här GitHub-kontot är redan kopplat till ett annat konto.",
     "githubClaimTitle": "Namnet {name} är redan registrerat här",
-    "githubClaimText": "Om det är ditt konto, logga in med lösenord nedan så kopplas GitHub automatiskt. Sedan räcker ett klick.",
+    "githubClaimText": "Om det är ditt konto, logga in med lösenord nedan så kopplas {provider} automatiskt. Sedan räcker ett klick.",
     "githubClaimCreate": "Inte mitt konto — skapa ett nytt",
     "editUsername": "Ändra användarnamn",
     "saveUsername": "Spara",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Allt i dina favoriter tas bort: {n}. Det går inte att ångra med ett klick — du får lägga till igen eller klistra in en sparad kod.",
     "clearFavoritesConfirm": "Ja, rensa",
     "favLoginTitle": "Hjärtan bor i ditt konto",
-    "favLoginText": "Skapa ett konto så samlas allt du hjärtmarkerar på ett ställe. Du får också nedladdningshistorik och aviseringar om nya versioner. En halv minut, ingen e-post."
+    "favLoginText": "Skapa ett konto så samlas allt du hjärtmarkerar på ett ställe. Du får också nedladdningshistorik och aviseringar om nya versioner. En halv minut, ingen e-post.",
+    "telegramContinue": "Fortsätt med Telegram",
+    "errTelegram": "Det gick inte att logga in med Telegram. Försök igen.",
+    "telegramLink": "Koppla Telegram",
+    "telegramLinked": "Telegram är kopplat — du kan logga in med ett klick.",
+    "telegramTaken": "Det här Telegram-kontot är redan kopplat till ett annat konto."
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",

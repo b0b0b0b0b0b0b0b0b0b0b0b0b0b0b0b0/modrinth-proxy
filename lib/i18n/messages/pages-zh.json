@@ -280,7 +280,7 @@
     "accMinT": "只保存最少的信息",
     "accMinD": "我们不要求邮箱。IP 地址不会与账号关联，也不会保存在账号数据库中。",
     "accStoredT": "具体保存哪些内容",
-    "accStored1": "**用户名和密码。** 密码以哈希形式保存——这是一种不可逆的指纹，无法据此还原密码，我们也不行。如果用 GitHub 登录，则不保存密码，只保存你的 GitHub 账号编号。",
+    "accStored1": "**用户名和密码。** 密码以哈希形式保存——这是一种不可逆的指纹，无法据此还原密码，我们也不行。如果用 GitHub/Telegram 登录，则不保存密码，只保存你的 GitHub/Telegram 账号编号。",
     "accStored2": "**收藏和下载。** 你点过爱心的内容和下载过的内容。下载记录 30 天后自动清除，用于更新提醒的数据半年后清除。",
     "accStored3": "**防刷保护。** 注册时会保存一天经过匿名化的网络指纹，防止同一地址批量注册账号。IP 本身不会被记录。"
   },
@@ -503,7 +503,7 @@
     "githubLinked": "已绑定 GitHub——可以一键登录。",
     "githubTaken": "这个 GitHub 已绑定到其他账号。",
     "githubClaimTitle": "{name} 这个名字已在本站注册",
-    "githubClaimText": "如果这是你的账号，请在下方用密码登录，GitHub 会自动绑定，之后即可一键登录。",
+    "githubClaimText": "如果这是你的账号，请在下方用密码登录，{provider} 会自动绑定，之后即可一键登录。",
     "githubClaimCreate": "不是我的账号——创建新账号",
     "editUsername": "修改用户名",
     "saveUsername": "保存",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "收藏中的全部内容都会被移除：{n} 项。无法一键恢复——只能重新添加，或粘贴之前保存的代码。",
     "clearFavoritesConfirm": "是的，清空",
     "favLoginTitle": "爱心保存在你的账号里",
-    "favLoginText": "创建账号后，你点过爱心的内容都会集中在一处，还能查看下载记录、收到新版本提醒。半分钟搞定，不需要邮箱。"
+    "favLoginText": "创建账号后，你点过爱心的内容都会集中在一处，还能查看下载记录、收到新版本提醒。半分钟搞定，不需要邮箱。",
+    "telegramContinue": "使用 Telegram 继续",
+    "errTelegram": "无法通过 Telegram 登录，请再试一次。",
+    "telegramLink": "绑定 Telegram",
+    "telegramLinked": "已绑定 Telegram——可以一键登录。",
+    "telegramTaken": "这个 Telegram 已绑定到其他账号。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",

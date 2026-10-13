@@ -1,17 +1,6 @@
-import { getSessionUser, startSession } from '@/lib/auth'
-import { recordSignup, signupAllowed } from '@/lib/captcha'
-import {
-  consumeGithubState,
-  fetchGithubIdentity,
-  findUserByGithubId,
-  githubAuthEnabled,
-  githubUsername,
-  holdGithubIdentity,
-  linkGithub,
-  redirectTo,
-  registerGithubUser,
-  usernameTaken,
-} from '@/lib/githubAuth'
+import { getSessionUser } from '@/lib/auth'
+import { resolveExternalSignIn } from '@/lib/externalAccounts'
+import { consumeGithubState, fetchGithubIdentity, githubAuthEnabled, redirectTo } from '@/lib/githubAuth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
 export const dynamic = 'force-dynamic'
@@ -33,23 +22,18 @@ export async function GET(request) {
   const identity = await fetchGithubIdentity(code)
   if (!identity) return redirectTo('/login?error=github')
 
-  const current = getSessionUser()
-  if (current) {
-    return redirectTo(linkGithub(current.id, identity.id) ? '/account' : '/account?github=taken')
-  }
+  const result = resolveExternalSignIn('github', identity, {
+    currentUser: getSessionUser(),
+    ip,
+    next: pending.next,
+  })
 
-  let user = findUserByGithubId(identity.id)
-  if (!user) {
-    if (usernameTaken(githubUsername(identity.login))) {
-      holdGithubIdentity(identity, pending.next)
-      return redirectTo(pending.next ? `/login?next=${encodeURIComponent(pending.next)}` : '/login')
-    }
-    if (!signupAllowed(ip)) return redirectTo('/login?error=signup_limit')
-    user = registerGithubUser(identity.id, identity.login)
-    if (!user) return redirectTo('/login?error=github')
-    recordSignup(ip)
+  if (result === 'linked') return redirectTo('/account')
+  if (result === 'taken') return redirectTo('/account?taken=github')
+  if (result === 'session') return redirectTo(pending.next || '/account')
+  if (result === 'held') {
+    return redirectTo(pending.next ? `/login?next=${encodeURIComponent(pending.next)}` : '/login')
   }
-
-  startSession(user.id)
-  return redirectTo(pending.next || '/account')
+  if (result === 'signup_limit') return redirectTo('/login?error=signup_limit')
+  return redirectTo('/login?error=github')
 }

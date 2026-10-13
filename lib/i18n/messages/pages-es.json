@@ -280,7 +280,7 @@
     "accMinT": "Guardamos lo mínimo",
     "accMinD": "No pedimos correo. Tu dirección IP no se vincula a la cuenta ni se guarda en la base de datos de cuentas.",
     "accStoredT": "Qué se guarda exactamente",
-    "accStored1": "**Usuario y contraseña.** La contraseña se guarda como hash: una huella irreversible con la que no se puede recuperar la contraseña, ni siquiera nosotros. Si entras con GitHub, en lugar de contraseña solo se guarda el número de tu cuenta de GitHub.",
+    "accStored1": "**Usuario y contraseña.** La contraseña se guarda como hash: una huella irreversible con la que no se puede recuperar la contraseña, ni siquiera nosotros. Si entras con GitHub/Telegram, en lugar de contraseña solo se guarda el número de tu cuenta de GitHub/Telegram.",
     "accStored2": "**Favoritos y descargas.** Lo que marcaste con el corazón y lo que descargaste. El historial de descargas se borra solo a los 30 días; los datos para avisos de actualizaciones, a los seis meses.",
     "accStored3": "**Protección contra spam.** Al registrarte se guarda durante un día una huella anónima de la red, para que no se creen cuentas en masa desde una misma dirección. La IP en sí no se registra."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub vinculado — puedes entrar con un clic.",
     "githubTaken": "Este GitHub ya está vinculado a otra cuenta.",
     "githubClaimTitle": "El nombre {name} ya está registrado aquí",
-    "githubClaimText": "Si es tu cuenta, entra abajo con tu contraseña y GitHub se vinculará solo. Después podrás entrar con un clic.",
+    "githubClaimText": "Si es tu cuenta, entra abajo con tu contraseña y {provider} se vinculará solo. Después podrás entrar con un clic.",
     "githubClaimCreate": "No es mi cuenta — crear una nueva",
     "editUsername": "Cambiar nombre de usuario",
     "saveUsername": "Guardar",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Se quitará todo lo que hay en favoritos: {n}. No se puede deshacer con un clic: habrá que añadirlo de nuevo o pegar un código guardado.",
     "clearFavoritesConfirm": "Sí, vaciar",
     "favLoginTitle": "Los corazones viven en tu cuenta",
-    "favLoginText": "Crea una cuenta y todo lo que marques con el corazón quedará en un solo sitio. Además tendrás historial de descargas y avisos de nuevas versiones. Medio minuto, sin correo."
+    "favLoginText": "Crea una cuenta y todo lo que marques con el corazón quedará en un solo sitio. Además tendrás historial de descargas y avisos de nuevas versiones. Medio minuto, sin correo.",
+    "telegramContinue": "Continuar con Telegram",
+    "errTelegram": "No se pudo entrar con Telegram. Inténtalo otra vez.",
+    "telegramLink": "Vincular Telegram",
+    "telegramLinked": "Telegram vinculado — puedes entrar con un clic.",
+    "telegramTaken": "Este Telegram ya está vinculado a otra cuenta."
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",

@@ -280,7 +280,7 @@
     "accMinT": "Przechowujemy minimum",
     "accMinD": "Nie pytamy o e-mail. Adresu IP nie wiążemy z kontem i nie trzymamy go w bazie kont.",
     "accStoredT": "Co dokładnie jest przechowywane",
-    "accStored1": "**Login i hasło.** Hasło jest zapisane jako hash — nieodwracalny odcisk, z którego nie da się odtworzyć hasła, nawet my nie możemy. Jeśli logujesz się przez GitHub, zamiast hasła przechowujemy tylko numer twojego konta GitHub.",
+    "accStored1": "**Login i hasło.** Hasło jest zapisane jako hash — nieodwracalny odcisk, z którego nie da się odtworzyć hasła, nawet my nie możemy. Jeśli logujesz się przez GitHub/Telegram, zamiast hasła przechowujemy tylko numer twojego konta GitHub/Telegram.",
     "accStored2": "**Ulubione i pobrania.** To, co oznaczyłeś serduszkiem, i to, co pobrałeś. Historia pobrań kasuje się sama po 30 dniach, dane do powiadomień o aktualizacjach — po pół roku.",
     "accStored3": "**Ochrona przed spamem.** Przy rejestracji przez dobę przechowujemy zanonimizowany odcisk sieci, żeby z jednego adresu nie zakładano kont hurtowo. Sam adres IP nie jest zapisywany."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub podłączony — możesz logować się jednym przyciskiem.",
     "githubTaken": "Ten GitHub jest już podłączony do innego konta.",
     "githubClaimTitle": "Nazwa {name} jest już tu zarejestrowana",
-    "githubClaimText": "Jeśli to twoje konto — zaloguj się poniżej hasłem, a GitHub podłączy się sam. Potem wystarczy jedno kliknięcie.",
+    "githubClaimText": "Jeśli to twoje konto — zaloguj się poniżej hasłem, a {provider} podłączy się sam. Potem wystarczy jedno kliknięcie.",
     "githubClaimCreate": "To nie moje konto — utwórz nowe",
     "editUsername": "Zmień login",
     "saveUsername": "Zapisz",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "Z ulubionych zniknie wszystko, co tam jest: {n}. Nie da się tego cofnąć jednym kliknięciem — trzeba dodać od nowa albo wkleić zapisany kod.",
     "clearFavoritesConfirm": "Tak, wyczyść",
     "favLoginTitle": "Serduszka mieszkają na koncie",
-    "favLoginText": "Załóż konto — a wszystko, co oznaczysz serduszkiem, będzie w jednym miejscu. Do tego historia pobrań i powiadomienia o nowych wersjach. Pół minuty, bez e-maila."
+    "favLoginText": "Załóż konto — a wszystko, co oznaczysz serduszkiem, będzie w jednym miejscu. Do tego historia pobrań i powiadomienia o nowych wersjach. Pół minuty, bez e-maila.",
+    "telegramContinue": "Kontynuuj z Telegram",
+    "errTelegram": "Nie udało się zalogować przez Telegram. Spróbuj jeszcze raz.",
+    "telegramLink": "Podłącz Telegram",
+    "telegramLinked": "Telegram podłączony — możesz logować się jednym przyciskiem.",
+    "telegramTaken": "Ten Telegram jest już podłączony do innego konta."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",

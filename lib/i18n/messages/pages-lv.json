@@ -280,7 +280,7 @@
     "accMinT": "Glabājam minimumu",
     "accMinD": "E-pastu neprasām. IP adresi kontam nepiesaistām un kontu datubāzē neglabājam.",
     "accStoredT": "Kas tieši tiek glabāts",
-    "accStored1": "**Lietotājvārds un parole.** Parole glabājas kā jaucējkods — neatgriezenisks nospiedums, no kura pašu paroli uzzināt nevar, pat mēs ne. Ja ienāc ar GitHub, paroles vietā glabājas tikai tava GitHub konta numurs.",
+    "accStored1": "**Lietotājvārds un parole.** Parole glabājas kā jaucējkods — neatgriezenisks nospiedums, no kura pašu paroli uzzināt nevar, pat mēs ne. Ja ienāc ar GitHub/Telegram, paroles vietā glabājas tikai tava GitHub/Telegram konta numurs.",
     "accStored2": "**Izlase un lejupielādes.** Ko esi atzīmējis ar sirsniņu un ko lejupielādējis. Lejupielāžu vēsture izdzēšas pati pēc 30 dienām, dati atjauninājumu paziņojumiem — pēc pusgada.",
     "accStored3": "**Aizsardzība pret surogātpastu.** Reģistrējoties diennakti glabājas anonimizēts tīkla nospiedums, lai no vienas adreses nevarētu masveidā veidot kontus. Pati IP adrese netiek pierakstīta."
   },
@@ -503,7 +503,7 @@
     "githubLinked": "GitHub ir piesaistīts — vari ieiet ar vienu pogu.",
     "githubTaken": "Šis GitHub jau ir piesaistīts citam kontam.",
     "githubClaimTitle": "Vārds {name} šeit jau ir reģistrēts",
-    "githubClaimText": "Ja tas ir tavs konts — ienāc zemāk ar paroli, un GitHub piesaistīsies pats. Pēc tam varēsi ieiet ar vienu pogu.",
+    "githubClaimText": "Ja tas ir tavs konts — ienāc zemāk ar paroli, un {provider} piesaistīsies pats. Pēc tam varēsi ieiet ar vienu pogu.",
     "githubClaimCreate": "Tas nav mans konts — izveidot jaunu",
     "editUsername": "Mainīt lietotājvārdu",
     "saveUsername": "Saglabāt",
@@ -524,7 +524,12 @@
     "clearFavoritesText": "No izlases pazudīs viss, kas tur ir: {n}. Ar vienu pogu atgūt nevarēs — tikai pievienot no jauna vai ielīmēt saglabātu kodu.",
     "clearFavoritesConfirm": "Jā, notīrīt",
     "favLoginTitle": "Sirsniņas dzīvo kontā",
-    "favLoginText": "Izveido kontu — un viss, ko atzīmē ar sirsniņu, būs vienuviet. Klāt nāk arī lejupielāžu vēsture un paziņojumi par jaunām versijām. Pusminūte, e-pasts nav vajadzīgs."
+    "favLoginText": "Izveido kontu — un viss, ko atzīmē ar sirsniņu, būs vienuviet. Klāt nāk arī lejupielāžu vēsture un paziņojumi par jaunām versijām. Pusminūte, e-pasts nav vajadzīgs.",
+    "telegramContinue": "Turpināt ar Telegram",
+    "errTelegram": "Neizdevās ieiet ar Telegram. Pamēģini vēlreiz.",
+    "telegramLink": "Piesaistīt Telegram",
+    "telegramLinked": "Telegram ir piesaistīts — vari ieiet ar vienu pogu.",
+    "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
