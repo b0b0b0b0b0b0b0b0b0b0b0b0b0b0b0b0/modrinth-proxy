@@ -282,7 +282,8 @@
     "accStoredT": "Cosa viene conservato esattamente",
     "accStored1": "**Nome utente e password.** La password è conservata come hash: un’impronta irreversibile da cui non si può risalire alla password, nemmeno noi. Se accedi con GitHub, al posto della password si conserva solo il numero del tuo account GitHub.",
     "accStored2": "**Preferiti e download.** Ciò che hai segnato con il cuore e ciò che hai scaricato. La cronologia dei download si cancella da sola dopo 30 giorni, i dati per gli avvisi di aggiornamento dopo sei mesi.",
-    "accStored3": "**Protezione antispam.** Alla registrazione si conserva per un giorno un’impronta anonima della rete, per evitare la creazione in massa di account dallo stesso indirizzo. L’IP in sé non viene registrato."
+    "accStored3": "**Protezione antispam.** Alla registrazione si conserva per un giorno un’impronta anonima della rete, per evitare la creazione in massa di account dallo stesso indirizzo. L’IP in sé non viene registrato.",
+    "accStored4": "**Statistiche delle visite.** Per capire quante persone passano e quali pagine servono, sul sito c’è Yandex Metrica. Conta le visite, non gli account: nome utente, password e preferiti non le arrivano."
   },
   "bot": {
     "metaTitle": "Scansiona mod e plugin per hack e backdoor — analisi JAR | ModrinthProxy",
@@ -525,5 +526,9 @@
     "clearFavoritesConfirm": "Sì, svuota",
     "favLoginTitle": "I cuori vivono nel tuo account",
     "favLoginText": "Crea un account e tutto ciò che segni con il cuore finisce in un posto solo. In più hai la cronologia dei download e gli avvisi sulle nuove versioni. Mezzo minuto, senza email."
+  },
+  "cookie": {
+    "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",
+    "ok": "Ok"
   }
 }

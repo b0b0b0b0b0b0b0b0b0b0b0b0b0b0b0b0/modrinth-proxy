@@ -13,6 +13,7 @@ import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
 import ExtensionBanner from './components/ExtensionBanner'
+import CookieNotice from './components/CookieNotice'
 import FeedbackThoughtBanner from './components/FeedbackThoughtBanner'
 import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
@@ -181,6 +182,7 @@ export default async function RootLayout({ children }) {
           </Suspense>
           <Footer />
           <ExtensionBanner />
+          <CookieNotice />
           <FeedbackThoughtBanner />
           <HalloweenEffects />
           <NewYearEffects />

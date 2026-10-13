@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useT } from './I18nProvider'
+import { cookieNoticeAccepted } from './CookieNotice'
 
 export default function ExtensionBanner() {
   const t = useT()
@@ -14,6 +15,7 @@ export default function ExtensionBanner() {
     if (pathname?.startsWith('/extension')) return
     if (typeof window === 'undefined') return
     if (localStorage.getItem('extensionBannerDismissed') === 'true') return
+    if (!cookieNoticeAccepted()) return
     const t = setTimeout(() => setVisible(true), 1000)
     return () => clearTimeout(t)
   }, [pathname])

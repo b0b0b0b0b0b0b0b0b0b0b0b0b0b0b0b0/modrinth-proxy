@@ -282,7 +282,8 @@
     "accStoredT": "Was genau gespeichert wird",
     "accStored1": "**Benutzername und Passwort.** Das Passwort liegt als Hash vor — ein nicht umkehrbarer Abdruck, aus dem sich das Passwort nicht zurückgewinnen lässt, auch nicht von uns. Bei Anmeldung über GitHub wird statt eines Passworts nur die Nummer deines GitHub-Kontos gespeichert.",
     "accStored2": "**Favoriten und Downloads.** Was du mit Herz markiert und was du heruntergeladen hast. Der Download-Verlauf wird nach 30 Tagen automatisch gelöscht, Daten für Update-Hinweise nach einem halben Jahr.",
-    "accStored3": "**Spam-Schutz.** Bei der Registrierung wird einen Tag lang ein anonymisierter Netzwerk-Abdruck gespeichert, damit von einer Adresse nicht massenhaft Konten angelegt werden. Die IP selbst wird nicht aufgezeichnet."
+    "accStored3": "**Spam-Schutz.** Bei der Registrierung wird einen Tag lang ein anonymisierter Netzwerk-Abdruck gespeichert, damit von einer Adresse nicht massenhaft Konten angelegt werden. Die IP selbst wird nicht aufgezeichnet.",
+    "accStored4": "**Besuchsstatistik.** Um zu verstehen, wie viele Leute vorbeischauen und welche Seiten sie brauchen, läuft auf der Seite Yandex Metrica. Sie zählt Besuche, keine Konten: Benutzername, Passwort und Favoriten landen dort nicht."
   },
   "bot": {
     "metaTitle": "Mods und Plugins auf Hacks und Hintertüren scannen — JAR-Analyse | ModrinthProxy",
@@ -525,5 +526,9 @@
     "clearFavoritesConfirm": "Ja, leeren",
     "favLoginTitle": "Herzen wohnen im Konto",
     "favLoginText": "Erstell ein Konto — und alles, was du mit Herz markierst, liegt an einem Ort. Dazu gibt es Download-Verlauf und Hinweise auf neue Versionen. Eine halbe Minute, ohne E-Mail."
+  },
+  "cookie": {
+    "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
+    "ok": "OK"
   }
 }

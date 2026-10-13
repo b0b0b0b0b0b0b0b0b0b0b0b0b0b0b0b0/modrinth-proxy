@@ -282,7 +282,8 @@
     "accStoredT": "Ce qui est stocké exactement",
     "accStored1": "**Identifiant et mot de passe.** Le mot de passe est conservé sous forme de hash — une empreinte irréversible qui ne permet pas de retrouver le mot de passe, même pour nous. Si tu te connectes via GitHub, seul le numéro de ton compte GitHub est conservé à la place du mot de passe.",
     "accStored2": "**Favoris et téléchargements.** Ce que tu as marqué d’un cœur et ce que tu as téléchargé. L’historique des téléchargements s’efface tout seul au bout de 30 jours, les données pour les alertes de mise à jour au bout de six mois.",
-    "accStored3": "**Protection anti-spam.** À l’inscription, une empreinte réseau anonymisée est conservée un jour pour empêcher la création de comptes en masse depuis une même adresse. L’IP elle-même n’est pas enregistrée."
+    "accStored3": "**Protection anti-spam.** À l’inscription, une empreinte réseau anonymisée est conservée un jour pour empêcher la création de comptes en masse depuis une même adresse. L’IP elle-même n’est pas enregistrée.",
+    "accStored4": "**Statistiques de visite.** Pour savoir combien de personnes passent et quelles pages leur sont utiles, le site utilise Yandex Metrica. Elle compte les visites, pas les comptes : identifiant, mot de passe et favoris n’y arrivent pas."
   },
   "bot": {
     "metaTitle": "Scanner mods et plugins pour hacks et backdoors — analyse JAR | ModrinthProxy",
@@ -525,5 +526,9 @@
     "clearFavoritesConfirm": "Oui, vider",
     "favLoginTitle": "Les cœurs vivent dans ton compte",
     "favLoginText": "Crée un compte et tout ce que tu marques d’un cœur est rangé au même endroit. Tu gagnes aussi l’historique des téléchargements et les alertes de nouvelles versions. Trente secondes, sans e-mail."
+  },
+  "cookie": {
+    "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
+    "ok": "OK"
   }
 }

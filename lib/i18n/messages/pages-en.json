@@ -282,7 +282,8 @@
     "accStoredT": "What exactly is stored",
     "accStored1": "**Username and password.** The password is kept as a hash — a one-way fingerprint that can’t be turned back into the password, even by us. If you sign in with GitHub, only your GitHub account number is stored instead of a password.",
     "accStored2": "**Favorites and downloads.** What you hearted and what you downloaded. Download history is erased automatically after 30 days, data for update alerts after six months.",
-    "accStored3": "**Spam protection.** On sign-up, an anonymized network fingerprint is kept for a day so accounts can’t be mass-created from one address. The IP itself isn’t recorded."
+    "accStored3": "**Spam protection.** On sign-up, an anonymized network fingerprint is kept for a day so accounts can’t be mass-created from one address. The IP itself isn’t recorded.",
+    "accStored4": "**Visit statistics.** To understand how many people visit and which pages they need, the site runs Yandex Metrica. It counts visits, not accounts: your username, password and favorites never reach it."
   },
   "bot": {
     "metaTitle": "Scan mods and plugins for hacks and backdoors — JAR analysis | ModrinthProxy",
@@ -543,5 +544,9 @@
     "clearFavoritesConfirm": "Yes, clear",
     "favLoginTitle": "Hearts live in your account",
     "favLoginText": "Create an account and everything you heart is kept in one place. You also get download history and alerts about new versions. Half a minute, no email needed."
+  },
+  "cookie": {
+    "text": "Our site uses cookies too, because nothing works without them.",
+    "ok": "OK"
   }
 }

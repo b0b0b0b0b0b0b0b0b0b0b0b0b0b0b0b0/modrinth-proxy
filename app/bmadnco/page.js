@@ -225,7 +225,7 @@ export default function AboutPage() {
               <div className="mt-6 bg-emerald-950/30 border border-emerald-700/30 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-emerald-300 mb-4">{t('about.accStoredT')}</h3>
                 <ul className="space-y-3 text-gray-300 leading-relaxed">
-                  {['accStored1', 'accStored2', 'accStored3'].map((key) => (
+                  {['accStored1', 'accStored2', 'accStored3', 'accStored4'].map((key) => (
                     <li key={key} className="flex items-start gap-3">
                       <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
                       <div>

@@ -282,7 +282,8 @@
     "accStoredT": "Qué se guarda exactamente",
     "accStored1": "**Usuario y contraseña.** La contraseña se guarda como hash: una huella irreversible con la que no se puede recuperar la contraseña, ni siquiera nosotros. Si entras con GitHub, en lugar de contraseña solo se guarda el número de tu cuenta de GitHub.",
     "accStored2": "**Favoritos y descargas.** Lo que marcaste con el corazón y lo que descargaste. El historial de descargas se borra solo a los 30 días; los datos para avisos de actualizaciones, a los seis meses.",
-    "accStored3": "**Protección contra spam.** Al registrarte se guarda durante un día una huella anónima de la red, para que no se creen cuentas en masa desde una misma dirección. La IP en sí no se registra."
+    "accStored3": "**Protección contra spam.** Al registrarte se guarda durante un día una huella anónima de la red, para que no se creen cuentas en masa desde una misma dirección. La IP en sí no se registra.",
+    "accStored4": "**Estadísticas de visitas.** Para saber cuánta gente entra y qué páginas necesita, el sitio usa Yandex Metrica. Cuenta visitas, no cuentas: tu usuario, contraseña y favoritos no llegan a ella."
   },
   "bot": {
     "metaTitle": "Escanea mods y plugins en busca de hacks y backdoors — análisis de JAR | ModrinthProxy",
@@ -525,5 +526,9 @@
     "clearFavoritesConfirm": "Sí, vaciar",
     "favLoginTitle": "Los corazones viven en tu cuenta",
     "favLoginText": "Crea una cuenta y todo lo que marques con el corazón quedará en un solo sitio. Además tendrás historial de descargas y avisos de nuevas versiones. Medio minuto, sin correo."
+  },
+  "cookie": {
+    "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
+    "ok": "Vale"
   }
 }
