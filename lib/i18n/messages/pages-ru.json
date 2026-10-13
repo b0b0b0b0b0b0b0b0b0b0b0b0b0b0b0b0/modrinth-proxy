@@ -513,6 +513,16 @@
     "githubClaimCreate": "Это не мой аккаунт — создать новый",
     "editUsername": "Редактировать ник",
     "saveUsername": "Сохранить",
-    "cancelUsername": "Отмена"
+    "cancelUsername": "Отмена",
+    "shareFavorites": "Поделиться списком",
+    "shareCopy": "Скопировать",
+    "shareCopied": "Скопировано",
+    "shareHint": "Отправь этот код другу — он вставит его у себя в избранном и получит тот же список.",
+    "importFavorites": "Вставить список",
+    "importPlaceholder": "вставь код сюда",
+    "importSubmit": "Добавить",
+    "importHint": "Вставь код, которым с тобой поделились. Твоё избранное не пропадёт — новое просто добавится.",
+    "importResult": "Добавлено: {added}. Уже было: {existing}. Не найдено: {missing}.",
+    "errImportCode": "Это не похоже на код списка избранного."
   }
 }

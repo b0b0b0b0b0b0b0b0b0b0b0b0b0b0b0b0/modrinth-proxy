@@ -495,6 +495,16 @@
     "githubClaimCreate": "自分のアカウントではない — 新しく作成",
     "editUsername": "ユーザー名を変更",
     "saveUsername": "保存",
-    "cancelUsername": "キャンセル"
+    "cancelUsername": "キャンセル",
+    "shareFavorites": "リストを共有",
+    "shareCopy": "コピー",
+    "shareCopied": "コピーしました",
+    "shareHint": "このコードを友達に送ると、相手がお気に入りに貼り付けて同じリストを追加できます。",
+    "importFavorites": "リストを貼り付け",
+    "importPlaceholder": "ここにコードを貼り付け",
+    "importSubmit": "追加",
+    "importHint": "共有されたコードを貼り付けてください。今のお気に入りは消えず、新しいものが追加されるだけです。",
+    "importResult": "追加：{added}　登録済み：{existing}　見つからない：{missing}",
+    "errImportCode": "お気に入りリストのコードではないようです。"
   }
 }

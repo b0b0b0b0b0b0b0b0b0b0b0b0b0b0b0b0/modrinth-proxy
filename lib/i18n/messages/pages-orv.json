@@ -495,6 +495,16 @@
     "githubClaimCreate": "Сіе не мой учётъ — завести новый",
     "editUsername": "Перемѣнить прозваніе",
     "saveUsername": "Сберечь",
-    "cancelUsername": "Отступить"
+    "cancelUsername": "Отступить",
+    "shareFavorites": "Подѣлиться спискомъ",
+    "shareCopy": "Списать",
+    "shareCopied": "Списано",
+    "shareHint": "Пошли сей кодъ другу — онъ вставитъ его у себя въ излюбленномъ и обрящетъ тотъ же списокъ.",
+    "importFavorites": "Вставить списокъ",
+    "importPlaceholder": "вставь кодъ сюда",
+    "importSubmit": "Прибавить",
+    "importHint": "Вставь кодъ, коимъ съ тобою подѣлились. Твоё излюбленное не сгинетъ — новое лишь прибавится.",
+    "importResult": "Прибавлено: {added}. Уже было: {existing}. Не сыскано: {missing}.",
+    "errImportCode": "Сіе не похоже на кодъ списка излюбленнаго."
   }
 }

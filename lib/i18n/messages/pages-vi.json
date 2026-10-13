@@ -495,6 +495,16 @@
     "githubClaimCreate": "Không phải tài khoản của tôi — tạo mới",
     "editUsername": "Đổi tên đăng nhập",
     "saveUsername": "Lưu",
-    "cancelUsername": "Hủy"
+    "cancelUsername": "Hủy",
+    "shareFavorites": "Chia sẻ danh sách",
+    "shareCopy": "Sao chép",
+    "shareCopied": "Đã sao chép",
+    "shareHint": "Gửi mã này cho bạn bè — họ dán vào mục yêu thích của mình và nhận được cùng danh sách.",
+    "importFavorites": "Dán danh sách",
+    "importPlaceholder": "dán mã vào đây",
+    "importSubmit": "Thêm",
+    "importHint": "Dán mã mà người khác chia sẻ cho bạn. Mục yêu thích của bạn vẫn giữ nguyên — chỉ thêm cái mới.",
+    "importResult": "Đã thêm: {added}. Đã có sẵn: {existing}. Không tìm thấy: {missing}.",
+    "errImportCode": "Đây có vẻ không phải mã danh sách yêu thích."
   }
 }

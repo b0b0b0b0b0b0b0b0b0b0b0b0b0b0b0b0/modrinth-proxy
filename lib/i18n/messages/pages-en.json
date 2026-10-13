@@ -513,6 +513,16 @@
     "githubClaimCreate": "Not my account — create a new one",
     "editUsername": "Edit username",
     "saveUsername": "Save",
-    "cancelUsername": "Cancel"
+    "cancelUsername": "Cancel",
+    "shareFavorites": "Share list",
+    "shareCopy": "Copy",
+    "shareCopied": "Copied",
+    "shareHint": "Send this code to a friend — they paste it in their favorites and get the same list.",
+    "importFavorites": "Paste a list",
+    "importPlaceholder": "paste the code here",
+    "importSubmit": "Add",
+    "importHint": "Paste a code someone shared with you. Your own favorites stay — new ones are just added.",
+    "importResult": "Added: {added}. Already had: {existing}. Not found: {missing}.",
+    "errImportCode": "That doesn’t look like a favorites list code."
   }
 }

@@ -495,6 +495,16 @@
     "githubClaimCreate": "Nicht mein Konto — neues erstellen",
     "editUsername": "Benutzernamen ändern",
     "saveUsername": "Speichern",
-    "cancelUsername": "Abbrechen"
+    "cancelUsername": "Abbrechen",
+    "shareFavorites": "Liste teilen",
+    "shareCopy": "Kopieren",
+    "shareCopied": "Kopiert",
+    "shareHint": "Schick diesen Code einem Freund — er fügt ihn bei seinen Favoriten ein und bekommt dieselbe Liste.",
+    "importFavorites": "Liste einfügen",
+    "importPlaceholder": "Code hier einfügen",
+    "importSubmit": "Hinzufügen",
+    "importHint": "Füge einen Code ein, den jemand mit dir geteilt hat. Deine Favoriten bleiben — neue kommen einfach dazu.",
+    "importResult": "Hinzugefügt: {added}. Schon vorhanden: {existing}. Nicht gefunden: {missing}.",
+    "errImportCode": "Das sieht nicht nach einem Favoritenlisten-Code aus."
   }
 }

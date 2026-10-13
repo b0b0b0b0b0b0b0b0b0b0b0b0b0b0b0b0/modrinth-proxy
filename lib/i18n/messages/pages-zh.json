@@ -495,6 +495,16 @@
     "githubClaimCreate": "不是我的账号——创建新账号",
     "editUsername": "修改用户名",
     "saveUsername": "保存",
-    "cancelUsername": "取消"
+    "cancelUsername": "取消",
+    "shareFavorites": "分享列表",
+    "shareCopy": "复制",
+    "shareCopied": "已复制",
+    "shareHint": "把这段代码发给朋友，对方在自己的收藏里粘贴，就能得到同样的列表。",
+    "importFavorites": "粘贴列表",
+    "importPlaceholder": "在此粘贴代码",
+    "importSubmit": "添加",
+    "importHint": "粘贴别人分享给你的代码。你原有的收藏不会丢失，只会新增。",
+    "importResult": "已添加：{added}，已存在：{existing}，未找到：{missing}。",
+    "errImportCode": "这看起来不像收藏列表代码。"
   }
 }

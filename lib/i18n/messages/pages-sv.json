@@ -495,6 +495,16 @@
     "githubClaimCreate": "Inte mitt konto — skapa ett nytt",
     "editUsername": "Ändra användarnamn",
     "saveUsername": "Spara",
-    "cancelUsername": "Avbryt"
+    "cancelUsername": "Avbryt",
+    "shareFavorites": "Dela listan",
+    "shareCopy": "Kopiera",
+    "shareCopied": "Kopierat",
+    "shareHint": "Skicka koden till en vän — hen klistrar in den bland sina favoriter och får samma lista.",
+    "importFavorites": "Klistra in en lista",
+    "importPlaceholder": "klistra in koden här",
+    "importSubmit": "Lägg till",
+    "importHint": "Klistra in en kod som någon delat med dig. Dina favoriter finns kvar — nya läggs bara till.",
+    "importResult": "Tillagda: {added}. Fanns redan: {existing}. Hittades inte: {missing}.",
+    "errImportCode": "Det ser inte ut som en kod för en favoritlista."
   }
 }

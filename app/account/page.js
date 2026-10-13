@@ -3,10 +3,11 @@ import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { getSessionUser } from '@/lib/auth'
 import { githubAuthEnabled } from '@/lib/githubAuth'
-import { getDownloadsPage, getFavorites, getUpdates, HISTORY_RETENTION_DAYS } from '@/lib/account'
+import { buildFavoritesCode, getDownloadsPage, getFavorites, getUpdates, HISTORY_RETENTION_DAYS } from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
 import RelativeTime from '../components/RelativeTime'
+import FavoritesShare from './FavoritesShare'
 import LogoutButton from './LogoutButton'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
@@ -219,15 +220,21 @@ export default async function AccountPage({ searchParams }) {
         ) : null}
 
         {tab === 'favorites' ? (
-          favorites.length > 0 ? (
-            <ul className="divide-y divide-gray-800">
-              {favorites.map((row) => (
-                <ProjectRow key={row.project_id} row={row} />
-              ))}
-            </ul>
-          ) : (
-            <p className="text-sm text-gray-500">{t('account.emptyFavorites')}</p>
-          )
+          <>
+            <FavoritesShare
+              code={buildFavoritesCode(favorites.map((row) => row.project_id))}
+              count={favorites.length}
+            />
+            {favorites.length > 0 ? (
+              <ul className="divide-y divide-gray-800">
+                {favorites.map((row) => (
+                  <ProjectRow key={row.project_id} row={row} />
+                ))}
+              </ul>
+            ) : (
+              <p className="text-sm text-gray-500">{t('account.emptyFavorites')}</p>
+            )}
+          </>
         ) : null}
 
         {tab === 'downloads' ? (
