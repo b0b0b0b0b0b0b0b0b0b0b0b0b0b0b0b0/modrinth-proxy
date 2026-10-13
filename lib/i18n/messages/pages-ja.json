@@ -510,6 +510,8 @@
     "clearFavorites": "お気に入りを空にする",
     "clearFavoritesTitle": "本当に空にしますか？",
     "clearFavoritesText": "お気に入りの内容がすべて削除されます：{n} 件。ワンクリックでは元に戻せません。追加し直すか、保存したコードを貼り付ける必要があります。",
-    "clearFavoritesConfirm": "はい、空にする"
+    "clearFavoritesConfirm": "はい、空にする",
+    "favLoginTitle": "ハートはアカウントに保存されます",
+    "favLoginText": "アカウントを作ると、ハートを付けたものが一か所にまとまります。ダウンロード履歴と新バージョンのお知らせも使えます。30秒で完了、メール不要。"
   }
 }

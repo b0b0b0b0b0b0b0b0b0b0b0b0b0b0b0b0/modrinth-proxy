@@ -528,6 +528,8 @@
     "clearFavorites": "Clear favorites",
     "clearFavoritesTitle": "Clear everything?",
     "clearFavoritesText": "This removes everything in your favorites: {n}. It can’t be undone with one click — you’d have to add items again or paste a saved code.",
-    "clearFavoritesConfirm": "Yes, clear"
+    "clearFavoritesConfirm": "Yes, clear",
+    "favLoginTitle": "Hearts live in your account",
+    "favLoginText": "Create an account and everything you heart is kept in one place. You also get download history and alerts about new versions. Half a minute, no email needed."
   }
 }

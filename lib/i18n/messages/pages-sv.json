@@ -510,6 +510,8 @@
     "clearFavorites": "Rensa favoriter",
     "clearFavoritesTitle": "Rensa allt?",
     "clearFavoritesText": "Allt i dina favoriter tas bort: {n}. Det går inte att ångra med ett klick — du får lägga till igen eller klistra in en sparad kod.",
-    "clearFavoritesConfirm": "Ja, rensa"
+    "clearFavoritesConfirm": "Ja, rensa",
+    "favLoginTitle": "Hjärtan bor i ditt konto",
+    "favLoginText": "Skapa ett konto så samlas allt du hjärtmarkerar på ett ställe. Du får också nedladdningshistorik och aviseringar om nya versioner. En halv minut, ingen e-post."
   }
 }

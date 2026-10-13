@@ -510,6 +510,8 @@
     "clearFavorites": "Wyczyść ulubione",
     "clearFavoritesTitle": "Na pewno wyczyścić?",
     "clearFavoritesText": "Z ulubionych zniknie wszystko, co tam jest: {n}. Nie da się tego cofnąć jednym kliknięciem — trzeba dodać od nowa albo wkleić zapisany kod.",
-    "clearFavoritesConfirm": "Tak, wyczyść"
+    "clearFavoritesConfirm": "Tak, wyczyść",
+    "favLoginTitle": "Serduszka mieszkają na koncie",
+    "favLoginText": "Załóż konto — a wszystko, co oznaczysz serduszkiem, będzie w jednym miejscu. Do tego historia pobrań i powiadomienia o nowych wersjach. Pół minuty, bez e-maila."
   }
 }

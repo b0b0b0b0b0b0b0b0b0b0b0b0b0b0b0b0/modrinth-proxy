@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
+import { writeFavoritesCache } from '@/lib/favoritesCache'
 
 const CODE_RE = /^mpfav1(\.[A-Za-z0-9]{6,12}){1,200}$/
 const BUTTON =
@@ -25,6 +26,10 @@ export default function FavoritesShare({ code, count }) {
   const [value, setValue] = useState('')
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState({ text: '', bad: false })
+
+  useEffect(() => {
+    writeFavoritesCache(code.split('.').slice(1))
+  }, [code])
 
   const copy = async () => {
     try {

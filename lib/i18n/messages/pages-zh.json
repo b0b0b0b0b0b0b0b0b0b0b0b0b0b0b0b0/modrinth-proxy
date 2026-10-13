@@ -510,6 +510,8 @@
     "clearFavorites": "清空收藏",
     "clearFavoritesTitle": "确定要清空吗？",
     "clearFavoritesText": "收藏中的全部内容都会被移除：{n} 项。无法一键恢复——只能重新添加，或粘贴之前保存的代码。",
-    "clearFavoritesConfirm": "是的，清空"
+    "clearFavoritesConfirm": "是的，清空",
+    "favLoginTitle": "爱心保存在你的账号里",
+    "favLoginText": "创建账号后，你点过爱心的内容都会集中在一处，还能查看下载记录、收到新版本提醒。半分钟搞定，不需要邮箱。"
   }
 }

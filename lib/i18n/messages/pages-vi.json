@@ -510,6 +510,8 @@
     "clearFavorites": "Xóa hết yêu thích",
     "clearFavoritesTitle": "Xóa hết thật chứ?",
     "clearFavoritesText": "Mọi thứ trong mục yêu thích sẽ bị xóa: {n}. Không thể hoàn tác bằng một nút — chỉ có thể thêm lại hoặc dán mã đã lưu.",
-    "clearFavoritesConfirm": "Có, xóa hết"
+    "clearFavoritesConfirm": "Có, xóa hết",
+    "favLoginTitle": "Trái tim được lưu trong tài khoản",
+    "favLoginText": "Tạo tài khoản — mọi thứ bạn thả tim sẽ nằm ở một nơi. Bạn còn có lịch sử tải xuống và thông báo phiên bản mới. Nửa phút, không cần email."
   }
 }

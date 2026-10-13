@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
+import { clearFavoritesCache } from '@/lib/favoritesCache'
 
 export default function LogoutButton() {
   const t = useT()
@@ -13,6 +14,7 @@ export default function LogoutButton() {
     setBusy(true)
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
+      clearFavoritesCache()
       router.refresh()
     } catch {
     } finally {

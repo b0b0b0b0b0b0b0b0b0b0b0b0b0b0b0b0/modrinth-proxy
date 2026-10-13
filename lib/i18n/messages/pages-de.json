@@ -510,6 +510,8 @@
     "clearFavorites": "Favoriten leeren",
     "clearFavoritesTitle": "Wirklich alles leeren?",
     "clearFavoritesText": "Alles in deinen Favoriten wird entfernt: {n}. Das lässt sich nicht mit einem Klick rückgängig machen — nur neu hinzufügen oder einen gespeicherten Code einfügen.",
-    "clearFavoritesConfirm": "Ja, leeren"
+    "clearFavoritesConfirm": "Ja, leeren",
+    "favLoginTitle": "Herzen wohnen im Konto",
+    "favLoginText": "Erstell ein Konto — und alles, was du mit Herz markierst, liegt an einem Ort. Dazu gibt es Download-Verlauf und Hinweise auf neue Versionen. Eine halbe Minute, ohne E-Mail."
   }
 }

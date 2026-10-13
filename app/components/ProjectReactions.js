@@ -1,12 +1,17 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { usePathname, useRouter } from 'next/navigation'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import * as Popover from '@radix-ui/react-popover'
 import Lottie from 'lottie-react'
 import heartAnimation from '@/public/animations/heart.json'
 import StyledTooltip from './StyledTooltip'
 import { useI18n, useT } from './I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
+import { guessFavorite, updateFavoritesCache } from '@/lib/favoritesCache'
+
+const useBeforePaint = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 const stores = new Map()
 
@@ -19,17 +24,21 @@ function getStore(projectId) {
   return store
 }
 
-function publish(store, state) {
+function publish(store, state, projectId) {
   store.state = state
+  if (state?.signedIn) updateFavoritesCache(projectId, Boolean(state.favorite))
   store.listeners.forEach((listener) => listener(state))
 }
 
 function useProjectState(projectId) {
-  const router = useRouter()
-  const pathname = usePathname()
   const store = getStore(projectId)
   const [state, setState] = useState(store.state)
   const [busy, setBusy] = useState(false)
+  const [guess, setGuess] = useState(null)
+
+  useBeforePaint(() => {
+    setGuess(guessFavorite(projectId))
+  }, [projectId])
 
   useEffect(() => {
     store.listeners.add(setState)
@@ -39,7 +48,7 @@ function useProjectState(projectId) {
       fetch(`/api/account/project?id=${encodeURIComponent(projectId)}`)
         .then((response) => (response.ok ? response.json() : null))
         .then((data) => {
-          if (data) publish(store, data)
+          if (data) publish(store, data, projectId)
         })
         .catch(() => {})
         .finally(() => {
@@ -55,12 +64,8 @@ function useProjectState(projectId) {
   const send = useCallback(
     async (payload) => {
       const current = store.state
-      if (!current) return
-      const goToLogin = () => router.push(`/login?next=${encodeURIComponent(pathname)}`)
-      if (!current.signedIn) {
-        goToLogin()
-        return
-      }
+      if (!current) return false
+      if (!current.signedIn) return true
       setBusy(true)
       try {
         const response = await fetch('/api/account/project', {
@@ -68,24 +73,28 @@ function useProjectState(projectId) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ projectId, ...payload }),
         })
-        if (response.status === 401) goToLogin()
-        else if (response.ok) publish(store, await response.json())
+        if (response.status === 401) return true
+        if (response.ok) publish(store, await response.json(), projectId)
       } catch {
       } finally {
         setBusy(false)
       }
+      return false
     },
-    [pathname, projectId, router, store],
+    [projectId, store],
   )
 
-  return { state, busy, send }
+  return { state, busy, send, guess }
 }
 
 export function ProjectFavoriteButton({ projectId, className = '' }) {
   const t = useT()
-  const { state, busy, send } = useProjectState(projectId)
-  const favorite = state?.favorite ?? false
+  const { state, busy, send, guess } = useProjectState(projectId)
+  const favorite = state?.favorite ?? guess ?? false
+  const ready = state !== null || guess !== null
   const label = favorite ? t('account.favorited') : t('account.favorite')
+  const pathname = usePathname()
+  const [asking, setAsking] = useState(false)
   const lottieRef = useRef(null)
   const justClickedRef = useRef(false)
 
@@ -104,13 +113,17 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
     justClickedRef.current = false
   }, [favorite, rest])
 
-  const handleClick = () => {
-    justClickedRef.current = true
-    send({ favorite: !favorite })
+  const handleClick = async () => {
+    justClickedRef.current = Boolean(state?.signedIn)
+    if (await send({ favorite: !favorite })) setAsking(true)
   }
 
+  const authQuery = `?next=${encodeURIComponent(pathname)}`
+
   return (
+    <Popover.Root open={asking} onOpenChange={setAsking}>
     <StyledTooltip label={label}>
+      <Popover.Anchor asChild>
       <button
         type="button"
         onClick={handleClick}
@@ -119,7 +132,7 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
         disabled={busy}
         aria-pressed={favorite}
         aria-label={label}
-        className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-none transition-transform duration-200 hover:scale-110 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green lg:h-12 lg:w-12 ${className}`}
+        className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-none transition-[transform,opacity] duration-200 ${ready ? 'opacity-100' : 'opacity-0'} hover:scale-110 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green lg:h-12 lg:w-12 ${className}`}
       >
         <Lottie
           lottieRef={lottieRef}
@@ -133,7 +146,37 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
           ].join(' ')}
         />
       </button>
+      </Popover.Anchor>
     </StyledTooltip>
+      <Popover.Portal>
+        <Popover.Content
+          side="bottom"
+          align="end"
+          sideOffset={8}
+          collisionPadding={12}
+          className="z-50 w-80 max-w-[calc(100vw-24px)] rounded-xl border border-gray-700 p-4 shadow-lg shadow-black/50"
+          style={{ backgroundColor: 'var(--bg-gradient-start)' }}
+        >
+          <div className="text-sm font-bold text-white">{t('account.favLoginTitle')}</div>
+          <p className="mt-1 text-xs leading-relaxed text-gray-400">{t('account.favLoginText')}</p>
+          <div className="mt-3 flex flex-wrap justify-end gap-2">
+            <Link
+              href={`/register${authQuery}`}
+              className="inline-flex items-center justify-center rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-semibold leading-none text-gray-300 transition-colors hover:text-white"
+            >
+              {t('account.submitRegister')}
+            </Link>
+            <Link
+              href={`/login${authQuery}`}
+              className="inline-flex items-center justify-center rounded-lg border border-transparent bg-modrinth-green px-3 py-1.5 text-xs font-bold leading-none text-black transition-opacity hover:opacity-90"
+            >
+              {t('account.submitLogin')}
+            </Link>
+          </div>
+          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
   )
 }
 

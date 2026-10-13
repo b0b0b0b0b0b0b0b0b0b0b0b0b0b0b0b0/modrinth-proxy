@@ -510,6 +510,8 @@
     "clearFavorites": "Svuota preferiti",
     "clearFavoritesTitle": "Svuotare tutto?",
     "clearFavoritesText": "Verrà rimosso tutto ciò che è nei preferiti: {n}. Non si annulla con un clic: dovrai riaggiungere tutto o incollare un codice salvato.",
-    "clearFavoritesConfirm": "Sì, svuota"
+    "clearFavoritesConfirm": "Sì, svuota",
+    "favLoginTitle": "I cuori vivono nel tuo account",
+    "favLoginText": "Crea un account e tutto ciò che segni con il cuore finisce in un posto solo. In più hai la cronologia dei download e gli avvisi sulle nuove versioni. Mezzo minuto, senza email."
   }
 }

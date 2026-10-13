@@ -510,6 +510,8 @@
     "clearFavorites": "Notīrīt izlasi",
     "clearFavoritesTitle": "Tiešām notīrīt?",
     "clearFavoritesText": "No izlases pazudīs viss, kas tur ir: {n}. Ar vienu pogu atgūt nevarēs — tikai pievienot no jauna vai ielīmēt saglabātu kodu.",
-    "clearFavoritesConfirm": "Jā, notīrīt"
+    "clearFavoritesConfirm": "Jā, notīrīt",
+    "favLoginTitle": "Sirsniņas dzīvo kontā",
+    "favLoginText": "Izveido kontu — un viss, ko atzīmē ar sirsniņu, būs vienuviet. Klāt nāk arī lejupielāžu vēsture un paziņojumi par jaunām versijām. Pusminūte, e-pasts nav vajadzīgs."
   }
 }

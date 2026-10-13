@@ -510,6 +510,8 @@
     "clearFavorites": "Limpar favoritos",
     "clearFavoritesTitle": "Limpar tudo mesmo?",
     "clearFavoritesText": "Tudo o que está nos favoritos será removido: {n}. Não dá para desfazer com um clique — só adicionando de novo ou colando um código salvo.",
-    "clearFavoritesConfirm": "Sim, limpar"
+    "clearFavoritesConfirm": "Sim, limpar",
+    "favLoginTitle": "Os corações moram na sua conta",
+    "favLoginText": "Crie uma conta e tudo o que você marcar com o coração fica em um só lugar. De quebra, histórico de downloads e avisos de novas versões. Meio minuto, sem e-mail."
   }
 }

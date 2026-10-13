@@ -510,6 +510,8 @@
     "clearFavorites": "Vaciar favoritos",
     "clearFavoritesTitle": "¿Vaciar todo?",
     "clearFavoritesText": "Se quitará todo lo que hay en favoritos: {n}. No se puede deshacer con un clic: habrá que añadirlo de nuevo o pegar un código guardado.",
-    "clearFavoritesConfirm": "Sí, vaciar"
+    "clearFavoritesConfirm": "Sí, vaciar",
+    "favLoginTitle": "Los corazones viven en tu cuenta",
+    "favLoginText": "Crea una cuenta y todo lo que marques con el corazón quedará en un solo sitio. Además tendrás historial de descargas y avisos de nuevas versiones. Medio minuto, sin correo."
   }
 }

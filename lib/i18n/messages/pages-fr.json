@@ -510,6 +510,8 @@
     "clearFavorites": "Vider les favoris",
     "clearFavoritesTitle": "Tout vider ?",
     "clearFavoritesText": "Tout ce qui est dans tes favoris sera retiré : {n}. Impossible d’annuler en un clic — il faudra tout rajouter ou coller un code sauvegardé.",
-    "clearFavoritesConfirm": "Oui, vider"
+    "clearFavoritesConfirm": "Oui, vider",
+    "favLoginTitle": "Les cœurs vivent dans ton compte",
+    "favLoginText": "Crée un compte et tout ce que tu marques d’un cœur est rangé au même endroit. Tu gagnes aussi l’historique des téléchargements et les alertes de nouvelles versions. Trente secondes, sans e-mail."
   }
 }
