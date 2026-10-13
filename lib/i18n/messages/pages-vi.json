@@ -282,8 +282,7 @@
     "accStoredT": "Cụ thể lưu những gì",
     "accStored1": "**Tên đăng nhập và mật khẩu.** Mật khẩu được lưu dưới dạng hash — một dấu vết không thể đảo ngược, không ai lần ra được mật khẩu, kể cả chúng tôi. Nếu bạn đăng nhập bằng GitHub, thay cho mật khẩu chỉ lưu số tài khoản GitHub của bạn.",
     "accStored2": "**Yêu thích và lượt tải.** Những gì bạn thả tim và những gì bạn đã tải. Lịch sử tải xuống tự xóa sau 30 ngày, dữ liệu cho thông báo cập nhật sau nửa năm.",
-    "accStored3": "**Chống spam.** Khi đăng ký, một dấu vết mạng đã ẩn danh được giữ trong một ngày để không ai tạo tài khoản hàng loạt từ cùng một địa chỉ. Bản thân IP không được ghi lại.",
-    "accStored4": "**Thống kê lượt truy cập.** Để biết có bao nhiêu người ghé và họ cần trang nào, trang dùng Yandex Metrica. Nó đếm lượt truy cập chứ không đếm tài khoản: tên đăng nhập, mật khẩu và mục yêu thích không được gửi tới đó."
+    "accStored3": "**Chống spam.** Khi đăng ký, một dấu vết mạng đã ẩn danh được giữ trong một ngày để không ai tạo tài khoản hàng loạt từ cùng một địa chỉ. Bản thân IP không được ghi lại."
   },
   "bot": {
     "metaTitle": "Quét mod và plugin tìm hack và backdoor — phân tích JAR | ModrinthProxy",

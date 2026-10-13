@@ -282,8 +282,7 @@
     "accStoredT": "Kas tieši tiek glabāts",
     "accStored1": "**Lietotājvārds un parole.** Parole glabājas kā jaucējkods — neatgriezenisks nospiedums, no kura pašu paroli uzzināt nevar, pat mēs ne. Ja ienāc ar GitHub, paroles vietā glabājas tikai tava GitHub konta numurs.",
     "accStored2": "**Izlase un lejupielādes.** Ko esi atzīmējis ar sirsniņu un ko lejupielādējis. Lejupielāžu vēsture izdzēšas pati pēc 30 dienām, dati atjauninājumu paziņojumiem — pēc pusgada.",
-    "accStored3": "**Aizsardzība pret surogātpastu.** Reģistrējoties diennakti glabājas anonimizēts tīkla nospiedums, lai no vienas adreses nevarētu masveidā veidot kontus. Pati IP adrese netiek pierakstīta.",
-    "accStored4": "**Apmeklējumu statistika.** Lai saprastu, cik cilvēku pie mums ienāk un kuras lapas viņiem vajadzīgas, vietnē darbojas Yandex Metrica. Tā skaita apmeklējumus, nevis kontus: lietotājvārds, parole un izlase tajā nenonāk."
+    "accStored3": "**Aizsardzība pret surogātpastu.** Reģistrējoties diennakti glabājas anonimizēts tīkla nospiedums, lai no vienas adreses nevarētu masveidā veidot kontus. Pati IP adrese netiek pierakstīta."
   },
   "bot": {
     "metaTitle": "Skenē modus un spraudņus uz hacks un backdoors — JAR analīze | ModrinthProxy",

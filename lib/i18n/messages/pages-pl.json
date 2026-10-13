@@ -282,8 +282,7 @@
     "accStoredT": "Co dokładnie jest przechowywane",
     "accStored1": "**Login i hasło.** Hasło jest zapisane jako hash — nieodwracalny odcisk, z którego nie da się odtworzyć hasła, nawet my nie możemy. Jeśli logujesz się przez GitHub, zamiast hasła przechowujemy tylko numer twojego konta GitHub.",
     "accStored2": "**Ulubione i pobrania.** To, co oznaczyłeś serduszkiem, i to, co pobrałeś. Historia pobrań kasuje się sama po 30 dniach, dane do powiadomień o aktualizacjach — po pół roku.",
-    "accStored3": "**Ochrona przed spamem.** Przy rejestracji przez dobę przechowujemy zanonimizowany odcisk sieci, żeby z jednego adresu nie zakładano kont hurtowo. Sam adres IP nie jest zapisywany.",
-    "accStored4": "**Statystyki odwiedzin.** Żeby wiedzieć, ile osób do nas zagląda i jakich stron potrzebują, na stronie działa Yandex Metrica. Liczy odwiedziny, a nie konta: login, hasło i ulubione do niej nie trafiają."
+    "accStored3": "**Ochrona przed spamem.** Przy rejestracji przez dobę przechowujemy zanonimizowany odcisk sieci, żeby z jednego adresu nie zakładano kont hurtowo. Sam adres IP nie jest zapisywany."
   },
   "bot": {
     "metaTitle": "Skanuj mody i pluginy pod haki i backdoory — analiza JAR | ModrinthProxy",
