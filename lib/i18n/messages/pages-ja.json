@@ -551,6 +551,7 @@
     "digestHave": "現在 {v}",
     "digestMore": "…ほか {n} 件",
     "digestOpen": "マイページを開く",
-    "digestOff": "通知をオフにする"
+    "digestOff": "通知をオフにする",
+    "notifyNeedLink": "通知を受け取るには Telegram を連携してください。ダウンロード済みやお気に入りに新しいバージョンが出ると、ボットがまとめてお知らせします。"
   }
 }

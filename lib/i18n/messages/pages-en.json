@@ -569,6 +569,7 @@
     "digestHave": "you have {v}",
     "digestMore": "…and {n} more",
     "digestOpen": "Open my account",
-    "digestOff": "Turn notifications off"
+    "digestOff": "Turn notifications off",
+    "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version."
   }
 }

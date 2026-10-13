@@ -551,6 +551,7 @@
     "digestHave": "bạn đang có {v}",
     "digestMore": "…và {n} mục nữa",
     "digestOpen": "Mở tài khoản",
-    "digestOff": "Tắt thông báo"
+    "digestOff": "Tắt thông báo",
+    "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới."
   }
 }

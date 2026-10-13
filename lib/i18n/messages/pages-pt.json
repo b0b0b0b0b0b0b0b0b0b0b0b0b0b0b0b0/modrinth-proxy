@@ -551,6 +551,7 @@
     "digestHave": "você tem {v}",
     "digestMore": "…e mais {n}",
     "digestOpen": "Abrir minha conta",
-    "digestOff": "Desativar notificações"
+    "digestOff": "Desativar notificações",
+    "notifyNeedLink": "Para receber notificações, vincule o Telegram. O bot manda um resumo quando algo baixado ou favoritado ganha versão nova."
   }
 }

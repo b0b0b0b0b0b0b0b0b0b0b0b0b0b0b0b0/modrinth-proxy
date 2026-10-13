@@ -551,6 +551,7 @@
     "digestHave": "du har {v}",
     "digestMore": "…och {n} till",
     "digestOpen": "Öppna mitt konto",
-    "digestOff": "Stäng av aviseringar"
+    "digestOff": "Stäng av aviseringar",
+    "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version."
   }
 }

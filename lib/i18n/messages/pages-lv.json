@@ -551,6 +551,7 @@
     "digestHave": "tev ir {v}",
     "digestMore": "…un vēl {n}",
     "digestOpen": "Atvērt kontu",
-    "digestOff": "Izslēgt paziņojumus"
+    "digestOff": "Izslēgt paziņojumus",
+    "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija."
   }
 }

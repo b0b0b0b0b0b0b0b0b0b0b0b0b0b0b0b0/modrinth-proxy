@@ -551,6 +551,7 @@
     "digestHave": "你的版本：{v}",
     "digestMore": "……还有 {n} 项",
     "digestOpen": "打开我的账号",
-    "digestOff": "关闭通知"
+    "digestOff": "关闭通知",
+    "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。"
   }
 }

@@ -551,6 +551,7 @@
     "digestHave": "masz {v}",
     "digestMore": "…i jeszcze {n}",
     "digestOpen": "Otwórz konto",
-    "digestOff": "Wyłącz powiadomienia"
+    "digestOff": "Wyłącz powiadomienia",
+    "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję."
   }
 }

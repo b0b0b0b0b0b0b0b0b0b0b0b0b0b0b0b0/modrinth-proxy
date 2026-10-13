@@ -58,7 +58,8 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
   )
 
   const linkedCount = providers.filter((provider) => provider.linked).length
-  const telegramLinked = providers.some((provider) => provider.id === 'telegram' && provider.linked)
+  const telegramProvider = providers.find((provider) => provider.id === 'telegram') || null
+  const telegramLinked = Boolean(telegramProvider?.linked)
   const [notify, setNotify] = useState(telegramNotify)
 
   const toggleNotify = async () => {
@@ -162,12 +163,24 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
           )
         })}
       </ul>
-      {telegramLinked ? (
+      {telegramProvider ? (
         <div className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
           <div className="min-w-0">
             <div className="text-sm font-semibold text-white">{t('tg.notifyTitle')}</div>
-            <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{t('tg.notifyHint')}</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-gray-500">
+              {t(telegramLinked ? 'tg.notifyHint' : 'tg.notifyNeedLink')}
+            </p>
           </div>
+          {!telegramLinked ? (
+            <button
+              type="button"
+              onClick={() => linkTelegram(telegramProvider.botId)}
+              disabled={Boolean(busy) || !telegramProvider.botId}
+              className={LINK_BUTTON}
+            >
+              {t('account.telegramLink')}
+            </button>
+          ) : (
           <button
             type="button"
             role="switch"
@@ -181,6 +194,7 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
               className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${notify ? 'translate-x-5' : ''}`}
             />
           </button>
+          )}
         </div>
       ) : null}
       {error ? (
