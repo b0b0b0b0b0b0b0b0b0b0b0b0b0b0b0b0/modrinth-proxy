@@ -270,7 +270,19 @@
     "cloudDesc": "Körs i ett modernt moln så att sajten håller sig uppe och sidorna laddar.",
     "ddos": "Skydd mot attacker",
     "ddosLead": "Sajten skyddas mot DDoS och liknande attacker av **mitelis.net**. Så håller vi den uppe och sidorna snabba.",
-    "mitelisMore": "Läs mer om mitelis.net"
+    "mitelisMore": "Läs mer om mitelis.net",
+    "accTitle": "Konton på den här sajten",
+    "accLead": "Ett konto här är bara till för bekvämlighet: favoriter, nedladdningshistorik och aviseringar om nya versioner. Sajten fungerar likadant utan.",
+    "accNotT": "Det här är inget Modrinth-konto",
+    "accNotD": "Ett ModrinthProxy-konto finns bara på den här sajten. Användarnamn och lösenord från modrinth.com fungerar inte här och behövs inte, och vi har ingen åtkomst till ditt Modrinth-konto.",
+    "accSafeT": "Dina uppgifter stannar hos oss",
+    "accSafeD": "Kontouppgifterna ligger på vår egen server. Vi säljer dem inte, lämnar inte ut dem till tredje part och använder dem inte för reklam.",
+    "accMinT": "Vi sparar så lite som möjligt",
+    "accMinD": "Vi frågar inte efter e-post. Din IP-adress kopplas inte till kontot och sparas inte i kontodatabasen.",
+    "accStoredT": "Vad som sparas, mer exakt",
+    "accStored1": "**Användarnamn och lösenord.** Lösenordet sparas som en hash — ett oåterkalleligt avtryck som inte går att räkna tillbaka till lösenordet, inte ens för oss. Loggar du in med GitHub sparas bara numret på ditt GitHub-konto i stället för ett lösenord.",
+    "accStored2": "**Favoriter och nedladdningar.** Det du har hjärtmarkerat och det du har laddat ner. Nedladdningshistoriken raderas automatiskt efter 30 dagar, uppgifter för uppdateringsaviseringar efter ett halvår.",
+    "accStored3": "**Skydd mot spam.** Vid registrering sparas ett anonymiserat nätverksavtryck i ett dygn, så att konton inte kan massskapas från samma adress. Själva IP-adressen sparas inte."
   },
   "bot": {
     "metaTitle": "Skanna mods och plugins efter hacks och bakdörrar — JAR-analys | ModrinthProxy",

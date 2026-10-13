@@ -270,7 +270,19 @@
     "cloudDesc": "Runs on a modern cloud so the site stays up and pages load.",
     "ddos": "Attack protection",
     "ddosLead": "The site is shielded from DDoS and similar attacks by **mitelis.net**. That’s how we keep it up and pages fast.",
-    "mitelisMore": "Learn more about mitelis.net"
+    "mitelisMore": "Learn more about mitelis.net",
+    "accTitle": "Accounts on this site",
+    "accLead": "An account here is only for convenience: favorites, download history and alerts about new versions. The site works the same without one.",
+    "accNotT": "This is not a Modrinth account",
+    "accNotD": "A ModrinthProxy account exists only on this site. Your modrinth.com username and password don’t work here and aren’t needed, and we have no access to your Modrinth account.",
+    "accSafeT": "Your data stays with us",
+    "accSafeD": "Account data is kept on our own server. We don’t sell it, don’t pass it to third parties and don’t use it for advertising.",
+    "accMinT": "We keep the minimum",
+    "accMinD": "We don’t ask for an email. Your IP address isn’t tied to your account and isn’t stored in the account database.",
+    "accStoredT": "What exactly is stored",
+    "accStored1": "**Username and password.** The password is kept as a hash — a one-way fingerprint that can’t be turned back into the password, even by us. If you sign in with GitHub, only your GitHub account number is stored instead of a password.",
+    "accStored2": "**Favorites and downloads.** What you hearted and what you downloaded. Download history is erased automatically after 30 days, data for update alerts after six months.",
+    "accStored3": "**Spam protection.** On sign-up, an anonymized network fingerprint is kept for a day so accounts can’t be mass-created from one address. The IP itself isn’t recorded."
   },
   "bot": {
     "metaTitle": "Scan mods and plugins for hacks and backdoors — JAR analysis | ModrinthProxy",

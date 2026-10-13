@@ -270,7 +270,19 @@
     "cloudDesc": "Gira su un cloud moderno così il sito resta su e le pagine caricano.",
     "ddos": "Protezione dagli attacchi",
     "ddosLead": "Il sito è protetto da DDoS e attacchi simili da **mitelis.net**. Così resta su e le pagine veloci.",
-    "mitelisMore": "Scopri di più su mitelis.net"
+    "mitelisMore": "Scopri di più su mitelis.net",
+    "accTitle": "Gli account su questo sito",
+    "accLead": "Qui l’account serve solo per comodità: preferiti, cronologia dei download e avvisi sulle nuove versioni. Senza, il sito funziona allo stesso modo.",
+    "accNotT": "Questo non è un account Modrinth",
+    "accNotD": "L’account ModrinthProxy esiste solo su questo sito. Nome utente e password di modrinth.com qui non funzionano e non servono, e noi non abbiamo accesso al tuo account Modrinth.",
+    "accSafeT": "I tuoi dati restano da noi",
+    "accSafeD": "I dati dell’account stanno sul nostro server. Non li vendiamo, non li passiamo a terzi e non li usiamo per la pubblicità.",
+    "accMinT": "Conserviamo il minimo",
+    "accMinD": "Non chiediamo l’email. Il tuo indirizzo IP non viene collegato all’account e non è salvato nel database degli account.",
+    "accStoredT": "Cosa viene conservato esattamente",
+    "accStored1": "**Nome utente e password.** La password è conservata come hash: un’impronta irreversibile da cui non si può risalire alla password, nemmeno noi. Se accedi con GitHub, al posto della password si conserva solo il numero del tuo account GitHub.",
+    "accStored2": "**Preferiti e download.** Ciò che hai segnato con il cuore e ciò che hai scaricato. La cronologia dei download si cancella da sola dopo 30 giorni, i dati per gli avvisi di aggiornamento dopo sei mesi.",
+    "accStored3": "**Protezione antispam.** Alla registrazione si conserva per un giorno un’impronta anonima della rete, per evitare la creazione in massa di account dallo stesso indirizzo. L’IP in sé non viene registrato."
   },
   "bot": {
     "metaTitle": "Scansiona mod e plugin per hack e backdoor — analisi JAR | ModrinthProxy",

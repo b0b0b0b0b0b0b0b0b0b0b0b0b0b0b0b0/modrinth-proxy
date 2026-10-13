@@ -270,7 +270,19 @@
     "cloudDesc": "Darbojas modernā mākonī, lai vietne stāvētu un lapas ielādētos.",
     "ddos": "Aizsardzība pret uzbrukumiem",
     "ddosLead": "Vietni no DDoS un līdzīgiem uzbrukumiem sargā **mitelis.net**. Tā mēs turam to augšā un lapas ātras.",
-    "mitelisMore": "Uzzināt vairāk par mitelis.net"
+    "mitelisMore": "Uzzināt vairāk par mitelis.net",
+    "accTitle": "Konti šajā vietnē",
+    "accLead": "Konts šeit vajadzīgs tikai ērtībai: izlase, lejupielāžu vēsture un paziņojumi par jaunām versijām. Bez tā vietne darbojas tāpat.",
+    "accNotT": "Šis nav Modrinth konts",
+    "accNotD": "ModrinthProxy konts pastāv tikai šajā vietnē. modrinth.com lietotājvārds un parole šeit neder un nav vajadzīgi, un piekļuves tavam Modrinth kontam mums nav.",
+    "accSafeT": "Dati paliek pie mums",
+    "accSafeD": "Konta dati glabājas mūsu pašu serverī. Mēs tos nepārdodam, nenododam trešajām personām un neizmantojam reklāmai.",
+    "accMinT": "Glabājam minimumu",
+    "accMinD": "E-pastu neprasām. IP adresi kontam nepiesaistām un kontu datubāzē neglabājam.",
+    "accStoredT": "Kas tieši tiek glabāts",
+    "accStored1": "**Lietotājvārds un parole.** Parole glabājas kā jaucējkods — neatgriezenisks nospiedums, no kura pašu paroli uzzināt nevar, pat mēs ne. Ja ienāc ar GitHub, paroles vietā glabājas tikai tava GitHub konta numurs.",
+    "accStored2": "**Izlase un lejupielādes.** Ko esi atzīmējis ar sirsniņu un ko lejupielādējis. Lejupielāžu vēsture izdzēšas pati pēc 30 dienām, dati atjauninājumu paziņojumiem — pēc pusgada.",
+    "accStored3": "**Aizsardzība pret surogātpastu.** Reģistrējoties diennakti glabājas anonimizēts tīkla nospiedums, lai no vienas adreses nevarētu masveidā veidot kontus. Pati IP adrese netiek pierakstīta."
   },
   "bot": {
     "metaTitle": "Skenē modus un spraudņus uz hacks un backdoors — JAR analīze | ModrinthProxy",

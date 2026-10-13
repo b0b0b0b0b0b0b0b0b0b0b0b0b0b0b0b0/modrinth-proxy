@@ -270,7 +270,19 @@
     "cloudDesc": "Läuft in einer modernen Cloud, damit die Seite erreichbar bleibt und Seiten laden.",
     "ddos": "Schutz vor Angriffen",
     "ddosLead": "Die Seite ist vor DDoS und ähnlichen Angriffen durch **mitelis.net** geschützt. So bleibt sie online und Seiten schnell.",
-    "mitelisMore": "Mehr über mitelis.net"
+    "mitelisMore": "Mehr über mitelis.net",
+    "accTitle": "Konten auf dieser Seite",
+    "accLead": "Ein Konto dient hier nur der Bequemlichkeit: Favoriten, Download-Verlauf und Hinweise auf neue Versionen. Ohne Konto funktioniert die Seite genauso.",
+    "accNotT": "Das ist kein Modrinth-Konto",
+    "accNotD": "Ein ModrinthProxy-Konto gibt es nur auf dieser Seite. Benutzername und Passwort von modrinth.com funktionieren hier nicht und werden nicht gebraucht; auf dein Modrinth-Konto haben wir keinen Zugriff.",
+    "accSafeT": "Deine Daten bleiben bei uns",
+    "accSafeD": "Kontodaten liegen auf unserem eigenen Server. Wir verkaufen sie nicht, geben sie nicht an Dritte weiter und nutzen sie nicht für Werbung.",
+    "accMinT": "Wir speichern das Minimum",
+    "accMinD": "Wir fragen nicht nach einer E-Mail. Deine IP-Adresse wird nicht mit dem Konto verknüpft und nicht in der Kontodatenbank gespeichert.",
+    "accStoredT": "Was genau gespeichert wird",
+    "accStored1": "**Benutzername und Passwort.** Das Passwort liegt als Hash vor — ein nicht umkehrbarer Abdruck, aus dem sich das Passwort nicht zurückgewinnen lässt, auch nicht von uns. Bei Anmeldung über GitHub wird statt eines Passworts nur die Nummer deines GitHub-Kontos gespeichert.",
+    "accStored2": "**Favoriten und Downloads.** Was du mit Herz markiert und was du heruntergeladen hast. Der Download-Verlauf wird nach 30 Tagen automatisch gelöscht, Daten für Update-Hinweise nach einem halben Jahr.",
+    "accStored3": "**Spam-Schutz.** Bei der Registrierung wird einen Tag lang ein anonymisierter Netzwerk-Abdruck gespeichert, damit von einer Adresse nicht massenhaft Konten angelegt werden. Die IP selbst wird nicht aufgezeichnet."
   },
   "bot": {
     "metaTitle": "Mods und Plugins auf Hacks und Hintertüren scannen — JAR-Analyse | ModrinthProxy",

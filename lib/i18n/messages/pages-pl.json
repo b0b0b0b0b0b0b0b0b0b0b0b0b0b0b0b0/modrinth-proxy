@@ -270,7 +270,19 @@
     "cloudDesc": "Działa na nowoczesnej chmurze, żeby strona stała i strony się ładowały.",
     "ddos": "Ochrona przed atakami",
     "ddosLead": "Stronę osłania przed DDoS i podobnymi atakami **mitelis.net**. Tak trzymamy ją w górze i strony szybkie.",
-    "mitelisMore": "Więcej o mitelis.net"
+    "mitelisMore": "Więcej o mitelis.net",
+    "accTitle": "Konta na tej stronie",
+    "accLead": "Konto służy tu tylko wygodzie: ulubione, historia pobrań i powiadomienia o nowych wersjach. Bez niego strona działa tak samo.",
+    "accNotT": "To nie jest konto Modrinth",
+    "accNotD": "Konto ModrinthProxy istnieje tylko na tej stronie. Login i hasło z modrinth.com tu nie działają i nie są potrzebne, a my nie mamy dostępu do twojego konta Modrinth.",
+    "accSafeT": "Dane zostają u nas",
+    "accSafeD": "Dane konta leżą na naszym własnym serwerze. Nie sprzedajemy ich, nie przekazujemy osobom trzecim i nie używamy do reklam.",
+    "accMinT": "Przechowujemy minimum",
+    "accMinD": "Nie pytamy o e-mail. Adresu IP nie wiążemy z kontem i nie trzymamy go w bazie kont.",
+    "accStoredT": "Co dokładnie jest przechowywane",
+    "accStored1": "**Login i hasło.** Hasło jest zapisane jako hash — nieodwracalny odcisk, z którego nie da się odtworzyć hasła, nawet my nie możemy. Jeśli logujesz się przez GitHub, zamiast hasła przechowujemy tylko numer twojego konta GitHub.",
+    "accStored2": "**Ulubione i pobrania.** To, co oznaczyłeś serduszkiem, i to, co pobrałeś. Historia pobrań kasuje się sama po 30 dniach, dane do powiadomień o aktualizacjach — po pół roku.",
+    "accStored3": "**Ochrona przed spamem.** Przy rejestracji przez dobę przechowujemy zanonimizowany odcisk sieci, żeby z jednego adresu nie zakładano kont hurtowo. Sam adres IP nie jest zapisywany."
   },
   "bot": {
     "metaTitle": "Skanuj mody i pluginy pod haki i backdoory — analiza JAR | ModrinthProxy",

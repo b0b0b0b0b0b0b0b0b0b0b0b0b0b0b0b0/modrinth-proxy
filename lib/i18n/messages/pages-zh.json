@@ -270,7 +270,19 @@
     "cloudDesc": "跑在现代云上，让站点保持可用、页面加载。",
     "ddos": "攻击防护",
     "ddosLead": "站点由 **mitelis.net** 防护 DDoS 及类似攻击。这样我们才能保持可用、页面快速。",
-    "mitelisMore": "了解 mitelis.net"
+    "mitelisMore": "了解 mitelis.net",
+    "accTitle": "本站账号说明",
+    "accLead": "这里的账号只是为了方便：收藏、下载记录和新版本提醒。没有账号，网站照样能用。",
+    "accNotT": "这不是 Modrinth 账号",
+    "accNotD": "ModrinthProxy 账号只存在于本站。modrinth.com 的用户名和密码在这里不能用，也不需要，我们也无法访问你的 Modrinth 账号。",
+    "accSafeT": "数据留在我们这里",
+    "accSafeD": "账号数据存放在我们自己的服务器上。我们不出售、不提供给第三方，也不用于广告。",
+    "accMinT": "只保存最少的信息",
+    "accMinD": "我们不要求邮箱。IP 地址不会与账号关联，也不会保存在账号数据库中。",
+    "accStoredT": "具体保存哪些内容",
+    "accStored1": "**用户名和密码。** 密码以哈希形式保存——这是一种不可逆的指纹，无法据此还原密码，我们也不行。如果用 GitHub 登录，则不保存密码，只保存你的 GitHub 账号编号。",
+    "accStored2": "**收藏和下载。** 你点过爱心的内容和下载过的内容。下载记录 30 天后自动清除，用于更新提醒的数据半年后清除。",
+    "accStored3": "**防刷保护。** 注册时会保存一天经过匿名化的网络指纹，防止同一地址批量注册账号。IP 本身不会被记录。"
   },
   "bot": {
     "metaTitle": "扫描模组与插件中的黑客与后门 — JAR 分析 | ModrinthProxy",

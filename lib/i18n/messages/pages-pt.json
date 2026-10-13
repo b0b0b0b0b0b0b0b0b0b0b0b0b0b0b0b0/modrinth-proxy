@@ -270,7 +270,19 @@
     "cloudDesc": "Roda numa nuvem moderna para o site ficar no ar e as páginas carregarem.",
     "ddos": "Proteção contra ataques",
     "ddosLead": "O site é protegido de DDoS e ataques parecidos pela **mitelis.net**. É assim que a gente mantém no ar e as páginas rápidas.",
-    "mitelisMore": "Saiba mais sobre mitelis.net"
+    "mitelisMore": "Saiba mais sobre mitelis.net",
+    "accTitle": "Contas neste site",
+    "accLead": "Aqui a conta serve só para a sua comodidade: favoritos, histórico de downloads e avisos de novas versões. Sem ela, o site funciona do mesmo jeito.",
+    "accNotT": "Esta não é uma conta Modrinth",
+    "accNotD": "A conta ModrinthProxy existe só neste site. Usuário e senha do modrinth.com não funcionam aqui nem são necessários, e não temos acesso à sua conta Modrinth.",
+    "accSafeT": "Seus dados ficam com a gente",
+    "accSafeD": "Os dados da conta ficam no nosso próprio servidor. Não vendemos, não repassamos a terceiros e não usamos para publicidade.",
+    "accMinT": "Guardamos o mínimo",
+    "accMinD": "Não pedimos e-mail. Seu endereço IP não é vinculado à conta nem fica guardado no banco de dados de contas.",
+    "accStoredT": "O que exatamente é guardado",
+    "accStored1": "**Usuário e senha.** A senha é guardada como hash — uma impressão irreversível a partir da qual não dá para descobrir a senha, nem nós conseguimos. Se você entra com o GitHub, no lugar da senha guardamos apenas o número da sua conta GitHub.",
+    "accStored2": "**Favoritos e downloads.** O que você marcou com o coração e o que baixou. O histórico de downloads some sozinho após 30 dias; os dados para avisos de atualização, após seis meses.",
+    "accStored3": "**Proteção contra spam.** No cadastro, guardamos por um dia uma impressão anônima da rede, para que não criem contas em massa a partir de um mesmo endereço. O IP em si não é registrado."
   },
   "bot": {
     "metaTitle": "Analise mods e plugins em busca de hacks e backdoors — análise de JAR | ModrinthProxy",

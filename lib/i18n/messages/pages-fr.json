@@ -270,7 +270,19 @@
     "cloudDesc": "Tourne sur un cloud moderne pour que le site tienne et que les pages chargent.",
     "ddos": "Protection contre les attaques",
     "ddosLead": "Le site est protégé des DDoS et attaques similaires par **mitelis.net**. C’est comme ça qu’on le garde en ligne et les pages rapides.",
-    "mitelisMore": "En savoir plus sur mitelis.net"
+    "mitelisMore": "En savoir plus sur mitelis.net",
+    "accTitle": "Les comptes sur ce site",
+    "accLead": "Ici, un compte sert seulement au confort : favoris, historique des téléchargements et alertes de nouvelles versions. Sans compte, le site fonctionne pareil.",
+    "accNotT": "Ce n’est pas un compte Modrinth",
+    "accNotD": "Un compte ModrinthProxy n’existe que sur ce site. L’identifiant et le mot de passe de modrinth.com ne fonctionnent pas ici et ne sont pas nécessaires, et nous n’avons aucun accès à ton compte Modrinth.",
+    "accSafeT": "Tes données restent chez nous",
+    "accSafeD": "Les données de compte sont sur notre propre serveur. Nous ne les vendons pas, ne les transmettons pas à des tiers et ne les utilisons pas pour la publicité.",
+    "accMinT": "Nous gardons le minimum",
+    "accMinD": "Nous ne demandons pas d’e-mail. Ton adresse IP n’est pas liée au compte et n’est pas stockée dans la base des comptes.",
+    "accStoredT": "Ce qui est stocké exactement",
+    "accStored1": "**Identifiant et mot de passe.** Le mot de passe est conservé sous forme de hash — une empreinte irréversible qui ne permet pas de retrouver le mot de passe, même pour nous. Si tu te connectes via GitHub, seul le numéro de ton compte GitHub est conservé à la place du mot de passe.",
+    "accStored2": "**Favoris et téléchargements.** Ce que tu as marqué d’un cœur et ce que tu as téléchargé. L’historique des téléchargements s’efface tout seul au bout de 30 jours, les données pour les alertes de mise à jour au bout de six mois.",
+    "accStored3": "**Protection anti-spam.** À l’inscription, une empreinte réseau anonymisée est conservée un jour pour empêcher la création de comptes en masse depuis une même adresse. L’IP elle-même n’est pas enregistrée."
   },
   "bot": {
     "metaTitle": "Scanner mods et plugins pour hacks et backdoors — analyse JAR | ModrinthProxy",

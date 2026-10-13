@@ -178,6 +178,66 @@ export default function AboutPage() {
             </div>
           </section>
 
+          <section className="relative bg-gradient-to-br from-emerald-900/30 via-gray-900/60 to-teal-800/20 rounded-2xl p-8 md:p-10 border border-emerald-700/40 shadow-2xl overflow-hidden">
+            <div className="absolute top-0 left-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
+            <div className="relative">
+              <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
+                <svg className="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                {t('about.accTitle')}
+              </h2>
+              <p className="text-gray-300 leading-relaxed">{t('about.accLead')}</p>
+
+              <div className="grid md:grid-cols-3 gap-4 mt-6">
+                <div className="bg-gradient-to-br from-amber-500/10 to-transparent rounded-xl p-5 border border-amber-500/25 hover:border-amber-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="inline-flex p-2 bg-amber-500/20 rounded-lg mb-3">
+                    <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-white mb-1">{t('about.accNotT')}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t('about.accNotD')}</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-emerald-500/10 to-transparent rounded-xl p-5 border border-emerald-500/25 hover:border-emerald-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="inline-flex p-2 bg-emerald-500/20 rounded-lg mb-3">
+                    <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-white mb-1">{t('about.accSafeT')}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t('about.accSafeD')}</p>
+                </div>
+
+                <div className="bg-gradient-to-br from-teal-500/10 to-transparent rounded-xl p-5 border border-teal-500/25 hover:border-teal-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="inline-flex p-2 bg-teal-500/20 rounded-lg mb-3">
+                    <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88L6.59 6.59m7.532 7.532l3.29 3.29M3 3l18 18" />
+                    </svg>
+                  </div>
+                  <h3 className="font-bold text-white mb-1">{t('about.accMinT')}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{t('about.accMinD')}</p>
+                </div>
+              </div>
+
+              <div className="mt-6 bg-emerald-950/30 border border-emerald-700/30 rounded-xl p-6">
+                <h3 className="text-lg font-bold text-emerald-300 mb-4">{t('about.accStoredT')}</h3>
+                <ul className="space-y-3 text-gray-300 leading-relaxed">
+                  {['accStored1', 'accStored2', 'accStored3'].map((key) => (
+                    <li key={key} className="flex items-start gap-3">
+                      <span className="text-modrinth-green-light text-xl flex-shrink-0">✓</span>
+                      <div>
+                        <RichText text={t(`about.${key}`)} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
+
           <section className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8 border border-blue-700/50 shadow-2xl">
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
               <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
