@@ -505,6 +505,11 @@
     "importSubmit": "Ajouter",
     "importHint": "Colle un code qu’on t’a partagé. Tes favoris restent — les nouveaux s’ajoutent simplement.",
     "importResult": "Ajoutés : {added}. Déjà présents : {existing}. Introuvables : {missing}.",
-    "errImportCode": "Ça ne ressemble pas à un code de liste de favoris."
+    "errImportCode": "Ça ne ressemble pas à un code de liste de favoris.",
+    "removeFavorite": "Retirer des favoris",
+    "clearFavorites": "Vider les favoris",
+    "clearFavoritesTitle": "Tout vider ?",
+    "clearFavoritesText": "Tout ce qui est dans tes favoris sera retiré : {n}. Impossible d’annuler en un clic — il faudra tout rajouter ou coller un code sauvegardé.",
+    "clearFavoritesConfirm": "Oui, vider"
   }
 }

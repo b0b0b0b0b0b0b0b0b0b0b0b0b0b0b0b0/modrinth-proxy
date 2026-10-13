@@ -505,6 +505,11 @@
     "importSubmit": "Adicionar",
     "importHint": "Cole um código que compartilharam com você. Seus favoritos continuam — os novos são só adicionados.",
     "importResult": "Adicionados: {added}. Já tinha: {existing}. Não encontrados: {missing}.",
-    "errImportCode": "Isso não parece um código de lista de favoritos."
+    "errImportCode": "Isso não parece um código de lista de favoritos.",
+    "removeFavorite": "Remover dos favoritos",
+    "clearFavorites": "Limpar favoritos",
+    "clearFavoritesTitle": "Limpar tudo mesmo?",
+    "clearFavoritesText": "Tudo o que está nos favoritos será removido: {n}. Não dá para desfazer com um clique — só adicionando de novo ou colando um código salvo.",
+    "clearFavoritesConfirm": "Sim, limpar"
   }
 }

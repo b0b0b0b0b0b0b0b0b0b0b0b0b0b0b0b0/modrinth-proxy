@@ -505,6 +505,11 @@
     "importSubmit": "追加",
     "importHint": "共有されたコードを貼り付けてください。今のお気に入りは消えず、新しいものが追加されるだけです。",
     "importResult": "追加：{added}　登録済み：{existing}　見つからない：{missing}",
-    "errImportCode": "お気に入りリストのコードではないようです。"
+    "errImportCode": "お気に入りリストのコードではないようです。",
+    "removeFavorite": "お気に入りから削除",
+    "clearFavorites": "お気に入りを空にする",
+    "clearFavoritesTitle": "本当に空にしますか？",
+    "clearFavoritesText": "お気に入りの内容がすべて削除されます：{n} 件。ワンクリックでは元に戻せません。追加し直すか、保存したコードを貼り付ける必要があります。",
+    "clearFavoritesConfirm": "はい、空にする"
   }
 }

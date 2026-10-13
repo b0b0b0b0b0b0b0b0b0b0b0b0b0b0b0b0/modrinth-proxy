@@ -505,6 +505,11 @@
     "importSubmit": "Thêm",
     "importHint": "Dán mã mà người khác chia sẻ cho bạn. Mục yêu thích của bạn vẫn giữ nguyên — chỉ thêm cái mới.",
     "importResult": "Đã thêm: {added}. Đã có sẵn: {existing}. Không tìm thấy: {missing}.",
-    "errImportCode": "Đây có vẻ không phải mã danh sách yêu thích."
+    "errImportCode": "Đây có vẻ không phải mã danh sách yêu thích.",
+    "removeFavorite": "Bỏ khỏi yêu thích",
+    "clearFavorites": "Xóa hết yêu thích",
+    "clearFavoritesTitle": "Xóa hết thật chứ?",
+    "clearFavoritesText": "Mọi thứ trong mục yêu thích sẽ bị xóa: {n}. Không thể hoàn tác bằng một nút — chỉ có thể thêm lại hoặc dán mã đã lưu.",
+    "clearFavoritesConfirm": "Có, xóa hết"
   }
 }

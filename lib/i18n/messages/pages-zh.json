@@ -505,6 +505,11 @@
     "importSubmit": "添加",
     "importHint": "粘贴别人分享给你的代码。你原有的收藏不会丢失，只会新增。",
     "importResult": "已添加：{added}，已存在：{existing}，未找到：{missing}。",
-    "errImportCode": "这看起来不像收藏列表代码。"
+    "errImportCode": "这看起来不像收藏列表代码。",
+    "removeFavorite": "从收藏中移除",
+    "clearFavorites": "清空收藏",
+    "clearFavoritesTitle": "确定要清空吗？",
+    "clearFavoritesText": "收藏中的全部内容都会被移除：{n} 项。无法一键恢复——只能重新添加，或粘贴之前保存的代码。",
+    "clearFavoritesConfirm": "是的，清空"
   }
 }

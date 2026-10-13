@@ -7,6 +7,7 @@ import { buildFavoritesCode, getDownloadsPage, getFavorites, getUpdates, HISTORY
 import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
 import RelativeTime from '../components/RelativeTime'
+import { ClearFavoritesButton, RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
 import LogoutButton from './LogoutButton'
 import UsernameEditor from './UsernameEditor'
@@ -41,7 +42,7 @@ function ProjectIcon({ url }) {
   )
 }
 
-function ProjectRow({ row, meta }) {
+function ProjectRow({ row, meta, action = null }) {
   return (
     <li className="flex items-center gap-3 py-2.5">
       <ProjectIcon url={row.icon_url} />
@@ -52,6 +53,7 @@ function ProjectRow({ row, meta }) {
         {meta ? <div className="truncate text-xs text-gray-500">{meta}</div> : null}
       </div>
       <RelativeTime dateString={new Date(row.created_at).toISOString()} className="shrink-0 text-xs text-gray-500" />
+      {action}
     </li>
   )
 }
@@ -226,11 +228,20 @@ export default async function AccountPage({ searchParams }) {
               count={favorites.length}
             />
             {favorites.length > 0 ? (
-              <ul className="divide-y divide-gray-800">
-                {favorites.map((row) => (
-                  <ProjectRow key={row.project_id} row={row} />
-                ))}
-              </ul>
+              <>
+                <ul className="divide-y divide-gray-800">
+                  {favorites.map((row) => (
+                    <ProjectRow
+                      key={row.project_id}
+                      row={row}
+                      action={<RemoveFavoriteButton projectId={row.project_id} />}
+                    />
+                  ))}
+                </ul>
+                <div className="mt-3 flex justify-end border-t border-gray-800 pt-3">
+                  <ClearFavoritesButton count={favorites.length} />
+                </div>
+              </>
             ) : (
               <p className="text-sm text-gray-500">{t('account.emptyFavorites')}</p>
             )}

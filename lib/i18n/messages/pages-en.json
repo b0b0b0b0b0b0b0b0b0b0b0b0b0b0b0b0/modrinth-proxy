@@ -523,6 +523,11 @@
     "importSubmit": "Add",
     "importHint": "Paste a code someone shared with you. Your own favorites stay — new ones are just added.",
     "importResult": "Added: {added}. Already had: {existing}. Not found: {missing}.",
-    "errImportCode": "That doesn’t look like a favorites list code."
+    "errImportCode": "That doesn’t look like a favorites list code.",
+    "removeFavorite": "Remove from favorites",
+    "clearFavorites": "Clear favorites",
+    "clearFavoritesTitle": "Clear everything?",
+    "clearFavoritesText": "This removes everything in your favorites: {n}. It can’t be undone with one click — you’d have to add items again or paste a saved code.",
+    "clearFavoritesConfirm": "Yes, clear"
   }
 }

@@ -505,6 +505,11 @@
     "importSubmit": "Dodaj",
     "importHint": "Wklej kod, który ktoś ci udostępnił. Twoje ulubione zostają — nowe po prostu się dodadzą.",
     "importResult": "Dodano: {added}. Już było: {existing}. Nie znaleziono: {missing}.",
-    "errImportCode": "To nie wygląda na kod listy ulubionych."
+    "errImportCode": "To nie wygląda na kod listy ulubionych.",
+    "removeFavorite": "Usuń z ulubionych",
+    "clearFavorites": "Wyczyść ulubione",
+    "clearFavoritesTitle": "Na pewno wyczyścić?",
+    "clearFavoritesText": "Z ulubionych zniknie wszystko, co tam jest: {n}. Nie da się tego cofnąć jednym kliknięciem — trzeba dodać od nowa albo wkleić zapisany kod.",
+    "clearFavoritesConfirm": "Tak, wyczyść"
   }
 }

@@ -505,6 +505,11 @@
     "importSubmit": "Lägg till",
     "importHint": "Klistra in en kod som någon delat med dig. Dina favoriter finns kvar — nya läggs bara till.",
     "importResult": "Tillagda: {added}. Fanns redan: {existing}. Hittades inte: {missing}.",
-    "errImportCode": "Det ser inte ut som en kod för en favoritlista."
+    "errImportCode": "Det ser inte ut som en kod för en favoritlista.",
+    "removeFavorite": "Ta bort från favoriter",
+    "clearFavorites": "Rensa favoriter",
+    "clearFavoritesTitle": "Rensa allt?",
+    "clearFavoritesText": "Allt i dina favoriter tas bort: {n}. Det går inte att ångra med ett klick — du får lägga till igen eller klistra in en sparad kod.",
+    "clearFavoritesConfirm": "Ja, rensa"
   }
 }

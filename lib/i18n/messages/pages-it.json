@@ -505,6 +505,11 @@
     "importSubmit": "Aggiungi",
     "importHint": "Incolla un codice che ti hanno condiviso. I tuoi preferiti restano: i nuovi vengono solo aggiunti.",
     "importResult": "Aggiunti: {added}. Già presenti: {existing}. Non trovati: {missing}.",
-    "errImportCode": "Non sembra un codice di elenco preferiti."
+    "errImportCode": "Non sembra un codice di elenco preferiti.",
+    "removeFavorite": "Rimuovi dai preferiti",
+    "clearFavorites": "Svuota preferiti",
+    "clearFavoritesTitle": "Svuotare tutto?",
+    "clearFavoritesText": "Verrà rimosso tutto ciò che è nei preferiti: {n}. Non si annulla con un clic: dovrai riaggiungere tutto o incollare un codice salvato.",
+    "clearFavoritesConfirm": "Sì, svuota"
   }
 }

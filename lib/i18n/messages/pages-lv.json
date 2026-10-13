@@ -505,6 +505,11 @@
     "importSubmit": "Pievienot",
     "importHint": "Ielīmē kodu, ar ko ar tevi dalījās. Tava izlase nepazudīs — jaunais vienkārši pievienosies.",
     "importResult": "Pievienots: {added}. Jau bija: {existing}. Nav atrasts: {missing}.",
-    "errImportCode": "Tas neizskatās pēc izlases saraksta koda."
+    "errImportCode": "Tas neizskatās pēc izlases saraksta koda.",
+    "removeFavorite": "Noņemt no izlases",
+    "clearFavorites": "Notīrīt izlasi",
+    "clearFavoritesTitle": "Tiešām notīrīt?",
+    "clearFavoritesText": "No izlases pazudīs viss, kas tur ir: {n}. Ar vienu pogu atgūt nevarēs — tikai pievienot no jauna vai ielīmēt saglabātu kodu.",
+    "clearFavoritesConfirm": "Jā, notīrīt"
   }
 }
