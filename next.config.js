@@ -67,6 +67,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
 })
 
 const nextConfig = {
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   basePath: '',
   compress: false,
   async rewrites() {
