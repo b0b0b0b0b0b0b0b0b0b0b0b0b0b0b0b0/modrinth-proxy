@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useT } from '../components/I18nProvider'
+import StyledTooltip from '../components/StyledTooltip'
 import { safeNext } from '@/lib/safeNext'
 import { useCaptcha } from './useCaptcha'
 
@@ -16,7 +17,11 @@ const ERROR_KEYS = {
   rate_limit: 'account.errRate',
   captcha: 'account.errCaptcha',
   signup_limit: 'account.errSignupLimit',
+  github: 'account.errGithub',
 }
+
+const GITHUB_ICON =
+  'M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z'
 
 const PERKS = [
   {
@@ -65,19 +70,21 @@ function FieldIcon({ path }) {
 const inputClass =
   'w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] py-3 pl-10 pr-4 text-sm text-white outline-none transition-[border-color,box-shadow] placeholder:text-gray-600 focus:border-modrinth-green focus:shadow-[0_0_0_3px_rgba(var(--color-green-rgb),0.18)] dark:border-gray-800'
 
-export default function AuthCard() {
+export default function AuthCard({ github = false }) {
   const t = useT()
   const router = useRouter()
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
-  const next = safeNext(useSearchParams().get('next'))
+  const searchParams = useSearchParams()
+  const next = safeNext(searchParams.get('next'))
+  const initialError = ERROR_KEYS[searchParams.get('error')]
   const mode = pathname === '/register' ? 'register' : 'login'
   const isRegister = mode === 'register'
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
-  const [error, setError] = useState({ text: '', id: 0 })
+  const [error, setError] = useState(() => ({ text: initialError ? t(initialError) : '', id: 0 }))
   const [busy, setBusy] = useState(false)
   const [done, setDone] = useState(false)
   const [website, setWebsite] = useState('')
@@ -168,7 +175,7 @@ export default function AuthCard() {
 
         <div className="relative grid overflow-hidden rounded-[calc(1.5rem-1px)] bg-modrinth-dark md:grid-cols-[0.9fr_1.1fr]">
           <div
-            className="relative hidden flex-col justify-between overflow-hidden p-8 md:flex"
+            className="relative hidden flex-col overflow-hidden p-8 md:flex"
             style={{
               background:
                 'linear-gradient(140deg, rgba(var(--color-green-rgb), 0.22), rgba(var(--color-green-light-rgb), 0.10) 60%, transparent)',
@@ -192,45 +199,24 @@ export default function AuthCard() {
               </motion.p>
             </div>
 
-            <ul className="mt-8 space-y-3">
+            <ul className="mt-8 space-y-4">
               {PERKS.map((perk, index) => (
-                <motion.li key={perk.key} {...rise(0.3 + index * 0.08)} className="flex items-center gap-3">
+                <motion.li key={perk.key} {...rise(0.3 + index * 0.08)} className="flex items-start gap-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green">
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
                       <path d={perk.path} />
                     </svg>
                   </span>
-                  <span className="text-sm text-gray-200">{t(`account.${perk.key}`)}</span>
+                  <span className="min-w-0">
+                    <span className="block text-sm font-semibold text-white">{t(`account.${perk.key}`)}</span>
+                    <span className="mt-0.5 block text-xs leading-relaxed text-gray-400">{t(`account.${perk.key}Text`)}</span>
+                  </span>
                 </motion.li>
               ))}
             </ul>
           </div>
 
           <div className="p-6 md:p-8">
-            <div className="relative grid grid-cols-2 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-1">
-              {['login', 'register'].map((value) => (
-                <Link
-                  key={value}
-                  href={`/${value}${query}`}
-                  scroll={false}
-                  aria-current={mode === value ? 'page' : undefined}
-                  className={[
-                    'relative z-10 rounded-lg px-3 py-2 text-center text-sm font-semibold transition-colors',
-                    mode === value ? 'text-black' : 'text-gray-400 hover:text-white',
-                  ].join(' ')}
-                >
-                  {mode === value ? (
-                    <motion.span
-                      layoutId="auth-tab"
-                      className="absolute inset-0 -z-10 rounded-lg bg-modrinth-green"
-                      transition={{ type: 'spring', stiffness: 420, damping: 34 }}
-                    />
-                  ) : null}
-                  {t(`account.${value}`)}
-                </Link>
-              ))}
-            </div>
-
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={mode}
@@ -239,7 +225,7 @@ export default function AuthCard() {
                 exit={reduceMotion ? undefined : { opacity: 0, x: isRegister ? -24 : 24 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }}
               >
-                <h1 className="mt-6 text-xl font-bold text-white">
+                <h1 className="text-xl font-bold text-white">
                   {t(isRegister ? 'account.registerTitle' : 'account.loginTitle')}
                 </h1>
                 <p className="mt-1 text-sm text-gray-500">
@@ -250,11 +236,6 @@ export default function AuthCard() {
                   {...rise(0.05)}
                   className="mt-4 flex gap-3 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3"
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-amber-400 text-black">
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
-                      <path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6l-8-3ZM12 8v5M12 16.5v.01" />
-                    </svg>
-                  </span>
                   <div className="min-w-0 text-xs leading-relaxed text-gray-400">
                     <div className="text-sm font-bold text-white">{t('account.notModrinthTitle')}</div>
                     <p className="mt-0.5">
@@ -270,6 +251,33 @@ export default function AuthCard() {
                     </p>
                   </div>
                 </motion.div>
+
+                {github ? (
+                  <>
+                    <div className="mt-5 flex items-center justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="text-sm font-bold text-white">{t('account.githubAuto')}</div>
+                        <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">{t('account.githubHint')}</p>
+                      </div>
+                      <StyledTooltip label={t('account.githubContinue')}>
+                        <a
+                          href={`/api/auth/github${query}`}
+                          aria-label={t('account.githubContinue')}
+                          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-[var(--bg-primary)] text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green dark:border-gray-800"
+                        >
+                          <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                            <path d={GITHUB_ICON} />
+                          </svg>
+                        </a>
+                      </StyledTooltip>
+                    </div>
+                    <div className="mt-5 flex items-center gap-3 text-[11px] uppercase tracking-wide text-gray-600">
+                      <span className="h-px flex-1 bg-gray-800" />
+                      {t('account.or')}
+                      <span className="h-px flex-1 bg-gray-800" />
+                    </div>
+                  </>
+                ) : null}
 
                 <form onSubmit={submit} className="mt-4 space-y-4">
                   <label className="block">

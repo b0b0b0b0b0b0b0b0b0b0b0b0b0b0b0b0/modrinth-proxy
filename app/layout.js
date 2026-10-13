@@ -144,7 +144,7 @@ export default async function RootLayout({ children }) {
 })();`}
         </Script>
       </head>
-      <body className={`${nunito.className} min-h-screen m-0`}>
+      <body className={`${nunito.className} m-0 flex min-h-screen flex-col`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -173,7 +173,7 @@ export default async function RootLayout({ children }) {
             </div>
           </nav>
           <DisclaimerBadge />
-          <main className="container">
+          <main className="container flex-1">
             {children}
           </main>
           <Suspense fallback={null}>

@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
 import { getSessionUser } from '@/lib/auth'
+import { githubAuthEnabled } from '@/lib/githubAuth'
 import { getDownloadsPage, getFavorites, getUpdates, HISTORY_RETENTION_DAYS } from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
@@ -152,6 +153,19 @@ export default async function AccountPage({ searchParams }) {
         <h1 className="text-2xl font-bold text-white">{t('account.hello', { name: user.username })}</h1>
         <LogoutButton />
       </div>
+
+      {user.github_id ? (
+        <p className="mt-2 text-xs text-gray-500">{t('account.githubLinked')}</p>
+      ) : githubAuthEnabled() ? (
+        <div className="mt-2 flex flex-wrap items-center gap-2">
+          <a href="/api/auth/github?next=/account" className={GHOST_BUTTON}>
+            {t('account.githubLink')}
+          </a>
+          <span className={`text-xs ${searchParams?.github === 'taken' ? 'text-amber-400' : 'text-gray-500'}`}>
+            {t(searchParams?.github === 'taken' ? 'account.githubTaken' : 'account.githubLinkHint')}
+          </span>
+        </div>
+      ) : null}
 
       <div className="mt-5 flex gap-1 overflow-x-auto rounded-xl border border-gray-800 bg-modrinth-dark p-1">
         {TABS.map((value) => {

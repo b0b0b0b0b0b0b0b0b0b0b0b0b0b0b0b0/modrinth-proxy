@@ -493,8 +493,20 @@
     "errCaptcha": "Couldn’t verify the request. Try again.",
     "errSignupLimit": "Too many accounts were created from your network today. Try again tomorrow.",
     "notModrinthTitle": "This is not a Modrinth account",
-    "notModrinthRegister": "ModrinthProxy is an independent site with no ties to modrinth.com. This account works only here. Don’t reuse your Modrinth password — make a new one.",
+    "notModrinthRegister": "ModrinthProxy is an independent site with no ties to modrinth.com. This account works only here.",
     "notModrinthLogin": "This is a separate ModrinthProxy account. Your modrinth.com username and password won’t work here, and you shouldn’t enter them.",
-    "favoritesCount": "In favorites on ModrinthProxy: {n}"
+    "favoritesCount": "In favorites on ModrinthProxy: {n}",
+    "or": "or the old-fashioned way",
+    "githubAuto": "One-click sign-in",
+    "perkHeartsText": "Tap the heart and a mod, shader or server is always at hand, on any device.",
+    "perkUpdatesText": "When something you saved or downloaded gets a new version, it shows up in your account with a one-click download.",
+    "perkHistoryText": "Everything you downloaded while signed in. Easy to find that one file again.",
+    "githubContinue": "Continue with GitHub",
+    "githubHint": "No password needed. If you don’t have an account yet, one is created for you.",
+    "errGithub": "Couldn’t sign in with GitHub. Please try again.",
+    "githubLink": "Link GitHub",
+    "githubLinkHint": "To sign in with one click, no password.",
+    "githubLinked": "GitHub is linked — you can sign in with one click.",
+    "githubTaken": "This GitHub account is already linked to another account."
   }
 }
