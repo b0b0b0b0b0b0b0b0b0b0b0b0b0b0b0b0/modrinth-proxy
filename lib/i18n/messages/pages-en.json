@@ -561,5 +561,14 @@
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
     "ok": "OK"
+  },
+  "tg": {
+    "notifyTitle": "Telegram notifications",
+    "notifyHint": "The bot sends a summary when something you downloaded or saved gets a new version. We check about every three hours.",
+    "digestTitle": "New versions are out",
+    "digestHave": "you have {v}",
+    "digestMore": "…and {n} more",
+    "digestOpen": "Open my account",
+    "digestOff": "Turn notifications off"
   }
 }

@@ -245,6 +245,7 @@ export default async function AccountPage({ searchParams }) {
         {tab === 'signin' ? (
           <SignInMethods
             hasPassword={Boolean(user.has_password)}
+            telegramNotify={Boolean(user.telegram_notify)}
             takenProvider={searchParams?.taken || null}
             providers={[
               ...(githubEnabled || user.github_id ? [{ id: 'github', linked: Boolean(user.github_id) }] : []),

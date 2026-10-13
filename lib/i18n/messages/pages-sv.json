@@ -543,5 +543,14 @@
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
     "ok": "Okej"
+  },
+  "tg": {
+    "notifyTitle": "Telegram-aviseringar",
+    "notifyHint": "Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version. Vi kollar ungefär var tredje timme.",
+    "digestTitle": "Nya versioner är ute",
+    "digestHave": "du har {v}",
+    "digestMore": "…och {n} till",
+    "digestOpen": "Öppna mitt konto",
+    "digestOff": "Stäng av aviseringar"
   }
 }

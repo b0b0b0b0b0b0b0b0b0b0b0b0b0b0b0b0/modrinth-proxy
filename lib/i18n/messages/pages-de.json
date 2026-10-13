@@ -543,5 +543,14 @@
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
     "ok": "OK"
+  },
+  "tg": {
+    "notifyTitle": "Telegram-Benachrichtigungen",
+    "notifyHint": "Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt. Wir prüfen etwa alle drei Stunden.",
+    "digestTitle": "Neue Versionen sind da",
+    "digestHave": "du hast {v}",
+    "digestMore": "…und {n} weitere",
+    "digestOpen": "Konto öffnen",
+    "digestOff": "Benachrichtigungen ausschalten"
   }
 }

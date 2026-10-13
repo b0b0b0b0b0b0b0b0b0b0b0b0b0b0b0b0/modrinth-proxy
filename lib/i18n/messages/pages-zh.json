@@ -543,5 +543,14 @@
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
     "ok": "好的"
+  },
+  "tg": {
+    "notifyTitle": "Telegram 通知",
+    "notifyHint": "下载过或收藏的内容有新版本时，机器人会发送一条汇总。大约每三小时检查一次。",
+    "digestTitle": "有新版本发布",
+    "digestHave": "你的版本：{v}",
+    "digestMore": "……还有 {n} 项",
+    "digestOpen": "打开我的账号",
+    "digestOff": "关闭通知"
   }
 }

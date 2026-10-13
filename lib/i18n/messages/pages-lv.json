@@ -543,5 +543,14 @@
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
     "ok": "Labi"
+  },
+  "tg": {
+    "notifyTitle": "Telegram paziņojumi",
+    "notifyHint": "Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija. Pārbaudām apmēram reizi trijās stundās.",
+    "digestTitle": "Iznākušas jaunas versijas",
+    "digestHave": "tev ir {v}",
+    "digestMore": "…un vēl {n}",
+    "digestOpen": "Atvērt kontu",
+    "digestOff": "Izslēgt paziņojumus"
   }
 }

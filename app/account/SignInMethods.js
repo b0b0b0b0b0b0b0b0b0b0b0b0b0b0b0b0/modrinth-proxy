@@ -49,7 +49,7 @@ function Row({ icon, title, status, active, children }) {
   )
 }
 
-export default function SignInMethods({ hasPassword, providers, takenProvider = null }) {
+export default function SignInMethods({ hasPassword, providers, telegramNotify = true, takenProvider = null }) {
   const t = useT()
   const router = useRouter()
   const [busy, setBusy] = useState(null)
@@ -58,6 +58,28 @@ export default function SignInMethods({ hasPassword, providers, takenProvider = 
   )
 
   const linkedCount = providers.filter((provider) => provider.linked).length
+  const telegramLinked = providers.some((provider) => provider.id === 'telegram' && provider.linked)
+  const [notify, setNotify] = useState(telegramNotify)
+
+  const toggleNotify = async () => {
+    if (busy) return
+    const next = !notify
+    setBusy('notify')
+    setError('')
+    try {
+      const response = await fetch('/api/account/notifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ telegram: next }),
+      })
+      if (response.ok) setNotify(next)
+      else setError(t('account.errGeneric'))
+    } catch {
+      setError(t('account.errGeneric'))
+    } finally {
+      setBusy(null)
+    }
+  }
 
   const unlink = async (id) => {
     if (busy) return
@@ -140,6 +162,27 @@ export default function SignInMethods({ hasPassword, providers, takenProvider = 
           )
         })}
       </ul>
+      {telegramLinked ? (
+        <div className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
+          <div className="min-w-0">
+            <div className="text-sm font-semibold text-white">{t('tg.notifyTitle')}</div>
+            <p className="mt-0.5 text-xs leading-relaxed text-gray-500">{t('tg.notifyHint')}</p>
+          </div>
+          <button
+            type="button"
+            role="switch"
+            aria-checked={notify}
+            aria-label={t('tg.notifyTitle')}
+            onClick={toggleNotify}
+            disabled={Boolean(busy)}
+            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-60 ${notify ? 'bg-modrinth-green' : 'bg-gray-700'}`}
+          >
+            <span
+              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${notify ? 'translate-x-5' : ''}`}
+            />
+          </button>
+        </div>
+      ) : null}
       {error ? (
         <p className="mt-2 text-xs text-amber-400" role="alert">
           {error}

@@ -543,5 +543,14 @@
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
     "ok": "Vale"
+  },
+  "tg": {
+    "notifyTitle": "Avisos por Telegram",
+    "notifyHint": "El bot envía un resumen cuando algo descargado o guardado tiene versión nueva. Lo comprobamos más o menos cada tres horas.",
+    "digestTitle": "Hay versiones nuevas",
+    "digestHave": "tienes {v}",
+    "digestMore": "…y {n} más",
+    "digestOpen": "Abrir mi cuenta",
+    "digestOff": "Desactivar avisos"
   }
 }

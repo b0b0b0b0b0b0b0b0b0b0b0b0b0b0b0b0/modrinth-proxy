@@ -543,5 +543,14 @@
   "cookie": {
     "text": "このサイトも Cookie を使っています。ないと何も動かないからです。",
     "ok": "OK"
+  },
+  "tg": {
+    "notifyTitle": "Telegram 通知",
+    "notifyHint": "ダウンロード済みやお気に入りに新しいバージョンが出ると、ボットがまとめてお知らせします。確認はおよそ 3 時間ごとです。",
+    "digestTitle": "新しいバージョンが出ました",
+    "digestHave": "現在 {v}",
+    "digestMore": "…ほか {n} 件",
+    "digestOpen": "マイページを開く",
+    "digestOff": "通知をオフにする"
   }
 }
