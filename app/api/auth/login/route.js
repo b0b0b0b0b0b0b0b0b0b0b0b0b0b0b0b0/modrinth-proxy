@@ -1,5 +1,6 @@
 import { authenticateUser, isSameOrigin, startSession } from '@/lib/auth'
 import { clearLoginFailures, recordLoginFailure, verifyCaptcha } from '@/lib/captcha'
+import { heldGithubIdentity, linkGithub, releaseGithubIdentity } from '@/lib/githubAuth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
 const RATE_LIMIT = { limit: 10, windowMs: 10 * 60 * 1000 }
@@ -26,5 +27,12 @@ export async function POST(request) {
 
   clearLoginFailures(ip)
   startSession(user.id)
+  if (body?.linkGithub) {
+    const held = heldGithubIdentity()
+    if (held) {
+      linkGithub(user.id, held.id)
+      releaseGithubIdentity()
+    }
+  }
   return Response.json({ user: { username: user.username } })
 }

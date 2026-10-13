@@ -489,6 +489,12 @@
     "githubLink": "Liên kết GitHub",
     "githubLinkHint": "Để đăng nhập bằng một nút, không cần mật khẩu.",
     "githubLinked": "Đã liên kết GitHub — có thể đăng nhập bằng một nút.",
-    "githubTaken": "GitHub này đã được liên kết với tài khoản khác."
+    "githubTaken": "GitHub này đã được liên kết với tài khoản khác.",
+    "githubClaimTitle": "Tên {name} đã được đăng ký ở đây",
+    "githubClaimText": "Nếu đó là tài khoản của bạn, hãy đăng nhập bằng mật khẩu bên dưới, GitHub sẽ tự liên kết. Sau đó chỉ cần một nút bấm.",
+    "githubClaimCreate": "Không phải tài khoản của tôi — tạo mới",
+    "editUsername": "Đổi tên đăng nhập",
+    "saveUsername": "Lưu",
+    "cancelUsername": "Hủy"
   }
 }

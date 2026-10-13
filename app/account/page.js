@@ -8,6 +8,7 @@ import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
 import RelativeTime from '../components/RelativeTime'
 import LogoutButton from './LogoutButton'
+import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 
 export const dynamic = 'force-dynamic'
@@ -150,7 +151,7 @@ export default async function AccountPage({ searchParams }) {
   return (
     <div className="mx-auto max-w-3xl py-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-2xl font-bold text-white">{t('account.hello', { name: user.username })}</h1>
+        <UsernameEditor username={user.username} />
         <LogoutButton />
       </div>
 

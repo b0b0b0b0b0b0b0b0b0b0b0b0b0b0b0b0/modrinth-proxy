@@ -70,18 +70,19 @@ function FieldIcon({ path }) {
 const inputClass =
   'w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] py-3 pl-10 pr-4 text-sm text-white outline-none transition-[border-color,box-shadow] placeholder:text-gray-600 focus:border-modrinth-green focus:shadow-[0_0_0_3px_rgba(var(--color-green-rgb),0.18)] dark:border-gray-800'
 
-export default function AuthCard({ github = false }) {
+export default function AuthCard({ github = false, githubClaim = null }) {
   const t = useT()
   const router = useRouter()
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
   const searchParams = useSearchParams()
   const next = safeNext(searchParams.get('next'))
-  const initialError = ERROR_KEYS[searchParams.get('error')]
+  const errorParam = searchParams.get('error')
+  const initialError = errorParam && Object.hasOwn(ERROR_KEYS, errorParam) ? ERROR_KEYS[errorParam] : null
   const mode = pathname === '/register' ? 'register' : 'login'
   const isRegister = mode === 'register'
 
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState(githubClaim || '')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState(() => ({ text: initialError ? t(initialError) : '', id: 0 }))
@@ -93,12 +94,34 @@ export default function AuthCard({ github = false }) {
   const query = next ? `?next=${encodeURIComponent(next)}` : ''
   const strength = passwordStrength(password)
 
+  const fail = (key) => setError((prev) => ({ text: t(key), id: prev.id + 1 }))
+
+  const createFromGithub = async () => {
+    if (busy || done) return
+    setBusy(true)
+    setError((prev) => ({ text: '', id: prev.id }))
+    try {
+      const response = await fetch('/api/auth/github/create', { method: 'POST' })
+      if (response.ok) {
+        setDone(true)
+        router.push(next || '/account')
+        router.refresh()
+        return
+      }
+      const data = await response.json().catch(() => null)
+      fail(ERROR_KEYS[data?.error] || 'account.errGeneric')
+    } catch {
+      fail('account.errGeneric')
+    } finally {
+      setBusy(false)
+    }
+  }
+
   const submit = async (event) => {
     event.preventDefault()
     if (busy || done) return
     setBusy(true)
     setError((prev) => ({ text: '', id: prev.id }))
-    const fail = (key) => setError((prev) => ({ text: t(key), id: prev.id + 1 }))
     try {
       const proof = await captcha.takeProof()
       const response = await fetch(`/api/auth/${mode}`, {
@@ -109,6 +132,7 @@ export default function AuthCard({ github = false }) {
           password,
           website,
           captcha: proof,
+          linkGithub: Boolean(githubClaim) && !isRegister,
         }),
       })
       if (response.ok) {
@@ -252,7 +276,20 @@ export default function AuthCard({ github = false }) {
                   </div>
                 </motion.div>
 
-                {github ? (
+                {githubClaim ? (
+                  <div className="mt-5 rounded-xl border border-modrinth-green/30 bg-modrinth-green/10 p-3">
+                    <div className="text-sm font-bold text-white">{t('account.githubClaimTitle', { name: githubClaim })}</div>
+                    <p className="mt-0.5 text-xs leading-relaxed text-gray-400">{t('account.githubClaimText')}</p>
+                    <button
+                      type="button"
+                      onClick={createFromGithub}
+                      disabled={busy || done}
+                      className="mt-2 text-xs font-semibold text-modrinth-green hover:underline disabled:opacity-60"
+                    >
+                      {t('account.githubClaimCreate')}
+                    </button>
+                  </div>
+                ) : github ? (
                   <>
                     <div className="mt-5 flex items-center justify-between gap-3">
                       <div className="min-w-0">

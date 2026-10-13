@@ -489,6 +489,12 @@
     "githubLink": "绑定 GitHub",
     "githubLinkHint": "绑定后可一键登录，无需密码。",
     "githubLinked": "已绑定 GitHub——可以一键登录。",
-    "githubTaken": "这个 GitHub 已绑定到其他账号。"
+    "githubTaken": "这个 GitHub 已绑定到其他账号。",
+    "githubClaimTitle": "{name} 这个名字已在本站注册",
+    "githubClaimText": "如果这是你的账号，请在下方用密码登录，GitHub 会自动绑定，之后即可一键登录。",
+    "githubClaimCreate": "不是我的账号——创建新账号",
+    "editUsername": "修改用户名",
+    "saveUsername": "保存",
+    "cancelUsername": "取消"
   }
 }

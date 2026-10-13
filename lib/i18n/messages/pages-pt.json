@@ -489,6 +489,12 @@
     "githubLink": "Vincular GitHub",
     "githubLinkHint": "Para entrar com um clique, sem senha.",
     "githubLinked": "GitHub vinculado — dá para entrar com um clique.",
-    "githubTaken": "Este GitHub já está vinculado a outra conta."
+    "githubTaken": "Este GitHub já está vinculado a outra conta.",
+    "githubClaimTitle": "O nome {name} já está cadastrado aqui",
+    "githubClaimText": "Se a conta é sua, entre abaixo com a senha e o GitHub será vinculado sozinho. Depois é só um clique.",
+    "githubClaimCreate": "Não é minha conta — criar uma nova",
+    "editUsername": "Editar usuário",
+    "saveUsername": "Salvar",
+    "cancelUsername": "Cancelar"
   }
 }

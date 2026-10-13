@@ -489,6 +489,12 @@
     "githubLink": "GitHub を連携",
     "githubLinkHint": "パスワードなしでワンクリックログインできます。",
     "githubLinked": "GitHub 連携済み — ワンクリックでログインできます。",
-    "githubTaken": "この GitHub はすでに別のアカウントに連携されています。"
+    "githubTaken": "この GitHub はすでに別のアカウントに連携されています。",
+    "githubClaimTitle": "{name} はすでにこのサイトに登録されています",
+    "githubClaimText": "あなたのアカウントなら、下でパスワードでログインしてください。GitHub が自動で連携され、次回からワンクリックでログインできます。",
+    "githubClaimCreate": "自分のアカウントではない — 新しく作成",
+    "editUsername": "ユーザー名を変更",
+    "saveUsername": "保存",
+    "cancelUsername": "キャンセル"
   }
 }

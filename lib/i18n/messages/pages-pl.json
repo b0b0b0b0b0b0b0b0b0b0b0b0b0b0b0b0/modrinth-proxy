@@ -489,6 +489,12 @@
     "githubLink": "Podłącz GitHub",
     "githubLinkHint": "Żeby logować się jednym przyciskiem, bez hasła.",
     "githubLinked": "GitHub podłączony — możesz logować się jednym przyciskiem.",
-    "githubTaken": "Ten GitHub jest już podłączony do innego konta."
+    "githubTaken": "Ten GitHub jest już podłączony do innego konta.",
+    "githubClaimTitle": "Nazwa {name} jest już tu zarejestrowana",
+    "githubClaimText": "Jeśli to twoje konto — zaloguj się poniżej hasłem, a GitHub podłączy się sam. Potem wystarczy jedno kliknięcie.",
+    "githubClaimCreate": "To nie moje konto — utwórz nowe",
+    "editUsername": "Zmień login",
+    "saveUsername": "Zapisz",
+    "cancelUsername": "Anuluj"
   }
 }

@@ -489,6 +489,12 @@
     "githubLink": "Koppla GitHub",
     "githubLinkHint": "För att logga in med ett klick, utan lösenord.",
     "githubLinked": "GitHub är kopplat — du kan logga in med ett klick.",
-    "githubTaken": "Det här GitHub-kontot är redan kopplat till ett annat konto."
+    "githubTaken": "Det här GitHub-kontot är redan kopplat till ett annat konto.",
+    "githubClaimTitle": "Namnet {name} är redan registrerat här",
+    "githubClaimText": "Om det är ditt konto, logga in med lösenord nedan så kopplas GitHub automatiskt. Sedan räcker ett klick.",
+    "githubClaimCreate": "Inte mitt konto — skapa ett nytt",
+    "editUsername": "Ändra användarnamn",
+    "saveUsername": "Spara",
+    "cancelUsername": "Avbryt"
   }
 }

@@ -489,6 +489,12 @@
     "githubLink": "Piesaistīt GitHub",
     "githubLinkHint": "Lai ieietu ar vienu pogu, bez paroles.",
     "githubLinked": "GitHub ir piesaistīts — vari ieiet ar vienu pogu.",
-    "githubTaken": "Šis GitHub jau ir piesaistīts citam kontam."
+    "githubTaken": "Šis GitHub jau ir piesaistīts citam kontam.",
+    "githubClaimTitle": "Vārds {name} šeit jau ir reģistrēts",
+    "githubClaimText": "Ja tas ir tavs konts — ienāc zemāk ar paroli, un GitHub piesaistīsies pats. Pēc tam varēsi ieiet ar vienu pogu.",
+    "githubClaimCreate": "Tas nav mans konts — izveidot jaunu",
+    "editUsername": "Mainīt lietotājvārdu",
+    "saveUsername": "Saglabāt",
+    "cancelUsername": "Atcelt"
   }
 }

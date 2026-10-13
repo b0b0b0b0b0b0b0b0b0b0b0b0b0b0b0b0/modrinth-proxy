@@ -507,6 +507,12 @@
     "githubLink": "Link GitHub",
     "githubLinkHint": "To sign in with one click, no password.",
     "githubLinked": "GitHub is linked — you can sign in with one click.",
-    "githubTaken": "This GitHub account is already linked to another account."
+    "githubTaken": "This GitHub account is already linked to another account.",
+    "githubClaimTitle": "The name {name} is already registered here",
+    "githubClaimText": "If that’s your account, sign in with your password below and GitHub will be linked to it. After that you can sign in with one click.",
+    "githubClaimCreate": "Not my account — create a new one",
+    "editUsername": "Edit username",
+    "saveUsername": "Save",
+    "cancelUsername": "Cancel"
   }
 }

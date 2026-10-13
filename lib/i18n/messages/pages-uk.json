@@ -489,6 +489,12 @@
     "githubLink": "Прив’язати GitHub",
     "githubLinkHint": "Щоб входити однією кнопкою, без пароля.",
     "githubLinked": "GitHub прив’язано — можна входити однією кнопкою.",
-    "githubTaken": "Цей GitHub уже прив’язано до іншого акаунта."
+    "githubTaken": "Цей GitHub уже прив’язано до іншого акаунта.",
+    "githubClaimTitle": "Нік {name} уже зареєстровано на сайті",
+    "githubClaimText": "Якщо це твій акаунт — увійди паролем нижче, і GitHub прив’яжеться до нього сам. Далі зможеш входити однією кнопкою.",
+    "githubClaimCreate": "Це не мій акаунт — створити новий",
+    "editUsername": "Редагувати нік",
+    "saveUsername": "Зберегти",
+    "cancelUsername": "Скасувати"
   }
 }

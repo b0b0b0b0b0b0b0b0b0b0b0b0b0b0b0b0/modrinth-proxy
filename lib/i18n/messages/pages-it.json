@@ -489,6 +489,12 @@
     "githubLink": "Collega GitHub",
     "githubLinkHint": "Per accedere con un clic, senza password.",
     "githubLinked": "GitHub è collegato — accedi con un clic.",
-    "githubTaken": "Questo GitHub è già collegato a un altro account."
+    "githubTaken": "Questo GitHub è già collegato a un altro account.",
+    "githubClaimTitle": "Il nome {name} è già registrato qui",
+    "githubClaimText": "Se è il tuo account, accedi qui sotto con la password e GitHub verrà collegato da solo. Poi basterà un clic.",
+    "githubClaimCreate": "Non è il mio account — creane uno nuovo",
+    "editUsername": "Modifica nome utente",
+    "saveUsername": "Salva",
+    "cancelUsername": "Annulla"
   }
 }

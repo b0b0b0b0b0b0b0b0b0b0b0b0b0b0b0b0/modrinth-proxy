@@ -489,6 +489,12 @@
     "githubLink": "GitHub verknüpfen",
     "githubLinkHint": "Um dich mit einem Klick anzumelden, ohne Passwort.",
     "githubLinked": "GitHub ist verknüpft — Anmeldung mit einem Klick.",
-    "githubTaken": "Dieses GitHub-Konto ist schon mit einem anderen Konto verknüpft."
+    "githubTaken": "Dieses GitHub-Konto ist schon mit einem anderen Konto verknüpft.",
+    "githubClaimTitle": "Der Name {name} ist hier schon registriert",
+    "githubClaimText": "Wenn das dein Konto ist, melde dich unten mit Passwort an — GitHub wird dann automatisch verknüpft. Danach reicht ein Klick.",
+    "githubClaimCreate": "Nicht mein Konto — neues erstellen",
+    "editUsername": "Benutzernamen ändern",
+    "saveUsername": "Speichern",
+    "cancelUsername": "Abbrechen"
   }
 }

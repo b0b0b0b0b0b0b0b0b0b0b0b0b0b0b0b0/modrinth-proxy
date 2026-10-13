@@ -5,9 +5,12 @@ import {
   fetchGithubIdentity,
   findUserByGithubId,
   githubAuthEnabled,
+  githubUsername,
+  holdGithubIdentity,
   linkGithub,
   redirectTo,
   registerGithubUser,
+  usernameTaken,
 } from '@/lib/githubAuth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
@@ -37,6 +40,10 @@ export async function GET(request) {
 
   let user = findUserByGithubId(identity.id)
   if (!user) {
+    if (usernameTaken(githubUsername(identity.login))) {
+      holdGithubIdentity(identity, pending.next)
+      return redirectTo(pending.next ? `/login?next=${encodeURIComponent(pending.next)}` : '/login')
+    }
     if (!signupAllowed(ip)) return redirectTo('/login?error=signup_limit')
     user = registerGithubUser(identity.id, identity.login)
     if (!user) return redirectTo('/login?error=github')
