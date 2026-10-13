@@ -28,8 +28,8 @@ export async function GET(request) {
     next: pending.next,
   })
 
-  if (result === 'linked') return redirectTo('/account')
-  if (result === 'taken') return redirectTo('/account?taken=github')
+  if (result === 'linked') return redirectTo('/account?tab=signin')
+  if (result === 'taken') return redirectTo('/account?tab=signin&taken=github')
   if (result === 'session') return redirectTo(pending.next || '/account')
   if (result === 'held') {
     return redirectTo(pending.next ? `/login?next=${encodeURIComponent(pending.next)}` : '/login')

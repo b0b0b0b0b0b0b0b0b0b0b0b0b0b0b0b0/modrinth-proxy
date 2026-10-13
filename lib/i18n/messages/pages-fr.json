@@ -529,7 +529,16 @@
     "errTelegram": "La connexion via Telegram a échoué. Réessaie.",
     "telegramLink": "Lier Telegram",
     "telegramLinked": "Telegram est lié — connexion en un clic.",
-    "telegramTaken": "Ce compte Telegram est déjà lié à un autre compte."
+    "telegramTaken": "Ce compte Telegram est déjà lié à un autre compte.",
+    "signin": "Moyens de connexion",
+    "connLead": "Comment accéder à ce compte. Lie GitHub ou Telegram et connecte-toi en un clic, sans mot de passe.",
+    "connPasswordSet": "Défini",
+    "connPasswordNone": "Non défini — connexion uniquement via les comptes liés",
+    "connLinked": "Lié",
+    "connNotLinked": "Non lié",
+    "connLink": "Lier",
+    "connUnlink": "Délier",
+    "connLast": "C’est ton seul moyen d’accès. Lies-en un autre d’abord, sinon tu perdras l’accès au compte."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",

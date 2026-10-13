@@ -529,7 +529,16 @@
     "errTelegram": "Det gick inte att logga in med Telegram. Försök igen.",
     "telegramLink": "Koppla Telegram",
     "telegramLinked": "Telegram är kopplat — du kan logga in med ett klick.",
-    "telegramTaken": "Det här Telegram-kontot är redan kopplat till ett annat konto."
+    "telegramTaken": "Det här Telegram-kontot är redan kopplat till ett annat konto.",
+    "signin": "Inloggningssätt",
+    "connLead": "Hur du kommer in på det här kontot. Koppla GitHub eller Telegram och logga in med ett klick, utan lösenord.",
+    "connPasswordSet": "Angivet",
+    "connPasswordNone": "Inte angivet — inloggning bara via kopplade konton",
+    "connLinked": "Kopplat",
+    "connNotLinked": "Inte kopplat",
+    "connLink": "Koppla",
+    "connUnlink": "Koppla från",
+    "connLast": "Det här är ditt enda sätt att logga in. Koppla ett till först, annars förlorar du åtkomsten till kontot."
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",

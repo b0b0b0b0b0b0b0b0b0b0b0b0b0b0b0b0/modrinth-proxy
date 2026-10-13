@@ -529,7 +529,16 @@
     "errTelegram": "Không đăng nhập được bằng Telegram. Hãy thử lại.",
     "telegramLink": "Liên kết Telegram",
     "telegramLinked": "Đã liên kết Telegram — có thể đăng nhập bằng một nút.",
-    "telegramTaken": "Telegram này đã được liên kết với tài khoản khác."
+    "telegramTaken": "Telegram này đã được liên kết với tài khoản khác.",
+    "signin": "Cách đăng nhập",
+    "connLead": "Những cách vào tài khoản này. Liên kết GitHub hoặc Telegram để đăng nhập bằng một nút, không cần mật khẩu.",
+    "connPasswordSet": "Đã đặt",
+    "connPasswordNone": "Chưa đặt — chỉ đăng nhập qua tài khoản đã liên kết",
+    "connLinked": "Đã liên kết",
+    "connNotLinked": "Chưa liên kết",
+    "connLink": "Liên kết",
+    "connUnlink": "Hủy liên kết",
+    "connLast": "Đây là cách đăng nhập duy nhất của bạn. Hãy liên kết thêm một cách khác trước, nếu không bạn sẽ mất quyền vào tài khoản."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",

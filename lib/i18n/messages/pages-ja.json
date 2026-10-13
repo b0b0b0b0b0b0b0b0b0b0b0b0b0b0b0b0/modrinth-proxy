@@ -529,7 +529,16 @@
     "errTelegram": "Telegram でログインできませんでした。もう一度お試しください。",
     "telegramLink": "Telegram を連携",
     "telegramLinked": "Telegram 連携済み — ワンクリックでログインできます。",
-    "telegramTaken": "この Telegram はすでに別のアカウントに連携されています。"
+    "telegramTaken": "この Telegram はすでに別のアカウントに連携されています。",
+    "signin": "ログイン方法",
+    "connLead": "このアカウントに入る方法です。GitHub や Telegram を連携すると、パスワードなしでワンクリックでログインできます。",
+    "connPasswordSet": "設定済み",
+    "connPasswordNone": "未設定 — 連携したアカウントでのみログイン可能",
+    "connLinked": "連携済み",
+    "connNotLinked": "未連携",
+    "connLink": "連携する",
+    "connUnlink": "連携を解除",
+    "connLast": "これが唯一のログイン方法です。先に別の方法を連携しないと、アカウントに入れなくなります。"
   },
   "cookie": {
     "text": "このサイトも Cookie を使っています。ないと何も動かないからです。",

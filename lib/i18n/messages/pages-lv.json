@@ -529,7 +529,16 @@
     "errTelegram": "Neizdevās ieiet ar Telegram. Pamēģini vēlreiz.",
     "telegramLink": "Piesaistīt Telegram",
     "telegramLinked": "Telegram ir piesaistīts — vari ieiet ar vienu pogu.",
-    "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam."
+    "telegramTaken": "Šis Telegram jau ir piesaistīts citam kontam.",
+    "signin": "Ieejas veidi",
+    "connLead": "Ar ko var ieiet šajā kontā. Piesaisti GitHub vai Telegram un ienāc ar vienu pogu, bez paroles.",
+    "connPasswordSet": "Iestatīta",
+    "connPasswordNone": "Nav iestatīta — ieeja tikai caur piesaistītajiem kontiem",
+    "connLinked": "Piesaistīts",
+    "connNotLinked": "Nav piesaistīts",
+    "connLink": "Piesaistīt",
+    "connUnlink": "Atsaistīt",
+    "connLast": "Šis ir vienīgais veids, kā ieiet. Vispirms piesaisti vēl vienu, citādi zaudēsi piekļuvi kontam."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",

@@ -547,7 +547,16 @@
     "errTelegram": "Couldn’t sign in with Telegram. Please try again.",
     "telegramLink": "Link Telegram",
     "telegramLinked": "Telegram is linked — you can sign in with one click.",
-    "telegramTaken": "This Telegram account is already linked to another account."
+    "telegramTaken": "This Telegram account is already linked to another account.",
+    "signin": "Sign-in methods",
+    "connLead": "Ways to get into this account. Link GitHub or Telegram and sign in with one click, no password.",
+    "connPasswordSet": "Set",
+    "connPasswordNone": "Not set — sign-in only through linked accounts",
+    "connLinked": "Linked",
+    "connNotLinked": "Not linked",
+    "connLink": "Link",
+    "connUnlink": "Unlink",
+    "connLast": "This is your only way in. Link another one first, or you’ll lose access to the account."
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",

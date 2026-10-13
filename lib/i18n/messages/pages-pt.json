@@ -529,7 +529,16 @@
     "errTelegram": "Não foi possível entrar com o Telegram. Tente de novo.",
     "telegramLink": "Vincular Telegram",
     "telegramLinked": "Telegram vinculado — dá para entrar com um clique.",
-    "telegramTaken": "Este Telegram já está vinculado a outra conta."
+    "telegramTaken": "Este Telegram já está vinculado a outra conta.",
+    "signin": "Formas de entrar",
+    "connLead": "Com o que dá para entrar nesta conta. Vincule o GitHub ou o Telegram e entre com um clique, sem senha.",
+    "connPasswordSet": "Definida",
+    "connPasswordNone": "Não definida — entrada só pelas contas vinculadas",
+    "connLinked": "Vinculado",
+    "connNotLinked": "Não vinculado",
+    "connLink": "Vincular",
+    "connUnlink": "Desvincular",
+    "connLast": "Esta é sua única forma de entrar. Vincule outra antes, senão você perde o acesso à conta."
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",

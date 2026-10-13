@@ -529,7 +529,16 @@
     "errTelegram": "Nie udało się zalogować przez Telegram. Spróbuj jeszcze raz.",
     "telegramLink": "Podłącz Telegram",
     "telegramLinked": "Telegram podłączony — możesz logować się jednym przyciskiem.",
-    "telegramTaken": "Ten Telegram jest już podłączony do innego konta."
+    "telegramTaken": "Ten Telegram jest już podłączony do innego konta.",
+    "signin": "Sposoby logowania",
+    "connLead": "Czym można wejść na to konto. Podłącz GitHub albo Telegram i loguj się jednym przyciskiem, bez hasła.",
+    "connPasswordSet": "Ustawione",
+    "connPasswordNone": "Nie ustawione — logowanie tylko przez podłączone konta",
+    "connLinked": "Podłączony",
+    "connNotLinked": "Niepodłączony",
+    "connLink": "Podłącz",
+    "connUnlink": "Odłącz",
+    "connLast": "To jedyny sposób logowania. Najpierw podłącz inny, inaczej stracisz dostęp do konta."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",

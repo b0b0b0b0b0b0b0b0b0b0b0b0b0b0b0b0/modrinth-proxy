@@ -529,7 +529,16 @@
     "errTelegram": "无法通过 Telegram 登录，请再试一次。",
     "telegramLink": "绑定 Telegram",
     "telegramLinked": "已绑定 Telegram——可以一键登录。",
-    "telegramTaken": "这个 Telegram 已绑定到其他账号。"
+    "telegramTaken": "这个 Telegram 已绑定到其他账号。",
+    "signin": "登录方式",
+    "connLead": "可以用哪些方式进入这个账号。绑定 GitHub 或 Telegram 后，无需密码即可一键登录。",
+    "connPasswordSet": "已设置",
+    "connPasswordNone": "未设置——只能通过已绑定的账号登录",
+    "connLinked": "已绑定",
+    "connNotLinked": "未绑定",
+    "connLink": "绑定",
+    "connUnlink": "解绑",
+    "connLast": "这是你唯一的登录方式。请先绑定另一种，否则将无法进入账号。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",

@@ -529,7 +529,16 @@
     "errTelegram": "Accesso con Telegram non riuscito. Riprova.",
     "telegramLink": "Collega Telegram",
     "telegramLinked": "Telegram è collegato — accedi con un clic.",
-    "telegramTaken": "Questo Telegram è già collegato a un altro account."
+    "telegramTaken": "Questo Telegram è già collegato a un altro account.",
+    "signin": "Metodi di accesso",
+    "connLead": "Con cosa puoi entrare in questo account. Collega GitHub o Telegram e accedi con un clic, senza password.",
+    "connPasswordSet": "Impostata",
+    "connPasswordNone": "Non impostata — accesso solo tramite account collegati",
+    "connLinked": "Collegato",
+    "connNotLinked": "Non collegato",
+    "connLink": "Collega",
+    "connUnlink": "Scollega",
+    "connLast": "È il tuo unico modo per entrare. Collegane prima un altro, altrimenti perderai l’accesso all’account."
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",

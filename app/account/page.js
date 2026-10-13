@@ -11,13 +11,13 @@ import RelativeTime from '../components/RelativeTime'
 import { ClearFavoritesButton, RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
 import LogoutButton from './LogoutButton'
-import TelegramLinkButton from './TelegramLinkButton'
+import SignInMethods from './SignInMethods'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 
 export const dynamic = 'force-dynamic'
 
-const TABS = ['updates', 'favorites', 'downloads']
+const TABS = ['updates', 'favorites', 'downloads', 'signin']
 const GHOST_BUTTON =
   'shrink-0 rounded-lg border border-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white disabled:opacity-60'
 const PRIMARY_BUTTON =
@@ -163,30 +163,6 @@ export default async function AccountPage({ searchParams }) {
         <LogoutButton />
       </div>
 
-      <div className="mt-2 space-y-1.5">
-        {user.github_id ? (
-          <p className="text-xs text-gray-500">{t('account.githubLinked')}</p>
-        ) : null}
-        {user.telegram_id ? (
-          <p className="text-xs text-gray-500">{t('account.telegramLinked')}</p>
-        ) : null}
-        {(githubEnabled && !user.github_id) || (telegramBot && !user.telegram_id) ? (
-          <div className="flex flex-wrap items-center gap-2">
-            {githubEnabled && !user.github_id ? (
-              <a href="/api/auth/github?next=/account" className={GHOST_BUTTON}>
-                {t('account.githubLink')}
-              </a>
-            ) : null}
-            {telegramBot && !user.telegram_id ? (
-              <TelegramLinkButton botId={telegramBot} className={GHOST_BUTTON} />
-            ) : null}
-            <span className={`text-xs ${searchParams?.taken === 'github' ? 'text-amber-400' : 'text-gray-500'}`}>
-              {t(searchParams?.taken === 'github' ? 'account.githubTaken' : 'account.githubLinkHint')}
-            </span>
-          </div>
-        ) : null}
-      </div>
-
       <div className="mt-5 flex gap-1 overflow-x-auto rounded-xl border border-gray-800 bg-modrinth-dark p-1">
         {TABS.map((value) => {
           const active = value === tab
@@ -202,6 +178,7 @@ export default async function AccountPage({ searchParams }) {
               ].join(' ')}
             >
               {t(`account.${value}`)}
+              {value in counts ? (
               <span
                 className={[
                   'rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none',
@@ -214,6 +191,7 @@ export default async function AccountPage({ searchParams }) {
               >
                 {counts[value]}
               </span>
+              ) : null}
             </Link>
           )
         })}
@@ -262,6 +240,19 @@ export default async function AccountPage({ searchParams }) {
               <p className="text-sm text-gray-500">{t('account.emptyFavorites')}</p>
             )}
           </>
+        ) : null}
+
+        {tab === 'signin' ? (
+          <SignInMethods
+            hasPassword={Boolean(user.has_password)}
+            takenProvider={searchParams?.taken || null}
+            providers={[
+              ...(githubEnabled || user.github_id ? [{ id: 'github', linked: Boolean(user.github_id) }] : []),
+              ...(telegramBot || user.telegram_id
+                ? [{ id: 'telegram', linked: Boolean(user.telegram_id), botId: telegramBot }]
+                : []),
+            ]}
+          />
         ) : null}
 
         {tab === 'downloads' ? (

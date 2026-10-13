@@ -529,7 +529,16 @@
     "errTelegram": "Anmeldung über Telegram hat nicht geklappt. Probier es noch mal.",
     "telegramLink": "Telegram verknüpfen",
     "telegramLinked": "Telegram ist verknüpft — Anmeldung mit einem Klick.",
-    "telegramTaken": "Dieses Telegram-Konto ist schon mit einem anderen Konto verknüpft."
+    "telegramTaken": "Dieses Telegram-Konto ist schon mit einem anderen Konto verknüpft.",
+    "signin": "Anmeldemethoden",
+    "connLead": "Womit du in dieses Konto kommst. Verknüpfe GitHub oder Telegram und melde dich mit einem Klick an, ohne Passwort.",
+    "connPasswordSet": "Festgelegt",
+    "connPasswordNone": "Nicht festgelegt — Anmeldung nur über verknüpfte Konten",
+    "connLinked": "Verknüpft",
+    "connNotLinked": "Nicht verknüpft",
+    "connLink": "Verknüpfen",
+    "connUnlink": "Trennen",
+    "connLast": "Das ist dein einziger Zugang. Verknüpfe zuerst einen weiteren, sonst verlierst du den Zugriff auf das Konto."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
