@@ -133,6 +133,13 @@ export default function PeekKitten() {
           <KittenFace mood={mood} look={look} className="h-full w-full" />
         </motion.button>
       </div>
+      <div
+        aria-hidden
+        className={`pointer-events-auto absolute bottom-0 z-20 hidden h-10 w-16 translate-y-1/2 cursor-pointer sm:block ${side === 'left' ? 'left-[calc(8%-4px)]' : 'right-[calc(8%-4px)]'}`}
+        onMouseEnter={caught}
+        onMouseLeave={release}
+        onClick={pet}
+      />
     </div>
   )
 }
