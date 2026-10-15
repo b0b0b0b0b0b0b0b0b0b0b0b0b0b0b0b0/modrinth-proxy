@@ -548,10 +548,8 @@
     "newPassword": "Nouveau mot de passe",
     "passwordSaved": "Mot de passe enregistré. Il faudra te reconnecter sur tes autres appareils.",
     "errCurrentPassword": "Le mot de passe actuel est incorrect.",
-    "clearFavoritesHint": "Tu veux repartir de zéro ? Tu peux d’abord sauvegarder ta liste avec « Partager la liste ».",
     "clearHistory": "Effacer l’historique",
     "clearHistoryText": "Tout l’historique sera supprimé : {n}. Les nouvelles versions des téléchargements ne seront plus suivies non plus — le suivi reprend dès que tu télécharges quelque chose.",
-    "clearHistoryHint": "Tu veux repartir d’un historique vide ?",
     "settings": "Paramètres",
     "newRelease": "Une nouvelle version est sortie",
     "filterAll": "Tout"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Pour recevoir les notifications, lie Telegram. Le bot enverra un récapitulatif quand un téléchargement ou un favori reçoit une nouvelle version.",
     "muteProject": "Ne plus suivre les nouvelles versions de ce projet",
     "unmuteProject": "Suivre à nouveau les nouvelles versions",
-    "muteHint": "La cloche à côté d’une ligne arrête le suivi des nouvelles versions de ce projet : il disparaît des « Mises à jour » et de Telegram. Les favoris ne sont pas touchés."
+    "muteHint": "La cloche barrée à côté d’une ligne arrête le suivi des nouvelles versions de ce projet : il disparaît des « Mises à jour » et de Telegram. Les favoris ne sont pas touchés."
   },
   "set": {
     "trackDownloads": "Suivre les nouvelles versions des téléchargements",
@@ -579,7 +577,7 @@
     "mutedHint": "Projets que tu as choisi de ne plus suivre dans l’historique des téléchargements.",
     "unmuteAll": "Tout réactiver",
     "recordHistory": "Garder l’historique des téléchargements",
-    "recordHistoryHint": "Si tu le désactives, les nouveaux téléchargements n’iront pas dans l’historique et ne seront pas suivis. Ce qui est déjà enregistré reste — tu peux l’effacer dans l’onglet « Historique des téléchargements ».",
+    "recordHistoryHint": "Si tu désactives, les nouveaux téléchargements n’iront pas dans l’historique et le site ne suivra pas leurs mises à jour. Ce qui est déjà enregistré reste — tu peux l’effacer plus bas, dans « Nettoyage ».",
     "historyOff": "L’historique n’est pas enregistré : les nouveaux téléchargements n’apparaissent pas ici. Tu peux le réactiver dans les Paramètres.",
     "gameTitle": "À quoi tu joues",
     "gameHint": "Les notifications des favoris ne concerneront que ton loader et ta version de Minecraft — avec un bouton « Télécharger » du bon fichier. Sur « Deviner », le site prend ce que tu télécharges le plus.",
@@ -587,7 +585,10 @@
     "gameVersion": "Version de Minecraft",
     "auto": "Deviner",
     "guessed": "Deviné d’après tes téléchargements : {value}",
-    "notGuessed": "Rien pour deviner pour l’instant — télécharge quelque chose ou choisis toi-même. En attendant, les favoris reçoivent un résumé général toutes versions."
+    "notGuessed": "Rien pour deviner pour l’instant — télécharge quelque chose ou choisis toi-même. En attendant, les favoris reçoivent un résumé général toutes versions.",
+    "cleanupTitle": "Nettoyage",
+    "clearFavoritesHint": "Supprime tous tes favoris d’un coup — les {n}, de tous types, pas seulement ceux du filtre. Tu peux d’abord sauvegarder la liste sous forme de code dans l’onglet « Favoris ».",
+    "clearHistoryHint": "Supprime tout l’historique de téléchargements d’un coup — les {n}, de tous types."
   },
   "del": {
     "title": "Supprimer le compte",

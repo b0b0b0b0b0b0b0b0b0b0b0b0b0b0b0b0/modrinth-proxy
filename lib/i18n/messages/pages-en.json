@@ -566,10 +566,8 @@
     "newPassword": "New password",
     "passwordSaved": "Password saved. You’ll need to sign in again on other devices.",
     "errCurrentPassword": "The current password is wrong.",
-    "clearFavoritesHint": "Want to start your list over? You can save it first with “Share list”.",
     "clearHistory": "Clear history",
     "clearHistoryText": "Everything in your history will be removed: {n}. New versions of downloaded items will stop being tracked too — tracking starts again when you download something.",
-    "clearHistoryHint": "Want to start your history from scratch?",
     "settings": "Settings",
     "newRelease": "A new version is out",
     "filterAll": "All"
@@ -588,7 +586,7 @@
     "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version.",
     "muteProject": "Stop tracking new versions of this project",
     "unmuteProject": "Track new versions again",
-    "muteHint": "The bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected."
+    "muteHint": "The crossed-out bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected."
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",
@@ -597,7 +595,7 @@
     "mutedHint": "Projects you chose not to track in your download history.",
     "unmuteAll": "Unmute all",
     "recordHistory": "Keep download history",
-    "recordHistoryHint": "If you turn this off, new downloads won’t be added to your history and won’t be tracked for updates. What’s already there stays — you can clear it on the Download history tab.",
+    "recordHistoryHint": "If turned off, new downloads won’t be added to the history and the site won’t track their updates. What’s already recorded stays — you can clear it below, in “Clean up”.",
     "historyOff": "History recording is off — new downloads don’t show up here. You can turn it back on in Settings.",
     "gameTitle": "What you play",
     "gameHint": "Then favorites notifications will only be about your loader and Minecraft version — with a Download button for the right file. If you leave it on “Guess”, the site uses what you download most.",
@@ -605,7 +603,10 @@
     "gameVersion": "Minecraft version",
     "auto": "Guess",
     "guessed": "Guessed from your downloads: {value}",
-    "notGuessed": "Nothing to guess from yet — download something or pick it yourself. Until then favorites get a general summary across all versions."
+    "notGuessed": "Nothing to guess from yet — download something or pick it yourself. Until then favorites get a general summary across all versions.",
+    "cleanupTitle": "Clean up",
+    "clearFavoritesHint": "Removes all your favorites at once — all {n}, of every type, not just what a filter shows. You can save the list as a code on the Favorites tab first.",
+    "clearHistoryHint": "Removes your whole download history at once — all {n}, of every type."
   },
   "del": {
     "title": "Delete account",

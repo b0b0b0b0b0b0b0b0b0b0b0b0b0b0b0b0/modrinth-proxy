@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import DeleteAccount from './DeleteAccount'
+import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 
 const LINK_BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-modrinth-green px-2.5 py-1.5 text-xs font-bold leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
@@ -55,6 +56,7 @@ export default function AccountSettings({
   trackDownloads: initialTrack,
   recordHistory: initialRecord,
   mutedCount,
+  counts,
   deletion,
   game,
 }) {
@@ -239,6 +241,21 @@ export default function AccountSettings({
           />
         </Setting>
       </Section>
+
+      {counts.favorites > 0 || counts.downloads > 0 ? (
+        <Section title={t('set.cleanupTitle')}>
+          {counts.favorites > 0 ? (
+            <Setting title={t('account.favorites')} hint={t('set.clearFavoritesHint', { n: counts.favorites })}>
+              <ClearFavoritesButton count={counts.favorites} />
+            </Setting>
+          ) : null}
+          {counts.downloads > 0 ? (
+            <Setting title={t('account.downloads')} hint={t('set.clearHistoryHint', { n: counts.downloads })}>
+              <ClearHistoryButton count={counts.downloads} />
+            </Setting>
+          ) : null}
+        </Section>
+      ) : null}
 
       {error ? (
         <p className="text-xs text-amber-600 dark:text-amber-400" role="alert">

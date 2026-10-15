@@ -548,10 +548,8 @@
     "newPassword": "Nueva contraseña",
     "passwordSaved": "Contraseña guardada. En otros dispositivos tendrás que volver a entrar.",
     "errCurrentPassword": "La contraseña actual no es correcta.",
-    "clearFavoritesHint": "¿Quieres empezar la lista de cero? Antes puedes guardarla con «Compartir lista».",
     "clearHistory": "Borrar historial",
     "clearHistoryText": "Se borrará todo el historial: {n}. Las nuevas versiones de lo descargado también dejarán de seguirse; vuelve a empezar cuando descargues algo.",
-    "clearHistoryHint": "¿Quieres empezar el historial de cero?",
     "settings": "Ajustes",
     "newRelease": "Ha salido una versión nueva",
     "filterAll": "Todo"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Para recibir avisos, vincula Telegram. El bot enviará un resumen cuando algo descargado o guardado tenga versión nueva.",
     "muteProject": "Dejar de seguir nuevas versiones de este proyecto",
     "unmuteProject": "Volver a seguir nuevas versiones",
-    "muteHint": "La campana junto a una fila deja de seguir las nuevas versiones de ese proyecto: desaparece de «Actualizaciones» y de Telegram. Los favoritos no se ven afectados."
+    "muteHint": "La campana tachada junto a una fila deja de seguir las nuevas versiones de ese proyecto: desaparece de «Actualizaciones» y de Telegram. Los favoritos no se ven afectados."
   },
   "set": {
     "trackDownloads": "Seguir nuevas versiones de lo descargado",
@@ -579,7 +577,7 @@
     "mutedHint": "Proyectos que elegiste no seguir en el historial de descargas.",
     "unmuteAll": "Reactivar todos",
     "recordHistory": "Guardar historial de descargas",
-    "recordHistoryHint": "Si lo desactivas, las nuevas descargas no se guardarán en el historial ni se seguirán sus actualizaciones. Lo ya guardado se queda; puedes borrarlo en la pestaña «Historial de descargas».",
+    "recordHistoryHint": "Si lo desactivas, las nuevas descargas no se guardarán en el historial y el sitio no seguirá sus actualizaciones. Lo ya guardado se queda: puedes borrarlo abajo, en «Limpieza».",
     "historyOff": "El historial no se guarda: las nuevas descargas no aparecen aquí. Puedes activarlo en Ajustes.",
     "gameTitle": "A qué juegas",
     "gameHint": "Así los avisos de favoritos serán solo de tu cargador y tu versión de Minecraft, con botón «Descargar» del archivo correcto. Si dejas «Adivinar», el sitio usa lo que más descargas.",
@@ -587,7 +585,10 @@
     "gameVersion": "Versión de Minecraft",
     "auto": "Adivinar",
     "guessed": "Adivinado por tus descargas: {value}",
-    "notGuessed": "Aún no hay de dónde adivinar: descarga algo o elígelo tú. Mientras tanto, los favoritos reciben un resumen general de todas las versiones."
+    "notGuessed": "Aún no hay de dónde adivinar: descarga algo o elígelo tú. Mientras tanto, los favoritos reciben un resumen general de todas las versiones.",
+    "cleanupTitle": "Limpieza",
+    "clearFavoritesHint": "Quita todos tus favoritos de una vez: los {n}, de todos los tipos, no solo lo que muestra el filtro. Antes puedes guardar la lista como código en la pestaña «Favoritos».",
+    "clearHistoryHint": "Quita todo el historial de descargas de una vez: las {n}, de todos los tipos."
   },
   "del": {
     "title": "Eliminar cuenta",

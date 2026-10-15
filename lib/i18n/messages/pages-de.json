@@ -548,10 +548,8 @@
     "newPassword": "Neues Passwort",
     "passwordSaved": "Passwort gespeichert. Auf anderen Geräten musst du dich neu anmelden.",
     "errCurrentPassword": "Das aktuelle Passwort stimmt nicht.",
-    "clearFavoritesHint": "Willst du deine Liste neu anfangen? Vorher kannst du sie mit „Liste teilen“ sichern.",
     "clearHistory": "Verlauf leeren",
     "clearHistoryText": "Alles im Verlauf wird entfernt: {n}. Neue Versionen von Heruntergeladenem werden auch nicht mehr verfolgt — das beginnt wieder, sobald du etwas herunterlädst.",
-    "clearHistoryHint": "Willst du deinen Verlauf neu beginnen?",
     "settings": "Einstellungen",
     "newRelease": "Eine neue Version ist da",
     "filterAll": "Alle"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt.",
     "muteProject": "Neue Versionen dieses Projekts nicht verfolgen",
     "unmuteProject": "Neue Versionen wieder verfolgen",
-    "muteHint": "Die Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt."
+    "muteHint": "Die durchgestrichene Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt."
   },
   "set": {
     "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",
@@ -579,7 +577,7 @@
     "mutedHint": "Projekte, die du im Download-Verlauf nicht mehr verfolgst.",
     "unmuteAll": "Alle wieder aktivieren",
     "recordHistory": "Download-Verlauf speichern",
-    "recordHistoryHint": "Wenn du das ausschaltest, landen neue Downloads nicht im Verlauf und werden nicht auf Updates geprüft. Bisherige Einträge bleiben — du kannst sie im Tab „Download-Verlauf“ löschen.",
+    "recordHistoryHint": "Wenn ausgeschaltet, landen neue Downloads nicht im Verlauf und die Seite verfolgt keine Updates dafür. Bereits Gespeichertes bleibt — du kannst es unten unter „Aufräumen“ löschen.",
     "historyOff": "Der Verlauf wird nicht gespeichert — neue Downloads erscheinen hier nicht. Einschalten kannst du das in den Einstellungen.",
     "gameTitle": "Was du spielst",
     "gameHint": "Dann gelten Favoriten-Benachrichtigungen nur für deinen Loader und deine Minecraft-Version — mit „Herunterladen“-Knopf für die passende Datei. Bei „Raten“ nimmt die Seite das, was du am häufigsten herunterlädst.",
@@ -587,7 +585,10 @@
     "gameVersion": "Minecraft-Version",
     "auto": "Raten",
     "guessed": "Aus deinen Downloads geraten: {value}",
-    "notGuessed": "Noch nichts zum Raten — lade etwas herunter oder wähle selbst. Bis dahin gibt es für Favoriten eine allgemeine Übersicht über alle Versionen."
+    "notGuessed": "Noch nichts zum Raten — lade etwas herunter oder wähle selbst. Bis dahin gibt es für Favoriten eine allgemeine Übersicht über alle Versionen.",
+    "cleanupTitle": "Aufräumen",
+    "clearFavoritesHint": "Entfernt alle Favoriten auf einmal — alle {n}, jeder Art, nicht nur die im Filter sichtbaren. Vorher kannst du die Liste im Tab „Favoriten“ als Code speichern.",
+    "clearHistoryHint": "Entfernt den gesamten Download-Verlauf auf einmal — alle {n}, jeder Art."
   },
   "del": {
     "title": "Konto löschen",

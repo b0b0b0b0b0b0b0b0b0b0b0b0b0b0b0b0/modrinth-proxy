@@ -45,11 +45,11 @@ export default function NotifyMuteButton({ projectId, muted }) {
         aria-label={label}
         aria-pressed={current}
         className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors disabled:opacity-50 ${
-          current ? 'text-gray-600 hover:text-gray-300' : 'text-modrinth-green hover:bg-modrinth-green/10'
+          current ? 'text-modrinth-green hover:bg-modrinth-green/10' : 'text-gray-600 hover:bg-gray-500/10 hover:text-gray-300 dark:text-gray-500'
         }`}
       >
         <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
-          <path d={current ? BELL_OFF : BELL} />
+          <path d={current ? BELL : BELL_OFF} />
         </svg>
       </button>
     </StyledTooltip>

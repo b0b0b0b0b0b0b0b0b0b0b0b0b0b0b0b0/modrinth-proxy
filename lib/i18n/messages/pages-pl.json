@@ -548,10 +548,8 @@
     "newPassword": "Nowe hasło",
     "passwordSaved": "Hasło zapisane. Na innych urządzeniach trzeba będzie zalogować się ponownie.",
     "errCurrentPassword": "Obecne hasło jest nieprawidłowe.",
-    "clearFavoritesHint": "Chcesz zacząć listę od nowa? Najpierw możesz ją zapisać przyciskiem „Udostępnij listę”.",
     "clearHistory": "Wyczyść historię",
     "clearHistoryText": "Z historii zniknie wszystko: {n}. Nowe wersje pobranych rzeczy też przestaną być śledzone — śledzenie wróci, gdy coś pobierzesz.",
-    "clearHistoryHint": "Chcesz zacząć historię od nowa?",
     "settings": "Ustawienia",
     "newRelease": "Wyszła nowa wersja",
     "filterAll": "Wszystko"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję.",
     "muteProject": "Nie śledź nowych wersji tego projektu",
     "unmuteProject": "Znowu śledź nowe wersje",
-    "muteHint": "Dzwonek przy wierszu wyłącza śledzenie nowych wersji tego projektu: znika z „Aktualizacji” i z Telegrama. Ulubionych to nie dotyczy."
+    "muteHint": "Przekreślony dzwonek przy wierszu wyłącza śledzenie nowych wersji tego projektu: znika z „Aktualizacji” i z Telegrama. Ulubionych to nie dotyczy."
   },
   "set": {
     "trackDownloads": "Śledź nowe wersje pobranych",
@@ -579,7 +577,7 @@
     "mutedHint": "Projekty, których postanowiłeś nie śledzić w historii pobrań.",
     "unmuteAll": "Przywróć wszystkie",
     "recordHistory": "Zapisuj historię pobrań",
-    "recordHistoryHint": "Jeśli wyłączysz, nowe pobrania nie trafią do historii i nie będą śledzone. To, co już zapisane, zostanie — możesz to wyczyścić w zakładce „Historia pobrań”.",
+    "recordHistoryHint": "Po wyłączeniu nowe pobrania nie trafią do historii, a strona nie będzie śledzić ich aktualizacji. To, co już zapisane, zostaje — możesz to wyczyścić niżej, w „Czyszczeniu”.",
     "historyOff": "Historia nie jest zapisywana — nowe pobrania tu nie trafiają. Włączysz to w Ustawieniach.",
     "gameTitle": "W co grasz",
     "gameHint": "Wtedy powiadomienia o ulubionych będą tylko o twoim loaderze i wersji Minecrafta — od razu z przyciskiem „Pobierz” właściwego pliku. Przy „Zgadnij” strona bierze to, co najczęściej pobierasz.",
@@ -587,7 +585,10 @@
     "gameVersion": "Wersja Minecrafta",
     "auto": "Zgadnij",
     "guessed": "Zgadnięte z twoich pobrań: {value}",
-    "notGuessed": "Na razie nie ma z czego zgadywać — pobierz coś albo wybierz sam. Do tego czasu ulubione dostają ogólne podsumowanie wszystkich wersji."
+    "notGuessed": "Na razie nie ma z czego zgadywać — pobierz coś albo wybierz sam. Do tego czasu ulubione dostają ogólne podsumowanie wszystkich wersji.",
+    "cleanupTitle": "Czyszczenie",
+    "clearFavoritesHint": "Usuwa naraz wszystkie ulubione — wszystkie {n}, każdego typu, nie tylko widoczne w filtrze. Najpierw możesz zapisać listę jako kod w zakładce „Ulubione”.",
+    "clearHistoryHint": "Usuwa naraz całą historię pobrań — wszystkie {n}, każdego typu."
   },
   "del": {
     "title": "Usuwanie konta",

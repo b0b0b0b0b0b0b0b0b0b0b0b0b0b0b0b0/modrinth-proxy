@@ -548,10 +548,8 @@
     "newPassword": "Nova senha",
     "passwordSaved": "Senha salva. Nos outros dispositivos será preciso entrar de novo.",
     "errCurrentPassword": "A senha atual está errada.",
-    "clearFavoritesHint": "Quer começar a lista do zero? Antes dá para salvá-la com “Compartilhar lista”.",
     "clearHistory": "Limpar histórico",
     "clearHistoryText": "Todo o histórico será apagado: {n}. As novas versões do que foi baixado também deixam de ser acompanhadas — voltam quando você baixar algo.",
-    "clearHistoryHint": "Quer começar o histórico do zero?",
     "settings": "Configurações",
     "newRelease": "Saiu uma versão nova",
     "filterAll": "Tudo"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Para receber notificações, vincule o Telegram. O bot manda um resumo quando algo baixado ou favoritado ganha versão nova.",
     "muteProject": "Não acompanhar novas versões deste projeto",
     "unmuteProject": "Acompanhar novas versões de novo",
-    "muteHint": "O sino ao lado de uma linha para de acompanhar as novas versões desse projeto: ele some das “Atualizações” e do Telegram. Os favoritos não mudam."
+    "muteHint": "O sino riscado ao lado de uma linha para de acompanhar as novas versões desse projeto: ele some das “Atualizações” e do Telegram. Os favoritos não mudam."
   },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",
@@ -579,7 +577,7 @@
     "mutedHint": "Projetos que você escolheu não acompanhar no histórico de downloads.",
     "unmuteAll": "Reativar todos",
     "recordHistory": "Guardar histórico de downloads",
-    "recordHistoryHint": "Se desligar, os novos downloads não entram no histórico nem são acompanhados. O que já está salvo continua — dá para limpar na aba “Histórico de downloads”.",
+    "recordHistoryHint": "Se desativar, novos downloads não entram no histórico e o site não acompanha as atualizações deles. O que já foi registrado fica — dá para apagar abaixo, em “Limpeza”.",
     "historyOff": "O histórico não está sendo salvo — novos downloads não aparecem aqui. Dá para ligar nas Configurações.",
     "gameTitle": "O que você joga",
     "gameHint": "Aí as notificações dos favoritos serão só do seu loader e da sua versão do Minecraft — já com o botão “Baixar” do arquivo certo. Em “Adivinhar”, o site usa o que você mais baixa.",
@@ -587,7 +585,10 @@
     "gameVersion": "Versão do Minecraft",
     "auto": "Adivinhar",
     "guessed": "Adivinhado pelos seus downloads: {value}",
-    "notGuessed": "Ainda não dá para adivinhar — baixe algo ou escolha você mesmo. Até lá, os favoritos recebem um resumo geral de todas as versões."
+    "notGuessed": "Ainda não dá para adivinhar — baixe algo ou escolha você mesmo. Até lá, os favoritos recebem um resumo geral de todas as versões.",
+    "cleanupTitle": "Limpeza",
+    "clearFavoritesHint": "Remove todos os favoritos de uma vez — todos os {n}, de todos os tipos, não só o que o filtro mostra. Antes, você pode salvar a lista como código na aba “Favoritos”.",
+    "clearHistoryHint": "Remove todo o histórico de downloads de uma vez — todos os {n}, de todos os tipos."
   },
   "del": {
     "title": "Excluir conta",

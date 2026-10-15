@@ -18,7 +18,7 @@ import { getLoaderDisplayName } from '@/lib/loaders'
 import { filterAvatar } from '@/lib/contentFilter'
 import CatalogPagination from '../components/CatalogPagination'
 import RelativeTime from '../components/RelativeTime'
-import { ClearFavoritesButton, ClearHistoryButton, RemoveFavoriteButton } from './FavoriteActions'
+import { RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
 import AccountMobileMenu from './AccountMobileMenu'
 import AccountSettings from './AccountSettings'
@@ -318,10 +318,6 @@ export default async function AccountPage({ searchParams }) {
                   searchParams={typeFilter ? { tab: 'favorites', type: typeFilter } : { tab: 'favorites' }}
                   className="mt-4 border-t border-gray-800 pt-4"
                 />
-                <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-gray-800 px-4 py-3">
-                  <p className="text-xs text-gray-600 dark:text-gray-500">{t('account.clearFavoritesHint')}</p>
-                  <ClearFavoritesButton count={favorites.length} />
-                </div>
               </>
             ) : (
               <p className="text-sm text-gray-600 dark:text-gray-500">{t('account.emptyFavorites')}</p>
@@ -348,6 +344,7 @@ export default async function AccountPage({ searchParams }) {
             trackDownloads={trackDownloads}
             recordHistory={Boolean(user.record_history)}
             mutedCount={mutes.size}
+            counts={{ favorites: favorites.length, downloads: downloads.all }}
             game={(() => {
               const profile = getGameProfile(user.id)
               return {
@@ -404,10 +401,6 @@ export default async function AccountPage({ searchParams }) {
               />
               <p className="mt-3 text-[11px] text-gray-600 dark:text-gray-500">{t('account.historyNote', { n: HISTORY_RETENTION_DAYS })}</p>
               {trackDownloads ? <p className="mt-1 text-[11px] text-gray-600 dark:text-gray-500">{t('tg.muteHint')}</p> : null}
-              <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-gray-800 px-4 py-3">
-                <p className="text-xs text-gray-600 dark:text-gray-500">{t('account.clearHistoryHint')}</p>
-                <ClearHistoryButton count={downloads.all} />
-              </div>
             </>
           ) : (
             <p className="text-sm text-gray-600 dark:text-gray-500">{t('account.emptyDownloads')}</p>

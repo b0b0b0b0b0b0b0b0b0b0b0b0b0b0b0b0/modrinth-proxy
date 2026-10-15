@@ -548,10 +548,8 @@
     "newPassword": "Jaunā parole",
     "passwordSaved": "Parole saglabāta. Citās ierīcēs būs jāienāk no jauna.",
     "errCurrentPassword": "Pašreizējā parole nav pareiza.",
-    "clearFavoritesHint": "Gribi sākt sarakstu no jauna? Vispirms vari to saglabāt ar «Dalīties ar sarakstu».",
     "clearHistory": "Notīrīt vēsturi",
     "clearHistoryText": "No vēstures pazudīs viss: {n}. Arī lejupielādētā jaunās versijas vairs netiks sekotas — tas atsāksies, kad kaut ko lejupielādēsi.",
-    "clearHistoryHint": "Gribi sākt vēsturi no tīras lapas?",
     "settings": "Iestatījumi",
     "newRelease": "Iznākusi jauna versija",
     "filterAll": "Visi"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija.",
     "muteProject": "Nesekot šī projekta jaunajām versijām",
     "unmuteProject": "Atkal sekot jaunajām versijām",
-    "muteHint": "Zvaniņš pie rindas pārtrauc sekot šī projekta jaunajām versijām: tas pazūd no «Atjauninājumiem» un Telegram. Izlasi tas neietekmē."
+    "muteHint": "Pārsvītrotais zvaniņš pie rindas pārtrauc sekot šī projekta jaunajām versijām: tas pazūd no «Atjauninājumiem» un Telegram. Izlasi tas neietekmē."
   },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",
@@ -579,7 +577,7 @@
     "mutedHint": "Projekti, kuriem lejupielāžu vēsturē izvēlējies nesekot.",
     "unmuteAll": "Atgriezt visus",
     "recordHistory": "Saglabāt lejupielāžu vēsturi",
-    "recordHistoryHint": "Ja izslēgsi, jaunās lejupielādes nenonāks vēsturē un tām netiks sekots. Jau saglabātais paliks — to var notīrīt cilnē «Lejupielāžu vēsture».",
+    "recordHistoryHint": "Ja izslēgsi, jaunās lejupielādes netiks ierakstītas vēsturē un vietne nesekos to atjauninājumiem. Jau ierakstītais paliks — to var notīrīt zemāk, sadaļā “Tīrīšana”.",
     "historyOff": "Vēsture netiek saglabāta — jaunās lejupielādes šeit neparādās. Ieslēgt var «Iestatījumos».",
     "gameTitle": "Ko tu spēlē",
     "gameHint": "Tad paziņojumi par izlasi būs tikai par tavu ielādētāju un Minecraft versiju — ar pogu «Lejupielādēt» vajadzīgajam failam. Ja atstāsi «Minēt», vietne ņems to, ko tu visbiežāk lejupielādē.",
@@ -587,7 +585,10 @@
     "gameVersion": "Minecraft versija",
     "auto": "Minēt",
     "guessed": "Uzminēts pēc tavām lejupielādēm: {value}",
-    "notGuessed": "Vēl nav no kā minēt — lejupielādē kaut ko vai izvēlies pats. Līdz tam par izlasi nāks vispārējs kopsavilkums par visām versijām."
+    "notGuessed": "Vēl nav no kā minēt — lejupielādē kaut ko vai izvēlies pats. Līdz tam par izlasi nāks vispārējs kopsavilkums par visām versijām.",
+    "cleanupTitle": "Tīrīšana",
+    "clearFavoritesHint": "Noņem visus izlases ierakstus uzreiz — visus {n}, visu veidu, ne tikai filtrā redzamos. Pirms tam sarakstu var saglabāt kā kodu cilnē “Izlase”.",
+    "clearHistoryHint": "Noņem visu lejupielāžu vēsturi uzreiz — visus {n}, visu veidu."
   },
   "del": {
     "title": "Konta dzēšana",

@@ -548,10 +548,8 @@
     "newPassword": "Nytt lösenord",
     "passwordSaved": "Lösenordet är sparat. På andra enheter behöver du logga in igen.",
     "errCurrentPassword": "Det nuvarande lösenordet stämmer inte.",
-    "clearFavoritesHint": "Vill du börja om listan? Du kan spara den först med ”Dela listan”.",
     "clearHistory": "Rensa historiken",
     "clearHistoryText": "Allt i historiken tas bort: {n}. Nya versioner av det du laddat ner slutar också följas — det börjar igen när du laddar ner något.",
-    "clearHistoryHint": "Vill du börja om historiken från noll?",
     "settings": "Inställningar",
     "newRelease": "En ny version är ute",
     "filterAll": "Alla"
@@ -570,7 +568,7 @@
     "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version.",
     "muteProject": "Följ inte nya versioner av det här projektet",
     "unmuteProject": "Följ nya versioner igen",
-    "muteHint": "Klockan bredvid en rad slutar följa nya versioner av projektet: det försvinner från ”Uppdateringar” och från Telegram. Favoriter påverkas inte."
+    "muteHint": "Den överstrukna klockan bredvid en rad slutar följa nya versioner av projektet: det försvinner från ”Uppdateringar” och från Telegram. Favoriter påverkas inte."
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",
@@ -579,7 +577,7 @@
     "mutedHint": "Projekt du valt att inte följa i nedladdningshistoriken.",
     "unmuteAll": "Slå på alla igen",
     "recordHistory": "Spara nedladdningshistorik",
-    "recordHistoryHint": "Stänger du av det hamnar nya nedladdningar inte i historiken och följs inte upp. Det som redan finns ligger kvar — du kan rensa det på fliken ”Nedladdningshistorik”.",
+    "recordHistoryHint": "Om du stänger av det hamnar nya nedladdningar inte i historiken och sidan följer inte deras uppdateringar. Det som redan sparats finns kvar — du kan rensa det nedan, under ”Rensa”.",
     "historyOff": "Historiken sparas inte — nya nedladdningar syns inte här. Du kan slå på det i Inställningar.",
     "gameTitle": "Vad du spelar",
     "gameHint": "Då gäller aviseringar för favoriter bara din loader och din Minecraft-version — med en ”Ladda ner”-knapp för rätt fil. Med ”Gissa” tar sajten det du laddar ner oftast.",
@@ -587,7 +585,10 @@
     "gameVersion": "Minecraft-version",
     "auto": "Gissa",
     "guessed": "Gissat från dina nedladdningar: {value}",
-    "notGuessed": "Inget att gissa från än — ladda ner något eller välj själv. Tills dess får favoriter en allmän sammanfattning för alla versioner."
+    "notGuessed": "Inget att gissa från än — ladda ner något eller välj själv. Tills dess får favoriter en allmän sammanfattning för alla versioner.",
+    "cleanupTitle": "Rensa",
+    "clearFavoritesHint": "Tar bort alla favoriter på en gång — alla {n}, av alla typer, inte bara det som filtret visar. Du kan spara listan som kod på fliken ”Favoriter” först.",
+    "clearHistoryHint": "Tar bort hela nedladdningshistoriken på en gång — alla {n}, av alla typer."
   },
   "del": {
     "title": "Radera konto",
