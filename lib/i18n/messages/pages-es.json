@@ -422,7 +422,10 @@
   "fb": {
     "close": "Cerrar",
     "offer": "¿Tienes una idea o encontraste un bug?",
-    "write": "Escríbenos"
+    "write": "Escríbenos",
+    "signupTitle": "Deja de buscar actualizaciones a mano",
+    "signupText": "Crea una cuenta y el sitio te avisará cuando tus mods tengan versión nueva. Incluso por Telegram.",
+    "signupButton": "Crear cuenta"
   },
   "account": {
     "title": "Cuenta",

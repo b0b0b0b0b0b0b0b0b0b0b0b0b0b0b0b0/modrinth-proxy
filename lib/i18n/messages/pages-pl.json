@@ -422,7 +422,10 @@
   "fb": {
     "close": "Zamknij",
     "offer": "Masz pomysł albo znalazłeś buga?",
-    "write": "Napisz do nas"
+    "write": "Napisz do nas",
+    "signupTitle": "Koniec ze sprawdzaniem aktualizacji ręcznie",
+    "signupText": "Załóż konto, a strona sama powie, kiedy twoje mody dostaną nową wersję. Nawet w Telegramie.",
+    "signupButton": "Załóż konto"
   },
   "account": {
     "title": "Konto",

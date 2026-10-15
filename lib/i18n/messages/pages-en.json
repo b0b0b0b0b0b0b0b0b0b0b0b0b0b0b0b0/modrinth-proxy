@@ -426,7 +426,10 @@
     "title": "Got a thought?",
     "lead": "Suggestions or a bug?",
     "crowd": "We’re already over {n} people a day. GitHub Issues — we read them and fix fast.",
-    "issues": "Open an Issue"
+    "issues": "Open an Issue",
+    "signupTitle": "Stop checking for updates by hand",
+    "signupText": "Create an account and the site will tell you when your mods get a new version. Even in Telegram.",
+    "signupButton": "Create account"
   },
   "notfound": {
     "metaTitle": "404 — Page not found | ModrinthProxy",

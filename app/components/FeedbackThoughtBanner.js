@@ -1,16 +1,28 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useT } from './I18nProvider'
 
 const STORAGE_KEY = 'feedbackThoughtDismissed'
+const SIGNUP_KEY = 'signupThoughtDismissedAt'
+const SIGNUP_PAUSE_MS = 3 * 24 * 60 * 60 * 1000
+const SIGNUP_HIDDEN_ON = ['/login', '/register', '/account', '/extension']
 const Y_KEY = 'feedbackThoughtY'
 const SIDE_KEY = 'feedbackThoughtSide'
 const PIN_KEY = 'feedbackThoughtPin'
 
-function isDismissed() {
+function isSignedIn() {
   try {
+    return document.cookie.split('; ').some((part) => part.startsWith('mp_signed='))
+  } catch {
+    return false
+  }
+}
+
+function isDismissed(mode) {
+  try {
+    if (mode === 'signup') return Date.now() - Number(localStorage.getItem(SIGNUP_KEY) || 0) < SIGNUP_PAUSE_MS
     return localStorage.getItem(STORAGE_KEY) === 'true'
   } catch {
     return false
@@ -126,7 +138,9 @@ function easeInOutCubic(t) {
 
 export default function FeedbackThoughtBanner() {
   const t = useT()
+  const router = useRouter()
   const pathname = usePathname()
+  const [mode, setMode] = useState('feedback')
   const rootRef = useRef(null)
   const posRef = useRef({ x: 0, y: 0 })
   const sizeRef = useRef({ w: 256, h: 118 })
@@ -141,12 +155,19 @@ export default function FeedbackThoughtBanner() {
   const [dragging, setDragging] = useState(false)
 
   useEffect(() => {
-    if (isDismissed()) {
+    const nextMode = isSignedIn() ? 'feedback' : 'signup'
+    setMode(nextMode)
+    if (isDismissed(nextMode)) {
       setVisible(false)
       return
     }
-    if (pathname?.startsWith('/extension')) {
+    const hiddenHere =
+      nextMode === 'signup'
+        ? SIGNUP_HIDDEN_ON.some((path) => pathname?.startsWith(path))
+        : pathname?.startsWith('/extension')
+    if (hiddenHere) {
       setVisible(false)
+      shownRef.current = false
       return
     }
 
@@ -355,8 +376,14 @@ export default function FeedbackThoughtBanner() {
   const handleDismiss = () => {
     setVisible(false)
     try {
-      localStorage.setItem(STORAGE_KEY, 'true')
+      if (mode === 'signup') localStorage.setItem(SIGNUP_KEY, String(Date.now()))
+      else localStorage.setItem(STORAGE_KEY, 'true')
     } catch {}
+  }
+
+  const handleSignup = () => {
+    setVisible(false)
+    router.push(`/register?next=${encodeURIComponent(pathname || '/')}`)
   }
 
   const handleOpenIssues = () => {
@@ -398,16 +425,23 @@ export default function FeedbackThoughtBanner() {
             </svg>
           </button>
 
-          <p className="mb-2.5 pr-5 text-xs font-semibold leading-relaxed">
-            {t('fb.offer')}
-          </p>
+          {mode === 'signup' ? (
+            <>
+              <p className="pr-5 text-xs font-bold leading-snug">{t('fb.signupTitle')}</p>
+              <p className="mb-2.5 mt-1 text-[11px] leading-relaxed opacity-80">{t('fb.signupText')}</p>
+            </>
+          ) : (
+            <p className="mb-2.5 pr-5 text-xs font-semibold leading-relaxed">
+              {t('fb.offer')}
+            </p>
+          )}
 
           <button
             type="button"
-            onClick={handleOpenIssues}
+            onClick={mode === 'signup' ? handleSignup : handleOpenIssues}
             className="inline-flex cursor-pointer items-center rounded-full bg-modrinth-green px-3 py-1.5 text-xs font-bold text-black shadow transition-all duration-200 hover:bg-modrinth-green-light active:scale-95"
           >
-            {t('fb.write')}
+            {t(mode === 'signup' ? 'fb.signupButton' : 'fb.write')}
           </button>
         </div>
       </div>

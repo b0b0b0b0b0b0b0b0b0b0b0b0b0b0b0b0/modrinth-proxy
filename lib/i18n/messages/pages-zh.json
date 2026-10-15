@@ -422,7 +422,10 @@
   "fb": {
     "close": "关闭",
     "offer": "有建议或发现漏洞？",
-    "write": "写信给我们"
+    "write": "写信给我们",
+    "signupTitle": "别再手动检查更新了",
+    "signupText": "创建账号后，你的模组出新版本时网站会主动提醒你，还能发到 Telegram。",
+    "signupButton": "创建账号"
   },
   "account": {
     "title": "账号",

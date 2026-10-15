@@ -422,7 +422,10 @@
   "fb": {
     "close": "Aizvērt",
     "offer": "Ir ideja vai atradīji bugu?",
-    "write": "Raksti mums"
+    "write": "Raksti mums",
+    "signupTitle": "Pietiek pārbaudīt atjauninājumus ar roku",
+    "signupText": "Izveido kontu — vietne pati pateiks, kad taviem modiem iznāks jauna versija. Pat Telegram.",
+    "signupButton": "Izveidot kontu"
   },
   "account": {
     "title": "Konts",

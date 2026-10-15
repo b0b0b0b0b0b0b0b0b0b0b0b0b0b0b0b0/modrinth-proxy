@@ -422,7 +422,10 @@
   "fb": {
     "close": "Schließen",
     "offer": "Idee oder Bug gefunden?",
-    "write": "Schreib uns"
+    "write": "Schreib uns",
+    "signupTitle": "Schluss mit Updates per Hand prüfen",
+    "signupText": "Erstell ein Konto — die Seite sagt dir selbst, wenn deine Mods eine neue Version bekommen. Sogar in Telegram.",
+    "signupButton": "Konto erstellen"
   },
   "account": {
     "title": "Konto",

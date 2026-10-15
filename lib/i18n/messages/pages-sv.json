@@ -422,7 +422,10 @@
   "fb": {
     "close": "Stäng",
     "offer": "Har du en idé eller hittade du en bugg?",
-    "write": "Skriv till oss"
+    "write": "Skriv till oss",
+    "signupTitle": "Sluta kolla uppdateringar för hand",
+    "signupText": "Skapa ett konto så säger sajten till när dina moddar får en ny version. Till och med i Telegram.",
+    "signupButton": "Skapa konto"
   },
   "account": {
     "title": "Konto",

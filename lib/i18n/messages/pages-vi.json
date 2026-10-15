@@ -422,7 +422,10 @@
   "fb": {
     "close": "Đóng",
     "offer": "Có góp ý hoặc tìm thấy lỗi?",
-    "write": "Viết cho chúng tôi"
+    "write": "Viết cho chúng tôi",
+    "signupTitle": "Thôi tự kiểm tra cập nhật bằng tay",
+    "signupText": "Tạo tài khoản và trang sẽ báo khi mod của bạn có phiên bản mới. Cả qua Telegram.",
+    "signupButton": "Tạo tài khoản"
   },
   "account": {
     "title": "Tài khoản",
