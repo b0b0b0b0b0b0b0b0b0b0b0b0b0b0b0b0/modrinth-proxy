@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from 'framer-motion'
+import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './components/Kitten'
+import { onSoundsMutedChange, playBloop, playChime, playPop, setSoundsMuted, soundsMuted } from './components/softSounds'
 
 const GLYPHS = {
   4: ['1.1', '1.1', '111', '..1', '..1'],
@@ -135,6 +137,7 @@ function Block({ block, reduceMotion, glitch, wave }) {
 
   const mine = () => {
     if (broken) return
+    playPop()
     setBroken(true)
     timer.current = setTimeout(() => setBroken(false), RESPAWN_MS)
   }
@@ -145,6 +148,7 @@ function Block({ block, reduceMotion, glitch, wave }) {
         type="button"
         tabIndex={-1}
         aria-hidden
+        data-sound
         onClick={mine}
         initial={reduceMotion ? false : { y: -120, opacity: 0 }}
         animate={broken ? { scale: 0, rotate: 45, opacity: 0 } : { y: 0, opacity: 1, scale: 1, rotate: 0 }}
@@ -217,73 +221,6 @@ function trickKeyframes(trick, from) {
   return [from, from + trick.dir * 360 * trick.turns]
 }
 
-function useCatMood(enabled, faceRef) {
-  const [look, setLook] = useState({ x: 0, y: 0 })
-  const [mood, setMood] = useState('look')
-  const moodTimer = useRef(null)
-
-  const showMood = useCallback((next, ms) => {
-    clearTimeout(moodTimer.current)
-    setMood(next)
-    moodTimer.current = setTimeout(() => setMood('look'), ms)
-  }, [])
-
-  useEffect(() => {
-    if (!enabled) return undefined
-    const onMove = (event) => {
-      const rect = faceRef.current?.getBoundingClientRect()
-      if (!rect) return
-      const dx = event.clientX - (rect.left + rect.width / 2)
-      const dy = event.clientY - (rect.top + rect.height / 2)
-      const length = Math.hypot(dx, dy) || 1
-      const reach = Math.min(1, length / 160)
-      setLook({ x: (dx / length) * reach, y: (dy / length) * reach })
-    }
-    let blinkTimer = null
-    const blink = () => {
-      blinkTimer = setTimeout(() => {
-        setMood((current) => {
-          if (current !== 'look') return current
-          clearTimeout(moodTimer.current)
-          moodTimer.current = setTimeout(() => setMood('look'), 140)
-          return 'blink'
-        })
-        blink()
-      }, random(2200, 5200))
-    }
-    blink()
-    window.addEventListener('pointermove', onMove)
-    return () => {
-      window.removeEventListener('pointermove', onMove)
-      clearTimeout(blinkTimer)
-      clearTimeout(moodTimer.current)
-    }
-  }, [enabled, faceRef])
-
-  return { look, mood, showMood }
-}
-
-function Hearts({ items }) {
-  return (
-    <AnimatePresence>
-      {items.map((heart) => (
-        <motion.svg
-          key={heart.id}
-          aria-hidden
-          viewBox="0 0 24 24"
-          className="pointer-events-none absolute bottom-20 left-1/2 h-4 w-4 fill-modrinth-green"
-          initial={{ x: heart.x * 0.3, y: 0, scale: 0, opacity: 1 }}
-          animate={{ x: [heart.x * 0.3, heart.x, heart.x + heart.sway], y: -heart.rise, scale: [0, 1.2, 1], opacity: [1, 1, 0] }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.1, ease: 'easeOut' }}
-        >
-          <path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z" />
-        </motion.svg>
-      ))}
-    </AnimatePresence>
-  )
-}
-
 function BouncingFace({ reduceMotion, onImpact }) {
   const lastScale = useRef(1)
   const angle = useRef(0)
@@ -291,8 +228,8 @@ function BouncingFace({ reduceMotion, onImpact }) {
   const faceRef = useRef(null)
   const spin = useAnimationControls()
   const [landing, setLanding] = useState(0)
-  const [hearts, setHearts] = useState([])
-  const { look, mood, showMood } = useCatMood(!reduceMotion, faceRef)
+  const { hearts, burst } = useKittenHearts()
+  const { look, mood, showMood } = useKittenMood(!reduceMotion, faceRef)
   const loop = { duration: BOUNCE_S, repeat: Infinity }
   const contact = { ...loop, times: [0, IMPACT, IMPACT + 0.02, IMPACT + 0.045, 1], ease: [FALL, 'easeOut', 'easeOut', RISE] }
 
@@ -310,21 +247,14 @@ function BouncingFace({ reduceMotion, onImpact }) {
   const pet = () => {
     queued.current = { kind: 'spin', dir: chance(0.5) ? 1 : -1, turns: 2 }
     showMood('happy', 1100)
-    const now = Date.now()
-    const fresh = Array.from({ length: 6 }, (_, index) => ({
-      id: `${now}-${index}`,
-      x: random(-46, 46),
-      sway: random(-14, 14),
-      rise: random(70, 120),
-    }))
-    setHearts((current) => [...current.slice(-12), ...fresh])
-    setTimeout(() => setHearts((current) => current.filter((heart) => !fresh.includes(heart))), 1200)
+    playChime()
+    burst()
   }
 
   if (reduceMotion) {
     return (
       <div className="mx-auto flex h-48 w-40 items-end justify-center">
-        <Face mood="happy" look={{ x: 0, y: 0 }} />
+        <KittenFace mood="happy" />
       </div>
     )
   }
@@ -339,7 +269,7 @@ function BouncingFace({ reduceMotion, onImpact }) {
         animate={{ scaleX: [0.55, 1, 1.12, 1, 0.55], opacity: [0.25, 0.6, 0.75, 0.6, 0.25] }}
         transition={contact}
       />
-      <Hearts items={hearts} />
+      <KittenHearts items={hearts} />
       <motion.div
         className="absolute -bottom-3 left-1/2 -ml-12"
         style={{ originX: 0.5, originY: 0.875 }}
@@ -357,63 +287,42 @@ function BouncingFace({ reduceMotion, onImpact }) {
           scaleX: contact,
         }}
       >
-        <motion.div ref={faceRef} animate={spin} onPointerDown={pet} className="cursor-pointer">
-          <Face earTransition={contact} mood={mood} look={look} />
+        <motion.div ref={faceRef} animate={spin} onPointerDown={pet} data-sound className="cursor-pointer">
+          <KittenFace earTransition={contact} mood={mood} look={look} />
         </motion.div>
       </motion.div>
     </div>
   )
 }
 
-const EARS = [
-  { side: -1, outer: 'M5.7 5.6 5 0.9 10.1 3.2', inner: 'M6.6 5 6.3 2.6 8.8 3.7Z', origin: '8px 4.5px' },
-  { side: 1, outer: 'M18.3 5.6 19 0.9 13.9 3.2', inner: 'M17.4 5 17.7 2.6 15.2 3.7Z', origin: '16px 4.5px' },
-]
+function SoundToggle({ labels }) {
+  const [muted, setMuted] = useState(false)
 
-function Ear({ ear, transition }) {
+  useEffect(() => {
+    setMuted(soundsMuted())
+    return onSoundsMutedChange(setMuted)
+  }, [])
+
+  const toggle = () => {
+    setSoundsMuted(!muted)
+    if (muted) setTimeout(playChime, 0)
+  }
+
   return (
-    <motion.g
-      style={{ transformOrigin: ear.origin }}
-      animate={transition ? { rotate: [0, ear.side * -4, ear.side * 16, ear.side * -5, 0] } : undefined}
-      transition={transition}
+    <button
+      type="button"
+      data-no-wave
+      onClick={toggle}
+      aria-pressed={!muted}
+      aria-label={muted ? labels.on : labels.off}
+      title={muted ? labels.on : labels.off}
+      className="absolute right-0 top-0 z-10 flex h-9 w-9 items-center justify-center rounded-full border border-gray-800 text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-modrinth-green"
     >
-      <path d={ear.outer} strokeLinejoin="round" className="fill-modrinth-green/10" />
-      <path d={ear.inner} stroke="none" className="fill-modrinth-green/40" />
-    </motion.g>
-  )
-}
-
-function Eyes({ mood, look }) {
-  if (mood === 'happy') return <path d="M7.9 10.6q1.3-1.8 2.6 0M13.5 10.6q1.3-1.8 2.6 0" />
-  if (mood === 'blink') return <path d="M8 10.2h2.4M13.6 10.2h2.4" />
-  const dx = look.x * 0.7
-  const dy = look.y * 0.6
-  return (
-    <g stroke="none">
-      {[9.2, 14.8].map((cx) => (
-        <g key={cx}>
-          <circle cx={cx + dx} cy={10 + dy} r="1.35" fill="currentColor" />
-          <circle cx={cx + dx - 0.45} cy={10 + dy - 0.45} r="0.42" fill="white" />
-        </g>
-      ))}
-    </g>
-  )
-}
-
-function Face({ earTransition, mood = 'look', look = { x: 0, y: 0 } }) {
-  return (
-    <svg className="h-24 w-24 overflow-visible text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden>
-      {EARS.map((ear) => (
-        <Ear key={ear.side} ear={ear} transition={earTransition} />
-      ))}
-      <circle cx="12" cy="12" r="9" className="fill-modrinth-green/10" />
-      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className="fill-modrinth-green/35" />
-      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className="fill-modrinth-green/35" />
-      <Eyes mood={mood} look={look} />
-      <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round" />
-      <path d="M12 13.3q-.4 1.4-1.6 1.1M12 13.3q.4 1.4 1.6 1.1" />
-      <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1" />
-    </svg>
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+        <path d="M11 5 6 9H2v6h4l5 4Z" />
+        {muted ? <path d="m22 9-6 6M16 9l6 6" /> : <path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14" />}
+      </svg>
+    </button>
   )
 }
 
@@ -449,7 +358,7 @@ function Burst({ x, y }) {
   )
 }
 
-export default function NotFoundScene({ label }) {
+export default function NotFoundScene({ label, soundLabels }) {
   const reduceMotion = useReducedMotion()
   const glitch = useGlitch(!reduceMotion)
   const gridRef = useRef(null)
@@ -463,7 +372,8 @@ export default function NotFoundScene({ label }) {
   useEffect(() => {
     if (reduceMotion) return undefined
     const onPointer = (event) => {
-      if (event.button !== 0 || event.target.closest?.('a, input, textarea, select, [role="dialog"]')) return
+      if (event.button !== 0 || event.target.closest?.('a, input, textarea, select, [role="dialog"], [data-no-wave]')) return
+      if (!event.target.closest?.('[data-sound]')) playBloop()
       const rect = gridRef.current?.getBoundingClientRect()
       if (!rect) return
       shake(
@@ -482,7 +392,8 @@ export default function NotFoundScene({ label }) {
   }, [reduceMotion, shake])
 
   return (
-    <div className="select-none">
+    <div className="relative select-none">
+      <SoundToggle labels={soundLabels} />
       <BouncingFace reduceMotion={reduceMotion} onImpact={() => shake(CAT_ORIGIN, 1)} />
       <h1 className="sr-only">{label}</h1>
       <div

@@ -552,7 +552,8 @@
     "clearHistoryText": "Z historii zniknie wszystko: {n}. Nowe wersje pobranych rzeczy też przestaną być śledzone — śledzenie wróci, gdy coś pobierzesz.",
     "settings": "Ustawienia",
     "newRelease": "Wyszła nowa wersja",
-    "filterAll": "Wszystko"
+    "filterAll": "Wszystko",
+    "petKitten": "Pogłaszcz kotka"
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mody",
     "pluginsTitle": "Pluginy",
     "serverCore": "Rdzeń serwera",
-    "serverVersion": "Wersja serwera"
+    "serverVersion": "Wersja serwera",
+    "kittenSounds": "Dźwięki kotka",
+    "kittenSoundsHint": "Ciche, miękkie dźwięki, gdy głaszczesz kotka albo rozbijasz bloki na stronie 404. Nigdy nie grają same — tylko po kliknięciu."
   },
   "del": {
     "title": "Usuwanie konta",
@@ -646,6 +649,8 @@
     "metaDesc": "Tej strony tu nie ma",
     "title": "Ups! Nie znaleziono strony",
     "lead": "Wygląda na to, że ta strona poszła do Endu z Endermanem. Usunięta albo nigdy nie istniała.",
-    "home": "Strona główna"
+    "home": "Strona główna",
+    "soundOn": "Włącz dźwięki",
+    "soundOff": "Wyłącz dźwięki"
   }
 }

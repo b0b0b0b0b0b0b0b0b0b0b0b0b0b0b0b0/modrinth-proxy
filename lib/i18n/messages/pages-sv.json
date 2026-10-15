@@ -552,7 +552,8 @@
     "clearHistoryText": "Allt i historiken tas bort: {n}. Nya versioner av det du laddat ner slutar också följas — det börjar igen när du laddar ner något.",
     "settings": "Inställningar",
     "newRelease": "En ny version är ute",
-    "filterAll": "Alla"
+    "filterAll": "Alla",
+    "petKitten": "Klappa kattungen"
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
@@ -596,7 +597,9 @@
     "modsTitle": "Moddar",
     "pluginsTitle": "Plugins",
     "serverCore": "Serverkärna",
-    "serverVersion": "Serverversion"
+    "serverVersion": "Serverversion",
+    "kittenSounds": "Kattungeljud",
+    "kittenSoundsHint": "Mjuka, tysta ljud när du klappar kattungen eller slår sönder block på 404-sidan. De spelas aldrig av sig själva — bara när du klickar."
   },
   "del": {
     "title": "Radera konto",
@@ -646,6 +649,8 @@
     "metaDesc": "Den sidan finns inte här",
     "title": "Hoppsan! Sidan hittades inte",
     "lead": "Det verkar som att sidan gick till End med en Enderman. Borttagen – eller så har den aldrig funnits.",
-    "home": "Startsidan"
+    "home": "Startsidan",
+    "soundOn": "Slå på ljud",
+    "soundOff": "Stäng av ljud"
   }
 }

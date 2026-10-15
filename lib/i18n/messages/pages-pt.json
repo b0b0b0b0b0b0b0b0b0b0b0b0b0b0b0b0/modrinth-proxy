@@ -552,7 +552,8 @@
     "clearHistoryText": "Todo o histórico será apagado: {n}. As novas versões do que foi baixado também deixam de ser acompanhadas — voltam quando você baixar algo.",
     "settings": "Configurações",
     "newRelease": "Saiu uma versão nova",
-    "filterAll": "Tudo"
+    "filterAll": "Tudo",
+    "petKitten": "Fazer carinho no gatinho"
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mods",
     "pluginsTitle": "Plugins",
     "serverCore": "Núcleo do servidor",
-    "serverVersion": "Versão do servidor"
+    "serverVersion": "Versão do servidor",
+    "kittenSounds": "Sons do gatinho",
+    "kittenSoundsHint": "Sons suaves e baixinhos quando você faz carinho no gatinho ou quebra blocos na página 404. Nunca tocam sozinhos — só no clique."
   },
   "del": {
     "title": "Excluir conta",
@@ -646,6 +649,8 @@
     "metaDesc": "Essa página não está aqui",
     "title": "Opa! Página não encontrada",
     "lead": "Parece que esta página foi para o End com um Enderman. Foi apagada ou nunca existiu.",
-    "home": "Início"
+    "home": "Início",
+    "soundOn": "Ligar sons",
+    "soundOff": "Desligar sons"
   }
 }

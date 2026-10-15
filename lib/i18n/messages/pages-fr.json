@@ -552,7 +552,8 @@
     "clearHistoryText": "Tout l’historique sera supprimé : {n}. Les nouvelles versions des téléchargements ne seront plus suivies non plus — le suivi reprend dès que tu télécharges quelque chose.",
     "settings": "Paramètres",
     "newRelease": "Une nouvelle version est sortie",
-    "filterAll": "Tout"
+    "filterAll": "Tout",
+    "petKitten": "Caresser le chaton"
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mods",
     "pluginsTitle": "Plugins",
     "serverCore": "Cœur du serveur",
-    "serverVersion": "Version du serveur"
+    "serverVersion": "Version du serveur",
+    "kittenSounds": "Sons du chaton",
+    "kittenSoundsHint": "Des sons doux et discrets quand tu caresses le chaton ou casses des blocs sur la page 404. Ils ne se jouent jamais tout seuls — seulement au clic."
   },
   "del": {
     "title": "Supprimer le compte",
@@ -646,6 +649,8 @@
     "metaDesc": "Cette page n’est pas là",
     "title": "Oups ! Page introuvable",
     "lead": "On dirait que cette page est partie dans l’End avec un Enderman. Supprimée, ou elle n’a jamais existé.",
-    "home": "Accueil"
+    "home": "Accueil",
+    "soundOn": "Activer les sons",
+    "soundOff": "Couper les sons"
   }
 }

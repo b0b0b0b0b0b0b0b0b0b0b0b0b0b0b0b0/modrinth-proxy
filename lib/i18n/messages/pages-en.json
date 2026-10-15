@@ -436,7 +436,9 @@
     "metaDesc": "That page isn’t here",
     "title": "Oops. Page not found",
     "lead": "Looks like this page walked into the End with an Enderman. Deleted, or it never existed.",
-    "home": "Home"
+    "home": "Home",
+    "soundOn": "Turn sounds on",
+    "soundOff": "Turn sounds off"
   },
   "console": {
     "stop": "Stop. Stop. Stop.",
@@ -568,7 +570,8 @@
     "clearHistoryText": "Everything in your history will be removed: {n}. New versions of downloaded items will stop being tracked too — tracking starts again when you download something.",
     "settings": "Settings",
     "newRelease": "A new version is out",
-    "filterAll": "All"
+    "filterAll": "All",
+    "petKitten": "Pet the kitten"
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
@@ -612,7 +615,9 @@
     "modsTitle": "Mods",
     "pluginsTitle": "Plugins",
     "serverCore": "Server core",
-    "serverVersion": "Server version"
+    "serverVersion": "Server version",
+    "kittenSounds": "Kitten sounds",
+    "kittenSoundsHint": "Soft quiet sounds when you pet the kitten or break blocks on the 404 page. They never play on their own — only when you click."
   },
   "del": {
     "title": "Delete account",

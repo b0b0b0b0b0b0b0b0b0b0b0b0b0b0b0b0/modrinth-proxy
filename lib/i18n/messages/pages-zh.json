@@ -552,7 +552,8 @@
     "clearHistoryText": "下载记录将全部删除：{n} 项。已下载内容的新版本也将停止跟踪，再次下载内容后会重新开始。",
     "settings": "设置",
     "newRelease": "有新版本发布",
-    "filterAll": "全部"
+    "filterAll": "全部",
+    "petKitten": "摸摸小猫"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
@@ -596,7 +597,9 @@
     "modsTitle": "模组",
     "pluginsTitle": "插件",
     "serverCore": "服务端核心",
-    "serverVersion": "服务端版本"
+    "serverVersion": "服务端版本",
+    "kittenSounds": "小猫的声音",
+    "kittenSoundsHint": "摸小猫或在 404 页面敲碎方块时，会有轻柔的小声音。不会自己响，只在点击时出现。"
   },
   "del": {
     "title": "删除账号",
@@ -646,6 +649,8 @@
     "metaDesc": "这个页面不存在",
     "title": "哎呀！页面未找到",
     "lead": "这个页面好像跟着末影人去了末地。可能已被删除，或者根本不存在。",
-    "home": "首页"
+    "home": "首页",
+    "soundOn": "打开声音",
+    "soundOff": "关闭声音"
   }
 }

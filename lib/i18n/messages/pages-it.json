@@ -552,7 +552,8 @@
     "clearHistoryText": "Verrà eliminato tutto dalla cronologia: {n}. Anche le nuove versioni dei download non verranno più seguite: si riparte quando scarichi qualcosa.",
     "settings": "Impostazioni",
     "newRelease": "È uscita una nuova versione",
-    "filterAll": "Tutto"
+    "filterAll": "Tutto",
+    "petKitten": "Accarezza il gattino"
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mod",
     "pluginsTitle": "Plugin",
     "serverCore": "Core del server",
-    "serverVersion": "Versione del server"
+    "serverVersion": "Versione del server",
+    "kittenSounds": "Suoni del gattino",
+    "kittenSoundsHint": "Suoni dolci e leggeri quando accarezzi il gattino o rompi i blocchi nella pagina 404. Non partono mai da soli, solo al clic."
   },
   "del": {
     "title": "Elimina account",
@@ -646,6 +649,8 @@
     "metaDesc": "Questa pagina non c’è",
     "title": "Ops! Pagina non trovata",
     "lead": "Sembra che questa pagina sia finita nell’End con un Enderman. Eliminata, o non è mai esistita.",
-    "home": "Home"
+    "home": "Home",
+    "soundOn": "Attiva i suoni",
+    "soundOff": "Disattiva i suoni"
   }
 }

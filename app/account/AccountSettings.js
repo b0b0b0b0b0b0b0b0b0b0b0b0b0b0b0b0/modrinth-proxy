@@ -12,6 +12,7 @@ const SERVER_CORES = ['paper', 'purpur', 'spigot', 'folia', 'velocity', 'bungeec
 const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
 import { getLoaderDisplayName } from '@/lib/loaders'
 import { NEWS_BADGE_EVENT } from '../components/NewsCounter'
+import { onSoundsMutedChange, playChime, setSoundsMuted, soundsMuted } from '../components/softSounds'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 
 const LINK_BUTTON =
@@ -76,6 +77,12 @@ export default function AccountSettings({
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [recordHistory, setRecordHistory] = useState(initialRecord)
   const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
+  const [kittenSounds, setKittenSounds] = useState(true)
+
+  useEffect(() => {
+    setKittenSounds(!soundsMuted())
+    return onSoundsMutedChange((muted) => setKittenSounds(!muted))
+  }, [])
   const [profile, setProfile] = useState(game.chosen)
   const [gameVersions, setGameVersions] = useState([])
 
@@ -272,6 +279,16 @@ export default function AccountSettings({
                 () => setNewsBadge(newsBadge),
               ).then(() => window.dispatchEvent(new Event(NEWS_BADGE_EVENT)))
             }
+          />
+        </Setting>
+        <Setting title={t('set.kittenSounds')} hint={t('set.kittenSoundsHint')}>
+          <Switch
+            checked={kittenSounds}
+            label={t('set.kittenSounds')}
+            onChange={() => {
+              setSoundsMuted(kittenSounds)
+              if (!kittenSounds) playChime()
+            }}
           />
         </Setting>
       </Section>

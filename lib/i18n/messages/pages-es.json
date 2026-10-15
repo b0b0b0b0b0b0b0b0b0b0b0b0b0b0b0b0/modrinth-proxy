@@ -552,7 +552,8 @@
     "clearHistoryText": "Se borrará todo el historial: {n}. Las nuevas versiones de lo descargado también dejarán de seguirse; vuelve a empezar cuando descargues algo.",
     "settings": "Ajustes",
     "newRelease": "Ha salido una versión nueva",
-    "filterAll": "Todo"
+    "filterAll": "Todo",
+    "petKitten": "Acariciar al gatito"
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mods",
     "pluginsTitle": "Plugins",
     "serverCore": "Núcleo del servidor",
-    "serverVersion": "Versión del servidor"
+    "serverVersion": "Versión del servidor",
+    "kittenSounds": "Sonidos del gatito",
+    "kittenSoundsHint": "Sonidos suaves y bajitos al acariciar al gatito o romper bloques en la página 404. Nunca suenan solos, solo al hacer clic."
   },
   "del": {
     "title": "Eliminar cuenta",
@@ -646,6 +649,8 @@
     "metaDesc": "Esa página no está aquí",
     "title": "¡Ups! Página no encontrada",
     "lead": "Parece que esta página se fue al End con un Enderman. La borraron o nunca existió.",
-    "home": "Inicio"
+    "home": "Inicio",
+    "soundOn": "Activar sonidos",
+    "soundOff": "Silenciar sonidos"
   }
 }

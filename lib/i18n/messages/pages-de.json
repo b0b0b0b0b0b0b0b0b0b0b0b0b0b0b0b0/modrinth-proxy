@@ -552,7 +552,8 @@
     "clearHistoryText": "Alles im Verlauf wird entfernt: {n}. Neue Versionen von Heruntergeladenem werden auch nicht mehr verfolgt — das beginnt wieder, sobald du etwas herunterlädst.",
     "settings": "Einstellungen",
     "newRelease": "Eine neue Version ist da",
-    "filterAll": "Alle"
+    "filterAll": "Alle",
+    "petKitten": "Kätzchen streicheln"
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mods",
     "pluginsTitle": "Plugins",
     "serverCore": "Server-Kern",
-    "serverVersion": "Server-Version"
+    "serverVersion": "Server-Version",
+    "kittenSounds": "Kätzchen-Töne",
+    "kittenSoundsHint": "Leise, sanfte Töne, wenn du das Kätzchen streichelst oder auf der 404-Seite Blöcke zerbrichst. Sie spielen nie von selbst – nur beim Klicken."
   },
   "del": {
     "title": "Konto löschen",
@@ -646,6 +649,8 @@
     "metaDesc": "Diese Seite gibt es nicht",
     "title": "Hoppla! Seite nicht gefunden",
     "lead": "Sieht aus, als wäre diese Seite mit einem Enderman ins Ende gegangen. Gelöscht – oder es gab sie nie.",
-    "home": "Startseite"
+    "home": "Startseite",
+    "soundOn": "Töne an",
+    "soundOff": "Töne aus"
   }
 }

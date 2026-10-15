@@ -552,7 +552,8 @@
     "clearHistoryText": "Mọi thứ trong lịch sử sẽ bị xóa: {n}. Phiên bản mới của những thứ đã tải cũng sẽ ngừng được theo dõi — sẽ bắt đầu lại khi bạn tải gì đó.",
     "settings": "Cài đặt",
     "newRelease": "Đã có phiên bản mới",
-    "filterAll": "Tất cả"
+    "filterAll": "Tất cả",
+    "petKitten": "Vuốt ve mèo con"
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",
@@ -596,7 +597,9 @@
     "modsTitle": "Mod",
     "pluginsTitle": "Plugin",
     "serverCore": "Lõi máy chủ",
-    "serverVersion": "Phiên bản máy chủ"
+    "serverVersion": "Phiên bản máy chủ",
+    "kittenSounds": "Âm thanh mèo con",
+    "kittenSoundsHint": "Âm thanh nhẹ nhàng khi bạn vuốt ve mèo con hoặc phá khối ở trang 404. Không bao giờ tự phát — chỉ khi bạn bấm."
   },
   "del": {
     "title": "Xóa tài khoản",
@@ -646,6 +649,8 @@
     "metaDesc": "Trang này không có ở đây",
     "title": "Ối! Không tìm thấy trang",
     "lead": "Có vẻ trang này đã theo Enderman vào End. Đã bị xoá hoặc chưa từng tồn tại.",
-    "home": "Trang chủ"
+    "home": "Trang chủ",
+    "soundOn": "Bật âm thanh",
+    "soundOff": "Tắt âm thanh"
   }
 }

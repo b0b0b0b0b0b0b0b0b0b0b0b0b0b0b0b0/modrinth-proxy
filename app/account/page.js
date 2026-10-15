@@ -29,6 +29,7 @@ import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 import PageFade from './PageFade'
 import TypeFilter from './TypeFilter'
+import { HeaderKitten, SleepyKitten } from './AccountKitten'
 
 export const dynamic = 'force-dynamic'
 
@@ -215,7 +216,10 @@ export default async function AccountPage({ searchParams }) {
         }))}
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <UsernameEditor username={user.username} />
+        <div className="flex min-w-0 items-center gap-3">
+          <HeaderKitten />
+          <UsernameEditor username={user.username} />
+        </div>
         <LogoutButton />
       </div>
 
@@ -290,7 +294,7 @@ export default async function AccountPage({ searchParams }) {
               />
             </>
           ) : (
-            <p className="text-sm text-gray-600 dark:text-gray-500">{t('account.emptyUpdates')}</p>
+            <SleepyKitten text={t('account.emptyUpdates')} />
           )
         ) : null}
 
@@ -320,7 +324,7 @@ export default async function AccountPage({ searchParams }) {
                 />
               </>
             ) : (
-              <p className="text-sm text-gray-600 dark:text-gray-500">{t('account.emptyFavorites')}</p>
+              <SleepyKitten text={t('account.emptyFavorites')} />
             )}
           </>
         ) : null}
@@ -413,7 +417,7 @@ export default async function AccountPage({ searchParams }) {
               {trackDownloads ? <p className="mt-1 text-[11px] text-gray-600 dark:text-gray-500">{t('tg.muteHint')}</p> : null}
             </>
           ) : (
-            <p className="text-sm text-gray-600 dark:text-gray-500">{t('account.emptyDownloads')}</p>
+            <SleepyKitten text={t('account.emptyDownloads')} />
           )
         ) : null}
         </PageFade>

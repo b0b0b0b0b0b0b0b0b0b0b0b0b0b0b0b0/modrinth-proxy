@@ -552,7 +552,8 @@
     "clearHistoryText": "No vēstures pazudīs viss: {n}. Arī lejupielādētā jaunās versijas vairs netiks sekotas — tas atsāksies, kad kaut ko lejupielādēsi.",
     "settings": "Iestatījumi",
     "newRelease": "Iznākusi jauna versija",
-    "filterAll": "Visi"
+    "filterAll": "Visi",
+    "petKitten": "Paglaudīt kaķēnu"
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
@@ -596,7 +597,9 @@
     "modsTitle": "Modi",
     "pluginsTitle": "Spraudņi",
     "serverCore": "Servera kodols",
-    "serverVersion": "Servera versija"
+    "serverVersion": "Servera versija",
+    "kittenSounds": "Kaķēna skaņas",
+    "kittenSoundsHint": "Klusas, maigas skaņas, kad glaudi kaķēnu vai lauz blokus 404 lapā. Pašas no sevis tās neskan — tikai uz klikšķi."
   },
   "del": {
     "title": "Konta dzēšana",
@@ -646,6 +649,8 @@
     "metaDesc": "Šīs lapas te nav",
     "title": "Ups! Lapa nav atrasta",
     "lead": "Izskatās, ka šī lapa aizgāja uz Endu kopā ar Endermenu. Izdzēsta – vai nekad nav bijusi.",
-    "home": "Uz sākumu"
+    "home": "Uz sākumu",
+    "soundOn": "Ieslēgt skaņas",
+    "soundOff": "Izslēgt skaņas"
   }
 }

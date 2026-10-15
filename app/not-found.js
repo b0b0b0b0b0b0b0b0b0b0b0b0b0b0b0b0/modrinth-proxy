@@ -24,7 +24,10 @@ export default function NotFound() {
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-10">
       <div className="mx-auto w-full max-w-xl text-center">
-        <NotFoundScene label={`404 — ${t('notfound.title')}`} />
+        <NotFoundScene
+          label={`404 — ${t('notfound.title')}`}
+          soundLabels={{ on: t('notfound.soundOn'), off: t('notfound.soundOff') }}
+        />
 
         <h2 className="mt-10 text-2xl font-bold text-white md:text-3xl">{t('notfound.title')}</h2>
         <p className="mx-auto mt-3 max-w-md text-base text-gray-400">{t('notfound.lead')}</p>
