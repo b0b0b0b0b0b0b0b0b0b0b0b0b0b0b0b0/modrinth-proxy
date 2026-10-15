@@ -627,6 +627,18 @@
     "userOne": "användare",
     "userFew": "användare",
     "userMany": "användare",
-    "lead": "registrerade på ModrinthProxy"
+    "lead": "registrerade på ModrinthProxy",
+    "today": "+{n} i dag",
+    "active": "inloggade senaste dygnet",
+    "github": "via GitHub",
+    "telegram": "kopplade Telegram",
+    "favorites": "projekt i favoriter",
+    "downloads": "nedladdningar i historiken",
+    "byDay": "Registreringar på två veckor",
+    "likes": "Vad som sparas och laddas ner",
+    "inFavorites": "Favoriter",
+    "inDownloads": "Nedladdningar",
+    "topFavorites": "Flest favoriter",
+    "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna."
   }
 }

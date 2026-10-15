@@ -627,6 +627,18 @@
     "userOne": "位用户",
     "userFew": "位用户",
     "userMany": "位用户",
-    "lead": "已在 ModrinthProxy 注册"
+    "lead": "已在 ModrinthProxy 注册",
+    "today": "今天 +{n}",
+    "active": "24 小时内登录",
+    "github": "通过 GitHub",
+    "telegram": "已绑定 Telegram",
+    "favorites": "收藏中的项目",
+    "downloads": "历史中的下载",
+    "byDay": "两周内的注册",
+    "likes": "大家收藏和下载什么",
+    "inFavorites": "收藏",
+    "inDownloads": "下载",
+    "topFavorites": "收藏最多",
+    "note": "只有总数——没有用户名或任何人的列表。下载按最近 30 天统计。"
   }
 }

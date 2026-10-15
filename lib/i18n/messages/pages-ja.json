@@ -627,6 +627,18 @@
     "userOne": "人のユーザー",
     "userFew": "人のユーザー",
     "userMany": "人のユーザー",
-    "lead": "ModrinthProxy に登録済み"
+    "lead": "ModrinthProxy に登録済み",
+    "today": "今日 +{n}",
+    "active": "24時間以内にログイン",
+    "github": "GitHub で登録",
+    "telegram": "Telegram 連携",
+    "favorites": "お気に入りのプロジェクト",
+    "downloads": "履歴のダウンロード",
+    "byDay": "2週間の登録数",
+    "likes": "保存・ダウンロードされているもの",
+    "inFavorites": "お気に入り",
+    "inDownloads": "ダウンロード",
+    "topFavorites": "お気に入りの多い順",
+    "note": "合計のみで、名前や個人のリストは含みません。ダウンロードは直近30日分です。"
   }
 }

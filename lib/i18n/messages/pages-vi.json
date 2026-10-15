@@ -627,6 +627,18 @@
     "userOne": "người dùng",
     "userFew": "người dùng",
     "userMany": "người dùng",
-    "lead": "đã đăng ký trên ModrinthProxy"
+    "lead": "đã đăng ký trên ModrinthProxy",
+    "today": "+{n} hôm nay",
+    "active": "đăng nhập trong ngày",
+    "github": "qua GitHub",
+    "telegram": "đã liên kết Telegram",
+    "favorites": "dự án trong yêu thích",
+    "downloads": "lượt tải trong lịch sử",
+    "byDay": "Đăng ký trong hai tuần",
+    "likes": "Mọi người lưu và tải gì",
+    "inFavorites": "Yêu thích",
+    "inDownloads": "Lượt tải",
+    "topFavorites": "Được yêu thích nhiều nhất",
+    "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất."
   }
 }

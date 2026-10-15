@@ -627,6 +627,18 @@
     "userOne": "Nutzer",
     "userFew": "Nutzer",
     "userMany": "Nutzer",
-    "lead": "auf ModrinthProxy registriert"
+    "lead": "auf ModrinthProxy registriert",
+    "today": "+{n} heute",
+    "active": "heute angemeldet",
+    "github": "über GitHub",
+    "telegram": "Telegram verknüpft",
+    "favorites": "Projekte in Favoriten",
+    "downloads": "Downloads im Verlauf",
+    "byDay": "Registrierungen in zwei Wochen",
+    "likes": "Was gespeichert und geladen wird",
+    "inFavorites": "Favoriten",
+    "inDownloads": "Downloads",
+    "topFavorites": "Am häufigsten favorisiert",
+    "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage."
   }
 }

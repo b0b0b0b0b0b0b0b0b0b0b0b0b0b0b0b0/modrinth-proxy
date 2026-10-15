@@ -627,6 +627,18 @@
     "userOne": "lietotājs",
     "userFew": "lietotāji",
     "userMany": "lietotāji",
-    "lead": "reģistrēti ModrinthProxy"
+    "lead": "reģistrēti ModrinthProxy",
+    "today": "+{n} šodien",
+    "active": "ienākuši diennaktī",
+    "github": "ar GitHub",
+    "telegram": "piesaistījuši Telegram",
+    "favorites": "projekti izlasē",
+    "downloads": "lejupielādes vēsturē",
+    "byDay": "Reģistrācijas divās nedēļās",
+    "likes": "Ko saglabā un lejupielādē",
+    "inFavorites": "Izlase",
+    "inDownloads": "Lejupielādes",
+    "topFavorites": "Visbiežāk izlasē",
+    "note": "Tikai kopskaiti — bez vārdiem un kāda sarakstiem. Lejupielādes par pēdējām 30 dienām."
   }
 }
