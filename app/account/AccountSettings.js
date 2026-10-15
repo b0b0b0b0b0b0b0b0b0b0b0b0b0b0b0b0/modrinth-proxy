@@ -5,6 +5,13 @@ import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import DeleteAccount from './DeleteAccount'
+import GamePicker from './GamePicker'
+
+const GAME_LOADERS = ['fabric', 'forge', 'neoforge', 'quilt']
+const SERVER_CORES = ['paper', 'purpur', 'spigot', 'folia', 'velocity', 'bungeecord']
+const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
+import { getLoaderDisplayName } from '@/lib/loaders'
+import { NEWS_BADGE_EVENT } from '../components/NewsCounter'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 
 const LINK_BUTTON =
@@ -55,6 +62,7 @@ export default function AccountSettings({
   telegram,
   trackDownloads: initialTrack,
   recordHistory: initialRecord,
+  newsBadge: initialNewsBadge,
   mutedCount,
   counts,
   deletion,
@@ -67,8 +75,8 @@ export default function AccountSettings({
   const [notify, setNotify] = useState(telegram.notify)
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [recordHistory, setRecordHistory] = useState(initialRecord)
-  const [loader, setLoader] = useState(game.loader)
-  const [gameVersion, setGameVersion] = useState(game.gameVersion)
+  const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
+  const [profile, setProfile] = useState(game.chosen)
   const [gameVersions, setGameVersions] = useState([])
 
   useEffect(() => {
@@ -148,49 +156,57 @@ export default function AccountSettings({
       <Section title={t('set.gameTitle')}>
         <div className="py-3">
           <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-500">{t('set.gameHint')}</p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <label className="block">
-              <span className="mb-1 block text-xs font-semibold text-gray-400">{t('set.loader')}</span>
-              <select
-                value={loader}
-                disabled={Boolean(busy)}
-                onChange={(event) => {
-                  const next = event.target.value
-                  save('loader', { gameLoader: next }, () => setLoader(next), () => setLoader(loader))
-                }}
-                className="w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green"
-              >
-                <option value="">{t('set.auto')}</option>
-                <option value="fabric">Fabric</option>
-                <option value="forge">Forge</option>
-                <option value="neoforge">NeoForge</option>
-                <option value="quilt">Quilt</option>
-              </select>
-            </label>
-            <label className="block">
-              <span className="mb-1 block text-xs font-semibold text-gray-400">{t('set.gameVersion')}</span>
-              <select
-                value={gameVersion}
-                disabled={Boolean(busy)}
-                onChange={(event) => {
-                  const next = event.target.value
-                  save('version', { gameVersion: next }, () => setGameVersion(next), () => setGameVersion(gameVersion))
-                }}
-                className="w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green"
-              >
-                <option value="">{t('set.auto')}</option>
-                {gameVersion && !gameVersions.includes(gameVersion) ? <option value={gameVersion}>{gameVersion}</option> : null}
-                {gameVersions.map((version) => (
-                  <option key={version} value={version}>
-                    {version}
-                  </option>
+          {[
+            { title: t('set.modsTitle'), core: 'loader', version: 'gameVersion', coreLabel: t('set.loader'), versionLabel: t('set.gameVersion'), cores: GAME_LOADERS },
+            { title: t('set.pluginsTitle'), core: 'serverCore', version: 'serverVersion', coreLabel: t('set.serverCore'), versionLabel: t('set.serverVersion'), cores: SERVER_CORES },
+          ].map((group) => (
+            <div key={group.core} className="mt-4">
+              <div className="mb-2 text-sm font-semibold text-white">{group.title}</div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {[
+                  {
+                    key: group.core,
+                    label: group.coreLabel,
+                    options: group.cores.map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
+                    hint: game.guess[group.core] ? getLoaderDisplayName(game.guess[group.core]) : null,
+                  },
+                  {
+                    key: group.version,
+                    label: group.versionLabel,
+                    search: true,
+                    options: [
+                      ...(profile[group.version] && !gameVersions.includes(profile[group.version])
+                        ? [{ value: profile[group.version], label: profile[group.version] }]
+                        : []),
+                      ...gameVersions.map((version) => ({ value: version, label: version })),
+                    ],
+                    hint: game.guess[group.version] || null,
+                  },
+                ].map((field) => (
+                  <GamePicker
+                    key={field.key}
+                    label={field.label}
+                    value={profile[field.key]}
+                    disabled={Boolean(busy)}
+                    searchPlaceholder={field.search ? t('set.versionSearch') : undefined}
+                    emptyText={t('set.versionNotFound')}
+                    options={[{ value: '', label: t('set.auto'), hint: field.hint }, ...field.options]}
+                    onChange={(next) =>
+                      save(
+                        field.key,
+                        { [PROFILE_PAYLOAD[field.key]]: next },
+                        () => setProfile((current) => ({ ...current, [field.key]: next })),
+                        () => setProfile((current) => ({ ...current, [field.key]: profile[field.key] })),
+                      )
+                    }
+                  />
                 ))}
-              </select>
-            </label>
-          </div>
-          <p className="mt-2 text-[11px] text-gray-600 dark:text-gray-500">
-            {game.guess ? t('set.guessed', { value: game.guess }) : t('set.notGuessed')}
-          </p>
+              </div>
+            </div>
+          ))}
+          {Object.values(game.guess).some(Boolean) || Object.values(profile).some(Boolean) ? null : (
+            <p className="mt-3 text-[11px] text-gray-600 dark:text-gray-500">{t('set.notGuessed')}</p>
+          )}
         </div>
       </Section>
 
@@ -237,6 +253,24 @@ export default function AccountSettings({
                 () => setRecordHistory(!recordHistory),
                 () => setRecordHistory(recordHistory),
               )
+            }
+          />
+        </Setting>
+      </Section>
+
+      <Section title={t('set.siteTitle')}>
+        <Setting title={t('set.newsBadge')} hint={t('set.newsBadgeHint')}>
+          <Switch
+            checked={newsBadge}
+            label={t('set.newsBadge')}
+            disabled={Boolean(busy)}
+            onChange={() =>
+              save(
+                'news',
+                { newsBadge: !newsBadge },
+                () => setNewsBadge(!newsBadge),
+                () => setNewsBadge(newsBadge),
+              ).then(() => window.dispatchEvent(new Event(NEWS_BADGE_EVENT)))
             }
           />
         </Setting>

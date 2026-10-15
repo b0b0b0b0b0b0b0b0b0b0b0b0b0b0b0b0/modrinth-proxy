@@ -343,14 +343,24 @@ export default async function AccountPage({ searchParams }) {
             telegram={{ botId: telegramBot, linked: Boolean(user.telegram_id), notify: Boolean(user.telegram_notify) }}
             trackDownloads={trackDownloads}
             recordHistory={Boolean(user.record_history)}
+            newsBadge={!user.hide_news_badge}
             mutedCount={mutes.size}
             counts={{ favorites: favorites.length, downloads: downloads.all }}
             game={(() => {
               const profile = getGameProfile(user.id)
               return {
-                loader: profile.chosenLoader || '',
-                gameVersion: profile.chosenVersion || '',
-                guess: [profile.guess.loader, profile.guess.gameVersion].filter(Boolean).join(' '),
+                chosen: {
+                  loader: profile.chosen.loader || '',
+                  gameVersion: profile.chosen.gameVersion || '',
+                  serverCore: profile.chosen.serverCore || '',
+                  serverVersion: profile.chosen.serverVersion || '',
+                },
+                guess: {
+                  loader: profile.guess.loader || '',
+                  gameVersion: profile.guess.gameVersion || '',
+                  serverCore: profile.guess.serverCore || '',
+                  serverVersion: profile.guess.serverVersion || '',
+                },
               }
             })()}
             deletion={{

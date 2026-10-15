@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import { NEWS_BADGE_EVENT } from './NewsCounter'
 
 export const ACCOUNT_UPDATES_KEY = 'account-updates'
 const CACHE_MS = 10 * 60 * 1000
@@ -27,6 +28,7 @@ export default function AccountUpdatesDot() {
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => {
         if (!alive || !data) return
+        window.dispatchEvent(new Event(NEWS_BADGE_EVENT))
         setCount(data.count)
         try {
           sessionStorage.setItem(ACCOUNT_UPDATES_KEY, JSON.stringify({ at: Date.now(), count: data.count }))

@@ -1,4 +1,5 @@
-import { getSessionUser, isSameOrigin } from '@/lib/auth'
+import { cookies } from 'next/headers'
+import { getSessionUser, isSameOrigin, setNewsBadgeCookie } from '@/lib/auth'
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 
 export const dynamic = 'force-dynamic'
@@ -6,6 +7,9 @@ export const dynamic = 'force-dynamic'
 export async function GET() {
   const user = getSessionUser()
   if (!user) return Response.json({ count: 0 })
+  if (Boolean(user.hide_news_badge) !== (cookies().get('mp_news_off')?.value === '1')) {
+    setNewsBadgeCookie(!user.hide_news_badge)
+  }
   const updates = await getUpdates(user.id)
   return Response.json({ count: updates.length })
 }

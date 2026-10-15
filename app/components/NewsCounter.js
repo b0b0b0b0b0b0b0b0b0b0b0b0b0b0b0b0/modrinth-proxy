@@ -4,8 +4,22 @@ import { useState, useEffect } from 'react'
 import { SITE_VERSION } from '@/lib/siteVersion'
 import { NEWS_LAST_SHA_KEY, NEWS_SITE_VERSION_KEY, NEWS_UNREAD_KEY } from '@/lib/newsUnread'
 
+export const NEWS_BADGE_EVENT = 'newsBadgeChange'
+
+function badgeHidden() {
+  return document.cookie.includes('mp_signed=1') && document.cookie.includes('mp_news_off=1')
+}
+
 export default function NewsCounter() {
   const [unreadCount, setUnreadCount] = useState(0)
+  const [hidden, setHidden] = useState(true)
+
+  useEffect(() => {
+    const sync = () => setHidden(badgeHidden())
+    sync()
+    window.addEventListener(NEWS_BADGE_EVENT, sync)
+    return () => window.removeEventListener(NEWS_BADGE_EVENT, sync)
+  }, [])
 
   useEffect(() => {
     const storedUnread = Number.parseInt(localStorage.getItem(NEWS_UNREAD_KEY) || '0', 10)
@@ -45,10 +59,10 @@ export default function NewsCounter() {
     return () => window.removeEventListener('commitsRead', clearUnread)
   }, [])
 
-  if (unreadCount === 0) return null
+  if (unreadCount === 0 || hidden) return null
 
   return (
-    <span className="absolute -top-2 -right-3 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[9px] font-bold text-white bg-red-500 rounded-full animate-pulse shadow-lg z-20">
+    <span className="absolute -right-3 -top-2 z-20 flex h-[18px] min-w-[18px] animate-pulse items-center justify-center rounded-full bg-modrinth-green px-1 text-[9px] font-bold text-black shadow-lg">
       {unreadCount > 9 ? '9+' : `+${unreadCount}`}
     </span>
   )
