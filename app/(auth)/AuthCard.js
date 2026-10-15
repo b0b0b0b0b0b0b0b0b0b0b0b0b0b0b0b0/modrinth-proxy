@@ -9,6 +9,7 @@ import StyledTooltip from '../components/StyledTooltip'
 import { safeNext } from '@/lib/safeNext'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import { useCaptcha } from './useCaptcha'
+import GuardKitten from './GuardKitten'
 
 const ERROR_KEYS = {
   invalid: 'account.errInvalid',
@@ -94,6 +95,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
   const [username, setUsername] = useState(claim?.name || '')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
+  const [focused, setFocused] = useState(null)
   const [error, setError] = useState(() => ({ text: initialError ? t(initialError) : '', id: 0 }))
   const [busy, setBusy] = useState(false)
   const [done, setDone] = useState(false)
@@ -275,12 +277,17 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                 exit={reduceMotion ? undefined : { opacity: 0, x: isRegister ? -24 : 24 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }}
               >
-                <h1 className="text-xl font-bold text-white">
-                  {t(isRegister ? 'account.registerTitle' : 'account.loginTitle')}
-                </h1>
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">
-                  {t(isRegister ? 'account.registerLead' : 'account.loginLead')}
-                </p>
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <h1 className="text-xl font-bold text-white">
+                      {t(isRegister ? 'account.registerTitle' : 'account.loginTitle')}
+                    </h1>
+                    <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">
+                      {t(isRegister ? 'account.registerLead' : 'account.loginLead')}
+                    </p>
+                  </div>
+                  <GuardKitten field={focused} reveal={showPassword} typed={username.length} />
+                </div>
 
                 <motion.div
                   {...rise(0.05)}
@@ -367,6 +374,8 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         name="username"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
+                        onFocus={() => setFocused('username')}
+                        onBlur={() => setFocused((current) => (current === 'username' ? null : current))}
                         placeholder={t('account.usernamePlaceholder')}
                         autoComplete="username"
                         autoCapitalize="none"
@@ -390,6 +399,11 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         name="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
+                        onFocus={() => setFocused('password')}
+                        onBlur={(event) => {
+                          if (event.relatedTarget?.hasAttribute?.('data-password-toggle')) return
+                          setFocused((current) => (current === 'password' ? null : current))
+                        }}
                         placeholder={t(isRegister ? 'account.newPasswordPlaceholder' : 'account.passwordPlaceholder')}
                         autoComplete={isRegister ? 'new-password' : 'current-password'}
                         maxLength={128}
@@ -398,7 +412,11 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                       />
                       <button
                         type="button"
+                        data-password-toggle
                         onClick={() => setShowPassword((value) => !value)}
+                        onBlur={(event) => {
+                          if (event.relatedTarget?.name !== 'password') setFocused(null)
+                        }}
                         aria-label={t(showPassword ? 'account.hidePassword' : 'account.showPassword')}
                         aria-pressed={showPassword}
                         className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-600 dark:text-gray-500 transition-colors hover:text-white"

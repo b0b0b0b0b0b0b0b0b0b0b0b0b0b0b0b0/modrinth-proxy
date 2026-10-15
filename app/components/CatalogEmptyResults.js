@@ -1,4 +1,5 @@
 import { catalogBlockedCopy } from '@/lib/i18n/catalogListing'
+import LostKitten from './LostKitten'
 
 export default function CatalogEmptyResults({
   data,
@@ -32,5 +33,5 @@ export default function CatalogEmptyResults({
 
   if (hideEmptyMessage) return null
 
-  return <p className="text-xl text-gray-400">{emptyTitle}</p>
+  return <LostKitten text={emptyTitle} />
 }

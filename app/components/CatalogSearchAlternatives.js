@@ -3,6 +3,7 @@ import { buildCatalogSearchUrl } from '@/lib/catalogCrossSearch'
 import { intlLocale } from '@/lib/i18n/config'
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
+import LostKitten from './LostKitten'
 
 const CATALOG_ROW_STYLE = {
   mods: 'bg-modrinth-green/15 text-modrinth-green border-modrinth-green/30 hover:bg-modrinth-green/25',
@@ -36,11 +37,14 @@ export default function CatalogSearchAlternatives({
 
   return (
     <article className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 md:p-6">
-      <p className="text-lg md:text-xl text-gray-400 mb-5">
-        {t('catalog.searchAlt.intro')}
-        <br />
-        {t('catalog.searchAlt.found')}
-      </p>
+      <div className="mb-5 flex items-start justify-between gap-4">
+        <p className="text-lg md:text-xl text-gray-400">
+          {t('catalog.searchAlt.intro')}
+          <br />
+          {t('catalog.searchAlt.found')}
+        </p>
+        <LostKitten found className="mr-2 mt-1" />
+      </div>
       <ul className="space-y-3">
         {alternatives.map((alt) => {
           const pillStyle =

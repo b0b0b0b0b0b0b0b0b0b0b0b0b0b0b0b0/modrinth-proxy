@@ -9,6 +9,7 @@ import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import Footer from './components/Footer'
+import PeekKitten from './components/PeekKitten'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
@@ -170,6 +171,7 @@ export default async function RootLayout({ children }) {
           <Suspense fallback={null}>
             <MobileNav />
           </Suspense>
+          <PeekKitten />
           <Footer />
           <ExtensionBanner />
           <CookieNotice />

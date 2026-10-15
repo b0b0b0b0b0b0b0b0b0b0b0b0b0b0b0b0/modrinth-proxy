@@ -43,7 +43,24 @@ function Eyes({ mood, look }) {
   )
 }
 
-export function KittenFace({ earTransition, mood = 'look', look = { x: 0, y: 0 }, className = 'h-24 w-24' }) {
+function Paw({ cx, shift = 0, lift, delay }) {
+  return (
+    <motion.g
+      initial={{ y: 12, opacity: 0 }}
+      animate={{ x: shift, y: lift, opacity: 1 }}
+      exit={{ y: 12, opacity: 0 }}
+      transition={{ type: 'spring', stiffness: 420, damping: 24, delay }}
+    >
+      <ellipse cx={cx} cy="10.6" rx="2.7" ry="2.3" stroke="none" fill="currentColor" />
+      <ellipse cx={cx} cy="11.2" rx="1" ry="0.75" stroke="none" fill="white" fillOpacity="0.45" />
+      {[-1.2, 0, 1.2].map((dx) => (
+        <circle key={dx} cx={cx + dx} cy={dx ? 9.3 : 9} r="0.42" stroke="none" fill="white" fillOpacity="0.45" />
+      ))}
+    </motion.g>
+  )
+}
+
+export function KittenFace({ earTransition, mood = 'look', look = { x: 0, y: 0 }, paws = null, className = 'h-24 w-24' }) {
   return (
     <svg
       className={`${className} overflow-visible text-modrinth-green`}
@@ -61,6 +78,10 @@ export function KittenFace({ earTransition, mood = 'look', look = { x: 0, y: 0 }
       <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className="fill-modrinth-green/35" />
       <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className="fill-modrinth-green/35" />
       <Eyes mood={mood} look={look} />
+      <AnimatePresence>
+        {paws ? <Paw key="left" cx={9.2} shift={paws === 'peek' ? -1.6 : 0} lift={paws === 'peek' ? 2.2 : 0} delay={0} /> : null}
+        {paws ? <Paw key="right" cx={14.8} lift={0} delay={0.05} /> : null}
+      </AnimatePresence>
       <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round" />
       <path d="M12 13.3q-.4 1.4-1.6 1.1M12 13.3q.4 1.4 1.6 1.1" />
       <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1" />
