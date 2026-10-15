@@ -1,3 +1,4 @@
+import RestrictedNotice from '@/app/components/RestrictedNotice'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAuthorInfo } from '@/lib/author'
@@ -40,10 +41,12 @@ export default async function CollectionPage({ params, searchParams }) {
   const ownerRaw = collection.user ? await getAuthorInfo(collection.user) : null
   if (ownerRaw && (isUserBlocked(ownerRaw.id) || isUserBlocked(ownerRaw.username))) {
     return (
-      <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
-        <p className="text-gray-400">{t('restricted.collection')}</p>
-      </div>
+      <RestrictedNotice
+        title={t('restricted.title')}
+        kid={t('restricted.kid')}
+        details={[t('restricted.collection')]}
+        backLabel={t('notfound.home')}
+      />
     )
   }
   const owner = filterUserPublic(ownerRaw)

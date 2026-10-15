@@ -1,3 +1,4 @@
+import RestrictedNotice from '@/app/components/RestrictedNotice'
 import { notFound, redirect } from 'next/navigation'
 import { getAuthorInfo, getAuthorProjects, formatAuthorStats, getProjectTypeDisplayName } from '@/lib/author'
 import { getUserCollections } from '@/lib/collections'
@@ -57,10 +58,12 @@ export default async function AuthorPage({ params, searchParams }) {
 
   if (isUserBlocked(userId)) {
     return (
-      <div className="text-center py-16 max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold text-red-500 mb-4">{t('restricted.title')}</h1>
-        <p className="text-gray-400">{t('restricted.user')}</p>
-      </div>
+      <RestrictedNotice
+        title={t('restricted.title')}
+        kid={t('restricted.kid')}
+        details={[t('restricted.user')]}
+        backLabel={t('notfound.home')}
+      />
     )
   }
 

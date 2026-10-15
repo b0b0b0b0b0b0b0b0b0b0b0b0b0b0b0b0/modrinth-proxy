@@ -12,11 +12,11 @@ const EARS = [
 
 const random = (min, max) => min + Math.random() * (max - min)
 
-function Ear({ ear, transition }) {
+function Ear({ ear, transition, down }) {
   return (
     <motion.g
       style={{ transformOrigin: ear.origin }}
-      animate={transition ? { rotate: [0, ear.side * -4, ear.side * 16, ear.side * -5, 0] } : undefined}
+      animate={transition ? { rotate: [0, ear.side * -4, ear.side * 16, ear.side * -5, 0] } : { rotate: down ? ear.side * 24 : 0 }}
       transition={transition}
     >
       <path d={ear.outer} strokeLinejoin="round" className="fill-modrinth-green/10" />
@@ -60,7 +60,7 @@ function Paw({ cx, shift = 0, lift, delay }) {
   )
 }
 
-export function KittenFace({ earTransition, mood = 'look', look = { x: 0, y: 0 }, paws = null, className = 'h-24 w-24' }) {
+export function KittenFace({ earTransition, earsDown = false, mood = 'look', look = { x: 0, y: 0 }, paws = null, className = 'h-24 w-24' }) {
   return (
     <svg
       className={`${className} overflow-visible text-modrinth-green`}
@@ -72,7 +72,7 @@ export function KittenFace({ earTransition, mood = 'look', look = { x: 0, y: 0 }
       aria-hidden
     >
       {EARS.map((ear) => (
-        <Ear key={ear.side} ear={ear} transition={earTransition} />
+        <Ear key={ear.side} ear={ear} transition={earTransition} down={earsDown} />
       ))}
       <circle cx="12" cy="12" r="9" className="fill-modrinth-green/10" />
       <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className="fill-modrinth-green/35" />
