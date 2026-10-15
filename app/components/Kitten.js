@@ -29,6 +29,17 @@ function Eyes({ mood, look }) {
   if (mood === 'happy') return <path d="M7.9 10.6q1.3-1.8 2.6 0M13.5 10.6q1.3-1.8 2.6 0" />
   if (mood === 'blink') return <path d="M8 10.2h2.4M13.6 10.2h2.4" />
   if (mood === 'sleep') return <path d="M7.9 9.9q1.3 1.4 2.6 0M13.5 9.9q1.3 1.4 2.6 0" />
+  if (mood === 'wink') {
+    return (
+      <>
+        <path d="M13.5 10.6q1.3-1.8 2.6 0" />
+        <g stroke="none">
+          <circle cx={9.2 + look.x * 0.7} cy={10 + look.y * 0.6} r="1.35" fill="currentColor" />
+          <circle cx={8.75 + look.x * 0.7} cy={9.55 + look.y * 0.6} r="0.42" fill="white" />
+        </g>
+      </>
+    )
+  }
   const dx = look.x * 0.7
   const dy = look.y * 0.6
   return (
