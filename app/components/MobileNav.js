@@ -166,7 +166,7 @@ export default function MobileNav({ onFilterClick }) {
     pathname.startsWith('/discover/datapacks') ||
     pathname.startsWith('/discover/modpacks')
 
-  const showSettingsNavButton = pathname === '/settings'
+  const showSettingsNavButton = pathname === '/settings' || pathname === '/account'
 
   const handleFilterClick = () => {
     if (typeof window !== 'undefined') {
@@ -176,7 +176,7 @@ export default function MobileNav({ onFilterClick }) {
 
   const handleSettingsNavClick = () => {
     if (typeof window !== 'undefined') {
-      window.dispatchEvent(new CustomEvent('toggleSettingsNav'))
+      window.dispatchEvent(new CustomEvent(pathname === '/account' ? 'toggleAccountNav' : 'toggleSettingsNav'))
     }
   }
 

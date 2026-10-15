@@ -538,7 +538,14 @@
     "connNotLinked": "Niepodłączony",
     "connLink": "Podłącz",
     "connUnlink": "Odłącz",
-    "connLast": "To jedyny sposób logowania. Najpierw podłącz inny, inaczej stracisz dostęp do konta."
+    "connLast": "To jedyny sposób logowania. Najpierw podłącz inny, inaczej stracisz dostęp do konta.",
+    "changePassword": "Zmień hasło",
+    "setPassword": "Ustaw hasło",
+    "currentPassword": "Obecne hasło",
+    "newPassword": "Nowe hasło",
+    "passwordSaved": "Hasło zapisane. Na innych urządzeniach trzeba będzie zalogować się ponownie.",
+    "errCurrentPassword": "Obecne hasło jest nieprawidłowe.",
+    "clearFavoritesHint": "Chcesz zacząć listę od nowa? Najpierw możesz ją zapisać przyciskiem „Udostępnij listę”."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",
@@ -552,6 +559,9 @@
     "digestMore": "…i jeszcze {n}",
     "digestOpen": "Otwórz konto",
     "digestOff": "Wyłącz powiadomienia",
-    "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję."
+    "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję.",
+    "muteProject": "Nie powiadamiaj o nowych wersjach",
+    "unmuteProject": "Znowu powiadamiaj o nowych wersjach",
+    "muteHint": "Dzwonek przy wierszu wyłącza powiadomienia w Telegramie o nowych wersjach tego projektu. W zakładce „Aktualizacje” nadal będą widoczne."
   }
 }

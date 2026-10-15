@@ -4,20 +4,40 @@ import Image from 'next/image'
 import { getSessionUser } from '@/lib/auth'
 import { githubAuthEnabled } from '@/lib/githubAuth'
 import { telegramBotId } from '@/lib/telegramAuth'
-import { buildFavoritesCode, getDownloadsPage, getFavorites, getUpdates, HISTORY_RETENTION_DAYS } from '@/lib/account'
+import {
+  buildFavoritesCode,
+  getDownloadsPage,
+  getFavorites,
+  getNotifyMutes,
+  getUpdates,
+  HISTORY_RETENTION_DAYS,
+} from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
 import { filterAvatar } from '@/lib/contentFilter'
+import CatalogPagination from '../components/CatalogPagination'
 import RelativeTime from '../components/RelativeTime'
 import { ClearFavoritesButton, RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
+import AccountMobileMenu from './AccountMobileMenu'
 import LogoutButton from './LogoutButton'
+import NotifyMuteButton from './NotifyMuteButton'
 import SignInMethods from './SignInMethods'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
+import PageFade from './PageFade'
 
 export const dynamic = 'force-dynamic'
 
 const TABS = ['updates', 'favorites', 'downloads', 'signin']
+const PAGE_SIZE = 20
+const TAB_ICONS = {
+  updates: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0',
+  favorites:
+    'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z',
+  downloads: 'M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v5h5',
+  signin:
+    'M15 7a2 2 0 0 1 2 2m4 0a6 6 0 0 1-7.743 5.743L11 17H9v2H7v2H4a1 1 0 0 1-1-1v-2.586a1 1 0 0 1 .293-.707l5.964-5.964A6 6 0 1 1 21 9Z',
+}
 const GHOST_BUTTON =
   'shrink-0 rounded-lg border border-gray-800 px-2.5 py-1 text-xs font-semibold text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white disabled:opacity-60'
 const PRIMARY_BUTTON =
@@ -121,22 +141,10 @@ function UpdateRow({ row, t }) {
   )
 }
 
-function Pager({ page, pages, t }) {
-  if (pages <= 1) return null
-  const href = (target) => `/account?tab=downloads&page=${target}`
-  const linkClass = `${GHOST_BUTTON} px-3 py-1.5`
-  const disabledClass = `${linkClass} pointer-events-none opacity-40`
-  return (
-    <nav className="mt-3 flex items-center justify-between gap-3 border-t border-gray-800 pt-3">
-      <Link href={href(page - 1)} aria-disabled={page <= 1} className={page <= 1 ? disabledClass : linkClass}>
-        {t('account.pagePrev')}
-      </Link>
-      <span className="text-xs text-gray-500">{t('account.pageOf', { page, pages })}</span>
-      <Link href={href(page + 1)} aria-disabled={page >= pages} className={page >= pages ? disabledClass : linkClass}>
-        {t('account.pageNext')}
-      </Link>
-    </nav>
-  )
+function paginate(list, requested) {
+  const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE))
+  const page = Math.min(pages, Math.max(1, Number.isInteger(requested) ? requested : 1))
+  return { rows: list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), page, pages }
 }
 
 export default async function AccountPage({ searchParams }) {
@@ -150,54 +158,80 @@ export default async function AccountPage({ searchParams }) {
 
   const updates = await getUpdates(user.id)
   const favorites = getFavorites(user.id)
-  const downloads = getDownloadsPage(user.id, parseInt(searchParams?.page, 10))
+  const requestedPage = parseInt(searchParams?.page, 10)
+  const downloads = getDownloadsPage(user.id, requestedPage)
+  const updatesPage = paginate(updates, requestedPage)
+  const favoritesPage = paginate(favorites, requestedPage)
 
   const requested = searchParams?.tab
   const tab = TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
   const counts = { updates: updates.length, favorites: favorites.length, downloads: downloads.total }
+  const notifyOn = Boolean(telegramBot && user.telegram_id && user.telegram_notify)
+  const mutes = notifyOn && tab === 'downloads' ? getNotifyMutes(user.id) : new Set()
+  const fadeKey = `${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : 1}`
 
   return (
-    <div className="mx-auto max-w-3xl py-8">
+    <div className="mx-auto max-w-7xl pb-8">
+      <AccountMobileMenu
+        items={TABS.map((value) => ({
+          id: value,
+          label: t(`account.${value}`),
+          icon: TAB_ICONS[value],
+          count: value in counts ? counts[value] : null,
+          highlight: value === 'updates' && counts.updates > 0,
+          active: value === tab,
+        }))}
+      />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <UsernameEditor username={user.username} />
         <LogoutButton />
       </div>
 
-      <div className="mt-5 flex gap-1 overflow-x-auto rounded-xl border border-gray-800 bg-modrinth-dark p-1">
-        {TABS.map((value) => {
-          const active = value === tab
-          const highlight = value === 'updates' && counts.updates > 0
-          return (
-            <Link
-              key={value}
-              href={`/account?tab=${value}`}
-              aria-current={active ? 'page' : undefined}
-              className={[
-                'flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold transition-colors',
-                active ? 'bg-modrinth-green text-black' : 'text-gray-400 hover:text-white',
-              ].join(' ')}
-            >
-              {t(`account.${value}`)}
-              {value in counts ? (
-              <span
-                className={[
-                  'rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none',
-                  active
-                    ? 'bg-black/20 text-black'
-                    : highlight
-                      ? 'bg-modrinth-green text-black'
-                      : 'bg-[var(--bg-tertiary)] text-gray-400',
-                ].join(' ')}
-              >
-                {counts[value]}
-              </span>
-              ) : null}
-            </Link>
-          )
-        })}
-      </div>
+      <div className="mt-5 flex flex-col gap-6 lg:flex-row">
+        <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:flex-shrink-0">
+          <div className="sticky top-4 space-y-1 rounded-xl border border-gray-800 bg-modrinth-dark p-4">
+            <h2 className="mb-3 text-sm font-semibold text-gray-300">{t('nav.sections')}</h2>
+            {TABS.map((value) => {
+              const active = value === tab
+              const highlight = value === 'updates' && counts.updates > 0
+              return (
+                <Link
+                  key={value}
+                  href={`/account?tab=${value}`}
+                  aria-current={active ? 'page' : undefined}
+                  className={[
+                    'flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
+                    active
+                      ? 'bg-[rgba(var(--color-green-rgb),0.15)] font-semibold text-modrinth-green'
+                      : 'text-gray-400 hover:bg-gray-800/50 hover:text-white',
+                  ].join(' ')}
+                >
+                  <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                    <path d={TAB_ICONS[value]} />
+                  </svg>
+                  <span className="flex-1">{t(`account.${value}`)}</span>
+                  {value in counts ? (
+                    <span
+                      className={[
+                        'rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none',
+                        active
+                          ? 'bg-modrinth-green/20 text-modrinth-green'
+                          : highlight
+                            ? 'bg-modrinth-green text-black'
+                            : 'bg-[var(--bg-tertiary)] text-gray-400',
+                      ].join(' ')}
+                    >
+                      {counts[value]}
+                    </span>
+                  ) : null}
+                </Link>
+              )
+            })}
+          </div>
+        </nav>
 
-      <section className="mt-3 rounded-2xl border border-gray-800 bg-modrinth-dark p-4 md:p-5">
+      <section className="min-w-0 flex-1 rounded-2xl border border-gray-800 bg-modrinth-dark p-4 md:p-5 lg:self-start">
+        <PageFade key={fadeKey}>
         {tab === 'updates' ? (
           updates.length > 0 ? (
             <>
@@ -205,10 +239,17 @@ export default async function AccountPage({ searchParams }) {
                 <MarkSeenButton label={t('account.markAllSeen')} className={GHOST_BUTTON} />
               </div>
               <ul className="divide-y divide-gray-800">
-                {updates.map((row) => (
+                {updatesPage.rows.map((row) => (
                   <UpdateRow key={`${row.project_id}:${row.variant}`} row={row} t={t} />
                 ))}
               </ul>
+              <CatalogPagination
+                page={updatesPage.page}
+                totalPages={updatesPage.pages}
+                pathname="/account"
+                searchParams={{ tab: 'updates' }}
+                className="mt-4 border-t border-gray-800 pt-4"
+              />
             </>
           ) : (
             <p className="text-sm text-gray-500">{t('account.emptyUpdates')}</p>
@@ -224,7 +265,7 @@ export default async function AccountPage({ searchParams }) {
             {favorites.length > 0 ? (
               <>
                 <ul className="divide-y divide-gray-800">
-                  {favorites.map((row) => (
+                  {favoritesPage.rows.map((row) => (
                     <ProjectRow
                       key={row.project_id}
                       row={row}
@@ -232,7 +273,15 @@ export default async function AccountPage({ searchParams }) {
                     />
                   ))}
                 </ul>
-                <div className="mt-3 flex justify-end border-t border-gray-800 pt-3">
+                <CatalogPagination
+                  page={favoritesPage.page}
+                  totalPages={favoritesPage.pages}
+                  pathname="/account"
+                  searchParams={{ tab: 'favorites' }}
+                  className="mt-4 border-t border-gray-800 pt-4"
+                />
+                <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-gray-800 px-4 py-3">
+                  <p className="text-xs text-gray-500">{t('account.clearFavoritesHint')}</p>
                   <ClearFavoritesButton count={favorites.length} />
                 </div>
               </>
@@ -261,17 +310,39 @@ export default async function AccountPage({ searchParams }) {
             <>
               <ul className="divide-y divide-gray-800">
                 {downloads.rows.map((row) => (
-                  <ProjectRow key={row.id} row={row} meta={row.file_name} />
+                  <ProjectRow
+                    key={row.id}
+                    row={row}
+                    meta={row.file_name}
+                    action={
+                      notifyOn ? (
+                        <NotifyMuteButton
+                          key={`${row.project_id}:${mutes.has(row.project_id)}`}
+                          projectId={row.project_id}
+                          muted={mutes.has(row.project_id)}
+                        />
+                      ) : null
+                    }
+                  />
                 ))}
               </ul>
-              <Pager page={downloads.page} pages={downloads.pages} t={t} />
+              <CatalogPagination
+                page={downloads.page}
+                totalPages={downloads.pages}
+                pathname="/account"
+                searchParams={{ tab: 'downloads' }}
+                className="mt-4 border-t border-gray-800 pt-4"
+              />
               <p className="mt-3 text-[11px] text-gray-500">{t('account.historyNote', { n: HISTORY_RETENTION_DAYS })}</p>
+              {notifyOn ? <p className="mt-1 text-[11px] text-gray-500">{t('tg.muteHint')}</p> : null}
             </>
           ) : (
             <p className="text-sm text-gray-500">{t('account.emptyDownloads')}</p>
           )
         ) : null}
+        </PageFade>
       </section>
+      </div>
     </div>
   )
 }

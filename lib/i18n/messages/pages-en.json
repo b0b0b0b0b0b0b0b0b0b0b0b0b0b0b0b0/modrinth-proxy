@@ -556,7 +556,14 @@
     "connNotLinked": "Not linked",
     "connLink": "Link",
     "connUnlink": "Unlink",
-    "connLast": "This is your only way in. Link another one first, or you’ll lose access to the account."
+    "connLast": "This is your only way in. Link another one first, or you’ll lose access to the account.",
+    "changePassword": "Change password",
+    "setPassword": "Set a password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "passwordSaved": "Password saved. You’ll need to sign in again on other devices.",
+    "errCurrentPassword": "The current password is wrong.",
+    "clearFavoritesHint": "Want to start your list over? You can save it first with “Share list”."
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
@@ -570,6 +577,9 @@
     "digestMore": "…and {n} more",
     "digestOpen": "Open my account",
     "digestOff": "Turn notifications off",
-    "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version."
+    "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version.",
+    "muteProject": "Stop notifying me about new versions",
+    "unmuteProject": "Notify me about new versions again",
+    "muteHint": "The bell next to a row turns off Telegram notifications about new versions of that project. They still show up on the Updates tab."
   }
 }

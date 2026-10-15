@@ -538,7 +538,14 @@
     "connNotLinked": "Nicht verknüpft",
     "connLink": "Verknüpfen",
     "connUnlink": "Trennen",
-    "connLast": "Das ist dein einziger Zugang. Verknüpfe zuerst einen weiteren, sonst verlierst du den Zugriff auf das Konto."
+    "connLast": "Das ist dein einziger Zugang. Verknüpfe zuerst einen weiteren, sonst verlierst du den Zugriff auf das Konto.",
+    "changePassword": "Passwort ändern",
+    "setPassword": "Passwort festlegen",
+    "currentPassword": "Aktuelles Passwort",
+    "newPassword": "Neues Passwort",
+    "passwordSaved": "Passwort gespeichert. Auf anderen Geräten musst du dich neu anmelden.",
+    "errCurrentPassword": "Das aktuelle Passwort stimmt nicht.",
+    "clearFavoritesHint": "Willst du deine Liste neu anfangen? Vorher kannst du sie mit „Liste teilen“ sichern."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
@@ -552,6 +559,9 @@
     "digestMore": "…und {n} weitere",
     "digestOpen": "Konto öffnen",
     "digestOff": "Benachrichtigungen ausschalten",
-    "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt."
+    "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt.",
+    "muteProject": "Keine Benachrichtigungen über neue Versionen",
+    "unmuteProject": "Wieder über neue Versionen benachrichtigen",
+    "muteHint": "Die Glocke neben einer Zeile schaltet Telegram-Benachrichtigungen über neue Versionen dieses Projekts aus. Im Tab „Updates“ bleiben sie trotzdem sichtbar."
   }
 }

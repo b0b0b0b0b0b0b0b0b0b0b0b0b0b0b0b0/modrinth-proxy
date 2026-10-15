@@ -538,7 +538,14 @@
     "connNotLinked": "Nav piesaistīts",
     "connLink": "Piesaistīt",
     "connUnlink": "Atsaistīt",
-    "connLast": "Šis ir vienīgais veids, kā ieiet. Vispirms piesaisti vēl vienu, citādi zaudēsi piekļuvi kontam."
+    "connLast": "Šis ir vienīgais veids, kā ieiet. Vispirms piesaisti vēl vienu, citādi zaudēsi piekļuvi kontam.",
+    "changePassword": "Mainīt paroli",
+    "setPassword": "Iestatīt paroli",
+    "currentPassword": "Pašreizējā parole",
+    "newPassword": "Jaunā parole",
+    "passwordSaved": "Parole saglabāta. Citās ierīcēs būs jāienāk no jauna.",
+    "errCurrentPassword": "Pašreizējā parole nav pareiza.",
+    "clearFavoritesHint": "Gribi sākt sarakstu no jauna? Vispirms vari to saglabāt ar «Dalīties ar sarakstu»."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
@@ -552,6 +559,9 @@
     "digestMore": "…un vēl {n}",
     "digestOpen": "Atvērt kontu",
     "digestOff": "Izslēgt paziņojumus",
-    "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija."
+    "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija.",
+    "muteProject": "Nepaziņot par jaunām versijām",
+    "unmuteProject": "Atkal paziņot par jaunām versijām",
+    "muteHint": "Zvaniņš pie rindas izslēdz Telegram paziņojumus par šī projekta jaunajām versijām. Cilnē «Atjauninājumi» tās joprojām būs redzamas."
   }
 }

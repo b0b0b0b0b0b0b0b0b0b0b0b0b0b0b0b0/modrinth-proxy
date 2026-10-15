@@ -538,7 +538,14 @@
     "connNotLinked": "未绑定",
     "connLink": "绑定",
     "connUnlink": "解绑",
-    "connLast": "这是你唯一的登录方式。请先绑定另一种，否则将无法进入账号。"
+    "connLast": "这是你唯一的登录方式。请先绑定另一种，否则将无法进入账号。",
+    "changePassword": "修改密码",
+    "setPassword": "设置密码",
+    "currentPassword": "当前密码",
+    "newPassword": "新密码",
+    "passwordSaved": "密码已保存。在其他设备上需要重新登录。",
+    "errCurrentPassword": "当前密码不正确。",
+    "clearFavoritesHint": "想重新整理列表？可以先用“分享列表”保存一份。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
@@ -552,6 +559,9 @@
     "digestMore": "……还有 {n} 项",
     "digestOpen": "打开我的账号",
     "digestOff": "关闭通知",
-    "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。"
+    "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。",
+    "muteProject": "不再通知此项目的新版本",
+    "unmuteProject": "重新通知此项目的新版本",
+    "muteHint": "点每行旁边的铃铛，可以关闭该项目新版本的 Telegram 通知。“更新”标签页里仍会显示。"
   }
 }

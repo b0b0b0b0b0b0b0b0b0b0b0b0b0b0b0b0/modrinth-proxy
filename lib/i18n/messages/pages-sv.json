@@ -538,7 +538,14 @@
     "connNotLinked": "Inte kopplat",
     "connLink": "Koppla",
     "connUnlink": "Koppla från",
-    "connLast": "Det här är ditt enda sätt att logga in. Koppla ett till först, annars förlorar du åtkomsten till kontot."
+    "connLast": "Det här är ditt enda sätt att logga in. Koppla ett till först, annars förlorar du åtkomsten till kontot.",
+    "changePassword": "Byt lösenord",
+    "setPassword": "Ange ett lösenord",
+    "currentPassword": "Nuvarande lösenord",
+    "newPassword": "Nytt lösenord",
+    "passwordSaved": "Lösenordet är sparat. På andra enheter behöver du logga in igen.",
+    "errCurrentPassword": "Det nuvarande lösenordet stämmer inte.",
+    "clearFavoritesHint": "Vill du börja om listan? Du kan spara den först med ”Dela listan”."
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
@@ -552,6 +559,9 @@
     "digestMore": "…och {n} till",
     "digestOpen": "Öppna mitt konto",
     "digestOff": "Stäng av aviseringar",
-    "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version."
+    "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version.",
+    "muteProject": "Avisera inte om nya versioner",
+    "unmuteProject": "Avisera om nya versioner igen",
+    "muteHint": "Klockan bredvid en rad stänger av Telegram-aviseringar om nya versioner av det projektet. På fliken ”Uppdateringar” syns de fortfarande."
   }
 }

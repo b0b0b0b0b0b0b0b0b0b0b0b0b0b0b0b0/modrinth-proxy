@@ -538,7 +538,14 @@
     "connNotLinked": "Non lié",
     "connLink": "Lier",
     "connUnlink": "Délier",
-    "connLast": "C’est ton seul moyen d’accès. Lies-en un autre d’abord, sinon tu perdras l’accès au compte."
+    "connLast": "C’est ton seul moyen d’accès. Lies-en un autre d’abord, sinon tu perdras l’accès au compte.",
+    "changePassword": "Changer le mot de passe",
+    "setPassword": "Définir un mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "passwordSaved": "Mot de passe enregistré. Il faudra te reconnecter sur tes autres appareils.",
+    "errCurrentPassword": "Le mot de passe actuel est incorrect.",
+    "clearFavoritesHint": "Tu veux repartir de zéro ? Tu peux d’abord sauvegarder ta liste avec « Partager la liste »."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
@@ -552,6 +559,9 @@
     "digestMore": "…et {n} de plus",
     "digestOpen": "Ouvrir mon compte",
     "digestOff": "Désactiver les notifications",
-    "notifyNeedLink": "Pour recevoir les notifications, lie Telegram. Le bot enverra un récapitulatif quand un téléchargement ou un favori reçoit une nouvelle version."
+    "notifyNeedLink": "Pour recevoir les notifications, lie Telegram. Le bot enverra un récapitulatif quand un téléchargement ou un favori reçoit une nouvelle version.",
+    "muteProject": "Ne plus me prévenir des nouvelles versions",
+    "unmuteProject": "Me prévenir à nouveau des nouvelles versions",
+    "muteHint": "La cloche à côté d’une ligne coupe les notifications Telegram sur les nouvelles versions de ce projet. Elles restent visibles dans l’onglet « Mises à jour »."
   }
 }

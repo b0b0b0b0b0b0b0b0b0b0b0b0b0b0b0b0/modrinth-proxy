@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
+import StyledTooltip from '../components/StyledTooltip'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 
 const ICONS = {
@@ -46,6 +47,158 @@ function Row({ icon, title, status, active, children }) {
       </div>
       {children}
     </li>
+  )
+}
+
+const PASSWORD_ERRORS = {
+  current: 'account.errCurrentPassword',
+  password: 'account.errPassword',
+  rate_limit: 'account.errRate',
+}
+const PASSWORD_INPUT =
+  'w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none transition-colors placeholder:text-gray-600 focus:border-modrinth-green'
+const SMALL_BUTTON =
+  'inline-flex shrink-0 items-center justify-center rounded-lg border px-3 py-1.5 text-xs font-semibold leading-none transition-colors disabled:opacity-50'
+
+function PasswordRow({ hasPassword, onSaved }) {
+  const t = useT()
+  const [editing, setEditing] = useState(false)
+  const [current, setCurrent] = useState('')
+  const [next, setNext] = useState('')
+  const [visible, setVisible] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [message, setMessage] = useState({ text: '', ok: false })
+  const label = t(hasPassword ? 'account.changePassword' : 'account.setPassword')
+
+  const close = () => {
+    setEditing(false)
+    setCurrent('')
+    setNext('')
+    setVisible(false)
+  }
+
+  const open = () => {
+    setMessage({ text: '', ok: false })
+    setEditing(true)
+  }
+
+  const save = async (event) => {
+    event.preventDefault()
+    if (busy) return
+    if (next.length < 8 || next.length > 128) {
+      setMessage({ text: t('account.errPassword'), ok: false })
+      return
+    }
+    setBusy(true)
+    setMessage({ text: '', ok: false })
+    try {
+      const response = await fetch('/api/account/password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ current, next }),
+      })
+      if (response.ok) {
+        close()
+        setMessage({ text: t('account.passwordSaved'), ok: true })
+        onSaved()
+        return
+      }
+      const data = await response.json().catch(() => null)
+      const key = Object.hasOwn(PASSWORD_ERRORS, data?.error) ? PASSWORD_ERRORS[data.error] : 'account.errGeneric'
+      setMessage({ text: t(key), ok: false })
+    } catch {
+      setMessage({ text: t('account.errGeneric'), ok: false })
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  return (
+    <>
+      <Row
+        icon={ICONS.password}
+        title={t('account.password')}
+        status={t(hasPassword ? 'account.connPasswordSet' : 'account.connPasswordNone')}
+        active={hasPassword}
+      >
+        {!editing ? (
+          <StyledTooltip label={label}>
+            <button
+              type="button"
+              onClick={open}
+              aria-label={label}
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gray-800 text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white"
+            >
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                <path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+              </svg>
+            </button>
+          </StyledTooltip>
+        ) : null}
+      </Row>
+      {editing ? (
+        <li className="pb-3">
+          <form
+            onSubmit={save}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') close()
+            }}
+            className="space-y-2 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3"
+          >
+            <input type="text" name="username" autoComplete="username" hidden readOnly value="" />
+            {hasPassword ? (
+              <input
+                type={visible ? 'text' : 'password'}
+                value={current}
+                onChange={(event) => setCurrent(event.target.value)}
+                placeholder={t('account.currentPassword')}
+                aria-label={t('account.currentPassword')}
+                autoComplete="current-password"
+                autoFocus
+                maxLength={256}
+                required
+                className={PASSWORD_INPUT}
+              />
+            ) : null}
+            <input
+              type={visible ? 'text' : 'password'}
+              value={next}
+              onChange={(event) => setNext(event.target.value)}
+              placeholder={t('account.newPassword')}
+              aria-label={t('account.newPassword')}
+              autoComplete="new-password"
+              autoFocus={!hasPassword}
+              maxLength={128}
+              required
+              className={PASSWORD_INPUT}
+            />
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <label className="flex cursor-pointer items-center gap-2 text-xs text-gray-400">
+                <input type="checkbox" checked={visible} onChange={(event) => setVisible(event.target.checked)} />
+                {t('account.showPassword')}
+              </label>
+              <div className="flex gap-2">
+                <button type="button" onClick={close} className={`${SMALL_BUTTON} border-gray-700 text-gray-300 hover:text-white`}>
+                  {t('account.cancelUsername')}
+                </button>
+                <button
+                  type="submit"
+                  disabled={busy || !next || (hasPassword && !current)}
+                  className={`${SMALL_BUTTON} border-transparent bg-modrinth-green font-bold text-black hover:opacity-90`}
+                >
+                  {t('account.saveUsername')}
+                </button>
+              </div>
+            </div>
+            <p className={`text-[11px] ${message.text && !message.ok ? 'text-amber-400' : 'text-gray-500'}`} role={message.text ? 'alert' : undefined}>
+              {message.text && !message.ok ? message.text : t('account.passwordHint')}
+            </p>
+          </form>
+        </li>
+      ) : message.ok ? (
+        <li className="pb-3 text-xs text-modrinth-green">{message.text}</li>
+      ) : null}
+    </>
   )
 }
 
@@ -120,12 +273,7 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
     <div>
       <p className="text-sm text-gray-400">{t('account.connLead')}</p>
       <ul className="mt-2 divide-y divide-gray-800">
-        <Row
-          icon={ICONS.password}
-          title={t('account.password')}
-          status={t(hasPassword ? 'account.connPasswordSet' : 'account.connPasswordNone')}
-          active={hasPassword}
-        />
+        <PasswordRow hasPassword={hasPassword} onSaved={() => router.refresh()} />
         {providers.map((provider) => {
           const onlyWay = provider.linked && !hasPassword && linkedCount === 1
           return (

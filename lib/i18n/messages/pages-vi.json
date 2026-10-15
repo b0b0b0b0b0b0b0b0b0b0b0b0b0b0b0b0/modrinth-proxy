@@ -538,7 +538,14 @@
     "connNotLinked": "Chưa liên kết",
     "connLink": "Liên kết",
     "connUnlink": "Hủy liên kết",
-    "connLast": "Đây là cách đăng nhập duy nhất của bạn. Hãy liên kết thêm một cách khác trước, nếu không bạn sẽ mất quyền vào tài khoản."
+    "connLast": "Đây là cách đăng nhập duy nhất của bạn. Hãy liên kết thêm một cách khác trước, nếu không bạn sẽ mất quyền vào tài khoản.",
+    "changePassword": "Đổi mật khẩu",
+    "setPassword": "Đặt mật khẩu",
+    "currentPassword": "Mật khẩu hiện tại",
+    "newPassword": "Mật khẩu mới",
+    "passwordSaved": "Đã lưu mật khẩu. Trên các thiết bị khác bạn sẽ phải đăng nhập lại.",
+    "errCurrentPassword": "Mật khẩu hiện tại không đúng.",
+    "clearFavoritesHint": "Muốn làm lại danh sách từ đầu? Trước đó bạn có thể lưu nó bằng nút “Chia sẻ danh sách”."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",
@@ -552,6 +559,9 @@
     "digestMore": "…và {n} mục nữa",
     "digestOpen": "Mở tài khoản",
     "digestOff": "Tắt thông báo",
-    "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới."
+    "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới.",
+    "muteProject": "Không báo cho tôi về phiên bản mới",
+    "unmuteProject": "Báo lại cho tôi về phiên bản mới",
+    "muteHint": "Biểu tượng chuông cạnh mỗi dòng tắt thông báo Telegram về phiên bản mới của dự án đó. Ở thẻ “Cập nhật” chúng vẫn hiển thị."
   }
 }

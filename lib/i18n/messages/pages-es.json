@@ -538,7 +538,14 @@
     "connNotLinked": "No vinculado",
     "connLink": "Vincular",
     "connUnlink": "Desvincular",
-    "connLast": "Es tu única forma de entrar. Vincula otra primero o perderás el acceso a la cuenta."
+    "connLast": "Es tu única forma de entrar. Vincula otra primero o perderás el acceso a la cuenta.",
+    "changePassword": "Cambiar contraseña",
+    "setPassword": "Crear una contraseña",
+    "currentPassword": "Contraseña actual",
+    "newPassword": "Nueva contraseña",
+    "passwordSaved": "Contraseña guardada. En otros dispositivos tendrás que volver a entrar.",
+    "errCurrentPassword": "La contraseña actual no es correcta.",
+    "clearFavoritesHint": "¿Quieres empezar la lista de cero? Antes puedes guardarla con «Compartir lista»."
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
@@ -552,6 +559,9 @@
     "digestMore": "…y {n} más",
     "digestOpen": "Abrir mi cuenta",
     "digestOff": "Desactivar avisos",
-    "notifyNeedLink": "Para recibir avisos, vincula Telegram. El bot enviará un resumen cuando algo descargado o guardado tenga versión nueva."
+    "notifyNeedLink": "Para recibir avisos, vincula Telegram. El bot enviará un resumen cuando algo descargado o guardado tenga versión nueva.",
+    "muteProject": "No avisarme de nuevas versiones",
+    "unmuteProject": "Volver a avisarme de nuevas versiones",
+    "muteHint": "La campana junto a una fila desactiva los avisos de Telegram sobre nuevas versiones de ese proyecto. En la pestaña «Actualizaciones» se seguirán viendo."
   }
 }
