@@ -545,7 +545,11 @@
     "newPassword": "Nowe hasło",
     "passwordSaved": "Hasło zapisane. Na innych urządzeniach trzeba będzie zalogować się ponownie.",
     "errCurrentPassword": "Obecne hasło jest nieprawidłowe.",
-    "clearFavoritesHint": "Chcesz zacząć listę od nowa? Najpierw możesz ją zapisać przyciskiem „Udostępnij listę”."
+    "clearFavoritesHint": "Chcesz zacząć listę od nowa? Najpierw możesz ją zapisać przyciskiem „Udostępnij listę”.",
+    "clearHistory": "Wyczyść historię",
+    "clearHistoryText": "Z historii zniknie wszystko: {n}. Nowe wersje pobranych rzeczy też przestaną być śledzone — śledzenie wróci, gdy coś pobierzesz.",
+    "clearHistoryHint": "Chcesz zacząć historię od nowa?",
+    "settings": "Ustawienia"
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",
@@ -560,8 +564,49 @@
     "digestOpen": "Otwórz konto",
     "digestOff": "Wyłącz powiadomienia",
     "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję.",
-    "muteProject": "Nie powiadamiaj o nowych wersjach",
-    "unmuteProject": "Znowu powiadamiaj o nowych wersjach",
-    "muteHint": "Dzwonek przy wierszu wyłącza powiadomienia w Telegramie o nowych wersjach tego projektu. W zakładce „Aktualizacje” nadal będą widoczne."
+    "muteProject": "Nie śledź nowych wersji tego projektu",
+    "unmuteProject": "Znowu śledź nowe wersje",
+    "muteHint": "Dzwonek przy wierszu wyłącza śledzenie nowych wersji tego projektu: znika z „Aktualizacji” i z Telegrama. Ulubionych to nie dotyczy."
+  },
+  "set": {
+    "trackDownloads": "Śledź nowe wersje pobranych",
+    "trackDownloadsHint": "Jeśli wyłączysz, w zakładce „Aktualizacje” i w Telegramie zostaną tylko ulubione.",
+    "mutedTitle": "Wyciszone dzwonkiem: {n}",
+    "mutedHint": "Projekty, których postanowiłeś nie śledzić w historii pobrań.",
+    "unmuteAll": "Przywróć wszystkie",
+    "recordHistory": "Zapisuj historię pobrań",
+    "recordHistoryHint": "Jeśli wyłączysz, nowe pobrania nie trafią do historii i nie będą śledzone. To, co już zapisane, zostanie — możesz to wyczyścić w zakładce „Historia pobrań”.",
+    "historyOff": "Historia nie jest zapisywana — nowe pobrania tu nie trafiają. Włączysz to w Ustawieniach."
+  },
+  "del": {
+    "title": "Usuwanie konta",
+    "lead": "Konto zostanie usunięte na zawsze razem ze wszystkim, co w nim jest: ulubionymi, historią, ustawieniami i powiadomieniami. Nie da się go przywrócić.",
+    "button": "Usuń konto",
+    "warnTitle": "Usunąć konto {name}?",
+    "warnIntro": "To na zawsze. Oto co zniknie razem z kontem:",
+    "itemAccount": "login i hasło — nie zalogujesz się już na to konto",
+    "itemFavorites": "ulubione: {n}",
+    "itemHistory": "historia pobrań: {n}",
+    "itemUpdates": "śledzenie aktualizacji i powiadomienia w Telegramie",
+    "itemLinks": "podłączone konta: {list}",
+    "warnTip": "Rada: przed usunięciem zapisz ulubione przyciskiem „Udostępnij listę” w zakładce Ulubione. Ten kod można potem wkleić w nowym koncie.",
+    "warnCancel": "Nie usuwaj",
+    "warnNext": "Tak, usuń",
+    "finalTitle": "Ostatnie sprawdzenie",
+    "finalText": "Konto {name} zostanie usunięte całkowicie i na zawsze. Nie cofniesz tego ani ty, ani my. Pomyśl jeszcze chwilę.",
+    "finalWait": "Pole odblokuje się za {s} s.",
+    "finalReady": "Jeśli jesteś pewien — zaznacz pole.",
+    "finalCheck": "Na pewno chcę usunąć swoje konto i rozumiem ryzyko.",
+    "finalDelete": "Usuń na zawsze",
+    "deleting": "Usuwamy konto…",
+    "done": "Konto usunięte. Wracamy na stronę główną…",
+    "error": "Nie udało się usunąć konta. Spróbuj jeszcze raz."
+  },
+  "st": {
+    "metaTitle": "Statystyki | ModrinthProxy",
+    "userOne": "użytkownik",
+    "userFew": "użytkowników",
+    "userMany": "użytkowników",
+    "lead": "zarejestrowanych na ModrinthProxy"
   }
 }

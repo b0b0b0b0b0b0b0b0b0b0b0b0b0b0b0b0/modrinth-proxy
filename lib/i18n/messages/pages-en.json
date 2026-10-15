@@ -563,7 +563,11 @@
     "newPassword": "New password",
     "passwordSaved": "Password saved. You’ll need to sign in again on other devices.",
     "errCurrentPassword": "The current password is wrong.",
-    "clearFavoritesHint": "Want to start your list over? You can save it first with “Share list”."
+    "clearFavoritesHint": "Want to start your list over? You can save it first with “Share list”.",
+    "clearHistory": "Clear history",
+    "clearHistoryText": "Everything in your history will be removed: {n}. New versions of downloaded items will stop being tracked too — tracking starts again when you download something.",
+    "clearHistoryHint": "Want to start your history from scratch?",
+    "settings": "Settings"
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
@@ -578,8 +582,49 @@
     "digestOpen": "Open my account",
     "digestOff": "Turn notifications off",
     "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version.",
-    "muteProject": "Stop notifying me about new versions",
-    "unmuteProject": "Notify me about new versions again",
-    "muteHint": "The bell next to a row turns off Telegram notifications about new versions of that project. They still show up on the Updates tab."
+    "muteProject": "Stop tracking new versions of this project",
+    "unmuteProject": "Track new versions again",
+    "muteHint": "The bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected."
+  },
+  "set": {
+    "trackDownloads": "Track new versions of downloads",
+    "trackDownloadsHint": "If you turn this off, only favorites stay in the Updates tab and in Telegram.",
+    "mutedTitle": "Muted with the bell: {n}",
+    "mutedHint": "Projects you chose not to track in your download history.",
+    "unmuteAll": "Unmute all",
+    "recordHistory": "Keep download history",
+    "recordHistoryHint": "If you turn this off, new downloads won’t be added to your history and won’t be tracked for updates. What’s already there stays — you can clear it on the Download history tab.",
+    "historyOff": "History recording is off — new downloads don’t show up here. You can turn it back on in Settings."
+  },
+  "del": {
+    "title": "Delete account",
+    "lead": "Your account will be deleted forever along with everything in it: favorites, history, settings and notifications. It can’t be restored.",
+    "button": "Delete account",
+    "warnTitle": "Delete the account {name}?",
+    "warnIntro": "This is permanent. Here’s what disappears with the account:",
+    "itemAccount": "your username and password — you won’t be able to sign in to this account again",
+    "itemFavorites": "favorites: {n}",
+    "itemHistory": "download history: {n}",
+    "itemUpdates": "update tracking and Telegram notifications",
+    "itemLinks": "linked accounts: {list}",
+    "warnTip": "Tip: before deleting, save your favorites with “Share list” on the Favorites tab. You can paste that code into a new account later.",
+    "warnCancel": "Keep my account",
+    "warnNext": "Yes, delete",
+    "finalTitle": "Final check",
+    "finalText": "The account {name} will be deleted completely and forever. Neither you nor we can undo it later. Take a moment to think.",
+    "finalWait": "The checkbox unlocks in {s} s.",
+    "finalReady": "If you’re sure, tick the box.",
+    "finalCheck": "I’m sure I want to delete my account and I understand the risks.",
+    "finalDelete": "Delete forever",
+    "deleting": "Deleting the account…",
+    "done": "Account deleted. Taking you to the home page…",
+    "error": "Couldn’t delete the account. Please try again."
+  },
+  "st": {
+    "metaTitle": "Stats | ModrinthProxy",
+    "userOne": "user",
+    "userFew": "users",
+    "userMany": "users",
+    "lead": "registered on ModrinthProxy"
   }
 }

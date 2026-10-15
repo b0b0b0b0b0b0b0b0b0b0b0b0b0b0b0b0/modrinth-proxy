@@ -55,7 +55,39 @@ export function RemoveFavoriteButton({ projectId }) {
   )
 }
 
+async function clearHistory() {
+  const response = await fetch('/api/account/history', {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ all: true }),
+  })
+  if (!response.ok) throw new Error('failed')
+  try {
+    sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
+  } catch {}
+}
+
 export function ClearFavoritesButton({ count }) {
+  return (
+    <ClearListButton
+      count={count}
+      request={() => removeFavorites({ all: true })}
+      labels={{ button: 'account.clearFavorites', text: 'account.clearFavoritesText' }}
+    />
+  )
+}
+
+export function ClearHistoryButton({ count }) {
+  return (
+    <ClearListButton
+      count={count}
+      request={clearHistory}
+      labels={{ button: 'account.clearHistory', text: 'account.clearHistoryText' }}
+    />
+  )
+}
+
+function ClearListButton({ count, request, labels }) {
   const t = useT()
   const router = useRouter()
   const [open, setOpen] = useState(false)
@@ -67,7 +99,7 @@ export function ClearFavoritesButton({ count }) {
     setBusy(true)
     setFailed(false)
     try {
-      await removeFavorites({ all: true })
+      await request()
       setOpen(false)
       router.refresh()
     } catch {
@@ -87,7 +119,7 @@ export function ClearFavoritesButton({ count }) {
           <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
             <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6" />
           </svg>
-          {t('account.clearFavorites')}
+          {t(labels.button)}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
@@ -100,9 +132,9 @@ export function ClearFavoritesButton({ count }) {
           style={{ backgroundColor: 'var(--bg-gradient-start)' }}
         >
           <div className="text-sm font-bold text-white">{t('account.clearFavoritesTitle')}</div>
-          <p className="mt-1 text-xs leading-relaxed text-gray-400">{t('account.clearFavoritesText', { n: count })}</p>
+          <p className="mt-1 text-xs leading-relaxed text-gray-400">{t(labels.text, { n: count })}</p>
           {failed ? (
-            <p className="mt-2 text-xs text-amber-400" role="alert">
+            <p className="mt-2 text-xs text-amber-600 dark:text-amber-400" role="alert">
               {t('account.errGeneric')}
             </p>
           ) : null}

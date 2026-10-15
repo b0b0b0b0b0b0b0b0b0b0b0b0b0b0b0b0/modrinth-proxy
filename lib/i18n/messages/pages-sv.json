@@ -545,7 +545,11 @@
     "newPassword": "Nytt lösenord",
     "passwordSaved": "Lösenordet är sparat. På andra enheter behöver du logga in igen.",
     "errCurrentPassword": "Det nuvarande lösenordet stämmer inte.",
-    "clearFavoritesHint": "Vill du börja om listan? Du kan spara den först med ”Dela listan”."
+    "clearFavoritesHint": "Vill du börja om listan? Du kan spara den först med ”Dela listan”.",
+    "clearHistory": "Rensa historiken",
+    "clearHistoryText": "Allt i historiken tas bort: {n}. Nya versioner av det du laddat ner slutar också följas — det börjar igen när du laddar ner något.",
+    "clearHistoryHint": "Vill du börja om historiken från noll?",
+    "settings": "Inställningar"
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
@@ -560,8 +564,49 @@
     "digestOpen": "Öppna mitt konto",
     "digestOff": "Stäng av aviseringar",
     "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version.",
-    "muteProject": "Avisera inte om nya versioner",
-    "unmuteProject": "Avisera om nya versioner igen",
-    "muteHint": "Klockan bredvid en rad stänger av Telegram-aviseringar om nya versioner av det projektet. På fliken ”Uppdateringar” syns de fortfarande."
+    "muteProject": "Följ inte nya versioner av det här projektet",
+    "unmuteProject": "Följ nya versioner igen",
+    "muteHint": "Klockan bredvid en rad slutar följa nya versioner av projektet: det försvinner från ”Uppdateringar” och från Telegram. Favoriter påverkas inte."
+  },
+  "set": {
+    "trackDownloads": "Följ nya versioner av nedladdat",
+    "trackDownloadsHint": "Stänger du av det finns bara favoriterna kvar på fliken ”Uppdateringar” och i Telegram.",
+    "mutedTitle": "Tystade med klockan: {n}",
+    "mutedHint": "Projekt du valt att inte följa i nedladdningshistoriken.",
+    "unmuteAll": "Slå på alla igen",
+    "recordHistory": "Spara nedladdningshistorik",
+    "recordHistoryHint": "Stänger du av det hamnar nya nedladdningar inte i historiken och följs inte upp. Det som redan finns ligger kvar — du kan rensa det på fliken ”Nedladdningshistorik”.",
+    "historyOff": "Historiken sparas inte — nya nedladdningar syns inte här. Du kan slå på det i Inställningar."
+  },
+  "del": {
+    "title": "Radera konto",
+    "lead": "Kontot raderas för alltid tillsammans med allt i det: favoriter, historik, inställningar och aviseringar. Det går inte att återställa.",
+    "button": "Radera konto",
+    "warnTitle": "Radera kontot {name}?",
+    "warnIntro": "Det här är för alltid. Det här försvinner med kontot:",
+    "itemAccount": "användarnamn och lösenord — du kan inte logga in på kontot igen",
+    "itemFavorites": "favoriter: {n}",
+    "itemHistory": "nedladdningshistorik: {n}",
+    "itemUpdates": "bevakning av uppdateringar och Telegram-aviseringar",
+    "itemLinks": "kopplade konton: {list}",
+    "warnTip": "Tips: spara dina favoriter med ”Dela listan” på fliken Favoriter innan du raderar. Koden kan du klistra in i ett nytt konto senare.",
+    "warnCancel": "Behåll kontot",
+    "warnNext": "Ja, radera",
+    "finalTitle": "Sista kontrollen",
+    "finalText": "Kontot {name} raderas helt och för alltid. Varken du eller vi kan ångra det sedan. Tänk efter en stund till.",
+    "finalWait": "Rutan låses upp om {s} s.",
+    "finalReady": "Om du är säker — kryssa i rutan.",
+    "finalCheck": "Jag vill verkligen radera mitt konto och förstår riskerna.",
+    "finalDelete": "Radera för alltid",
+    "deleting": "Raderar kontot…",
+    "done": "Kontot är raderat. Vi tar dig till startsidan…",
+    "error": "Det gick inte att radera kontot. Försök igen."
+  },
+  "st": {
+    "metaTitle": "Statistik | ModrinthProxy",
+    "userOne": "användare",
+    "userFew": "användare",
+    "userMany": "användare",
+    "lead": "registrerade på ModrinthProxy"
   }
 }

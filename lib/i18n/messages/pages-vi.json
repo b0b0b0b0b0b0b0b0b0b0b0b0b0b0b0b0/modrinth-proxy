@@ -545,7 +545,11 @@
     "newPassword": "Mật khẩu mới",
     "passwordSaved": "Đã lưu mật khẩu. Trên các thiết bị khác bạn sẽ phải đăng nhập lại.",
     "errCurrentPassword": "Mật khẩu hiện tại không đúng.",
-    "clearFavoritesHint": "Muốn làm lại danh sách từ đầu? Trước đó bạn có thể lưu nó bằng nút “Chia sẻ danh sách”."
+    "clearFavoritesHint": "Muốn làm lại danh sách từ đầu? Trước đó bạn có thể lưu nó bằng nút “Chia sẻ danh sách”.",
+    "clearHistory": "Xóa lịch sử",
+    "clearHistoryText": "Mọi thứ trong lịch sử sẽ bị xóa: {n}. Phiên bản mới của những thứ đã tải cũng sẽ ngừng được theo dõi — sẽ bắt đầu lại khi bạn tải gì đó.",
+    "clearHistoryHint": "Muốn bắt đầu lịch sử lại từ đầu?",
+    "settings": "Cài đặt"
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",
@@ -560,8 +564,49 @@
     "digestOpen": "Mở tài khoản",
     "digestOff": "Tắt thông báo",
     "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới.",
-    "muteProject": "Không báo cho tôi về phiên bản mới",
-    "unmuteProject": "Báo lại cho tôi về phiên bản mới",
-    "muteHint": "Biểu tượng chuông cạnh mỗi dòng tắt thông báo Telegram về phiên bản mới của dự án đó. Ở thẻ “Cập nhật” chúng vẫn hiển thị."
+    "muteProject": "Không theo dõi phiên bản mới của dự án này",
+    "unmuteProject": "Theo dõi phiên bản mới trở lại",
+    "muteHint": "Chuông cạnh mỗi dòng sẽ ngừng theo dõi phiên bản mới của dự án đó: nó biến mất khỏi “Cập nhật” và Telegram. Mục yêu thích không bị ảnh hưởng."
+  },
+  "set": {
+    "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",
+    "trackDownloadsHint": "Nếu tắt, ở thẻ “Cập nhật” và trong Telegram chỉ còn mục yêu thích.",
+    "mutedTitle": "Đã tắt bằng chuông: {n}",
+    "mutedHint": "Những dự án bạn chọn không theo dõi trong lịch sử tải xuống.",
+    "unmuteAll": "Bật lại tất cả",
+    "recordHistory": "Lưu lịch sử tải xuống",
+    "recordHistoryHint": "Nếu tắt, lượt tải mới sẽ không vào lịch sử và không được theo dõi cập nhật. Những gì đã lưu vẫn giữ — có thể xóa ở thẻ “Lịch sử tải xuống”.",
+    "historyOff": "Lịch sử đang không được lưu — lượt tải mới không hiện ở đây. Có thể bật lại trong Cài đặt."
+  },
+  "del": {
+    "title": "Xóa tài khoản",
+    "lead": "Tài khoản sẽ bị xóa vĩnh viễn cùng mọi thứ bên trong: mục yêu thích, lịch sử, cài đặt và thông báo. Không thể khôi phục.",
+    "button": "Xóa tài khoản",
+    "warnTitle": "Xóa tài khoản {name}?",
+    "warnIntro": "Đây là vĩnh viễn. Những thứ sau sẽ biến mất cùng tài khoản:",
+    "itemAccount": "tên đăng nhập và mật khẩu — bạn sẽ không vào được tài khoản này nữa",
+    "itemFavorites": "mục yêu thích: {n}",
+    "itemHistory": "lịch sử tải xuống: {n}",
+    "itemUpdates": "việc theo dõi cập nhật và thông báo Telegram",
+    "itemLinks": "liên kết: {list}",
+    "warnTip": "Mẹo: trước khi xóa, hãy lưu mục yêu thích bằng nút “Chia sẻ danh sách” ở thẻ Yêu thích. Sau này có thể dán mã đó vào tài khoản mới.",
+    "warnCancel": "Không xóa",
+    "warnNext": "Có, xóa",
+    "finalTitle": "Kiểm tra lần cuối",
+    "finalText": "Tài khoản {name} sẽ bị xóa hoàn toàn và vĩnh viễn. Cả bạn lẫn chúng tôi đều không thể hoàn tác. Hãy nghĩ thêm một chút.",
+    "finalWait": "Ô đánh dấu sẽ mở sau {s} giây.",
+    "finalReady": "Nếu bạn đã chắc chắn — hãy đánh dấu.",
+    "finalCheck": "Tôi chắc chắn muốn xóa tài khoản và hiểu mọi rủi ro.",
+    "finalDelete": "Xóa vĩnh viễn",
+    "deleting": "Đang xóa tài khoản…",
+    "done": "Đã xóa tài khoản. Đang đưa bạn về trang chủ…",
+    "error": "Không xóa được tài khoản. Hãy thử lại."
+  },
+  "st": {
+    "metaTitle": "Thống kê | ModrinthProxy",
+    "userOne": "người dùng",
+    "userFew": "người dùng",
+    "userMany": "người dùng",
+    "lead": "đã đăng ký trên ModrinthProxy"
   }
 }

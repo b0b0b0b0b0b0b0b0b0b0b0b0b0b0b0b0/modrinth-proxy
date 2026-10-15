@@ -545,7 +545,11 @@
     "newPassword": "Nouveau mot de passe",
     "passwordSaved": "Mot de passe enregistré. Il faudra te reconnecter sur tes autres appareils.",
     "errCurrentPassword": "Le mot de passe actuel est incorrect.",
-    "clearFavoritesHint": "Tu veux repartir de zéro ? Tu peux d’abord sauvegarder ta liste avec « Partager la liste »."
+    "clearFavoritesHint": "Tu veux repartir de zéro ? Tu peux d’abord sauvegarder ta liste avec « Partager la liste ».",
+    "clearHistory": "Effacer l’historique",
+    "clearHistoryText": "Tout l’historique sera supprimé : {n}. Les nouvelles versions des téléchargements ne seront plus suivies non plus — le suivi reprend dès que tu télécharges quelque chose.",
+    "clearHistoryHint": "Tu veux repartir d’un historique vide ?",
+    "settings": "Paramètres"
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
@@ -560,8 +564,49 @@
     "digestOpen": "Ouvrir mon compte",
     "digestOff": "Désactiver les notifications",
     "notifyNeedLink": "Pour recevoir les notifications, lie Telegram. Le bot enverra un récapitulatif quand un téléchargement ou un favori reçoit une nouvelle version.",
-    "muteProject": "Ne plus me prévenir des nouvelles versions",
-    "unmuteProject": "Me prévenir à nouveau des nouvelles versions",
-    "muteHint": "La cloche à côté d’une ligne coupe les notifications Telegram sur les nouvelles versions de ce projet. Elles restent visibles dans l’onglet « Mises à jour »."
+    "muteProject": "Ne plus suivre les nouvelles versions de ce projet",
+    "unmuteProject": "Suivre à nouveau les nouvelles versions",
+    "muteHint": "La cloche à côté d’une ligne arrête le suivi des nouvelles versions de ce projet : il disparaît des « Mises à jour » et de Telegram. Les favoris ne sont pas touchés."
+  },
+  "set": {
+    "trackDownloads": "Suivre les nouvelles versions des téléchargements",
+    "trackDownloadsHint": "Si tu le désactives, seuls les favoris restent dans l’onglet « Mises à jour » et sur Telegram.",
+    "mutedTitle": "Coupés avec la cloche : {n}",
+    "mutedHint": "Projets que tu as choisi de ne plus suivre dans l’historique des téléchargements.",
+    "unmuteAll": "Tout réactiver",
+    "recordHistory": "Garder l’historique des téléchargements",
+    "recordHistoryHint": "Si tu le désactives, les nouveaux téléchargements n’iront pas dans l’historique et ne seront pas suivis. Ce qui est déjà enregistré reste — tu peux l’effacer dans l’onglet « Historique des téléchargements ».",
+    "historyOff": "L’historique n’est pas enregistré : les nouveaux téléchargements n’apparaissent pas ici. Tu peux le réactiver dans les Paramètres."
+  },
+  "del": {
+    "title": "Supprimer le compte",
+    "lead": "Ton compte sera supprimé pour toujours avec tout son contenu : favoris, historique, paramètres et notifications. Impossible de le récupérer.",
+    "button": "Supprimer le compte",
+    "warnTitle": "Supprimer le compte {name} ?",
+    "warnIntro": "C’est définitif. Voici ce qui disparaît avec le compte :",
+    "itemAccount": "l’identifiant et le mot de passe — tu ne pourras plus te connecter à ce compte",
+    "itemFavorites": "favoris : {n}",
+    "itemHistory": "historique des téléchargements : {n}",
+    "itemUpdates": "le suivi des mises à jour et les notifications Telegram",
+    "itemLinks": "comptes liés : {list}",
+    "warnTip": "Astuce : avant de supprimer, sauvegarde tes favoris avec « Partager la liste » dans l’onglet Favoris. Tu pourras coller ce code dans un nouveau compte.",
+    "warnCancel": "Garder mon compte",
+    "warnNext": "Oui, supprimer",
+    "finalTitle": "Dernière vérification",
+    "finalText": "Le compte {name} sera supprimé entièrement et pour toujours. Ni toi ni nous ne pourrons l’annuler. Prends encore un instant pour réfléchir.",
+    "finalWait": "La case se débloque dans {s} s.",
+    "finalReady": "Si tu es sûr, coche la case.",
+    "finalCheck": "Je veux vraiment supprimer mon compte et je comprends les risques.",
+    "finalDelete": "Supprimer pour toujours",
+    "deleting": "Suppression du compte…",
+    "done": "Compte supprimé. On te ramène à l’accueil…",
+    "error": "Impossible de supprimer le compte. Réessaie."
+  },
+  "st": {
+    "metaTitle": "Statistiques | ModrinthProxy",
+    "userOne": "utilisateur",
+    "userFew": "utilisateurs",
+    "userMany": "utilisateurs",
+    "lead": "inscrits sur ModrinthProxy"
   }
 }

@@ -545,7 +545,11 @@
     "newPassword": "Nova senha",
     "passwordSaved": "Senha salva. Nos outros dispositivos será preciso entrar de novo.",
     "errCurrentPassword": "A senha atual está errada.",
-    "clearFavoritesHint": "Quer começar a lista do zero? Antes dá para salvá-la com “Compartilhar lista”."
+    "clearFavoritesHint": "Quer começar a lista do zero? Antes dá para salvá-la com “Compartilhar lista”.",
+    "clearHistory": "Limpar histórico",
+    "clearHistoryText": "Todo o histórico será apagado: {n}. As novas versões do que foi baixado também deixam de ser acompanhadas — voltam quando você baixar algo.",
+    "clearHistoryHint": "Quer começar o histórico do zero?",
+    "settings": "Configurações"
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",
@@ -560,8 +564,49 @@
     "digestOpen": "Abrir minha conta",
     "digestOff": "Desativar notificações",
     "notifyNeedLink": "Para receber notificações, vincule o Telegram. O bot manda um resumo quando algo baixado ou favoritado ganha versão nova.",
-    "muteProject": "Não me avisar de novas versões",
-    "unmuteProject": "Voltar a me avisar de novas versões",
-    "muteHint": "O sino ao lado de uma linha desliga as notificações do Telegram sobre novas versões desse projeto. Na aba “Atualizações” elas continuam aparecendo."
+    "muteProject": "Não acompanhar novas versões deste projeto",
+    "unmuteProject": "Acompanhar novas versões de novo",
+    "muteHint": "O sino ao lado de uma linha para de acompanhar as novas versões desse projeto: ele some das “Atualizações” e do Telegram. Os favoritos não mudam."
+  },
+  "set": {
+    "trackDownloads": "Acompanhar novas versões do que baixei",
+    "trackDownloadsHint": "Se desligar, na aba “Atualizações” e no Telegram ficam só os favoritos.",
+    "mutedTitle": "Silenciados com o sino: {n}",
+    "mutedHint": "Projetos que você escolheu não acompanhar no histórico de downloads.",
+    "unmuteAll": "Reativar todos",
+    "recordHistory": "Guardar histórico de downloads",
+    "recordHistoryHint": "Se desligar, os novos downloads não entram no histórico nem são acompanhados. O que já está salvo continua — dá para limpar na aba “Histórico de downloads”.",
+    "historyOff": "O histórico não está sendo salvo — novos downloads não aparecem aqui. Dá para ligar nas Configurações."
+  },
+  "del": {
+    "title": "Excluir conta",
+    "lead": "Sua conta será excluída para sempre com tudo o que tem nela: favoritos, histórico, configurações e notificações. Não dá para recuperar.",
+    "button": "Excluir conta",
+    "warnTitle": "Excluir a conta {name}?",
+    "warnIntro": "É para sempre. Isto some junto com a conta:",
+    "itemAccount": "usuário e senha — não dará mais para entrar nesta conta",
+    "itemFavorites": "favoritos: {n}",
+    "itemHistory": "histórico de downloads: {n}",
+    "itemUpdates": "o acompanhamento de atualizações e as notificações no Telegram",
+    "itemLinks": "contas vinculadas: {list}",
+    "warnTip": "Dica: antes de excluir, salve os favoritos com “Compartilhar lista” na aba Favoritos. Depois dá para colar esse código numa conta nova.",
+    "warnCancel": "Não excluir",
+    "warnNext": "Sim, excluir",
+    "finalTitle": "Última verificação",
+    "finalText": "A conta {name} será excluída por completo e para sempre. Nem você nem nós poderemos desfazer isso. Pense mais um pouco.",
+    "finalWait": "A caixa libera em {s} s.",
+    "finalReady": "Se tiver certeza, marque a caixa.",
+    "finalCheck": "Tenho certeza de que quero excluir minha conta e entendo os riscos.",
+    "finalDelete": "Excluir para sempre",
+    "deleting": "Excluindo a conta…",
+    "done": "Conta excluída. Levando você para a página inicial…",
+    "error": "Não foi possível excluir a conta. Tente de novo."
+  },
+  "st": {
+    "metaTitle": "Estatísticas | ModrinthProxy",
+    "userOne": "usuário",
+    "userFew": "usuários",
+    "userMany": "usuários",
+    "lead": "cadastrados no ModrinthProxy"
   }
 }

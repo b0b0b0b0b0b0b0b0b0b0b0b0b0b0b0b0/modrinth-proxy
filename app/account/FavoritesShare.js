@@ -117,7 +117,7 @@ export default function FavoritesShare({ code, count }) {
               {t(copied ? 'account.shareCopied' : 'account.shareCopy')}
             </button>
           </div>
-          <p className="mt-2 text-[11px] leading-relaxed text-gray-500">{t('account.shareHint')}</p>
+          <p className="mt-2 text-[11px] leading-relaxed text-gray-600 dark:text-gray-500">{t('account.shareHint')}</p>
         </div>
       ) : null}
 
@@ -145,7 +145,7 @@ export default function FavoritesShare({ code, count }) {
               {t('account.importSubmit')}
             </button>
           </div>
-          <p className={`mt-2 text-[11px] leading-relaxed ${message.bad ? 'text-amber-400' : message.text ? 'text-modrinth-green' : 'text-gray-500'}`} role={message.bad ? 'alert' : undefined}>
+          <p className={`mt-2 text-[11px] leading-relaxed ${message.bad ? 'text-amber-600 dark:text-amber-400' : message.text ? 'text-modrinth-green' : 'text-gray-600 dark:text-gray-500'}`} role={message.bad ? 'alert' : undefined}>
             {message.text || t('account.importHint')}
           </p>
         </form>

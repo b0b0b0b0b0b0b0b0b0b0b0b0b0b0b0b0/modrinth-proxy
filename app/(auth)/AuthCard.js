@@ -61,7 +61,7 @@ function passwordStrength(password) {
 function FieldIcon({ path }) {
   return (
     <svg
-      className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 transition-colors group-focus-within:text-modrinth-green"
+      className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-600 dark:text-gray-500 transition-colors group-focus-within:text-modrinth-green"
       fill="none"
       stroke="currentColor"
       strokeWidth="2"
@@ -278,7 +278,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                 <h1 className="text-xl font-bold text-white">
                   {t(isRegister ? 'account.registerTitle' : 'account.loginTitle')}
                 </h1>
-                <p className="mt-1 text-sm text-gray-500">
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">
                   {t(isRegister ? 'account.registerLead' : 'account.loginLead')}
                 </p>
 
@@ -294,7 +294,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         href="/bmadnco"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-semibold text-amber-400 hover:underline"
+                        className="font-semibold text-amber-600 dark:text-amber-400 hover:underline"
                       >
                         {t('disclaimer.what')}
                       </Link>
@@ -320,7 +320,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                     <div className="mt-5 flex items-center justify-between gap-3">
                       <div className="min-w-0">
                         <div className="text-sm font-bold text-white">{t('account.githubAuto')}</div>
-                        <p className="mt-0.5 text-[11px] leading-relaxed text-gray-500">{t('account.githubHint')}</p>
+                        <p className="mt-0.5 text-[11px] leading-relaxed text-gray-600 dark:text-gray-500">{t('account.githubHint')}</p>
                       </div>
                       <div className="flex shrink-0 items-center gap-2">
                         {telegram ? (
@@ -377,7 +377,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                       />
                     </span>
                     {isRegister ? (
-                      <span className="mt-1.5 block text-[11px] text-gray-500">{t('account.usernameHint')}</span>
+                      <span className="mt-1.5 block text-[11px] text-gray-600 dark:text-gray-500">{t('account.usernameHint')}</span>
                     ) : null}
                   </label>
 
@@ -401,7 +401,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         onClick={() => setShowPassword((value) => !value)}
                         aria-label={t(showPassword ? 'account.hidePassword' : 'account.showPassword')}
                         aria-pressed={showPassword}
-                        className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-500 transition-colors hover:text-white"
+                        className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-600 dark:text-gray-500 transition-colors hover:text-white"
                       >
                         <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
                           {showPassword ? (
@@ -429,7 +429,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                             </span>
                           ))}
                         </span>
-                        <span className="shrink-0 whitespace-nowrap text-right text-[11px] text-gray-500">
+                        <span className="shrink-0 whitespace-nowrap text-right text-[11px] text-gray-600 dark:text-gray-500">
                           {strength ? t(`account.strength${strength}`) : t('account.passwordHint')}
                         </span>
                       </span>
@@ -456,7 +456,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         animate={{ opacity: 1, height: 'auto', x: reduceMotion ? 0 : [0, -8, 8, -5, 5, 0] }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.35 }}
-                        className="overflow-hidden rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-400"
+                        className="overflow-hidden rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-600 dark:text-amber-400"
                       >
                         {error.text}
                       </motion.p>
@@ -493,10 +493,10 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                 </form>
 
                 {isRegister ? (
-                  <p className="mt-4 text-[11px] leading-relaxed text-gray-500">{t('account.noRecovery')}</p>
+                  <p className="mt-4 text-[11px] leading-relaxed text-gray-600 dark:text-gray-500">{t('account.noRecovery')}</p>
                 ) : null}
 
-                <p className="mt-5 text-center text-sm text-gray-500">
+                <p className="mt-5 text-center text-sm text-gray-600 dark:text-gray-500">
                   {t(isRegister ? 'account.haveAccount' : 'account.noAccount')}{' '}
                   <Link
                     href={`/${isRegister ? 'login' : 'register'}${query}`}

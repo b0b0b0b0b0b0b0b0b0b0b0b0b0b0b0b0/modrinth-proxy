@@ -8,7 +8,7 @@ export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
   const user = getSessionUser()
-  if (!user) return new Response(null, { status: 204 })
+  if (!user || !user.record_history) return new Response(null, { status: 204 })
 
   const rate = checkRateLimit(`account-download:${user.id}`, RATE_LIMIT)
   if (!rate.ok) return Response.json({ error: 'rate_limit' }, { status: 429 })

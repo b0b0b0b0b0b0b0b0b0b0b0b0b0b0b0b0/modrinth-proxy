@@ -545,7 +545,11 @@
     "newPassword": "Nueva contraseña",
     "passwordSaved": "Contraseña guardada. En otros dispositivos tendrás que volver a entrar.",
     "errCurrentPassword": "La contraseña actual no es correcta.",
-    "clearFavoritesHint": "¿Quieres empezar la lista de cero? Antes puedes guardarla con «Compartir lista»."
+    "clearFavoritesHint": "¿Quieres empezar la lista de cero? Antes puedes guardarla con «Compartir lista».",
+    "clearHistory": "Borrar historial",
+    "clearHistoryText": "Se borrará todo el historial: {n}. Las nuevas versiones de lo descargado también dejarán de seguirse; vuelve a empezar cuando descargues algo.",
+    "clearHistoryHint": "¿Quieres empezar el historial de cero?",
+    "settings": "Ajustes"
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
@@ -560,8 +564,49 @@
     "digestOpen": "Abrir mi cuenta",
     "digestOff": "Desactivar avisos",
     "notifyNeedLink": "Para recibir avisos, vincula Telegram. El bot enviará un resumen cuando algo descargado o guardado tenga versión nueva.",
-    "muteProject": "No avisarme de nuevas versiones",
-    "unmuteProject": "Volver a avisarme de nuevas versiones",
-    "muteHint": "La campana junto a una fila desactiva los avisos de Telegram sobre nuevas versiones de ese proyecto. En la pestaña «Actualizaciones» se seguirán viendo."
+    "muteProject": "Dejar de seguir nuevas versiones de este proyecto",
+    "unmuteProject": "Volver a seguir nuevas versiones",
+    "muteHint": "La campana junto a una fila deja de seguir las nuevas versiones de ese proyecto: desaparece de «Actualizaciones» y de Telegram. Los favoritos no se ven afectados."
+  },
+  "set": {
+    "trackDownloads": "Seguir nuevas versiones de lo descargado",
+    "trackDownloadsHint": "Si lo desactivas, en la pestaña «Actualizaciones» y en Telegram solo quedarán los favoritos.",
+    "mutedTitle": "Silenciados con la campana: {n}",
+    "mutedHint": "Proyectos que elegiste no seguir en el historial de descargas.",
+    "unmuteAll": "Reactivar todos",
+    "recordHistory": "Guardar historial de descargas",
+    "recordHistoryHint": "Si lo desactivas, las nuevas descargas no se guardarán en el historial ni se seguirán sus actualizaciones. Lo ya guardado se queda; puedes borrarlo en la pestaña «Historial de descargas».",
+    "historyOff": "El historial no se guarda: las nuevas descargas no aparecen aquí. Puedes activarlo en Ajustes."
+  },
+  "del": {
+    "title": "Eliminar cuenta",
+    "lead": "Tu cuenta se eliminará para siempre junto con todo lo que contiene: favoritos, historial, ajustes y avisos. No se podrá recuperar.",
+    "button": "Eliminar cuenta",
+    "warnTitle": "¿Eliminar la cuenta {name}?",
+    "warnIntro": "Es para siempre. Esto desaparecerá con la cuenta:",
+    "itemAccount": "el usuario y la contraseña: ya no podrás entrar en esta cuenta",
+    "itemFavorites": "favoritos: {n}",
+    "itemHistory": "historial de descargas: {n}",
+    "itemUpdates": "el seguimiento de actualizaciones y los avisos de Telegram",
+    "itemLinks": "cuentas vinculadas: {list}",
+    "warnTip": "Consejo: antes de eliminarla, guarda tus favoritos con «Compartir lista» en la pestaña Favoritos. Luego podrás pegar ese código en una cuenta nueva.",
+    "warnCancel": "No eliminar",
+    "warnNext": "Sí, eliminar",
+    "finalTitle": "Última comprobación",
+    "finalText": "La cuenta {name} se eliminará por completo y para siempre. Ni tú ni nosotros podremos deshacerlo. Piénsalo un momento más.",
+    "finalWait": "La casilla se activará en {s} s.",
+    "finalReady": "Si estás seguro, marca la casilla.",
+    "finalCheck": "Estoy seguro de que quiero eliminar mi cuenta y entiendo los riesgos.",
+    "finalDelete": "Eliminar para siempre",
+    "deleting": "Eliminando la cuenta…",
+    "done": "Cuenta eliminada. Te llevamos a la página principal…",
+    "error": "No se pudo eliminar la cuenta. Inténtalo otra vez."
+  },
+  "st": {
+    "metaTitle": "Estadísticas | ModrinthProxy",
+    "userOne": "usuario",
+    "userFew": "usuarios",
+    "userMany": "usuarios",
+    "lead": "registrados en ModrinthProxy"
   }
 }

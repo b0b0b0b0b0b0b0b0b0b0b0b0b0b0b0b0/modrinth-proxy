@@ -545,7 +545,11 @@
     "newPassword": "新密码",
     "passwordSaved": "密码已保存。在其他设备上需要重新登录。",
     "errCurrentPassword": "当前密码不正确。",
-    "clearFavoritesHint": "想重新整理列表？可以先用“分享列表”保存一份。"
+    "clearFavoritesHint": "想重新整理列表？可以先用“分享列表”保存一份。",
+    "clearHistory": "清空记录",
+    "clearHistoryText": "下载记录将全部删除：{n} 项。已下载内容的新版本也将停止跟踪，再次下载内容后会重新开始。",
+    "clearHistoryHint": "想让下载记录从头开始吗？",
+    "settings": "设置"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
@@ -560,8 +564,49 @@
     "digestOpen": "打开我的账号",
     "digestOff": "关闭通知",
     "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。",
-    "muteProject": "不再通知此项目的新版本",
-    "unmuteProject": "重新通知此项目的新版本",
-    "muteHint": "点每行旁边的铃铛，可以关闭该项目新版本的 Telegram 通知。“更新”标签页里仍会显示。"
+    "muteProject": "不再跟踪此项目的新版本",
+    "unmuteProject": "重新跟踪新版本",
+    "muteHint": "点每行旁边的铃铛，就不再跟踪该项目的新版本：它会从“更新”和 Telegram 中消失。收藏不受影响。"
+  },
+  "set": {
+    "trackDownloads": "跟踪已下载内容的新版本",
+    "trackDownloadsHint": "关闭后，“更新”标签页和 Telegram 中只保留收藏的内容。",
+    "mutedTitle": "已用铃铛关闭：{n} 个",
+    "mutedHint": "你在下载记录中选择不再跟踪的项目。",
+    "unmuteAll": "全部恢复",
+    "recordHistory": "记录下载历史",
+    "recordHistoryHint": "关闭后，新的下载不会进入记录，也不会跟踪其更新。已有记录会保留，可在“下载记录”标签页中清空。",
+    "historyOff": "下载记录已关闭，新的下载不会出现在这里。可在“设置”中重新开启。"
+  },
+  "del": {
+    "title": "删除账号",
+    "lead": "账号将连同其中的一切被永久删除：收藏、记录、设置和通知。无法恢复。",
+    "button": "删除账号",
+    "warnTitle": "删除账号 {name}？",
+    "warnIntro": "此操作不可撤销。以下内容会随账号一起消失：",
+    "itemAccount": "用户名和密码——之后将无法再登录此账号",
+    "itemFavorites": "收藏：{n} 项",
+    "itemHistory": "下载记录：{n} 项",
+    "itemUpdates": "更新跟踪和 Telegram 通知",
+    "itemLinks": "已绑定：{list}",
+    "warnTip": "建议：删除前，先在“收藏”标签页用“分享列表”保存收藏。之后可以把这段代码粘贴到新账号里。",
+    "warnCancel": "不删除",
+    "warnNext": "是的，删除",
+    "finalTitle": "最后确认",
+    "finalText": "账号 {name} 将被彻底、永久删除。之后你和我们都无法撤销。请再想一想。",
+    "finalWait": "{s} 秒后可以勾选。",
+    "finalReady": "如果你已决定，请勾选。",
+    "finalCheck": "我确定要删除自己的账号，并了解所有风险。",
+    "finalDelete": "永久删除",
+    "deleting": "正在删除账号…",
+    "done": "账号已删除。正在返回首页…",
+    "error": "无法删除账号，请再试一次。"
+  },
+  "st": {
+    "metaTitle": "统计 | ModrinthProxy",
+    "userOne": "位用户",
+    "userFew": "位用户",
+    "userMany": "位用户",
+    "lead": "已在 ModrinthProxy 注册"
   }
 }

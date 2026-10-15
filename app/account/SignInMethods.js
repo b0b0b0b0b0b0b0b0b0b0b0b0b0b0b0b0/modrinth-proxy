@@ -28,7 +28,7 @@ function Row({ icon, title, status, active, children }) {
   return (
     <li className="flex items-center gap-3 py-3">
       <span
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${active ? 'border-modrinth-green/40 bg-modrinth-green/10 text-modrinth-green' : 'border-gray-800 text-gray-500'}`}
+        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border ${active ? 'border-modrinth-green/40 bg-modrinth-green/10 text-modrinth-green' : 'border-gray-800 text-gray-600 dark:text-gray-500'}`}
       >
         <svg
           className="h-5 w-5"
@@ -43,7 +43,7 @@ function Row({ icon, title, status, active, children }) {
       </span>
       <div className="min-w-0 flex-1">
         <div className="text-sm font-semibold text-white">{title}</div>
-        <div className={`text-xs ${active ? 'text-modrinth-green' : 'text-gray-500'}`}>{status}</div>
+        <div className={`text-xs ${active ? 'text-modrinth-green' : 'text-gray-600 dark:text-gray-500'}`}>{status}</div>
       </div>
       {children}
     </li>
@@ -190,7 +190,7 @@ function PasswordRow({ hasPassword, onSaved }) {
                 </button>
               </div>
             </div>
-            <p className={`text-[11px] ${message.text && !message.ok ? 'text-amber-400' : 'text-gray-500'}`} role={message.text ? 'alert' : undefined}>
+            <p className={`text-[11px] ${message.text && !message.ok ? 'text-amber-600 dark:text-amber-400' : 'text-gray-600 dark:text-gray-500'}`} role={message.text ? 'alert' : undefined}>
               {message.text && !message.ok ? message.text : t('account.passwordHint')}
             </p>
           </form>
@@ -202,7 +202,7 @@ function PasswordRow({ hasPassword, onSaved }) {
   )
 }
 
-export default function SignInMethods({ hasPassword, providers, telegramNotify = true, takenProvider = null }) {
+export default function SignInMethods({ hasPassword, providers, takenProvider = null }) {
   const t = useT()
   const router = useRouter()
   const [busy, setBusy] = useState(null)
@@ -211,29 +211,6 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
   )
 
   const linkedCount = providers.filter((provider) => provider.linked).length
-  const telegramProvider = providers.find((provider) => provider.id === 'telegram') || null
-  const telegramLinked = Boolean(telegramProvider?.linked)
-  const [notify, setNotify] = useState(telegramNotify)
-
-  const toggleNotify = async () => {
-    if (busy) return
-    const next = !notify
-    setBusy('notify')
-    setError('')
-    try {
-      const response = await fetch('/api/account/notifications', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ telegram: next }),
-      })
-      if (response.ok) setNotify(next)
-      else setError(t('account.errGeneric'))
-    } catch {
-      setError(t('account.errGeneric'))
-    } finally {
-      setBusy(null)
-    }
-  }
 
   const unlink = async (id) => {
     if (busy) return
@@ -311,46 +288,12 @@ export default function SignInMethods({ hasPassword, providers, telegramNotify =
           )
         })}
       </ul>
-      {telegramProvider ? (
-        <div className="mt-3 flex items-center justify-between gap-4 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
-          <div className="min-w-0">
-            <div className="text-sm font-semibold text-white">{t('tg.notifyTitle')}</div>
-            <p className="mt-0.5 text-xs leading-relaxed text-gray-500">
-              {t(telegramLinked ? 'tg.notifyHint' : 'tg.notifyNeedLink')}
-            </p>
-          </div>
-          {!telegramLinked ? (
-            <button
-              type="button"
-              onClick={() => linkTelegram(telegramProvider.botId)}
-              disabled={Boolean(busy) || !telegramProvider.botId}
-              className={LINK_BUTTON}
-            >
-              {t('account.telegramLink')}
-            </button>
-          ) : (
-          <button
-            type="button"
-            role="switch"
-            aria-checked={notify}
-            aria-label={t('tg.notifyTitle')}
-            onClick={toggleNotify}
-            disabled={Boolean(busy)}
-            className={`relative h-6 w-11 shrink-0 rounded-full transition-colors disabled:opacity-60 ${notify ? 'bg-modrinth-green' : 'bg-gray-700'}`}
-          >
-            <span
-              className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow transition-transform ${notify ? 'translate-x-5' : ''}`}
-            />
-          </button>
-          )}
-        </div>
-      ) : null}
       {error ? (
-        <p className="mt-2 text-xs text-amber-400" role="alert">
+        <p className="mt-2 text-xs text-amber-600 dark:text-amber-400" role="alert">
           {error}
         </p>
       ) : !hasPassword && linkedCount === 1 ? (
-        <p className="mt-2 text-xs text-gray-500">{t('account.connLast')}</p>
+        <p className="mt-2 text-xs text-gray-600 dark:text-gray-500">{t('account.connLast')}</p>
       ) : null}
     </div>
   )

@@ -545,7 +545,11 @@
     "newPassword": "Nuova password",
     "passwordSaved": "Password salvata. Sugli altri dispositivi dovrai accedere di nuovo.",
     "errCurrentPassword": "La password attuale non è corretta.",
-    "clearFavoritesHint": "Vuoi ricominciare l’elenco da capo? Prima puoi salvarlo con «Condividi elenco»."
+    "clearFavoritesHint": "Vuoi ricominciare l’elenco da capo? Prima puoi salvarlo con «Condividi elenco».",
+    "clearHistory": "Cancella cronologia",
+    "clearHistoryText": "Verrà eliminato tutto dalla cronologia: {n}. Anche le nuove versioni dei download non verranno più seguite: si riparte quando scarichi qualcosa.",
+    "clearHistoryHint": "Vuoi ricominciare la cronologia da zero?",
+    "settings": "Impostazioni"
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",
@@ -560,8 +564,49 @@
     "digestOpen": "Apri il mio account",
     "digestOff": "Disattiva le notifiche",
     "notifyNeedLink": "Per ricevere le notifiche, collega Telegram. Il bot manderà un riepilogo quando qualcosa di scaricato o salvato riceve una nuova versione.",
-    "muteProject": "Non avvisarmi delle nuove versioni",
-    "unmuteProject": "Avvisami di nuovo delle nuove versioni",
-    "muteHint": "La campanella accanto a una riga disattiva le notifiche Telegram sulle nuove versioni di quel progetto. Nella scheda «Aggiornamenti» restano comunque visibili."
+    "muteProject": "Non seguire le nuove versioni di questo progetto",
+    "unmuteProject": "Segui di nuovo le nuove versioni",
+    "muteHint": "La campanella accanto a una riga smette di seguire le nuove versioni di quel progetto: sparisce da «Aggiornamenti» e da Telegram. I preferiti non cambiano."
+  },
+  "set": {
+    "trackDownloads": "Segui le nuove versioni dei download",
+    "trackDownloadsHint": "Se lo disattivi, nella scheda «Aggiornamenti» e su Telegram restano solo i preferiti.",
+    "mutedTitle": "Silenziati con la campanella: {n}",
+    "mutedHint": "Progetti che hai scelto di non seguire nella cronologia dei download.",
+    "unmuteAll": "Riattiva tutti",
+    "recordHistory": "Salva la cronologia dei download",
+    "recordHistoryHint": "Se lo disattivi, i nuovi download non finiranno nella cronologia e non verranno seguiti. Quello già salvato resta: puoi cancellarlo nella scheda «Cronologia download».",
+    "historyOff": "La cronologia non viene salvata: i nuovi download non compaiono qui. Puoi riattivarla nelle Impostazioni."
+  },
+  "del": {
+    "title": "Elimina account",
+    "lead": "L’account verrà eliminato per sempre con tutto ciò che contiene: preferiti, cronologia, impostazioni e notifiche. Non si potrà recuperare.",
+    "button": "Elimina account",
+    "warnTitle": "Eliminare l’account {name}?",
+    "warnIntro": "È per sempre. Ecco cosa sparisce con l’account:",
+    "itemAccount": "nome utente e password: non potrai più accedere a questo account",
+    "itemFavorites": "preferiti: {n}",
+    "itemHistory": "cronologia download: {n}",
+    "itemUpdates": "il monitoraggio degli aggiornamenti e le notifiche Telegram",
+    "itemLinks": "account collegati: {list}",
+    "warnTip": "Consiglio: prima di eliminarlo, salva i preferiti con «Condividi elenco» nella scheda Preferiti. Potrai incollare quel codice in un nuovo account.",
+    "warnCancel": "Non eliminare",
+    "warnNext": "Sì, elimina",
+    "finalTitle": "Ultimo controllo",
+    "finalText": "L’account {name} verrà eliminato del tutto e per sempre. Né tu né noi potremo annullarlo. Pensaci ancora un momento.",
+    "finalWait": "La casella si sblocca tra {s} s.",
+    "finalReady": "Se sei sicuro, spunta la casella.",
+    "finalCheck": "Voglio davvero eliminare il mio account e capisco i rischi.",
+    "finalDelete": "Elimina per sempre",
+    "deleting": "Eliminazione dell’account…",
+    "done": "Account eliminato. Ti riportiamo alla home…",
+    "error": "Non è stato possibile eliminare l’account. Riprova."
+  },
+  "st": {
+    "metaTitle": "Statistiche | ModrinthProxy",
+    "userOne": "utente",
+    "userFew": "utenti",
+    "userMany": "utenti",
+    "lead": "registrati su ModrinthProxy"
   }
 }

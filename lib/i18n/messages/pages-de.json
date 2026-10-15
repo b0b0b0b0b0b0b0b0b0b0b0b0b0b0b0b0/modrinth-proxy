@@ -545,7 +545,11 @@
     "newPassword": "Neues Passwort",
     "passwordSaved": "Passwort gespeichert. Auf anderen Geräten musst du dich neu anmelden.",
     "errCurrentPassword": "Das aktuelle Passwort stimmt nicht.",
-    "clearFavoritesHint": "Willst du deine Liste neu anfangen? Vorher kannst du sie mit „Liste teilen“ sichern."
+    "clearFavoritesHint": "Willst du deine Liste neu anfangen? Vorher kannst du sie mit „Liste teilen“ sichern.",
+    "clearHistory": "Verlauf leeren",
+    "clearHistoryText": "Alles im Verlauf wird entfernt: {n}. Neue Versionen von Heruntergeladenem werden auch nicht mehr verfolgt — das beginnt wieder, sobald du etwas herunterlädst.",
+    "clearHistoryHint": "Willst du deinen Verlauf neu beginnen?",
+    "settings": "Einstellungen"
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
@@ -560,8 +564,49 @@
     "digestOpen": "Konto öffnen",
     "digestOff": "Benachrichtigungen ausschalten",
     "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt.",
-    "muteProject": "Keine Benachrichtigungen über neue Versionen",
-    "unmuteProject": "Wieder über neue Versionen benachrichtigen",
-    "muteHint": "Die Glocke neben einer Zeile schaltet Telegram-Benachrichtigungen über neue Versionen dieses Projekts aus. Im Tab „Updates“ bleiben sie trotzdem sichtbar."
+    "muteProject": "Neue Versionen dieses Projekts nicht verfolgen",
+    "unmuteProject": "Neue Versionen wieder verfolgen",
+    "muteHint": "Die Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt."
+  },
+  "set": {
+    "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",
+    "trackDownloadsHint": "Wenn du das ausschaltest, bleiben im Tab „Updates“ und in Telegram nur die Favoriten.",
+    "mutedTitle": "Per Glocke stummgeschaltet: {n}",
+    "mutedHint": "Projekte, die du im Download-Verlauf nicht mehr verfolgst.",
+    "unmuteAll": "Alle wieder aktivieren",
+    "recordHistory": "Download-Verlauf speichern",
+    "recordHistoryHint": "Wenn du das ausschaltest, landen neue Downloads nicht im Verlauf und werden nicht auf Updates geprüft. Bisherige Einträge bleiben — du kannst sie im Tab „Download-Verlauf“ löschen.",
+    "historyOff": "Der Verlauf wird nicht gespeichert — neue Downloads erscheinen hier nicht. Einschalten kannst du das in den Einstellungen."
+  },
+  "del": {
+    "title": "Konto löschen",
+    "lead": "Dein Konto wird für immer gelöscht, samt allem darin: Favoriten, Verlauf, Einstellungen und Benachrichtigungen. Es lässt sich nicht wiederherstellen.",
+    "button": "Konto löschen",
+    "warnTitle": "Konto {name} löschen?",
+    "warnIntro": "Das ist endgültig. Das verschwindet mit dem Konto:",
+    "itemAccount": "Benutzername und Passwort — du kannst dich nicht mehr in dieses Konto einloggen",
+    "itemFavorites": "Favoriten: {n}",
+    "itemHistory": "Download-Verlauf: {n}",
+    "itemUpdates": "Update-Verfolgung und Telegram-Benachrichtigungen",
+    "itemLinks": "Verknüpfungen: {list}",
+    "warnTip": "Tipp: Sichere vorher deine Favoriten mit „Liste teilen“ im Tab „Favoriten“. Den Code kannst du später in ein neues Konto einfügen.",
+    "warnCancel": "Nicht löschen",
+    "warnNext": "Ja, löschen",
+    "finalTitle": "Letzte Prüfung",
+    "finalText": "Das Konto {name} wird vollständig und für immer gelöscht. Weder du noch wir können das später rückgängig machen. Denk noch kurz nach.",
+    "finalWait": "Das Häkchen wird in {s} s freigeschaltet.",
+    "finalReady": "Wenn du dir sicher bist, setz das Häkchen.",
+    "finalCheck": "Ich will mein Konto wirklich löschen und verstehe die Risiken.",
+    "finalDelete": "Für immer löschen",
+    "deleting": "Konto wird gelöscht…",
+    "done": "Konto gelöscht. Wir bringen dich zur Startseite…",
+    "error": "Das Konto konnte nicht gelöscht werden. Probier es noch mal."
+  },
+  "st": {
+    "metaTitle": "Statistik | ModrinthProxy",
+    "userOne": "Nutzer",
+    "userFew": "Nutzer",
+    "userMany": "Nutzer",
+    "lead": "auf ModrinthProxy registriert"
   }
 }

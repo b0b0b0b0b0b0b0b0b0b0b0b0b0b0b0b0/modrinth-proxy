@@ -112,7 +112,7 @@ export default function UsernameEditor({ username }) {
           </button>
         </StyledTooltip>
       </div>
-      <p className={`mt-1.5 text-xs ${error ? 'text-amber-400' : 'text-gray-500'}`} role={error ? 'alert' : undefined}>
+      <p className={`mt-1.5 text-xs ${error ? 'text-amber-600 dark:text-amber-400' : 'text-gray-600 dark:text-gray-500'}`} role={error ? 'alert' : undefined}>
         {error || t('account.usernameHint')}
       </p>
     </form>

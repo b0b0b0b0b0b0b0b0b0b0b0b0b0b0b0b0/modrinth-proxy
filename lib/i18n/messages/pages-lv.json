@@ -545,7 +545,11 @@
     "newPassword": "Jaunā parole",
     "passwordSaved": "Parole saglabāta. Citās ierīcēs būs jāienāk no jauna.",
     "errCurrentPassword": "Pašreizējā parole nav pareiza.",
-    "clearFavoritesHint": "Gribi sākt sarakstu no jauna? Vispirms vari to saglabāt ar «Dalīties ar sarakstu»."
+    "clearFavoritesHint": "Gribi sākt sarakstu no jauna? Vispirms vari to saglabāt ar «Dalīties ar sarakstu».",
+    "clearHistory": "Notīrīt vēsturi",
+    "clearHistoryText": "No vēstures pazudīs viss: {n}. Arī lejupielādētā jaunās versijas vairs netiks sekotas — tas atsāksies, kad kaut ko lejupielādēsi.",
+    "clearHistoryHint": "Gribi sākt vēsturi no tīras lapas?",
+    "settings": "Iestatījumi"
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
@@ -560,8 +564,49 @@
     "digestOpen": "Atvērt kontu",
     "digestOff": "Izslēgt paziņojumus",
     "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija.",
-    "muteProject": "Nepaziņot par jaunām versijām",
-    "unmuteProject": "Atkal paziņot par jaunām versijām",
-    "muteHint": "Zvaniņš pie rindas izslēdz Telegram paziņojumus par šī projekta jaunajām versijām. Cilnē «Atjauninājumi» tās joprojām būs redzamas."
+    "muteProject": "Nesekot šī projekta jaunajām versijām",
+    "unmuteProject": "Atkal sekot jaunajām versijām",
+    "muteHint": "Zvaniņš pie rindas pārtrauc sekot šī projekta jaunajām versijām: tas pazūd no «Atjauninājumiem» un Telegram. Izlasi tas neietekmē."
+  },
+  "set": {
+    "trackDownloads": "Sekot lejupielādētā jaunajām versijām",
+    "trackDownloadsHint": "Ja izslēgsi, cilnē «Atjauninājumi» un Telegram paliks tikai izlase.",
+    "mutedTitle": "Izslēgts ar zvaniņu: {n}",
+    "mutedHint": "Projekti, kuriem lejupielāžu vēsturē izvēlējies nesekot.",
+    "unmuteAll": "Atgriezt visus",
+    "recordHistory": "Saglabāt lejupielāžu vēsturi",
+    "recordHistoryHint": "Ja izslēgsi, jaunās lejupielādes nenonāks vēsturē un tām netiks sekots. Jau saglabātais paliks — to var notīrīt cilnē «Lejupielāžu vēsture».",
+    "historyOff": "Vēsture netiek saglabāta — jaunās lejupielādes šeit neparādās. Ieslēgt var «Iestatījumos»."
+  },
+  "del": {
+    "title": "Konta dzēšana",
+    "lead": "Konts tiks dzēsts uz visiem laikiem kopā ar visu, kas tajā ir: izlasi, vēsturi, iestatījumiem un paziņojumiem. Atjaunot to nevarēs.",
+    "button": "Dzēst kontu",
+    "warnTitle": "Dzēst kontu {name}?",
+    "warnIntro": "Tas ir uz visiem laikiem. Lūk, kas pazudīs kopā ar kontu:",
+    "itemAccount": "lietotājvārds un parole — šajā kontā vairs nevarēsi ieiet",
+    "itemFavorites": "izlase: {n}",
+    "itemHistory": "lejupielāžu vēsture: {n}",
+    "itemUpdates": "atjauninājumu izsekošana un Telegram paziņojumi",
+    "itemLinks": "piesaistes: {list}",
+    "warnTip": "Padoms: pirms dzēšanas saglabā izlasi ar «Dalīties ar sarakstu» cilnē «Izlase». Šo kodu vēlāk varēs ielīmēt jaunā kontā.",
+    "warnCancel": "Nedzēst",
+    "warnNext": "Jā, dzēst",
+    "finalTitle": "Pēdējā pārbaude",
+    "finalText": "Konts {name} tiks dzēsts pilnībā un uz visiem laikiem. To vēlāk nevarēsi atcelt ne tu, ne mēs. Padomā vēl mirkli.",
+    "finalWait": "Atzīme būs pieejama pēc {s} s.",
+    "finalReady": "Ja esi izlēmis — ieliec atzīmi.",
+    "finalCheck": "Es tiešām esmu nolēmis dzēst savu kontu un saprotu riskus.",
+    "finalDelete": "Dzēst uz visiem laikiem",
+    "deleting": "Dzēšam kontu…",
+    "done": "Konts dzēsts. Atgriežam tevi sākumlapā…",
+    "error": "Neizdevās dzēst kontu. Pamēģini vēlreiz."
+  },
+  "st": {
+    "metaTitle": "Statistika | ModrinthProxy",
+    "userOne": "lietotājs",
+    "userFew": "lietotāji",
+    "userMany": "lietotāji",
+    "lead": "reģistrēti ModrinthProxy"
   }
 }
