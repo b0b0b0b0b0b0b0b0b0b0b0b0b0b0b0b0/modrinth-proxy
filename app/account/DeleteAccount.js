@@ -186,8 +186,8 @@ export default function DeleteAccount({ username, favorites, downloads, linkedNa
               <label
                 className={`mt-4 flex items-start gap-3 rounded-xl border p-3 text-sm transition-colors ${
                   seconds > 0
-                    ? 'cursor-not-allowed border-gray-800 text-gray-600'
-                    : 'cursor-pointer border-red-500/40 text-gray-100 hover:bg-red-500/5'
+                    ? 'cursor-not-allowed border-gray-800 text-gray-900 opacity-50 dark:text-gray-100'
+                    : 'cursor-pointer border-red-500/40 text-gray-900 hover:bg-red-500/5 dark:text-gray-100'
                 }`}
               >
                 <input
