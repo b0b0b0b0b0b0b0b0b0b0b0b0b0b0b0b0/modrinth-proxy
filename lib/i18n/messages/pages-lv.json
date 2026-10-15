@@ -552,7 +552,9 @@
     "clearHistory": "Notīrīt vēsturi",
     "clearHistoryText": "No vēstures pazudīs viss: {n}. Arī lejupielādētā jaunās versijas vairs netiks sekotas — tas atsāksies, kad kaut ko lejupielādēsi.",
     "clearHistoryHint": "Gribi sākt vēsturi no tīras lapas?",
-    "settings": "Iestatījumi"
+    "settings": "Iestatījumi",
+    "newRelease": "Iznākusi jauna versija",
+    "filterAll": "Visi"
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
@@ -565,7 +567,6 @@
     "digestHave": "tev ir {v}",
     "digestMore": "…un vēl {n}",
     "digestOpen": "Atvērt kontu",
-    "digestOff": "Izslēgt paziņojumus",
     "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija.",
     "muteProject": "Nesekot šī projekta jaunajām versijām",
     "unmuteProject": "Atkal sekot jaunajām versijām",
@@ -579,7 +580,14 @@
     "unmuteAll": "Atgriezt visus",
     "recordHistory": "Saglabāt lejupielāžu vēsturi",
     "recordHistoryHint": "Ja izslēgsi, jaunās lejupielādes nenonāks vēsturē un tām netiks sekots. Jau saglabātais paliks — to var notīrīt cilnē «Lejupielāžu vēsture».",
-    "historyOff": "Vēsture netiek saglabāta — jaunās lejupielādes šeit neparādās. Ieslēgt var «Iestatījumos»."
+    "historyOff": "Vēsture netiek saglabāta — jaunās lejupielādes šeit neparādās. Ieslēgt var «Iestatījumos».",
+    "gameTitle": "Ko tu spēlē",
+    "gameHint": "Tad paziņojumi par izlasi būs tikai par tavu ielādētāju un Minecraft versiju — ar pogu «Lejupielādēt» vajadzīgajam failam. Ja atstāsi «Minēt», vietne ņems to, ko tu visbiežāk lejupielādē.",
+    "loader": "Ielādētājs",
+    "gameVersion": "Minecraft versija",
+    "auto": "Minēt",
+    "guessed": "Uzminēts pēc tavām lejupielādēm: {value}",
+    "notGuessed": "Vēl nav no kā minēt — lejupielādē kaut ko vai izvēlies pats. Līdz tam par izlasi nāks vispārējs kopsavilkums par visām versijām."
   },
   "del": {
     "title": "Konta dzēšana",

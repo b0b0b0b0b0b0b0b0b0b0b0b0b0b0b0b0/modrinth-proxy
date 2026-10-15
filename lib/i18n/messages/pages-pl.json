@@ -552,7 +552,9 @@
     "clearHistory": "Wyczyść historię",
     "clearHistoryText": "Z historii zniknie wszystko: {n}. Nowe wersje pobranych rzeczy też przestaną być śledzone — śledzenie wróci, gdy coś pobierzesz.",
     "clearHistoryHint": "Chcesz zacząć historię od nowa?",
-    "settings": "Ustawienia"
+    "settings": "Ustawienia",
+    "newRelease": "Wyszła nowa wersja",
+    "filterAll": "Wszystko"
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",
@@ -565,7 +567,6 @@
     "digestHave": "masz {v}",
     "digestMore": "…i jeszcze {n}",
     "digestOpen": "Otwórz konto",
-    "digestOff": "Wyłącz powiadomienia",
     "notifyNeedLink": "Żeby dostawać powiadomienia, podłącz Telegram. Bot wyśle podsumowanie, gdy coś pobranego lub ulubionego dostanie nową wersję.",
     "muteProject": "Nie śledź nowych wersji tego projektu",
     "unmuteProject": "Znowu śledź nowe wersje",
@@ -579,7 +580,14 @@
     "unmuteAll": "Przywróć wszystkie",
     "recordHistory": "Zapisuj historię pobrań",
     "recordHistoryHint": "Jeśli wyłączysz, nowe pobrania nie trafią do historii i nie będą śledzone. To, co już zapisane, zostanie — możesz to wyczyścić w zakładce „Historia pobrań”.",
-    "historyOff": "Historia nie jest zapisywana — nowe pobrania tu nie trafiają. Włączysz to w Ustawieniach."
+    "historyOff": "Historia nie jest zapisywana — nowe pobrania tu nie trafiają. Włączysz to w Ustawieniach.",
+    "gameTitle": "W co grasz",
+    "gameHint": "Wtedy powiadomienia o ulubionych będą tylko o twoim loaderze i wersji Minecrafta — od razu z przyciskiem „Pobierz” właściwego pliku. Przy „Zgadnij” strona bierze to, co najczęściej pobierasz.",
+    "loader": "Loader",
+    "gameVersion": "Wersja Minecrafta",
+    "auto": "Zgadnij",
+    "guessed": "Zgadnięte z twoich pobrań: {value}",
+    "notGuessed": "Na razie nie ma z czego zgadywać — pobierz coś albo wybierz sam. Do tego czasu ulubione dostają ogólne podsumowanie wszystkich wersji."
   },
   "del": {
     "title": "Usuwanie konta",

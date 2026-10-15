@@ -552,7 +552,9 @@
     "clearHistory": "Cancella cronologia",
     "clearHistoryText": "Verrà eliminato tutto dalla cronologia: {n}. Anche le nuove versioni dei download non verranno più seguite: si riparte quando scarichi qualcosa.",
     "clearHistoryHint": "Vuoi ricominciare la cronologia da zero?",
-    "settings": "Impostazioni"
+    "settings": "Impostazioni",
+    "newRelease": "È uscita una nuova versione",
+    "filterAll": "Tutto"
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",
@@ -565,7 +567,6 @@
     "digestHave": "hai la {v}",
     "digestMore": "…e altri {n}",
     "digestOpen": "Apri il mio account",
-    "digestOff": "Disattiva le notifiche",
     "notifyNeedLink": "Per ricevere le notifiche, collega Telegram. Il bot manderà un riepilogo quando qualcosa di scaricato o salvato riceve una nuova versione.",
     "muteProject": "Non seguire le nuove versioni di questo progetto",
     "unmuteProject": "Segui di nuovo le nuove versioni",
@@ -579,7 +580,14 @@
     "unmuteAll": "Riattiva tutti",
     "recordHistory": "Salva la cronologia dei download",
     "recordHistoryHint": "Se lo disattivi, i nuovi download non finiranno nella cronologia e non verranno seguiti. Quello già salvato resta: puoi cancellarlo nella scheda «Cronologia download».",
-    "historyOff": "La cronologia non viene salvata: i nuovi download non compaiono qui. Puoi riattivarla nelle Impostazioni."
+    "historyOff": "La cronologia non viene salvata: i nuovi download non compaiono qui. Puoi riattivarla nelle Impostazioni.",
+    "gameTitle": "A cosa giochi",
+    "gameHint": "Così le notifiche dei preferiti riguarderanno solo il tuo loader e la tua versione di Minecraft, con il pulsante «Scarica» del file giusto. Con «Indovina», il sito usa ciò che scarichi di più.",
+    "loader": "Loader",
+    "gameVersion": "Versione di Minecraft",
+    "auto": "Indovina",
+    "guessed": "Indovinato dai tuoi download: {value}",
+    "notGuessed": "Ancora niente da cui indovinare: scarica qualcosa o scegli tu. Nel frattempo i preferiti ricevono un riepilogo generale di tutte le versioni."
   },
   "del": {
     "title": "Elimina account",

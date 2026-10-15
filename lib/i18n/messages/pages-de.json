@@ -552,7 +552,9 @@
     "clearHistory": "Verlauf leeren",
     "clearHistoryText": "Alles im Verlauf wird entfernt: {n}. Neue Versionen von Heruntergeladenem werden auch nicht mehr verfolgt — das beginnt wieder, sobald du etwas herunterlädst.",
     "clearHistoryHint": "Willst du deinen Verlauf neu beginnen?",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "newRelease": "Eine neue Version ist da",
+    "filterAll": "Alle"
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
@@ -565,7 +567,6 @@
     "digestHave": "du hast {v}",
     "digestMore": "…und {n} weitere",
     "digestOpen": "Konto öffnen",
-    "digestOff": "Benachrichtigungen ausschalten",
     "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt.",
     "muteProject": "Neue Versionen dieses Projekts nicht verfolgen",
     "unmuteProject": "Neue Versionen wieder verfolgen",
@@ -579,7 +580,14 @@
     "unmuteAll": "Alle wieder aktivieren",
     "recordHistory": "Download-Verlauf speichern",
     "recordHistoryHint": "Wenn du das ausschaltest, landen neue Downloads nicht im Verlauf und werden nicht auf Updates geprüft. Bisherige Einträge bleiben — du kannst sie im Tab „Download-Verlauf“ löschen.",
-    "historyOff": "Der Verlauf wird nicht gespeichert — neue Downloads erscheinen hier nicht. Einschalten kannst du das in den Einstellungen."
+    "historyOff": "Der Verlauf wird nicht gespeichert — neue Downloads erscheinen hier nicht. Einschalten kannst du das in den Einstellungen.",
+    "gameTitle": "Was du spielst",
+    "gameHint": "Dann gelten Favoriten-Benachrichtigungen nur für deinen Loader und deine Minecraft-Version — mit „Herunterladen“-Knopf für die passende Datei. Bei „Raten“ nimmt die Seite das, was du am häufigsten herunterlädst.",
+    "loader": "Loader",
+    "gameVersion": "Minecraft-Version",
+    "auto": "Raten",
+    "guessed": "Aus deinen Downloads geraten: {value}",
+    "notGuessed": "Noch nichts zum Raten — lade etwas herunter oder wähle selbst. Bis dahin gibt es für Favoriten eine allgemeine Übersicht über alle Versionen."
   },
   "del": {
     "title": "Konto löschen",

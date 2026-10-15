@@ -552,7 +552,9 @@
     "clearHistory": "Xóa lịch sử",
     "clearHistoryText": "Mọi thứ trong lịch sử sẽ bị xóa: {n}. Phiên bản mới của những thứ đã tải cũng sẽ ngừng được theo dõi — sẽ bắt đầu lại khi bạn tải gì đó.",
     "clearHistoryHint": "Muốn bắt đầu lịch sử lại từ đầu?",
-    "settings": "Cài đặt"
+    "settings": "Cài đặt",
+    "newRelease": "Đã có phiên bản mới",
+    "filterAll": "Tất cả"
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",
@@ -565,7 +567,6 @@
     "digestHave": "bạn đang có {v}",
     "digestMore": "…và {n} mục nữa",
     "digestOpen": "Mở tài khoản",
-    "digestOff": "Tắt thông báo",
     "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới.",
     "muteProject": "Không theo dõi phiên bản mới của dự án này",
     "unmuteProject": "Theo dõi phiên bản mới trở lại",
@@ -579,7 +580,14 @@
     "unmuteAll": "Bật lại tất cả",
     "recordHistory": "Lưu lịch sử tải xuống",
     "recordHistoryHint": "Nếu tắt, lượt tải mới sẽ không vào lịch sử và không được theo dõi cập nhật. Những gì đã lưu vẫn giữ — có thể xóa ở thẻ “Lịch sử tải xuống”.",
-    "historyOff": "Lịch sử đang không được lưu — lượt tải mới không hiện ở đây. Có thể bật lại trong Cài đặt."
+    "historyOff": "Lịch sử đang không được lưu — lượt tải mới không hiện ở đây. Có thể bật lại trong Cài đặt.",
+    "gameTitle": "Bạn chơi bản nào",
+    "gameHint": "Khi đó thông báo cho mục yêu thích chỉ nói về trình tải và phiên bản Minecraft của bạn — kèm nút “Tải xuống” đúng tệp. Nếu để “Đoán”, trang sẽ dùng những gì bạn tải nhiều nhất.",
+    "loader": "Trình tải",
+    "gameVersion": "Phiên bản Minecraft",
+    "auto": "Đoán",
+    "guessed": "Đoán theo lượt tải của bạn: {value}",
+    "notGuessed": "Chưa có gì để đoán — hãy tải gì đó hoặc tự chọn. Trong lúc đó mục yêu thích nhận bản tóm tắt chung cho mọi phiên bản."
   },
   "del": {
     "title": "Xóa tài khoản",

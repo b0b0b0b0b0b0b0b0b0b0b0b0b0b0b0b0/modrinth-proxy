@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import { signInWithTelegram } from '@/lib/telegramPopup'
@@ -56,6 +56,7 @@ export default function AccountSettings({
   recordHistory: initialRecord,
   mutedCount,
   deletion,
+  game,
 }) {
   const t = useT()
   const router = useRouter()
@@ -64,6 +65,22 @@ export default function AccountSettings({
   const [notify, setNotify] = useState(telegram.notify)
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [recordHistory, setRecordHistory] = useState(initialRecord)
+  const [loader, setLoader] = useState(game.loader)
+  const [gameVersion, setGameVersion] = useState(game.gameVersion)
+  const [gameVersions, setGameVersions] = useState([])
+
+  useEffect(() => {
+    let alive = true
+    fetch('/api/mc-versions')
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (alive && Array.isArray(data?.release)) setGameVersions(data.release)
+      })
+      .catch(() => {})
+    return () => {
+      alive = false
+    }
+  }, [])
 
   const save = async (key, payload, apply, revert) => {
     if (busy) return
@@ -125,6 +142,55 @@ export default function AccountSettings({
           </Setting>
         </Section>
       ) : null}
+
+      <Section title={t('set.gameTitle')}>
+        <div className="py-3">
+          <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-500">{t('set.gameHint')}</p>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <label className="block">
+              <span className="mb-1 block text-xs font-semibold text-gray-400">{t('set.loader')}</span>
+              <select
+                value={loader}
+                disabled={Boolean(busy)}
+                onChange={(event) => {
+                  const next = event.target.value
+                  save('loader', { gameLoader: next }, () => setLoader(next), () => setLoader(loader))
+                }}
+                className="w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green"
+              >
+                <option value="">{t('set.auto')}</option>
+                <option value="fabric">Fabric</option>
+                <option value="forge">Forge</option>
+                <option value="neoforge">NeoForge</option>
+                <option value="quilt">Quilt</option>
+              </select>
+            </label>
+            <label className="block">
+              <span className="mb-1 block text-xs font-semibold text-gray-400">{t('set.gameVersion')}</span>
+              <select
+                value={gameVersion}
+                disabled={Boolean(busy)}
+                onChange={(event) => {
+                  const next = event.target.value
+                  save('version', { gameVersion: next }, () => setGameVersion(next), () => setGameVersion(gameVersion))
+                }}
+                className="w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none focus:border-modrinth-green"
+              >
+                <option value="">{t('set.auto')}</option>
+                {gameVersion && !gameVersions.includes(gameVersion) ? <option value={gameVersion}>{gameVersion}</option> : null}
+                {gameVersions.map((version) => (
+                  <option key={version} value={version}>
+                    {version}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <p className="mt-2 text-[11px] text-gray-600 dark:text-gray-500">
+            {game.guess ? t('set.guessed', { value: game.guess }) : t('set.notGuessed')}
+          </p>
+        </div>
+      </Section>
 
       <Section title={t('account.updates')}>
         <Setting title={t('set.trackDownloads')} hint={t('set.trackDownloadsHint')}>

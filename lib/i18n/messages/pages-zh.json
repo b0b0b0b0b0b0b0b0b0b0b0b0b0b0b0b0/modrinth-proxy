@@ -552,7 +552,9 @@
     "clearHistory": "清空记录",
     "clearHistoryText": "下载记录将全部删除：{n} 项。已下载内容的新版本也将停止跟踪，再次下载内容后会重新开始。",
     "clearHistoryHint": "想让下载记录从头开始吗？",
-    "settings": "设置"
+    "settings": "设置",
+    "newRelease": "有新版本发布",
+    "filterAll": "全部"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
@@ -565,7 +567,6 @@
     "digestHave": "你的版本：{v}",
     "digestMore": "……还有 {n} 项",
     "digestOpen": "打开我的账号",
-    "digestOff": "关闭通知",
     "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。",
     "muteProject": "不再跟踪此项目的新版本",
     "unmuteProject": "重新跟踪新版本",
@@ -579,7 +580,14 @@
     "unmuteAll": "全部恢复",
     "recordHistory": "记录下载历史",
     "recordHistoryHint": "关闭后，新的下载不会进入记录，也不会跟踪其更新。已有记录会保留，可在“下载记录”标签页中清空。",
-    "historyOff": "下载记录已关闭，新的下载不会出现在这里。可在“设置”中重新开启。"
+    "historyOff": "下载记录已关闭，新的下载不会出现在这里。可在“设置”中重新开启。",
+    "gameTitle": "你玩的版本",
+    "gameHint": "设置后，收藏的通知只针对你的加载器和 Minecraft 版本，并直接附上对应文件的“下载”按钮。保持“自动推测”时，网站会参考你最常下载的内容。",
+    "loader": "加载器",
+    "gameVersion": "Minecraft 版本",
+    "auto": "自动推测",
+    "guessed": "根据你的下载推测：{value}",
+    "notGuessed": "暂时无从推测——下载点什么或自己选择。在此之前，收藏会收到涵盖所有版本的概要。"
   },
   "del": {
     "title": "删除账号",

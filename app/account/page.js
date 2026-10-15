@@ -8,11 +8,13 @@ import {
   buildFavoritesCode,
   getDownloadsPage,
   getFavorites,
+  getGameProfile,
   getNotifyMutes,
   getUpdates,
   HISTORY_RETENTION_DAYS,
 } from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
+import { getLoaderDisplayName } from '@/lib/loaders'
 import { filterAvatar } from '@/lib/contentFilter'
 import CatalogPagination from '../components/CatalogPagination'
 import RelativeTime from '../components/RelativeTime'
@@ -26,11 +28,33 @@ import SignInMethods from './SignInMethods'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 import PageFade from './PageFade'
+import TypeFilter from './TypeFilter'
 
 export const dynamic = 'force-dynamic'
 
 const TABS = ['updates', 'favorites', 'downloads', 'signin', 'settings']
 const PAGE_SIZE = 20
+const TYPE_ORDER = ['mod', 'plugin', 'resourcepack', 'shader', 'datapack', 'modpack', 'minecraft_java_server']
+const TYPE_LABEL_KEYS = {
+  mod: 'nav.mods',
+  plugin: 'nav.plugins',
+  resourcepack: 'nav.resourcepacks',
+  shader: 'nav.shaders',
+  datapack: 'nav.datapacks',
+  modpack: 'nav.modpacks',
+  minecraft_java_server: 'nav.servers',
+}
+
+function typeItems(byType, total, t) {
+  return [
+    { id: '', label: t('account.filterAll'), count: total },
+    ...TYPE_ORDER.filter((type) => byType[type] > 0).map((type) => ({
+      id: type,
+      label: t(TYPE_LABEL_KEYS[type]),
+      count: byType[type],
+    })),
+  ]
+}
 const TAB_ICONS = {
   updates: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0',
   favorites:
@@ -110,11 +134,13 @@ function UpdateRow({ row, t }) {
               <span className="font-bold text-modrinth-green">{row.version_number}</span>
             </>
           ) : (
-            <span className="font-bold text-modrinth-green">{t('account.newVersion', { v: row.version_number })}</span>
+            <span className="font-bold text-modrinth-green">
+              {row.version_number ? t('account.newVersion', { v: row.version_number }) : t('account.newRelease')}
+            </span>
           )}
           {row.game_version ? <Chip>{row.game_version}</Chip> : null}
           {row.loaders.map((loader) => (
-            <Chip key={loader}>{loader}</Chip>
+            <Chip key={loader}>{getLoaderDisplayName(loader)}</Chip>
           ))}
           <RelativeTime dateString={new Date(row.created_at).toISOString()} className="text-gray-600 dark:text-gray-500" />
         </div>
@@ -162,16 +188,19 @@ export default async function AccountPage({ searchParams }) {
   const updates = await getUpdates(user.id)
   const favorites = getFavorites(user.id)
   const requestedPage = parseInt(searchParams?.page, 10)
-  const downloads = getDownloadsPage(user.id, requestedPage)
+  const typeFilter = TYPE_ORDER.includes(searchParams?.type) ? searchParams.type : null
+  const downloads = getDownloadsPage(user.id, requestedPage, typeFilter)
+  const favoritesByType = favorites.reduce((map, row) => ({ ...map, [row.project_type]: (map[row.project_type] || 0) + 1 }), {})
+  const shownFavorites = typeFilter ? favorites.filter((row) => row.project_type === typeFilter) : favorites
   const updatesPage = paginate(updates, requestedPage)
-  const favoritesPage = paginate(favorites, requestedPage)
+  const favoritesPage = paginate(shownFavorites, requestedPage)
 
   const requested = searchParams?.tab
   const tab = TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
-  const counts = { updates: updates.length, favorites: favorites.length, downloads: downloads.total }
+  const counts = { updates: updates.length, favorites: favorites.length, downloads: downloads.all }
   const mutes = tab === 'downloads' || tab === 'settings' ? getNotifyMutes(user.id) : new Set()
   const trackDownloads = !user.skip_download_updates
-  const fadeKey = `${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : 1}`
+  const fadeKey = `${typeFilter || 'all'}-${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : 1}`
 
   return (
     <div className="mx-auto max-w-7xl pb-8">
@@ -234,6 +263,12 @@ export default async function AccountPage({ searchParams }) {
         </nav>
 
       <section className="min-w-0 flex-1 rounded-2xl border border-gray-800 bg-modrinth-dark p-4 md:p-5 lg:self-start">
+        {tab === 'favorites' && favorites.length > 0 ? (
+          <TypeFilter items={typeItems(favoritesByType, favorites.length, t)} active={typeFilter || ''} tab="favorites" />
+        ) : null}
+        {tab === 'downloads' && downloads.all > 0 ? (
+          <TypeFilter items={typeItems(downloads.byType, downloads.all, t)} active={typeFilter || ''} tab="downloads" />
+        ) : null}
         <PageFade key={fadeKey}>
         {tab === 'updates' ? (
           updates.length > 0 ? (
@@ -280,7 +315,7 @@ export default async function AccountPage({ searchParams }) {
                   page={favoritesPage.page}
                   totalPages={favoritesPage.pages}
                   pathname="/account"
-                  searchParams={{ tab: 'favorites' }}
+                  searchParams={typeFilter ? { tab: 'favorites', type: typeFilter } : { tab: 'favorites' }}
                   className="mt-4 border-t border-gray-800 pt-4"
                 />
                 <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-gray-800 px-4 py-3">
@@ -313,10 +348,18 @@ export default async function AccountPage({ searchParams }) {
             trackDownloads={trackDownloads}
             recordHistory={Boolean(user.record_history)}
             mutedCount={mutes.size}
+            game={(() => {
+              const profile = getGameProfile(user.id)
+              return {
+                loader: profile.chosenLoader || '',
+                gameVersion: profile.chosenVersion || '',
+                guess: [profile.guess.loader, profile.guess.gameVersion].filter(Boolean).join(' '),
+              }
+            })()}
             deletion={{
               username: user.username,
               favorites: favorites.length,
-              downloads: downloads.total,
+              downloads: downloads.all,
               linkedNames: [
                 ...(user.github_id ? ['GitHub'] : []),
                 ...(user.telegram_id ? ['Telegram'] : []),
@@ -332,7 +375,7 @@ export default async function AccountPage({ searchParams }) {
         ) : null}
 
         {tab === 'downloads' ? (
-          downloads.total > 0 ? (
+          downloads.all > 0 ? (
             <>
               <ul className="divide-y divide-gray-800">
                 {downloads.rows.map((row) => (
@@ -356,14 +399,14 @@ export default async function AccountPage({ searchParams }) {
                 page={downloads.page}
                 totalPages={downloads.pages}
                 pathname="/account"
-                searchParams={{ tab: 'downloads' }}
+                searchParams={typeFilter ? { tab: 'downloads', type: typeFilter } : { tab: 'downloads' }}
                 className="mt-4 border-t border-gray-800 pt-4"
               />
               <p className="mt-3 text-[11px] text-gray-600 dark:text-gray-500">{t('account.historyNote', { n: HISTORY_RETENTION_DAYS })}</p>
               {trackDownloads ? <p className="mt-1 text-[11px] text-gray-600 dark:text-gray-500">{t('tg.muteHint')}</p> : null}
               <div className="mt-10 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-dashed border-gray-800 px-4 py-3">
                 <p className="text-xs text-gray-600 dark:text-gray-500">{t('account.clearHistoryHint')}</p>
-                <ClearHistoryButton count={downloads.total} />
+                <ClearHistoryButton count={downloads.all} />
               </div>
             </>
           ) : (

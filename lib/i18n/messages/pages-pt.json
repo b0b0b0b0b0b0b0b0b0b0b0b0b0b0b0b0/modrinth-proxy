@@ -552,7 +552,9 @@
     "clearHistory": "Limpar histórico",
     "clearHistoryText": "Todo o histórico será apagado: {n}. As novas versões do que foi baixado também deixam de ser acompanhadas — voltam quando você baixar algo.",
     "clearHistoryHint": "Quer começar o histórico do zero?",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "newRelease": "Saiu uma versão nova",
+    "filterAll": "Tudo"
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",
@@ -565,7 +567,6 @@
     "digestHave": "você tem {v}",
     "digestMore": "…e mais {n}",
     "digestOpen": "Abrir minha conta",
-    "digestOff": "Desativar notificações",
     "notifyNeedLink": "Para receber notificações, vincule o Telegram. O bot manda um resumo quando algo baixado ou favoritado ganha versão nova.",
     "muteProject": "Não acompanhar novas versões deste projeto",
     "unmuteProject": "Acompanhar novas versões de novo",
@@ -579,7 +580,14 @@
     "unmuteAll": "Reativar todos",
     "recordHistory": "Guardar histórico de downloads",
     "recordHistoryHint": "Se desligar, os novos downloads não entram no histórico nem são acompanhados. O que já está salvo continua — dá para limpar na aba “Histórico de downloads”.",
-    "historyOff": "O histórico não está sendo salvo — novos downloads não aparecem aqui. Dá para ligar nas Configurações."
+    "historyOff": "O histórico não está sendo salvo — novos downloads não aparecem aqui. Dá para ligar nas Configurações.",
+    "gameTitle": "O que você joga",
+    "gameHint": "Aí as notificações dos favoritos serão só do seu loader e da sua versão do Minecraft — já com o botão “Baixar” do arquivo certo. Em “Adivinhar”, o site usa o que você mais baixa.",
+    "loader": "Loader",
+    "gameVersion": "Versão do Minecraft",
+    "auto": "Adivinhar",
+    "guessed": "Adivinhado pelos seus downloads: {value}",
+    "notGuessed": "Ainda não dá para adivinhar — baixe algo ou escolha você mesmo. Até lá, os favoritos recebem um resumo geral de todas as versões."
   },
   "del": {
     "title": "Excluir conta",

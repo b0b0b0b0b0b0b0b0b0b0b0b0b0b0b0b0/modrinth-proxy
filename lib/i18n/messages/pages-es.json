@@ -552,7 +552,9 @@
     "clearHistory": "Borrar historial",
     "clearHistoryText": "Se borrará todo el historial: {n}. Las nuevas versiones de lo descargado también dejarán de seguirse; vuelve a empezar cuando descargues algo.",
     "clearHistoryHint": "¿Quieres empezar el historial de cero?",
-    "settings": "Ajustes"
+    "settings": "Ajustes",
+    "newRelease": "Ha salido una versión nueva",
+    "filterAll": "Todo"
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",
@@ -565,7 +567,6 @@
     "digestHave": "tienes {v}",
     "digestMore": "…y {n} más",
     "digestOpen": "Abrir mi cuenta",
-    "digestOff": "Desactivar avisos",
     "notifyNeedLink": "Para recibir avisos, vincula Telegram. El bot enviará un resumen cuando algo descargado o guardado tenga versión nueva.",
     "muteProject": "Dejar de seguir nuevas versiones de este proyecto",
     "unmuteProject": "Volver a seguir nuevas versiones",
@@ -579,7 +580,14 @@
     "unmuteAll": "Reactivar todos",
     "recordHistory": "Guardar historial de descargas",
     "recordHistoryHint": "Si lo desactivas, las nuevas descargas no se guardarán en el historial ni se seguirán sus actualizaciones. Lo ya guardado se queda; puedes borrarlo en la pestaña «Historial de descargas».",
-    "historyOff": "El historial no se guarda: las nuevas descargas no aparecen aquí. Puedes activarlo en Ajustes."
+    "historyOff": "El historial no se guarda: las nuevas descargas no aparecen aquí. Puedes activarlo en Ajustes.",
+    "gameTitle": "A qué juegas",
+    "gameHint": "Así los avisos de favoritos serán solo de tu cargador y tu versión de Minecraft, con botón «Descargar» del archivo correcto. Si dejas «Adivinar», el sitio usa lo que más descargas.",
+    "loader": "Cargador",
+    "gameVersion": "Versión de Minecraft",
+    "auto": "Adivinar",
+    "guessed": "Adivinado por tus descargas: {value}",
+    "notGuessed": "Aún no hay de dónde adivinar: descarga algo o elígelo tú. Mientras tanto, los favoritos reciben un resumen general de todas las versiones."
   },
   "del": {
     "title": "Eliminar cuenta",

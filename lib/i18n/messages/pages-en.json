@@ -570,7 +570,9 @@
     "clearHistory": "Clear history",
     "clearHistoryText": "Everything in your history will be removed: {n}. New versions of downloaded items will stop being tracked too — tracking starts again when you download something.",
     "clearHistoryHint": "Want to start your history from scratch?",
-    "settings": "Settings"
+    "settings": "Settings",
+    "newRelease": "A new version is out",
+    "filterAll": "All"
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
@@ -583,7 +585,6 @@
     "digestHave": "you have {v}",
     "digestMore": "…and {n} more",
     "digestOpen": "Open my account",
-    "digestOff": "Turn notifications off",
     "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version.",
     "muteProject": "Stop tracking new versions of this project",
     "unmuteProject": "Track new versions again",
@@ -597,7 +598,14 @@
     "unmuteAll": "Unmute all",
     "recordHistory": "Keep download history",
     "recordHistoryHint": "If you turn this off, new downloads won’t be added to your history and won’t be tracked for updates. What’s already there stays — you can clear it on the Download history tab.",
-    "historyOff": "History recording is off — new downloads don’t show up here. You can turn it back on in Settings."
+    "historyOff": "History recording is off — new downloads don’t show up here. You can turn it back on in Settings.",
+    "gameTitle": "What you play",
+    "gameHint": "Then favorites notifications will only be about your loader and Minecraft version — with a Download button for the right file. If you leave it on “Guess”, the site uses what you download most.",
+    "loader": "Loader",
+    "gameVersion": "Minecraft version",
+    "auto": "Guess",
+    "guessed": "Guessed from your downloads: {value}",
+    "notGuessed": "Nothing to guess from yet — download something or pick it yourself. Until then favorites get a general summary across all versions."
   },
   "del": {
     "title": "Delete account",

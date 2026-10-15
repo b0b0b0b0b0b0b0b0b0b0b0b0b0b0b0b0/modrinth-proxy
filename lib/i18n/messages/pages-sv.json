@@ -552,7 +552,9 @@
     "clearHistory": "Rensa historiken",
     "clearHistoryText": "Allt i historiken tas bort: {n}. Nya versioner av det du laddat ner slutar också följas — det börjar igen när du laddar ner något.",
     "clearHistoryHint": "Vill du börja om historiken från noll?",
-    "settings": "Inställningar"
+    "settings": "Inställningar",
+    "newRelease": "En ny version är ute",
+    "filterAll": "Alla"
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
@@ -565,7 +567,6 @@
     "digestHave": "du har {v}",
     "digestMore": "…och {n} till",
     "digestOpen": "Öppna mitt konto",
-    "digestOff": "Stäng av aviseringar",
     "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version.",
     "muteProject": "Följ inte nya versioner av det här projektet",
     "unmuteProject": "Följ nya versioner igen",
@@ -579,7 +580,14 @@
     "unmuteAll": "Slå på alla igen",
     "recordHistory": "Spara nedladdningshistorik",
     "recordHistoryHint": "Stänger du av det hamnar nya nedladdningar inte i historiken och följs inte upp. Det som redan finns ligger kvar — du kan rensa det på fliken ”Nedladdningshistorik”.",
-    "historyOff": "Historiken sparas inte — nya nedladdningar syns inte här. Du kan slå på det i Inställningar."
+    "historyOff": "Historiken sparas inte — nya nedladdningar syns inte här. Du kan slå på det i Inställningar.",
+    "gameTitle": "Vad du spelar",
+    "gameHint": "Då gäller aviseringar för favoriter bara din loader och din Minecraft-version — med en ”Ladda ner”-knapp för rätt fil. Med ”Gissa” tar sajten det du laddar ner oftast.",
+    "loader": "Loader",
+    "gameVersion": "Minecraft-version",
+    "auto": "Gissa",
+    "guessed": "Gissat från dina nedladdningar: {value}",
+    "notGuessed": "Inget att gissa från än — ladda ner något eller välj själv. Tills dess får favoriter en allmän sammanfattning för alla versioner."
   },
   "del": {
     "title": "Radera konto",
