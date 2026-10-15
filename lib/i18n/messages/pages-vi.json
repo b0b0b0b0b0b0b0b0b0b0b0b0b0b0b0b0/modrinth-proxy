@@ -640,5 +640,12 @@
     "inDownloads": "Lượt tải",
     "topFavorites": "Được yêu thích nhiều nhất",
     "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất."
+  },
+  "notfound": {
+    "metaTitle": "404 — Không tìm thấy trang | ModrinthProxy",
+    "metaDesc": "Trang này không có ở đây",
+    "title": "Ối! Không tìm thấy trang",
+    "lead": "Có vẻ trang này đã theo Enderman vào End. Đã bị xoá hoặc chưa từng tồn tại.",
+    "home": "Trang chủ"
   }
 }

@@ -640,5 +640,12 @@
     "inDownloads": "Downloads",
     "topFavorites": "Am häufigsten favorisiert",
     "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage."
+  },
+  "notfound": {
+    "metaTitle": "404 — Seite nicht gefunden | ModrinthProxy",
+    "metaDesc": "Diese Seite gibt es nicht",
+    "title": "Hoppla! Seite nicht gefunden",
+    "lead": "Sieht aus, als wäre diese Seite mit einem Enderman ins Ende gegangen. Gelöscht – oder es gab sie nie.",
+    "home": "Startseite"
   }
 }

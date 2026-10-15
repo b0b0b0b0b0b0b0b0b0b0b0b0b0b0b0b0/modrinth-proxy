@@ -24,7 +24,7 @@ const TYPE_LABEL_KEYS = {
 export async function generateMetadata() {
   const { t } = getRequestT()
   return {
-    title: t('st.metaTitle'),
+    title: getSessionUser() ? t('st.metaTitle') : t('notfound.metaTitle'),
     robots: 'noindex, nofollow',
   }
 }

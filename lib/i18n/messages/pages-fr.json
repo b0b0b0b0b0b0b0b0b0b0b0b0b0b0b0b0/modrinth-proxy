@@ -640,5 +640,12 @@
     "inDownloads": "Téléchargements",
     "topFavorites": "Les plus mis en favoris",
     "note": "Seulement des totaux — aucun pseudo ni liste personnelle. Les téléchargements couvrent les 30 derniers jours."
+  },
+  "notfound": {
+    "metaTitle": "404 — Page introuvable | ModrinthProxy",
+    "metaDesc": "Cette page n’est pas là",
+    "title": "Oups ! Page introuvable",
+    "lead": "On dirait que cette page est partie dans l’End avec un Enderman. Supprimée, ou elle n’a jamais existé.",
+    "home": "Accueil"
   }
 }

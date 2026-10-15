@@ -640,5 +640,12 @@
     "inDownloads": "Nedladdningar",
     "topFavorites": "Flest favoriter",
     "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna."
+  },
+  "notfound": {
+    "metaTitle": "404 — Sidan hittades inte | ModrinthProxy",
+    "metaDesc": "Den sidan finns inte här",
+    "title": "Hoppsan! Sidan hittades inte",
+    "lead": "Det verkar som att sidan gick till End med en Enderman. Borttagen – eller så har den aldrig funnits.",
+    "home": "Startsidan"
   }
 }

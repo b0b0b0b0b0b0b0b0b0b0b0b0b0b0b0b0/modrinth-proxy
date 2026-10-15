@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { getRequestT } from '@/lib/i18n/server'
+import NotFoundScene from './NotFoundScene'
 
 export async function generateMetadata() {
   const { t } = getRequestT()
@@ -9,90 +10,44 @@ export async function generateMetadata() {
   }
 }
 
+const SECTIONS = [
+  { href: '/mods', key: 'nav.mods' },
+  { href: '/plugins', key: 'nav.plugins' },
+  { href: '/resourcepacks', key: 'nav.resourcepacks' },
+  { href: '/shaders', key: 'nav.shaders' },
+  { href: '/modpacks', key: 'nav.modpacks' },
+  { href: '/datapacks', key: 'nav.datapacks' },
+]
+
 export default function NotFound() {
   const { t } = getRequestT()
   return (
-    <div className="min-h-[70vh] flex items-center justify-center px-4">
-      <div className="text-center max-w-2xl mx-auto">
-        <div className="mb-8 relative">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-32 h-32 bg-red-500/20 rounded-full animate-ping"></div>
-          </div>
-          <div className="relative">
-            <svg 
-              className="w-32 h-32 mx-auto text-red-500 animate-bounce" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-              style={{ animationDuration: '2s' }}
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={1.5} 
-                d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" 
-              />
-            </svg>
-          </div>
-        </div>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-10">
+      <div className="mx-auto w-full max-w-xl text-center">
+        <NotFoundScene label={`404 — ${t('notfound.title')}`} />
 
-        <h1 className="text-6xl md:text-8xl font-black mb-6 bg-gradient-to-r from-red-500 via-orange-500 to-red-500 bg-clip-text text-transparent animate-pulse">
-          404
-        </h1>
-        
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-          {t('notfound.title')}
-        </h2>
-        
-        <p className="text-gray-400 text-base md:text-lg mb-8 max-w-md mx-auto">
-          {t('notfound.lead')}
-        </p>
+        <h2 className="mt-10 text-2xl font-bold text-white md:text-3xl">{t('notfound.title')}</h2>
+        <p className="mx-auto mt-3 max-w-md text-base text-gray-400">{t('notfound.lead')}</p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link 
+        <div className="mt-8 flex flex-wrap justify-center gap-2">
+          <Link
             href="/"
-            className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50 overflow-hidden"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-modrinth-green/40 px-3 py-1.5 text-sm font-semibold text-modrinth-green transition-colors hover:bg-modrinth-green/10"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <svg className="w-5 h-5 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+              <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1Z" />
             </svg>
-            <span className="relative z-10">{t('notfound.home')}</span>
+            {t('notfound.home')}
           </Link>
-          
-          <Link 
-            href="/mods"
-            className="group inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:scale-105 border border-gray-700 hover:border-modrinth-green"
-          >
-            <svg className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            <span>{t('notfound.toMods')}</span>
-          </Link>
-        </div>
-
-        <div className="mt-12 pt-8 border-t border-gray-800">
-          <p className="text-gray-500 text-sm mb-4">{t('notfound.orSections')}</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/plugins" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('nav.plugins')}
+          {SECTIONS.map((section) => (
+            <Link
+              key={section.href}
+              href={section.href}
+              className="rounded-lg border border-gray-800 px-3 py-1.5 text-sm text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white"
+            >
+              {t(section.key)}
             </Link>
-            <Link href="/modpacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('nav.modpacks')}
-            </Link>
-            <Link href="/shaders" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('nav.shaders')}
-            </Link>
-            <Link href="/resourcepacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('nav.resourcepacks')}
-            </Link>
-            <Link href="/datapacks" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('nav.datapacks')}
-            </Link>
-            <Link href="/collections" className="px-4 py-2 bg-gray-800/50 hover:bg-gray-700 rounded-lg text-sm text-gray-300 hover:text-white transition-all duration-200 border border-gray-700 hover:border-modrinth-green">
-              {t('col.title')}
-            </Link>
-          </div>
+          ))}
         </div>
       </div>
     </div>

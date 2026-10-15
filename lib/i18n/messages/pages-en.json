@@ -436,9 +436,7 @@
     "metaDesc": "That page isn’t here",
     "title": "Oops. Page not found",
     "lead": "Looks like this page walked into the End with an Enderman. Deleted, or it never existed.",
-    "home": "Home",
-    "toMods": "To mods",
-    "orSections": "Or jump to a popular section:"
+    "home": "Home"
   },
   "console": {
     "stop": "Stop. Stop. Stop.",

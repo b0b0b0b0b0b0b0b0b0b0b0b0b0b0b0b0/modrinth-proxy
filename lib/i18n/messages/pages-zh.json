@@ -640,5 +640,12 @@
     "inDownloads": "下载",
     "topFavorites": "收藏最多",
     "note": "只有总数——没有用户名或任何人的列表。下载按最近 30 天统计。"
+  },
+  "notfound": {
+    "metaTitle": "404 — 页面未找到 | ModrinthProxy",
+    "metaDesc": "这个页面不存在",
+    "title": "哎呀！页面未找到",
+    "lead": "这个页面好像跟着末影人去了末地。可能已被删除，或者根本不存在。",
+    "home": "首页"
   }
 }

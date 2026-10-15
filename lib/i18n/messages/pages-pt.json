@@ -640,5 +640,12 @@
     "inDownloads": "Downloads",
     "topFavorites": "Mais favoritados",
     "note": "Só totais — sem nomes nem listas de ninguém. Downloads dos últimos 30 dias."
+  },
+  "notfound": {
+    "metaTitle": "404 — Página não encontrada | ModrinthProxy",
+    "metaDesc": "Essa página não está aqui",
+    "title": "Opa! Página não encontrada",
+    "lead": "Parece que esta página foi para o End com um Enderman. Foi apagada ou nunca existiu.",
+    "home": "Início"
   }
 }
