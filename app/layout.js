@@ -62,7 +62,7 @@ export const viewport = {
 
 const POSTERITY_COMMENT_BODY = ` _    _ 
     (o)--(o)      
-   /\.______\.       
+   /.______.\\
    \\________/     
   ./        \\.    
  ( .        , )
