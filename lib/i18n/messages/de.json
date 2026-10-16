@@ -48,7 +48,9 @@
     "collections": "Sammlungen",
     "extension": "Browsererweiterung",
     "siteVersion": "Site-Version: {version}",
-    "siteVersionTip": "News und Changelog"
+    "siteVersionTip": "News und Changelog",
+    "snowball": "Kätzchen zum Schneeballrollen rufen",
+    "snowballBusy": "Das Kätzchen spielt schon draußen"
   },
   "copy": {
     "id": "ID in die Zwischenablage kopieren",

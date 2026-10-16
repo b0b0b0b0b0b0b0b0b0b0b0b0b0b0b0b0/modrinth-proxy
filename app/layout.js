@@ -10,6 +10,8 @@ import TopNav from "./components/TopNav"
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import Footer from './components/Footer'
 import PeekKitten from './components/PeekKitten'
+import FooterSnow from './components/FooterSnow'
+import KittenSnowball from './components/KittenSnowball'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
@@ -172,12 +174,14 @@ export default async function RootLayout({ children }) {
             <MobileNav />
           </Suspense>
           <PeekKitten />
+          <FooterSnow />
           <Footer />
           <ExtensionBanner />
           <CookieNotice />
           <FeedbackThoughtBanner />
           <HalloweenEffects />
           <NewYearEffects />
+          <KittenSnowball />
           <BirthdayEffects />
           </I18nProvider>
           </AppTooltipProvider>

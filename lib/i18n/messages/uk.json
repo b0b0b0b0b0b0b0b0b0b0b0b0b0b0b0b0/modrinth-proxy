@@ -48,7 +48,9 @@
     "collections": "Колекції",
     "extension": "Розширення браузера",
     "siteVersion": "Версія сайту: {version}",
-    "siteVersionTip": "Новини й список змін"
+    "siteVersionTip": "Новини й список змін",
+    "snowball": "Покликати котика катати сніжку",
+    "snowballBusy": "Котик уже гуляє"
   },
   "copy": {
     "id": "Скопіювати ID в буфер",

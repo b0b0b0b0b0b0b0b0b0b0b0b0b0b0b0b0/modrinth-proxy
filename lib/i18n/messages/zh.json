@@ -48,7 +48,9 @@
     "collections": "合集",
     "extension": "浏览器扩展",
     "siteVersion": "站点版本：{version}",
-    "siteVersionTip": "动态与更新日志"
+    "siteVersionTip": "动态与更新日志",
+    "snowball": "叫小猫来滚雪球",
+    "snowballBusy": "小猫已经在玩啦"
   },
   "copy": {
     "id": "复制 ID 到剪贴板",

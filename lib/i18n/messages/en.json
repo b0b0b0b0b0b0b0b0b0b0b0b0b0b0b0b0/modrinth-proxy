@@ -49,7 +49,9 @@
     "collections": "Collections",
     "extension": "Browser extension",
     "siteVersion": "Site version: {version}",
-    "siteVersionTip": "News and changelog"
+    "siteVersionTip": "News and changelog",
+    "snowball": "Call the kitten to roll a snowball",
+    "snowballBusy": "The kitten is already out playing"
   },
   "copy": {
     "id": "Copy ID to clipboard",

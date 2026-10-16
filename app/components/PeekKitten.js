@@ -26,6 +26,13 @@ export default function PeekKitten() {
   const pose = useRef(POSES.phone)
   const hovering = useRef(false)
   const leaveTimer = useRef(null)
+  const [away, setAway] = useState(false)
+
+  useEffect(() => {
+    const onWalk = (event) => setAway(event.detail)
+    window.addEventListener('kitten-snowball', onWalk)
+    return () => window.removeEventListener('kitten-snowball', onWalk)
+  }, [])
 
   useEffect(() => {
     const media = window.matchMedia(WIDE_QUERY)
@@ -113,7 +120,7 @@ export default function PeekKitten() {
   }
 
   return (
-    <div className="pointer-events-none relative h-10 sm:h-0">
+    <div className={`pointer-events-none relative h-10 transition-opacity duration-300 sm:h-0 ${away ? 'invisible opacity-0' : ''}`}>
       <div
         className={`pointer-events-auto absolute bottom-0 h-20 w-20 translate-y-1/2 sm:h-14 sm:w-14 ${side === 'left' ? 'left-[8%]' : 'right-[8%]'}`}
         onMouseEnter={caught}

@@ -48,7 +48,9 @@
     "collections": "Colecciones",
     "extension": "Extensión del navegador",
     "siteVersion": "Versión del sitio: {version}",
-    "siteVersionTip": "Novedades y changelog"
+    "siteVersionTip": "Novedades y changelog",
+    "snowball": "Llamar al gatito a rodar una bola de nieve",
+    "snowballBusy": "El gatito ya está jugando"
   },
   "copy": {
     "id": "Copiar ID al portapapeles",

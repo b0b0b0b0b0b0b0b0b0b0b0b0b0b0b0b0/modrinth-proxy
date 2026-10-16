@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { isHalloweenSeason } from '@/lib/halloween'
+import { isNewYearSeason } from '@/lib/newYear'
 
 const HEART_PATH =
   'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z'
@@ -16,12 +17,13 @@ const BAT_PATH =
 
 const random = (min, max) => min + Math.random() * (max - min)
 
-export function useHalloween() {
-  const [spooky, setSpooky] = useState(false)
+export function useKittenSeason() {
+  const [season, setSeason] = useState(null)
   useEffect(() => {
-    setSpooky(isHalloweenSeason())
+    if (isHalloweenSeason()) setSeason('halloween')
+    else if (isNewYearSeason()) setSeason('winter')
   }, [])
-  return spooky
+  return season
 }
 
 function Ear({ ear, transition, down, spooky }) {
@@ -95,6 +97,26 @@ function WitchHat() {
   )
 }
 
+function SantaHat() {
+  return (
+    <g transform="rotate(-8 12 3)" strokeWidth="1" strokeLinejoin="round">
+      <path d="M7.8 2.8Q9.4-3.2 14.2-3.4q3.4 0 4.4 3.6L16.6 2.8Z" className="fill-red-500" />
+      <rect x="7" y="2.1" width="10.4" height="2.2" rx="1.1" className="fill-white" />
+      <circle cx="18.6" cy="0.4" r="1.25" className="fill-white" />
+    </g>
+  )
+}
+
+function Scarf() {
+  return (
+    <g strokeWidth="0.7" strokeLinejoin="round">
+      <path d="M15 19.8 18 18.9 18.9 24.4 16.2 25Z" className="fill-red-500" />
+      <path d="M4.8 16.6Q12 22 19.2 16.6L20.3 19.6Q12 25.6 3.7 19.6Z" className="fill-red-500" />
+      <path d="M8.3 19.4 7.8 21.9M12 20.3V23M15.7 19.4 16.2 21.9M16.4 21.3 18.3 20.8M16.8 23.3 18.6 22.8" stroke="white" strokeWidth="1" />
+    </g>
+  )
+}
+
 function Paw({ cx, shift = 0, lift, delay }) {
   return (
     <motion.g
@@ -113,7 +135,9 @@ function Paw({ cx, shift = 0, lift, delay }) {
 }
 
 export function KittenFace({ earTransition, earsDown = false, mood = 'look', look = { x: 0, y: 0 }, paws = null, className = 'h-24 w-24' }) {
-  const spooky = useHalloween()
+  const season = useKittenSeason()
+  const spooky = season === 'halloween'
+  const winter = season === 'winter'
   return (
     <svg
       className={`${className} overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`}
@@ -129,8 +153,9 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
       ))}
       <circle cx="12" cy="12" r="9" className={spooky ? 'fill-[#f08a24]/10' : 'fill-modrinth-green/10'} />
       {spooky ? <WitchHat /> : null}
-      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : 'fill-modrinth-green/35'} />
-      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : 'fill-modrinth-green/35'} />
+      {winter ? <SantaHat /> : null}
+      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
       {spooky && mood !== 'sleep' ? <path d="M7.4 7.7 10.5 8.6M16.6 7.7 13.5 8.6" strokeWidth="1.1" /> : null}
       {spooky ? <SpookyEyes mood={mood} look={look} /> : <Eyes mood={mood} look={look} />}
       <AnimatePresence>
@@ -147,6 +172,7 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
         <path d="M12 13.3q-.4 1.4-1.6 1.1M12 13.3q.4 1.4 1.6 1.1" />
       )}
       <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1" />
+      {winter ? <Scarf /> : null}
     </svg>
   )
 }
@@ -246,8 +272,39 @@ function Treat({ kind }) {
   )
 }
 
+function WinterTreat({ kind }) {
+  if (kind === 0) {
+    return (
+      <g fill="none" stroke="#bae6fd" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        {[0, 60, 120, 180, 240, 300].map((angle) => (
+          <path key={angle} d="M12 12V3.5M9.9 5.4 12 7.4 14.1 5.4" transform={`rotate(${angle} 12 12)`} />
+        ))}
+      </g>
+    )
+  }
+  if (kind === 1) {
+    return (
+      <>
+        <rect x="4.5" y="10" width="15" height="11" rx="1.5" className="fill-red-500" />
+        <rect x="3.5" y="7" width="17" height="3.6" rx="1" className="fill-red-400" />
+        <rect x="10.8" y="7" width="2.4" height="14" className="fill-amber-300" />
+        <path d="M12 7C9.4 3.2 6.6 5.4 8.8 7ZM12 7c2.6-3.8 5.4-1.6 3.2 0Z" className="fill-amber-300" />
+      </>
+    )
+  }
+  return (
+    <>
+      <path d="M12 3.5 17 10h-2.4l4.4 6H5l4.4-6H7Z" className="fill-green-500" />
+      <rect x="10.8" y="16" width="2.4" height="3.6" rx="0.5" fill="#92400e" />
+      <circle cx="12" cy="3.6" r="1.4" className="fill-amber-300" />
+      <circle cx="10.4" cy="12.6" r="0.8" className="fill-red-400" />
+      <circle cx="14" cy="14.4" r="0.8" className="fill-amber-300" />
+    </>
+  )
+}
+
 export function KittenHearts({ items, className = 'bottom-20 h-4 w-4' }) {
-  const spooky = useHalloween()
+  const season = useKittenSeason()
   return (
     <AnimatePresence>
       {items.map((heart) => (
@@ -261,7 +318,7 @@ export function KittenHearts({ items, className = 'bottom-20 h-4 w-4' }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeOut' }}
         >
-          {spooky ? <Treat kind={heart.kind} /> : <path d={HEART_PATH} />}
+          {season === 'halloween' ? <Treat kind={heart.kind} /> : season === 'winter' ? <WinterTreat kind={heart.kind} /> : <path d={HEART_PATH} />}
         </motion.svg>
       ))}
     </AnimatePresence>

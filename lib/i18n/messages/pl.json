@@ -48,7 +48,9 @@
     "collections": "Kolekcje",
     "extension": "Rozszerzenie przeglądarki",
     "siteVersion": "Wersja strony: {version}",
-    "siteVersionTip": "Aktualności i changelog"
+    "siteVersionTip": "Aktualności i changelog",
+    "snowball": "Zawołaj kotka do toczenia śnieżki",
+    "snowballBusy": "Kotek już się bawi"
   },
   "copy": {
     "id": "Kopiuj ID do schowka",

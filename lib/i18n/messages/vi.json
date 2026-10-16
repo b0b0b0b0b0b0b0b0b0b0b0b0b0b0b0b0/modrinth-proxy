@@ -48,7 +48,9 @@
     "collections": "Bộ sưu tập",
     "extension": "Tiện ích trình duyệt",
     "siteVersion": "Phiên bản trang: {version}",
-    "siteVersionTip": "Tin tức và nhật ký thay đổi"
+    "siteVersionTip": "Tin tức và nhật ký thay đổi",
+    "snowball": "Gọi mèo con lăn quả cầu tuyết",
+    "snowballBusy": "Mèo con đang đi chơi rồi"
   },
   "copy": {
     "id": "Sao chép ID vào clipboard",

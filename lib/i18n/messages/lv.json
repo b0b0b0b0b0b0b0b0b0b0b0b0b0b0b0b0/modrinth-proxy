@@ -48,7 +48,9 @@
     "collections": "Kolekcijas",
     "extension": "Pārlūka paplašinājums",
     "siteVersion": "Vietnes versija: {version}",
-    "siteVersionTip": "Jaunumi un izmaiņu saraksts"
+    "siteVersionTip": "Jaunumi un izmaiņu saraksts",
+    "snowball": "Pasaukt kaķēnu ripināt sniega piku",
+    "snowballBusy": "Kaķēns jau rotaļājas"
   },
   "copy": {
     "id": "Kopēt ID starpliktuvē",

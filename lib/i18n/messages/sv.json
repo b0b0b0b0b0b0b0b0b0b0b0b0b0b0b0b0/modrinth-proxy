@@ -48,7 +48,9 @@
     "collections": "Samlingar",
     "extension": "Webbläsartillägg",
     "siteVersion": "Webbplatsversion: {version}",
-    "siteVersionTip": "Nyheter och ändringslogg"
+    "siteVersionTip": "Nyheter och ändringslogg",
+    "snowball": "Kalla på kattungen att rulla en snöboll",
+    "snowballBusy": "Kattungen leker redan"
   },
   "copy": {
     "id": "Kopiera ID till urklipp",

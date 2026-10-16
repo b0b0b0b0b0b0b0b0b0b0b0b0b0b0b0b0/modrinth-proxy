@@ -48,7 +48,9 @@
     "collections": "コレクション",
     "extension": "ブラウザ拡張機能",
     "siteVersion": "サイトバージョン: {version}",
-    "siteVersionTip": "ニュースと変更履歴"
+    "siteVersionTip": "ニュースと変更履歴",
+    "snowball": "子猫と雪玉を転がそう",
+    "snowballBusy": "子猫はもうお散歩中"
   },
   "copy": {
     "id": "IDをクリップボードにコピー",

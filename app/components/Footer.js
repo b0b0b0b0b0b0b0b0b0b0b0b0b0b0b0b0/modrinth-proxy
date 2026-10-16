@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { SITE_VERSION } from '@/lib/siteVersion'
 import { IconSiteVersion } from '@/lib/icons'
 import StyledTooltip from './StyledTooltip'
+import SnowballButton from './SnowballButton'
 import { useT } from './I18nProvider'
 
 export default function Footer() {
@@ -30,6 +31,7 @@ export default function Footer() {
               <br/>
               <span className="text-modrinth-green/80 font-medium">{t('footer.homes')}</span>
             </p>
+            <SnowballButton />
           </div>
 
           <div className="text-center md:text-left">

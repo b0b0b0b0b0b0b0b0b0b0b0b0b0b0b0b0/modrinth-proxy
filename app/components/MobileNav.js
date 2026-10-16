@@ -182,7 +182,7 @@ export default function MobileNav({ onFilterClick }) {
 
   return (
     <>
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
+      <div data-mobile-nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
         <div className="flex items-center justify-center gap-2 px-4 py-3 bg-modrinth-darker backdrop-blur-xl shadow-[0_-4px_20px_rgba(var(--color-green-rgb),0.15)] rounded-t-[24px]">
           <Link
             href="/"

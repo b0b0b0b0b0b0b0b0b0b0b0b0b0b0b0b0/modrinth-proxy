@@ -1049,7 +1049,8 @@ html:not(.dark) .newyear-flake {
   50% { margin-left: 14px; }
 }
 
-.newyear-drift {
+.newyear-drift,
+.footer-drift {
   position: absolute;
   left: 0;
   top: -15px;
@@ -1112,11 +1113,13 @@ html:not(.dark) .newyear-flake {
   height: 20px;
 }
 
-.newyear-drift path {
+.newyear-drift path,
+.footer-drift path {
   fill: #f4f8ff;
 }
 
-html:not(.dark) .newyear-drift path {
+html:not(.dark) .newyear-drift path,
+html:not(.dark) .footer-drift path {
   fill: #ffffff;
   stroke: rgba(170, 200, 230, 0.45);
   stroke-width: 0.5;

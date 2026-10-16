@@ -48,7 +48,9 @@
     "collections": "Collections",
     "extension": "Extension navigateur",
     "siteVersion": "Version du site : {version}",
-    "siteVersionTip": "Actu et changelog"
+    "siteVersionTip": "Actu et changelog",
+    "snowball": "Appeler le chaton pour rouler une boule de neige",
+    "snowballBusy": "Le chaton joue déjà dehors"
   },
   "copy": {
     "id": "Copier l’ID dans le presse-papiers",

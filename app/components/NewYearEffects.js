@@ -21,7 +21,7 @@ const FLAKES = Array.from({ length: 42 }, (_, i) => {
 const MARKS = ['❄', '❅', '❆']
 const HOST_SEL = 'main .universal-card, main .rounded-xl, main .rounded-lg, main .ny-snow-host'
 
-function driftPath(width, kind) {
+export function driftPath(width, kind) {
   const h = 15
   const steps = Math.max(4, Math.round(width / 54))
   let d = `M0 ${h} L0 ${h - 2}`
