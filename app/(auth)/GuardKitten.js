@@ -4,7 +4,7 @@ import { useRef } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from '../components/Kitten'
 import { useT } from '../components/I18nProvider'
-import { playChime } from '../components/softSounds'
+import { playTrill } from '../components/softSounds'
 
 const USERNAME_MAX = 24
 
@@ -22,7 +22,7 @@ export default function GuardKitten({ field, reveal, typed }) {
 
   const pet = () => {
     showMood('happy', 1000)
-    playChime()
+    playTrill()
     burst(5, 24)
     if (!reduceMotion) {
       hop.start({

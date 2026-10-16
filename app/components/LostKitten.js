@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './Kitten'
 import { useT } from './I18nProvider'
-import { playChime } from './softSounds'
+import { playTrill } from './softSounds'
 
 const FOUND_GLANCES = [
   { x: -0.5, y: 0.9 },
@@ -36,7 +36,7 @@ export default function LostKitten({ text, found = false, className = '' }) {
 
   const pet = () => {
     showMood('happy', 1000)
-    playChime()
+    playTrill()
     burst(5, 30)
     if (!reduceMotion) {
       hop.start({

@@ -4,7 +4,7 @@ import { useRef, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from '../components/Kitten'
 import { useT } from '../components/I18nProvider'
-import { playChime, playMew } from '../components/softSounds'
+import { playMew, playTrill } from '../components/softSounds'
 
 const SLEEP_ZS = [0, 1, 2]
 const WAKE_MS = 2600
@@ -19,7 +19,7 @@ export function HeaderKitten() {
 
   const pet = () => {
     showMood('happy', 1000)
-    playChime()
+    playTrill()
     burst(5, 26)
     if (!reduceMotion) {
       hop.start({
@@ -69,7 +69,7 @@ export function SleepyKitten({ text }) {
     clearTimeout(wakeTimer.current)
     if (awake) {
       showMood('happy', 900)
-      playChime()
+      playTrill()
       burst(5, 30)
     } else {
       playMew()

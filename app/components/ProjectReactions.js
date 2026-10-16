@@ -180,7 +180,7 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
   )
 }
 
-export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray-400', numberClassName = 'font-semibold text-gray-900 dark:text-white', muted = false }) {
+export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray-400', numberClassName = 'font-semibold text-gray-900 dark:text-white', iconClassName = '', muted = false }) {
   const { t, locale } = useI18n()
   const lottieRef = useRef(null)
 
@@ -204,9 +204,9 @@ export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray
           loop={false}
           autoplay={false}
           onDOMLoaded={rest}
-          className={`pointer-events-none -my-1.5 h-7 w-7 transition-[filter,opacity] duration-150 ${muted ? 'opacity-60 grayscale group-hover/fav:opacity-100 group-hover/fav:grayscale-0' : ''}`}
+          className={`pointer-events-none -my-1.5 h-7 w-7 transition-[filter,opacity] duration-150 ${iconClassName} ${muted ? 'opacity-60 grayscale group-hover/fav:opacity-100 group-hover/fav:grayscale-0' : ''}`}
         />
-        <span className={numberClassName}>
+        <span className={`translate-y-[0.14em] ${numberClassName}`}>
           {new Intl.NumberFormat(intlLocale(locale), { notation: 'compact', maximumFractionDigits: 1 }).format(count)}
         </span>
       </div>

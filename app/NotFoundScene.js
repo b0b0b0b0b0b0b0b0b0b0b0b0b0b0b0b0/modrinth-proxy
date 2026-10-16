@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './components/Kitten'
-import { onSoundsMutedChange, playBloop, playChime, playPop, setSoundsMuted, soundsMuted } from './components/softSounds'
+import { onSoundsMutedChange, playBloop, playChime, playPop, playTrill, setSoundsMuted, soundsMuted } from './components/softSounds'
 
 const GLYPHS = {
   4: ['1.1', '1.1', '111', '..1', '..1'],
@@ -247,7 +247,7 @@ function BouncingFace({ reduceMotion, onImpact }) {
   const pet = () => {
     queued.current = { kind: 'spin', dir: chance(0.5) ? 1 : -1, turns: 2 }
     showMood('happy', 1100)
-    playChime()
+    playTrill()
     burst()
   }
 

@@ -327,15 +327,32 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
 
   return (
     <div className="ny-snow-host bg-modrinth-dark border border-gray-800 rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
-      {resource.icon_url && (
-        <img
-          src={resource.icon_url}
-          alt={resource.title}
-          className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-cover flex-shrink-0"
-          referrerPolicy="no-referrer"
-        />
-      )}
-      
+      <div className="flex flex-col items-center gap-2 flex-shrink-0">
+        {resource.icon_url && (
+          <img
+            src={resource.icon_url}
+            alt={resource.title}
+            className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-cover flex-shrink-0"
+            referrerPolicy="no-referrer"
+          />
+        )}
+        <div className="flex md:hidden flex-col items-start gap-1 text-gray-400">
+          <div className="flex items-center gap-1">
+            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            <strong className="ml-1 text-xs font-semibold text-white tabular-nums">{formatDownloads(resource.downloads)}</strong>
+          </div>
+          <div className="flex items-center gap-1">
+            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0" />
+            </svg>
+            <strong className="ml-1 text-xs font-semibold text-white tabular-nums">{formatDownloads(resource.follows || resource.followers)}</strong>
+          </div>
+          <FavoriteCount count={favoriteCount} muted className="text-gray-400" iconClassName="-ml-1 -mr-2" numberClassName="ml-1 text-xs font-semibold text-white tabular-nums" />
+        </div>
+      </div>
+
       <div className="flex-1 min-w-0">
         <div className="mb-1 flex items-baseline gap-2 flex-wrap">
           <CatalogReturnLink href={`/${basePath}/${resource.slug}`} catalogSlug={resource.slug}>
