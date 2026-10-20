@@ -141,9 +141,65 @@ function voice(ctx, { length, pitch, f1, f2, volume, attack = 0.05, roll = 0 }) 
   }
 }
 
+const PURR_URL = '/sounds/kitten-purr.mp3'
+let purrBuffer = null
+let purrState = 'idle'
+let purrWanted = 0
+let purrNow = null
+
+function startPurr(ctx) {
+  const at = ctx.currentTime
+  if (purrNow) {
+    purrNow.gain.gain.cancelScheduledValues(at)
+    purrNow.gain.gain.setTargetAtTime(0.0001, at, 0.08)
+    purrNow.source.stop(at + 0.4)
+  }
+  const length = vary(1.8, 0.15)
+  const offset = Math.random() * Math.max(0, purrBuffer.duration - length)
+  const source = ctx.createBufferSource()
+  source.buffer = purrBuffer
+  source.playbackRate.value = vary(1, 0.04)
+  const gain = ctx.createGain()
+  gain.gain.setValueAtTime(0.0001, at)
+  gain.gain.exponentialRampToValueAtTime(0.5, at + 0.25)
+  gain.gain.setValueAtTime(0.5, at + length - 0.6)
+  gain.gain.exponentialRampToValueAtTime(0.0001, at + length)
+  source.connect(gain).connect(ctx.destination)
+  source.start(at, offset, length + 0.05)
+  purrNow = { source, gain }
+  source.onended = () => {
+    if (purrNow?.source === source) purrNow = null
+  }
+}
+
+function purr(ctx) {
+  if (purrBuffer) {
+    startPurr(ctx)
+    return true
+  }
+  if (purrState === 'failed') return false
+  purrWanted = Date.now()
+  if (purrState === 'idle') {
+    purrState = 'loading'
+    fetch(PURR_URL)
+      .then((response) => response.arrayBuffer())
+      .then((data) => ctx.decodeAudioData(data))
+      .then((buffer) => {
+        purrBuffer = buffer
+        purrState = 'ready'
+        if (Date.now() - purrWanted < 1200 && !readMuted()) startPurr(ctx)
+      })
+      .catch(() => {
+        purrState = 'failed'
+      })
+  }
+  return true
+}
+
 export function playMew() {
   const ctx = audio()
   if (!ctx) return
+  if (purr(ctx)) return
   const p = vary(1, 0.06)
   voice(ctx, {
     length: 0.62,
@@ -158,6 +214,7 @@ export function playMew() {
 export function playTrill() {
   const ctx = audio()
   if (!ctx) return
+  if (purr(ctx)) return
   const p = vary(1, 0.05)
   voice(ctx, {
     length: 0.36,
