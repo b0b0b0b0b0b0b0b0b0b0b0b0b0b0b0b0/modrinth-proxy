@@ -599,7 +599,9 @@
     "serverCore": "Servera kodols",
     "serverVersion": "Servera versija",
     "kittenSounds": "Kaķēna skaņas",
-    "kittenSoundsHint": "Klusas, maigas skaņas, kad glaudi kaķēnu vai lauz blokus 404 lapā. Pašas no sevis tās neskan — tikai uz klikšķi."
+    "kittenSoundsHint": "Klusas, maigas skaņas, kad glaudi kaķēnu vai lauz blokus 404 lapā. Pašas no sevis tās neskan — tikai uz klikšķi.",
+    "ghostTurbo": "Turbo spoki",
+    "ghostTurboHint": "Helovīnā spoku ir vairāk, un tie lido ātrāk. Pieredzējušiem spoku ķērājiem."
   },
   "del": {
     "title": "Konta dzēšana",

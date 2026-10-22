@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { isHalloweenSeason, readGhostScore, writeGhostScore } from '@/lib/halloween'
+import { isHalloweenSeason, onGhostTurboChange, readGhostScore, readGhostTurbo, writeGhostScore } from '@/lib/halloween'
 import { useT } from './I18nProvider'
 import { playPoof } from './softSounds'
 
@@ -158,13 +158,18 @@ function Ghost({ happy = false }) {
   )
 }
 
-function spawnCatchGhost(id) {
+const GHOST_PACE = {
+  calm: { max: 3, every: 2600, first: 1200, duration: [9, 5], sway: [2.4, 1.6] },
+  turbo: { max: 5, every: 1000, first: 400, duration: [6.5, 2.5], sway: [2, 1.2] },
+}
+
+function spawnCatchGhost(id, pace) {
   return {
     id,
     left: 6 + Math.random() * 86,
-    duration: 9 + Math.random() * 5,
+    duration: pace.duration[0] + Math.random() * pace.duration[1],
     size: 44 + Math.round(Math.random() * 16),
-    sway: 2.4 + Math.random() * 1.6,
+    sway: pace.sway[0] + Math.random() * pace.sway[1],
     drift: `${(Math.random() * 2 - 1) * 60}px`,
     caught: false,
   }
@@ -172,23 +177,30 @@ function spawnCatchGhost(id) {
 
 function GhostGame({ onCatch }) {
   const [ghosts, setGhosts] = useState([])
+  const [turbo, setTurbo] = useState(false)
   const seq = useRef(0)
 
   useEffect(() => {
+    setTurbo(readGhostTurbo())
+    return onGhostTurboChange(setTurbo)
+  }, [])
+
+  useEffect(() => {
+    const pace = turbo ? GHOST_PACE.turbo : GHOST_PACE.calm
     const tick = () => {
       setGhosts((list) => {
-        if (list.filter((g) => !g.caught).length >= 3) return list
+        if (list.filter((g) => !g.caught).length >= pace.max) return list
         seq.current += 1
-        return [...list, spawnCatchGhost(seq.current)]
+        return [...list, spawnCatchGhost(seq.current, pace)]
       })
     }
-    const first = window.setTimeout(tick, 1200)
-    const id = window.setInterval(tick, 2600)
+    const first = window.setTimeout(tick, pace.first)
+    const id = window.setInterval(tick, pace.every)
     return () => {
       window.clearTimeout(first)
       window.clearInterval(id)
     }
-  }, [])
+  }, [turbo])
 
   const remove = (id) => setGhosts((list) => list.filter((g) => g.id !== id))
 

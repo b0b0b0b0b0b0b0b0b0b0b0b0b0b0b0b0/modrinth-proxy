@@ -599,7 +599,9 @@
     "serverCore": "Serverkärna",
     "serverVersion": "Serverversion",
     "kittenSounds": "Kattungeljud",
-    "kittenSoundsHint": "Mjuka, tysta ljud när du klappar kattungen eller slår sönder block på 404-sidan. De spelas aldrig av sig själva — bara när du klickar."
+    "kittenSoundsHint": "Mjuka, tysta ljud när du klappar kattungen eller slår sönder block på 404-sidan. De spelas aldrig av sig själva — bara när du klickar.",
+    "ghostTurbo": "Turbospöken",
+    "ghostTurboHint": "Under halloween blir spökena fler och flyger snabbare. För vana spökfångare."
   },
   "del": {
     "title": "Radera konto",

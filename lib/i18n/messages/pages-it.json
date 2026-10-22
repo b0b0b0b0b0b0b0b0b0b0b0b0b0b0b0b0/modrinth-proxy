@@ -599,7 +599,9 @@
     "serverCore": "Core del server",
     "serverVersion": "Versione del server",
     "kittenSounds": "Suoni del gattino",
-    "kittenSoundsHint": "Suoni dolci e leggeri quando accarezzi il gattino o rompi i blocchi nella pagina 404. Non partono mai da soli, solo al clic."
+    "kittenSoundsHint": "Suoni dolci e leggeri quando accarezzi il gattino o rompi i blocchi nella pagina 404. Non partono mai da soli, solo al clic.",
+    "ghostTurbo": "Fantasmi turbo",
+    "ghostTurboHint": "Ad Halloween i fantasmi sono di più e volano più veloci. Per acchiappafantasmi esperti."
   },
   "del": {
     "title": "Elimina account",

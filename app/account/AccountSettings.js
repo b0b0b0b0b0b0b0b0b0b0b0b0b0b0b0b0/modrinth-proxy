@@ -12,7 +12,8 @@ const SERVER_CORES = ['paper', 'purpur', 'spigot', 'folia', 'velocity', 'bungeec
 const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
 import { getLoaderDisplayName } from '@/lib/loaders'
 import { NEWS_BADGE_EVENT } from '../components/NewsCounter'
-import { onSoundsMutedChange, playChime, setSoundsMuted, soundsMuted } from '../components/softSounds'
+import { onSoundsMutedChange, playChime, playPoof, setSoundsMuted, soundsMuted } from '../components/softSounds'
+import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo, setGhostTurbo } from '@/lib/halloween'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 
 const LINK_BUTTON =
@@ -82,6 +83,14 @@ export default function AccountSettings({
   useEffect(() => {
     setKittenSounds(!soundsMuted())
     return onSoundsMutedChange((muted) => setKittenSounds(!muted))
+  }, [])
+  const [halloween, setHalloween] = useState(false)
+  const [ghostTurbo, setGhostTurboState] = useState(false)
+
+  useEffect(() => {
+    setHalloween(isHalloweenSeason())
+    setGhostTurboState(readGhostTurbo())
+    return onGhostTurboChange(setGhostTurboState)
   }, [])
   const [profile, setProfile] = useState(game.chosen)
   const [gameVersions, setGameVersions] = useState([])
@@ -291,6 +300,18 @@ export default function AccountSettings({
             }}
           />
         </Setting>
+        {halloween ? (
+          <Setting title={t('set.ghostTurbo')} hint={t('set.ghostTurboHint')}>
+            <Switch
+              checked={ghostTurbo}
+              label={t('set.ghostTurbo')}
+              onChange={() => {
+                setGhostTurbo(!ghostTurbo)
+                if (!ghostTurbo) playPoof()
+              }}
+            />
+          </Setting>
+        ) : null}
       </Section>
 
       {counts.favorites > 0 || counts.downloads > 0 ? (

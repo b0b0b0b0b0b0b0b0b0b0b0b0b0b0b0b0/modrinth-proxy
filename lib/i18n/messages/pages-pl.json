@@ -599,7 +599,9 @@
     "serverCore": "Rdzeń serwera",
     "serverVersion": "Wersja serwera",
     "kittenSounds": "Dźwięki kotka",
-    "kittenSoundsHint": "Ciche, miękkie dźwięki, gdy głaszczesz kotka albo rozbijasz bloki na stronie 404. Nigdy nie grają same — tylko po kliknięciu."
+    "kittenSoundsHint": "Ciche, miękkie dźwięki, gdy głaszczesz kotka albo rozbijasz bloki na stronie 404. Nigdy nie grają same — tylko po kliknięciu.",
+    "ghostTurbo": "Turbo-duszki",
+    "ghostTurboHint": "Na Halloween duszków jest więcej i latają szybciej. Dla zawodowych łapaczy."
   },
   "del": {
     "title": "Usuwanie konta",

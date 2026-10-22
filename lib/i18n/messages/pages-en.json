@@ -617,7 +617,9 @@
     "serverCore": "Server core",
     "serverVersion": "Server version",
     "kittenSounds": "Kitten sounds",
-    "kittenSoundsHint": "Soft quiet sounds when you pet the kitten or break blocks on the 404 page. They never play on their own — only when you click."
+    "kittenSoundsHint": "Soft quiet sounds when you pet the kitten or break blocks on the 404 page. They never play on their own — only when you click.",
+    "ghostTurbo": "Turbo ghosts",
+    "ghostTurboHint": "For Halloween there are more ghosts and they fly faster. For seasoned ghost catchers."
   },
   "del": {
     "title": "Delete account",

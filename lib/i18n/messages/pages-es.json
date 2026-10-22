@@ -599,7 +599,9 @@
     "serverCore": "Núcleo del servidor",
     "serverVersion": "Versión del servidor",
     "kittenSounds": "Sonidos del gatito",
-    "kittenSoundsHint": "Sonidos suaves y bajitos al acariciar al gatito o romper bloques en la página 404. Nunca suenan solos, solo al hacer clic."
+    "kittenSoundsHint": "Sonidos suaves y bajitos al acariciar al gatito o romper bloques en la página 404. Nunca suenan solos, solo al hacer clic.",
+    "ghostTurbo": "Fantasmas turbo",
+    "ghostTurboHint": "En Halloween hay más fantasmas y vuelan más rápido. Para cazadores expertos."
   },
   "del": {
     "title": "Eliminar cuenta",

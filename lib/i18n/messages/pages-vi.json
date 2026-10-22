@@ -599,7 +599,9 @@
     "serverCore": "Lõi máy chủ",
     "serverVersion": "Phiên bản máy chủ",
     "kittenSounds": "Âm thanh mèo con",
-    "kittenSoundsHint": "Âm thanh nhẹ nhàng khi bạn vuốt ve mèo con hoặc phá khối ở trang 404. Không bao giờ tự phát — chỉ khi bạn bấm."
+    "kittenSoundsHint": "Âm thanh nhẹ nhàng khi bạn vuốt ve mèo con hoặc phá khối ở trang 404. Không bao giờ tự phát — chỉ khi bạn bấm.",
+    "ghostTurbo": "Ma tốc độ",
+    "ghostTurboHint": "Dịp Halloween ma nhiều hơn và bay nhanh hơn. Dành cho thợ bắt ma lão luyện."
   },
   "del": {
     "title": "Xóa tài khoản",

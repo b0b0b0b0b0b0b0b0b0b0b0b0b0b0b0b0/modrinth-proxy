@@ -599,7 +599,9 @@
     "serverCore": "Cœur du serveur",
     "serverVersion": "Version du serveur",
     "kittenSounds": "Sons du chaton",
-    "kittenSoundsHint": "Des sons doux et discrets quand tu caresses le chaton ou casses des blocs sur la page 404. Ils ne se jouent jamais tout seuls — seulement au clic."
+    "kittenSoundsHint": "Des sons doux et discrets quand tu caresses le chaton ou casses des blocs sur la page 404. Ils ne se jouent jamais tout seuls — seulement au clic.",
+    "ghostTurbo": "Fantômes turbo",
+    "ghostTurboHint": "Pour Halloween, il y a plus de fantômes et ils volent plus vite. Pour les chasseurs aguerris."
   },
   "del": {
     "title": "Supprimer le compte",

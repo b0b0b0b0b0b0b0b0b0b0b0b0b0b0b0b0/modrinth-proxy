@@ -1263,6 +1263,12 @@ html:not(.dark) .halloween-jsbat img {
   animation-fill-mode: forwards;
 }
 
+.halloween-catch::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+}
+
 .halloween-catch:hover {
   filter: drop-shadow(0 0 14px rgba(255, 170, 60, 0.7)) drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
 }

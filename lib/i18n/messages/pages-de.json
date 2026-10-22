@@ -599,7 +599,9 @@
     "serverCore": "Server-Kern",
     "serverVersion": "Server-Version",
     "kittenSounds": "Kätzchen-Töne",
-    "kittenSoundsHint": "Leise, sanfte Töne, wenn du das Kätzchen streichelst oder auf der 404-Seite Blöcke zerbrichst. Sie spielen nie von selbst – nur beim Klicken."
+    "kittenSoundsHint": "Leise, sanfte Töne, wenn du das Kätzchen streichelst oder auf der 404-Seite Blöcke zerbrichst. Sie spielen nie von selbst – nur beim Klicken.",
+    "ghostTurbo": "Turbo-Geister",
+    "ghostTurboHint": "Zu Halloween gibt es mehr Geister, und sie fliegen schneller. Für erfahrene Geisterfänger."
   },
   "del": {
     "title": "Konto löschen",

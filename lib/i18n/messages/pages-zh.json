@@ -599,7 +599,9 @@
     "serverCore": "服务端核心",
     "serverVersion": "服务端版本",
     "kittenSounds": "小猫的声音",
-    "kittenSoundsHint": "摸小猫或在 404 页面敲碎方块时，会有轻柔的小声音。不会自己响，只在点击时出现。"
+    "kittenSoundsHint": "摸小猫或在 404 页面敲碎方块时，会有轻柔的小声音。不会自己响，只在点击时出现。",
+    "ghostTurbo": "涡轮幽灵",
+    "ghostTurboHint": "万圣节期间幽灵更多、飞得更快。适合抓幽灵高手。"
   },
   "del": {
     "title": "删除账号",
