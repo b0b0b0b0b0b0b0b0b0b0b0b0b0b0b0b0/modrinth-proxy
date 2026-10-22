@@ -160,5 +160,11 @@
     "play": "Łap ciasteczka myszką. Chrup-chrup.",
     "score": "{n}",
     "title": "Dziś urodziny ModrinthProxy."
+  },
+  "halloween": {
+    "title": "Duszki wyszły na spacer!",
+    "play": "Łap je myszką albo palcem — puf! Nie są straszne, po prostu lubią chowanego.",
+    "scoreTitle": "Złapane duszki",
+    "close": "Zamknij"
   }
 }

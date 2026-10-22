@@ -160,5 +160,11 @@
     "play": "用鼠标抓住饼干。咔嚓咔嚓。",
     "score": "{n}",
     "title": "今天是 ModrinthProxy 的生日。"
+  },
+  "halloween": {
+    "title": "小幽灵出来散步啦！",
+    "play": "用鼠标或手指抓住它们——噗！它们一点也不可怕，只是喜欢捉迷藏。",
+    "scoreTitle": "抓到的幽灵",
+    "close": "关闭"
   }
 }

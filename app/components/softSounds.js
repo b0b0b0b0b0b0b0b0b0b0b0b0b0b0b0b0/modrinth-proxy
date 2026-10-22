@@ -68,6 +68,13 @@ export function playPop() {
   tone(ctx, { from: vary(1240, 0.15), to: vary(500, 0.1), length: 0.06, volume: 0.03, cutoff: 3000 })
 }
 
+export function playPoof() {
+  const ctx = audio()
+  if (!ctx) return
+  tone(ctx, { from: vary(260, 0.1), to: vary(820, 0.1), length: 0.22, volume: 0.06, attack: 0.02, cutoff: 1400 })
+  tone(ctx, { from: vary(520, 0.1), to: vary(1500, 0.1), start: 0.04, length: 0.18, volume: 0.025, attack: 0.02, cutoff: 2600 })
+}
+
 export function playChime() {
   const ctx = audio()
   if (!ctx) return

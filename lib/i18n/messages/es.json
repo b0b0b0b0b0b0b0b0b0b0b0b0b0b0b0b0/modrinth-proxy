@@ -160,5 +160,11 @@
     "play": "Atrapa las galletas con el ratón. Croc-croc.",
     "score": "{n}",
     "title": "Hoy es el cumpleaños de ModrinthProxy."
+  },
+  "halloween": {
+    "title": "¡Los fantasmas salieron a pasear!",
+    "play": "Atrápalos con el ratón o el dedo — ¡puf! No dan miedo, solo les encanta jugar al escondite.",
+    "scoreTitle": "Fantasmas atrapados",
+    "close": "Cerrar"
   }
 }

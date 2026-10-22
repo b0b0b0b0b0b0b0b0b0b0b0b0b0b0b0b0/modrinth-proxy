@@ -160,5 +160,11 @@
     "play": "Ķer cepumus ar peli. Krunc-krunc.",
     "score": "{n}",
     "title": "Šodien ModrinthProxy dzimšanas diena."
+  },
+  "halloween": {
+    "title": "Spoki izgājuši pastaigā!",
+    "play": "Ķer tos ar peli vai pirkstu — puf! Tie nav baisi, tie vienkārši mīl paslēpes.",
+    "scoreTitle": "Noķertie spoki",
+    "close": "Aizvērt"
   }
 }

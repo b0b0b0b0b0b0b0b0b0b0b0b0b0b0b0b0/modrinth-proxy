@@ -160,5 +160,11 @@
     "play": "Fang die Kekse mit der Maus. Mampf-mampf.",
     "score": "{n}",
     "title": "Heute hat ModrinthProxy Geburtstag."
+  },
+  "halloween": {
+    "title": "Die Geister machen einen Spaziergang!",
+    "play": "Fang sie mit der Maus oder dem Finger — puff! Sie sind nicht gruselig, sie lieben nur Verstecken.",
+    "scoreTitle": "Gefangene Geister",
+    "close": "Schließen"
   }
 }

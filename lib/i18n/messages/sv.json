@@ -160,5 +160,11 @@
     "play": "Fånga kakorna med musen. Knas-knas.",
     "score": "{n}",
     "title": "Idag fyller ModrinthProxy år."
+  },
+  "halloween": {
+    "title": "Spökena är ute på promenad!",
+    "play": "Fånga dem med musen eller fingret — poff! De är inte läskiga, de älskar bara kurragömma.",
+    "scoreTitle": "Fångade spöken",
+    "close": "Stäng"
   }
 }

@@ -160,5 +160,11 @@
     "play": "Pegue os biscoitos com o mouse. Croc-croc.",
     "score": "{n}",
     "title": "Hoje é o aniversário do ModrinthProxy."
+  },
+  "halloween": {
+    "title": "Os fantasmas saíram para passear!",
+    "play": "Pegue-os com o mouse ou o dedo — puf! Eles não assustam, só adoram brincar de esconde-esconde.",
+    "scoreTitle": "Fantasmas pegos",
+    "close": "Fechar"
   }
 }

@@ -160,5 +160,11 @@
     "play": "Bắt bánh quy bằng chuột. Giòn-giòn.",
     "score": "{n}",
     "title": "Hôm nay là sinh nhật ModrinthProxy."
+  },
+  "halloween": {
+    "title": "Các bé ma ra ngoài dạo chơi!",
+    "play": "Bắt chúng bằng chuột hoặc ngón tay — bụp! Chúng không đáng sợ đâu, chỉ thích chơi trốn tìm thôi.",
+    "scoreTitle": "Ma đã bắt được",
+    "close": "Đóng"
   }
 }

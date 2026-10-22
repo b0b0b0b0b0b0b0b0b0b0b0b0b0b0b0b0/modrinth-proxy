@@ -161,5 +161,11 @@
     "play": "Catch the cookies with your mouse. Crunch-crunch.",
     "score": "{n}",
     "title": "It's ModrinthProxy's birthday."
+  },
+  "halloween": {
+    "title": "The ghosts are out for a walk!",
+    "play": "Catch them with your mouse or finger — poof! They are not scary, they just love hide-and-seek.",
+    "scoreTitle": "Ghosts caught",
+    "close": "Close"
   }
 }

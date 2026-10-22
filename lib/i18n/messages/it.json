@@ -160,5 +160,11 @@
     "play": "Prendi i biscotti col mouse. Croc-croc.",
     "score": "{n}",
     "title": "Oggi è il compleanno di ModrinthProxy."
+  },
+  "halloween": {
+    "title": "I fantasmi sono usciti a passeggio!",
+    "play": "Prendili con il mouse o con il dito — puf! Non fanno paura, amano solo giocare a nascondino.",
+    "scoreTitle": "Fantasmi catturati",
+    "close": "Chiudi"
   }
 }

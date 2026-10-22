@@ -1,14 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { isHalloweenSeason } from '@/lib/halloween'
-
-const GHOSTS = [
-  { left: 3, top: 34, delay: 0, duration: 7.5, size: 46 },
-  { left: 89, top: 48, delay: 1.8, duration: 9, size: 36 },
-  { left: 6, top: 62, delay: 4.2, duration: 8, size: 32 },
-]
+import { isHalloweenSeason, readGhostScore, writeGhostScore } from '@/lib/halloween'
+import { useT } from './I18nProvider'
+import { playPoof } from './softSounds'
 
 const EMBERS = [
   { left: 18, delay: 0, duration: 9 },
@@ -73,12 +69,17 @@ function collectAnchors() {
   const heading = document.querySelector('main h1')
   if (heading) {
     const r = heading.getBoundingClientRect()
+    let right = r.right
+    for (let el = heading.nextElementSibling; el; el = el.nextElementSibling) {
+      const s = el.getBoundingClientRect()
+      if (s.width > 0 && s.top < r.bottom && s.bottom > r.top) right = Math.max(right, s.right)
+    }
     out.push({
       id: 'eyes-h1',
       type: 'eyes',
-      x: Math.min(r.right + 12, vw - 52),
+      x: right + 12,
       y: r.top + Math.max(2, r.height / 2 - 10),
-      show: inView(r, 48),
+      show: inView(r, 48) && right + 64 <= vw,
     })
   }
 
@@ -132,17 +133,155 @@ function Pumpkin({ className }) {
   )
 }
 
-function Ghost() {
+function Ghost({ happy = false }) {
   return (
     <svg viewBox="0 0 48 56" aria-hidden>
       <path
         fill="currentColor"
         d="M24 4c12 0 20 10 20 22v22c0 2-2.2 2-3.4.4L36 42l-5 7.2c-1 1.4-3 1.4-4 0L24 42l-3 7.2c-1 1.4-3 1.4-4 0L12 42l-4.6 6.4C6.2 50 4 50 4 48V26C4 14 12 4 24 4z"
       />
-      <circle cx="17" cy="24" r="3.2" fill="#2a2118" />
-      <circle cx="31" cy="24" r="3.2" fill="#2a2118" />
-      <ellipse cx="24" cy="33" rx="4" ry="2.2" fill="#2a2118" opacity="0.45" />
+      {happy ? (
+        <>
+          <path d="M13.5 25q3.5-4.5 7 0M27.5 25q3.5-4.5 7 0" fill="none" stroke="#2a2118" strokeWidth="2.4" strokeLinecap="round" />
+          <path d="M19 31q5 5.5 10 0" fill="none" stroke="#2a2118" strokeWidth="2.4" strokeLinecap="round" />
+          <ellipse cx="13" cy="31" rx="2.6" ry="1.6" fill="#ff8fb1" opacity="0.7" />
+          <ellipse cx="35" cy="31" rx="2.6" ry="1.6" fill="#ff8fb1" opacity="0.7" />
+        </>
+      ) : (
+        <>
+          <circle cx="17" cy="24" r="3.2" fill="#2a2118" />
+          <circle cx="31" cy="24" r="3.2" fill="#2a2118" />
+          <ellipse cx="24" cy="33" rx="4" ry="2.2" fill="#2a2118" opacity="0.45" />
+        </>
+      )}
     </svg>
+  )
+}
+
+function spawnCatchGhost(id) {
+  return {
+    id,
+    left: 6 + Math.random() * 86,
+    duration: 9 + Math.random() * 5,
+    size: 44 + Math.round(Math.random() * 16),
+    sway: 2.4 + Math.random() * 1.6,
+    drift: `${(Math.random() * 2 - 1) * 60}px`,
+    caught: false,
+  }
+}
+
+function GhostGame({ onCatch }) {
+  const [ghosts, setGhosts] = useState([])
+  const seq = useRef(0)
+
+  useEffect(() => {
+    const tick = () => {
+      setGhosts((list) => {
+        if (list.filter((g) => !g.caught).length >= 3) return list
+        seq.current += 1
+        return [...list, spawnCatchGhost(seq.current)]
+      })
+    }
+    const first = window.setTimeout(tick, 1200)
+    const id = window.setInterval(tick, 2600)
+    return () => {
+      window.clearTimeout(first)
+      window.clearInterval(id)
+    }
+  }, [])
+
+  const remove = (id) => setGhosts((list) => list.filter((g) => g.id !== id))
+
+  const caught = (ghost, event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    if (ghost.caught) return
+    playPoof()
+    onCatch()
+    setGhosts((list) => list.map((g) => (g.id === ghost.id ? { ...g, caught: true } : g)))
+    window.setTimeout(() => remove(ghost.id), 650)
+  }
+
+  return (
+    <div className="halloween-game">
+      {ghosts.map((ghost) => (
+        <button
+          key={ghost.id}
+          type="button"
+          tabIndex={-1}
+          aria-hidden
+          className={`halloween-catch${ghost.caught ? ' halloween-catch--caught' : ''}`}
+          style={{
+            left: `${ghost.left}%`,
+            width: ghost.size,
+            animationDuration: `${ghost.duration}s`,
+            '--halloween-drift': ghost.drift,
+          }}
+          onPointerDown={(event) => caught(ghost, event)}
+          onAnimationEnd={(event) => {
+            if (event.animationName === 'halloween-rise') remove(ghost.id)
+          }}
+        >
+          <span className="halloween-catch-body" style={{ animationDuration: `${ghost.sway}s` }}>
+            <Ghost happy={ghost.caught} />
+          </span>
+          {ghost.caught ? (
+            <span className="halloween-poof">
+              {[0, 1, 2, 3, 4, 5].map((i) => (
+                <span key={i} style={{ '--halloween-puff': `${i * 60}deg` }} />
+              ))}
+            </span>
+          ) : null}
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function GhostBanner({ caught }) {
+  const t = useT()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem('halloweenBannerOff') === '1') return
+    } catch {}
+    setOpen(true)
+  }, [])
+
+  if (!open) return null
+
+  return (
+    <div className="halloween-banner" role="status">
+      <span className="halloween-banner-ghost">
+        <Ghost />
+      </span>
+      <div className="halloween-banner-copy">
+        <p className="halloween-banner-title">{t('halloween.title')}</p>
+        <p className="halloween-banner-play">{t('halloween.play')}</p>
+      </div>
+      <span className="halloween-banner-score" title={t('halloween.scoreTitle')}>
+        <span className="halloween-banner-ghost halloween-banner-ghost--small">
+          <Ghost happy />
+        </span>
+        {caught}
+      </span>
+      <button
+        type="button"
+        className="halloween-banner-close"
+        aria-label={t('halloween.close')}
+        onClick={() => {
+          try {
+            sessionStorage.setItem('halloweenBannerOff', '1')
+          } catch {}
+          setOpen(false)
+        }}
+      >
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
   )
 }
 
@@ -159,6 +298,11 @@ export default function HalloweenEffects() {
   const pathname = usePathname()
   const [on, setOn] = useState(false)
   const [anchors, setAnchors] = useState([])
+  const [caught, setCaught] = useState(0)
+
+  useEffect(() => {
+    setCaught(readGhostScore())
+  }, [])
 
   useEffect(() => {
     if (!isHalloweenSeason()) return
@@ -200,6 +344,17 @@ export default function HalloweenEffects() {
   if (!on) return null
 
   return (
+    <>
+    <GhostBanner caught={caught} />
+    <GhostGame
+      onCatch={() =>
+        setCaught((n) => {
+          const next = n + 1
+          writeGhostScore(next)
+          return next
+        })
+      }
+    />
     <div className="halloween-layer" aria-hidden>
       {anchors.map((item) => (
         <span
@@ -214,21 +369,6 @@ export default function HalloweenEffects() {
           {item.type === 'pumpkin' ? <Pumpkin className="halloween-pumpkin" /> : <Eyes />}
         </span>
       ))}
-      {GHOSTS.map((ghost, i) => (
-        <span
-          key={`g${i}`}
-          className="halloween-ghost"
-          style={{
-            left: `${ghost.left}%`,
-            top: `${ghost.top}%`,
-            animationDelay: `${ghost.delay}s`,
-            animationDuration: `${ghost.duration}s`,
-            width: ghost.size,
-          }}
-        >
-          <Ghost />
-        </span>
-      ))}
       {EMBERS.map((ember, i) => (
         <span
           key={`e${i}`}
@@ -241,5 +381,6 @@ export default function HalloweenEffects() {
         />
       ))}
     </div>
+    </>
   )
 }
