@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "Liên quan",
+    "favorites": "mBlack chọn",
     "downloads": "Lượt tải",
     "newest": "Ngày đăng",
     "updated": "Cập nhật gần nhất",

@@ -1,7 +1,8 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions } from '@/lib/modrinth'
+import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
 import DatapackSidebarFilters from '@/app/datapacks/DatapackSidebarFilters'
@@ -100,7 +101,7 @@ export default async function DatapacksPage({ searchParams }) {
     blockedByOrganization,
     error,
   } = await loadCatalogPage({
-    searchBatch: (opts) => searchMods({ query, facets, index: sortBy, ...opts }),
+    searchBatch: catalogSearchBatch({ query, facets, index: sortBy }),
     page,
     limit,
     filterList: filterModsList,

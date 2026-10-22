@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "Relevanz",
+    "favorites": "mBlack-Auswahl",
     "downloads": "Downloads",
     "newest": "Veröffentlicht",
     "updated": "Zuletzt aktualisiert",

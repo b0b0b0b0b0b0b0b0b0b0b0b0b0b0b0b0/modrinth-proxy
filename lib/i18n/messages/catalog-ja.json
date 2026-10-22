@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "関連度",
+    "favorites": "mBlackのおすすめ",
     "downloads": "ダウンロード数",
     "newest": "公開日",
     "updated": "最終更新",

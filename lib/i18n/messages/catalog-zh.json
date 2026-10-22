@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "相关度",
+    "favorites": "mBlack 精选",
     "downloads": "下载量",
     "newest": "发布时间",
     "updated": "最近更新",

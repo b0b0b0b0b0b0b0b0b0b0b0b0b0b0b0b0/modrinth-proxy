@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "Trafność",
+    "favorites": "Wybór mBlack",
     "downloads": "Pobrania",
     "newest": "Opublikowano",
     "updated": "Ostatnia aktualizacja",

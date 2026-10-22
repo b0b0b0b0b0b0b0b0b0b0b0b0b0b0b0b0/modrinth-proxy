@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "Atbilstība",
+    "favorites": "mBlack izvēle",
     "downloads": "Lejupielādes",
     "newest": "Publicēts",
     "updated": "Pēdējoreiz atjaunināts",

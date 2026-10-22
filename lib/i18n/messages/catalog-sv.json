@@ -39,6 +39,7 @@
   },
   "sort": {
     "relevance": "Relevans",
+    "favorites": "mBlacks val",
     "downloads": "Nedladdningar",
     "newest": "Publicerad",
     "updated": "Senast uppdaterad",
