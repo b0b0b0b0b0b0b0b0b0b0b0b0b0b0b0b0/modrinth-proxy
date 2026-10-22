@@ -6,6 +6,7 @@ import { githubAuthEnabled } from '@/lib/githubAuth'
 import { telegramBotId } from '@/lib/telegramAuth'
 import {
   buildFavoritesCode,
+  parseFavoritesCode,
   getDownloadsPage,
   getFavorites,
   getGameProfile,
@@ -180,8 +181,10 @@ function paginate(list, requested) {
 export default async function AccountPage({ searchParams }) {
   const { t } = getRequestT()
   const user = getSessionUser()
+  const sharedIds = parseFavoritesCode(searchParams?.list)
+  const sharedCode = sharedIds ? buildFavoritesCode(sharedIds) : ''
 
-  if (!user) redirect('/login')
+  if (!user) redirect(sharedCode ? `/login?next=${encodeURIComponent(`/account?tab=favorites&list=${sharedCode}`)}` : '/login')
 
   const githubEnabled = githubAuthEnabled()
   const telegramBot = telegramBotId()
@@ -197,7 +200,7 @@ export default async function AccountPage({ searchParams }) {
   const favoritesPage = paginate(shownFavorites, requestedPage)
 
   const requested = searchParams?.tab
-  const tab = TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
+  const tab = sharedCode ? 'favorites' : TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
   const counts = { updates: updates.length, favorites: favorites.length, downloads: downloads.all }
   const mutes = tab === 'downloads' || tab === 'settings' ? getNotifyMutes(user.id) : new Set()
   const trackDownloads = !user.skip_download_updates
@@ -303,8 +306,8 @@ export default async function AccountPage({ searchParams }) {
             <FavoritesShare
               code={buildFavoritesCode(favorites.map((row) => row.project_id))}
               count={favorites.length}
-              name={user.username}
               titles={favorites.map((row) => row.title)}
+              sharedCode={sharedCode}
             />
             {favorites.length > 0 ? (
               <>
