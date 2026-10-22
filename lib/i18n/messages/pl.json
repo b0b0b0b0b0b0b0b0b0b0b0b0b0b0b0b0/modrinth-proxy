@@ -166,5 +166,15 @@
     "play": "Łap je myszką albo palcem — puf! Nie są straszne, po prostu lubią chowanego.",
     "scoreTitle": "Złapane duszki",
     "close": "Zamknij"
+  },
+  "newyear": {
+    "title": "Ubierz choinkę!",
+    "play": "Łap bombki na spadochronikach — same zawisną na gałązkach.",
+    "toGarland": "Jeszcze {n} i zapalą się lampki",
+    "toStar": "Jeszcze {n} i przyleci gwiazda",
+    "toSalute": "Jeszcze {n} i będą fajerwerki",
+    "done": "Choinka gotowa! Co 50 bombek — nowe fajerwerki.",
+    "scoreTitle": "Złapane bombki",
+    "close": "Zamknij"
   }
 }

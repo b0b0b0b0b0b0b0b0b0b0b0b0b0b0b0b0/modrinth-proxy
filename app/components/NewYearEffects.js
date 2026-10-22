@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { isNewYearSeason, NEW_YEAR_FORCE } from '@/lib/newYear'
 import Garland from './Garland'
+import NewYearGame from './NewYearGame'
 
 const FLAKES = Array.from({ length: 42 }, (_, i) => {
   const duration = 11 + (i % 10)
@@ -158,6 +159,7 @@ export default function NewYearEffects() {
   return (
     <>
       <Garland />
+      <NewYearGame />
       <div className="newyear-layer" aria-hidden>
         {FLAKES.map((flake, i) => (
           <span

@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { useT } from '../components/I18nProvider'
 import { ACCOUNT_UPDATES_KEY } from '../components/AccountUpdatesDot'
 import { clearFavoritesCache } from '@/lib/favoritesCache'
+import { buildFavoritesText, downloadText, favoritesFileName } from '@/lib/favoritesFile'
 
 const WAIT_SECONDS = 10
 const WARNING_ICON = 'M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z'
@@ -69,7 +70,36 @@ const CANCEL_BUTTON =
 const DANGER_BUTTON =
   'inline-flex items-center justify-center gap-2 rounded-xl border border-transparent bg-red-500 px-4 py-2.5 text-sm font-bold leading-none text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
 
-export default function DeleteAccount({ username, favorites, downloads, linkedNames }) {
+const SAVE_BUTTON =
+  'inline-flex items-center justify-center gap-1.5 rounded-lg border border-amber-500/40 px-3 py-1.5 text-xs font-semibold leading-none text-amber-800 transition-colors hover:bg-amber-500/15 dark:text-amber-200'
+
+function SaveFavorites({ username, code, titles }) {
+  const t = useT()
+  const [copied, setCopied] = useState(false)
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(code)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    } catch {}
+  }
+
+  const download = () => downloadText(favoritesFileName(username), buildFavoritesText(t, { name: username, code, titles }))
+
+  return (
+    <div className="mt-3 flex flex-wrap gap-2">
+      <button type="button" onClick={copy} className={SAVE_BUTTON}>
+        {t(copied ? 'del.copiedFavorites' : 'del.copyFavorites')}
+      </button>
+      <button type="button" onClick={download} className={SAVE_BUTTON}>
+        {t('del.saveTxt')}
+      </button>
+    </div>
+  )
+}
+
+export default function DeleteAccount({ username, favorites, favoritesCode = '', favoriteTitles = [], downloads, linkedNames }) {
   const t = useT()
   const [stage, setStage] = useState(null)
   const [seconds, setSeconds] = useState(WAIT_SECONDS)
@@ -153,9 +183,10 @@ export default function DeleteAccount({ username, favorites, downloads, linkedNa
               </li>
             ))}
           </ul>
-          <p className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-800 dark:text-amber-200">
+          <div className="mt-4 rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-800 dark:text-amber-200">
             {t('del.warnTip')}
-          </p>
+            {favoritesCode ? <SaveFavorites username={username} code={favoritesCode} titles={favoriteTitles} /> : null}
+          </div>
           <div className="mt-5 flex flex-wrap justify-end gap-2">
             <button type="button" onClick={close} className={CANCEL_BUTTON} autoFocus>
               {t('del.warnCancel')}

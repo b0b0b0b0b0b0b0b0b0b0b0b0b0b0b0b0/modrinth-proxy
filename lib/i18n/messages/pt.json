@@ -166,5 +166,15 @@
     "play": "Pegue-os com o mouse ou o dedo — puf! Eles não assustam, só adoram brincar de esconde-esconde.",
     "scoreTitle": "Fantasmas pegos",
     "close": "Fechar"
+  },
+  "newyear": {
+    "title": "Enfeite a árvore!",
+    "play": "Pegue os enfeites de paraquedas — eles se penduram sozinhos nos galhos.",
+    "toGarland": "Mais {n} e o pisca-pisca acende",
+    "toStar": "Mais {n} e a estrela chega",
+    "toSalute": "Mais {n} para os fogos",
+    "done": "Que árvore! A cada 50 enfeites, novos fogos.",
+    "scoreTitle": "Enfeites pegos",
+    "close": "Fechar"
   }
 }

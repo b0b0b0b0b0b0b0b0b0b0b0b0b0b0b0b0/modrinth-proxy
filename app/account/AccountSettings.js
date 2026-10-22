@@ -14,6 +14,7 @@ import { getLoaderDisplayName } from '@/lib/loaders'
 import { NEWS_BADGE_EVENT } from '../components/NewsCounter'
 import { onSoundsMutedChange, playChime, playPoof, setSoundsMuted, soundsMuted } from '../components/softSounds'
 import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo, setGhostTurbo } from '@/lib/halloween'
+import { isNewYearSeason, onSnowTurboChange, readSnowTurbo, setSnowTurbo } from '@/lib/newYear'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 
 const LINK_BUTTON =
@@ -91,6 +92,14 @@ export default function AccountSettings({
     setHalloween(isHalloweenSeason())
     setGhostTurboState(readGhostTurbo())
     return onGhostTurboChange(setGhostTurboState)
+  }, [])
+  const [newYear, setNewYear] = useState(false)
+  const [snowTurbo, setSnowTurboState] = useState(false)
+
+  useEffect(() => {
+    setNewYear(isNewYearSeason())
+    setSnowTurboState(readSnowTurbo())
+    return onSnowTurboChange(setSnowTurboState)
   }, [])
   const [profile, setProfile] = useState(game.chosen)
   const [gameVersions, setGameVersions] = useState([])
@@ -308,6 +317,18 @@ export default function AccountSettings({
               onChange={() => {
                 setGhostTurbo(!ghostTurbo)
                 if (!ghostTurbo) playPoof()
+              }}
+            />
+          </Setting>
+        ) : null}
+        {newYear ? (
+          <Setting title={t('set.snowTurbo')} hint={t('set.snowTurboHint')}>
+            <Switch
+              checked={snowTurbo}
+              label={t('set.snowTurbo')}
+              onChange={() => {
+                setSnowTurbo(!snowTurbo)
+                if (!snowTurbo) playChime()
               }}
             />
           </Setting>

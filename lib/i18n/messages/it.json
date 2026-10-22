@@ -166,5 +166,15 @@
     "play": "Prendili con il mouse o con il dito — puf! Non fanno paura, amano solo giocare a nascondino.",
     "scoreTitle": "Fantasmi catturati",
     "close": "Chiudi"
+  },
+  "newyear": {
+    "title": "Addobba l’albero!",
+    "play": "Prendi le palline col paracadute: si appendono da sole ai rami.",
+    "toGarland": "Ancora {n} e si accendono le luci",
+    "toStar": "Ancora {n} e arriva la stella",
+    "toSalute": "Ancora {n} per i fuochi d’artificio",
+    "done": "Che albero! Ogni 50 decorazioni, nuovi fuochi d’artificio.",
+    "scoreTitle": "Decorazioni prese",
+    "close": "Chiudi"
   }
 }

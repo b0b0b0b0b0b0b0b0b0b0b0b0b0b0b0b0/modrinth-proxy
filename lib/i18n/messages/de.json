@@ -166,5 +166,15 @@
     "play": "Fang sie mit der Maus oder dem Finger — puff! Sie sind nicht gruselig, sie lieben nur Verstecken.",
     "scoreTitle": "Gefangene Geister",
     "close": "Schließen"
+  },
+  "newyear": {
+    "title": "Schmück den Baum!",
+    "play": "Fang den Christbaumschmuck an kleinen Fallschirmen — er hängt sich von selbst an die Zweige.",
+    "toGarland": "Noch {n}, dann leuchtet die Lichterkette",
+    "toStar": "Noch {n}, dann kommt der Stern",
+    "toSalute": "Noch {n} bis zum Feuerwerk",
+    "done": "Was für ein Baum! Alle 50 Kugeln gibt es ein neues Feuerwerk.",
+    "scoreTitle": "Gefangener Schmuck",
+    "close": "Schließen"
   }
 }

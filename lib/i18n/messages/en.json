@@ -167,5 +167,15 @@
     "play": "Catch them with your mouse or finger — poof! They are not scary, they just love hide-and-seek.",
     "scoreTitle": "Ghosts caught",
     "close": "Close"
+  },
+  "newyear": {
+    "title": "Decorate the tree!",
+    "play": "Catch the ornaments on tiny parachutes — they hang themselves on the branches.",
+    "toGarland": "{n} more and the lights turn on",
+    "toStar": "{n} more and the star arrives",
+    "toSalute": "{n} more for fireworks",
+    "done": "What a tree! Every 50 ornaments bring new fireworks.",
+    "scoreTitle": "Ornaments caught",
+    "close": "Close"
   }
 }

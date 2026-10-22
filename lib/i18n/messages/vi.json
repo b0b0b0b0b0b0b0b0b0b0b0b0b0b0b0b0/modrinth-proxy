@@ -166,5 +166,15 @@
     "play": "Bắt chúng bằng chuột hoặc ngón tay — bụp! Chúng không đáng sợ đâu, chỉ thích chơi trốn tìm thôi.",
     "scoreTitle": "Ma đã bắt được",
     "close": "Đóng"
+  },
+  "newyear": {
+    "title": "Trang trí cây thông!",
+    "play": "Bắt đồ trang trí đeo dù nhỏ — chúng sẽ tự treo lên cành.",
+    "toGarland": "Thêm {n} nữa là đèn sáng",
+    "toStar": "Thêm {n} nữa là ngôi sao bay tới",
+    "toSalute": "Thêm {n} nữa là có pháo hoa",
+    "done": "Cây thông thật đẹp! Cứ 50 món là có pháo hoa mới.",
+    "scoreTitle": "Đồ trang trí đã bắt",
+    "close": "Đóng"
   }
 }

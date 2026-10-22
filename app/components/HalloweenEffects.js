@@ -13,51 +13,6 @@ const EMBERS = [
   { left: 84, delay: 1.6, duration: 12 },
 ]
 
-const BAT_COUNT = 9
-const BAT_GIF =
-  'data:image/gif;base64,R0lGODlhMAAwAJECAAAAAEJCQv///////yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJAQACACwAAAAAMAAwAAACdpSPqcvtD6NcYNpbr4Z5ewV0UvhRohOe5UE+6cq0carCgpzQuM3ut16zvRBAH+/XKQ6PvaQyCFs+mbnWlEq0FrGi15XZJSmxP8OTRj4DyWY1lKdmV8fyLL3eXOPn6D3f6BcoOEhYaHiImKi4yNjo+AgZKTl5WAAAIfkECQEAAgAsAAAAADAAMAAAAnyUj6nL7Q+jdCDWicF9G1vdeWICao05ciUVpkrZIqjLwCdI16s+5wfck+F8JOBiR/zZZAJk0mAsDp/KIHRKvVqb2KxTu/Vdvt/nGFs2V5Bpta3tBcKp8m5WWL/z5PpbtH/0B/iyNGh4iJiouMjY6PgIGSk5SVlpeYmZqVkAACH5BAkBAAIALAAAAAAwADAAAAJhlI+py+0Po5y02ouz3rz7D4biSJbmiabq6gCs4B5AvM7GTKv4buby7vsAbT9gZ4h0JYmZpXO4YEKeVCk0QkVUlw+uYovE8ibgaVBSLm1Pa3W194rL5/S6/Y7P6/f8vp9SAAAh+QQJAQACACwAAAAAMAAwAAACZZSPqcvtD6OctNqLs968+w+G4kiW5omm6ooALeCusAHHclyzQs3rOz9jAXuqIRFlPJ6SQWRSaIQOpUBqtfjEZpfMJqmrHIFtpbGze2ZywWu0aUwWEbfiZvQdD4sXuWUj7gPos1EAACH5BAkBAAIALAAAAAAwADAAAAJrlI+py+0Po5y02ouz3rz7D4ZiCIxUaU4Amjrr+rDg+7ojXTdyh+e7kPP0egjabGg0EIVImHLJa6KaUam1aqVynNNsUvPTQjO/J84cFA3RzlaJO2495TF63Y7P6/f8vv8PGCg4SFhoeIg4UQAAIfkEBQEAAgAsAAAAADAAMAAAAnaUj6nL7Q+jXGDaW6+GeXsFdFL4UaITnuVBPunKtHGqwoKc0LjN7rdes70QQB/v1ykOj72kMghbPpm51pRKtBaxoteV2SUpsT/Dk0Y+A8lmNZSnZlfH8iy93lzj5+g93+gXKDhIWGh4iJiouMjY6PgIGSk5eVgAADs='
-
-function spawnBat() {
-  const rand = Math.random
-  const wrap = document.createElement('div')
-  const img = document.createElement('img')
-  wrap.className = 'halloween-jsbat'
-  img.src = BAT_GIF
-  img.alt = ''
-  img.draggable = false
-  wrap.appendChild(img)
-  document.body.appendChild(wrap)
-
-  let ax = window.innerWidth * rand()
-  let ay = window.innerHeight * rand()
-  let alive = true
-  let timer = 0
-
-  const jump = (origin, max) => Math.max(Math.min(origin + (rand() - 0.5) * 400, max - 50), 50)
-
-  const fly = () => {
-    if (!alive) return
-    const x = jump(ax, window.innerWidth)
-    const y = jump(ay, window.innerHeight)
-    const dist = 5 * Math.hypot(ax - x, ay - y)
-    wrap.style.opacity = '1'
-    wrap.style.transition = `${dist / 1000}s linear`
-    wrap.style.transform = `translate(${x}px, ${y}px)`
-    img.style.transform = ax > x ? 'none' : 'scaleX(-1)'
-    ax = x
-    ay = y
-    timer = window.setTimeout(fly, dist)
-  }
-
-  timer = window.setTimeout(fly, rand() * 2500)
-
-  return () => {
-    alive = false
-    window.clearTimeout(timer)
-    wrap.remove()
-  }
-}
-
 function inView(r, pad = 24) {
   return r.width > 24 && r.height > 16 && r.bottom > pad && r.top < window.innerHeight - pad
 }
@@ -347,11 +302,6 @@ export default function HalloweenEffects() {
     }
   }, [on, pathname])
 
-  useEffect(() => {
-    if (!on) return
-    const stopBats = Array.from({ length: BAT_COUNT }, () => spawnBat())
-    return () => stopBats.forEach((stop) => stop())
-  }, [on])
 
   if (!on) return null
 

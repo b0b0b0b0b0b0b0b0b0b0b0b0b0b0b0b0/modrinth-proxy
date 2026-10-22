@@ -166,5 +166,15 @@
     "play": "Atrápalos con el ratón o el dedo — ¡puf! No dan miedo, solo les encanta jugar al escondite.",
     "scoreTitle": "Fantasmas atrapados",
     "close": "Cerrar"
+  },
+  "newyear": {
+    "title": "¡Decora el árbol!",
+    "play": "Atrapa los adornos con paracaídas: se cuelgan solos en las ramas.",
+    "toGarland": "{n} más y se encienden las luces",
+    "toStar": "{n} más y llega la estrella",
+    "toSalute": "{n} más para los fuegos artificiales",
+    "done": "¡Qué árbol! Cada 50 adornos, nuevos fuegos artificiales.",
+    "scoreTitle": "Adornos atrapados",
+    "close": "Cerrar"
   }
 }

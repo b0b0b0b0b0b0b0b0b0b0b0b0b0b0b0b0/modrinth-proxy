@@ -166,5 +166,15 @@
     "play": "Ķer tos ar peli vai pirkstu — puf! Tie nav baisi, tie vienkārši mīl paslēpes.",
     "scoreTitle": "Noķertie spoki",
     "close": "Aizvērt"
+  },
+  "newyear": {
+    "title": "Izrotā eglīti!",
+    "play": "Ķer rotājumus ar izpletņiem — tie paši pakarsies zaros.",
+    "toGarland": "Vēl {n}, un iedegsies virtene",
+    "toStar": "Vēl {n}, un atlidos zvaigzne",
+    "toSalute": "Vēl {n} līdz salūtam",
+    "done": "Eglīte izrotāta! Ik pēc 50 rotājumiem — jauns salūts.",
+    "scoreTitle": "Noķertie rotājumi",
+    "close": "Aizvērt"
   }
 }

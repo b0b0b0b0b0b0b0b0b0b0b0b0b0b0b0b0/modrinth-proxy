@@ -303,6 +303,8 @@ export default async function AccountPage({ searchParams }) {
             <FavoritesShare
               code={buildFavoritesCode(favorites.map((row) => row.project_id))}
               count={favorites.length}
+              name={user.username}
+              titles={favorites.map((row) => row.title)}
             />
             {favorites.length > 0 ? (
               <>
@@ -370,6 +372,8 @@ export default async function AccountPage({ searchParams }) {
             deletion={{
               username: user.username,
               favorites: favorites.length,
+              favoritesCode: favorites.length > 0 ? buildFavoritesCode(favorites.map((row) => row.project_id)) : '',
+              favoriteTitles: favorites.map((row) => row.title),
               downloads: downloads.all,
               linkedNames: [
                 ...(user.github_id ? ['GitHub'] : []),

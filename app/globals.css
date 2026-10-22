@@ -998,21 +998,7 @@ body {
   pointer-events: none;
 }
 
-.halloween-jsbat {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 25;
-  opacity: 0;
-  pointer-events: none;
-}
 
-.halloween-jsbat img {
-  display: block;
-  width: 48px;
-  height: 48px;
-  image-rendering: pixelated;
-}
 
 .newyear-layer {
   position: fixed;
@@ -1231,10 +1217,318 @@ html:not(.dark) .halloween-pumpkin {
     drop-shadow(0 3px 5px rgba(0, 0, 0, 0.28));
 }
 
-html:not(.dark) .halloween-jsbat img {
-  filter:
-    drop-shadow(0 0 1px rgba(0, 0, 0, 0.45))
-    drop-shadow(0 0 8px rgba(255, 110, 20, 0.4));
+
+.ny-game {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ny-toy {
+  position: absolute;
+  top: -90px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  pointer-events: auto;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  filter: drop-shadow(0 3px 5px rgba(10, 30, 60, 0.3));
+  animation-name: ny-toy-fall;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.ny-toy::before {
+  content: '';
+  position: absolute;
+  inset: -14px;
+}
+
+.ny-toy:hover {
+  filter: drop-shadow(0 0 12px rgba(253, 224, 71, 0.75)) drop-shadow(0 3px 5px rgba(10, 30, 60, 0.3));
+}
+
+.ny-toy-swing {
+  display: block;
+  transform-origin: 50% 0;
+  animation-name: ny-toy-swing;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.ny-toy svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ny-toy--caught {
+  pointer-events: none;
+  animation-play-state: paused;
+}
+
+.ny-toy--caught .ny-toy-swing {
+  animation-play-state: paused;
+}
+
+.ny-toy--caught .ny-toy-ball {
+  opacity: 0;
+}
+
+.ny-toy--caught .ny-toy-chute {
+  animation: ny-chute-away 0.7s ease-out forwards;
+}
+
+.ny-flight {
+  position: fixed;
+  z-index: 41;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  pointer-events: none;
+  animation: ny-fly-x 0.75s linear forwards;
+}
+
+.ny-flight-y {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: ny-fly-y 0.75s cubic-bezier(0.45, -0.7, 0.75, 1) forwards;
+}
+
+.ny-flight svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.7));
+}
+
+@keyframes ny-toy-fall {
+  0% { transform: translate3d(0, 0, 0); opacity: 0; }
+  6% { opacity: 1; }
+  94% { opacity: 1; }
+  100% { transform: translate3d(0, calc(100vh + 180px), 0); opacity: 0; }
+}
+
+@keyframes ny-toy-swing {
+  0%, 100% { transform: rotate(-9deg); }
+  50% { transform: rotate(9deg); }
+}
+
+@keyframes ny-chute-away {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(-34px) rotate(-18deg); opacity: 0; }
+}
+
+@keyframes ny-fly-x {
+  to { transform: translateX(var(--ny-dx)); }
+}
+
+@keyframes ny-fly-y {
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(var(--ny-dy)) scale(var(--ny-scale, 0.25)); }
+}
+
+.ny-banner {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(500px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  padding: 8px 12px 8px 10px;
+  border-radius: 18px;
+  color: #f2f8ff;
+  background: rgba(16, 36, 60, 0.72);
+  box-shadow: 0 12px 32px -12px rgba(40, 120, 200, 0.45);
+  backdrop-filter: blur(12px) saturate(140%);
+  -webkit-backdrop-filter: blur(12px) saturate(140%);
+}
+
+.ny-tree-wrap {
+  position: relative;
+  flex-shrink: 0;
+  width: 60px;
+}
+
+.ny-tree {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.ny-light {
+  animation: ny-light 1.4s ease-in-out infinite;
+}
+
+.ny-hang {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: ny-hang 0.7s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.ny-star {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+  animation: ny-star-in 0.8s cubic-bezier(0.3, 1.6, 0.5, 1), ny-star-twinkle 2.4s ease-in-out 0.8s infinite;
+  filter: drop-shadow(0 0 2px rgba(253, 224, 71, 0.9));
+}
+
+.ny-salute {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  pointer-events: none;
+}
+
+.ny-burst {
+  position: absolute;
+  left: var(--ny-bx);
+  top: var(--ny-by);
+}
+
+.ny-burst span {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  border-radius: 999px;
+  opacity: 0;
+  animation: ny-ray 0.9s ease-out forwards;
+}
+
+@keyframes ny-light {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes ny-hang {
+  0% { transform: scale(0.2) rotate(-30deg); }
+  60% { transform: scale(1.25) rotate(12deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes ny-star-in {
+  0% { transform: scale(0) rotate(-180deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+@keyframes ny-star-twinkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.18) rotate(10deg); }
+}
+
+@keyframes ny-ray {
+  0% { transform: rotate(var(--ny-ray)) translateY(0) scale(0.6); opacity: 1; }
+  100% { transform: rotate(var(--ny-ray)) translateY(-26px) scale(1); opacity: 0; }
+}
+
+.ny-banner-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.ny-banner-title {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.ny-banner-play {
+  margin: 3px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.ny-banner-hint {
+  margin: 3px 0 0;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #fde68a;
+}
+
+.ny-banner-score {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 5px;
+  min-width: 2.6rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.ny-banner-ball {
+  width: 18px;
+  height: 18px;
+  overflow: visible;
+}
+
+.ny-banner-close {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ny-banner-close:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 1023px) {
+  .ny-banner {
+    bottom: calc(76px + env(safe-area-inset-bottom, 0px));
+    z-index: 39;
+  }
+  .ny-game {
+    z-index: 60;
+  }
+  .ny-flight {
+    z-index: 61;
+  }
+}
+
+html:not(.dark) .ny-banner {
+  color: #17324d;
+  background: rgba(240, 248, 255, 0.8);
+  box-shadow: 0 12px 28px -14px rgba(40, 110, 180, 0.4);
+}
+
+html:not(.dark) .ny-banner-hint {
+  color: #b45309;
+}
+
+html:not(.dark) .ny-banner-close:hover {
+  background: rgba(23, 50, 77, 0.08);
+}
+
+html:not(.dark) .ny-toy {
+  filter: drop-shadow(0 0 0.8px rgba(20, 40, 70, 0.6)) drop-shadow(0 3px 5px rgba(10, 30, 60, 0.25));
 }
 
 .halloween-game {

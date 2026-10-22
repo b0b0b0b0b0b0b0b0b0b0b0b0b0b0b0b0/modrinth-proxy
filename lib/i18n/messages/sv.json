@@ -166,5 +166,15 @@
     "play": "Fånga dem med musen eller fingret — poff! De är inte läskiga, de älskar bara kurragömma.",
     "scoreTitle": "Fångade spöken",
     "close": "Stäng"
+  },
+  "newyear": {
+    "title": "Klä granen!",
+    "play": "Fånga julgranskulorna i små fallskärmar — de hänger sig själva på grenarna.",
+    "toGarland": "{n} till så tänds ljusslingan",
+    "toStar": "{n} till så kommer stjärnan",
+    "toSalute": "{n} till för fyrverkeri",
+    "done": "Vilken gran! Var 50:e kula ger nytt fyrverkeri.",
+    "scoreTitle": "Fångade kulor",
+    "close": "Stäng"
   }
 }

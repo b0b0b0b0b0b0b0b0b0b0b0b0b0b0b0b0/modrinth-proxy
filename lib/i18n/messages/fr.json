@@ -166,5 +166,15 @@
     "play": "Attrape-les avec la souris ou le doigt — pouf ! Ils ne font pas peur, ils adorent juste jouer à cache-cache.",
     "scoreTitle": "Fantômes attrapés",
     "close": "Fermer"
+  },
+  "newyear": {
+    "title": "Décore le sapin !",
+    "play": "Attrape les boules en parachute — elles s’accrochent toutes seules aux branches.",
+    "toGarland": "Encore {n} et la guirlande s’allume",
+    "toStar": "Encore {n} et l’étoile arrive",
+    "toSalute": "Encore {n} pour le feu d’artifice",
+    "done": "Quel sapin ! Tous les 50 ornements, un nouveau feu d’artifice.",
+    "scoreTitle": "Ornements attrapés",
+    "close": "Fermer"
   }
 }
