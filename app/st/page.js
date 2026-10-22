@@ -7,6 +7,7 @@ import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
 import { filterAvatar } from '@/lib/contentFilter'
 import CountUp from './CountUp'
+import RoyalKitten from './RoyalKitten'
 import { DaysChart, TypeSplit } from './StatsCharts'
 
 export const dynamic = 'force-dynamic'
@@ -35,6 +36,37 @@ function Card({ title, children, className = '' }) {
       {title ? <h2 className="mb-4 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{title}</h2> : null}
       {children}
     </section>
+  )
+}
+
+function NumberCrown() {
+  return (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute -right-[0.1em] -top-[0.32em] h-[0.5em] w-[0.64em] rotate-[18deg] transition-transform duration-300 ease-out group-hover/crown:-translate-y-[0.04em] group-hover/crown:rotate-[26deg]"
+    >
+      <svg className="h-full w-full overflow-visible drop-shadow-[0_2px_6px_rgba(251,191,36,0.45)]" viewBox="0 0 24 18">
+        <defs>
+          <linearGradient id="st-crown-gold" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#fde68a" />
+            <stop offset="1" stopColor="#f59e0b" />
+          </linearGradient>
+        </defs>
+        <path d="M2.5 14.5 1.6 4.6l5.6 4.8L12 1.6l4.8 7.8 5.6-4.8-.9 9.9Z" fill="url(#st-crown-gold)" stroke="#d97706" strokeWidth="1.1" strokeLinejoin="round" />
+        <rect x="2.4" y="13.6" width="19.2" height="3.4" rx="1.2" fill="#f59e0b" stroke="#d97706" strokeWidth="1.1" />
+        <circle cx="12" cy="15.3" r="1.1" fill="#f43f5e" />
+        <circle cx="6.8" cy="15.3" r="0.8" fill="#38bdf8" />
+        <circle cx="17.2" cy="15.3" r="0.8" fill="#38bdf8" />
+        <circle cx="1.6" cy="4.2" r="1.2" fill="#fde68a" stroke="#d97706" strokeWidth="0.8" />
+        <circle cx="12" cy="1.4" r="1.3" fill="#fde68a" stroke="#d97706" strokeWidth="0.8" />
+        <circle cx="22.4" cy="4.2" r="1.2" fill="#fde68a" stroke="#d97706" strokeWidth="0.8" />
+        <path
+          d="M17.6 5.2l.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5Z"
+          fill="white"
+          className="origin-[17.6px_7px] scale-0 opacity-0 transition-[transform,opacity] duration-300 group-hover/crown:scale-125 group-hover/crown:opacity-100"
+        />
+      </svg>
+    </span>
   )
 }
 
@@ -76,13 +108,14 @@ export default function StatsPage() {
           style={{ background: 'rgba(var(--color-green-rgb), 0.25)' }}
         />
         <div className="relative">
-          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-modrinth-green/15 text-modrinth-green">
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </div>
-          <div className="mt-6 bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-7xl font-extrabold tabular-nums leading-none text-transparent">
-            <CountUp value={stats.users} />
+          <RoyalKitten />
+          <div className="mt-16 text-7xl font-extrabold tabular-nums leading-none">
+            <span className="group/crown relative inline-block">
+              <span className="bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent">
+                <CountUp value={stats.users} />
+              </span>
+              <NumberCrown />
+            </span>
           </div>
           <div className="mt-3 text-lg font-semibold text-white">{label}</div>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">{t('st.lead')}</p>

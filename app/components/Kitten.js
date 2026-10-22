@@ -117,6 +117,33 @@ function Scarf() {
   )
 }
 
+function Crown() {
+  return (
+    <g transform="rotate(-14 12 2.5)" strokeWidth="0.7" strokeLinejoin="round" stroke="#d97706">
+      <path d="M8.7 3.5 8.2-0.5l2.1 1.8L12-1.6l1.7 2.9 2.1-1.8-.5 4Z" fill="#fbbf24" />
+      <rect x="8.6" y="2.6" width="6.8" height="1.4" rx="0.5" fill="#f59e0b" />
+      <circle cx="12" cy="3.3" r="0.45" stroke="none" fill="#f43f5e" />
+      <circle cx="12" cy="-1.7" r="0.55" fill="#fde68a" />
+    </g>
+  )
+}
+
+function Mantle() {
+  return (
+    <>
+      <path d="M4.6 19.4Q12 23.6 19.4 19.4L22 26.4Q12 29 2 26.4Z" strokeWidth="0.7" strokeLinejoin="round" stroke="#9f1239" fill="#e11d48" />
+      <path d="M4.2 18.2Q12 23.8 19.8 18.2L20.7 20.4Q12 26.2 3.3 20.4Z" strokeWidth="0.6" strokeLinejoin="round" stroke="#cbd5e1" fill="white" />
+      <g stroke="none" fill="#1f2937">
+        <ellipse cx="7" cy="20.9" rx="0.3" ry="0.55" />
+        <ellipse cx="9.6" cy="22.1" rx="0.3" ry="0.55" />
+        <ellipse cx="14.4" cy="22.1" rx="0.3" ry="0.55" />
+        <ellipse cx="17" cy="20.9" rx="0.3" ry="0.55" />
+      </g>
+      <circle cx="12" cy="23.4" r="0.95" strokeWidth="0.6" stroke="#d97706" fill="#fbbf24" />
+    </>
+  )
+}
+
 function Paw({ cx, shift = 0, lift, delay }) {
   return (
     <motion.g
@@ -134,10 +161,10 @@ function Paw({ cx, shift = 0, lift, delay }) {
   )
 }
 
-export function KittenFace({ earTransition, earsDown = false, mood = 'look', look = { x: 0, y: 0 }, paws = null, className = 'h-24 w-24' }) {
+export function KittenFace({ earTransition, earsDown = false, mood = 'look', look = { x: 0, y: 0 }, paws = null, royal = false, className = 'h-24 w-24' }) {
   const season = useKittenSeason()
-  const spooky = season === 'halloween'
-  const winter = season === 'winter'
+  const spooky = !royal && season === 'halloween'
+  const winter = !royal && season === 'winter'
   return (
     <svg
       className={`${className} overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`}
@@ -154,8 +181,9 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
       <circle cx="12" cy="12" r="9" className={spooky ? 'fill-[#f08a24]/10' : 'fill-modrinth-green/10'} />
       {spooky ? <WitchHat /> : null}
       {winter ? <SantaHat /> : null}
-      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
-      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+      {royal ? <Crown /> : null}
+      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
       {spooky && mood !== 'sleep' ? <path d="M7.4 7.7 10.5 8.6M16.6 7.7 13.5 8.6" strokeWidth="1.1" /> : null}
       {spooky ? <SpookyEyes mood={mood} look={look} /> : <Eyes mood={mood} look={look} />}
       <AnimatePresence>
@@ -173,6 +201,7 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
       )}
       <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1" />
       {winter ? <Scarf /> : null}
+      {royal ? <Mantle /> : null}
     </svg>
   )
 }
