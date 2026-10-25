@@ -34,7 +34,11 @@ export function formatRelative(dateString, t) {
   if (diffDays < 7) return t('time.daysAgo', { n: diffDays })
   if (diffDays < 30) return t('time.weeksAgo', { n: Math.floor(diffDays / 7) })
   if (diffDays < 365) return t('time.monthsAgo', { n: Math.floor(diffDays / 30) })
-  return t('time.yearsAgo', { n: Math.floor(diffDays / 365) })
+  const years = Math.floor(diffDays / 365)
+  const mod10 = years % 10
+  const mod100 = years % 100
+  const isMany = (mod100 >= 11 && mod100 <= 19) || mod10 === 0 || mod10 >= 5
+  return t(isMany ? 'time.yearsAgoMany' : 'time.yearsAgo', { n: years })
 }
 
 export default function RelativeTime({ dateString, className = '' }) {

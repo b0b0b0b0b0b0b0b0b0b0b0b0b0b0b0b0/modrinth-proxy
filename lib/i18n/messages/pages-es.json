@@ -209,7 +209,8 @@
     "daysAgo": "hace {n} d",
     "weeksAgo": "hace {n} sem",
     "monthsAgo": "hace {n} mes",
-    "yearsAgo": "hace {n} a"
+    "yearsAgo": "hace {n} a",
+    "yearsAgoMany": "hace {n} a"
   },
   "about": {
     "metaTitle": "Acerca de — ModrinthProxy",

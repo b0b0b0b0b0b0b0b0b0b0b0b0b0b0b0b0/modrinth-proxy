@@ -209,7 +209,8 @@
     "daysAgo": "pirms {n} d",
     "weeksAgo": "pirms {n} n.",
     "monthsAgo": "pirms {n} mēn.",
-    "yearsAgo": "pirms {n} g."
+    "yearsAgo": "pirms {n} g.",
+    "yearsAgoMany": "pirms {n} g."
   },
   "about": {
     "metaTitle": "Par — ModrinthProxy",

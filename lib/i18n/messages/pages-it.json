@@ -209,7 +209,8 @@
     "daysAgo": "{n} g fa",
     "weeksAgo": "{n} sett. fa",
     "monthsAgo": "{n} mesi fa",
-    "yearsAgo": "{n} anni fa"
+    "yearsAgo": "{n} anni fa",
+    "yearsAgoMany": "{n} anni fa"
   },
   "about": {
     "metaTitle": "Informazioni — ModrinthProxy",

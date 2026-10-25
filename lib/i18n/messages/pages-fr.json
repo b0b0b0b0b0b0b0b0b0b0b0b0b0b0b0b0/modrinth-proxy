@@ -209,7 +209,8 @@
     "daysAgo": "il y a {n} j",
     "weeksAgo": "il y a {n} sem.",
     "monthsAgo": "il y a {n} mois",
-    "yearsAgo": "il y a {n} an"
+    "yearsAgo": "il y a {n} an",
+    "yearsAgoMany": "il y a {n} an"
   },
   "about": {
     "metaTitle": "À propos — ModrinthProxy",

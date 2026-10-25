@@ -209,7 +209,8 @@
     "daysAgo": "{n} d sedan",
     "weeksAgo": "{n} v sedan",
     "monthsAgo": "{n} mån sedan",
-    "yearsAgo": "{n} år sedan"
+    "yearsAgo": "{n} år sedan",
+    "yearsAgoMany": "{n} år sedan"
   },
   "about": {
     "metaTitle": "Om — ModrinthProxy",

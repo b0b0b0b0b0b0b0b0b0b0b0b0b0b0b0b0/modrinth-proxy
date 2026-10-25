@@ -209,7 +209,8 @@
     "daysAgo": "{n} dn. temu",
     "weeksAgo": "{n} tyg. temu",
     "monthsAgo": "{n} mies. temu",
-    "yearsAgo": "{n} r. temu"
+    "yearsAgo": "{n} r. temu",
+    "yearsAgoMany": "{n} r. temu"
   },
   "about": {
     "metaTitle": "O serwisie — ModrinthProxy",

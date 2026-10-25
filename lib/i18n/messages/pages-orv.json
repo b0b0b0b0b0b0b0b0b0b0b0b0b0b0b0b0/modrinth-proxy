@@ -209,7 +209,8 @@
     "daysAgo": "{n} дн. назадъ",
     "weeksAgo": "{n} нед. назадъ",
     "monthsAgo": "{n} мѣс. назадъ",
-    "yearsAgo": "{n} г. назадъ"
+    "yearsAgo": "{n} г. назадъ",
+    "yearsAgoMany": "{n} л. назадъ"
   },
   "about": {
     "metaTitle": "О заведеніи - ModrinthProxy",

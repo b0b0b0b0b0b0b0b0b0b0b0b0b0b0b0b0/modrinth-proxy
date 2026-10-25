@@ -209,7 +209,8 @@
     "daysAgo": "{n} дн. тому",
     "weeksAgo": "{n} тиж. тому",
     "monthsAgo": "{n} міс. тому",
-    "yearsAgo": "{n} р. тому"
+    "yearsAgo": "{n} р. тому",
+    "yearsAgoMany": "{n} р. тому"
   },
   "about": {
     "metaTitle": "Про сервіс — ModrinthProxy",

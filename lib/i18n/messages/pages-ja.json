@@ -209,7 +209,8 @@
     "daysAgo": "{n}日前",
     "weeksAgo": "{n}週間前",
     "monthsAgo": "{n}か月前",
-    "yearsAgo": "{n}年前"
+    "yearsAgo": "{n}年前",
+    "yearsAgoMany": "{n}年前"
   },
   "about": {
     "metaTitle": "このサービスについて — ModrinthProxy",
