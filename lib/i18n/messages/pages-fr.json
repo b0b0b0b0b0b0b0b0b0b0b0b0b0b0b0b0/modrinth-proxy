@@ -613,6 +613,8 @@
     "siteTitle": "Site",
     "newsBadge": "Compteur des nouveautés du site",
     "newsBadgeHint": "Le chiffre sur l’icône des nouveautés en haut indique combien de mises à jour du site tu n’as pas encore vues. Si ça te gêne, désactive-le : les nouveautés restent là.",
+    "festive": "Décorations festives",
+    "festiveHint": "Fantômes et citrouilles pour Halloween, neige pour le Nouvel An, ballons pour l’anniversaire du site. Tu préfères un site calme sans fête ? Désactive-les, le chaton ne sera pas vexé.",
     "versionSearch": "Chercher une version",
     "versionNotFound": "Cette version n’existe pas",
     "modsTitle": "Mods",

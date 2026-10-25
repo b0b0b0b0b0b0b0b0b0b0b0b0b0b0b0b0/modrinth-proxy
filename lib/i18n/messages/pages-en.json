@@ -631,6 +631,8 @@
     "siteTitle": "Site",
     "newsBadge": "Site news counter",
     "newsBadgeHint": "The number on the news icon in the header shows how many site updates you haven’t seen yet. Turn it off if it bugs you — the news itself stays.",
+    "festive": "Holiday decorations",
+    "festiveHint": "Ghosts and pumpkins for Halloween, snow for New Year, balloons on the site’s birthday. Prefer a calm site without the festivities? Turn it off — the kitten won’t mind.",
     "versionSearch": "Find a version",
     "versionNotFound": "No such version",
     "modsTitle": "Mods",

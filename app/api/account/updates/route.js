@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { getSessionUser, isSameOrigin, setNewsBadgeCookie } from '@/lib/auth'
+import { FESTIVE_OFF_COOKIE, getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 
 export const dynamic = 'force-dynamic'
@@ -9,6 +9,9 @@ export async function GET() {
   if (!user) return Response.json({ count: 0 })
   if (Boolean(user.hide_news_badge) !== (cookies().get('mp_news_off')?.value === '1')) {
     setNewsBadgeCookie(!user.hide_news_badge)
+  }
+  if (Boolean(user.hide_festive) !== (cookies().get(FESTIVE_OFF_COOKIE)?.value === '1')) {
+    setFestiveCookie(!user.hide_festive)
   }
   const updates = await getUpdates(user.id)
   return Response.json({ count: updates.length })

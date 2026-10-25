@@ -613,6 +613,8 @@
     "siteTitle": "Trang web",
     "newsBadge": "Bộ đếm tin tức trang web",
     "newsBadgeHint": "Con số trên biểu tượng tin tức ở trên cùng cho biết có bao nhiêu cập nhật trang web bạn chưa xem. Nếu thấy phiền, hãy tắt — tin tức vẫn còn đó.",
+    "festive": "Trang trí ngày lễ",
+    "festiveHint": "Ma và bí ngô dịp Halloween, tuyết dịp Năm mới, bóng bay vào sinh nhật trang. Muốn trang yên tĩnh không có lễ hội? Hãy tắt đi — mèo con không giận đâu.",
     "versionSearch": "Tìm phiên bản",
     "versionNotFound": "Không có phiên bản này",
     "modsTitle": "Mod",

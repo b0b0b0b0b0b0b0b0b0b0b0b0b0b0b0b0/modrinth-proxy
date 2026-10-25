@@ -613,6 +613,8 @@
     "siteTitle": "网站",
     "newsBadge": "网站新闻计数",
     "newsBadgeHint": "顶部新闻图标上的数字表示你还没看过的网站更新数量。嫌烦可以关掉——新闻本身还在。",
+    "festive": "节日装饰",
+    "festiveHint": "万圣节的幽灵和南瓜、新年的雪花、网站生日的气球。想要一个安静、没有节日气氛的网站？关掉就好，小猫不会介意的。",
     "versionSearch": "查找版本",
     "versionNotFound": "没有这个版本",
     "modsTitle": "模组",

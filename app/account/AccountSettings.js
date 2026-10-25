@@ -16,6 +16,7 @@ import { onSoundsMutedChange, playChime, playPoof, setSoundsMuted, soundsMuted }
 import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo, setGhostTurbo } from '@/lib/halloween'
 import { isNewYearSeason, onSnowTurboChange, readSnowTurbo, setSnowTurbo } from '@/lib/newYear'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
+import { announceFestiveChange, onFestiveChange } from '@/lib/festive'
 
 const LINK_BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-modrinth-green px-2.5 py-1.5 text-xs font-bold leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
@@ -40,11 +41,11 @@ function Switch({ checked, onChange, disabled, label }) {
   )
 }
 
-function Setting({ title, hint, children }) {
+function Setting({ title, hint, nested, children }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-3">
+    <div className={`flex items-center justify-between gap-4 ${nested ? 'py-2' : 'py-3'}`}>
       <div className="min-w-0">
-        <div className="text-sm font-semibold text-white">{title}</div>
+        <div className={`${nested ? 'text-[13px]' : 'text-sm'} font-semibold text-white`}>{title}</div>
         {hint ? <p className="mt-0.5 text-xs leading-relaxed text-gray-600 dark:text-gray-500">{hint}</p> : null}
       </div>
       {children}
@@ -66,6 +67,7 @@ export default function AccountSettings({
   trackDownloads: initialTrack,
   recordHistory: initialRecord,
   newsBadge: initialNewsBadge,
+  festive: initialFestive,
   mutedCount,
   counts,
   deletion,
@@ -79,6 +81,7 @@ export default function AccountSettings({
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [recordHistory, setRecordHistory] = useState(initialRecord)
   const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
+  const [festive, setFestive] = useState(initialFestive)
   const [kittenSounds, setKittenSounds] = useState(true)
 
   useEffect(() => {
@@ -101,6 +104,15 @@ export default function AccountSettings({
     setSnowTurboState(readSnowTurbo())
     return onSnowTurboChange(setSnowTurboState)
   }, [])
+
+  useEffect(
+    () =>
+      onFestiveChange(() => {
+        setHalloween(isHalloweenSeason())
+        setNewYear(isNewYearSeason())
+      }),
+    [],
+  )
   const [profile, setProfile] = useState(game.chosen)
   const [gameVersions, setGameVersions] = useState([])
 
@@ -299,6 +311,51 @@ export default function AccountSettings({
             }
           />
         </Setting>
+        <div>
+          <Setting title={t('set.festive')} hint={t('set.festiveHint')}>
+            <Switch
+              checked={festive}
+              label={t('set.festive')}
+              disabled={Boolean(busy)}
+              onChange={() =>
+                save(
+                  'festive',
+                  { festive: !festive },
+                  () => setFestive(!festive),
+                  () => setFestive(festive),
+                ).then((ok) => ok && announceFestiveChange())
+              }
+            />
+          </Setting>
+          {halloween || newYear ? (
+            <div className="mb-3 ml-1 space-y-1 border-l-2 border-modrinth-green/30 pl-4">
+              {halloween ? (
+                <Setting nested title={t('set.ghostTurbo')} hint={t('set.ghostTurboHint')}>
+                  <Switch
+                    checked={ghostTurbo}
+                    label={t('set.ghostTurbo')}
+                    onChange={() => {
+                      setGhostTurbo(!ghostTurbo)
+                      if (!ghostTurbo) playPoof()
+                    }}
+                  />
+                </Setting>
+              ) : null}
+              {newYear ? (
+                <Setting nested title={t('set.snowTurbo')} hint={t('set.snowTurboHint')}>
+                  <Switch
+                    checked={snowTurbo}
+                    label={t('set.snowTurbo')}
+                    onChange={() => {
+                      setSnowTurbo(!snowTurbo)
+                      if (!snowTurbo) playChime()
+                    }}
+                  />
+                </Setting>
+              ) : null}
+            </div>
+          ) : null}
+        </div>
         <Setting title={t('set.kittenSounds')} hint={t('set.kittenSoundsHint')}>
           <Switch
             checked={kittenSounds}
@@ -309,30 +366,6 @@ export default function AccountSettings({
             }}
           />
         </Setting>
-        {halloween ? (
-          <Setting title={t('set.ghostTurbo')} hint={t('set.ghostTurboHint')}>
-            <Switch
-              checked={ghostTurbo}
-              label={t('set.ghostTurbo')}
-              onChange={() => {
-                setGhostTurbo(!ghostTurbo)
-                if (!ghostTurbo) playPoof()
-              }}
-            />
-          </Setting>
-        ) : null}
-        {newYear ? (
-          <Setting title={t('set.snowTurbo')} hint={t('set.snowTurboHint')}>
-            <Switch
-              checked={snowTurbo}
-              label={t('set.snowTurbo')}
-              onChange={() => {
-                setSnowTurbo(!snowTurbo)
-                if (!snowTurbo) playChime()
-              }}
-            />
-          </Setting>
-        ) : null}
       </Section>
 
       {counts.favorites > 0 || counts.downloads > 0 ? (

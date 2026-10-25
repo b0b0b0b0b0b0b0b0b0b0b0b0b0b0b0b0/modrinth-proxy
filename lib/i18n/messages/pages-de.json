@@ -613,6 +613,8 @@
     "siteTitle": "Seite",
     "newsBadge": "Zähler für Seiten-News",
     "newsBadgeHint": "Die Zahl am News-Symbol oben zeigt, wie viele Seiten-Updates du noch nicht gesehen hast. Stört sie, schalte sie aus — die News selbst bleiben.",
+    "festive": "Feiertagsdekoration",
+    "festiveHint": "Geister und Kürbisse zu Halloween, Schnee zu Neujahr, Ballons am Geburtstag der Seite. Lieber eine ruhige Seite ohne Feststimmung? Schalte es aus — das Kätzchen ist nicht beleidigt.",
     "versionSearch": "Version suchen",
     "versionNotFound": "Diese Version gibt es nicht",
     "modsTitle": "Mods",

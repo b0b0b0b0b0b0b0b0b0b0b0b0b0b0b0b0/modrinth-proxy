@@ -1,4 +1,4 @@
-import { getSessionUser, isSameOrigin, setNewsBadgeCookie } from '@/lib/auth'
+import { getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import {
   clearNotifyMutes,
   isGameLoader,
@@ -30,6 +30,7 @@ export async function POST(request) {
     trackDownloads: body?.trackDownloads,
     recordHistory: body?.recordHistory,
     newsBadge: body?.newsBadge,
+    festive: body?.festive,
   }
   const booleans = Object.entries(changes).filter(([, value]) => typeof value === 'boolean')
   const unmuteAll = body?.unmuteAll === true
@@ -55,6 +56,7 @@ export async function POST(request) {
     if (key === 'telegram') setTelegramNotify(user.id, value, getRequestLocale())
     else setAccountPreference(user.id, key, value)
     if (key === 'newsBadge') setNewsBadgeCookie(value)
+    if (key === 'festive') setFestiveCookie(value)
   }
   if (unmuteAll) clearNotifyMutes(user.id)
   return Response.json({ ok: true })

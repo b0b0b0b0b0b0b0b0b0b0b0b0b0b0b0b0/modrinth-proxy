@@ -21,6 +21,7 @@ import FeedbackThoughtBanner from './components/FeedbackThoughtBanner'
 import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
 import BirthdayEffects from './components/BirthdayEffects'
+import FestiveGate from './components/FestiveGate'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { I18nProvider } from './components/I18nProvider'
@@ -184,15 +185,19 @@ export default async function RootLayout({ children }) {
             <MobileNav />
           </Suspense>
           <PeekKitten />
-          <FooterSnow />
+          <FestiveGate>
+            <FooterSnow />
+          </FestiveGate>
           <Footer />
           <ExtensionBanner />
           <CookieNotice />
           <FeedbackThoughtBanner />
-          <HalloweenEffects />
-          <NewYearEffects />
-          <KittenSnowball />
-          <BirthdayEffects />
+          <FestiveGate>
+            <HalloweenEffects />
+            <NewYearEffects />
+            <KittenSnowball />
+            <BirthdayEffects />
+          </FestiveGate>
           </I18nProvider>
           </AppTooltipProvider>
         </ThemeProvider>

@@ -613,6 +613,8 @@
     "siteTitle": "Sito",
     "newsBadge": "Contatore delle novità del sito",
     "newsBadgeHint": "Il numero sull’icona delle novità in alto indica quanti aggiornamenti del sito non hai ancora visto. Se dà fastidio, spegnilo: le novità restano.",
+    "festive": "Decorazioni festive",
+    "festiveHint": "Fantasmi e zucche ad Halloween, neve a Capodanno, palloncini al compleanno del sito. Preferisci un sito tranquillo senza feste? Disattivale, il gattino non si offenderà.",
     "versionSearch": "Cerca versione",
     "versionNotFound": "Questa versione non esiste",
     "modsTitle": "Mod",

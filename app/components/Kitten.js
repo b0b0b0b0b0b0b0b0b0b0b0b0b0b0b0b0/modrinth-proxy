@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { isHalloweenSeason } from '@/lib/halloween'
 import { isNewYearSeason } from '@/lib/newYear'
+import { onFestiveChange } from '@/lib/festive'
 
 const HEART_PATH =
   'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z'
@@ -20,8 +21,9 @@ const random = (min, max) => min + Math.random() * (max - min)
 export function useKittenSeason() {
   const [season, setSeason] = useState(null)
   useEffect(() => {
-    if (isHalloweenSeason()) setSeason('halloween')
-    else if (isNewYearSeason()) setSeason('winter')
+    const update = () => setSeason(isHalloweenSeason() ? 'halloween' : isNewYearSeason() ? 'winter' : null)
+    update()
+    return onFestiveChange(update)
   }, [])
   return season
 }

@@ -613,6 +613,8 @@
     "siteTitle": "Site",
     "newsBadge": "Contador de novidades do site",
     "newsBadgeHint": "O número no ícone de novidades no topo mostra quantas atualizações do site você ainda não viu. Se incomodar, desligue — as novidades continuam lá.",
+    "festive": "Decorações festivas",
+    "festiveHint": "Fantasmas e abóboras no Halloween, neve no Ano Novo, balões no aniversário do site. Prefere um site calmo, sem festa? Desative — o gatinho não vai se importar.",
     "versionSearch": "Buscar versão",
     "versionNotFound": "Essa versão não existe",
     "modsTitle": "Mods",

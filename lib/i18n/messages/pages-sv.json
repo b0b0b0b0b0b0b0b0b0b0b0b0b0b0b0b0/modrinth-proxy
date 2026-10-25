@@ -613,6 +613,8 @@
     "siteTitle": "Sidan",
     "newsBadge": "Räknare för nyheter på sidan",
     "newsBadgeHint": "Siffran på nyhetsikonen överst visar hur många uppdateringar av sidan du inte har sett än. Stör den, stäng av den — själva nyheterna finns kvar.",
+    "festive": "Högtidsdekorationer",
+    "festiveHint": "Spöken och pumpor på Halloween, snö till nyår, ballonger på sajtens födelsedag. Vill du ha en lugn sajt utan fest? Stäng av — kattungen blir inte ledsen.",
     "versionSearch": "Sök version",
     "versionNotFound": "Den versionen finns inte",
     "modsTitle": "Moddar",

@@ -613,6 +613,8 @@
     "siteTitle": "Strona",
     "newsBadge": "Licznik nowości strony",
     "newsBadgeHint": "Liczba przy ikonie nowości u góry pokazuje, ilu aktualizacji strony jeszcze nie widziałeś. Jeśli przeszkadza, wyłącz ją — same nowości zostaną.",
+    "festive": "Świąteczne dekoracje",
+    "festiveHint": "Duchy i dynie na Halloween, śnieg na Nowy Rok, balony w urodziny strony. Wolisz spokojną stronę bez świętowania? Wyłącz — kotek się nie obrazi.",
     "versionSearch": "Znajdź wersję",
     "versionNotFound": "Nie ma takiej wersji",
     "modsTitle": "Mody",

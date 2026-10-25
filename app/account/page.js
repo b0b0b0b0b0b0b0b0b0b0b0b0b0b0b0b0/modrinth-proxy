@@ -353,6 +353,7 @@ export default async function AccountPage({ searchParams }) {
             trackDownloads={trackDownloads}
             recordHistory={Boolean(user.record_history)}
             newsBadge={!user.hide_news_badge}
+            festive={!user.hide_festive}
             mutedCount={mutes.size}
             counts={{ favorites: favorites.length, downloads: downloads.all }}
             game={(() => {
