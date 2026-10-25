@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { getSessionUser } from '@/lib/auth'
+import { isAdmin } from '@/lib/admins'
 import { getSiteStats } from '@/lib/siteStats'
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
@@ -27,7 +28,7 @@ const TYPE_LABEL_KEYS = {
 export async function generateMetadata() {
   const { t } = getRequestT()
   return {
-    title: getSessionUser() ? t('st.metaTitle') : t('notfound.metaTitle'),
+    title: isAdmin(getSessionUser()) ? t('st.metaTitle') : t('notfound.metaTitle'),
     robots: 'noindex, nofollow',
   }
 }
@@ -87,7 +88,7 @@ function Tile({ value, label, index }) {
 }
 
 export default function StatsPage() {
-  if (!getSessionUser()) notFound()
+  if (!isAdmin(getSessionUser())) notFound()
 
   const { t, locale } = getRequestT()
   const stats = getSiteStats()
