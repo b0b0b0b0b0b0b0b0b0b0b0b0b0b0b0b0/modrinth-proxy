@@ -198,17 +198,37 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               })}
             </div>
             <div className="mt-3 flex items-center justify-between gap-2 border-t border-gray-800/80 pt-3 text-xs text-gray-500">
-              <span className="flex items-center gap-1 text-gray-400">
-                <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                <strong className="font-semibold text-gray-300">{formatDownloads(resource.downloads)}</strong>
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="flex items-center gap-1 text-gray-400">
+                  <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  <strong className="font-semibold text-gray-300">{formatDownloads(resource.downloads)}</strong>
+                </span>
+                <span className="flex items-center gap-1 text-gray-400">
+                  <svg className="h-3.5 w-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4.318 6.318a4.5 4.5 0 0 0 0 6.364L12 20.364l7.682-7.682a4.5 4.5 0 0 0-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 0 0-6.364 0"
+                    />
+                  </svg>
+                  <strong className="font-semibold text-gray-300">{formatDownloads(resource.follows || resource.followers)}</strong>
+                </span>
+                <FavoriteCount
+                  count={favoriteCount}
+                  muted
+                  className="gap-0 text-gray-400"
+                  iconClassName="-ml-1.5 -mr-1 !h-6 !w-6"
+                  numberClassName="font-semibold text-gray-300"
+                />
+              </div>
               {(resource.date_modified || resource.updated) && (
                 <RelativeTime dateString={resource.date_modified || resource.updated} />
               )}
