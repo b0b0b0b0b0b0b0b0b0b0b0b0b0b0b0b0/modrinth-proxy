@@ -1,7 +1,7 @@
 import { randomBytes } from 'crypto'
 import { cookies } from 'next/headers'
 import { isSameOrigin } from '@/lib/auth'
-import { COURIER_COOKIE, COURIER_TTL_MS, putCourier } from '@/lib/courierStore'
+import { COURIER_COOKIE, COURIER_TTL_MS, putCourierDelivery } from '@/lib/courierStore'
 import { MODRINTH_API } from '@/lib/modrinth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
@@ -64,10 +64,11 @@ export async function POST(request) {
     maxAge: Math.floor(COURIER_TTL_MS / 1000),
   })
 
-  putCourier(token, `${MODRINTH_API}/project/${slug}`, body.project)
+  const items = [{ url: `${MODRINTH_API}/project/${slug}`, data: body.project, size: JSON.stringify(body.project).length }]
   if (validVersions(body.versions, body.project.id)) {
-    putCourier(token, `${MODRINTH_API}/project/${slug}/version`, body.versions)
+    items.push({ url: `${MODRINTH_API}/project/${slug}/version`, data: body.versions, size: JSON.stringify(body.versions).length })
   }
+  if (!putCourierDelivery(token, slug, items)) return Response.json({ error: 'too_large' }, { status: 413 })
 
   return Response.json({ ok: true })
 }

@@ -64,5 +64,7 @@ export const config = {
     '/shader/:path*',
     '/datapack/:path*',
     '/server/:path*',
+    '/project/:path*',
+    '/api/:path*',
   ],
 }

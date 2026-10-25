@@ -75,6 +75,7 @@ const nextConfig = {
       { source: '/app', destination: '/launcher' },
       { source: '/app/', destination: '/launcher' },
       { source: '/file-lookup', destination: '/admin/file_lookup' },
+      { source: '/favicon.ico', destination: '/icon.png' },
     ]
   },
   images: {
