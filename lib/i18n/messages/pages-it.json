@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Copia codice",
     "copied": "Copiato!"
+  },
+  "errorPage": {
+    "courierTitle": "Il gattino va a prenderlo",
+    "courierLead": "Il server di Modrinth è occupato, quindi il gattino recupera il progetto direttamente dal tuo browser. Solo un paio di secondi.",
+    "title": "Modrinth sta facendo un pisolino",
+    "lead": "Il server di Modrinth è sovraccarico per un momento e non ha risposto in tempo. Il gattino riproverà da solo tra un paio di secondi, oppure premi il pulsante.",
+    "retry": "Riprova",
+    "home": "Home"
   }
 }

@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Kopiuj kod",
     "copied": "Skopiowano!"
+  },
+  "errorPage": {
+    "courierTitle": "Kotek sam po to pobiegnie",
+    "courierLead": "Serwer Modrinth jest teraz zajęty, więc kotek pobiera projekt bezpośrednio przez twoją przeglądarkę. To tylko kilka sekund.",
+    "title": "Modrinth ucina sobie drzemkę",
+    "lead": "Serwer Modrinth jest na chwilę przeciążony i nie odpowiedział na czas. Kotek sam spróbuje ponownie za kilka sekund — albo kliknij przycisk.",
+    "retry": "Spróbuj ponownie",
+    "home": "Strona główna"
   }
 }

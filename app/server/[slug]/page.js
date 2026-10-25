@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
-import { notFound } from 'next/navigation'
-import { getServer, getOrganization, getTeamMembers, getVersion } from '@/lib/modrinth'
+import { getServer, getOrganization, getTeamMembers, getVersion, isModrinthNotFound } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { getServerCategoryName } from '@/lib/serverCategories'
 import { categoryLabel } from '@/lib/i18n/label'
@@ -15,12 +14,14 @@ import ServerLinkIcon from '@/app/components/ServerLinkIcon'
 import AuthorsSection from '@/app/components/AuthorsSection'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export async function generateMetadata({ params }) {
   try {
     const server = await getServer(params.slug)
     return buildServerPageMetadata(server, params.slug)
-  } catch {
+  } catch (error) {
+    if (!isModrinthNotFound(error)) return {}
     return buildServerNotFoundMetadata()
   }
 }
@@ -56,7 +57,7 @@ export default async function ServerPage({ params }) {
       return <ProjectAccessRestricted href="/servers" backKey="project.backToServers" />
     }
   } catch (error) {
-    notFound()
+    notFoundOrThrow(error)
   }
 
   const getLinks = (srv) => {

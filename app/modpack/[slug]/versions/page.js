@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
-import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
+import { getMod, getModVersions, getTeamMembers, getOrganization, isModrinthNotFound } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
@@ -8,12 +8,14 @@ import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithB
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export async function generateMetadata({ params }) {
   try {
     const modpack = await getMod(params.slug)
     return buildProjectVersionsMetadata('modpack', params.slug, modpack)
-  } catch {
+  } catch (error) {
+    if (!isModrinthNotFound(error)) return {}
     return buildProjectNotFoundMetadata('modpack')
   }
 }
@@ -34,7 +36,7 @@ export default async function ModpackVersionsPage({ params, searchParams }) {
     organization = modpack.organization ? await getOrganization(modpack.organization) : null;
     if ((await isProjectBlocked(modpack.slug, modpack.id) || isOrganizationBlocked(modpack.organization))) notFound()
   } catch (error) {
-    notFound()
+    notFoundOrThrow(error)
   }
 
   return (

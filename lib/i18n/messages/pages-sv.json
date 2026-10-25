@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Kopiera kod",
     "copied": "Kopierat!"
+  },
+  "errorPage": {
+    "courierTitle": "Kattungen hämtar det själv",
+    "courierLead": "Modrinths server är upptagen just nu, så kattungen hämtar projektet direkt via din webbläsare. Bara ett par sekunder.",
+    "title": "Modrinth tar en liten tupplur",
+    "lead": "Modrinths server är överbelastad en stund och svarade inte i tid. Kattungen försöker igen av sig själv om ett par sekunder — eller tryck på knappen.",
+    "retry": "Försök igen",
+    "home": "Startsida"
   }
 }

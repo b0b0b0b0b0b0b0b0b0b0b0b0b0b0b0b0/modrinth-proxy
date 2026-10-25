@@ -1,12 +1,13 @@
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
-import { notFound, permanentRedirect } from 'next/navigation'
-import { getMod, getModVersions, getTeamMembers, getOrganization, formatDownloads } from '@/lib/modrinth'
+import { permanentRedirect } from 'next/navigation'
+import { getMod, getModVersions, getTeamMembers, getOrganization, formatDownloads, isModrinthNotFound } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export async function generateMetadata({ params }) {
   const { t } = getRequestT()
@@ -45,7 +46,8 @@ export async function generateMetadata({ params }) {
         'theme-color': '#1bd96a',
       },
     }
-  } catch {
+  } catch (error) {
+    if (!isModrinthNotFound(error)) return {}
     return {
       title: t('project.notFound'),
       description: t('project.notFoundDesc'),
@@ -80,7 +82,7 @@ export default async function ModPage({ params }) {
       return <ProjectAccessRestricted href="/mods" backKey="project.backToMods" />
     }
   } catch (error) {
-    notFound()
+    notFoundOrThrow(error)
   }
 
   return (

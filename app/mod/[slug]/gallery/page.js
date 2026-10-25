@@ -1,6 +1,5 @@
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
-import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
+import { getMod, getModVersions, getOrganization, isModrinthNotFound } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
@@ -8,6 +7,7 @@ import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
 import IconPreload from '@/app/components/IconPreload'
 import { getRequestT } from '@/lib/i18n/server'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export async function generateMetadata({ params }) {
   const { t } = getRequestT()
@@ -34,7 +34,8 @@ export async function generateMetadata({ params }) {
         images: mod.icon_url ? [mod.icon_url] : [],
       },
     }
-  } catch {
+  } catch (error) {
+    if (!isModrinthNotFound(error)) return {}
     return {
       title: t('project.galleryNotFound'),
     }
@@ -59,7 +60,7 @@ export default async function ModGalleryPage({ params }) {
       return <ProjectAccessRestricted href="/mods" backKey="project.backToMods" />
     }
   } catch (error) {
-    notFound()
+    notFoundOrThrow(error)
   }
 
   mod = filterModContent(mod)

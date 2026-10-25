@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Copier le code",
     "copied": "Copié !"
+  },
+  "errorPage": {
+    "courierTitle": "Le chaton va le chercher",
+    "courierLead": "Le serveur de Modrinth est occupé, alors le chaton récupère le projet directement via ton navigateur. Juste quelques secondes.",
+    "title": "Modrinth fait une petite sieste",
+    "lead": "Le serveur de Modrinth est surchargé pour un instant et n’a pas répondu à temps. Le chaton réessaiera tout seul dans quelques secondes — ou appuie sur le bouton.",
+    "retry": "Réessayer",
+    "home": "Accueil"
   }
 }

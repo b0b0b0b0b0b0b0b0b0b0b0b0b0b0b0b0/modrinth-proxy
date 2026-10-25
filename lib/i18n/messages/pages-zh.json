@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "复制代码",
     "copied": "已复制！"
+  },
+  "errorPage": {
+    "courierTitle": "小猫亲自去取",
+    "courierLead": "Modrinth 服务器正忙，小猫会通过你的浏览器直接把项目取回来。只需几秒钟。",
+    "title": "Modrinth 正在打个小盹",
+    "lead": "Modrinth 服务器暂时繁忙，没能及时回应。小猫会在几秒后自动再试一次——你也可以点按钮。",
+    "retry": "重试",
+    "home": "首页"
   }
 }

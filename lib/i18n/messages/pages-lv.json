@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Kopēt kodu",
     "copied": "Nokopēts!"
+  },
+  "errorPage": {
+    "courierTitle": "Kaķēns aizskrien pats",
+    "courierLead": "Modrinth serveris šobrīd ir aizņemts, tāpēc kaķēns paņem projektu tieši caur tavu pārlūku. Tikai pāris sekundes.",
+    "title": "Modrinth mazliet atpūšas",
+    "lead": "Modrinth serveris uz brīdi ir pārslogots un neatbildēja laikā. Kaķēns pēc pāris sekundēm pats mēģinās vēlreiz — vai nospied pogu.",
+    "retry": "Mēģināt vēlreiz",
+    "home": "Uz sākumu"
   }
 }

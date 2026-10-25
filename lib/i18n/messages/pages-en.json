@@ -695,5 +695,13 @@
   "codeBlock": {
     "copy": "Copy code",
     "copied": "Copied!"
+  },
+  "errorPage": {
+    "courierTitle": "The kitten is fetching it",
+    "courierLead": "The Modrinth server is busy right now, so the kitten is grabbing the project straight through your browser. Just a couple of seconds.",
+    "title": "Modrinth is taking a little nap",
+    "lead": "The Modrinth server is busy for a moment and didn’t answer in time. The kitten will try again by itself in a couple of seconds — or press the button.",
+    "retry": "Try again",
+    "home": "Home"
   }
 }

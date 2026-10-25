@@ -2,6 +2,7 @@ import { notFound, redirect } from 'next/navigation'
 import { getMod } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { resolveProjectHref } from '@/lib/dependencies'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export default async function ProjectRedirectPage({ params }) {
   const { slug, path } = params
@@ -9,8 +10,8 @@ export default async function ProjectRedirectPage({ params }) {
   let project
   try {
     project = await getMod(slug)
-  } catch {
-    notFound()
+  } catch (error) {
+    notFoundOrThrow(error)
   }
 
   if (await isProjectBlocked(project.slug, project.id) || isOrganizationBlocked(project.organization)) {

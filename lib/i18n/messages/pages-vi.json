@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Sao chép mã",
     "copied": "Đã sao chép!"
+  },
+  "errorPage": {
+    "courierTitle": "Mèo con tự chạy đi lấy",
+    "courierLead": "Máy chủ Modrinth đang bận, nên mèo con lấy dự án trực tiếp qua trình duyệt của bạn. Chỉ vài giây thôi.",
+    "title": "Modrinth đang chợp mắt một chút",
+    "lead": "Máy chủ Modrinth đang quá tải trong chốc lát và chưa kịp trả lời. Mèo con sẽ tự thử lại sau vài giây — hoặc bạn bấm nút.",
+    "retry": "Thử lại",
+    "home": "Trang chủ"
   }
 }

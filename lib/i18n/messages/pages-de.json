@@ -686,5 +686,13 @@
   "codeBlock": {
     "copy": "Code kopieren",
     "copied": "Kopiert!"
+  },
+  "errorPage": {
+    "courierTitle": "Das Kätzchen holt es selbst",
+    "courierLead": "Der Modrinth-Server ist gerade beschäftigt, deshalb holt das Kätzchen das Projekt direkt über deinen Browser. Nur ein paar Sekunden.",
+    "title": "Modrinth macht ein kleines Nickerchen",
+    "lead": "Der Modrinth-Server ist gerade kurz überlastet und hat nicht rechtzeitig geantwortet. Das Kätzchen versucht es in ein paar Sekunden von selbst noch einmal — oder drück den Knopf.",
+    "retry": "Erneut versuchen",
+    "home": "Startseite"
   }
 }

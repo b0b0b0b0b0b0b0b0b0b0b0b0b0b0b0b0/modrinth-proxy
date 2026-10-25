@@ -1,6 +1,5 @@
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
-import { notFound } from 'next/navigation'
-import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
+import { getMod, getModVersions, getOrganization, isModrinthNotFound } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked, filterGalleryImages, filterModContent } from '@/lib/contentFilter'
 import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProjectVersionsMetadata, buildProjectChangelogMetadata, buildProjectNotFoundMetadata, galleryNotFoundMetadata } from '@/lib/projectPageSeo'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
@@ -8,12 +7,14 @@ import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
 import IconPreload from '@/app/components/IconPreload'
+import { notFoundOrThrow } from '@/lib/projectPageError'
 
 export async function generateMetadata({ params }) {
   try {
     const shader = filterModContent(await getMod(params.slug))
     return buildProjectGalleryMetadata('shader', params.slug, shader)
-  } catch {
+  } catch (error) {
+    if (!isModrinthNotFound(error)) return {}
     return galleryNotFoundMetadata()
   }
 }
@@ -36,7 +37,7 @@ export default async function ShaderGalleryPage({ params }) {
       return <ProjectAccessRestricted href="/shaders" backKey="project.backToShaders" />
     }
   } catch (error) {
-    notFound()
+    notFoundOrThrow(error)
   }
 
   shader = filterModContent(shader)
