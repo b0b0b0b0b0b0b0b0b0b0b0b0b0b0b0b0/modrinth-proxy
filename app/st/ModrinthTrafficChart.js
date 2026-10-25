@@ -91,6 +91,21 @@ export default function ModrinthTrafficChart({ initial }) {
         <span>{time.format(new Date(minutes[0].at))}</span>
         <span>{time.format(new Date(minutes[minutes.length - 1].at))}</span>
       </div>
+      {data.byKind?.length ? (
+        <div className="mt-4 space-y-1.5">
+          {data.byKind.map((row) => (
+            <div key={row.kind} className="flex items-center gap-3 text-xs">
+              <span className="w-40 shrink-0 truncate font-mono text-gray-400">{row.kind}</span>
+              <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-800">
+                <div className="h-full rounded-full bg-modrinth-green/70" style={{ width: `${(row.n / data.byKind[0].n) * 100}%` }} />
+              </div>
+              <span className="w-24 shrink-0 text-right tabular-nums text-gray-300">
+                {row.n} · {total ? Math.round((row.n / total) * 100) : 0}%
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : null}
       <p className="mt-3 text-[11px] leading-relaxed text-gray-600 dark:text-gray-500">{t('st.mrHint')}</p>
     </div>
   )
