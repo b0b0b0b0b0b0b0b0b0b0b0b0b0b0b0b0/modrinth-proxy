@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react'
 import { appendVersionParams } from '@/lib/catalogVersionParams'
 import { useT } from './I18nProvider'
 
+const MIN_QUERY_LENGTH = 3
+
 export default function SearchInput({ 
   defaultValue = '',
   placeholder,
@@ -40,7 +42,8 @@ export default function SearchInput({
     }
 
     const urlQuery = searchParams.get('q') || ''
-    if (query !== urlQuery) {
+    const typed = query.trim().length
+    if (query !== urlQuery && (typed === 0 || typed >= MIN_QUERY_LENGTH)) {
       debounceTimerRef.current = setTimeout(() => {
         isUpdatingUrlRef.current = true
         const params = new URLSearchParams()
