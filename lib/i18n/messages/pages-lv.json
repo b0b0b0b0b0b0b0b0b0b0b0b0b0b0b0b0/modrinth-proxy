@@ -680,5 +680,9 @@
     "home": "Uz sākumu",
     "soundOn": "Ieslēgt skaņas",
     "soundOff": "Izslēgt skaņas"
+  },
+  "codeBlock": {
+    "copy": "Kopēt kodu",
+    "copied": "Nokopēts!"
   }
 }

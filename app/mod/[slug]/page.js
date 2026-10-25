@@ -5,7 +5,7 @@ import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBl
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
-import MarkdownContent from '@/app/components/MarkdownContent'
+import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata({ params }) {
@@ -93,7 +93,7 @@ export default async function ModPage({ params }) {
         <div className="min-w-0">
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
-              <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={mod.body} />
+              <RichMarkdownContent className="prose prose-invert prose-sm max-w-none" content={mod.body} />
             </div>
           </div>
         </div>

@@ -689,5 +689,9 @@
     "inDownloads": "Downloads",
     "topFavorites": "Most favorited",
     "note": "Only totals — no usernames or anyone’s lists. Downloads cover the last 30 days."
+  },
+  "codeBlock": {
+    "copy": "Copy code",
+    "copied": "Copied!"
   }
 }

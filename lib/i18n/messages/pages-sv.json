@@ -680,5 +680,9 @@
     "home": "Startsidan",
     "soundOn": "Slå på ljud",
     "soundOff": "Stäng av ljud"
+  },
+  "codeBlock": {
+    "copy": "Kopiera kod",
+    "copied": "Kopierat!"
   }
 }

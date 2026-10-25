@@ -6,7 +6,7 @@ import { buildProjectOverviewMetadata, buildProjectGalleryMetadata, buildProject
 import ResourceSidebarContainer from '@/app/components/ResourceSidebarContainer'
 import ContentNavigationWithBanner from '@/app/components/ContentNavigationWithBanner'
 import ResourceHeader from '@/app/components/ResourceHeader'
-import MarkdownContent from '@/app/components/MarkdownContent'
+import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 
 export async function generateMetadata({ params }) {
   try {
@@ -54,7 +54,7 @@ export default async function ModpackPage({ params }) {
         <div className="lg:col-span-2">
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
-              <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={modpack.body} />
+              <RichMarkdownContent className="prose prose-invert prose-sm max-w-none" content={modpack.body} />
             </div>
           </div>
         </div>

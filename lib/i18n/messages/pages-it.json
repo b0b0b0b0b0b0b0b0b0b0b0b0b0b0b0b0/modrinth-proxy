@@ -680,5 +680,9 @@
     "home": "Home",
     "soundOn": "Attiva i suoni",
     "soundOff": "Disattiva i suoni"
+  },
+  "codeBlock": {
+    "copy": "Copia codice",
+    "copied": "Copiato!"
   }
 }

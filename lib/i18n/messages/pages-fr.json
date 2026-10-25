@@ -680,5 +680,9 @@
     "home": "Accueil",
     "soundOn": "Activer les sons",
     "soundOff": "Couper les sons"
+  },
+  "codeBlock": {
+    "copy": "Copier le code",
+    "copied": "Copié !"
   }
 }

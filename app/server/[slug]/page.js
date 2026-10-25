@@ -13,7 +13,7 @@ import ServerGallery from '@/app/components/ServerGallery'
 import ServerSidebarLink from '@/app/components/ServerSidebarLink'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
 import AuthorsSection from '@/app/components/AuthorsSection'
-import MarkdownContent from '@/app/components/MarkdownContent'
+import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata({ params }) {
@@ -100,7 +100,7 @@ export default async function ServerPage({ params }) {
           <ServerGallery gallery={server.gallery} />
           <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
-              <MarkdownContent className="prose prose-invert prose-sm max-w-none" content={server.body || ''} />
+              <RichMarkdownContent className="prose prose-invert prose-sm max-w-none" content={server.body || ''} />
             </div>
           </div>
         </div>

@@ -680,5 +680,9 @@
     "home": "首页",
     "soundOn": "打开声音",
     "soundOff": "关闭声音"
+  },
+  "codeBlock": {
+    "copy": "复制代码",
+    "copied": "已复制！"
   }
 }

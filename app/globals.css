@@ -2370,12 +2370,42 @@ html:not(.dark) .feedback-thought button[aria-label="Закрыть"]:hover {
 }
 
 .prose code {
-  background-color: var(--bg-code) !important;
-  color: var(--color-green) !important;
-  padding: 0.125rem 0.375rem !important;
-  border-radius: 0.25rem !important;
-  font-size: 0.875em !important;
-  font-family: 'Courier New', monospace !important;
+  background-color: var(--code-inline-bg) !important;
+  color: var(--code-inline-text) !important;
+  border: 1px solid var(--code-inline-border);
+  padding: 0.1em 0.4em !important;
+  border-radius: 0.375rem !important;
+  font-size: 0.85em !important;
+  font-weight: 500;
+  font-family: ui-monospace, 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace !important;
+  overflow-wrap: anywhere;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none !important;
+}
+
+.prose code.code-inline {
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.prose code.code-inline:hover {
+  background-color: var(--code-inline-bg-hover) !important;
+  border-color: var(--code-inline-border-hover);
+}
+
+.prose code.code-inline:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
+}
+
+.prose code.code-inline.is-copied {
+  background-color: var(--code-inline-bg-hover) !important;
+  border-color: var(--color-green);
 }
 
 .prose pre {
@@ -2388,8 +2418,285 @@ html:not(.dark) .feedback-thought button[aria-label="Закрыть"]:hover {
 
 .prose pre code {
   background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  font-weight: 400;
   padding: 0 !important;
   color: var(--text-light) !important;
+}
+
+:root {
+  --code-bg: #15171c;
+  --code-head-bg: #1c1f26;
+  --code-border: #2b2f38;
+  --code-ln: #565c69;
+  --code-ln-active: #ec7fab;
+  --code-line-hover: rgba(236, 127, 171, 0.07);
+  --code-inline-bg: rgba(236, 127, 171, 0.1);
+  --code-inline-bg-hover: rgba(236, 127, 171, 0.18);
+  --code-inline-border: rgba(236, 127, 171, 0.2);
+  --code-inline-border-hover: rgba(236, 127, 171, 0.45);
+  --code-inline-text: #f6a8c8;
+  --code-scroll: rgba(236, 127, 171, 0.22);
+  --code-scroll-hover: rgba(236, 127, 171, 0.5);
+  --code-text: #e2e8f0;
+  --code-key: #7dd3fc;
+  --code-string: #86efac;
+  --code-number: #fbbf24;
+  --code-comment: #6f7889;
+  --code-keyword: #f59ac0;
+  --code-meta: #c4b5fd;
+  --code-title: #93c5fd;
+  --code-variable: #fda4af;
+  --code-type: #fcd34d;
+}
+
+html:not(.dark) {
+  --code-bg: #fbfbfc;
+  --code-head-bg: #f1f2f5;
+  --code-border: #dfe2e7;
+  --code-ln: #a3a9b5;
+  --code-ln-active: #d0508a;
+  --code-line-hover: rgba(236, 127, 171, 0.1);
+  --code-inline-bg: rgba(236, 127, 171, 0.12);
+  --code-inline-bg-hover: rgba(236, 127, 171, 0.22);
+  --code-inline-border: rgba(208, 80, 138, 0.25);
+  --code-inline-border-hover: rgba(208, 80, 138, 0.5);
+  --code-inline-text: #b8135f;
+  --code-scroll: rgba(208, 80, 138, 0.25);
+  --code-scroll-hover: rgba(208, 80, 138, 0.55);
+  --code-text: #24292f;
+  --code-key: #0369a1;
+  --code-string: #15803d;
+  --code-number: #b45309;
+  --code-comment: #8a919e;
+  --code-keyword: #be185d;
+  --code-meta: #6d28d9;
+  --code-title: #1d4ed8;
+  --code-variable: #be123c;
+  --code-type: #a16207;
+}
+
+.prose .code-block {
+  margin: 0 0 1.25rem;
+  border: 1px solid var(--code-border);
+  border-radius: 0.75rem;
+  background: var(--code-bg);
+  overflow: hidden;
+  box-shadow: 0 6px 24px -14px rgba(0, 0, 0, 0.6);
+}
+
+.prose .code-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.375rem 0.5rem 0.375rem 0.875rem;
+  background: var(--code-head-bg);
+  border-bottom: 1px solid var(--code-border);
+}
+
+.prose .code-block-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.prose .code-block-lang::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: var(--color-green);
+  box-shadow: 0 0 8px rgba(var(--color-green-rgb), 0.7);
+}
+
+.prose .code-block-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  border-radius: 0.5rem;
+  color: var(--text-muted);
+  transition: color 0.15s, background-color 0.15s, transform 0.15s;
+}
+
+.prose .code-block-copy:hover {
+  color: var(--text-primary);
+  background: rgba(var(--color-green-rgb), 0.14);
+}
+
+.prose .code-block-copy:active {
+  transform: scale(0.9);
+}
+
+.prose .code-block-copy:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 1px;
+}
+
+.prose .code-block-copy.is-copied {
+  color: var(--color-green);
+}
+
+.prose .code-block .code-block-pre {
+  margin: 0 !important;
+  padding: 0.75rem 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  max-height: 38rem;
+  overflow: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: var(--code-scroll) transparent;
+}
+
+.prose .code-block .code-block-pre:hover {
+  scrollbar-color: var(--code-scroll-hover) transparent;
+}
+
+.prose .code-block .code-block-pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.prose .code-block .code-block-pre::-webkit-scrollbar-track,
+.prose .code-block .code-block-pre::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.prose .code-block .code-block-pre::-webkit-scrollbar-thumb {
+  background: var(--code-scroll);
+  border-radius: 9999px;
+}
+
+.prose .code-block .code-block-pre::-webkit-scrollbar-thumb:hover {
+  background: var(--code-scroll-hover);
+}
+
+.prose .code-block .code-block-pre code {
+  display: block;
+  min-width: 100%;
+  width: max-content;
+  counter-reset: code-line;
+  color: var(--code-text) !important;
+  font-family: ui-monospace, 'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace !important;
+  font-size: 0.8125rem !important;
+  line-height: 1.65;
+  tab-size: 4;
+}
+
+.prose .code-block .code-line {
+  display: flex;
+  transition: background-color 0.1s;
+}
+
+.prose .code-block .code-line::before {
+  content: counter(code-line);
+  counter-increment: code-line;
+  position: sticky;
+  left: 0;
+  flex: none;
+  box-sizing: content-box;
+  width: calc(var(--ln-digits, 2) * 1ch);
+  padding: 0 0.875rem 0 1rem;
+  text-align: right;
+  color: var(--code-ln);
+  background: var(--code-bg);
+  border-right: 1px solid var(--code-border);
+  user-select: none;
+}
+
+.prose .code-block .code-line:hover {
+  background: var(--code-line-hover);
+}
+
+.prose .code-block .code-line:hover::before {
+  color: var(--code-ln-active);
+}
+
+.prose .code-block .code-text {
+  padding: 0 1.25rem 0 1rem;
+  white-space: pre;
+}
+
+.prose .code-block .code-text * {
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+}
+
+.code-block .hljs-comment,
+.code-block .hljs-quote {
+  color: var(--code-comment);
+  font-style: italic;
+}
+
+.code-block .hljs-keyword,
+.code-block .hljs-selector-tag,
+.code-block .hljs-built_in,
+.code-block .hljs-doctag,
+.code-block .hljs-tag {
+  color: var(--code-keyword);
+}
+
+.code-block .hljs-attr,
+.code-block .hljs-attribute,
+.code-block .hljs-property,
+.code-block .hljs-selector-class,
+.code-block .hljs-selector-id {
+  color: var(--code-key);
+}
+
+.code-block .hljs-string,
+.code-block .hljs-regexp,
+.code-block .hljs-addition,
+.code-block .hljs-symbol {
+  color: var(--code-string);
+}
+
+.code-block .hljs-number,
+.code-block .hljs-literal {
+  color: var(--code-number);
+}
+
+.code-block .hljs-meta,
+.code-block .hljs-bullet,
+.code-block .hljs-section,
+.code-block .hljs-link {
+  color: var(--code-meta);
+}
+
+.code-block .hljs-title,
+.code-block .hljs-name,
+.code-block .hljs-function {
+  color: var(--code-title);
+}
+
+.code-block .hljs-variable,
+.code-block .hljs-template-variable,
+.code-block .hljs-params,
+.code-block .hljs-deletion {
+  color: var(--code-variable);
+}
+
+.code-block .hljs-type,
+.code-block .hljs-class,
+.code-block .hljs-title.class_ {
+  color: var(--code-type);
+}
+
+.code-block .hljs-emphasis {
+  font-style: italic;
+}
+
+.code-block .hljs-strong {
+  font-weight: 700;
 }
 
 .prose blockquote {

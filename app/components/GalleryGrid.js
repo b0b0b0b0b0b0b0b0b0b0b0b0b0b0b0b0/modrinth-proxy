@@ -85,7 +85,7 @@ export default function GalleryGrid({ gallery }) {
         {gallery.map((item, idx) => (
           <div
             key={idx}
-            className="overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark transition-colors hover:border-gray-700"
+            className="group flex flex-col overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark transition-colors hover:border-gray-700"
           >
             {item.isBlocked ? (
               <div className="relative flex aspect-video w-full items-center justify-center border-b border-red-500/20 bg-gradient-to-br from-red-500/10 to-orange-500/10">
@@ -107,12 +107,21 @@ export default function GalleryGrid({ gallery }) {
             ) : (
               <button
                 onClick={() => setSelectedIndex(idx)}
-                className="block w-full cursor-pointer"
+                className="relative block aspect-video w-full cursor-pointer overflow-hidden bg-black/40"
               >
                 <img
                   src={item.url}
+                  alt=""
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-xl"
+                  loading="lazy"
+                  decoding="async"
+                  referrerPolicy="no-referrer"
+                />
+                <img
+                  src={item.url}
                   alt={item.title || 'Gallery image'}
-                  className="h-auto w-full object-cover transition-opacity hover:opacity-90"
+                  className="relative h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.03]"
                   loading="lazy"
                   decoding="async"
                   referrerPolicy="no-referrer"

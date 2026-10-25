@@ -680,5 +680,9 @@
     "home": "Trang chủ",
     "soundOn": "Bật âm thanh",
     "soundOff": "Tắt âm thanh"
+  },
+  "codeBlock": {
+    "copy": "Sao chép mã",
+    "copied": "Đã sao chép!"
   }
 }
