@@ -9,8 +9,10 @@ import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionPar
 import { appendFacetParams, parseFacetList, pickIds, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import { copyDependentParams } from '@/lib/dependentsFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import DependencyFilter from '@/app/components/DependencyFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 import { useT } from '@/app/components/I18nProvider'
 import { categoryLabel } from '@/lib/i18n/label'
@@ -107,6 +109,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
+    copyDependentParams(params, searchParams)
     appendDisclosureExclusionParams(params, searchParams, '/shaders')
     
     router.push(`/shaders?${params.toString()}`)
@@ -327,6 +330,8 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
         </div>
 
         <LicenseFilter />
+
+        <DependencyFilter />
 
         <AdvancedExclusionsFilter />
 

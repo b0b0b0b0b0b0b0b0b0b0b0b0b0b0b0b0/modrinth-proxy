@@ -7,10 +7,11 @@ import { getFilterConfig, getCategoryName, getLoaderName, getPlatformName, getEn
 import { SERVER_REGIONS, SERVER_LANGUAGES } from '@/lib/serverCategories'
 import { getDisclosureExclusionLabel, filterDisclosureIdsForCatalog, parseDisclosureExclusions, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import { formatDependentParam, parseDependentOptions } from '@/lib/dependentsFilter'
 import { useI18n } from './I18nProvider'
 import { categoryLabel, languageDisplayName, labeled, serverRegionLabel } from '@/lib/i18n/label'
 
-export default function ActiveFilters({ categoryPath = 'plugins' }) {
+export default function ActiveFilters({ categoryPath = 'plugins', dependencies = [] }) {
   const { t, locale } = useI18n()
   const searchParams = useSearchParams()
   const config = getFilterConfig(categoryPath)
@@ -102,6 +103,17 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
     }
   })
   
+  const depOptions = parseDependentOptions(searchParams)
+  depOptions.forEach((option) => {
+    const project = dependencies.find((dependency) => dependency.id === option.id)
+    activeFilters.push({
+      type: 'dependency',
+      id: option.id,
+      label: t(categoryPath.endsWith('modpacks') ? 'filter.contains' : 'filter.dependsOn', { name: project?.title || option.id }),
+      param: 'dep'
+    })
+  })
+
   const sgv = searchParams.get('sgv')
   if (sgv) {
     activeFilters.push({
@@ -212,6 +224,12 @@ export default function ActiveFilters({ categoryPath = 'plugins' }) {
       
       if (filterToRemove.type === 'openSource' && key === 'l') return
       if (filterToRemove.type === 'sgv' && key === 'sgv') return
+      if (filterToRemove.type === 'dependency' && key === 'dep') {
+        depOptions
+          .filter((option) => option.id !== filterToRemove.id)
+          .forEach((option) => params.append('dep', formatDependentParam(option.id, option.types)))
+        return
+      }
       if (filterToRemove.type === 'environment' && key === 'e') return
       if (filterToRemove.type === 'sst' && key === 'sst') {
         params.set('sst', 'online')

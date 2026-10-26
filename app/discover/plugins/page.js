@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions, getDependentFilterProjects } from '@/lib/modrinth'
 import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
@@ -23,6 +23,7 @@ import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { PLUGIN_PLATFORM_ID_LIST } from '@/lib/loaders'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
+import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('plugins', searchParams, { basePath: 'discover/plugins' })
@@ -120,6 +121,8 @@ export default async function PluginsPage({ searchParams }) {
 
   appendDisclosureExclusionFacets(facets, searchParams, 'plugins')
   appendOpenSourceFacets(facets, searchParams)
+  appendDependentFacets(facets, searchParams, 'plugins')
+  const dependencies = await getDependentFilterProjects(searchParams)
   appendNegatedFacets(facets, excludedLoaders)
   appendNegatedFacets(facets, excludedPlatforms)
   appendNegatedFacets(facets, excludedCategories)
@@ -152,6 +155,7 @@ export default async function PluginsPage({ searchParams }) {
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     
     copyOpenSourceParams(params, searchParams)
+    copyDependentParams(params, searchParams)
     appendDisclosureExclusionParams(params, searchParams)
     params.set('page', newPage.toString());
     return `/discover/plugins?${params.toString()}`;
@@ -229,7 +233,7 @@ export default async function PluginsPage({ searchParams }) {
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="discover/plugins" />
+              <ActiveFilters categoryPath="discover/plugins" dependencies={dependencies} />
             </div>
           </div>
 

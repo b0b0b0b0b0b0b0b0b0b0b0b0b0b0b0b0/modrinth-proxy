@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions, getDependentFilterProjects } from '@/lib/modrinth'
 import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
@@ -22,6 +22,7 @@ import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/ca
 import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
+import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('datapacks', searchParams, { basePath: 'discover/datapacks' })
@@ -74,6 +75,8 @@ export default async function DatapacksPage({ searchParams }) {
   
   appendDisclosureExclusionFacets(facets, searchParams, 'datapacks');
   appendOpenSourceFacets(facets, searchParams);
+  appendDependentFacets(facets, searchParams, 'datapacks');
+  const dependencies = await getDependentFilterProjects(searchParams);
   appendNegatedFacets(facets, excludedCategories)
 
   const buildPageUrl = (newPage) => {
@@ -84,6 +87,7 @@ export default async function DatapacksPage({ searchParams }) {
     excludedCategories.forEach(c => params.append('f', `categories!=${c}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     copyOpenSourceParams(params, searchParams);
+    copyDependentParams(params, searchParams);
     appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/datapacks?${params.toString()}`;
@@ -161,7 +165,7 @@ export default async function DatapacksPage({ searchParams }) {
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="discover/datapacks" />
+              <ActiveFilters categoryPath="discover/datapacks" dependencies={dependencies} />
             </div>
           </div>
 

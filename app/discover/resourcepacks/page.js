@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions, getDependentFilterProjects } from '@/lib/modrinth'
 import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
@@ -21,6 +21,7 @@ import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/ca
 import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
+import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('resourcepacks', searchParams, { basePath: 'discover/resourcepacks' })
@@ -100,6 +101,8 @@ export default async function ResourcepacksPage({ searchParams }) {
   }
   appendDisclosureExclusionFacets(facets, searchParams, 'resourcepacks');
   appendOpenSourceFacets(facets, searchParams);
+  appendDependentFacets(facets, searchParams, 'resourcepacks');
+  const dependencies = await getDependentFilterProjects(searchParams);
   appendNegatedFacets(facets, excludedCategories)
   appendNegatedFacets(facets, excludedFeatures)
   appendNegatedFacets(facets, excludedResolutions)
@@ -116,6 +119,7 @@ export default async function ResourcepacksPage({ searchParams }) {
     excludedResolutions.forEach(r => params.append('f', `categories!=${r}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     copyOpenSourceParams(params, searchParams);
+    copyDependentParams(params, searchParams);
     appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/resourcepacks?${params.toString()}`;
@@ -185,7 +189,7 @@ export default async function ResourcepacksPage({ searchParams }) {
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="discover/resourcepacks" />
+              <ActiveFilters categoryPath="discover/resourcepacks" dependencies={dependencies} />
             </div>
           </div>
 

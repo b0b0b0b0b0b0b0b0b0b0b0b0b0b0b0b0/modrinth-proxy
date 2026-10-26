@@ -3,6 +3,7 @@
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect, useRef } from 'react'
 import { appendVersionParams } from '@/lib/catalogVersionParams'
+import { copyDependentParams } from '@/lib/dependentsFilter'
 import { useT } from './I18nProvider'
 
 const MIN_QUERY_LENGTH = 3
@@ -71,6 +72,7 @@ export default function SearchInput({
         
         const sort = searchParams.get('sort')
         if (sort) params.set('sort', sort)
+        copyDependentParams(params, searchParams)
         
         router.push(`/${categoryPath}?${params.toString()}`)
       }, delay)
@@ -114,7 +116,8 @@ export default function SearchInput({
     
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
-    
+    copyDependentParams(params, searchParams)
+
     router.push(`/${categoryPath}?${params.toString()}`)
   }
 

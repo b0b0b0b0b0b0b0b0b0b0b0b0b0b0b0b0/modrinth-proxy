@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions, getDependentFilterProjects } from '@/lib/modrinth'
 import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
@@ -22,6 +22,7 @@ import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/ca
 import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
+import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'discover/modpacks' })
@@ -106,6 +107,8 @@ export default async function ModpacksPage({ searchParams }) {
 
   appendDisclosureExclusionFacets(facets, searchParams, 'modpacks')
   appendOpenSourceFacets(facets, searchParams)
+  appendDependentFacets(facets, searchParams, 'modpacks')
+  const dependencies = await getDependentFilterProjects(searchParams)
   appendNegatedFacets(facets, excludedLoaders)
   appendNegatedFacets(facets, excludedCategories)
 
@@ -132,6 +135,7 @@ export default async function ModpacksPage({ searchParams }) {
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     
     copyOpenSourceParams(params, searchParams)
+    copyDependentParams(params, searchParams)
     appendDisclosureExclusionParams(params, searchParams)
     params.set('page', newPage.toString());
     return `/discover/modpacks?${params.toString()}`;
@@ -209,7 +213,7 @@ export default async function ModpacksPage({ searchParams }) {
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="discover/modpacks" />
+              <ActiveFilters categoryPath="discover/modpacks" dependencies={dependencies} />
             </div>
           </div>
 

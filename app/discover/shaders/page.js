@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 import { catalogUi } from '@/lib/i18n/catalogListing'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
-import { getMinecraftVersions } from '@/lib/modrinth'
+import { getMinecraftVersions, getDependentFilterProjects } from '@/lib/modrinth'
 import { catalogSearchBatch } from '@/lib/favoritesRanking'
 import { filterModsList } from '@/lib/contentFilter'
 import { loadCatalogPage } from '@/lib/loadCatalogPage'
@@ -22,6 +22,7 @@ import { parseVersionParams, appendVersionParams, versionFacets } from '@/lib/ca
 import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
+import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
 export async function generateMetadata({ searchParams }) {
   return buildCatalogSearchMetadata('shaders', searchParams, { basePath: 'discover/shaders' })
@@ -116,6 +117,8 @@ export default async function ShadersPage({ searchParams }) {
   
   appendDisclosureExclusionFacets(facets, searchParams, 'shaders');
   appendOpenSourceFacets(facets, searchParams);
+  appendDependentFacets(facets, searchParams, 'shaders');
+  const dependencies = await getDependentFilterProjects(searchParams);
   appendNegatedFacets(facets, excludedStyles)
   appendNegatedFacets(facets, excludedFeatures)
   appendNegatedFacets(facets, excludedPerformance)
@@ -135,6 +138,7 @@ export default async function ShadersPage({ searchParams }) {
     excludedLoaders.forEach(l => params.append('g', `categories!=${l}`));
     if (sortBy !== 'relevance') params.set('sort', sortBy);
     copyOpenSourceParams(params, searchParams);
+    copyDependentParams(params, searchParams);
     appendDisclosureExclusionParams(params, searchParams);
     params.set('page', newPage.toString());
     return `/discover/shaders?${params.toString()}`;
@@ -212,7 +216,7 @@ export default async function ShadersPage({ searchParams }) {
                   searchParams={searchParams}
                 />
               </div>
-              <ActiveFilters categoryPath="discover/shaders" />
+              <ActiveFilters categoryPath="discover/shaders" dependencies={dependencies} />
             </div>
           </div>
 

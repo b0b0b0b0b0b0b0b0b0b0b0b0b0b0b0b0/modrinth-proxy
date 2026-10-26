@@ -8,8 +8,10 @@ import { parseVersionParams, appendVersionParams } from '@/lib/catalogVersionPar
 import { appendFacetParams, parseFacetList, pickIds, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import { appendDisclosureExclusionParams, catalogResetUrl, saveVisibleDisclosureExclusions } from '@/lib/disclosureExclusions'
 import { copyOpenSourceParams, parseOpenSourceFilter, saveStoredOpenSource } from '@/lib/openSourceFilter'
+import { copyDependentParams } from '@/lib/dependentsFilter'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import LicenseFilter from '@/app/components/LicenseFilter'
+import DependencyFilter from '@/app/components/DependencyFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
 import { PLUGIN_PLATFORM_ID_LIST } from '@/lib/loaders'
 import { useT } from '@/app/components/I18nProvider'
@@ -95,6 +97,7 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
     const sort = searchParams.get('sort')
     if (sort) params.set('sort', sort)
     copyOpenSourceParams(params, searchParams)
+    copyDependentParams(params, searchParams)
     appendDisclosureExclusionParams(params, searchParams, '/plugins')
     
     router.push(`/plugins?${params.toString()}`)
@@ -290,6 +293,8 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
         </div>
 
         <LicenseFilter />
+
+        <DependencyFilter />
 
         <AdvancedExclusionsFilter />
 

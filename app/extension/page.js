@@ -1,7 +1,9 @@
+import { headers } from 'next/headers'
+import { ArrowRight, EyeOff, Feather, MousePointerClick, Pin, Power, ShieldCheck, Target, UserRound, Zap } from 'lucide-react'
 import { getRequestT } from '@/lib/i18n/server'
-
-const STORE =
-  'https://chromewebstore.google.com/detail/modrinth-redirect/poamgpbaabemlgienajmcolicdiapekg'
+import { EXTENSION_STORES, detectBrowser } from '@/lib/browserDetect'
+import { BROWSER_LABELS, ChromeIcon, FirefoxIcon } from '../components/BrowserIcons'
+import ExtensionKitten from './ExtensionKitten'
 
 export async function generateMetadata() {
   const { t } = getRequestT()
@@ -11,170 +13,233 @@ export async function generateMetadata() {
   }
 }
 
+function InstallButton({ family, label, highlighted, idSuffix, className = '' }) {
+  const Logo = family === 'firefox' ? FirefoxIcon : ChromeIcon
+  return (
+    <a
+      href={EXTENSION_STORES[family]}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center justify-center gap-3 rounded-2xl px-5 py-3.5 text-base font-bold transition-all duration-300 hover:scale-[0.97] ${
+        highlighted
+          ? 'bg-modrinth-green text-black shadow-lg shadow-modrinth-green/25 hover:bg-modrinth-green-light'
+          : 'border border-modrinth-green/40 bg-modrinth-green/10 text-gray-900 hover:border-modrinth-green/70 hover:bg-modrinth-green/20 dark:text-white'
+      } ${className}`}
+    >
+      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-white/90 p-0.5">
+        <Logo className="h-6 w-6" id={`ff${idSuffix}`} />
+      </span>
+      <span className="min-w-0">{label}</span>
+    </a>
+  )
+}
+
+function StoreCard({ family, store, note, button, current, yours, idSuffix }) {
+  const Logo = family === 'firefox' ? FirefoxIcon : ChromeIcon
+  return (
+    <div
+      className={`relative flex flex-col rounded-3xl border p-5 transition-colors sm:p-7 ${
+        current
+          ? 'border-modrinth-green/60 bg-gradient-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark shadow-xl shadow-modrinth-green/10'
+          : 'border-modrinth-border bg-modrinth-dark'
+      }`}
+    >
+      {current ? (
+        <span className="absolute right-4 top-4 rounded-full bg-modrinth-green px-2.5 py-1 text-xs font-bold text-black">{yours}</span>
+      ) : null}
+      <div className="mb-4 flex items-center gap-4 pr-20">
+        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-white/90 p-1.5 shadow-md">
+          <Logo className="h-11 w-11" id={`ffcard${idSuffix}`} />
+        </div>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">{store}</h3>
+      </div>
+      <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{note}</p>
+      <InstallButton family={family} label={button} highlighted={current} idSuffix={`store${idSuffix}`} className="w-full" />
+    </div>
+  )
+}
+
+const FEATURES = [
+  ['redirect', Zap],
+  ['keep', Target],
+  ['account', UserRound],
+  ['toggle', Power],
+  ['privacy', EyeOff],
+  ['light', Feather],
+]
+
+const STEPS = [
+  ['s1', MousePointerClick],
+  ['s2', Pin],
+  ['s3', Zap],
+]
+
+const FAQ = ['1', '2', '3', '4', '5', '6']
+
 export default function ExtensionPage() {
   const { t } = getRequestT()
-  return (
-    <div className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="text-center mb-16 animate-fade-in">
-          <div className="inline-flex items-center gap-4 mb-6">
-            <div className="w-20 h-20 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-2xl flex items-center justify-center shadow-2xl">
-              <svg className="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-              </svg>
-            </div>
-          </div>
+  const requestHeaders = headers()
+  const browser = detectBrowser(requestHeaders.get('user-agent'), requestHeaders.get('sec-ch-ua'))
+  const chromiumLabel = browser.family === 'chromium' ? BROWSER_LABELS[browser.name] || BROWSER_LABELS.chrome : null
+  const chromeButton = chromiumLabel ? t('ext.install.chromiumBtn', { browser: chromiumLabel }) : t('ext.install.chromeBtn')
+  const firefoxButton = t('ext.install.firefoxBtn')
+  const order = browser.family === 'chromium' ? ['chromium', 'firefox'] : ['firefox', 'chromium']
+  const buttonLabel = (family) => (family === 'firefox' ? firefoxButton : chromeButton)
 
-          <h1 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
+  return (
+    <div className="min-h-screen overflow-x-hidden">
+      <div className="mx-auto max-w-6xl px-4 pb-16 pt-6 sm:pt-10">
+        <section className="relative mb-16 text-center sm:mb-24">
+          <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-modrinth-green/10 blur-3xl sm:h-96 sm:w-[36rem]" />
+
+          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-modrinth-green/30 bg-modrinth-green/10 px-3 py-1.5 text-sm font-semibold text-modrinth-green">
+            <FirefoxIcon className="h-4 w-4" id="ffbadge" />
+            {t('ext.badge')}
+          </span>
+
+          <h1 className="mb-5 text-4xl font-black leading-tight text-gray-900 dark:text-white sm:text-6xl md:text-7xl">
             {t('ext.h1')}
           </h1>
-
-          <p className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+          <p className="mx-auto mb-10 max-w-2xl text-lg leading-relaxed text-gray-600 dark:text-gray-400 sm:text-xl">
             {t('ext.lead')}
           </p>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-modrinth-green/10 to-transparent rounded-3xl p-8 shadow-2xl">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-12 h-12 bg-modrinth-green/20 rounded-xl flex items-center justify-center">
-                  <svg className="w-6 h-6 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h2 className="text-3xl font-bold text-white">{t('ext.what')}</h2>
+          <div className="relative mx-auto mb-10 max-w-xl">
+            <ExtensionKitten />
+            <div className="relative rounded-2xl border border-modrinth-border bg-modrinth-dark p-3 text-left shadow-2xl sm:p-4">
+              <div className="mb-3 flex gap-1.5">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/70" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-400/70" />
               </div>
-
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
-                {t('ext.whatLead')}{' '}
-                <span className="text-modrinth-green font-semibold">modrinth.com</span> {t('ext.to')}{' '}
-                <span className="text-modrinth-green font-semibold">modrinth.black</span>
-              </p>
-
-              <div className="space-y-4">
-                {[t('ext.instant'), t('ext.allPages'), t('ext.keepUrl'), t('ext.light')].map((line) => (
-                  <div key={line} className="flex items-start gap-3">
-                    <div className="w-2 h-2 bg-modrinth-green rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-gray-300">{line}</span>
-                  </div>
-                ))}
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
+                <div className="min-w-0 flex-1 truncate rounded-xl bg-black/20 px-3 py-2 font-mono text-xs text-gray-500 line-through decoration-gray-500/60 sm:text-sm">
+                  {t('ext.demoFrom')}
+                </div>
+                <ArrowRight className="mx-auto h-5 w-5 flex-shrink-0 rotate-90 animate-pulse text-modrinth-green sm:mx-0 sm:rotate-0" aria-hidden />
+                <div className="min-w-0 flex-1 truncate rounded-xl bg-modrinth-green/15 px-3 py-2 font-mono text-xs font-semibold text-modrinth-green ring-1 ring-modrinth-green/40 sm:text-sm">
+                  {t('ext.demoTo')}
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl p-8 shadow-2xl">
-              <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-                <svg className="w-8 h-8 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-                {t('ext.install')}
-              </h2>
-
-              <div className="rounded-2xl p-8">
-                <div className="mb-6">
-                  <h3 className="text-2xl font-bold text-white">{t('ext.store')}</h3>
-                  <p className="text-gray-300">{t('ext.official')}</p>
-                </div>
-
-                <p className="text-lg text-gray-300 mb-6">{t('ext.browsers')}</p>
-
-                <a
-                  href={STORE}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black font-bold py-4 px-8 rounded-2xl hover:from-modrinth-green-light hover:to-modrinth-green transition-all duration-300 transform hover:scale-95 shadow-xl text-center"
-                >
-                  <div className="flex items-center justify-center gap-3">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    {t('ext.installStore')}
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-modrinth-green/10 rounded-3xl p-4 md:p-8 shadow-2xl border border-modrinth-green/20 mb-16">
-          <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
-              <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">{t('ext.help')}</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-            {[
-              ['b1', 'b1d'],
-              ['b2', 'b2d'],
-              ['b3', 'b3d'],
-              ['b4', 'b4d'],
-            ].map(([title, desc]) => (
-              <div key={title} className="p-4 md:p-6 bg-gray-800/50 rounded-xl hover:bg-gray-800/70 transition-colors text-center flex flex-col items-center">
-                <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center mb-3 md:mb-4">
-                  <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <p className="text-gray-200 font-medium mb-2">{t(`ext.${title}`)}</p>
-                <p className="text-gray-400 text-sm">{t(`ext.${desc}`)}</p>
-              </div>
+          <div className="mx-auto flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+            {order.map((family) => (
+              <InstallButton
+                key={family}
+                family={family}
+                label={buttonLabel(family)}
+                highlighted={browser.family === family}
+                idSuffix={`hero${family}`}
+              />
             ))}
           </div>
-        </div>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-gray-600 dark:text-gray-400">
+            {browser.family
+              ? t('ext.detected', { browser: browser.family === 'firefox' ? BROWSER_LABELS.firefox : chromiumLabel })
+              : t('ext.unsupported')}
+          </p>
 
-        <div className="bg-gradient-to-br from-modrinth-green/5 to-transparent rounded-3xl p-8 md:p-12 shadow-2xl">
-          <div className="text-center mb-8">
-            <h2 className="text-4xl font-bold text-white mb-4">{t('ext.how')}</h2>
-            <p className="text-xl text-gray-400">{t('ext.howLead')}</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              ['s1', 's1d'],
-              ['s2', 's2d'],
-              ['s3', 's3d'],
-            ].map(([title, desc]) => (
-              <div key={title} className="text-center">
-                <div className="w-20 h-20 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl">
-                  <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-3">{t(`ext.${title}`)}</h3>
-                <p className="text-gray-400">{t(`ext.${desc}`)}</p>
-              </div>
+          <div className="mt-8 flex flex-wrap justify-center gap-2 text-sm">
+            {[t('ext.tagFree'), t('ext.tagPrivate'), t('ext.tagMit')].map((tag) => (
+              <span key={tag} className="inline-flex items-center gap-1.5 rounded-full border border-modrinth-border px-3 py-1 text-gray-600 dark:text-gray-300">
+                <ShieldCheck className="h-3.5 w-3.5 text-modrinth-green" aria-hidden />
+                {tag}
+              </span>
             ))}
           </div>
-        </div>
+        </section>
 
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-modrinth-green/10 to-transparent rounded-3xl p-8 md:p-12 shadow-2xl">
-            <h2 className="text-4xl font-bold text-white mb-6">{t('ext.cta')}</h2>
-            <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">{t('ext.ctaLead')}</p>
-
-            <div className="flex justify-center">
-              <a
-                href={STORE}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black font-bold py-4 px-8 rounded-2xl hover:from-modrinth-green-light hover:to-modrinth-green transition-all duration-300 transform hover:scale-95 shadow-xl"
+        <section className="mb-16 sm:mb-24">
+          <h2 className="mb-3 text-center text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.features.title')}</h2>
+          <div className="mx-auto mb-10 h-1 w-16 rounded-full bg-modrinth-green/60" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {FEATURES.map(([key, Icon]) => (
+              <div
+                key={key}
+                className="group rounded-2xl border border-modrinth-border bg-modrinth-dark p-5 transition-all duration-300 hover:-translate-y-1 hover:border-modrinth-green/40 sm:p-6"
               >
-                <div className="flex items-center justify-center gap-3">
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  {t('ext.installExt')}
+                <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-modrinth-green/15 text-modrinth-green transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+                  <Icon className="h-5 w-5" aria-hidden />
                 </div>
-              </a>
-            </div>
+                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">{t(`ext.features.${key}T`)}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{t(`ext.features.${key}D`)}</p>
+              </div>
+            ))}
           </div>
-        </div>
+        </section>
+
+        <section id="install" className="mb-16 scroll-mt-24 sm:mb-24">
+          <h2 className="mb-3 text-center text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.install.title')}</h2>
+          <p className="mb-10 text-center text-gray-600 dark:text-gray-400">{t('ext.install.lead')}</p>
+          <div className="mx-auto grid max-w-4xl gap-5 md:grid-cols-2">
+            {order.map((family) => (
+              <StoreCard
+                key={family}
+                family={family}
+                idSuffix={family}
+                store={t(family === 'firefox' ? 'ext.install.firefoxStore' : 'ext.install.chromeStore')}
+                note={t(family === 'firefox' ? 'ext.install.firefoxNote' : 'ext.install.chromeNote')}
+                button={buttonLabel(family)}
+                current={browser.family === family}
+                yours={t('ext.install.yours')}
+              />
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16 sm:mb-24">
+          <h2 className="mb-3 text-center text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.steps.title')}</h2>
+          <p className="mb-10 text-center text-gray-600 dark:text-gray-400">{t('ext.steps.lead')}</p>
+          <ol className="grid gap-4 md:grid-cols-3 md:gap-6">
+            {STEPS.map(([key, Icon], index) => (
+              <li key={key} className="relative rounded-2xl border border-modrinth-border bg-modrinth-dark p-5 sm:p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-modrinth-green text-lg font-black text-black">{index + 1}</span>
+                  <Icon className="h-5 w-5 text-modrinth-green" aria-hidden />
+                </div>
+                <h3 className="mb-2 text-lg font-bold text-gray-900 dark:text-white">{t(`ext.steps.${key}t`)}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{t(`ext.steps.${key}d`)}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section className="mx-auto mb-16 max-w-3xl sm:mb-24">
+          <h2 className="mb-8 text-center text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.faq.title')}</h2>
+          <div className="space-y-3">
+            {FAQ.map((n) => (
+              <details key={n} className="group rounded-2xl border border-modrinth-border bg-modrinth-dark px-5 open:border-modrinth-green/40">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-gray-900 dark:text-white [&::-webkit-details-marker]:hidden">
+                  {t(`ext.faq.q${n}`)}
+                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-modrinth-green/15 text-modrinth-green transition-transform duration-300 group-open:rotate-45">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path strokeLinecap="round" strokeWidth={2.4} d="M12 5v14M5 12h14" />
+                    </svg>
+                  </span>
+                </summary>
+                <p className="pb-5 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{t(`ext.faq.a${n}`)}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden rounded-3xl border border-modrinth-green/30 bg-gradient-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark p-6 text-center sm:p-12">
+          <h2 className="mb-3 text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.cta')}</h2>
+          <p className="mx-auto mb-8 max-w-xl text-gray-600 dark:text-gray-400">{t('ext.ctaLead')}</p>
+          <div className="mx-auto flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">
+            {order.map((family) => (
+              <InstallButton
+                key={family}
+                family={family}
+                label={buttonLabel(family)}
+                highlighted={browser.family === family}
+                idSuffix={`cta${family}`}
+              />
+            ))}
+          </div>
+        </section>
       </div>
     </div>
   )

@@ -17,6 +17,7 @@ import AuthorsSection from './AuthorsSection'
 import StyledTooltip from './StyledTooltip'
 import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 import ProjectLinksCard from './ProjectLinksCard'
+import ProjectDependentsCard from './ProjectDependentsCard'
 import { DisclosureIcon } from './ProjectDisclosureIcons'
 import { useI18n, useT } from './I18nProvider'
 import { formatRelative } from './RelativeTime'
@@ -161,6 +162,13 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           </div>
         </div>
       )}
+
+      <ProjectDependentsCard
+        projectId={projectId}
+        projectType={resource.project_type}
+        loaders={resource.loaders || []}
+        title={resource.title}
+      />
 
       {resource.project_type === 'minecraft_java_server' && (
         <div className="ny-snow-host bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
