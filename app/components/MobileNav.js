@@ -166,7 +166,7 @@ export default function MobileNav({ onFilterClick }) {
     pathname.startsWith('/discover/datapacks') ||
     pathname.startsWith('/discover/modpacks')
 
-  const showSettingsNavButton = pathname === '/settings' || pathname === '/account'
+  const showSettingsNavButton = pathname === '/settings' || pathname.startsWith('/settings/') || pathname === '/account'
 
   const handleFilterClick = () => {
     if (typeof window !== 'undefined') {

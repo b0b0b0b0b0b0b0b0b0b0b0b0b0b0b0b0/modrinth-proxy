@@ -482,7 +482,10 @@
       "shader": "シェーダー",
       "modpack": "Modパック",
       "mod": "Mod"
-    }
+    },
+    "starHint": "左のブックマークを押すと、このバージョンが自動で選ばれます",
+    "starHintLoader": "左のブックマークを押すと、このローダーが自動で選ばれます",
+    "onlyLoader": "このプロジェクトは {name} 専用です。選ぶ必要はありません"
   },
   "searchBack": {
     "label": "検索に戻る",

@@ -607,7 +607,12 @@
     "settings": "设置",
     "newRelease": "有新版本发布",
     "filterAll": "全部",
-    "petKitten": "摸摸小猫"
+    "petKitten": "摸摸小猫",
+    "repeatPassword": "再输入一次新密码",
+    "repeatPasswordPlaceholder": "再输一遍同样的密码",
+    "repeatPasswordHint": "自己再输一遍，就不会打错字了。",
+    "errPasswordMismatch": "两次密码不一致，请重新输入第二个。",
+    "passwordKeptHint": "不记得第一次输了什么？点“取消”——旧密码不变，什么都不会坏。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",
@@ -659,7 +664,16 @@
     "ghostTurbo": "涡轮幽灵",
     "ghostTurboHint": "万圣节期间幽灵更多、飞得更快。适合抓幽灵高手。",
     "snowTurbo": "涡轮降雪",
-    "snowTurboHint": "新年期间降落伞装饰更多、落得更快。适合手快的玩家。"
+    "snowTurboHint": "新年期间降落伞装饰更多、落得更快。适合手快的玩家。",
+    "moreOptions": "其他",
+    "find": "搜索",
+    "nothingFound": "没有找到",
+    "loaderHelp": "你用什么装模组：Fabric、Forge、NeoForge……启动器里能看到。",
+    "gameVersionHelp": "你玩的游戏版本——启动器里也能看到。",
+    "serverCoreHelp": "你的服务器运行的程序：Paper、Spigot、Purpur……",
+    "serverVersionHelp": "你服务器上的 Minecraft 版本。",
+    "ownServer": "我有自己的服务器",
+    "ownServerHint": "如果你有带插件的服务器就打开——我们会为它挑选插件。"
   },
   "del": {
     "title": "删除账号",
@@ -727,5 +741,29 @@
     "lead": "Modrinth 服务器暂时繁忙，没能及时回应。小猫会在几秒后自动再试一次——你也可以点按钮。",
     "retry": "重试",
     "home": "首页"
+  },
+  "sn": {
+    "display": "显示",
+    "appearance": "外观",
+    "language": "语言",
+    "account": "账户",
+    "profile": "个人资料",
+    "notifications": "通知",
+    "extras": "节日与声音",
+    "data": "历史与数据",
+    "security": "登录与安全",
+    "signIn": "登录账户",
+    "signInHint": "个人资料、通知以及账户的一切——登录后可用。",
+    "menu": "个人菜单",
+    "dashboard": "个人中心",
+    "localHint": "只保存在此浏览器中——没有账户也能用。"
+  },
+  "gp": {
+    "title": "小猫记住了你在玩什么",
+    "text": "从你在“下载”窗口里的书签拿来的——现在保存在账户里，任何设备都能用。",
+    "mods": "模组：{value}",
+    "plugins": "插件：{value}",
+    "change": "修改",
+    "close": "知道了"
   }
 }

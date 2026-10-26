@@ -149,10 +149,14 @@
     "pageModpacks": "整合包页",
     "pageServers": "服务器页",
     "pageProfiles": "用户资料",
-    "resetTitle": "出问题了？",
-    "resetHint": "如果界面显示不对，或你只想恢复默认设置。",
-    "resetBtn": "重置设置",
-    "resetting": "正在重置…"
+    "resetTitle": "网站显示有点奇怪？",
+    "resetHint": "网站会在这个浏览器里记住一些小事，好记得你喜欢的样子。有时这些小记忆会弄混——从头开始就好了。这只影响这台设备上的这个浏览器。",
+    "resetBtn": "在此浏览器中重置",
+    "resetting": "正在重置…",
+    "resetGoneLabel": "会被忘记",
+    "resetGone": "主题、颜色、列表样式、语言、小猫声音和已关闭的提示",
+    "resetKeptLabel": "会保留",
+    "resetKept": "账户、收藏和下载历史——它们不保存在浏览器里"
   },
   "birthday": {
     "banner": "蛋糕是虚拟的，模组是真的——而且全部免费。",

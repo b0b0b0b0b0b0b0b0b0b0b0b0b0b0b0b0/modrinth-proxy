@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
 import { signInWithTelegram } from '@/lib/telegramPopup'
+import PasswordInput, { PasswordStrength } from '../components/PasswordInput'
 
 const ICONS = {
   password: {
@@ -55,16 +56,35 @@ const PASSWORD_ERRORS = {
   password: 'account.errPassword',
   rate_limit: 'account.errRate',
 }
-const PASSWORD_INPUT =
-  'w-full rounded-lg border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm text-white outline-none transition-colors placeholder:text-gray-600 focus:border-modrinth-green'
 const SMALL_BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border px-3 py-1.5 text-xs font-semibold leading-none transition-colors disabled:opacity-50'
 
-function PasswordRow({ hasPassword, onSaved }) {
+function blockCopy(event) {
+  event.preventDefault()
+}
+
+function isAutofilled(input) {
+  for (const selector of [':autofill', ':-webkit-autofill']) {
+    try {
+      if (input.matches(selector)) return true
+    } catch {}
+  }
+  return false
+}
+
+function filledBySoftware(event) {
+  const type = event.nativeEvent?.inputType
+  return isAutofilled(event.target) || ((!type || type === 'insertReplacementText') && event.target.value.length > 1)
+}
+
+function PasswordRow({ hasPassword, username, onSaved }) {
   const t = useT()
   const [editing, setEditing] = useState(false)
   const [current, setCurrent] = useState('')
   const [next, setNext] = useState('')
+  const [repeat, setRepeat] = useState('')
+  const [confirming, setConfirming] = useState(false)
+  const [generated, setGenerated] = useState(false)
   const [visible, setVisible] = useState(false)
   const [busy, setBusy] = useState(false)
   const [message, setMessage] = useState({ text: '', ok: false })
@@ -74,6 +94,9 @@ function PasswordRow({ hasPassword, onSaved }) {
     setEditing(false)
     setCurrent('')
     setNext('')
+    setRepeat('')
+    setConfirming(false)
+    setGenerated(false)
     setVisible(false)
   }
 
@@ -87,6 +110,17 @@ function PasswordRow({ hasPassword, onSaved }) {
     if (busy) return
     if (next.length < 8 || next.length > 128) {
       setMessage({ text: t('account.errPassword'), ok: false })
+      return
+    }
+    const trusted = generated || isAutofilled(event.currentTarget.querySelector('input[autocomplete="new-password"]'))
+    if (!confirming && !trusted) {
+      setMessage({ text: '', ok: false })
+      setConfirming(true)
+      return
+    }
+    if (!trusted && repeat !== next) {
+      setRepeat('')
+      setMessage({ text: t('account.errPasswordMismatch'), ok: false, keep: true })
       return
     }
     setBusy(true)
@@ -143,56 +177,95 @@ function PasswordRow({ hasPassword, onSaved }) {
             onKeyDown={(event) => {
               if (event.key === 'Escape') close()
             }}
-            className="space-y-2 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3"
+            className="max-w-md space-y-4 pb-1 sm:ml-[3.25rem]"
           >
-            <input type="text" name="username" autoComplete="username" hidden readOnly value="" />
+            <input type="text" name="username" autoComplete="username" hidden readOnly value={username || ''} />
             {hasPassword ? (
-              <input
-                type={visible ? 'text' : 'password'}
-                value={current}
-                onChange={(event) => setCurrent(event.target.value)}
-                placeholder={t('account.currentPassword')}
-                aria-label={t('account.currentPassword')}
-                autoComplete="current-password"
-                autoFocus
-                maxLength={256}
-                required
-                className={PASSWORD_INPUT}
-              />
-            ) : null}
-            <input
-              type={visible ? 'text' : 'password'}
-              value={next}
-              onChange={(event) => setNext(event.target.value)}
-              placeholder={t('account.newPassword')}
-              aria-label={t('account.newPassword')}
-              autoComplete="new-password"
-              autoFocus={!hasPassword}
-              maxLength={128}
-              required
-              className={PASSWORD_INPUT}
-            />
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <label className="flex cursor-pointer items-center gap-2 text-xs text-gray-400">
-                <input type="checkbox" checked={visible} onChange={(event) => setVisible(event.target.checked)} />
-                {t('account.showPassword')}
+              <label className="block">
+                <span className="mb-1.5 block text-xs font-medium text-gray-400">{t('account.currentPassword')}</span>
+                <PasswordInput
+                  visible={visible}
+                  onToggleVisible={() => setVisible((value) => !value)}
+                  inputProps={{
+                    value: current,
+                    onChange: (event) => setCurrent(event.target.value),
+                    placeholder: t('account.passwordPlaceholder'),
+                    autoComplete: 'current-password',
+                    autoFocus: true,
+                    maxLength: 256,
+                    required: true,
+                  }}
+                />
               </label>
-              <div className="flex gap-2">
-                <button type="button" onClick={close} className={`${SMALL_BUTTON} border-gray-700 text-gray-300 hover:text-white`}>
-                  {t('account.cancelUsername')}
-                </button>
-                <button
-                  type="submit"
-                  disabled={busy || !next || (hasPassword && !current)}
-                  className={`${SMALL_BUTTON} border-transparent bg-modrinth-green font-bold text-black hover:opacity-90`}
-                >
-                  {t('account.saveUsername')}
-                </button>
+            ) : null}
+            <label className="block">
+              <span className="mb-1.5 block text-xs font-medium text-gray-400">{t('account.newPassword')}</span>
+              <PasswordInput
+                visible={visible}
+                onToggleVisible={() => setVisible((value) => !value)}
+                inputProps={{
+                  value: next,
+                  onChange: (event) => {
+                    setNext(event.target.value)
+                    setGenerated(filledBySoftware(event))
+                    if (repeat) setRepeat('')
+                  },
+                  onCopy: blockCopy,
+                  onCut: blockCopy,
+                  onDragStart: blockCopy,
+                  onDrop: blockCopy,
+                  placeholder: t('account.newPasswordPlaceholder'),
+                  autoComplete: 'new-password',
+                  autoFocus: !hasPassword,
+                  maxLength: 128,
+                  required: true,
+                }}
+              />
+              <PasswordStrength password={next} />
+            </label>
+            {confirming ? (
+              <label className="block">
+                <span className="mb-1.5 block text-xs font-medium text-gray-400">{t('account.repeatPassword')}</span>
+                <PasswordInput
+                  visible={visible}
+                  onToggleVisible={() => setVisible((value) => !value)}
+                  inputProps={{
+                    value: repeat,
+                    onChange: (event) => setRepeat(event.target.value),
+                    onCopy: blockCopy,
+                    onCut: blockCopy,
+                    onDragStart: blockCopy,
+                    onDrop: blockCopy,
+                    placeholder: t('account.repeatPasswordPlaceholder'),
+                    autoComplete: 'new-password',
+                    autoFocus: true,
+                    maxLength: 128,
+                    required: true,
+                  }}
+                />
+                <span className="mt-1.5 block text-[11px] text-gray-600 dark:text-gray-500">{t('account.repeatPasswordHint')}</span>
+              </label>
+            ) : null}
+            {message.text && !message.ok ? (
+              <div role="alert">
+                <p className="m-0 text-xs text-amber-600 dark:text-amber-400">{message.text}</p>
+                {message.keep ? (
+                  <p className="m-0 mt-1 text-xs text-gray-500 dark:text-gray-400">{t('account.passwordKeptHint')}</p>
+                ) : null}
               </div>
+            ) : null}
+            <div className="flex justify-end gap-2 pt-1">
+              <button type="button" onClick={close} className={`${SMALL_BUTTON} border-gray-700 text-gray-300 hover:text-white`}>
+                {t('account.cancelUsername')}
+              </button>
+              <button
+                type="submit"
+                disabled={busy || !next || (hasPassword && !current) || (confirming && !repeat)}
+                className={`${SMALL_BUTTON} border-transparent bg-modrinth-green font-bold text-black hover:opacity-90`}
+              >
+                {t('account.saveUsername')}
+              </button>
             </div>
-            <p className={`text-[11px] ${message.text && !message.ok ? 'text-amber-600 dark:text-amber-400' : 'text-gray-600 dark:text-gray-500'}`} role={message.text ? 'alert' : undefined}>
-              {message.text && !message.ok ? message.text : t('account.passwordHint')}
-            </p>
           </form>
         </li>
       ) : message.ok ? (
@@ -202,7 +275,7 @@ function PasswordRow({ hasPassword, onSaved }) {
   )
 }
 
-export default function SignInMethods({ hasPassword, providers, takenProvider = null }) {
+export default function SignInMethods({ hasPassword, username, providers, takenProvider = null }) {
   const t = useT()
   const router = useRouter()
   const [busy, setBusy] = useState(null)
@@ -250,7 +323,7 @@ export default function SignInMethods({ hasPassword, providers, takenProvider = 
     <div>
       <p className="text-sm text-gray-400">{t('account.connLead')}</p>
       <ul className="mt-2 divide-y divide-gray-800">
-        <PasswordRow hasPassword={hasPassword} onSaved={() => router.refresh()} />
+        <PasswordRow hasPassword={hasPassword} username={username} onSaved={() => router.refresh()} />
         {providers.map((provider) => {
           const onlyWay = provider.linked && !hasPassword && linkedCount === 1
           return (

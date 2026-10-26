@@ -636,7 +636,10 @@
       "shader": "shader",
       "modpack": "modpack",
       "mod": "mod"
-    }
+    },
+    "starHint": "Tap the bookmark on the left — and this version will be picked automatically",
+    "starHintLoader": "Tap the bookmark on the left — and this loader will be picked automatically",
+    "onlyLoader": "This project only works with {name} — nothing to pick"
   },
   "searchBack": {
     "label": "Back to search",

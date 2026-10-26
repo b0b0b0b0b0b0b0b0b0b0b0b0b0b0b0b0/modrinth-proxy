@@ -1,62 +1,18 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
-import { SETTINGS_SECTIONS } from './SettingsNav'
+import { useEffect, useState } from 'react'
+import SettingsSidebar from './SettingsSidebar'
 import { useT } from '../components/I18nProvider'
 
-const SCROLL_OFFSET = 96
-
-function navButtonClass(active) {
-  return `w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors ${
-    active
-      ? 'bg-[rgba(var(--color-green-rgb),0.15)] text-modrinth-green font-semibold'
-      : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
-  }`
-}
-
-function resolveActiveSection() {
-  let active = SETTINGS_SECTIONS[0].id
-
-  for (const section of SETTINGS_SECTIONS) {
-    const element = document.getElementById(section.id)
-    if (element && element.getBoundingClientRect().top <= SCROLL_OFFSET) {
-      active = section.id
-    }
-  }
-
-  return active
-}
-
-export default function SettingsMobileMenu() {
+export default function SettingsMobileMenu({ signedIn }) {
   const t = useT()
   const [isOpen, setIsOpen] = useState(false)
-  const [activeId, setActiveId] = useState(SETTINGS_SECTIONS[0].id)
 
   useEffect(() => {
     const handleToggle = () => setIsOpen((prev) => !prev)
     window.addEventListener('toggleSettingsNav', handleToggle)
     return () => window.removeEventListener('toggleSettingsNav', handleToggle)
   }, [])
-
-  const updateActive = useCallback(() => {
-    setActiveId(resolveActiveSection())
-  }, [])
-
-  useEffect(() => {
-    if (!isOpen) return undefined
-    updateActive()
-    window.addEventListener('scroll', updateActive, { passive: true })
-    return () => window.removeEventListener('scroll', updateActive)
-  }, [isOpen, updateActive])
-
-  const scrollTo = (id) => {
-    setActiveId(id)
-    const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-    setIsOpen(false)
-  }
 
   if (!isOpen) return null
 
@@ -82,19 +38,7 @@ export default function SettingsMobileMenu() {
             </svg>
           </button>
         </div>
-        <nav className="space-y-1" aria-label={t('settings.nav.aria')}>
-          {SETTINGS_SECTIONS.map((section) => (
-            <button
-              key={section.id}
-              type="button"
-              onClick={() => scrollTo(section.id)}
-              className={navButtonClass(activeId === section.id)}
-              aria-current={activeId === section.id ? 'true' : undefined}
-            >
-              {t(section.labelKey)}
-            </button>
-          ))}
-        </nav>
+        <SettingsSidebar signedIn={signedIn} onNavigate={() => setIsOpen(false)} />
       </div>
     </div>
   )

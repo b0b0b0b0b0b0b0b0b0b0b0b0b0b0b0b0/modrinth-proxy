@@ -4,19 +4,24 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import { signInWithTelegram } from '@/lib/telegramPopup'
-import DeleteAccount from './DeleteAccount'
 import GamePicker from './GamePicker'
-
-const GAME_LOADERS = ['fabric', 'forge', 'neoforge', 'quilt']
-const SERVER_CORES = ['paper', 'purpur', 'spigot', 'folia', 'velocity', 'bungeecord']
-const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
-import { getLoaderDisplayName } from '@/lib/loaders'
+import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
+import { rememberProfileField } from '@/lib/gameProfileSync'
+import {
+  getLoaderDisplayName,
+  PROFILE_MOD_LOADER_IDS,
+  PROFILE_MOD_LOADER_MAIN,
+  PROFILE_SERVER_CORE_IDS,
+  PROFILE_SERVER_CORE_MAIN,
+} from '@/lib/loaders'
 import { NEWS_BADGE_EVENT } from '../components/NewsCounter'
 import { onSoundsMutedChange, playChime, playPoof, setSoundsMuted, soundsMuted } from '../components/softSounds'
 import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo, setGhostTurbo } from '@/lib/halloween'
 import { isNewYearSeason, onSnowTurboChange, readSnowTurbo, setSnowTurbo } from '@/lib/newYear'
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 import { announceFestiveChange, onFestiveChange } from '@/lib/festive'
+
+const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
 
 const LINK_BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-modrinth-green px-2.5 py-1.5 text-xs font-bold leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
@@ -53,84 +58,31 @@ function Setting({ title, hint, nested, children }) {
   )
 }
 
-function Section({ title, children }) {
+export function SettingsCard({ title, hint, children }) {
   return (
-    <section className="rounded-xl border border-gray-800 bg-[var(--bg-primary)] px-4 py-1">
-      <h2 className="pt-3 text-[11px] font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{title}</h2>
+    <section className="universal-card settings-section">
+      <h2 className="text-xl font-bold text-white mb-1">{title}</h2>
+      {hint ? <p className="text-gray-400 mb-2 text-xs md:text-sm">{hint}</p> : null}
       <div className="divide-y divide-gray-800">{children}</div>
     </section>
   )
 }
 
-export default function AccountSettings({
-  telegram,
-  trackDownloads: initialTrack,
-  recordHistory: initialRecord,
-  newsBadge: initialNewsBadge,
-  festive: initialFestive,
-  mutedCount,
-  counts,
-  deletion,
-  game,
-}) {
+function ErrorLine({ error }) {
+  return error ? (
+    <p className="mt-2 text-xs text-amber-600 dark:text-amber-400" role="alert">
+      {error}
+    </p>
+  ) : null
+}
+
+function useAccountSave() {
   const t = useT()
-  const router = useRouter()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState('')
-  const [notify, setNotify] = useState(telegram.notify)
-  const [trackDownloads, setTrackDownloads] = useState(initialTrack)
-  const [recordHistory, setRecordHistory] = useState(initialRecord)
-  const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
-  const [festive, setFestive] = useState(initialFestive)
-  const [kittenSounds, setKittenSounds] = useState(true)
-
-  useEffect(() => {
-    setKittenSounds(!soundsMuted())
-    return onSoundsMutedChange((muted) => setKittenSounds(!muted))
-  }, [])
-  const [halloween, setHalloween] = useState(false)
-  const [ghostTurbo, setGhostTurboState] = useState(false)
-
-  useEffect(() => {
-    setHalloween(isHalloweenSeason())
-    setGhostTurboState(readGhostTurbo())
-    return onGhostTurboChange(setGhostTurboState)
-  }, [])
-  const [newYear, setNewYear] = useState(false)
-  const [snowTurbo, setSnowTurboState] = useState(false)
-
-  useEffect(() => {
-    setNewYear(isNewYearSeason())
-    setSnowTurboState(readSnowTurbo())
-    return onSnowTurboChange(setSnowTurboState)
-  }, [])
-
-  useEffect(
-    () =>
-      onFestiveChange(() => {
-        setHalloween(isHalloweenSeason())
-        setNewYear(isNewYearSeason())
-      }),
-    [],
-  )
-  const [profile, setProfile] = useState(game.chosen)
-  const [gameVersions, setGameVersions] = useState([])
-
-  useEffect(() => {
-    let alive = true
-    fetch('/api/mc-versions')
-      .then((response) => (response.ok ? response.json() : null))
-      .then((data) => {
-        if (alive && Array.isArray(data?.release)) setGameVersions(data.release)
-      })
-      .catch(() => {})
-    return () => {
-      alive = false
-    }
-  }, [])
 
   const save = async (key, payload, apply, revert) => {
-    if (busy) return
+    if (busy) return false
     setBusy(key)
     setError('')
     apply()
@@ -155,6 +107,138 @@ export default function AccountSettings({
     }
   }
 
+  return { busy, setBusy, error, setError, save }
+}
+
+export function GameSettings({ game }) {
+  const t = useT()
+  const { busy, error, save } = useAccountSave()
+  const [profile, setProfile] = useState(game.chosen)
+  const { release: gameVersions, full: allGameVersions } = useMinecraftVersions()
+  const [ownServer, setOwnServer] = useState(Boolean(game.chosen.serverCore || game.chosen.serverVersion || game.guess.serverCore))
+
+  const toggleOwnServer = () => {
+    if (!ownServer) {
+      setOwnServer(true)
+      return
+    }
+    if (!profile.serverCore && !profile.serverVersion) {
+      setOwnServer(false)
+      return
+    }
+    const previous = { serverCore: profile.serverCore, serverVersion: profile.serverVersion }
+    save(
+      'ownServer',
+      { serverCore: '', serverVersion: '' },
+      () => {
+        setOwnServer(false)
+        setProfile((current) => ({ ...current, serverCore: '', serverVersion: '' }))
+      },
+      () => {
+        setOwnServer(true)
+        setProfile((current) => ({ ...current, ...previous }))
+      },
+    ).then((ok) => {
+      if (!ok) return
+      rememberProfileField('serverCore', '')
+      rememberProfileField('serverVersion', '')
+    })
+  }
+
+  return (
+    <section className="universal-card settings-section">
+      <h2 className="text-xl font-bold text-white mb-1">{t('set.gameTitle')}</h2>
+      <p className="text-gray-400 text-xs md:text-sm">{t('set.gameHint')}</p>
+      {[
+        { title: t('set.modsTitle'), core: 'loader', version: 'gameVersion', coreLabel: t('set.loader'), versionLabel: t('set.gameVersion'), coreHelp: t('set.loaderHelp'), versionHelp: t('set.gameVersionHelp'), cores: PROFILE_MOD_LOADER_IDS, main: PROFILE_MOD_LOADER_MAIN },
+        { title: t('set.pluginsTitle'), core: 'serverCore', version: 'serverVersion', coreLabel: t('set.serverCore'), versionLabel: t('set.serverVersion'), coreHelp: t('set.serverCoreHelp'), versionHelp: t('set.serverVersionHelp'), cores: PROFILE_SERVER_CORE_IDS, main: PROFILE_SERVER_CORE_MAIN, server: true },
+      ].map((group) => (
+        <div key={group.core} className="mt-5">
+          {group.server ? (
+            <div className="flex items-center justify-between gap-4 border-t border-gray-800 pt-4">
+              <div className="min-w-0">
+                <div className="text-sm font-semibold text-white">{t('set.ownServer')}</div>
+                <p className="mt-0.5 text-xs leading-relaxed text-gray-500 dark:text-gray-400">{t('set.ownServerHint')}</p>
+              </div>
+              <Switch
+                checked={ownServer}
+                label={t('set.ownServer')}
+                disabled={Boolean(busy)}
+                onChange={toggleOwnServer}
+              />
+            </div>
+          ) : (
+            <div className="mb-2 text-sm font-semibold text-white">{group.title}</div>
+          )}
+          {group.server && !ownServer ? null : (
+          <div className={`grid gap-3 sm:grid-cols-2 ${group.server ? 'mt-3' : ''}`}>
+            {[
+              {
+                key: group.core,
+                label: group.coreLabel,
+                help: group.coreHelp,
+                options: [
+                  ...group.main.map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
+                  { section: t('set.moreOptions') },
+                  ...group.cores
+                    .filter((id) => !group.main.includes(id))
+                    .map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
+                ],
+                hint: game.guess[group.core] ? getLoaderDisplayName(game.guess[group.core]) : null,
+              },
+              {
+                key: group.version,
+                label: group.versionLabel,
+                help: group.versionHelp,
+                options: gameVersions.map((version) => ({ value: version, label: version })),
+                allOptions: [
+                  ...(profile[group.version] && !allGameVersions.includes(profile[group.version])
+                    ? [{ value: profile[group.version], label: profile[group.version] }]
+                    : []),
+                  ...allGameVersions.map((version) => ({ value: version, label: version })),
+                ],
+                hint: game.guess[group.version] || null,
+              },
+            ].map((field) => (
+              <GamePicker
+                key={field.key}
+                label={field.label}
+                help={field.help}
+                value={profile[field.key]}
+                disabled={Boolean(busy)}
+                searchPlaceholder={field.key === group.version ? t('set.versionSearch') : t('set.find')}
+                emptyText={field.key === group.version ? t('set.versionNotFound') : t('set.nothingFound')}
+                options={[{ value: '', label: t('set.auto'), hint: field.hint }, ...field.options]}
+                allOptions={field.allOptions ? [{ value: '', label: t('set.auto'), hint: field.hint }, ...field.allOptions] : undefined}
+                onChange={(next) =>
+                  save(
+                    field.key,
+                    { [PROFILE_PAYLOAD[field.key]]: next },
+                    () => setProfile((current) => ({ ...current, [field.key]: next })),
+                    () => setProfile((current) => ({ ...current, [field.key]: profile[field.key] })),
+                  ).then((ok) => ok && rememberProfileField(PROFILE_PAYLOAD[field.key], next))
+                }
+              />
+            ))}
+          </div>
+          )}
+        </div>
+      ))}
+      {Object.values(game.guess).some(Boolean) || Object.values(profile).some(Boolean) ? null : (
+        <p className="mt-3 text-[11px] text-gray-600 dark:text-gray-500">{t('set.notGuessed')}</p>
+      )}
+      <ErrorLine error={error} />
+    </section>
+  )
+}
+
+export function NotificationSettings({ telegram, trackDownloads: initialTrack, mutedCount }) {
+  const t = useT()
+  const router = useRouter()
+  const { busy, setBusy, error, setError, save } = useAccountSave()
+  const [notify, setNotify] = useState(telegram.notify)
+  const [trackDownloads, setTrackDownloads] = useState(initialTrack)
+
   const linkTelegram = async () => {
     if (busy) return
     setBusy('link')
@@ -168,18 +252,16 @@ export default function AccountSettings({
   }
 
   return (
-    <div className="space-y-3">
+    <>
       {telegram.botId ? (
-        <Section title="Telegram">
+        <SettingsCard title="Telegram">
           <Setting title={t('tg.notifyTitle')} hint={t(telegram.linked ? 'tg.notifyHint' : 'tg.notifyNeedLink')}>
             {telegram.linked ? (
               <Switch
                 checked={notify}
                 label={t('tg.notifyTitle')}
                 disabled={Boolean(busy)}
-                onChange={() =>
-                  save('notify', { telegram: !notify }, () => setNotify(!notify), () => setNotify(notify))
-                }
+                onChange={() => save('notify', { telegram: !notify }, () => setNotify(!notify), () => setNotify(notify))}
               />
             ) : (
               <button type="button" onClick={linkTelegram} disabled={Boolean(busy)} className={LINK_BUTTON}>
@@ -187,67 +269,10 @@ export default function AccountSettings({
               </button>
             )}
           </Setting>
-        </Section>
+        </SettingsCard>
       ) : null}
 
-      <Section title={t('set.gameTitle')}>
-        <div className="py-3">
-          <p className="text-xs leading-relaxed text-gray-600 dark:text-gray-500">{t('set.gameHint')}</p>
-          {[
-            { title: t('set.modsTitle'), core: 'loader', version: 'gameVersion', coreLabel: t('set.loader'), versionLabel: t('set.gameVersion'), cores: GAME_LOADERS },
-            { title: t('set.pluginsTitle'), core: 'serverCore', version: 'serverVersion', coreLabel: t('set.serverCore'), versionLabel: t('set.serverVersion'), cores: SERVER_CORES },
-          ].map((group) => (
-            <div key={group.core} className="mt-4">
-              <div className="mb-2 text-sm font-semibold text-white">{group.title}</div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {[
-                  {
-                    key: group.core,
-                    label: group.coreLabel,
-                    options: group.cores.map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
-                    hint: game.guess[group.core] ? getLoaderDisplayName(game.guess[group.core]) : null,
-                  },
-                  {
-                    key: group.version,
-                    label: group.versionLabel,
-                    search: true,
-                    options: [
-                      ...(profile[group.version] && !gameVersions.includes(profile[group.version])
-                        ? [{ value: profile[group.version], label: profile[group.version] }]
-                        : []),
-                      ...gameVersions.map((version) => ({ value: version, label: version })),
-                    ],
-                    hint: game.guess[group.version] || null,
-                  },
-                ].map((field) => (
-                  <GamePicker
-                    key={field.key}
-                    label={field.label}
-                    value={profile[field.key]}
-                    disabled={Boolean(busy)}
-                    searchPlaceholder={field.search ? t('set.versionSearch') : undefined}
-                    emptyText={t('set.versionNotFound')}
-                    options={[{ value: '', label: t('set.auto'), hint: field.hint }, ...field.options]}
-                    onChange={(next) =>
-                      save(
-                        field.key,
-                        { [PROFILE_PAYLOAD[field.key]]: next },
-                        () => setProfile((current) => ({ ...current, [field.key]: next })),
-                        () => setProfile((current) => ({ ...current, [field.key]: profile[field.key] })),
-                      )
-                    }
-                  />
-                ))}
-              </div>
-            </div>
-          ))}
-          {Object.values(game.guess).some(Boolean) || Object.values(profile).some(Boolean) ? null : (
-            <p className="mt-3 text-[11px] text-gray-600 dark:text-gray-500">{t('set.notGuessed')}</p>
-          )}
-        </div>
-      </Section>
-
-      <Section title={t('account.updates')}>
+      <SettingsCard title={t('account.updates')}>
         <Setting title={t('set.trackDownloads')} hint={t('set.trackDownloadsHint')}>
           <Switch
             checked={trackDownloads}
@@ -275,9 +300,134 @@ export default function AccountSettings({
             </button>
           </Setting>
         ) : null}
-      </Section>
+      </SettingsCard>
+      <ErrorLine error={error} />
+    </>
+  )
+}
 
-      <Section title={t('account.downloads')}>
+export function ExtrasSettings({ newsBadge: initialNewsBadge, festive: initialFestive }) {
+  const t = useT()
+  const { busy, error, save } = useAccountSave()
+  const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
+  const [festive, setFestive] = useState(initialFestive)
+  const [kittenSounds, setKittenSounds] = useState(true)
+  const [halloween, setHalloween] = useState(false)
+  const [ghostTurbo, setGhostTurboState] = useState(false)
+  const [newYear, setNewYear] = useState(false)
+  const [snowTurbo, setSnowTurboState] = useState(false)
+
+  useEffect(() => {
+    setKittenSounds(!soundsMuted())
+    return onSoundsMutedChange((muted) => setKittenSounds(!muted))
+  }, [])
+
+  useEffect(() => {
+    setHalloween(isHalloweenSeason())
+    setGhostTurboState(readGhostTurbo())
+    return onGhostTurboChange(setGhostTurboState)
+  }, [])
+
+  useEffect(() => {
+    setNewYear(isNewYearSeason())
+    setSnowTurboState(readSnowTurbo())
+    return onSnowTurboChange(setSnowTurboState)
+  }, [])
+
+  useEffect(
+    () =>
+      onFestiveChange(() => {
+        setHalloween(isHalloweenSeason())
+        setNewYear(isNewYearSeason())
+      }),
+    [],
+  )
+
+  return (
+    <SettingsCard title={t('sn.extras')}>
+      <div>
+        <Setting title={t('set.festive')} hint={t('set.festiveHint')}>
+          <Switch
+            checked={festive}
+            label={t('set.festive')}
+            disabled={Boolean(busy)}
+            onChange={() =>
+              save(
+                'festive',
+                { festive: !festive },
+                () => setFestive(!festive),
+                () => setFestive(festive),
+              ).then((ok) => ok && announceFestiveChange())
+            }
+          />
+        </Setting>
+        {halloween || newYear ? (
+          <div className="mb-3 ml-1 space-y-1 border-l-2 border-modrinth-green/30 pl-4">
+            {halloween ? (
+              <Setting nested title={t('set.ghostTurbo')} hint={t('set.ghostTurboHint')}>
+                <Switch
+                  checked={ghostTurbo}
+                  label={t('set.ghostTurbo')}
+                  onChange={() => {
+                    setGhostTurbo(!ghostTurbo)
+                    if (!ghostTurbo) playPoof()
+                  }}
+                />
+              </Setting>
+            ) : null}
+            {newYear ? (
+              <Setting nested title={t('set.snowTurbo')} hint={t('set.snowTurboHint')}>
+                <Switch
+                  checked={snowTurbo}
+                  label={t('set.snowTurbo')}
+                  onChange={() => {
+                    setSnowTurbo(!snowTurbo)
+                    if (!snowTurbo) playChime()
+                  }}
+                />
+              </Setting>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
+      <Setting title={t('set.kittenSounds')} hint={t('set.kittenSoundsHint')}>
+        <Switch
+          checked={kittenSounds}
+          label={t('set.kittenSounds')}
+          onChange={() => {
+            setSoundsMuted(kittenSounds)
+            if (!kittenSounds) playChime()
+          }}
+        />
+      </Setting>
+      <Setting title={t('set.newsBadge')} hint={t('set.newsBadgeHint')}>
+        <Switch
+          checked={newsBadge}
+          label={t('set.newsBadge')}
+          disabled={Boolean(busy)}
+          onChange={() =>
+            save(
+              'news',
+              { newsBadge: !newsBadge },
+              () => setNewsBadge(!newsBadge),
+              () => setNewsBadge(newsBadge),
+            ).then(() => window.dispatchEvent(new Event(NEWS_BADGE_EVENT)))
+          }
+        />
+      </Setting>
+      <ErrorLine error={error} />
+    </SettingsCard>
+  )
+}
+
+export function DataSettings({ recordHistory: initialRecord, counts }) {
+  const t = useT()
+  const { busy, error, save } = useAccountSave()
+  const [recordHistory, setRecordHistory] = useState(initialRecord)
+
+  return (
+    <>
+      <SettingsCard title={t('account.downloads')}>
         <Setting title={t('set.recordHistory')} hint={t('set.recordHistoryHint')}>
           <Switch
             checked={recordHistory}
@@ -293,83 +443,11 @@ export default function AccountSettings({
             }
           />
         </Setting>
-      </Section>
-
-      <Section title={t('set.siteTitle')}>
-        <Setting title={t('set.newsBadge')} hint={t('set.newsBadgeHint')}>
-          <Switch
-            checked={newsBadge}
-            label={t('set.newsBadge')}
-            disabled={Boolean(busy)}
-            onChange={() =>
-              save(
-                'news',
-                { newsBadge: !newsBadge },
-                () => setNewsBadge(!newsBadge),
-                () => setNewsBadge(newsBadge),
-              ).then(() => window.dispatchEvent(new Event(NEWS_BADGE_EVENT)))
-            }
-          />
-        </Setting>
-        <div>
-          <Setting title={t('set.festive')} hint={t('set.festiveHint')}>
-            <Switch
-              checked={festive}
-              label={t('set.festive')}
-              disabled={Boolean(busy)}
-              onChange={() =>
-                save(
-                  'festive',
-                  { festive: !festive },
-                  () => setFestive(!festive),
-                  () => setFestive(festive),
-                ).then((ok) => ok && announceFestiveChange())
-              }
-            />
-          </Setting>
-          {halloween || newYear ? (
-            <div className="mb-3 ml-1 space-y-1 border-l-2 border-modrinth-green/30 pl-4">
-              {halloween ? (
-                <Setting nested title={t('set.ghostTurbo')} hint={t('set.ghostTurboHint')}>
-                  <Switch
-                    checked={ghostTurbo}
-                    label={t('set.ghostTurbo')}
-                    onChange={() => {
-                      setGhostTurbo(!ghostTurbo)
-                      if (!ghostTurbo) playPoof()
-                    }}
-                  />
-                </Setting>
-              ) : null}
-              {newYear ? (
-                <Setting nested title={t('set.snowTurbo')} hint={t('set.snowTurboHint')}>
-                  <Switch
-                    checked={snowTurbo}
-                    label={t('set.snowTurbo')}
-                    onChange={() => {
-                      setSnowTurbo(!snowTurbo)
-                      if (!snowTurbo) playChime()
-                    }}
-                  />
-                </Setting>
-              ) : null}
-            </div>
-          ) : null}
-        </div>
-        <Setting title={t('set.kittenSounds')} hint={t('set.kittenSoundsHint')}>
-          <Switch
-            checked={kittenSounds}
-            label={t('set.kittenSounds')}
-            onChange={() => {
-              setSoundsMuted(kittenSounds)
-              if (!kittenSounds) playChime()
-            }}
-          />
-        </Setting>
-      </Section>
+        <ErrorLine error={error} />
+      </SettingsCard>
 
       {counts.favorites > 0 || counts.downloads > 0 ? (
-        <Section title={t('set.cleanupTitle')}>
+        <SettingsCard title={t('set.cleanupTitle')}>
           {counts.favorites > 0 ? (
             <Setting title={t('account.favorites')} hint={t('set.clearFavoritesHint', { n: counts.favorites })}>
               <ClearFavoritesButton count={counts.favorites} />
@@ -380,18 +458,8 @@ export default function AccountSettings({
               <ClearHistoryButton count={counts.downloads} />
             </Setting>
           ) : null}
-        </Section>
+        </SettingsCard>
       ) : null}
-
-      {error ? (
-        <p className="text-xs text-amber-600 dark:text-amber-400" role="alert">
-          {error}
-        </p>
-      ) : null}
-
-      <div className="pt-6">
-        <DeleteAccount {...deletion} />
-      </div>
-    </div>
+    </>
   )
 }

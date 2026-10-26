@@ -6,9 +6,6 @@ import StyledTooltip from '../components/StyledTooltip'
 import Lottie from 'lottie-react'
 import fixAnimation from '@/public/animations/fix.json'
 import { PALETTES } from '../../lib/paletteManager'
-import SettingsNav from './SettingsNav'
-import SettingsMobileMenu from './SettingsMobileMenu'
-import LanguageSettingsCard from '../components/LanguageSettingsCard'
 import { useT } from '../components/I18nProvider'
 import { LOCALE_COOKIE } from '@/lib/i18n/config'
 import { BDAY_COOKIES_KEY } from '@/lib/birthday'
@@ -148,26 +145,22 @@ export default function SettingsClient() {
 
   if (!mounted) {
     return (
-      <>
-        <h1 className="text-3xl font-extrabold text-white mb-2" id="settings-title">{t('settings.pageTitle')}</h1>
-        <p className="text-gray-400 mb-8 text-sm md:text-base">{t('settings.pageHint')}</p>
-        <div className="animate-pulse space-y-6">
-          <div className="h-48 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
-          <div className="h-96 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
-        </div>
-      </>
+      <div className="animate-pulse space-y-6">
+        <div className="h-48 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
+        <div className="h-96 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
+      </div>
     )
   }
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold text-white mb-2" id="settings-title">{t('settings.pageTitle')}</h1>
-      <p className="text-gray-400 mb-8 text-sm md:text-base">{t('settings.pageHint')}</p>
-      <SettingsMobileMenu />
-      <div className="flex flex-col lg:flex-row gap-6">
-      <SettingsNav />
-      <div className="flex-1 min-w-0 space-y-6">
-      <LanguageSettingsCard />
+      <p className="m-0 flex items-center gap-2 text-gray-400 text-sm">
+        <svg className="h-4 w-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+          <rect width="20" height="14" x="2" y="3" rx="2" />
+          <path d="M8 21h8M12 17v4" />
+        </svg>
+        {t('sn.localHint')}
+      </p>
       <section id="settings-color-theme" className="universal-card settings-section" aria-labelledby="color-theme-heading">
         <h2 id="color-theme-heading" className="text-xl font-bold text-white mb-1">{t('settings.themeTitle')}</h2>
         <p className="text-gray-400 mb-6 text-xs md:text-sm">{t('settings.themeHint')}</p>
@@ -528,10 +521,29 @@ export default function SettingsClient() {
         </div>
       </section>
 
-      <section className="universal-card text-center flex flex-col items-center justify-center p-6 gap-3" aria-labelledby="reset-heading">
-        <h2 id="reset-heading" className="text-lg font-bold text-white mb-0">{t('settings.resetTitle')}</h2>
-        <p className="text-gray-400 text-xs md:text-sm max-w-md m-0">{t('settings.resetHint')}</p>
-        
+      <section className="universal-card settings-section" aria-labelledby="reset-heading">
+        <h2 id="reset-heading" className="text-xl font-bold text-white mb-1">{t('settings.resetTitle')}</h2>
+        <p className="text-gray-400 text-xs md:text-sm max-w-2xl">{t('settings.resetHint')}</p>
+
+        <ul className="mt-4 mb-5 grid list-none gap-2 p-0 sm:grid-cols-2">
+          {[
+            { label: t('settings.resetGoneLabel'), text: t('settings.resetGone'), path: 'M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2', tone: 'text-amber-600 dark:text-amber-400 bg-amber-500/10' },
+            { label: t('settings.resetKeptLabel'), text: t('settings.resetKept'), path: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10M9 12l2 2 4-4', tone: 'text-modrinth-green bg-[rgba(var(--color-green-rgb),0.12)]' },
+          ].map((row) => (
+            <li key={row.label} className="flex items-start gap-3 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
+              <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${row.tone}`}>
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                  <path d={row.path} />
+                </svg>
+              </span>
+              <span className="min-w-0">
+                <span className="block text-sm font-semibold text-white">{row.label}</span>
+                <span className="block text-xs leading-relaxed text-gray-600 dark:text-gray-500">{row.text}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+
         <button
           onClick={handleResetAll}
           disabled={isResetting}
@@ -563,8 +575,6 @@ export default function SettingsClient() {
           )}
         </button>
       </section>
-      </div>
-    </div>
     </>
   )
 }

@@ -149,10 +149,14 @@
     "pageModpacks": "Strona modpacków",
     "pageServers": "Strona serwerów",
     "pageProfiles": "Profile użytkowników",
-    "resetTitle": "Coś się zepsuło?",
-    "resetHint": "Jeśli interfejs wygląda źle, albo chcesz wrócić do ustawień domyślnych.",
-    "resetBtn": "Resetuj ustawienia",
-    "resetting": "Resetowanie…"
+    "resetTitle": "Strona dziwnie się zachowuje?",
+    "resetHint": "Strona zapamiętuje kilka rzeczy w tej przeglądarce, żeby wiedzieć, jak ci wygodnie. Czasem te drobiazgi się mieszają — wtedy pomaga zacząć od nowa. Dotyczy to tylko tej przeglądarki na tym urządzeniu.",
+    "resetBtn": "Zresetuj w tej przeglądarce",
+    "resetting": "Resetowanie…",
+    "resetGoneLabel": "Zostanie zapomniane",
+    "resetGone": "motyw, kolor, widok list, język, dźwięki kotków i zamknięte podpowiedzi",
+    "resetKeptLabel": "Zostanie",
+    "resetKept": "konto, ulubione i historia pobrań — nie są przechowywane w przeglądarce"
   },
   "birthday": {
     "banner": "Wirtualny tort, prawdziwe mody — nadal za darmo.",

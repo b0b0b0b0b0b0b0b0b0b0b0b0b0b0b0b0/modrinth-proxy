@@ -607,7 +607,12 @@
     "settings": "Paramètres",
     "newRelease": "Une nouvelle version est sortie",
     "filterAll": "Tout",
-    "petKitten": "Caresser le chaton"
+    "petKitten": "Caresser le chaton",
+    "repeatPassword": "Répète le nouveau mot de passe",
+    "repeatPasswordPlaceholder": "le même mot de passe",
+    "repeatPasswordHint": "Retape-le toi-même — comme ça, pas de faute de frappe.",
+    "errPasswordMismatch": "Les mots de passe ne correspondent pas — retape le second.",
+    "passwordKeptHint": "Tu ne te souviens plus de ce que tu as tapé ? Appuie sur Annuler — ton ancien mot de passe reste, rien ne casse."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Fantômes turbo",
     "ghostTurboHint": "Pour Halloween, il y a plus de fantômes et ils volent plus vite. Pour les chasseurs aguerris.",
     "snowTurbo": "Neige turbo",
-    "snowTurboHint": "Pour le Nouvel An, il y a plus d’ornements en parachute et ils tombent plus vite. Pour les plus agiles."
+    "snowTurboHint": "Pour le Nouvel An, il y a plus d’ornements en parachute et ils tombent plus vite. Pour les plus agiles.",
+    "moreOptions": "Autres",
+    "find": "Rechercher",
+    "nothingFound": "Aucun résultat",
+    "loaderHelp": "Ce qui sert à installer les mods : Fabric, Forge, NeoForge… C’est indiqué dans le launcher.",
+    "gameVersionHelp": "La version sur laquelle tu joues — aussi indiquée dans le launcher.",
+    "serverCoreHelp": "Le programme qui fait tourner ton serveur : Paper, Spigot, Purpur…",
+    "serverVersionHelp": "La version de Minecraft de ton serveur.",
+    "ownServer": "J’ai mon propre serveur",
+    "ownServerHint": "Active-le si tu as ton propre serveur avec des plugins — on choisira des plugins adaptés."
   },
   "del": {
     "title": "Supprimer le compte",
@@ -727,5 +741,29 @@
     "lead": "Le serveur de Modrinth est surchargé pour un instant et n’a pas répondu à temps. Le chaton réessaiera tout seul dans quelques secondes — ou appuie sur le bouton.",
     "retry": "Réessayer",
     "home": "Accueil"
+  },
+  "sn": {
+    "display": "Affichage",
+    "appearance": "Apparence",
+    "language": "Langue",
+    "account": "Compte",
+    "profile": "Profil",
+    "notifications": "Notifications",
+    "extras": "Fêtes et sons",
+    "data": "Historique et données",
+    "security": "Connexion et sécurité",
+    "signIn": "Se connecter",
+    "signInHint": "Profil, notifications et tout sur le compte — après connexion.",
+    "menu": "Menu du profil",
+    "dashboard": "Espace perso",
+    "localHint": "Enregistré uniquement dans ce navigateur — marche même sans compte."
+  },
+  "gp": {
+    "title": "Le chaton a retenu à quoi tu joues",
+    "text": "Repris de tes marque-pages dans la fenêtre Télécharger — c’est maintenant enregistré dans ton compte et ça marche sur tous tes appareils.",
+    "mods": "Mods : {value}",
+    "plugins": "Plugins : {value}",
+    "change": "Modifier",
+    "close": "Compris"
   }
 }

@@ -607,7 +607,12 @@
     "settings": "Inställningar",
     "newRelease": "En ny version är ute",
     "filterAll": "Alla",
-    "petKitten": "Klappa kattungen"
+    "petKitten": "Klappa kattungen",
+    "repeatPassword": "Upprepa det nya lösenordet",
+    "repeatPasswordPlaceholder": "samma lösenord igen",
+    "repeatPasswordHint": "Skriv det en gång till själv — då blir det inget stavfel.",
+    "errPasswordMismatch": "Lösenorden matchar inte — skriv det andra igen.",
+    "passwordKeptHint": "Minns du inte vad du skrev första gången? Tryck på Avbryt — det gamla lösenordet finns kvar, inget går sönder."
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Turbospöken",
     "ghostTurboHint": "Under halloween blir spökena fler och flyger snabbare. För vana spökfångare.",
     "snowTurbo": "Turbosnöfall",
-    "snowTurboHint": "Vid nyår blir det fler kulor i fallskärm och de faller snabbare. För de snabbaste."
+    "snowTurboHint": "Vid nyår blir det fler kulor i fallskärm och de faller snabbare. För de snabbaste.",
+    "moreOptions": "Övriga",
+    "find": "Sök",
+    "nothingFound": "Inget hittades",
+    "loaderHelp": "Det du installerar moddar med: Fabric, Forge, NeoForge… Syns i launchern.",
+    "gameVersionHelp": "Versionen du spelar på — syns också i launchern.",
+    "serverCoreHelp": "Programmet din server körs på: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "Minecraft-versionen på din server.",
+    "ownServer": "Jag har en egen server",
+    "ownServerHint": "Slå på om du har en egen server med plugins — så väljer vi plugins till den."
   },
   "del": {
     "title": "Radera konto",
@@ -727,5 +741,29 @@
     "lead": "Modrinths server är överbelastad en stund och svarade inte i tid. Kattungen försöker igen av sig själv om ett par sekunder — eller tryck på knappen.",
     "retry": "Försök igen",
     "home": "Startsida"
+  },
+  "sn": {
+    "display": "Visning",
+    "appearance": "Utseende",
+    "language": "Språk",
+    "account": "Konto",
+    "profile": "Profil",
+    "notifications": "Aviseringar",
+    "extras": "Högtider och ljud",
+    "data": "Historik och data",
+    "security": "Inloggning och säkerhet",
+    "signIn": "Logga in",
+    "signInHint": "Profil, aviseringar och allt om kontot — efter inloggning.",
+    "menu": "Profilmeny",
+    "dashboard": "Översikt",
+    "localHint": "Sparas bara i den här webbläsaren — funkar även utan konto."
+  },
+  "gp": {
+    "title": "Kattungen kom ihåg vad du spelar",
+    "text": "Hämtat från dina bokmärken i Ladda ner-fönstret — nu sparas det i kontot och funkar på alla enheter.",
+    "mods": "Moddar: {value}",
+    "plugins": "Plugins: {value}",
+    "change": "Ändra",
+    "close": "Uppfattat"
   }
 }

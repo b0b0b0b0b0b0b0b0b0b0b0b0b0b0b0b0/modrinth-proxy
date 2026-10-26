@@ -149,10 +149,14 @@
     "pageModpacks": "Modpacksida",
     "pageServers": "Serversida",
     "pageProfiles": "Användarprofiler",
-    "resetTitle": "Något gick sönder?",
-    "resetHint": "Om gränssnittet ser fel ut, eller om du bara vill ha standardvärdena tillbaka.",
-    "resetBtn": "Återställ inställningar",
-    "resetting": "Återställer…"
+    "resetTitle": "Beter sig sidan konstigt?",
+    "resetHint": "Sidan kommer ihåg några saker direkt i den här webbläsaren, så att den vet hur du vill ha det. Ibland blandas de små minnena ihop — då hjälper det att börja om. Det gäller bara den här webbläsaren på den här enheten.",
+    "resetBtn": "Återställ i den här webbläsaren",
+    "resetting": "Återställer…",
+    "resetGoneLabel": "Glöms bort",
+    "resetGone": "tema, färg, listvy, språk, kattljud och stängda tips",
+    "resetKeptLabel": "Finns kvar",
+    "resetKept": "ditt konto, favoriter och nedladdningshistorik — de sparas inte i webbläsaren"
   },
   "birthday": {
     "banner": "Virtuell tårta, riktiga mods — fortfarande gratis.",

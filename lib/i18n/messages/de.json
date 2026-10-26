@@ -149,10 +149,14 @@
     "pageModpacks": "Modpacks-Seite",
     "pageServers": "Server-Seite",
     "pageProfiles": "Benutzerprofile",
-    "resetTitle": "Etwas kaputt?",
-    "resetHint": "Wenn die UI falsch aussieht oder du einfach die Defaults willst.",
-    "resetBtn": "Einstellungen zurücksetzen",
-    "resetting": "Wird zurückgesetzt…"
+    "resetTitle": "Verhält sich die Seite komisch?",
+    "resetHint": "Die Seite merkt sich ein paar Dinge direkt in diesem Browser, damit alles so ist, wie du es magst. Manchmal geraten diese Kleinigkeiten durcheinander — dann hilft ein Neuanfang. Das betrifft nur diesen Browser auf diesem Gerät.",
+    "resetBtn": "In diesem Browser zurücksetzen",
+    "resetting": "Wird zurückgesetzt…",
+    "resetGoneLabel": "Wird vergessen",
+    "resetGone": "Design, Farbe, Listenansicht, Sprache, Kätzchen-Klänge und ausgeblendete Hinweise",
+    "resetKeptLabel": "Bleibt",
+    "resetKept": "Konto, Favoriten und Download-Verlauf — sie liegen nicht im Browser"
   },
   "birthday": {
     "banner": "Virtueller Kuchen, echte Mods — alles kostenlos.",

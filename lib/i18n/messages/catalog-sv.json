@@ -482,7 +482,10 @@
       "shader": "shader",
       "modpack": "modpack",
       "mod": "mod"
-    }
+    },
+    "starHint": "Tryck på bokmärket till vänster — så väljs den här versionen automatiskt",
+    "starHintLoader": "Tryck på bokmärket till vänster — så väljs den här loadern automatiskt",
+    "onlyLoader": "Det här projektet fungerar bara med {name} — inget att välja"
   },
   "searchBack": {
     "label": "Tillbaka till sök",

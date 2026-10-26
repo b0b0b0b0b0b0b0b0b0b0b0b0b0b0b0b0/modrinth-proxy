@@ -482,7 +482,10 @@
       "shader": "shader",
       "modpack": "modpack",
       "mod": "mod"
-    }
+    },
+    "starHint": "Nhấn dấu trang bên trái — phiên bản này sẽ tự được chọn",
+    "starHintLoader": "Nhấn dấu trang bên trái — loader này sẽ tự được chọn",
+    "onlyLoader": "Dự án này chỉ chạy với {name} — không cần chọn gì"
   },
   "searchBack": {
     "label": "Về tìm kiếm",

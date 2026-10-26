@@ -149,10 +149,14 @@
     "pageModpacks": "Página de modpacks",
     "pageServers": "Página de servidores",
     "pageProfiles": "Perfis de usuário",
-    "resetTitle": "Algo quebrou?",
-    "resetHint": "Se a interface ficou estranha, ou você só quer os padrões de volta.",
-    "resetBtn": "Redefinir configurações",
-    "resetting": "Redefinindo…"
+    "resetTitle": "O site está estranho?",
+    "resetHint": "O site guarda algumas coisinhas neste navegador para lembrar como você gosta. Às vezes essas lembranças se embaralham — começar do zero resolve. Isso afeta só este navegador neste dispositivo.",
+    "resetBtn": "Redefinir neste navegador",
+    "resetting": "Redefinindo…",
+    "resetGoneLabel": "Será esquecido",
+    "resetGone": "tema, cor, visualização das listas, idioma, sons dos gatinhos e dicas fechadas",
+    "resetKeptLabel": "Continua",
+    "resetKept": "sua conta, favoritos e histórico de downloads — eles não ficam no navegador"
   },
   "birthday": {
     "banner": "Bolo virtual, mods de verdade — tudo grátis.",

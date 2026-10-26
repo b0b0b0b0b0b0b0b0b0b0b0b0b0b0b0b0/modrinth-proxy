@@ -607,7 +607,12 @@
     "settings": "Ustawienia",
     "newRelease": "Wyszła nowa wersja",
     "filterAll": "Wszystko",
-    "petKitten": "Pogłaszcz kotka"
+    "petKitten": "Pogłaszcz kotka",
+    "repeatPassword": "Powtórz nowe hasło",
+    "repeatPasswordPlaceholder": "to samo hasło jeszcze raz",
+    "repeatPasswordHint": "Wpisz je jeszcze raz sam — wtedy na pewno nie pomylisz litery.",
+    "errPasswordMismatch": "Hasła się nie zgadzają — wpisz drugie jeszcze raz.",
+    "passwordKeptHint": "Nie pamiętasz, co wpisałeś za pierwszym razem? Kliknij „Anuluj” — zostanie stare hasło, nic się nie zepsuje."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Turbo-duszki",
     "ghostTurboHint": "Na Halloween duszków jest więcej i latają szybciej. Dla zawodowych łapaczy.",
     "snowTurbo": "Turbo-śnieżyca",
-    "snowTurboHint": "W Nowy Rok bombek na spadochronikach jest więcej i spadają szybciej. Dla najzręczniejszych."
+    "snowTurboHint": "W Nowy Rok bombek na spadochronikach jest więcej i spadają szybciej. Dla najzręczniejszych.",
+    "moreOptions": "Pozostałe",
+    "find": "Szukaj",
+    "nothingFound": "Nic nie znaleziono",
+    "loaderHelp": "Przez co instalujesz mody: Fabric, Forge, NeoForge… Widać to w launcherze.",
+    "gameVersionHelp": "Wersja, na której grasz — też jest w launcherze.",
+    "serverCoreHelp": "Program, na którym działa serwer: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "Wersja Minecrafta na twoim serwerze.",
+    "ownServer": "Mam własny serwer",
+    "ownServerHint": "Włącz, jeśli masz własny serwer z pluginami — dobierzemy pluginy pod niego."
   },
   "del": {
     "title": "Usuwanie konta",
@@ -727,5 +741,29 @@
     "lead": "Serwer Modrinth jest na chwilę przeciążony i nie odpowiedział na czas. Kotek sam spróbuje ponownie za kilka sekund — albo kliknij przycisk.",
     "retry": "Spróbuj ponownie",
     "home": "Strona główna"
+  },
+  "sn": {
+    "display": "Wyświetlanie",
+    "appearance": "Wygląd",
+    "language": "Język",
+    "account": "Konto",
+    "profile": "Profil",
+    "notifications": "Powiadomienia",
+    "extras": "Święta i dźwięki",
+    "data": "Historia i dane",
+    "security": "Logowanie i bezpieczeństwo",
+    "signIn": "Zaloguj się",
+    "signInHint": "Profil, powiadomienia i wszystko o koncie — po zalogowaniu.",
+    "menu": "Menu profilu",
+    "dashboard": "Panel",
+    "localHint": "Zapisywane tylko w tej przeglądarce — działa nawet bez konta."
+  },
+  "gp": {
+    "title": "Kotek zapamiętał, w co grasz",
+    "text": "Wzięte z twoich zakładek w oknie Pobierz — teraz jest zapisane na koncie i działa na każdym urządzeniu.",
+    "mods": "Mody: {value}",
+    "plugins": "Pluginy: {value}",
+    "change": "Zmień",
+    "close": "Jasne"
   }
 }

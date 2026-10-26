@@ -149,10 +149,14 @@
     "pageModpacks": "Modpaku lapa",
     "pageServers": "Serveru lapa",
     "pageProfiles": "Lietotāju profili",
-    "resetTitle": "Kaut kas sabojājās?",
-    "resetHint": "Ja saskarne izskatās dīvaini, vai tu vienkārši gribi noklusējumu.",
-    "resetBtn": "Atiestatīt iestatījumus",
-    "resetting": "Atiestata…"
+    "resetTitle": "Vietne uzvedas dīvaini?",
+    "resetHint": "Vietne dažas lietas atceras tieši šajā pārlūkā, lai zinātu, kā tev ērtāk. Dažreiz šie sīkumi sajūk — tad palīdz sākt no jauna. Tas attiecas tikai uz šo pārlūku šajā ierīcē.",
+    "resetBtn": "Atiestatīt šajā pārlūkā",
+    "resetting": "Atiestata…",
+    "resetGoneLabel": "Tiks aizmirsts",
+    "resetGone": "tēma, krāsa, sarakstu skats, valoda, kaķēnu skaņas un aizvērtie padomi",
+    "resetKeptLabel": "Paliks",
+    "resetKept": "konts, izlase un lejupielāžu vēsture — tie netiek glabāti pārlūkā"
   },
   "birthday": {
     "banner": "Virtuāla torte, īsti modi — joprojām bez maksas.",

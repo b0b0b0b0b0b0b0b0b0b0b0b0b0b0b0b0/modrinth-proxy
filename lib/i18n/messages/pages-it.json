@@ -607,7 +607,12 @@
     "settings": "Impostazioni",
     "newRelease": "È uscita una nuova versione",
     "filterAll": "Tutto",
-    "petKitten": "Accarezza il gattino"
+    "petKitten": "Accarezza il gattino",
+    "repeatPassword": "Ripeti la nuova password",
+    "repeatPasswordPlaceholder": "la stessa password di nuovo",
+    "repeatPasswordHint": "Scrivila ancora una volta: così non sbagli neanche una lettera.",
+    "errPasswordMismatch": "Le password non coincidono: riscrivi la seconda.",
+    "passwordKeptHint": "Non ricordi cosa hai scritto la prima volta? Premi Annulla: resta la vecchia password, non si rompe niente."
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Fantasmi turbo",
     "ghostTurboHint": "Ad Halloween i fantasmi sono di più e volano più veloci. Per acchiappafantasmi esperti.",
     "snowTurbo": "Nevicata turbo",
-    "snowTurboHint": "A Capodanno le decorazioni col paracadute sono di più e cadono più veloci. Per i più agili."
+    "snowTurboHint": "A Capodanno le decorazioni col paracadute sono di più e cadono più veloci. Per i più agili.",
+    "moreOptions": "Altri",
+    "find": "Cerca",
+    "nothingFound": "Nessun risultato",
+    "loaderHelp": "Con cosa installi le mod: Fabric, Forge, NeoForge… Lo vedi nel launcher.",
+    "gameVersionHelp": "La versione su cui giochi — anche questa è nel launcher.",
+    "serverCoreHelp": "Il programma su cui gira il server: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "La versione di Minecraft del tuo server.",
+    "ownServer": "Ho un mio server",
+    "ownServerHint": "Attivalo se hai un tuo server con plugin: sceglieremo i plugin adatti."
   },
   "del": {
     "title": "Elimina account",
@@ -727,5 +741,29 @@
     "lead": "Il server di Modrinth è sovraccarico per un momento e non ha risposto in tempo. Il gattino riproverà da solo tra un paio di secondi, oppure premi il pulsante.",
     "retry": "Riprova",
     "home": "Home"
+  },
+  "sn": {
+    "display": "Visualizzazione",
+    "appearance": "Aspetto",
+    "language": "Lingua",
+    "account": "Account",
+    "profile": "Profilo",
+    "notifications": "Notifiche",
+    "extras": "Feste e suoni",
+    "data": "Cronologia e dati",
+    "security": "Accesso e sicurezza",
+    "signIn": "Accedi",
+    "signInHint": "Profilo, notifiche e tutto sull’account — dopo l’accesso.",
+    "menu": "Menu profilo",
+    "dashboard": "Pannello",
+    "localHint": "Salvato solo in questo browser — funziona anche senza account."
+  },
+  "gp": {
+    "title": "Il gattino si è ricordato a cosa giochi",
+    "text": "Preso dai tuoi segnalibri nella finestra Scarica: ora è salvato nell’account e funziona su ogni dispositivo.",
+    "mods": "Mod: {value}",
+    "plugins": "Plugin: {value}",
+    "change": "Cambia",
+    "close": "Capito"
   }
 }

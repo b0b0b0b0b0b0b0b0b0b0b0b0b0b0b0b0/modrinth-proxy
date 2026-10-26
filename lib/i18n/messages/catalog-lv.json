@@ -482,7 +482,10 @@
       "shader": "šaderis",
       "modpack": "modpaks",
       "mod": "mods"
-    }
+    },
+    "starHint": "Pieskaries grāmatzīmei pa kreisi — un šī versija tiks izvēlēta pati",
+    "starHintLoader": "Pieskaries grāmatzīmei pa kreisi — un šis ielādētājs tiks izvēlēts pats",
+    "onlyLoader": "Šis projekts darbojas tikai ar {name} — nekas nav jāizvēlas"
   },
   "searchBack": {
     "label": "Atpakaļ uz meklēšanu",

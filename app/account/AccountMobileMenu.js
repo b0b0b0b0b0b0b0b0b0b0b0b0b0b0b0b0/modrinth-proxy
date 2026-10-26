@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useT } from '../components/I18nProvider'
 
-export default function AccountMobileMenu({ items }) {
+export default function AccountMobileMenu({ items, settings }) {
   const t = useT()
   const [isOpen, setIsOpen] = useState(false)
 
@@ -70,6 +70,16 @@ export default function AccountMobileMenu({ items }) {
               ) : null}
             </Link>
           ))}
+          <Link
+            href="/settings/profile"
+            onClick={() => setIsOpen(false)}
+            className="!mt-3 flex w-full items-center gap-2.5 rounded-lg border-t border-gray-800 px-3 py-2.5 text-sm text-gray-400 transition-colors hover:bg-gray-800/50 hover:text-white"
+          >
+            <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+              <path d={settings.icon} />
+            </svg>
+            <span className="flex-1">{settings.label}</span>
+          </Link>
         </nav>
       </div>
     </div>

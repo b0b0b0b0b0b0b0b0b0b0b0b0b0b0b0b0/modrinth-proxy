@@ -8,7 +8,7 @@ import { useT } from './I18nProvider'
 const PICKER_DROPDOWN_MAX_HEIGHT = 260
 const PICKER_LIST_MAX_HEIGHT = 220
 
-function ChevronIcon({ open }) {
+export function ChevronIcon({ open }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -148,6 +148,7 @@ export default function DownloadModalPickers({
   onToggleFavoriteLoader,
   getLoaderName,
   showLoaderPicker,
+  singleLoader,
   openPicker,
   onOpenPickerChange,
   LottieStar,
@@ -233,7 +234,20 @@ export default function DownloadModalPickers({
           </div>
         </div>
 
-        {showLoaderPicker && (
+        {showLoaderPicker && singleLoader ? (
+          <StyledTooltip label={t('dl.onlyLoader', { name: getLoaderName(singleLoader) })}>
+            <div className="flex h-9 min-w-0 items-center gap-2 rounded-xl bg-gray-200 px-3 py-2 text-gray-900 dark:bg-[#34363c] dark:text-white">
+              <svg className="size-4 shrink-0 text-modrinth-green" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <span className="min-w-0 truncate text-sm font-semibold leading-tight min-[480px]:text-base">
+                {getLoaderName(singleLoader)}
+              </span>
+            </div>
+          </StyledTooltip>
+        ) : null}
+
+        {showLoaderPicker && !singleLoader && (
           <div ref={loaderAnchorRef} className="relative min-w-0">
             <button
               type="button"
@@ -275,6 +289,9 @@ export default function DownloadModalPickers({
               </button>
             </StyledTooltip>
           )}
+          {!favMcVersion ? (
+            <p className="m-0 w-full text-[11px] leading-snug text-gray-500 dark:text-gray-400">{t('dl.starHint')}</p>
+          ) : null}
         </div>
         <div
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 custom-scrollbar"
@@ -328,6 +345,9 @@ export default function DownloadModalPickers({
           <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">
             {t('dl.platform')}
           </span>
+          {!favLoader ? (
+            <p className="m-0 mt-0.5 text-[11px] leading-snug text-gray-500 dark:text-gray-400">{t('dl.starHintLoader')}</p>
+          ) : null}
         </div>
         <div
           className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-1.5 custom-scrollbar"

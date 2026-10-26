@@ -149,10 +149,14 @@
     "pageModpacks": "Pagina modpack",
     "pageServers": "Pagina server",
     "pageProfiles": "Profili utente",
-    "resetTitle": "Qualcosa è andato storto?",
-    "resetHint": "Se l’interfaccia è storto, o vuoi solo i valori predefiniti.",
-    "resetBtn": "Reimposta impostazioni",
-    "resetting": "Reimpostazione…"
+    "resetTitle": "Il sito si comporta in modo strano?",
+    "resetHint": "Il sito ricorda alcune cose direttamente in questo browser, per sapere come ti piace. A volte questi piccoli ricordi si confondono: ripartire da zero risolve. Riguarda solo questo browser su questo dispositivo.",
+    "resetBtn": "Ripristina in questo browser",
+    "resetting": "Reimpostazione…",
+    "resetGoneLabel": "Verrà dimenticato",
+    "resetGone": "tema, colore, vista elenchi, lingua, suoni dei gattini e suggerimenti chiusi",
+    "resetKeptLabel": "Resterà",
+    "resetKept": "account, preferiti e cronologia download: non sono salvati nel browser"
   },
   "birthday": {
     "banner": "Torta virtuale, mod vere — tutto gratis.",

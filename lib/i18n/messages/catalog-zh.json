@@ -482,7 +482,10 @@
       "shader": "光影",
       "modpack": "整合包",
       "mod": "模组"
-    }
+    },
+    "starHint": "点左边的书签，以后会自动选这个版本",
+    "starHintLoader": "点左边的书签，以后会自动选这个加载器",
+    "onlyLoader": "这个项目只支持 {name}——无需选择"
   },
   "searchBack": {
     "label": "返回搜索",

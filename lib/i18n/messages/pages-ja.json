@@ -607,7 +607,12 @@
     "settings": "設定",
     "newRelease": "新しいバージョンが出ました",
     "filterAll": "すべて",
-    "petKitten": "子ねこをなでる"
+    "petKitten": "子ねこをなでる",
+    "repeatPassword": "新しいパスワードをもう一度",
+    "repeatPasswordPlaceholder": "同じパスワードをもう一度",
+    "repeatPasswordHint": "もう一度自分で入力すれば、打ち間違いを防げます。",
+    "errPasswordMismatch": "パスワードが一致しません。2つ目をもう一度入力してください。",
+    "passwordKeptHint": "最初に何を入力したか忘れた？「キャンセル」を押せば、今のパスワードのままで何も壊れません。"
   },
   "cookie": {
     "text": "このサイトも Cookie を使っています。ないと何も動かないからです。",
@@ -659,7 +664,16 @@
     "ghostTurbo": "ターボおばけ",
     "ghostTurboHint": "ハロウィンのあいだ、おばけが増えて速く飛びます。おばけ捕りの達人向け。",
     "snowTurbo": "ターボ雪",
-    "snowTurboHint": "お正月のあいだ、パラシュートのオーナメントが増えて速く落ちます。すばやい人向け。"
+    "snowTurboHint": "お正月のあいだ、パラシュートのオーナメントが増えて速く落ちます。すばやい人向け。",
+    "moreOptions": "その他",
+    "find": "検索",
+    "nothingFound": "見つかりませんでした",
+    "loaderHelp": "MOD を入れるための仕組み：Fabric、Forge、NeoForge など。ランチャーで確認できます。",
+    "gameVersionHelp": "遊んでいるバージョン。これもランチャーに表示されます。",
+    "serverCoreHelp": "サーバーを動かすソフト：Paper、Spigot、Purpur など。",
+    "serverVersionHelp": "あなたのサーバーの Minecraft バージョン。",
+    "ownServer": "自分のサーバーを持っている",
+    "ownServerHint": "プラグイン入りの自分のサーバーがあればオンに。合うプラグインを選びます。"
   },
   "del": {
     "title": "アカウントの削除",
@@ -727,5 +741,29 @@
     "lead": "Modrinth のサーバーが少し混み合っていて、時間内に応答がありませんでした。数秒後に子猫がもう一度試します。ボタンを押してもOKです。",
     "retry": "もう一度試す",
     "home": "ホーム"
+  },
+  "sn": {
+    "display": "表示",
+    "appearance": "外観",
+    "language": "言語",
+    "account": "アカウント",
+    "profile": "プロフィール",
+    "notifications": "通知",
+    "extras": "季節イベントとサウンド",
+    "data": "履歴とデータ",
+    "security": "ログインとセキュリティ",
+    "signIn": "ログイン",
+    "signInHint": "プロフィールや通知などアカウントの設定は、ログイン後に使えます。",
+    "menu": "プロフィールメニュー",
+    "dashboard": "マイページ",
+    "localHint": "このブラウザだけに保存されます。アカウントなしでも使えます。"
+  },
+  "gp": {
+    "title": "子猫があなたの遊び方を覚えました",
+    "text": "「ダウンロード」画面のブックマークから引き継ぎました。アカウントに保存されたので、どの端末でも使えます。",
+    "mods": "MOD：{value}",
+    "plugins": "プラグイン：{value}",
+    "change": "変更する",
+    "close": "わかった"
   }
 }

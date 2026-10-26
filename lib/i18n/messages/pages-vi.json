@@ -607,7 +607,12 @@
     "settings": "Cài đặt",
     "newRelease": "Đã có phiên bản mới",
     "filterAll": "Tất cả",
-    "petKitten": "Vuốt ve mèo con"
+    "petKitten": "Vuốt ve mèo con",
+    "repeatPassword": "Nhập lại mật khẩu mới",
+    "repeatPasswordPlaceholder": "nhập lại đúng mật khẩu đó",
+    "repeatPasswordHint": "Tự gõ lại một lần nữa — như vậy sẽ không gõ nhầm chữ nào.",
+    "errPasswordMismatch": "Mật khẩu không khớp — hãy gõ lại ô thứ hai.",
+    "passwordKeptHint": "Không nhớ lần đầu đã gõ gì? Nhấn Hủy — mật khẩu cũ vẫn giữ nguyên, không hỏng gì cả."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Ma tốc độ",
     "ghostTurboHint": "Dịp Halloween ma nhiều hơn và bay nhanh hơn. Dành cho thợ bắt ma lão luyện.",
     "snowTurbo": "Tuyết tốc độ",
-    "snowTurboHint": "Dịp năm mới đồ trang trí đeo dù nhiều hơn và rơi nhanh hơn. Dành cho người nhanh tay nhất."
+    "snowTurboHint": "Dịp năm mới đồ trang trí đeo dù nhiều hơn và rơi nhanh hơn. Dành cho người nhanh tay nhất.",
+    "moreOptions": "Khác",
+    "find": "Tìm",
+    "nothingFound": "Không tìm thấy",
+    "loaderHelp": "Thứ bạn dùng để cài mod: Fabric, Forge, NeoForge… Xem trong launcher.",
+    "gameVersionHelp": "Phiên bản bạn đang chơi — cũng ghi trong launcher.",
+    "serverCoreHelp": "Chương trình chạy máy chủ của bạn: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "Phiên bản Minecraft trên máy chủ của bạn.",
+    "ownServer": "Tôi có máy chủ riêng",
+    "ownServerHint": "Bật lên nếu bạn có máy chủ riêng với plugin — chúng tôi sẽ chọn plugin cho nó."
   },
   "del": {
     "title": "Xóa tài khoản",
@@ -727,5 +741,29 @@
     "lead": "Máy chủ Modrinth đang quá tải trong chốc lát và chưa kịp trả lời. Mèo con sẽ tự thử lại sau vài giây — hoặc bạn bấm nút.",
     "retry": "Thử lại",
     "home": "Trang chủ"
+  },
+  "sn": {
+    "display": "Hiển thị",
+    "appearance": "Giao diện",
+    "language": "Ngôn ngữ",
+    "account": "Tài khoản",
+    "profile": "Hồ sơ",
+    "notifications": "Thông báo",
+    "extras": "Lễ hội và âm thanh",
+    "data": "Lịch sử và dữ liệu",
+    "security": "Đăng nhập và bảo mật",
+    "signIn": "Đăng nhập",
+    "signInHint": "Hồ sơ, thông báo và mọi thứ về tài khoản — sau khi đăng nhập.",
+    "menu": "Menu hồ sơ",
+    "dashboard": "Bảng điều khiển",
+    "localHint": "Chỉ lưu trong trình duyệt này — dùng được cả khi không có tài khoản."
+  },
+  "gp": {
+    "title": "Mèo con đã nhớ bạn chơi gì",
+    "text": "Lấy từ các dấu trang trong cửa sổ Tải xuống — giờ đã lưu trong tài khoản và dùng được trên mọi thiết bị.",
+    "mods": "Mod: {value}",
+    "plugins": "Plugin: {value}",
+    "change": "Đổi",
+    "close": "Đã hiểu"
   }
 }

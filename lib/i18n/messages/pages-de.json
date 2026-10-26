@@ -607,7 +607,12 @@
     "settings": "Einstellungen",
     "newRelease": "Eine neue Version ist da",
     "filterAll": "Alle",
-    "petKitten": "Kätzchen streicheln"
+    "petKitten": "Kätzchen streicheln",
+    "repeatPassword": "Neues Passwort wiederholen",
+    "repeatPasswordPlaceholder": "dasselbe Passwort noch mal",
+    "repeatPasswordHint": "Tippe es noch einmal selbst ein — so schleicht sich kein Tippfehler ein.",
+    "errPasswordMismatch": "Die Passwörter stimmen nicht überein — gib das zweite noch mal ein.",
+    "passwordKeptHint": "Weißt du nicht mehr, was du zuerst getippt hast? Drück auf „Abbrechen“ — dein altes Passwort bleibt, nichts geht kaputt."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Turbo-Geister",
     "ghostTurboHint": "Zu Halloween gibt es mehr Geister, und sie fliegen schneller. Für erfahrene Geisterfänger.",
     "snowTurbo": "Turbo-Schneefall",
-    "snowTurboHint": "Zu Neujahr gibt es mehr Schmuck an Fallschirmen, und er fällt schneller. Für die Flinksten."
+    "snowTurboHint": "Zu Neujahr gibt es mehr Schmuck an Fallschirmen, und er fällt schneller. Für die Flinksten.",
+    "moreOptions": "Weitere",
+    "find": "Suchen",
+    "nothingFound": "Nichts gefunden",
+    "loaderHelp": "Womit du Mods installierst: Fabric, Forge, NeoForge… Steht im Launcher.",
+    "gameVersionHelp": "Die Version, auf der du spielst — steht auch im Launcher.",
+    "serverCoreHelp": "Das Programm, auf dem dein Server läuft: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "Die Minecraft-Version auf deinem Server.",
+    "ownServer": "Ich habe einen eigenen Server",
+    "ownServerHint": "Schalte es ein, wenn du einen eigenen Server mit Plugins hast — dann suchen wir passende Plugins aus."
   },
   "del": {
     "title": "Konto löschen",
@@ -727,5 +741,29 @@
     "lead": "Der Modrinth-Server ist gerade kurz überlastet und hat nicht rechtzeitig geantwortet. Das Kätzchen versucht es in ein paar Sekunden von selbst noch einmal — oder drück den Knopf.",
     "retry": "Erneut versuchen",
     "home": "Startseite"
+  },
+  "sn": {
+    "display": "Anzeige",
+    "appearance": "Aussehen",
+    "language": "Sprache",
+    "account": "Konto",
+    "profile": "Profil",
+    "notifications": "Benachrichtigungen",
+    "extras": "Feiertage & Klänge",
+    "data": "Verlauf & Daten",
+    "security": "Anmeldung & Sicherheit",
+    "signIn": "Anmelden",
+    "signInHint": "Profil, Benachrichtigungen und alles rund ums Konto — nach der Anmeldung.",
+    "menu": "Profilmenü",
+    "dashboard": "Übersicht",
+    "localHint": "Wird nur in diesem Browser gespeichert — klappt auch ohne Konto."
+  },
+  "gp": {
+    "title": "Das Kätzchen hat sich gemerkt, was du spielst",
+    "text": "Aus deinen Lesezeichen im Download-Fenster übernommen — jetzt ist es im Konto gespeichert und klappt auf jedem Gerät.",
+    "mods": "Mods: {value}",
+    "plugins": "Plugins: {value}",
+    "change": "Ändern",
+    "close": "Alles klar"
   }
 }

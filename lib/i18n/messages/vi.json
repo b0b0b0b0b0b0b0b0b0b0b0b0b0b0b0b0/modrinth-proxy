@@ -149,10 +149,14 @@
     "pageModpacks": "Trang modpack",
     "pageServers": "Trang máy chủ",
     "pageProfiles": "Hồ sơ người dùng",
-    "resetTitle": "Có gì đó sai?",
-    "resetHint": "Nếu giao diện lệch, hoặc bạn chỉ muốn về mặc định.",
-    "resetBtn": "Đặt lại cài đặt",
-    "resetting": "Đang đặt lại…"
+    "resetTitle": "Trang web hoạt động lạ?",
+    "resetHint": "Trang web ghi nhớ vài thứ ngay trong trình duyệt này để biết bạn thích thế nào. Đôi khi những ghi nhớ nhỏ này bị rối — bắt đầu lại từ đầu sẽ giúp ích. Việc này chỉ ảnh hưởng đến trình duyệt này trên thiết bị này.",
+    "resetBtn": "Đặt lại trong trình duyệt này",
+    "resetting": "Đang đặt lại…",
+    "resetGoneLabel": "Sẽ bị quên",
+    "resetGone": "giao diện, màu sắc, kiểu danh sách, ngôn ngữ, tiếng mèo con và gợi ý đã đóng",
+    "resetKeptLabel": "Vẫn giữ",
+    "resetKept": "tài khoản, mục yêu thích và lịch sử tải xuống — chúng không lưu trong trình duyệt"
   },
   "birthday": {
     "banner": "Bánh ảo, mod thật — vẫn miễn phí.",

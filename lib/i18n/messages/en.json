@@ -150,10 +150,14 @@
     "pageModpacks": "Modpacks page",
     "pageServers": "Servers page",
     "pageProfiles": "User profiles",
-    "resetTitle": "Something broke?",
-    "resetHint": "If the UI looks wrong, or you just want the defaults back.",
-    "resetBtn": "Reset settings",
-    "resetting": "Resetting…"
+    "resetTitle": "Is the site acting weird?",
+    "resetHint": "The site remembers a few things right in this browser, so it knows how you like it. Sometimes those little memories get mixed up — starting fresh fixes that. This only affects this browser on this device.",
+    "resetBtn": "Reset in this browser",
+    "resetting": "Resetting…",
+    "resetGoneLabel": "Will be forgotten",
+    "resetGone": "theme, color, list view, language, kitten sounds and dismissed hints",
+    "resetKeptLabel": "Will stay",
+    "resetKept": "your account, favorites and download history — they are not stored in the browser"
   },
   "birthday": {
     "banner": "Virtual cake, real mods — still free.",

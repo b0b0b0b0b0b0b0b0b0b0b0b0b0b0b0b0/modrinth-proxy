@@ -607,7 +607,12 @@
     "settings": "Iestatījumi",
     "newRelease": "Iznākusi jauna versija",
     "filterAll": "Visi",
-    "petKitten": "Paglaudīt kaķēnu"
+    "petKitten": "Paglaudīt kaķēnu",
+    "repeatPassword": "Atkārto jauno paroli",
+    "repeatPasswordPlaceholder": "to pašu paroli vēlreiz",
+    "repeatPasswordHint": "Ieraksti to vēlreiz pats — tā noteikti nekļūdīsies burtā.",
+    "errPasswordMismatch": "Paroles nesakrīt — ieraksti otro vēlreiz.",
+    "passwordKeptHint": "Neatceries, ko ierakstīji pirmajā reizē? Nospied «Atcelt» — paliks vecā parole, nekas nesaplīsīs."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",
@@ -659,7 +664,16 @@
     "ghostTurbo": "Turbo spoki",
     "ghostTurboHint": "Helovīnā spoku ir vairāk, un tie lido ātrāk. Pieredzējušiem spoku ķērājiem.",
     "snowTurbo": "Turbo sniegputenis",
-    "snowTurboHint": "Jaunajā gadā rotājumu ar izpletņiem ir vairāk, un tie krīt ātrāk. Veiklākajiem."
+    "snowTurboHint": "Jaunajā gadā rotājumu ar izpletņiem ir vairāk, un tie krīt ātrāk. Veiklākajiem.",
+    "moreOptions": "Citi",
+    "find": "Meklēt",
+    "nothingFound": "Nekas netika atrasts",
+    "loaderHelp": "Ar ko tu instalē modus: Fabric, Forge, NeoForge… Redzams palaidējā.",
+    "gameVersionHelp": "Versija, kurā tu spēlē, — arī redzama palaidējā.",
+    "serverCoreHelp": "Programma, uz kuras darbojas serveris: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "Minecraft versija tavā serverī.",
+    "ownServer": "Man ir savs serveris",
+    "ownServerHint": "Ieslēdz, ja tev ir savs serveris ar spraudņiem, — piemeklēsim tam spraudņus."
   },
   "del": {
     "title": "Konta dzēšana",
@@ -727,5 +741,29 @@
     "lead": "Modrinth serveris uz brīdi ir pārslogots un neatbildēja laikā. Kaķēns pēc pāris sekundēm pats mēģinās vēlreiz — vai nospied pogu.",
     "retry": "Mēģināt vēlreiz",
     "home": "Uz sākumu"
+  },
+  "sn": {
+    "display": "Attēlojums",
+    "appearance": "Izskats",
+    "language": "Valoda",
+    "account": "Konts",
+    "profile": "Profils",
+    "notifications": "Paziņojumi",
+    "extras": "Svētki un skaņas",
+    "data": "Vēsture un dati",
+    "security": "Ieeja un drošība",
+    "signIn": "Ieiet kontā",
+    "signInHint": "Profils, paziņojumi un viss par kontu — pēc ieiešanas.",
+    "menu": "Profila izvēlne",
+    "dashboard": "Panelis",
+    "localHint": "Saglabājas tikai šajā pārlūkā — darbojas arī bez konta."
+  },
+  "gp": {
+    "title": "Kaķēns atcerējās, ko tu spēlē",
+    "text": "Paņemts no tavām grāmatzīmēm logā «Lejupielādēt» — tagad tas glabājas kontā un darbojas jebkurā ierīcē.",
+    "mods": "Modi: {value}",
+    "plugins": "Spraudņi: {value}",
+    "change": "Mainīt",
+    "close": "Skaidrs"
   }
 }

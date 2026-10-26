@@ -8,6 +8,7 @@ import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
+import GameProfileSync from './components/GameProfileSync'
 import Footer from './components/Footer'
 import PeekKitten from './components/PeekKitten'
 import OiiaParty from './components/OiiaParty'
@@ -28,6 +29,7 @@ import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { I18nProvider } from './components/I18nProvider'
 import DisclaimerBadge from './components/DisclaimerBadge'
 import { PALETTES } from '../lib/paletteManager'
+import { getSessionUser } from '@/lib/auth'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 import { LOCALE_COOKIE } from '../lib/i18n/config'
 import { resolveLocale } from '../lib/i18n/resolveLocale'
@@ -80,6 +82,7 @@ export default async function RootLayout({ children }) {
     headers().get('accept-language'),
   )
   const { t } = getRequestT()
+  const sessionUser = getSessionUser()
   const consoleStop = t('console.stop')
   const consoleWarn = t('console.warn')
   const consoleReport = t('console.report')
@@ -165,7 +168,8 @@ export default async function RootLayout({ children }) {
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <DownloadHistoryTracker />
-          <TopNav />
+          <GameProfileSync />
+          <TopNav account={sessionUser ? { username: sessionUser.username } : null} />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">
               <div className="flex min-w-0 items-center gap-4 md:gap-6">

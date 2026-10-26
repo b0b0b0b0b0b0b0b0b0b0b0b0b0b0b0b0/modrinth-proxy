@@ -22,7 +22,7 @@ function Icon({ path }) {
   )
 }
 
-export default function UsernameEditor({ username }) {
+export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
   const t = useT()
   const router = useRouter()
   const [editing, setEditing] = useState(false)
@@ -73,7 +73,7 @@ export default function UsernameEditor({ username }) {
   if (!editing) {
     return (
       <div className="flex min-w-0 items-center gap-2">
-        <h1 className="truncate text-2xl font-bold text-white">{t('account.hello', { name: username })}</h1>
+        <Heading className="truncate text-2xl font-bold text-white">{t('account.hello', { name: username })}</Heading>
         <StyledTooltip label={t('account.editUsername')}>
           <button type="button" onClick={open} aria-label={t('account.editUsername')} className={ICON_BUTTON}>
             <Icon path="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />

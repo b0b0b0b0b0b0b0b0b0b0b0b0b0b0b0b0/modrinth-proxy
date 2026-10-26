@@ -14,7 +14,7 @@ export async function GET() {
     setFestiveCookie(!user.hide_festive)
   }
   const updates = await getUpdates(user.id)
-  return Response.json({ count: updates.length })
+  return Response.json({ count: updates.length, username: user.username })
 }
 
 export async function POST(request) {

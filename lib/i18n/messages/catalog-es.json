@@ -482,7 +482,10 @@
       "shader": "shader",
       "modpack": "modpack",
       "mod": "mod"
-    }
+    },
+    "starHint": "Toca el marcador de la izquierda y esta versión se elegirá sola",
+    "starHintLoader": "Toca el marcador de la izquierda y este loader se elegirá solo",
+    "onlyLoader": "Este proyecto solo funciona con {name}: no hay que elegir nada"
   },
   "searchBack": {
     "label": "Volver a la búsqueda",

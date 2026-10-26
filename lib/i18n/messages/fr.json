@@ -149,10 +149,14 @@
     "pageModpacks": "Page modpacks",
     "pageServers": "Page serveurs",
     "pageProfiles": "Profils utilisateur",
-    "resetTitle": "Quelque chose a cassé ?",
-    "resetHint": "Si l’interface est fausse, ou si tu veux juste les valeurs par défaut.",
-    "resetBtn": "Réinitialiser les paramètres",
-    "resetting": "Réinitialisation…"
+    "resetTitle": "Le site fait des siennes ?",
+    "resetHint": "Le site retient quelques petites choses directement dans ce navigateur, pour savoir ce qui vous plaît. Parfois ces souvenirs s’emmêlent — repartir de zéro arrange tout. Cela ne concerne que ce navigateur sur cet appareil.",
+    "resetBtn": "Réinitialiser dans ce navigateur",
+    "resetting": "Réinitialisation…",
+    "resetGoneLabel": "Sera oublié",
+    "resetGone": "thème, couleur, affichage des listes, langue, sons des chatons et astuces masquées",
+    "resetKeptLabel": "Restera",
+    "resetKept": "votre compte, vos favoris et l’historique des téléchargements — ils ne sont pas stockés dans le navigateur"
   },
   "birthday": {
     "banner": "Gâteau virtuel, vrais mods — toujours gratuit.",

@@ -625,7 +625,12 @@
     "settings": "Settings",
     "newRelease": "A new version is out",
     "filterAll": "All",
-    "petKitten": "Pet the kitten"
+    "petKitten": "Pet the kitten",
+    "repeatPassword": "Repeat the new password",
+    "repeatPasswordPlaceholder": "the same password again",
+    "repeatPasswordHint": "Type it once more yourself — so there’s no typo.",
+    "errPasswordMismatch": "The passwords don’t match — type the second one again.",
+    "passwordKeptHint": "Don’t remember what you typed the first time? Press Cancel — your old password stays, nothing breaks."
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",
@@ -677,7 +682,16 @@
     "ghostTurbo": "Turbo ghosts",
     "ghostTurboHint": "For Halloween there are more ghosts and they fly faster. For seasoned ghost catchers.",
     "snowTurbo": "Turbo snowfall",
-    "snowTurboHint": "For New Year there are more parachute ornaments and they fall faster. For the nimblest catchers."
+    "snowTurboHint": "For New Year there are more parachute ornaments and they fall faster. For the nimblest catchers.",
+    "moreOptions": "Others",
+    "find": "Search",
+    "nothingFound": "Nothing found",
+    "loaderHelp": "What you install mods with: Fabric, Forge, NeoForge… You can see it in your launcher.",
+    "gameVersionHelp": "The version you play on — also shown in your launcher.",
+    "serverCoreHelp": "The program your server runs on: Paper, Spigot, Purpur…",
+    "serverVersionHelp": "The Minecraft version on your server.",
+    "ownServer": "I have my own server",
+    "ownServerHint": "Turn on if you run your own server with plugins — we’ll pick plugins for it."
   },
   "del": {
     "title": "Delete account",
@@ -744,5 +758,29 @@
     "lead": "The Modrinth server is busy for a moment and didn’t answer in time. The kitten will try again by itself in a couple of seconds — or press the button.",
     "retry": "Try again",
     "home": "Home"
+  },
+  "sn": {
+    "display": "Display",
+    "appearance": "Appearance",
+    "language": "Language",
+    "account": "Account",
+    "profile": "Profile",
+    "notifications": "Notifications",
+    "extras": "Holidays & sounds",
+    "data": "History & data",
+    "security": "Sign-in & security",
+    "signIn": "Sign in",
+    "signInHint": "Profile, notifications and everything about your account — after signing in.",
+    "menu": "Profile menu",
+    "dashboard": "Dashboard",
+    "localHint": "Saved only in this browser — works even without an account."
+  },
+  "gp": {
+    "title": "The kitten remembered what you play",
+    "text": "Taken from your bookmarks in the Download window — now it’s saved in your account and works on any device.",
+    "mods": "Mods: {value}",
+    "plugins": "Plugins: {value}",
+    "change": "Change",
+    "close": "Got it"
   }
 }

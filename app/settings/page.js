@@ -11,9 +11,5 @@ export async function generateMetadata() {
 }
 
 export default function SettingsPage() {
-  return (
-    <div className="max-w-7xl mx-auto py-8">
-      <SettingsClient />
-    </div>
-  )
+  return <SettingsClient />
 }

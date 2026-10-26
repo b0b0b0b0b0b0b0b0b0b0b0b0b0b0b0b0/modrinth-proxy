@@ -21,6 +21,7 @@ import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { downloadZipBundle, downloadFilesSequentially, buildModrinthExtractZipName } from '@/lib/downloadZip'
 import StyledTooltip from './StyledTooltip'
 import { favoritesManager } from '@/lib/favoritesManager'
+import { GAME_PROFILE_EVENT, saveFavoriteToAccount } from '@/lib/gameProfileSync'
 import DownloadVersionDependencies from './DownloadVersionDependencies'
 import { DownloadFooterButton } from './DownloadModalParts'
 import DownloadModalPickers from './DownloadModalPickers'
@@ -93,7 +94,7 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
           className={`p-2 rounded-lg transition-all duration-200 ${
             isFavorite || alwaysVisible
               ? 'text-modrinth-green scale-110'
-              : 'text-gray-500 hover:text-modrinth-green hover:scale-110 opacity-0 group-hover/row:opacity-100 focus:opacity-100'
+              : 'text-gray-500 hover:text-modrinth-green hover:scale-110 opacity-40 group-hover/row:opacity-100 focus:opacity-100'
           }`}
         >
           <svg className="w-4 h-4" fill={isFavorite ? 'currentColor' : 'none'} stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -114,7 +115,7 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
         className={`p-1 rounded-lg transition-all duration-200 hover:scale-110 flex items-center justify-center w-8 h-8 ${
           isFavorite || alwaysVisible
             ? ''
-            : 'opacity-0 group-hover/row:opacity-100 focus:opacity-100'
+            : 'opacity-40 group-hover/row:opacity-100 focus:opacity-100'
         }`}
       >
         <Lottie
@@ -251,6 +252,15 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
       }
     }
   }, [])
+
+  useEffect(() => {
+    const refreshFavorites = () => {
+      setFavMcVersion(favoritesManager.getFavoriteMcVersion(contentType))
+      setFavLoader(favoritesManager.getFavoriteLoader(contentType))
+    }
+    window.addEventListener(GAME_PROFILE_EVENT, refreshFavorites)
+    return () => window.removeEventListener(GAME_PROFILE_EVENT, refreshFavorites)
+  }, [contentType])
 
   useEffect(() => {
     if (isOpen) {
@@ -446,6 +456,11 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     const newValue = current === version ? '' : version
     favoritesManager.setFavoriteMcVersion(newValue, contentType)
     setFavMcVersion(newValue)
+    saveFavoriteToAccount(contentType, 'version', newValue).then((ok) => {
+      if (ok) return
+      favoritesManager.setFavoriteMcVersion(current, contentType)
+      setFavMcVersion(current)
+    })
     if (newValue === version) {
       selectMcVersion(version)
     } else {
@@ -459,6 +474,11 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     const newValue = current === loader ? '' : loader
     favoritesManager.setFavoriteLoader(newValue, contentType)
     setFavLoader(newValue)
+    saveFavoriteToAccount(contentType, 'loader', newValue).then((ok) => {
+      if (ok) return
+      favoritesManager.setFavoriteLoader(current, contentType)
+      setFavLoader(current)
+    })
     if (newValue === loader) {
       selectLoader(loader)
     } else {
@@ -514,10 +534,11 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
   }, [contextualVersions, contentType])
 
   const allLoaders = useMemo(() => {
+    const supported = new Set(versionLoaderIds)
     const seen = new Set()
     const ordered = []
     const add = (id) => {
-      if (!id || seen.has(id)) return
+      if (!id || seen.has(id) || !supported.has(id)) return
       seen.add(id)
       ordered.push(id)
     }
@@ -525,6 +546,8 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
     versionLoaderIds.forEach(add)
     return ordered
   }, [catalogLoaderIds, versionLoaderIds])
+
+  const singleLoader = allLoaders.length === 1 ? allLoaders[0] : ''
 
   const loaders = useMemo(() => {
     if (!selectedMcVersion) return allLoaders
@@ -882,6 +905,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                 onToggleFavoriteLoader={toggleFavoriteLoader}
                 getLoaderName={getLoaderName}
                 showLoaderPicker={showLoaderPicker}
+                singleLoader={singleLoader}
                 openPicker={openPicker}
                 onOpenPickerChange={setOpenPicker}
                 LottieStar={LottieStar}

@@ -482,7 +482,10 @@
       "shader": "Shader",
       "modpack": "Modpack",
       "mod": "Mod"
-    }
+    },
+    "starHint": "Tippe links auf das Lesezeichen — dann wird diese Version automatisch gewählt",
+    "starHintLoader": "Tippe links auf das Lesezeichen — dann wird dieser Loader automatisch gewählt",
+    "onlyLoader": "Dieses Projekt läuft nur mit {name} — du musst nichts auswählen"
   },
   "searchBack": {
     "label": "Zurück zur Suche",
