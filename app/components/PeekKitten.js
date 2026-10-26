@@ -5,12 +5,14 @@ import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './Kitten'
 import { useT } from './I18nProvider'
 import { playMew } from './softSounds'
+import { OIIA_TAPS, onOiiaChange, startOiia } from './OiiaParty'
 
 const POSES = {
   phone: { rest: '-5%', peek: '-25%' },
   wide: { rest: '39%', peek: '7%' },
 }
 const JUMP_Y = '-64%'
+const TAP_GAP_MS = 1200
 const WIDE_QUERY = '(min-width: 640px)'
 const random = (min, max) => min + Math.random() * (max - min)
 
@@ -27,10 +29,14 @@ export default function PeekKitten() {
   const hovering = useRef(false)
   const leaveTimer = useRef(null)
   const [away, setAway] = useState(false)
+  const [partying, setPartying] = useState(false)
+  const taps = useRef({ count: 0, last: 0 })
 
   useEffect(() => {
     setSide(Math.random() < 0.5 ? 'left' : 'right')
   }, [])
+
+  useEffect(() => onOiiaChange(setPartying), [])
 
   useEffect(() => {
     const onWalk = (event) => setAway(event.detail)
@@ -71,6 +77,15 @@ export default function PeekKitten() {
   }, [reduceMotion, body, side])
 
   const pet = async () => {
+    const now = Date.now()
+    const tally = taps.current
+    tally.count = now - tally.last < TAP_GAP_MS ? tally.count + 1 : 1
+    tally.last = now
+    if (tally.count >= OIIA_TAPS) {
+      tally.count = 0
+      startOiia()
+      return
+    }
     showMood('happy', 1200)
     playMew()
     burst(5, 26)
@@ -124,7 +139,7 @@ export default function PeekKitten() {
   }
 
   return (
-    <div className={`pointer-events-none relative h-10 transition-opacity duration-300 sm:h-0 ${away || !side ? 'invisible opacity-0' : ''}`}>
+    <div className={`pointer-events-none relative h-10 transition-opacity duration-300 sm:h-0 ${away || partying || !side ? 'invisible opacity-0' : ''}`}>
       <div
         className={`pointer-events-auto absolute bottom-0 h-20 w-20 translate-y-1/2 sm:h-14 sm:w-14 ${side === 'left' ? 'left-[8%]' : 'right-[8%]'}`}
         onMouseEnter={caught}

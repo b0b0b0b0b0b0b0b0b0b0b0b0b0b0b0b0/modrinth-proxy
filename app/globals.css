@@ -3986,3 +3986,127 @@ html.hide-disclaimer-badge .disclaimer-badge {
   80% { color: #f679ff; }
   100% { color: #ab47e9; }
 }
+
+@keyframes oiia-shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-4px, 2px) rotate(-0.6deg); }
+  50% { transform: translate(3px, -3px) rotate(0.5deg); }
+  75% { transform: translate(-2px, -1px) rotate(-0.3deg); }
+}
+
+@keyframes oiia-hue {
+  to { filter: hue-rotate(360deg) saturate(1.6); }
+}
+
+@keyframes oiia-light {
+  0%, 100% { opacity: 0.25; transform: translateX(-50%) rotate(-18deg); }
+  50% { opacity: 1; transform: translateX(-50%) rotate(18deg); }
+}
+
+@keyframes oiia-tail {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(14deg); }
+}
+
+.oiia-light {
+  transform-origin: top center;
+  mix-blend-mode: screen;
+  animation: oiia-light 0.9s ease-in-out infinite;
+}
+
+.oiia-tail {
+  transform-box: fill-box;
+  transform-origin: 0% 100%;
+  animation: oiia-tail 0.4s ease-in-out infinite;
+}
+
+html.oiia main,
+html.oiia footer,
+html.oiia nav {
+  animation: oiia-shake 0.24s linear infinite, oiia-hue 1.6s linear infinite;
+}
+
+@keyframes oiia-shake-big {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(-9px, 5px) rotate(-1.4deg) scale(1.01); }
+  40% { transform: translate(8px, -7px) rotate(1.2deg) scale(0.99); }
+  60% { transform: translate(-6px, -3px) rotate(-0.8deg) scale(1.015); }
+  80% { transform: translate(5px, 6px) rotate(1deg) scale(0.995); }
+}
+
+@keyframes oiia-wreck {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(calc(var(--oiia-x) * var(--oiia-k)), calc(var(--oiia-y) * var(--oiia-k) * -1)) rotate(calc(var(--oiia-r) * var(--oiia-k))) scale(1.08); }
+  50% { transform: translate(calc(var(--oiia-x) * var(--oiia-k) * -0.6), calc(var(--oiia-y) * var(--oiia-k) * 0.5)) rotate(calc(var(--oiia-r) * var(--oiia-k) * -1)) scale(0.93); }
+  75% { transform: translate(calc(var(--oiia-x) * var(--oiia-k) * 0.4), calc(var(--oiia-y) * var(--oiia-k) * -0.6)) rotate(calc(var(--oiia-r) * var(--oiia-k) * 0.5)) scale(1.05); }
+}
+
+@keyframes oiia-confetti {
+  from { transform: translateY(0) rotate(0deg); }
+  to { transform: translateY(110vh) rotate(var(--oiia-spin)); }
+}
+
+html {
+  --oiia-k: 1;
+}
+
+html.oiia-chaos {
+  --oiia-k: 2;
+}
+
+html.oiia.oiia-finale main,
+html.oiia.oiia-finale footer,
+html.oiia.oiia-finale nav {
+  animation: oiia-shake 0.16s linear infinite, oiia-hue 0.9s linear infinite;
+}
+
+html.oiia.oiia-chaos main,
+html.oiia.oiia-chaos footer,
+html.oiia.oiia-chaos nav {
+  animation: oiia-shake-big 0.14s linear infinite, oiia-hue 0.6s linear infinite;
+}
+
+.oiia-wreck {
+  animation: oiia-wreck var(--oiia-d) ease-in-out var(--oiia-delay) infinite;
+  will-change: transform;
+}
+
+.oiia-wreck-inline {
+  display: inline-block;
+}
+
+.oiia-shards {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482999;
+  overflow: hidden;
+  pointer-events: none;
+  animation: oiia-hue 0.6s linear infinite;
+}
+
+.oiia-confetti {
+  animation-name: oiia-confetti;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oiia-light {
+    animation: none;
+    opacity: 0.5;
+  }
+  html.oiia main,
+  html.oiia footer,
+  html.oiia nav,
+  html.oiia.oiia-finale main,
+  html.oiia.oiia-finale footer,
+  html.oiia.oiia-finale nav,
+  html.oiia.oiia-chaos main,
+  html.oiia.oiia-chaos footer,
+  html.oiia.oiia-chaos nav {
+    animation: oiia-hue 4s linear infinite;
+  }
+  .oiia-confetti {
+    display: none;
+  }
+}

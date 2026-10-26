@@ -10,6 +10,7 @@ import TopNav from "./components/TopNav"
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import Footer from './components/Footer'
 import PeekKitten from './components/PeekKitten'
+import OiiaParty from './components/OiiaParty'
 import FooterSnow from './components/FooterSnow'
 import KittenSnowball from './components/KittenSnowball'
 import Logo from './components/Logo'
@@ -185,6 +186,7 @@ export default async function RootLayout({ children }) {
             <MobileNav />
           </Suspense>
           <PeekKitten />
+          <OiiaParty />
           <FestiveGate>
             <FooterSnow />
           </FestiveGate>
