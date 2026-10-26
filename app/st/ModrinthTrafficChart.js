@@ -59,7 +59,7 @@ export default function ModrinthTrafficChart({ initial }) {
           className="pointer-events-none absolute inset-x-0 border-t border-dashed border-red-400/50"
           style={{ bottom: `${(limit / scale) * 100}%` }}
         >
-          <span className="absolute -top-4 right-0 text-[10px] font-semibold text-red-400/80">{t('st.mrLimit', { n: limit })}</span>
+          <span className="absolute -top-4 left-0 text-[10px] font-semibold text-red-400/80">{t('st.mrLimit', { n: limit })}</span>
         </div>
         <div role="img" aria-label={t('st.mrTitle')} className="flex h-full items-end gap-[2px]">
           {minutes.map((minute) => {

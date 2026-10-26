@@ -3,13 +3,13 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState, useEffect } from 'react'
-import { useT } from './I18nProvider'
+import { useI18n } from './I18nProvider'
 import { cookieNoticeAccepted } from './CookieNotice'
-import { BrowserLogo, BROWSER_LABELS } from './BrowserIcons'
+import { BrowserLogo, browserLabel } from './BrowserIcons'
 import { EXTENSION_STORES, detectClientBrowser } from '@/lib/browserDetect'
 
 export default function ExtensionBanner() {
-  const t = useT()
+  const { t, locale } = useI18n()
   const pathname = usePathname()
   const [browser, setBrowser] = useState(null)
 
@@ -31,7 +31,7 @@ export default function ExtensionBanner() {
 
   if (!browser || pathname?.startsWith('/extension')) return null
 
-  const label = BROWSER_LABELS[browser.name] || BROWSER_LABELS.chrome
+  const label = browserLabel(browser.name, locale, browser.product)
   const store = EXTENSION_STORES[browser.family]
 
   return (
@@ -52,7 +52,7 @@ export default function ExtensionBanner() {
 
         <div className="relative flex gap-3 pr-6 sm:gap-4">
           <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 sm:h-12 sm:w-12">
-            <BrowserLogo family={browser.family} id="ffbanner" className="h-7 w-7 sm:h-8 sm:w-8" />
+            <BrowserLogo name={browser.name} className="h-7 w-7 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="mb-1 text-base font-bold text-white sm:text-lg">

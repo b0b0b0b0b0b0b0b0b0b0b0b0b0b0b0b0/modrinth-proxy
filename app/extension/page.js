@@ -2,7 +2,7 @@ import { headers } from 'next/headers'
 import { ArrowRight, EyeOff, Feather, MousePointerClick, Pin, Power, ShieldCheck, Target, UserRound, Zap } from 'lucide-react'
 import { getRequestT } from '@/lib/i18n/server'
 import { EXTENSION_STORES, detectBrowser } from '@/lib/browserDetect'
-import { BROWSER_LABELS, ChromeIcon, FirefoxIcon } from '../components/BrowserIcons'
+import { BROWSER_LABELS, BrowserLogo, browserLabel } from '../components/BrowserIcons'
 import ExtensionKitten from './ExtensionKitten'
 
 export async function generateMetadata() {
@@ -13,8 +13,7 @@ export async function generateMetadata() {
   }
 }
 
-function InstallButton({ family, label, highlighted, idSuffix, className = '' }) {
-  const Logo = family === 'firefox' ? FirefoxIcon : ChromeIcon
+function InstallButton({ family, logo, label, highlighted, className = '' }) {
   return (
     <a
       href={EXTENSION_STORES[family]}
@@ -26,16 +25,13 @@ function InstallButton({ family, label, highlighted, idSuffix, className = '' })
           : 'border border-modrinth-green/40 bg-modrinth-green/10 text-gray-900 hover:border-modrinth-green/70 hover:bg-modrinth-green/20 dark:text-white'
       } ${className}`}
     >
-      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-white/90 p-0.5">
-        <Logo className="h-6 w-6" id={`ff${idSuffix}`} />
-      </span>
+      <BrowserLogo name={logo} className="h-7 w-7 flex-shrink-0" />
       <span className="min-w-0">{label}</span>
     </a>
   )
 }
 
-function StoreCard({ family, store, note, button, current, yours, idSuffix }) {
-  const Logo = family === 'firefox' ? FirefoxIcon : ChromeIcon
+function StoreCard({ family, logo, store, note, button, current, yours }) {
   return (
     <div
       className={`relative flex flex-col rounded-3xl border p-5 transition-colors sm:p-7 ${
@@ -48,13 +44,11 @@ function StoreCard({ family, store, note, button, current, yours, idSuffix }) {
         <span className="absolute right-4 top-4 rounded-full bg-modrinth-green px-2.5 py-1 text-xs font-bold text-black">{yours}</span>
       ) : null}
       <div className="mb-4 flex items-center gap-4 pr-20">
-        <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-2xl bg-white/90 p-1.5 shadow-md">
-          <Logo className="h-11 w-11" id={`ffcard${idSuffix}`} />
-        </div>
+        <BrowserLogo name={logo} className="h-14 w-14 flex-shrink-0 drop-shadow-md" />
         <h3 className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">{store}</h3>
       </div>
       <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{note}</p>
-      <InstallButton family={family} label={button} highlighted={current} idSuffix={`store${idSuffix}`} className="w-full" />
+      <InstallButton family={family} logo={logo} label={button} highlighted={current} className="w-full" />
     </div>
   )
 }
@@ -77,10 +71,11 @@ const STEPS = [
 const FAQ = ['1', '2', '3', '4', '5', '6']
 
 export default function ExtensionPage() {
-  const { t } = getRequestT()
+  const { t, locale } = getRequestT()
   const requestHeaders = headers()
   const browser = detectBrowser(requestHeaders.get('user-agent'), requestHeaders.get('sec-ch-ua'))
-  const chromiumLabel = browser.family === 'chromium' ? BROWSER_LABELS[browser.name] || BROWSER_LABELS.chrome : null
+  const chromiumLabel = browser.family === 'chromium' ? browserLabel(browser.name, locale, browser.product) : null
+  const logoName = (family) => (family === 'firefox' ? 'firefox' : browser.family === 'chromium' ? browser.name : 'chrome')
   const chromeButton = chromiumLabel ? t('ext.install.chromiumBtn', { browser: chromiumLabel }) : t('ext.install.chromeBtn')
   const firefoxButton = t('ext.install.firefoxBtn')
   const order = browser.family === 'chromium' ? ['chromium', 'firefox'] : ['firefox', 'chromium']
@@ -93,7 +88,7 @@ export default function ExtensionPage() {
           <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-modrinth-green/10 blur-3xl sm:h-96 sm:w-[36rem]" />
 
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-modrinth-green/30 bg-modrinth-green/10 px-3 py-1.5 text-sm font-semibold text-modrinth-green">
-            <FirefoxIcon className="h-4 w-4" id="ffbadge" />
+            <BrowserLogo name="firefox" className="h-4 w-4" />
             {t('ext.badge')}
           </span>
 
@@ -129,9 +124,9 @@ export default function ExtensionPage() {
               <InstallButton
                 key={family}
                 family={family}
+                logo={logoName(family)}
                 label={buttonLabel(family)}
                 highlighted={browser.family === family}
-                idSuffix={`hero${family}`}
               />
             ))}
           </div>
@@ -178,7 +173,7 @@ export default function ExtensionPage() {
               <StoreCard
                 key={family}
                 family={family}
-                idSuffix={family}
+                logo={logoName(family)}
                 store={t(family === 'firefox' ? 'ext.install.firefoxStore' : 'ext.install.chromeStore')}
                 note={t(family === 'firefox' ? 'ext.install.firefoxNote' : 'ext.install.chromeNote')}
                 button={buttonLabel(family)}
@@ -233,9 +228,9 @@ export default function ExtensionPage() {
               <InstallButton
                 key={family}
                 family={family}
+                logo={logoName(family)}
                 label={buttonLabel(family)}
                 highlighted={browser.family === family}
-                idSuffix={`cta${family}`}
               />
             ))}
           </div>
