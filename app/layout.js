@@ -30,6 +30,8 @@ import { I18nProvider } from './components/I18nProvider'
 import DisclaimerBadge from './components/DisclaimerBadge'
 import { PALETTES } from '../lib/paletteManager'
 import { getSessionUser } from '@/lib/auth'
+import { discordEmbedPath } from '@/lib/discordEmbed'
+import { SITE_ORIGIN } from '@/lib/site'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 import { LOCALE_COOKIE } from '../lib/i18n/config'
 import { resolveLocale } from '../lib/i18n/resolveLocale'
@@ -94,6 +96,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang={locale} className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
       <head>
+        <link
+          rel="discord:component-embed"
+          type="application/json"
+          href={`${SITE_ORIGIN}${discordEmbedPath(headers().get('x-modrinth-pathname'))}`}
+        />
         <script
           dangerouslySetInnerHTML={{ __html: CHUNK_LOAD_RECOVERY_INLINE }}
         />

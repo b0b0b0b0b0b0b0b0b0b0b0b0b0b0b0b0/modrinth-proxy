@@ -243,7 +243,7 @@ export default function TopNav({ account = null }) {
           ))}
         </div>
 
-        <div className="hidden md:flex flex-row items-center gap-2 flex-shrink-0">
+        <div className="hidden md:flex flex-row items-center gap-2 md:max-xl:gap-1 flex-shrink-0">
           <ProfileMenu account={account} linkClassName={iconLinkClass} />
           <Link
             href="/news"

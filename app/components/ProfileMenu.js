@@ -21,7 +21,6 @@ const ICONS = {
   ],
   logIn: ['M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3'],
   logOut: ['M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9'],
-  register: ['M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2', 'M13 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0', 'M19 8v6M22 11h-6'],
 }
 
 const ITEM =
@@ -58,6 +57,7 @@ export default function ProfileMenu({ account, linkClassName }) {
   const rootRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [username, setUsername] = useState(account?.username || null)
+  const [signed, setSigned] = useState(Boolean(account))
   const [updates, setUpdates] = useState(0)
   const [busy, setBusy] = useState(false)
 
@@ -67,7 +67,9 @@ export default function ProfileMenu({ account, linkClassName }) {
 
   useEffect(() => {
     setOpen(false)
-    if (!isSigned()) {
+    const signedNow = isSigned()
+    setSigned(signedNow)
+    if (!signedNow) {
       setUsername(null)
       return undefined
     }
@@ -115,6 +117,7 @@ export default function ProfileMenu({ account, linkClassName }) {
         sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
       } catch {}
       setUsername(null)
+      setSigned(false)
       close()
       if (pathname === '/account' || (pathname.startsWith('/settings/') && pathname !== '/settings/language')) {
         router.push('/')
@@ -126,18 +129,39 @@ export default function ProfileMenu({ account, linkClassName }) {
     }
   }
 
-  const signedIn = Boolean(username)
-  const active = pathname === '/account' || pathname === '/login' || pathname === '/register' || pathname.startsWith('/settings')
-  const links = signedIn
-    ? [
-        { href: '/account?tab=updates', label: t('account.updates'), icon: ICONS.updates, count: updates },
-        { href: '/account?tab=favorites', label: t('account.favorites'), icon: ICONS.favorites },
-        { href: '/account?tab=downloads', label: t('account.downloads'), icon: ICONS.downloads },
-      ]
-    : [
-        { href: '/login', label: t('account.login'), icon: ICONS.logIn },
-        { href: '/register', label: t('account.register'), icon: ICONS.register },
-      ]
+  const active = pathname === '/account' || pathname.startsWith('/settings')
+  const links = [
+    { href: '/account?tab=updates', label: t('account.updates'), icon: ICONS.updates, count: updates },
+    { href: '/account?tab=favorites', label: t('account.favorites'), icon: ICONS.favorites },
+    { href: '/account?tab=downloads', label: t('account.downloads'), icon: ICONS.downloads },
+  ]
+
+  if (!signed) {
+    const onAuthPage = pathname === '/login' || pathname === '/register'
+    const next = onAuthPage || pathname === '/' ? '' : `?next=${encodeURIComponent(pathname)}`
+    return (
+      <div className="flex items-center gap-2 md:max-xl:gap-1">
+        <Link
+          href={`/login${next}`}
+          aria-current={onAuthPage ? 'page' : undefined}
+          aria-label={t('account.submitLogin')}
+          className="inline-flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-xl bg-modrinth-green px-2.5 text-sm font-bold text-black transition-[filter,transform] hover:brightness-110 active:scale-[0.97] max-[399px]:w-9 max-[399px]:px-0 md:max-xl:h-8 md:max-xl:w-8 md:max-xl:px-0"
+        >
+          <Icon paths={ICONS.logIn} />
+          <span className="max-[399px]:hidden md:max-xl:hidden">{t('account.submitLogin')}</span>
+        </Link>
+        <Link
+          href="/settings"
+          className={`${linkClassName(pathname.startsWith('/settings'))} md:max-xl:h-8 md:max-xl:w-8`}
+          data-tooltip={t('nav.settings')}
+          aria-label={t('nav.settings')}
+          aria-current={pathname.startsWith('/settings') ? 'page' : undefined}
+        >
+          <Icon paths={ICONS.settings} className="h-5 w-5 shrink-0 md:max-xl:h-4 md:max-xl:w-4" />
+        </Link>
+      </div>
+    )
+  }
 
   return (
     <div ref={rootRef} className="relative">
@@ -167,7 +191,7 @@ export default function ProfileMenu({ account, linkClassName }) {
             style={{ transformOrigin: 'top right' }}
             className="absolute right-0 top-full z-[60] mt-2 w-64 rounded-2xl border border-gray-800 bg-modrinth-dark p-2 shadow-2xl"
           >
-            {signedIn ? (
+            {username ? (
               <Link
                 href="/account"
                 role="menuitem"
@@ -203,7 +227,7 @@ export default function ProfileMenu({ account, linkClassName }) {
               <span className="min-w-0 flex-1 truncate">{t('nav.settings')}</span>
             </Link>
 
-            {signedIn ? (
+            {signed ? (
               <button
                 type="button"
                 role="menuitem"
