@@ -38,3 +38,63 @@ Disallow: /LICENSE
 Disallow: /license
 Disallow: /banner.webp
 
+
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-Web
+User-agent: anthropic-ai
+User-agent: Google-Extended
+User-agent: GoogleOther
+User-agent: Google-CloudVertexBot
+User-agent: Applebot-Extended
+User-agent: PerplexityBot
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: FacebookBot
+User-agent: Meta-ExternalAgent
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: YouBot
+User-agent: DuckAssistBot
+User-agent: AI2Bot
+User-agent: Ai2Bot-Dolma
+User-agent: PetalBot
+User-agent: Timpibot
+User-agent: ImagesiftBot
+User-agent: Omgilibot
+User-agent: Omgili
+User-agent: webzio-extended
+User-agent: img2dataset
+User-agent: Scrapy
+User-agent: YandexAdditional
+User-agent: YandexAdditionalBot
+User-agent: TikTokSpider
+User-agent: Kangaroo Bot
+User-agent: PanguBot
+User-agent: SemrushBot-OCOB
+User-agent: Brightbot
+User-agent: iaskspider
+User-agent: ICC-Crawler
+User-agent: Sidetrade indexer bot
+User-agent: VelenPublicWebCrawler
+User-agent: QualifiedBot
+User-agent: FriendlyCrawler
+Disallow: /
+
+User-agent: ChatGPT-User
+User-agent: Claude-User
+User-agent: Perplexity-User
+User-agent: MistralAI-User
+User-agent: meta-externalfetcher
+Allow: /
+Disallow: /api/
+Disallow: /_next/
+Disallow: /ads/
+Disallow: /LICENSE
+Disallow: /license
+Disallow: /banner.webp
