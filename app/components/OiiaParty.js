@@ -387,7 +387,7 @@ export default function OiiaParty() {
     timers.current = []
     const current = run.current
     run.current = null
-    document.documentElement.classList.remove('oiia', 'oiia-finale', 'oiia-chaos')
+    document.documentElement.classList.remove('oiia', 'oiia-finale', 'oiia-chaos', 'oiia-party')
     setLoud(false)
     setFinale(false)
     if (current) {
@@ -507,6 +507,7 @@ export default function OiiaParty() {
     const begin = () => {
       if (live.current || phaseRef.current) return
       live.current = true
+      root.classList.add('oiia-party')
       phaseRef.current = 'intro'
       timers.current.forEach(clearTimeout)
       timers.current = []

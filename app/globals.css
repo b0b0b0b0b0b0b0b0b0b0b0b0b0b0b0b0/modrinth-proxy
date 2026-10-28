@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overflow-x: clip;
+}
+
 @keyframes fire-flicker {
   0%, 100% {
     background-position: 0% 50%;
@@ -4277,6 +4282,17 @@ html {
 
 html.oiia-chaos {
   --oiia-k: 2;
+}
+
+html.oiia,
+html.oiia body,
+html.oiia-party,
+html.oiia-party body,
+html.oiia-finale,
+html.oiia-finale body,
+html.oiia-chaos,
+html.oiia-chaos body {
+  overflow-x: clip;
 }
 
 html.oiia.oiia-finale main,
