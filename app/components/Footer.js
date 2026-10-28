@@ -43,7 +43,7 @@ export default function Footer() {
               href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800 hover:bg-gray-700 text-white rounded-lg transition-all duration-300 group text-sm font-medium shadow-lg hover:shadow-modrinth-green/20 hover:scale-95"
+              className="glass-btn inline-flex items-center gap-2 px-4 py-2 text-white rounded-2xl text-sm font-medium transition-all duration-300 group hover:scale-95"
             >
               <svg className="w-5 h-5 shrink-0 text-modrinth-green group-hover:text-modrinth-green-light transition-all duration-300 group-hover:-rotate-12" fill="currentColor" viewBox="0 0 475.084 475.084" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" aria-hidden>
                 <g>
