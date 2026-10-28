@@ -1,9 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { usePathname } from 'next/navigation'
-import { useTheme } from 'next-themes'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { useT } from './I18nProvider'
 
@@ -16,14 +15,10 @@ export default function ContentNavigation({
 }) {
   const t = useT()
   const pathname = usePathname()
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
   const accent = useMemo(
     () => resolveModrinthProjectAccent(projectColor),
     [projectColor],
   )
-  const effectiveAccent = accent && (!mounted || resolvedTheme === 'dark') ? accent : null
 
   const isActive = (path) => {
     if (path === `/${contentType}/${slug}`) {
@@ -45,10 +40,16 @@ export default function ContentNavigation({
   return (
     <div className="overflow-x-auto mb-4 mobile-nav-spacing">
       <nav
-        className={`glass-track relative flex w-fit rounded-full p-1 text-sm font-bold ${effectiveAccent ? '' : 'bg-gray-800'}`}
+        className={`glass-track relative flex w-fit rounded-full p-1 text-sm font-bold bg-gray-800 ${
+          accent ? 'dark:[background-color:var(--nav-track)]' : ''
+        }`}
         style={
-          effectiveAccent
-            ? { backgroundColor: effectiveAccent.trackBgCss }
+          accent
+            ? {
+                '--nav-track': accent.trackBgCss,
+                '--nav-accent': accent.accentHex,
+                '--nav-accent-fg': accent.activeFgHex,
+              }
             : undefined
         }
       >
@@ -60,19 +61,11 @@ export default function ContentNavigation({
               href={tab.href}
               className={`button-animation z-[1] flex flex-row items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
                 active
-                  ? effectiveAccent
-                    ? 'glass-pill'
-                    : 'glass-pill bg-modrinth-green text-black'
+                  ? `glass-pill bg-modrinth-green text-black ${
+                      accent ? 'dark:[background-color:var(--nav-accent)] dark:[color:var(--nav-accent-fg)]' : ''
+                    }`
                   : 'text-gray-400 hover:text-white'
               }`}
-              style={
-                active && effectiveAccent
-                  ? {
-                      backgroundColor: effectiveAccent.accentHex,
-                      color: effectiveAccent.activeFgHex,
-                    }
-                  : undefined
-              }
             >
               {tab.label}
             </Link>

@@ -102,6 +102,14 @@ body {
   z-index: 2;
 }
 
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
 :root {
   --bg-primary: #16181c;
   --bg-primary-rgb: 22, 24, 28;
