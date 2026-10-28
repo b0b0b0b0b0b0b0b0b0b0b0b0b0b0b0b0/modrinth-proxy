@@ -17,8 +17,8 @@ const CHAOS_AT = 45
 const SHATTER_AT = 40
 const SHATTER_END = 57.5
 const SHATTER_SELECTOR = 'nav *, main *, footer *'
-const SMASH_PER_FRAME = 4
-const SHATTER_ABOVE = 1.5
+const SMASH_PER_FRAME = 2
+const SHATTER_LIMIT = 50
 const OUTRO_RUN_MS = 1300
 const OUTRO_REVEAL_MS = 2300
 const OUTRO_END_MS = 3300
@@ -121,8 +121,8 @@ function shatter(el, layer) {
   for (const name of style) css += `${name}:${style.getPropertyValue(name)};`
   css += `position:fixed;left:${rect.left}px;top:${rect.top}px;width:${rect.width}px;height:${rect.height}px;margin:0;box-sizing:border-box;transform:none;animation:none;transition:none;visibility:visible;opacity:1;pointer-events:none;`
   if (style.display === 'inline') css += 'display:inline-block;'
-  const cols = Math.min(4, Math.max(1, Math.round(rect.width / 90)))
-  const rows = Math.min(3, Math.max(1, Math.round(rect.height / 70)))
+  const cols = Math.min(3, Math.max(1, Math.round(rect.width / 120)))
+  const rows = Math.min(2, Math.max(1, Math.round(rect.height / 90)))
   const points = []
   for (let row = 0; row <= rows; row++) {
     for (let col = 0; col <= cols; col++) {
@@ -172,12 +172,22 @@ function startShatter() {
   const screen = window.innerWidth * window.innerHeight
   const queue = []
   for (const el of document.querySelectorAll(SHATTER_SELECTOR)) {
+    if (el.closest('.oiia-shards') || el.closest('[aria-hidden="true"]')) continue
     if (el.closest('svg') && el.tagName.toLowerCase() !== 'svg') continue
+
     const rect = el.getBoundingClientRect()
+    if (rect.bottom <= 0 || rect.top >= window.innerHeight || rect.right <= 0 || rect.left >= window.innerWidth) continue
+
     const area = rect.width * rect.height
-    if (rect.width < 6 || rect.height < 6 || area < 200 || area > screen * 0.6) continue
-    if (rect.bottom < -window.innerHeight * SHATTER_ABOVE || rect.top > window.innerHeight || rect.right < 0 || rect.left > window.innerWidth) continue
+    if (rect.width < 12 || rect.height < 12 || area < 300 || area > screen * 0.45) continue
+
+    const style = getComputedStyle(el)
+    if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) continue
+
+    if (queue.some(({ el: other }) => other.contains(el) || el.contains(other))) continue
+
     queue.push({ el, order: area * rand(0.4, 1.6) })
+    if (queue.length >= SHATTER_LIMIT) break
   }
   queue.sort((a, b) => a.order - b.order)
   const broken = new Set()
