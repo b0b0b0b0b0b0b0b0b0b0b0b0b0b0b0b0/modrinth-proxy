@@ -39,7 +39,10 @@ export default function ProfileSettingsPage() {
         </div>
         <MinecraftAvatarPicker avatar={avatar} name={user.mc_name} />
       </section>
-      <GameSettings key={Object.values(chosen).join('|')} game={{ chosen, guess: profileFields(profile.guess) }} />
+      <GameSettings
+        key={[...Object.values(chosen), profile.ownServer].join('|')}
+        game={{ chosen, guess: profileFields(profile.guess), ownServer: profile.ownServer }}
+      />
     </>
   )
 }

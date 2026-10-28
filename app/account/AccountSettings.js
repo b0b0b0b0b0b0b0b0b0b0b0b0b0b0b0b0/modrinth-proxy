@@ -9,6 +9,7 @@ import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
 import { rememberProfileField } from '@/lib/gameProfileSync'
 import {
   getLoaderDisplayName,
+  resolveLoader,
   PROFILE_MOD_LOADER_IDS,
   PROFILE_MOD_LOADER_MAIN,
   PROFILE_SERVER_CORE_IDS,
@@ -21,7 +22,12 @@ import { isNewYearSeason, onSnowTurboChange, readSnowTurbo, setSnowTurbo } from 
 import { ClearFavoritesButton, ClearHistoryButton } from './FavoriteActions'
 import { announceFestiveChange, onFestiveChange } from '@/lib/festive'
 
-const PROFILE_PAYLOAD = { loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
+function loaderOption(id) {
+  const loader = resolveLoader(id)
+  return { value: id, label: getLoaderDisplayName(id), icon: loader.icon, color: loader.color }
+}
+
+const PROFILE_PAYLOAD ={ loader: 'gameLoader', gameVersion: 'gameVersion', serverCore: 'serverCore', serverVersion: 'serverVersion' }
 
 const LINK_BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-modrinth-green px-2.5 py-1.5 text-xs font-bold leading-none text-black transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40'
@@ -115,21 +121,22 @@ export function GameSettings({ game }) {
   const { busy, error, save } = useAccountSave()
   const [profile, setProfile] = useState(game.chosen)
   const { release: gameVersions, full: allGameVersions } = useMinecraftVersions()
-  const [ownServer, setOwnServer] = useState(Boolean(game.chosen.serverCore || game.chosen.serverVersion || game.guess.serverCore))
+  const [ownServer, setOwnServer] = useState(game.ownServer)
 
   const toggleOwnServer = () => {
     if (!ownServer) {
-      setOwnServer(true)
-      return
-    }
-    if (!profile.serverCore && !profile.serverVersion) {
-      setOwnServer(false)
+      save(
+        'ownServer',
+        { ownServer: true },
+        () => setOwnServer(true),
+        () => setOwnServer(false),
+      )
       return
     }
     const previous = { serverCore: profile.serverCore, serverVersion: profile.serverVersion }
     save(
       'ownServer',
-      { serverCore: '', serverVersion: '' },
+      { ownServer: false, serverCore: '', serverVersion: '' },
       () => {
         setOwnServer(false)
         setProfile((current) => ({ ...current, serverCore: '', serverVersion: '' }))
@@ -178,11 +185,9 @@ export function GameSettings({ game }) {
                 label: group.coreLabel,
                 help: group.coreHelp,
                 options: [
-                  ...group.main.map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
+                  ...group.main.map(loaderOption),
                   { section: t('set.moreOptions') },
-                  ...group.cores
-                    .filter((id) => !group.main.includes(id))
-                    .map((id) => ({ value: id, label: getLoaderDisplayName(id) })),
+                  ...group.cores.filter((id) => !group.main.includes(id)).map(loaderOption),
                 ],
                 hint: game.guess[group.core] ? getLoaderDisplayName(game.guess[group.core]) : null,
               },

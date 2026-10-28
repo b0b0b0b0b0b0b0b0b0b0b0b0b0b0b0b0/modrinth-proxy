@@ -31,6 +31,7 @@ export async function POST(request) {
     recordHistory: body?.recordHistory,
     newsBadge: body?.newsBadge,
     festive: body?.festive,
+    ownServer: body?.ownServer,
   }
   const booleans = Object.entries(changes).filter(([, value]) => typeof value === 'boolean')
   const unmuteAll = body?.unmuteAll === true

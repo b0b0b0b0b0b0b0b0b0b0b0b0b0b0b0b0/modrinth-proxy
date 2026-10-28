@@ -9,6 +9,15 @@ import { useT } from '../components/I18nProvider'
 
 const TRIGGER_TEXT = 'min-w-0 truncate text-sm min-[480px]:text-base'
 
+function OptionIcon({ option }) {
+  if (!option?.icon) return null
+  return (
+    <span className="flex size-4 shrink-0 items-center justify-center [&>svg]:size-4" style={{ color: option.color }}>
+      {option.icon}
+    </span>
+  )
+}
+
 export default function GamePicker({ label, help, value, options, allOptions, onChange, disabled, searchPlaceholder, emptyText }) {
   const t = useT()
   const reduceMotion = useReducedMotion()
@@ -97,12 +106,15 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                   disabled={disabled}
                   className="flex h-9 w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left transition-colors hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60 dark:hover:brightness-110"
                 >
-                  <span
-                    className={`${TRIGGER_TEXT} ${
-                      current?.value ? 'font-semibold text-gray-900 dark:text-white' : 'font-medium text-gray-500 dark:text-gray-400'
-                    }`}
-                  >
-                    {current?.label}
+                  <span className="flex min-w-0 items-center gap-2">
+                    <OptionIcon option={current} />
+                    <span
+                      className={`${TRIGGER_TEXT} ${
+                        current?.value ? 'font-semibold text-gray-900 dark:text-white' : 'font-medium text-gray-500 dark:text-gray-400'
+                      }`}
+                    >
+                      {current?.label}
+                    </span>
                   </span>
                   <ChevronIcon open={open} />
                 </button>
@@ -177,7 +189,10 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                                 : 'text-gray-700 hover:bg-gray-100 focus-visible:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c] dark:focus-visible:bg-[#34363c]'
                             }`}
                           >
-                            <span className="min-w-0 truncate">{option.label}</span>
+                            <span className="flex min-w-0 items-center gap-2">
+                              <OptionIcon option={option} />
+                              <span className="min-w-0 truncate">{option.label}</span>
+                            </span>
                             {option.hint ? (
                               <span className={`shrink-0 text-[11px] ${'text-gray-600 dark:text-gray-500'}`}>
                                 {option.hint}
