@@ -60,7 +60,7 @@ export default function GalleryGrid({ gallery }) {
 
   if (gallery.length === 0) {
     return (
-      <div className="rounded-lg border border-gray-800 bg-modrinth-dark p-12 text-center">
+      <div className="rounded-lg card-glass bg-modrinth-dark p-12 text-center">
         <svg
           className="mx-auto mb-4 h-16 w-16 text-gray-600"
           fill="none"
@@ -85,7 +85,7 @@ export default function GalleryGrid({ gallery }) {
         {gallery.map((item, idx) => (
           <div
             key={idx}
-            className="group flex flex-col overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark transition-colors hover:border-gray-700"
+            className="group flex flex-col overflow-hidden rounded-lg card-glass bg-modrinth-dark transition-[filter] hover:brightness-110"
           >
             {item.isBlocked ? (
               <div className="relative flex aspect-video w-full items-center justify-center border-b border-red-500/20 bg-gradient-to-br from-red-500/10 to-orange-500/10">

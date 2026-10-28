@@ -387,7 +387,7 @@ export default async function AccountPage({ searchParams }) {
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row">
         <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:flex-shrink-0">
-          <div className="sticky top-4 space-y-1 rounded-xl border border-gray-800 bg-modrinth-dark p-4">
+          <div className="sticky top-4 space-y-1 rounded-xl card-glass bg-modrinth-dark p-4">
             <h2 className="mb-3 text-sm font-semibold text-gray-300">{t('nav.sections')}</h2>
             {TABS.map((value) => {
               const active = value === tab
@@ -442,7 +442,7 @@ export default async function AccountPage({ searchParams }) {
           </div>
         </nav>
 
-      <section className="min-w-0 flex-1 rounded-2xl border border-gray-800 bg-modrinth-dark p-4 md:p-5 lg:self-start">
+      <section className="min-w-0 flex-1 rounded-2xl card-glass bg-modrinth-dark p-4 md:p-5 lg:self-start">
         {tab === 'favorites' && favorites.length > 0 ? (
           <TypeFilter items={typeItems(favoritesByType, favorites.length, t)} active={typeFilter || ''} tab="favorites" />
         ) : null}

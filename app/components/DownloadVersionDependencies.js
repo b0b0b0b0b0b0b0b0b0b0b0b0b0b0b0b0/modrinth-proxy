@@ -379,7 +379,7 @@ export default function DownloadVersionDependencies({
 
   return (
     <>
-      <div className="mb-6 flex flex-col gap-2.5 rounded-2xl border border-gray-800 bg-modrinth-dark p-4">
+      <div className="mb-6 flex flex-col gap-2.5 rounded-2xl card-glass bg-modrinth-dark p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h3 className="m-0 flex items-center gap-1.5 text-base font-semibold text-gray-900 dark:text-white">
             Зависимости

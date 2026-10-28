@@ -146,8 +146,8 @@ export default function SettingsClient() {
   if (!mounted) {
     return (
       <div className="animate-pulse space-y-6">
-        <div className="h-48 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
-        <div className="h-96 bg-modrinth-dark border border-gray-800 rounded-2xl"></div>
+        <div className="h-48 bg-modrinth-dark card-glass rounded-2xl"></div>
+        <div className="h-96 bg-modrinth-dark card-glass rounded-2xl"></div>
       </div>
     )
   }

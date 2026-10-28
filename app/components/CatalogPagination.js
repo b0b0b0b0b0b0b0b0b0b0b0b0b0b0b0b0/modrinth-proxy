@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import StyledTooltip from '@/app/components/StyledTooltip'
 import { useI18n } from '@/app/components/I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
@@ -11,22 +11,43 @@ import { buildCatalogPageUrl, getPaginationItems } from '@/lib/pagination'
 const buttonBase =
   'glass-btn inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-3 text-sm font-semibold'
 
-function NavLink({ href, label, children }) {
-  return (
-    <StyledTooltip label={label}>
-      <Link
-        href={href}
-        aria-label={label}
-        className={`${buttonBase} text-gray-300 hover:text-white`}
-      >
+const PageLink = forwardRef(function PageLink({ target, go, label, children, ...rest }, ref) {
+  const className = `${buttonBase} text-gray-300 hover:text-white`
+  if (go.href) {
+    return (
+      <Link ref={ref} {...rest} href={go.href(target)} aria-label={label} className={className}>
         {children}
       </Link>
+    )
+  }
+  return (
+    <button
+      ref={ref}
+      {...rest}
+      type="button"
+      onClick={(event) => {
+        rest.onClick?.(event)
+        go.select(target)
+      }}
+      aria-label={label}
+      className={className}
+    >
+      {children}
+    </button>
+  )
+})
+
+function NavLink({ target, go, label, children }) {
+  return (
+    <StyledTooltip label={label}>
+      <PageLink target={target} go={go} label={label}>
+        {children}
+      </PageLink>
     </StyledTooltip>
   )
 }
 
-function EditableCurrentPage({ page, totalPages, pathname, searchParams, t }) {
-  const router = useRouter()
+function EditableCurrentPage({ page, totalPages, go, t }) {
   const [editing, setEditing] = useState(false)
   const [value, setValue] = useState(String(page))
   const inputRef = useRef(null)
@@ -57,9 +78,7 @@ function EditableCurrentPage({ page, totalPages, pathname, searchParams, t }) {
     setEditing(false)
     setValue(String(target))
 
-    if (target !== page) {
-      router.push(buildCatalogPageUrl(pathname, searchParams, target))
-    }
+    if (target !== page) go.select(target)
   }
 
   if (editing) {
@@ -107,14 +126,21 @@ export default function CatalogPagination({
   totalPages,
   pathname,
   searchParams,
+  onPageChange,
   className = '',
 }) {
   const { t, locale } = useI18n()
+  const router = useRouter()
   if (totalPages <= 1) return null
 
   const nf = intlLocale(locale)
   const items = getPaginationItems(page, totalPages, { siblings: 2, boundaries: 1 })
-  const hrefForPage = (targetPage) => buildCatalogPageUrl(pathname, searchParams, targetPage)
+  const go = onPageChange
+    ? { select: onPageChange }
+    : {
+        href: (targetPage) => buildCatalogPageUrl(pathname, searchParams, targetPage),
+        select: (targetPage) => router.push(buildCatalogPageUrl(pathname, searchParams, targetPage)),
+      }
 
   return (
     <nav
@@ -123,7 +149,7 @@ export default function CatalogPagination({
     >
       <div className="flex max-w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2">
         {page > 1 && (
-          <NavLink href={hrefForPage(page - 1)} label={t('catalog.pager.prev')}>
+          <NavLink target={page - 1} go={go} label={t('catalog.pager.prev')}>
             <span className="hidden sm:inline">{t('catalog.pager.back')}</span>
             <span className="sm:hidden">‹</span>
           </NavLink>
@@ -143,24 +169,20 @@ export default function CatalogPagination({
               key={item.key}
               page={page}
               totalPages={totalPages}
-              pathname={pathname}
-              searchParams={searchParams}
+              go={go}
               t={t}
             />
           ) : (
             <StyledTooltip key={item.key} label={t('catalog.pager.pageN', { n: item.page.toLocaleString(nf) })}>
-              <Link
-                href={hrefForPage(item.page)}
-                className={`${buttonBase} text-gray-300 hover:text-white`}
-              >
+              <PageLink target={item.page} go={go}>
                 {item.page}
-              </Link>
+              </PageLink>
             </StyledTooltip>
           )
         )}
 
         {page < totalPages && (
-          <NavLink href={hrefForPage(page + 1)} label={t('catalog.pager.nextAria')}>
+          <NavLink target={page + 1} go={go} label={t('catalog.pager.nextAria')}>
             <span className="hidden sm:inline">{t('catalog.pager.next')}</span>
             <span className="sm:hidden">›</span>
           </NavLink>

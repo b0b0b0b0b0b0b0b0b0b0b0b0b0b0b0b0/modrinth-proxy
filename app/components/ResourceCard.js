@@ -138,7 +138,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
         catalogSlug={resource.slug}
         className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]"
       >
-        <article className="ny-snow-host flex h-full flex-col overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark">
+        <article className="ny-snow-host flex h-full flex-col overflow-hidden rounded-lg card-glass bg-modrinth-dark">
           <div className="relative aspect-[16/9] w-full overflow-hidden bg-modrinth-darker">
             {packPreview ? (
               <img
@@ -259,7 +259,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
       .filter(Boolean)
 
     return (
-      <div className="ny-snow-host bg-modrinth-dark border border-gray-800 rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
+      <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
         {resource.icon_url && (
           <img
             src={resource.icon_url}
@@ -346,7 +346,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
   }
 
   return (
-    <div className="ny-snow-host bg-modrinth-dark border border-gray-800 rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
+    <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
       <div className="flex flex-col items-center gap-2 flex-shrink-0">
         {resource.icon_url && (
           <img

@@ -1,7 +1,7 @@
 export default function ResourceCardSkeleton({ variant = 'default' }) {
   if (variant === 'resourcepack') {
     return (
-      <div className="animate-pulse overflow-hidden rounded-lg border border-gray-800 bg-modrinth-dark">
+      <div className="animate-pulse overflow-hidden rounded-lg card-glass bg-modrinth-dark">
         <div className="aspect-[16/9] bg-modrinth-darker" />
         <div className="space-y-2 p-3">
           <div className="h-5 w-4/5 max-w-[14rem] rounded bg-gray-800" />
@@ -22,7 +22,7 @@ export default function ResourceCardSkeleton({ variant = 'default' }) {
   }
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4 animate-pulse">
+    <div className="bg-modrinth-dark card-glass rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4 animate-pulse">
       <div className="w-12 h-12 md:w-16 md:h-16 rounded-lg bg-gray-800 flex-shrink-0"></div>
       
       <div className="flex-1 min-w-0">

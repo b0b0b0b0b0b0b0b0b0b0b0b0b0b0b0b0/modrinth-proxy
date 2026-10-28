@@ -301,7 +301,7 @@ export default function AdvancedExclusionsFilter() {
   }, [queryString, pathname])
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-800 bg-modrinth-dark">
+    <div className="overflow-hidden rounded-xl card-glass bg-modrinth-dark">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}

@@ -36,7 +36,7 @@ export default function CatalogSearchAlternatives({
   if (!alternatives.length || !catalogKey) return null
 
   return (
-    <article className="bg-modrinth-dark border border-gray-800 rounded-lg p-4 md:p-6">
+    <article className="bg-modrinth-dark card-glass rounded-lg p-4 md:p-6">
       <div className="mb-5 flex items-start justify-between gap-4">
         <p className="text-lg md:text-xl text-gray-400">
           {t('catalog.searchAlt.intro')}

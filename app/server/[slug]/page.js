@@ -99,7 +99,7 @@ export default async function ServerPage({ params }) {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-6 mt-4">
         <div className="min-w-0">
           <ServerGallery gallery={server.gallery} />
-          <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
+          <div className="bg-modrinth-dark card-glass rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
               <RichMarkdownContent className="prose prose-invert prose-sm max-w-none" content={server.body || ''} />
             </div>
@@ -110,7 +110,7 @@ export default async function ServerPage({ params }) {
           <ServerSidebarDetails server={server} requiredContentVersion={requiredContentVersion} />
 
           {links.length > 0 && (
-            <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
+            <div className="bg-modrinth-dark card-glass rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
               <h2 className="text-lg font-bold text-white m-0">{t('links.title')}</h2>
               <div className="flex flex-col gap-3 font-semibold">
                 {links.map((link, idx) => (
@@ -121,7 +121,7 @@ export default async function ServerPage({ params }) {
           )}
 
           {allTags.length > 0 && (
-            <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
+            <div className="bg-modrinth-dark card-glass rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
               <h2 className="text-lg font-bold text-white m-0">{t('project.tags')}</h2>
               <div className="flex flex-wrap gap-1.5">
                 {allTags.map(tag => (
@@ -138,7 +138,7 @@ export default async function ServerPage({ params }) {
           )}
 
           {(organization || (teamMembers && teamMembers.length > 0)) && (
-            <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
+            <div className="bg-modrinth-dark card-glass rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
               <h2 className="text-lg font-bold text-white m-0">{t('project.authors')}</h2>
               <AuthorsSection
                 organization={organization}

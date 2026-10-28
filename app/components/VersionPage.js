@@ -46,7 +46,7 @@ const VERSION_TYPE_STYLES = {
 }
 
 const PILL_CLASS =
-  'inline-flex items-center gap-1 px-2 py-1 text-sm font-normal rounded-full border border-gray-300 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 [&_svg]:shrink-0 [&_svg]:h-4 [&_svg]:w-4'
+  'glass-chip inline-flex items-center gap-1 px-2.5 py-1.5 leading-none text-sm font-normal rounded-full text-gray-700 dark:text-gray-300 [&_svg]:shrink-0 [&_svg]:h-4 [&_svg]:w-4'
 
 function pickVersionLoader(version) {
   return (version.loaders || []).find((loader) => loader !== 'minecraft') || ''
@@ -107,7 +107,7 @@ function VersionMetadata({ version, author, t }) {
   const safeAuthor = author ? filterUserPublic(author) : null
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4">
+    <div className="bg-modrinth-dark card-glass rounded-2xl p-4">
       <h2 className="text-xl font-bold mb-3">{t('version.metadata')}</h2>
       <div className="space-y-3.5">
         <MetadataItem
@@ -166,7 +166,7 @@ function VersionCompatibility({ version, project, t }) {
       <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.compatibility')}</h3>
       <div className="grid gap-3 md:gap-4 md:grid-cols-3">
         {gameRanges.length > 0 && (
-          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">Minecraft: Java Edition</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {gameRanges.map((range) => (
@@ -179,7 +179,7 @@ function VersionCompatibility({ version, project, t }) {
         )}
 
         {platforms.length > 0 && (
-          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.platforms')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {platforms.map((loaderId) => {
@@ -202,7 +202,7 @@ function VersionCompatibility({ version, project, t }) {
         )}
 
         {environments.length > 0 && (
-          <div className="bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.environments')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {environments.map((env) => (
@@ -275,7 +275,7 @@ function SupplementaryVersionFiles({ files, t }) {
                           <a
                             href={dl}
                             download={file.filename || true}
-                            className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-[var(--bg-tertiary)] px-2.5 text-base font-semibold leading-5 text-gray-200 no-underline hover:brightness-110"
+                            className="glass-btn inline-flex h-9 items-center gap-1.5 rounded-xl px-2.5 text-base font-semibold leading-5 text-gray-200 no-underline"
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" className="size-5 shrink-0" aria-hidden>
                               <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3v-1m-4-4-4 4m0 0-4-4m4 4V4" />
@@ -333,7 +333,7 @@ export default async function VersionPage({ project, version, author, contentTyp
                     {version.version_number}
                   </h2>
                   <span
-                    className={`inline-flex items-center gap-1 px-2 py-1.5 leading-none rounded-full border text-sm font-normal ${versionType.className}`}
+                    className={`glass-edge inline-flex items-center gap-1 px-2 py-1.5 leading-none rounded-full text-sm font-normal ${versionType.className}`}
                   >
                     {versionType.label}
                   </span>
@@ -378,7 +378,7 @@ export default async function VersionPage({ project, version, author, contentTyp
                     <a
                       href={primaryFile.url}
                       download={primaryFile.filename || true}
-                      className={`inline-flex items-center gap-2 h-9 px-3 rounded-xl font-semibold text-base transition hover:brightness-110 active:scale-95 ${
+                      className={`download-glass inline-flex items-center gap-2 h-9 px-3 rounded-xl font-semibold text-base transition active:scale-95 ${
                         projectAccent ? '' : 'bg-modrinth-green text-black'
                       }`}
                       style={downloadStyle}
@@ -398,7 +398,7 @@ export default async function VersionPage({ project, version, author, contentTyp
             {version.changelog && (
               <section id="changes">
                 <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.changelog')}</h3>
-                <div className="p-4 bg-gray-100 dark:bg-[var(--bg-tertiary)] rounded-2xl border border-solid border-gray-300 dark:border-gray-800">
+                <div className="card-glass p-4 bg-gray-100 dark:bg-[var(--bg-tertiary)] rounded-2xl">
                   <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {filterVersionChangelog(version.changelog)}

@@ -10,7 +10,7 @@ export default function OrganizationMembersSidebar({ members = [] }) {
   if (items.length === 0) return null
 
   return (
-    <div className="bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
+    <div className="bg-modrinth-dark card-glass rounded-lg p-4">
       <h3 className="text-base font-bold m-0 mb-3 text-[var(--text-primary)]">Участники</h3>
       <div className="flex flex-col gap-3">
         {items.map((member) => (

@@ -16,7 +16,7 @@ export default function LanguageSwitcher({ compact = false }) {
           className={
             compact
               ? 'top-nav-link top-nav-link--icon inline-flex items-center justify-center gap-1 rounded-xl p-2 text-xs font-bold tracking-wide transition-colors'
-              : 'inline-flex items-center gap-2 rounded-xl border border-gray-800 bg-modrinth-dark px-3 py-2 text-sm font-semibold text-gray-200 transition hover:border-modrinth-green/40 hover:text-white'
+              : 'glass-btn inline-flex items-center gap-2 rounded-xl px-3 py-2 text-sm font-semibold text-gray-200 hover:text-white'
           }
           aria-label={t('lang.switcher')}
           data-tooltip={t('lang.switcher')}

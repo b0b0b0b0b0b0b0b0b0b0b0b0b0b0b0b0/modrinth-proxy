@@ -35,7 +35,7 @@ export async function generateMetadata() {
 
 function Card({ title, children, className = '' }) {
   return (
-    <section className={`rounded-2xl border border-gray-800 bg-modrinth-dark p-5 ${className}`}>
+    <section className={`rounded-2xl card-glass bg-modrinth-dark p-5 ${className}`}>
       {title ? <h2 className="mb-4 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{title}</h2> : null}
       {children}
     </section>
@@ -76,7 +76,7 @@ function NumberCrown() {
 function Tile({ value, label, index }) {
   return (
     <div
-      className="rounded-2xl border border-gray-800 bg-modrinth-dark px-4 py-4 animate-fade-in-up"
+      className="rounded-2xl card-glass bg-modrinth-dark px-4 py-4 animate-fade-in-up"
       style={{ animationDelay: `${120 + index * 60}ms`, animationFillMode: 'both' }}
     >
       <div className="text-2xl font-extrabold tabular-nums text-white">
@@ -104,7 +104,7 @@ export default function StatsPage() {
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 pb-10">
-      <div className="relative overflow-hidden rounded-3xl border border-gray-800 bg-modrinth-dark px-8 py-12 text-center shadow-2xl animate-fade-in-up">
+      <div className="relative overflow-hidden rounded-3xl card-glass bg-modrinth-dark px-8 py-12 text-center shadow-2xl animate-fade-in-up">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-24 left-1/2 h-56 w-56 -translate-x-1/2 rounded-full blur-3xl"

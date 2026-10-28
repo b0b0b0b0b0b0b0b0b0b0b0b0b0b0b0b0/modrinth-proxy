@@ -153,7 +153,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
         >
           <div 
             onClick={(e) => e.stopPropagation()}
-            className="bg-modrinth-dark border border-gray-800 rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl flex flex-col items-center gap-6"
+            className="bg-modrinth-dark card-glass rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl flex flex-col items-center gap-6"
           >
             <div className="flex flex-col gap-6 w-full">
               <div className="relative w-24 h-24 mx-auto flex items-center justify-center">

@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { useTheme } from 'next-themes'
 import { compressVersionRanges, formatFileSize, resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { compareMinecraftVersionsDesc, versionsForCompressedRange } from '@/lib/minecraftVersionSort'
@@ -21,6 +20,7 @@ import RelativeTime from './RelativeTime'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
 import VersionEnvironmentDisplay from './VersionEnvironmentDisplay'
 import StyledTooltip from './StyledTooltip'
+import CatalogPagination from './CatalogPagination'
 import { useT } from './I18nProvider'
 
 const RELEASE_GAME_VERSION_RE = /^\d+\.\d+(\.\d+)?$/
@@ -60,17 +60,12 @@ export default function VersionsList({
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const { resolvedTheme } = useTheme()
   const t = useT()
-  const [themeMounted, setThemeMounted] = useState(false)
-  useEffect(() => setThemeMounted(true), [])
 
   const accent = useMemo(
     () => resolveModrinthProjectAccent(projectColor),
     [projectColor],
   )
-  const paginationAccent =
-    themeMounted && accent && resolvedTheme === 'dark' ? accent : null
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedMcVersions, setSelectedMcVersions] = useState(() =>
@@ -172,10 +167,9 @@ export default function VersionsList({
               key={range}
               type="button"
               onClick={(e) => handleGameVersionChipClick(e, range, source)}
-              className={`${chipClass} rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 transition-colors ${
-                active ? 'bg-modrinth-green/20 text-modrinth-green' : ''
+              className={`${chipClass} rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 ${
+                active ? 'glass-edge bg-modrinth-green/20 text-modrinth-green' : 'glass-chip text-[var(--text-muted)]'
               }`}
-              style={active ? undefined : { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
             >
               {range}
             </button>
@@ -195,8 +189,7 @@ export default function VersionsList({
           >
             <span
               tabIndex={0}
-              className={`${chipClass} rounded-full whitespace-nowrap cursor-default relative z-10`}
-              style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+              className={`${chipClass} glass-chip rounded-full whitespace-nowrap cursor-default relative z-10 text-[var(--text-muted)]`}
             >
               +{rest.length}
             </span>
@@ -242,7 +235,26 @@ export default function VersionsList({
   }
 
   const chipClassName =
-    'bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer'
+    'glass-chip text-gray-900 dark:text-gray-300 dark:hover:text-white px-2.5 py-1.5 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 active:scale-[0.95] cursor-pointer'
+
+  const renderLoaderChip = (loaderId, chipClass) => {
+    const loaderData = resolveLoader(loaderId)
+    const active = selectedLoaders.includes(loaderId)
+    return (
+      <button
+        key={loaderId}
+        type="button"
+        onClick={(e) => handleLoaderClick(e, loaderId)}
+        className={`${chipClass} rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
+          active ? 'glass-edge bg-modrinth-green/20' : 'glass-chip'
+        }`}
+        style={{ color: loaderData.color || 'var(--text-muted)' }}
+      >
+        <div className="w-3 h-3 flex-shrink-0">{loaderData.icon}</div>
+        {loaderData.name}
+      </button>
+    )
+  }
 
   const chipXIcon = (
     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" className="w-4 h-4 shrink-0">
@@ -360,7 +372,7 @@ export default function VersionsList({
   else if (!showPlatforms) gridRowXl = ROW_GRID_XL_RESOURCEPACK
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
+    <div className="bg-modrinth-dark card-glass rounded-lg overflow-hidden">
       <div className="p-4 md:p-6">
         <div className="space-y-3 md:space-y-4 mb-6">
           <div className="relative">
@@ -490,7 +502,7 @@ export default function VersionsList({
                   <div className="group relative">
                     <div className="px-3 py-2">
                       <div className={`grid grid-cols-[40px_1fr_40px] max-[390px]:flex max-[390px]:flex-col max-[390px]:items-center sm:grid sm:grid-cols-[40px_minmax(150px,1fr)_minmax(120px,180px)_minmax(100px,150px)_40px] gap-3 items-center ${gridRowXl}`}>
-                        <div className={`relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[18px] font-bold ${versionTypeColor}`}>
+                        <div className={`glass-edge relative z-10 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[18px] font-bold ${versionTypeColor}`}>
                           {version.version_type[0].toUpperCase()}
                         </div>
 
@@ -518,30 +530,7 @@ export default function VersionsList({
                       <div className="relative z-10 hidden sm:flex xl:hidden flex-wrap gap-1 items-start content-start">
                         {renderGameVersionChips(version.game_versions, 2, 'px-2 py-1 text-xs font-semibold')}
                         {showPlatforms &&
-                          getVersionPlatformIds(version).map((loaderId) => {
-                          const loaderData = resolveLoader(loaderId)
-                          const active = selectedLoaders.includes(loaderId)
-                          
-                          return (
-                            <button
-                              key={loaderId}
-                              type="button"
-                              onClick={(e) => handleLoaderClick(e, loaderId)}
-                              className={`px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
-                                active ? 'bg-modrinth-green/20' : ''
-                              }`}
-                              style={{ 
-                                backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
-                                color: loaderData.color || 'var(--text-muted)' 
-                              }}
-                            >
-                              <div className="w-3 h-3 flex-shrink-0" style={{ color: loaderData.color || 'var(--text-muted)' }}>
-                                {loaderData.icon}
-                              </div>
-                              {loaderData.name}
-                            </button>
-                          )
-                        })}
+                          getVersionPlatformIds(version).map((loaderId) => renderLoaderChip(loaderId, 'px-2 py-1 text-xs font-semibold'))}
                       </div>
 
                       <div className="relative z-10 hidden sm:flex xl:hidden flex-col gap-1 text-xs text-gray-400 font-medium">
@@ -571,30 +560,7 @@ export default function VersionsList({
 
                       {showPlatforms && (
                         <div className="relative z-10 hidden xl:flex flex-wrap gap-1 items-start content-start">
-                          {getVersionPlatformIds(version).map((loaderId) => {
-                            const loaderData = resolveLoader(loaderId)
-                            const active = selectedLoaders.includes(loaderId)
-                            
-                            return (
-                              <button
-                                key={loaderId}
-                                type="button"
-                                onClick={(e) => handleLoaderClick(e, loaderId)}
-                                className={`px-2 py-1 text-xs font-semibold rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
-                                  active ? 'bg-modrinth-green/20' : ''
-                                }`}
-                                style={{ 
-                                  backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
-                                  color: loaderData.color || 'var(--text-muted)' 
-                                }}
-                              >
-                                <div className="w-3 h-3 flex-shrink-0" style={{ color: loaderData.color || 'var(--text-muted)' }}>
-                                  {loaderData.icon}
-                                </div>
-                                {loaderData.name}
-                              </button>
-                            )
-                          })}
+                          {getVersionPlatformIds(version).map((loaderId) => renderLoaderChip(loaderId, 'px-2 py-1 text-xs font-semibold'))}
                         </div>
                       )}
 
@@ -625,30 +591,7 @@ export default function VersionsList({
                           </div>
                           {showPlatforms && (
                             <div className="flex flex-wrap gap-1 max-[390px]:justify-center">
-                              {getVersionPlatformIds(version).map((loaderId) => {
-                                const loaderData = resolveLoader(loaderId)
-                                const active = selectedLoaders.includes(loaderId)
-                                
-                                return (
-                                  <button
-                                    key={loaderId}
-                                    type="button"
-                                    onClick={(e) => handleLoaderClick(e, loaderId)}
-                                    className={`px-2 py-0.5 text-xs rounded-full hover:underline cursor-pointer inline-flex items-center gap-1 relative z-10 ${
-                                      active ? 'bg-modrinth-green/20' : ''
-                                    }`}
-                                    style={{ 
-                                      backgroundColor: active ? undefined : 'var(--bg-tertiary)', 
-                                      color: loaderData.color || 'var(--text-muted)' 
-                                    }}
-                                  >
-                                    <div className="w-3 h-3 flex-shrink-0" style={{ color: loaderData.color || 'var(--text-muted)' }}>
-                                      {loaderData.icon}
-                                    </div>
-                                    {loaderData.name}
-                                  </button>
-                                )
-                              })}
+                              {getVersionPlatformIds(version).map((loaderId) => renderLoaderChip(loaderId, 'px-2 py-0.5 text-xs'))}
                             </div>
                           )}
                           <div className="flex gap-2 max-[390px]:justify-center">
@@ -686,7 +629,7 @@ export default function VersionsList({
                               href={primaryFile.url}
                               download
                               onClick={(e) => e.stopPropagation()}
-                              className={`relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all group/btn max-[390px]:mx-auto sm:mx-0 ${
+                              className={`dl-glass relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all group/btn max-[390px]:mx-auto sm:mx-0 ${
                                 accent
                                   ? 'hover:[background-color:var(--version-dl-bg)] hover:[color:var(--version-dl-fg)]'
                                   : 'hover:bg-modrinth-green hover:text-black'
@@ -718,93 +661,12 @@ export default function VersionsList({
             })}
             </div>
 
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-6 pt-4 border-t border-gray-800">
-                <button
-                  onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  {t('version.back')}
-                </button>
-
-                <div className="flex items-center gap-2">
-                  {currentPage > 2 && (
-                    <>
-                      <button
-                        onClick={() => setCurrentPage(1)}
-                        className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                      >
-                        1
-                      </button>
-                      {currentPage > 3 && <span className="text-gray-500">...</span>}
-                    </>
-                  )}
-
-                  {currentPage > 1 && (
-                    <button
-                      onClick={() => setCurrentPage(currentPage - 1)}
-                      className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                    >
-                      {currentPage - 1}
-                    </button>
-                  )}
-
-                  <div
-                    className={`w-10 h-10 flex items-center justify-center rounded-lg font-bold ${
-                      paginationAccent
-                        ? 'hover:!brightness-[1.08]'
-                        : 'bg-modrinth-green text-black'
-                    }`}
-                    style={
-                      paginationAccent
-                        ? {
-                            backgroundColor: paginationAccent.accentHex,
-                            color: paginationAccent.activeFgHex,
-                          }
-                        : undefined
-                    }
-                  >
-                    {currentPage}
-                  </div>
-
-                  {currentPage < totalPages && (
-                    <button
-                      onClick={() => setCurrentPage(currentPage + 1)}
-                      className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                    >
-                      {currentPage + 1}
-                    </button>
-                  )}
-
-                  {currentPage < totalPages - 1 && (
-                    <>
-                      {currentPage < totalPages - 2 && <span className="text-gray-500">...</span>}
-                      <button
-                        onClick={() => setCurrentPage(totalPages)}
-                        className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                      >
-                        {totalPages}
-                      </button>
-                    </>
-                  )}
-                </div>
-
-                <button
-                  onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-                >
-                  {t('version.next')}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-            )}
+            <CatalogPagination
+              page={currentPage}
+              totalPages={totalPages}
+              onPageChange={setCurrentPage}
+              className="mt-6 border-t border-gray-800 pt-4"
+            />
           </>
         )}
       </div>

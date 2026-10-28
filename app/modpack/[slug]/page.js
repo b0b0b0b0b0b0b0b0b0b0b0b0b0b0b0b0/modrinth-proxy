@@ -53,7 +53,7 @@ export default async function ModpackPage({ params }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
         <div className="lg:col-span-2">
-          <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
+          <div className="bg-modrinth-dark card-glass rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
               <RichMarkdownContent className="prose prose-invert prose-sm max-w-none" content={modpack.body} />
             </div>

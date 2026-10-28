@@ -1,6 +1,5 @@
 'use client'
 
-import { useTheme } from 'next-themes'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
@@ -10,6 +9,7 @@ import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { filterVersionChangelog } from '@/lib/contentFilter'
 import RelativeTime from './RelativeTime'
+import CatalogPagination from './CatalogPagination'
 import { useT } from './I18nProvider'
 
 function changelogBarClass(versionType) {
@@ -56,16 +56,11 @@ export default function ChangelogVersionEntries({
   projectColor,
 }) {
   const t = useT()
-  const { resolvedTheme } = useTheme()
-  const [themeMounted, setThemeMounted] = useState(false)
-  useEffect(() => setThemeMounted(true), [])
   const accent = useMemo(
     () => resolveModrinthProjectAccent(projectColor),
     [projectColor],
   )
   const resourceBarHex = accent?.accentHex
-  const paginationAccent =
-    themeMounted && accent && resolvedTheme === 'dark' ? accent : null
 
   const [currentPage, setCurrentPage] = useState(1)
 
@@ -144,98 +139,13 @@ export default function ChangelogVersionEntries({
 
       </ul>
 
-      {versions?.length > 0 && totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 mt-6 pt-4 border-t border-gray-800">
-          <button
-            type="button"
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={page === 1}
-            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-            {t('version.back')}
-          </button>
-
-          <div className="flex items-center gap-2">
-            {page > 2 && (
-              <>
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage(1)}
-                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                >
-                  1
-                </button>
-                {page > 3 && <span className="text-gray-500">...</span>}
-              </>
-            )}
-
-            {page > 1 && (
-              <button
-                type="button"
-                onClick={() => setCurrentPage(page - 1)}
-                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-              >
-                {page - 1}
-              </button>
-            )}
-
-            <div
-              className={`w-10 h-10 flex items-center justify-center rounded-lg font-bold ${
-                paginationAccent
-                  ? 'hover:!brightness-[1.08]'
-                  : 'bg-modrinth-green text-black'
-              }`}
-              style={
-                paginationAccent
-                  ? {
-                      backgroundColor: paginationAccent.accentHex,
-                      color: paginationAccent.activeFgHex,
-                    }
-                  : undefined
-              }
-            >
-              {page}
-            </div>
-
-            {page < totalPages && (
-              <button
-                type="button"
-                onClick={() => setCurrentPage(page + 1)}
-                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-              >
-                {page + 1}
-              </button>
-            )}
-
-            {page < totalPages - 1 && (
-              <>
-                {page < totalPages - 2 && <span className="text-gray-500">...</span>}
-                <button
-                  type="button"
-                  onClick={() => setCurrentPage(totalPages)}
-                  className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition"
-                >
-                  {totalPages}
-                </button>
-              </>
-            )}
-          </div>
-
-          <button
-            type="button"
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={page === totalPages}
-            className="px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition flex items-center gap-2"
-          >
-            {t('version.next')}
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
+      {versions?.length > 0 && (
+        <CatalogPagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setCurrentPage}
+          className="mt-6 border-t border-gray-800 pt-4"
+        />
       )}
     </>
   )

@@ -30,22 +30,22 @@ export default function ProtectBotLandingPage() {
         </div>
 
         <div className="animate-fade-in-up space-y-8">
-          <section className="rounded-2xl border border-modrinth-green/35 bg-gradient-to-br from-modrinth-green/[0.12] via-gray-900/90 to-transparent p-8 shadow-xl md:p-10">
+          <section className="card-glass rounded-2xl bg-gradient-to-br from-modrinth-green/[0.12] via-gray-900/90 to-transparent p-8 md:p-10">
             <h2 className="mb-6 text-xl font-bold text-white md:text-2xl">{t('bot.service')}</h2>
             <div className="grid gap-6 md:grid-cols-3">
-              <div className="rounded-xl border border-modrinth-green/25 bg-black/25 p-5">
+              <div className="card-glass rounded-xl bg-black/25 p-5">
                 <h3 className="mb-2 font-semibold text-modrinth-green-light">{t('bot.free')}</h3>
                 <p className="text-sm leading-relaxed text-gray-400">
                   {t('bot.freeD')}
                 </p>
               </div>
-              <div className="rounded-xl border border-modrinth-green/25 bg-black/25 p-5">
+              <div className="card-glass rounded-xl bg-black/25 p-5">
                 <h3 className="mb-2 font-semibold text-modrinth-green-light">{t('bot.noStore')}</h3>
                 <p className="text-sm leading-relaxed text-gray-400">
                   {t('bot.noStoreD')}
                 </p>
               </div>
-              <div className="rounded-xl border border-modrinth-green/25 bg-black/25 p-5">
+              <div className="card-glass rounded-xl bg-black/25 p-5">
                 <h3 className="mb-2 font-semibold text-modrinth-green-light">{t('bot.report')}</h3>
                 <p className="text-sm leading-relaxed text-gray-400">
                   <RichText text={t('bot.reportD')} strongClassName="text-gray-300" />
@@ -57,11 +57,11 @@ export default function ProtectBotLandingPage() {
             </p>
           </section>
 
-          <section className="relative overflow-hidden rounded-2xl border border-sky-500/25 bg-gradient-to-br from-sky-500/15 via-gray-900/80 to-blue-950/40 p-8 shadow-2xl md:p-12">
+          <section className="card-glass relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-500/15 via-gray-900/80 to-blue-950/40 p-8 md:p-12">
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl"></div>
             <div className="relative">
               <h2 className="mb-6 flex flex-wrap items-center gap-4 text-2xl font-bold text-white md:text-3xl">
-                <div className="rounded-xl border border-sky-400/40 bg-sky-500/20 p-3">
+                <div className="glass-edge rounded-xl bg-sky-500/20 p-3">
                   <svg className="h-10 w-10 text-sky-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
@@ -79,7 +79,7 @@ export default function ProtectBotLandingPage() {
             </div>
           </section>
 
-          <section className="rounded-2xl border border-amber-500/25 bg-gradient-to-br from-amber-950/20 via-gray-900/85 to-transparent p-8 shadow-xl md:p-10">
+          <section className="card-glass rounded-2xl bg-gradient-to-br from-amber-950/20 via-gray-900/85 to-transparent p-8 md:p-10">
             <h2 className="mb-4 text-xl font-bold text-white md:text-2xl">{t('bot.chat')}</h2>
             <p className="mb-4 text-gray-300 leading-relaxed">
               <RichText text={t('bot.chatP1')} />
@@ -90,7 +90,7 @@ export default function ProtectBotLandingPage() {
             <p className="mb-6 text-sm text-gray-500">
               {t('bot.chatP3')}
             </p>
-            <div className="overflow-x-auto rounded-xl border border-gray-700 bg-[#0d0f14] p-4">
+            <div className="glass-track overflow-x-auto rounded-xl bg-[#0d0f14] p-4">
               <pre className="font-mono text-[10px] leading-snug text-gray-400 whitespace-pre md:text-[11px]" tabIndex={0}>
               {t('bot.sample')}
               </pre>
@@ -100,7 +100,7 @@ export default function ProtectBotLandingPage() {
             </p>
           </section>
 
-          <section className="relative overflow-hidden rounded-2xl border border-indigo-600/35 bg-gradient-to-br from-indigo-950/50 via-gray-900/80 to-purple-950/35 p-8 shadow-2xl md:p-10">
+          <section className="card-glass relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-950/50 via-gray-900/80 to-purple-950/35 p-8 md:p-10">
             <div className="absolute left-0 top-0 h-56 w-56 rounded-full bg-indigo-500/15 blur-3xl"></div>
             <div className="relative">
               <h2 className="mb-2 text-2xl font-bold text-white md:text-3xl">{t('bot.deep')}</h2>
@@ -129,14 +129,14 @@ export default function ProtectBotLandingPage() {
                     <li>{t('bot.goes2')}</li>
                   </ul>
                 </div>
-                <p className="rounded-lg border border-indigo-500/25 bg-indigo-950/40 p-4 text-sm">
+                <p className="card-glass rounded-lg bg-indigo-950/40 p-4 text-sm">
                   <RichText text={t('bot.settings')} />
                 </p>
               </div>
             </div>
           </section>
 
-          <section className="rounded-2xl border border-modrinth-green/25 bg-gradient-to-br from-modrinth-green/10 via-gray-900/90 to-gray-950/90 p-8 shadow-2xl md:p-10">
+          <section className="card-glass rounded-2xl bg-gradient-to-br from-modrinth-green/10 via-gray-900/90 to-gray-950/90 p-8 md:p-10">
             <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white md:text-3xl">
               <svg className="h-8 w-8 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -170,7 +170,7 @@ export default function ProtectBotLandingPage() {
             </ul>
           </section>
 
-          <section className="rounded-2xl border border-purple-700/35 bg-gradient-to-br from-purple-950/40 via-gray-900/75 to-blue-950/25 p-8 md:p-10">
+          <section className="card-glass rounded-2xl bg-gradient-to-br from-purple-950/40 via-gray-900/75 to-blue-950/25 p-8 md:p-10">
             <h2 className="mb-4 text-xl font-bold text-white md:text-2xl">{t('bot.confused')}</h2>
             <p className="mb-4 text-gray-300">
               {t('bot.confused1')}
@@ -186,7 +186,7 @@ export default function ProtectBotLandingPage() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t('bot.tgAria')}
-              className="group inline-flex items-center gap-4 rounded-2xl border border-modrinth-green/45 bg-modrinth-green px-8 py-5 text-[17px] font-bold tracking-tight text-white shadow-xl shadow-black/35 transition hover:border-modrinth-green-light/80 hover:bg-modrinth-green-light hover:text-gray-950 hover:shadow-modrinth-green/20 active:scale-[0.99] md:px-12 md:py-6 md:text-lg"
+              className="download-glass group inline-flex items-center gap-4 rounded-2xl bg-modrinth-green px-8 py-5 text-[17px] font-bold tracking-tight text-white transition hover:bg-modrinth-green-light hover:text-gray-950 active:scale-[0.99] md:px-12 md:py-6 md:text-lg"
             >
               <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl ring-2 ring-white/35 md:h-14 md:w-14">
                 <Image
@@ -214,7 +214,7 @@ export default function ProtectBotLandingPage() {
             </a>
           </section>
 
-          <section className="rounded-2xl border border-gray-600/60 bg-gray-900/40 p-6 md:p-8">
+          <section className="card-glass rounded-2xl bg-gray-900/40 p-6 md:p-8">
             <h2 className="mb-3 text-lg font-bold text-gray-300 md:text-xl">{t('bot.rp')}</h2>
             <p className="text-[15px] leading-relaxed text-gray-500 md:text-base">
               {t('bot.rpD')}
@@ -222,7 +222,7 @@ export default function ProtectBotLandingPage() {
           </section>
 
           <section
-            className="rounded-2xl border border-gray-700/80 bg-[var(--bg-tertiary)]/90 p-8 md:p-10"
+            className="card-glass rounded-2xl bg-[var(--bg-tertiary)]/90 p-8 md:p-10"
             aria-labelledby="protect-bot-seo-heading"
           >
             <h2 id="protect-bot-seo-heading" className="mb-6 text-xl font-bold text-gray-900 dark:text-white md:text-2xl">

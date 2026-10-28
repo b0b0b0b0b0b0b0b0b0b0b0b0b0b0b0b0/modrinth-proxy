@@ -125,7 +125,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
     : null
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-2xl p-4 flex flex-col gap-4 shadow-lg">
+    <div className="bg-modrinth-dark card-glass rounded-2xl p-4 flex flex-col gap-4 shadow-lg">
       <h2 className="text-lg font-bold text-white m-0">{t('project.aboutServer')}</h2>
 
       {(javaAddress || gameVersions.length > 0 || loaders.length > 0) && (

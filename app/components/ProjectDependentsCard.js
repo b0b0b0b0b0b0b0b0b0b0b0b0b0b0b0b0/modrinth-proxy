@@ -45,7 +45,7 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
   if (dependents.length === 0) return <div ref={sentinelRef} aria-hidden="true" className="h-0" style={{ marginTop: '-1rem' }} />
 
   return (
-    <div className="ny-snow-host bg-modrinth-dark border border-gray-300 dark:border-gray-800 rounded-lg p-4">
+    <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
       <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
         <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
           <circle cx="6" cy="6" r="3" />

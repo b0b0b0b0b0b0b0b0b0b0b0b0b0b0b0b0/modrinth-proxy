@@ -313,7 +313,7 @@ export default function DependencyFilter() {
   const selectedProject = selected ? projects[selected.id] : null
 
   return (
-    <div className="rounded-xl border border-gray-800 bg-modrinth-dark">
+    <div className="rounded-xl card-glass bg-modrinth-dark">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}

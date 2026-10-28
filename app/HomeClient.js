@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
+import { useCountUp } from './hooks/useCountUp'
 import { getModsVersionRange } from '@/lib/minecraftVersionRange'
 import { useI18n, useMessage, useT } from './components/I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
@@ -37,6 +38,62 @@ function CategoryTitle({ title, count, tone }) {
     >
       {title}
     </h3>
+  )
+}
+
+const STAT_TONES = {
+  green: { text: 'text-modrinth-green', tile: 'bg-modrinth-green/15 text-modrinth-green' },
+  blue: { text: 'text-blue-400', tile: 'bg-blue-400/15 text-blue-400' },
+  purple: { text: 'text-purple-400', tile: 'bg-purple-400/15 text-purple-400' },
+  orange: { text: 'text-orange-400', tile: 'bg-orange-400/15 text-orange-400' },
+}
+
+const STAT_ICONS = {
+  projects: 'M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9',
+  files:
+    'M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9z',
+  authors:
+    'M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0z',
+  versions:
+    'M6.429 9.75L2.25 12l4.179 2.25m0-4.5l5.571 3 5.571-3m-11.142 0L2.25 7.5 12 2.25l9.75 5.25-4.179 2.25m0 0L21.75 12l-4.179 2.25m0 0l4.179 2.25L12 21.75 2.25 16.5l4.179-2.25m11.142 0l-5.571 3-5.571-3',
+}
+
+function StatIcon({ path, className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+      <path d={path} />
+    </svg>
+  )
+}
+
+function StatTile({ value, label, icon, tone }) {
+  const [ref, shown] = useCountUp(value)
+  const colors = STAT_TONES[tone]
+  return (
+    <div ref={ref} className="flex items-center gap-3 rounded-xl bg-[var(--bg-tertiary)] p-3 sm:p-4">
+      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${colors.tile}`}>
+        <StatIcon path={STAT_ICONS[icon]} className="h-5 w-5" />
+      </span>
+      <div className="min-w-0">
+        <div className={`text-2xl font-black leading-none tabular-nums sm:text-3xl ${colors.text}`}>
+          {compactCountEn(Math.round(shown))}
+        </div>
+        <div className="mt-1 truncate text-sm text-gray-300">{label}</div>
+      </div>
+    </div>
+  )
+}
+
+function CheckItem({ children }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-modrinth-green/15 text-modrinth-green">
+        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      </span>
+      <span className="text-gray-300">{children}</span>
+    </div>
   )
 }
 
@@ -131,7 +188,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               {t('home.discover', { n: thousands(projectsShown, locale) })}
             </h2>
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-base font-bold mb-4 border minecraft-players-badge" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
+            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-base font-bold mb-4 glass-edge minecraft-players-badge" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
               <span>{t('home.forPlayers')}</span>
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
@@ -148,68 +205,50 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 {t('home.directAccessLead')}
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                 
-                  <span className="text-gray-300">{t('home.currentFiles')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                 
-                  <span className="text-gray-300">{t('home.directLinks')}</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  
-                  <span className="text-gray-300">{t('home.noStore')}</span>
-                </div>
+                <CheckItem>{t('home.currentFiles')}</CheckItem>
+                <CheckItem>{t('home.directLinks')}</CheckItem>
+                <CheckItem>{t('home.noStore')}</CheckItem>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
+            <div className="card-glass bg-modrinth-dark rounded-2xl p-6 sm:p-8">
               <div className="text-center mb-6">
                 <h4 className="text-white font-semibold text-lg mb-2">{t('home.statsTitle')}</h4>
-                <p className="text-gray-400 text-sm">{t('home.statsFromApi')}</p>
+                <p className="inline-flex items-center gap-2 text-gray-400 text-sm">
+                  <span className="relative flex h-2 w-2 shrink-0" aria-hidden>
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-modrinth-green opacity-60 motion-reduce:hidden" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-modrinth-green" />
+                  </span>
+                  {t('home.statsFromApi')}
+                </p>
               </div>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="text-center">
-                  <div className="text-3xl font-black text-modrinth-green mb-2">
-                    {compactCountEn(projectsShown)}
-                  </div>
-                  <div className="text-gray-300 text-sm">{t('home.projects')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-black text-blue-400 mb-2">
-                    {compactCountEn(filesShown)}
-                  </div>
-                  <div className="text-gray-300 text-sm">{t('home.files')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-black text-purple-400 mb-2">
-                    {compactCountEn(authorsShown)}
-                  </div>
-                  <div className="text-gray-300 text-sm">{t('home.authors')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-3xl font-black text-orange-400 mb-2">
-                    {compactCountEn(versionsShown)}
-                  </div>
-                  <div className="text-gray-300 text-sm">{t('home.versions')}</div>
-                </div>
+              <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
+                <StatTile value={projectsShown} label={t('home.projects')} icon="projects" tone="green" />
+                <StatTile value={filesShown} label={t('home.files')} icon="files" tone="blue" />
+                <StatTile value={authorsShown} label={t('home.authors')} icon="authors" tone="purple" />
+                <StatTile value={versionsShown} label={t('home.versions')} icon="versions" tone="orange" />
               </div>
-              <div className="mt-6 pt-6 border-t border-white/10 text-center">
-                <div className="text-2xl md:text-3xl font-black text-emerald-400">100%</div>
-                <div className="text-gray-300 text-sm mt-1">{t('home.free')}</div>
+              <div className="mt-6 flex items-center justify-center gap-3 border-t border-white/10 pt-6">
+                <svg className="home-free-heart h-7 w-7 shrink-0 text-emerald-400" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+                <div className="text-left">
+                  <div className="text-2xl md:text-3xl font-black leading-none text-emerald-400">100%</div>
+                  <div className="text-gray-300 text-sm mt-1">{t('home.free')}</div>
+                </div>
               </div>
             </div>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
+              <div className="card-glass bg-modrinth-dark rounded-2xl p-8">
                 <div className="text-center mb-6">
                   <h4 className="text-white font-semibold text-lg mb-2">{t('home.platforms')}</h4>
                   <p className="text-gray-400 text-sm">{t('home.platformsLead')}</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
-                  <Link href="/mods?g=categories%3Aforge" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Aforge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-orange-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
                         <path fill="none" stroke="currentColor" strokeWidth="2" d="M2 7.5h8v-2h12v2s-7 3.4-7 6 3.1 3.1 3.1 3.1l.9 3.9H5l1-4.1s3.8.1 4-2.9c.2-2.7-6.5-.7-8-6Z"></path>
@@ -217,8 +256,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Forge</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Afabric" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Afabric" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" clipRule="evenodd" viewBox="0 0 24 24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
                         <path fill="none" stroke="currentColor" strokeWidth="23" d="m820 761-85.6-87.6c-4.6-4.7-10.4-9.6-25.9 1-19.9 13.6-8.4 21.9-5.2 25.4 8.2 9 84.1 89 97.2 104 2.5 2.8-20.3-22.5-6.5-39.7 5.4-7 18-12 26-3 6.5 7.3 10.7 18-3.4 29.7-24.7 20.4-102 82.4-127 103-12.5 10.3-28.5 2.3-35.8-6-7.5-8.9-30.6-34.6-51.3-58.2-5.5-6.3-4.1-19.6 2.3-25 35-30.3 91.9-73.8 111.9-90.8" transform="matrix(.08671 0 0 .0867 -49.8 -56)"></path>
@@ -226,8 +265,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Fabric</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Aquilt" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Aquilt" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-purple-400" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="2" clipRule="evenodd" viewBox="0 0 24 24">
                         <defs>
                           <path id="quilt" fill="none" stroke="currentColor" strokeWidth="65.6" d="M442.5 233.9c0-6.4-5.2-11.6-11.6-11.6h-197c-6.4 0-11.6 5.2-11.6 11.6v197c0 6.4 5.2 11.6 11.6 11.6h197c6.4 0 11.6-5.2 11.6-11.7v-197Z"></path>
@@ -241,8 +280,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Quilt</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Aneoforge" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Aneoforge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-modrinth-green-light" enableBackground="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xmlSpace="preserve">
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
                           <path d="m12 19.2v2m0-2v2"></path>
@@ -259,8 +298,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">NeoForge</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Ababric" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Ababric" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none">
                         <path d="M12.35 5.89001L12.34 5.90001C10.59 7.37001 5.67003 11.13 2.64003 13.76C2.09003 14.23 1.97003 15.38 2.44003 15.93C4.24003 17.97 6.24003 20.2 6.89003 20.97C7.52003 21.69 8.91003 22.39 10 21.49C11.8 20 16.78 16.01 19.62 13.7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
                         <path d="M19.59 13.66C19.34 13.33 18.02 11.53 19.05 10.25C19.52 9.63998 20.61 9.20998 21.3 9.98998C21.87 10.62 22.23 11.55 21.01 12.56C20.66 12.85 20.18 13.24 19.62 13.7C19.61 13.69 19.6 13.67 19.59 13.66Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -270,8 +309,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Babric</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Arift" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <Link href="/mods?g=categories%3Arift" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                    <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-indigo-400" viewBox="0 0 24 24" xmlSpace="preserve">
                         <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M2.7 6.6v10.8l9.3 5.3 9.3-5.3V6.6L12 1.3zm0 0L12 12m9.3-5.4L12 12m0 10.7V12"></path>
                       </svg>
@@ -323,7 +362,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               {t('home.pluginsTitle')}
             </h2>
-            <div className="inline-block bg-yellow-100 dark:bg-yellow-500/20 text-orange-700 dark:text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 border border-yellow-300/50 dark:border-transparent">
+            <div className="inline-block bg-yellow-100 dark:bg-yellow-500/20 text-orange-700 dark:text-orange-300 px-4 py-2 rounded-full text-sm font-semibold mb-4 glass-edge">
               {t('home.forServerOwners')}
             </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
@@ -354,22 +393,22 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-8">
+            <div className="card-glass bg-modrinth-dark rounded-2xl p-8">
               <div className="text-center mb-6">
                 <h4 className="text-white font-semibold text-lg mb-2">{t('home.serverPlatforms')}</h4>
                 <p className="text-gray-400 text-sm">{t('home.serverCores')}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
-                <Link href="/plugins?g=categories%3Abukkit" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Abukkit" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-yellow-500" viewBox="0 0 292 319" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12,109.5L12,155L34.5,224L57.5,224L57.5,271L81,294L160,294L160,172L259.087,172L265,155L265,109.5M12,109.5L12,64L34.5,64L34.5,41L81,17L195.5,17L241,41L241,64L265,64L265,109.5M12,109.5L81,109.5L81,132L195.5,132L195.5,109.5L265,109.5M264.087,204L264.087,244M207.5,272L207.5,312M250,272L250,312L280,312L280,272L250,272ZM192.5,204L192.5,244L222.5,244L222.5,204L192.5,204Z" strokeWidth="24"></path>
                     </svg>
                   </div>
                   <div className="text-white font-medium text-sm">Bukkit</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Afolia" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Afolia" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
                       <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
@@ -377,8 +416,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Folia</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Apaper" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Apaper" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-blue-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                       <path fill="none" d="M0 0h24v24H0z"></path>
                       <path fill="none" stroke="currentColor" strokeWidth="2" d="m12 18 6 2 3-17L2 14l6 2"></path>
@@ -388,8 +427,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Paper</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Apurpur" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Apurpur" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-purple-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                       <defs>
                         <path id="purpur" fill="none" stroke="currentColor" strokeWidth="1.68" d="m264 41.95 8-4v8l-8 4v-8Z"></path>
@@ -405,16 +444,16 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Purpur</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Aspigot" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Aspigot" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-orange-500" viewBox="0 0 332 284" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="24">
                       <path d="M147.5,27l27,-15l27.5,15l66.5,0l0,33.5l-73,-0.912l0,45.5l26,-0.088l0,31.5l-12.5,0l0,15.5l16,21.5l35,0l0,-21.5l35.5,0l0,21.5l24.5,0l0,55.5l-24.5,0l0,17l-35.5,0l0,-27l-35,0l-55.5,14.5l-67.5,-14.5l-15,14.5l18,12.5l-3,24.5l-41.5,1.5l-48.5,-19.5l6,-19l24.5,-4.5l16,-41l79,-36l-7,-15.5l0,-31.5l23.5,0l0,-45.5l-73.5,0l0,-32.5l67,0Z"></path>
                     </svg>
                   </div>
                   <div className="text-white font-medium text-sm">Spigot</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Asponge" className="relative text-center p-4 pt-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-xl hover:bg-white/10 transition-colors">
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                <Link href="/plugins?g=categories%3Asponge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-cyan-500" viewBox="0 0 268 313" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24">
                       <path d="M84.299,35.5c-5.547,-13.776 -19.037,-23.5 -34.799,-23.5c-20.711,0 -37.5,16.789 -37.5,37.5c-0,20.711 16.789,37.5 37.5,37.5c20.711,0 37.5,-16.789 37.5,-37.5c0,-4.949 -0.959,-9.674 -2.701,-14Zm0,0l44.701,-8.5l28,65m0,0l-99,20l-18,47.5l15.5,37l-25,32.5l0,72l222.5,0l2.5,-72l-33.5,-117l-65,-20Zm-60,65l0,15m94,-13.5l0,13.5m-67.5,45l46,0l-12.5,50.5l-14.5,0l-19,-50.5Z"></path>
                     </svg>
@@ -441,8 +480,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             </div>
 
             <div className="grid md:grid-cols-2 gap-12">
-              <Link href="/mods" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/mods" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
                   </svg>
@@ -453,8 +492,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
 
-              <Link href="/plugins" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/plugins" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                   </svg>
@@ -465,8 +504,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
 
-              <Link href="/shaders" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/shaders" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
@@ -477,8 +516,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
 
-              <Link href="/resourcepacks" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/resourcepacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
@@ -493,8 +532,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
 
-              <Link href="/datapacks" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/datapacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
                   </svg>
@@ -505,8 +544,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
 
-              <Link href="/modpacks" className="relative bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10 shadow-lg" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+              <Link href="/modpacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                   <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>

@@ -195,7 +195,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
       <div className="space-y-4">
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="type" label={t('filter.type')} />
           {openSections.type && (
             <div className="p-4 pt-0 space-y-1">
@@ -204,7 +204,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="features" label={t('filter.features')} />
           {openSections.features && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
@@ -213,7 +213,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="gameplay" label={t('filter.gameplay')} />
           {openSections.gameplay && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
@@ -222,7 +222,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="config" label={t('filter.config')} />
           {openSections.config && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
@@ -231,7 +231,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="community" label={t('filter.community')} />
           {openSections.community && (
             <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
@@ -240,7 +240,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="version" label={t('filter.gameVersion')} />
           {openSections.version && (
             <div className="p-4 pt-0">
@@ -319,7 +319,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="region" label={t('filter.region')} />
           {openSections.region && (
             <div className="p-4 pt-0 space-y-1">
@@ -361,7 +361,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="language" label={t('filter.language')} />
           {openSections.language && (
             <div className="p-4 pt-0">
@@ -457,7 +457,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
           )}
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl overflow-hidden">
+        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
           <SectionHeader sectionKey="status" label={t('filter.status')} />
           {openSections.status && (
             <div className="p-4 pt-0 space-y-1">
@@ -507,7 +507,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
         <AdvancedExclusionsFilter />
 
         {(selectedVersion || selectedCategories.length > 0 || excludedCategories.length > 0 || searchQuery || selectedStatus !== 'online' || selectedRegions.length > 0 || selectedLanguages.length > 0 || parseDisclosureExclusions(searchParams).length > 0) && (
-          <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
+          <div className="bg-modrinth-dark card-glass rounded-xl p-3">
             <button
               onClick={() => {
                 setSearchQuery('')

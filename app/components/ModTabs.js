@@ -149,7 +149,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
   const changelogResourceBarHex = resolveModrinthProjectAccent(mod.color)?.accentHex
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
+    <div className="bg-modrinth-dark card-glass rounded-lg overflow-hidden">
       <div className="flex border-b border-gray-800">
         <button
           onClick={() => handleTabChange('description')}

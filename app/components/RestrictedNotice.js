@@ -67,7 +67,7 @@ export default function RestrictedNotice({ title, kid, details = [], href = '/',
       {kid ? <p className="mx-auto mt-2 max-w-md text-base text-gray-400">{kid}</p> : null}
 
       {details.length ? (
-        <div className="mt-6 rounded-xl border border-gray-800 bg-modrinth-dark p-5 text-left">
+        <div className="mt-6 rounded-xl card-glass bg-modrinth-dark p-5 text-left">
           {details.map((line, index) => (
             <p key={index} className={index ? 'mt-2 text-xs leading-relaxed text-gray-600 dark:text-gray-500' : 'text-sm leading-relaxed text-gray-400'}>
               {line}

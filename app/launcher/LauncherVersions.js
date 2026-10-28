@@ -19,7 +19,7 @@ export default function LauncherVersions() {
 
   return (
     <section className="max-w-7xl mx-auto px-4 my-20">
-      <div className="feature gradient-border relative overflow-hidden rounded-3xl border border-gray-700/50 bg-gradient-to-br from-gray-900/50 to-gray-800/30 p-8 md:p-14 shadow-2xl">
+      <div className="feature card-glass relative overflow-hidden rounded-3xl bg-modrinth-dark p-8 md:p-14">
         <div className="pointer-events-none absolute -top-28 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-modrinth-green/20 blur-3xl" />
         <div className="relative mx-auto max-w-3xl text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight">

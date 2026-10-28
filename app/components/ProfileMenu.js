@@ -213,7 +213,7 @@ export default function ProfileMenu({ account, linkClassName }) {
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: -4 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: 'top right' }}
-            className="absolute right-0 top-full z-[60] mt-2 w-64 rounded-2xl border border-gray-800 bg-modrinth-dark p-2 shadow-2xl"
+            className="absolute right-0 top-full z-[60] mt-2 w-64 rounded-2xl glass-pop p-2"
           >
             {username ? (
               <Link

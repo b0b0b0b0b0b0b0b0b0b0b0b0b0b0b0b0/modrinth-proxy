@@ -77,7 +77,7 @@ function LicenseTableOfContents({ document, t }) {
   return (
     <nav
       aria-label={t('license.tocAria')}
-      className="rounded-xl border border-gray-800 bg-modrinth-dark/80 p-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
+      className="rounded-xl card-glass bg-modrinth-dark/80 p-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:overflow-y-auto"
     >
       <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-gray-500">{t('license.contents')}</p>
       <ol className="space-y-1 text-sm">
@@ -101,7 +101,7 @@ export default function LicenseDocument() {
   const document = getParsedSiteLicense()
 
   return (
-    <div className="rounded-2xl border border-gray-800 bg-modrinth-dark">
+    <div className="rounded-2xl card-glass bg-modrinth-dark">
       <div className="border-b border-gray-800 px-5 py-4 md:px-6">
         <h2 className="text-lg font-bold text-white">{t('license.fullText')}</h2>
         <p className="mt-1 text-sm text-gray-500">

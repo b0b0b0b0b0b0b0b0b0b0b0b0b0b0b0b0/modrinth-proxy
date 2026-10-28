@@ -183,7 +183,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
   return (
     <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
       <div className="space-y-4">
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
+        <div className="bg-modrinth-dark card-glass rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.categories')}</h3>
           <div className="space-y-1.5 pr-2">
             {SHADER_STYLES.map(style => (
@@ -200,7 +200,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
+        <div className="bg-modrinth-dark card-glass rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.features')}</h3>
           <div className="space-y-1.5 pr-2">
             {SHADER_FEATURES.map(feature => (
@@ -217,7 +217,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
+        <div className="bg-modrinth-dark card-glass rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.performance')}</h3>
           <div className="space-y-1.5">
             {SHADER_PERFORMANCE.map(perf => (
@@ -234,7 +234,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
+        <div className="bg-modrinth-dark card-glass rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
@@ -312,7 +312,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
           </div>
         </div>
 
-        <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-4">
+        <div className="bg-modrinth-dark card-glass rounded-xl p-4">
           <h3 className="text-sm font-semibold text-gray-300 mb-3">{t('filter.loader')}</h3>
           <div className="space-y-1.5">
             {SHADER_LOADERS.map(loader => (
@@ -336,7 +336,7 @@ export default function ShaderSidebarFilters({ onFilterChange, isMobile = false,
         <AdvancedExclusionsFilter />
 
         {(selectedVersions.length > 0 || selectedStyles.length > 0 || excludedStyles.length > 0 || selectedFeatures.length > 0 || excludedFeatures.length > 0 || selectedPerformance.length > 0 || excludedPerformance.length > 0 || selectedLoaders.length > 0 || excludedLoaders.length > 0 || parseOpenSourceFilter(searchParams) !== 'none' || searchQuery) && (
-          <div className="bg-modrinth-dark border border-gray-800 rounded-xl p-3">
+          <div className="bg-modrinth-dark card-glass rounded-xl p-3">
           <button
             onClick={() => {
               setSearchQuery('')

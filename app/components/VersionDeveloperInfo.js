@@ -127,7 +127,7 @@ dependencies {
   if (!projectId || !versionId) return null
 
   return (
-    <div className="bg-modrinth-dark border border-gray-800 rounded-2xl mb-6 overflow-hidden">
+    <div className="bg-modrinth-dark card-glass rounded-2xl mb-6 overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

@@ -74,7 +74,7 @@ export default async function NewsPage() {
         </header>
 
         {commits.length > 0 ? (
-          <div className="bg-modrinth-dark border border-gray-800 rounded-lg overflow-hidden">
+          <div className="bg-modrinth-dark card-glass rounded-lg overflow-hidden">
             <div className="p-4 md:p-6">
               <ul className="m-0 list-none p-0">
                 {commits.map((commit, index) => {

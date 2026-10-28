@@ -20,7 +20,7 @@ export default function CollectionCard({ collection }) {
   return (
     <Link
       href={`/collection/${collection.id}`}
-      className="group flex gap-4 rounded-xl border border-gray-800 bg-modrinth-dark p-4 text-inherit no-underline outline-none transition-colors hover:border-[rgba(var(--color-green-rgb),0.4)] hover:bg-[rgba(var(--color-green-rgb),0.08)]"
+      className="group flex gap-4 rounded-xl card-glass bg-modrinth-dark p-4 text-inherit no-underline outline-none transition-colors hover:bg-[rgba(var(--color-green-rgb),0.08)]"
     >
       {collection.icon_url ? (
         <img

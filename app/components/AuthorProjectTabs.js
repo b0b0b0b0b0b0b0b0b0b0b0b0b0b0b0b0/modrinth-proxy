@@ -54,7 +54,7 @@ export default function AuthorProjectTabs({
 
   return (
     <div className="mb-6 max-w-full overflow-x-auto overscroll-x-contain mobile-nav-spacing custom-scrollbar">
-      <nav className="relative flex w-max rounded-full border border-gray-800 bg-modrinth-dark p-1 text-sm font-bold shadow-lg">
+      <nav className="relative flex w-max rounded-full card-glass bg-modrinth-dark p-1 text-sm font-bold shadow-lg">
         {tabs.map((tab) => (
           <Link
             key={tab.key}

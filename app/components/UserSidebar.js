@@ -49,7 +49,7 @@ export default function UserSidebar({ organizations = [], badges = [], userId = 
   return (
     <div className="space-y-4">
       {orgs.length > 0 && (
-        <div className="rounded-2xl border border-gray-300 dark:border-gray-800 bg-modrinth-dark p-4 pt-3">
+        <div className="rounded-2xl card-glass bg-modrinth-dark p-4 pt-3">
           <h2 className="m-0 mb-2 text-lg font-bold text-[var(--text-primary)]">{t('profile.orgs')}</h2>
           <div className="flex flex-wrap gap-2">
             {orgs.map((org) => {
@@ -81,7 +81,7 @@ export default function UserSidebar({ organizations = [], badges = [], userId = 
       )}
 
       {badges.length > 0 && (
-        <div className="rounded-2xl border border-gray-300 dark:border-gray-800 bg-modrinth-dark p-4 pt-3">
+        <div className="rounded-2xl card-glass bg-modrinth-dark p-4 pt-3">
           <h2 className="m-0 mb-2 text-lg font-bold text-[var(--text-primary)]">{t('profile.badges')}</h2>
           <div className="grid grid-cols-[repeat(auto-fill,minmax(64px,1fr))] gap-2">
             {badges.map((badge) => (
@@ -91,7 +91,7 @@ export default function UserSidebar({ organizations = [], badges = [], userId = 
         </div>
       )}
 
-      <div className="rounded-2xl border border-gray-300 dark:border-gray-800 bg-modrinth-dark p-4 pt-3">
+      <div className="rounded-2xl card-glass bg-modrinth-dark p-4 pt-3">
         <h2 className="m-0 mb-2 text-lg font-bold text-[var(--text-primary)]">{t('profile.info')}</h2>
         <UserProfileIds userId={userId} />
         <p className="m-0 mt-3 text-xs text-gray-500 dark:text-gray-400">

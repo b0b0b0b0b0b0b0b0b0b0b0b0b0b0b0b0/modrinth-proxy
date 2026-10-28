@@ -13,7 +13,7 @@ import { getRequestT } from '@/lib/i18n/server'
 
 const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTabs'), {
   ssr: false,
-  loading: () => <div className="mb-6 h-12 bg-modrinth-dark border border-gray-800 rounded-full animate-pulse"></div>,
+  loading: () => <div className="mb-6 h-12 bg-modrinth-dark card-glass rounded-full animate-pulse"></div>,
 })
 
 export async function generateMetadata({ params }) {

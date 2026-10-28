@@ -42,7 +42,7 @@ export default function DownloadButtonWithPopover({
               setOpen(!open)
             }
           }}
-          className="download-link w-full hover:scale-100 focus:outline-none outline-none"
+          className="download-link glass-btn w-full hover:scale-100 focus:outline-none outline-none"
         >
           <div className="flex items-center justify-center gap-3">
             <DownloadIcon />
@@ -53,8 +53,7 @@ export default function DownloadButtonWithPopover({
 
       <Popover.Portal>
         <Popover.Content
-          className="rounded-xl px-3 py-1.5 shadow-lg shadow-black/50 border border-gray-700 z-50"
-          style={{ backgroundColor: 'var(--bg-gradient-start)' }}
+          className="glass-pop rounded-xl px-3 py-1.5 z-50"
           side="top"
           sideOffset={-10}
           align="end"
@@ -89,7 +88,6 @@ export default function DownloadButtonWithPopover({
               </div>
             </a>
           </div>
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

@@ -57,42 +57,42 @@ export default async function AppPage() {
         </h1>
 
         <div className="feature-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f1t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f1d')}</p>
             </div>
           </div>
 
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f2t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f2d')}</p>
             </div>
           </div>
 
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f3t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f3d')}</p>
             </div>
           </div>
 
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f4t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f4d')}</p>
             </div>
           </div>
 
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f5t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f5d')}</p>
             </div>
           </div>
 
-          <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+          <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">{t('app.f6t')}</h3>
               <p className="text-gray-600 dark:text-gray-400">{t('app.f6d')}</p>
@@ -184,7 +184,7 @@ export default async function AppPage() {
           </div>
         </div>
 
-        <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
+        <div className="feature card-glass bg-modrinth-dark rounded-3xl p-8">
           <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
             {t('app.legalEn')}
           </p>

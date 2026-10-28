@@ -50,7 +50,7 @@ export default function SettingsSidebar({ signedIn, onNavigate }) {
 
   return (
     <nav aria-label={t('settings.nav.aria')} className="w-full">
-      <ul className="m-0 flex list-none flex-col gap-1 rounded-2xl border border-gray-800 bg-modrinth-dark p-3 pt-2">
+      <ul className="m-0 flex list-none flex-col gap-1 rounded-2xl card-glass bg-modrinth-dark p-3 pt-2">
         {SETTINGS_GROUPS.map((group) => (
           <li key={group.id} className="contents">
             <div className="px-4 pb-1 pt-3 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">
