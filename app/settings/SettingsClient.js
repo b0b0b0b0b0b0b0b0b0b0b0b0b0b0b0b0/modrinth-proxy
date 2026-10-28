@@ -262,10 +262,7 @@ export default function SettingsClient() {
                 key={palette.id}
                 onClick={() => handlePaletteChange(palette.id)}
                 className={`preview-radio ${isSelected ? 'selected' : ''} w-[calc(50%-8px)] sm:w-[180px] lg:w-[190px]`}
-                style={{
-                  borderColor: isSelected ? palette.variables['--color-green'] : undefined,
-                  boxShadow: isSelected ? `0 0 12px rgba(${palette.variables['--color-green-rgb']}, 0.12)` : undefined
-                }}
+                style={{ '--preview-ring': palette.variables['--color-green'] }}
               >
                 <div className="preview">
                   <div 
