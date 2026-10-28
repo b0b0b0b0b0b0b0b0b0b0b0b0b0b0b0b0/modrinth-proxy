@@ -7,6 +7,7 @@ import { ThemeProvider } from 'next-themes'
 import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
+import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import GameProfileSync from './components/GameProfileSync'
 import Footer from './components/Footer'
@@ -176,7 +177,7 @@ export default async function RootLayout({ children }) {
           <VersionsPreloader />
           <DownloadHistoryTracker />
           <GameProfileSync />
-          <TopNav account={sessionUser ? { username: sessionUser.username } : null} />
+          <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser) } : null} />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">
               <div className="flex min-w-0 items-center gap-4 md:gap-6">

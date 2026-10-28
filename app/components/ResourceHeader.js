@@ -14,6 +14,7 @@ import AuthorPluginPromo from './AuthorPluginPromo'
 import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
 import { ProjectFavoriteButton, ProjectFavoriteCount } from './ProjectReactions'
+import ProjectSaveButton from './ProjectSaveButton'
 import ServerCategoryTagsRow from './ServerCategoryTagsRow'
 import ProjectActivityBackground from './ProjectActivityBackground'
 import { getRequestT } from '@/lib/i18n/server'
@@ -158,6 +159,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                     )}
                     <ProjectFavoriteCount projectId={resource.id} />
                     <ProjectFavoriteButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
+                    <ProjectSaveButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
                     {allResourceCategories.length > 0 && (
                       <ServerCategoryTagsRow categoryIds={allResourceCategories} maxVisible={3} />
                     )}
@@ -227,6 +229,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                     <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
                       <div className="flex items-center gap-2">
                         <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
+                        <ProjectSaveButton projectId={resource.id} className="hidden lg:inline-flex" />
                         <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                       </div>
                       <DownloadPromoConnector className="hidden lg:flex pb-px" />
@@ -234,6 +237,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                   ) : (
                     <div className="flex items-center gap-2">
                       <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
+                      <ProjectSaveButton projectId={resource.id} className="hidden lg:inline-flex" />
                       <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                     </div>
                   )}
@@ -264,6 +268,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                       <div className="flex shrink-0 flex-col items-center gap-1">
                         <div className="flex items-center gap-2">
                           <ProjectFavoriteButton projectId={resource.id} className="lg:hidden" />
+                          <ProjectSaveButton projectId={resource.id} className="lg:hidden" />
                           <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
                         </div>
                         <DownloadPromoConnector />
@@ -271,6 +276,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                     ) : (
                       <div className="flex shrink-0 items-center gap-2">
                         <ProjectFavoriteButton projectId={resource.id} className="lg:hidden" />
+                        <ProjectSaveButton projectId={resource.id} className="lg:hidden" />
                         <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
                       </div>
                     )}

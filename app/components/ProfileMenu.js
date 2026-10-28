@@ -7,6 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import AccountUpdatesDot, { ACCOUNT_UPDATES_KEY } from './AccountUpdatesDot'
 import { useT } from './I18nProvider'
 import { clearFavoritesCache } from '@/lib/favoritesCache'
+import { clearSavedCollectionsCache } from './ProjectSaveButton'
 
 const ICONS = {
   user: ['M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2', 'M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0'],
@@ -14,6 +15,7 @@ const ICONS = {
   favorites: [
     'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z',
   ],
+  collections: ['m16 6 4 14M12 6v14M8 8v12M4 4v16'],
   downloads: ['M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v5h5'],
   settings: [
     'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z',
@@ -33,6 +35,19 @@ function Icon({ paths, className = 'h-[18px] w-[18px] shrink-0' }) {
         <path key={d} d={d} />
       ))}
     </svg>
+  )
+}
+
+function Avatar({ src, className }) {
+  return (
+    <img
+      src={src}
+      alt=""
+      width={128}
+      height={128}
+      draggable={false}
+      className={`shrink-0 -scale-x-100 scale-y-[1.12] object-contain ${className}`}
+    />
   )
 }
 
@@ -57,13 +72,15 @@ export default function ProfileMenu({ account, linkClassName }) {
   const rootRef = useRef(null)
   const [open, setOpen] = useState(false)
   const [username, setUsername] = useState(account?.username || null)
+  const [avatar, setAvatar] = useState(account?.avatar || null)
   const [signed, setSigned] = useState(Boolean(account))
   const [updates, setUpdates] = useState(0)
   const [busy, setBusy] = useState(false)
 
   useEffect(() => {
     setUsername(account?.username || null)
-  }, [account?.username])
+    setAvatar(account?.avatar || null)
+  }, [account?.username, account?.avatar])
 
   useEffect(() => {
     setOpen(false)
@@ -71,6 +88,7 @@ export default function ProfileMenu({ account, linkClassName }) {
     setSigned(signedNow)
     if (!signedNow) {
       setUsername(null)
+      setAvatar(null)
       return undefined
     }
     if (username) return undefined
@@ -78,7 +96,10 @@ export default function ProfileMenu({ account, linkClassName }) {
     fetch('/api/account/updates')
       .then((response) => (response.ok ? response.json() : null))
       .then((data) => {
-        if (alive && data?.username) setUsername(data.username)
+        if (alive && data?.username) {
+          setUsername(data.username)
+          setAvatar(data.avatar || null)
+        }
       })
       .catch(() => {})
     return () => {
@@ -113,10 +134,12 @@ export default function ProfileMenu({ account, linkClassName }) {
     try {
       await fetch('/api/auth/logout', { method: 'POST' })
       clearFavoritesCache()
+      clearSavedCollectionsCache()
       try {
         sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
       } catch {}
       setUsername(null)
+      setAvatar(null)
       setSigned(false)
       close()
       if (pathname === '/account' || (pathname.startsWith('/settings/') && pathname !== '/settings/language')) {
@@ -133,6 +156,7 @@ export default function ProfileMenu({ account, linkClassName }) {
   const links = [
     { href: '/account?tab=updates', label: t('account.updates'), icon: ICONS.updates, count: updates },
     { href: '/account?tab=favorites', label: t('account.favorites'), icon: ICONS.favorites },
+    { href: '/account?tab=collections', label: t('account.collections'), icon: ICONS.collections },
     { href: '/account?tab=downloads', label: t('account.downloads'), icon: ICONS.downloads },
   ]
 
@@ -175,7 +199,7 @@ export default function ProfileMenu({ account, linkClassName }) {
         aria-expanded={open}
         aria-controls={menuId}
       >
-        <Icon paths={ICONS.user} className="h-5 w-5" />
+        {avatar ? <Avatar src={avatar} className="h-6 w-6" /> : <Icon paths={ICONS.user} className="h-5 w-5" />}
         <AccountUpdatesDot />
       </button>
 
@@ -196,11 +220,13 @@ export default function ProfileMenu({ account, linkClassName }) {
                 href="/account"
                 role="menuitem"
                 onClick={close}
-                className="mb-1 flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-gray-800/60"
+                className="mb-1 flex items-center gap-2.5 rounded-xl px-3 py-2 transition-colors hover:bg-gray-800/60"
               >
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[rgba(var(--color-green-rgb),0.15)] text-sm font-extrabold uppercase text-modrinth-green">
-                  {username.slice(0, 1)}
-                </span>
+                {avatar ? (
+                  <Avatar src={avatar} className="h-8 w-8" />
+                ) : (
+                  <Icon paths={ICONS.user} className="h-[18px] w-[18px] shrink-0 text-gray-300" />
+                )}
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-bold text-white">{username}</span>
                   <span className="block text-xs text-gray-600 dark:text-gray-500">{t('sn.dashboard')}</span>

@@ -13,6 +13,9 @@ import {
 } from '@/lib/account'
 import { getRequestT } from '@/lib/i18n/server'
 import { getLoaderDisplayName } from '@/lib/loaders'
+import { getCollectionItems, listCollections, parseCollectionId } from '@/lib/userCollections'
+import { intlLocale } from '@/lib/i18n/config'
+import { pluralCount } from '@/lib/i18n/label'
 import { filterAvatar } from '@/lib/contentFilter'
 import CatalogPagination from '../components/CatalogPagination'
 import RelativeTime from '../components/RelativeTime'
@@ -24,12 +27,20 @@ import NotifyMuteButton from './NotifyMuteButton'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 import PageFade from './PageFade'
+import {
+  CreateCollectionButton,
+  DeleteCollectionButton,
+  RemoveFromCollectionButton,
+  RenameCollectionButton,
+} from './CollectionActions'
 import TypeFilter from './TypeFilter'
 import { HeaderKitten, SleepyKitten } from './AccountKitten'
+import { AvatarImage } from './MinecraftAvatarPicker'
+import { userAvatarUrl } from '@/lib/minecraftAvatar'
 
 export const dynamic = 'force-dynamic'
 
-const TABS = ['updates', 'favorites', 'downloads']
+const TABS = ['updates', 'favorites', 'collections', 'downloads']
 const MOVED_TABS = { signin: '/settings/security', settings: '/settings/profile' }
 const PAGE_SIZE = 20
 const TYPE_ORDER = ['mod', 'plugin', 'resourcepack', 'shader', 'datapack', 'modpack', 'minecraft_java_server']
@@ -57,6 +68,7 @@ const TAB_ICONS = {
   updates: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0',
   favorites:
     'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z',
+  collections: 'm16 6 4 14M12 6v14M8 8v12M4 4v16',
   downloads: 'M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v5h5',
   settings:
     'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2zM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
@@ -166,6 +178,142 @@ function UpdateRow({ row, t }) {
   )
 }
 
+function projectsLabel(t, locale, n) {
+  const count = n.toLocaleString(intlLocale(locale))
+  return pluralCount(locale, n, t('ucol.projects_one', { n: count }), t('ucol.projects_few', { n: count }), t('ucol.projects', { n: count }))
+}
+
+function PrivateBadge({ t }) {
+  return (
+    <span title={t('ucol.privateHint')} className="inline-flex items-center gap-1">
+      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+        <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+      {t('ucol.private')}
+    </span>
+  )
+}
+
+function CollectionCard({ href, title, count, t, locale }) {
+  return (
+    <Link
+      href={href}
+      className="group block min-w-0 rounded-2xl bg-[var(--bg-primary)] p-4 transition-colors hover:bg-gray-800/60"
+    >
+      <div className="min-w-0">
+        <div className="truncate text-base font-bold text-white group-hover:text-modrinth-green">{title}</div>
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-gray-500">
+          <span className="inline-flex items-center gap-1">
+            <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16" />
+              <path d="M3.29 7 12 12l8.71-5M12 22V12" />
+            </svg>
+            {projectsLabel(t, locale, count)}
+          </span>
+          <PrivateBadge t={t} />
+        </div>
+      </div>
+    </Link>
+  )
+}
+
+function CollectionsGrid({ collections, t, locale }) {
+  return (
+    <>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h2 className="text-lg font-bold text-white">{t('account.collections')}</h2>
+        <CreateCollectionButton />
+      </div>
+      {collections.length > 0 ? (
+      <div className="grid gap-3 sm:grid-cols-2">
+        {collections.map((item) => (
+          <CollectionCard
+            key={item.id}
+            href={`/account?tab=collections&c=${item.id}`}
+            title={item.name}
+            count={item.count}
+            t={t}
+            locale={locale}
+          />
+        ))}
+      </div>
+      ) : (
+        <SleepyKitten text={t('account.emptyCollections')} />
+      )}
+    </>
+  )
+}
+
+function CollectionView({ collection, page, t, locale }) {
+  const back = (
+    <Link
+      href="/account?tab=collections"
+      className="inline-flex items-center gap-1 text-xs font-semibold text-gray-500 transition-colors hover:text-modrinth-green"
+    >
+      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+      {t('ucol.all')}
+    </Link>
+  )
+
+  if (!collection) {
+    return (
+      <>
+        {back}
+        <SleepyKitten text={t('ucol.notFound')} />
+      </>
+    )
+  }
+
+  return (
+    <>
+      {back}
+      <div className="mt-3 flex flex-wrap items-center gap-4 border-b border-gray-800 pb-4">
+        <div className="min-w-0 flex-1">
+          <h2 className="break-words text-xl font-bold text-white">{collection.name}</h2>
+          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-gray-500">
+            <span>{projectsLabel(t, locale, collection.items.length)}</span>
+            <PrivateBadge t={t} />
+            <span>
+              {t('ucol.created', {
+                date: new Date(collection.created_at).toLocaleDateString(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric' }),
+              })}
+            </span>
+          </div>
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <RenameCollectionButton id={collection.id} name={collection.name} />
+          <DeleteCollectionButton id={collection.id} name={collection.name} />
+        </div>
+      </div>
+      {collection.items.length > 0 ? (
+        <>
+          <ul className="divide-y divide-gray-800">
+            {page.rows.map((row) => (
+              <ProjectRow
+                key={row.project_id}
+                row={row}
+                action={<RemoveFromCollectionButton id={collection.id} projectId={row.project_id} />}
+              />
+            ))}
+          </ul>
+          <CatalogPagination
+            page={page.page}
+            totalPages={page.pages}
+            pathname="/account"
+            searchParams={{ tab: 'collections', c: String(collection.id) }}
+            className="mt-4 border-t border-gray-800 pt-4"
+          />
+        </>
+      ) : (
+        <SleepyKitten text={t('ucol.empty', { name: collection.name })} />
+      )}
+    </>
+  )
+}
+
 function paginate(list, requested) {
   const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE))
   const page = Math.min(pages, Math.max(1, Number.isInteger(requested) ? requested : 1))
@@ -173,7 +321,7 @@ function paginate(list, requested) {
 }
 
 export default async function AccountPage({ searchParams }) {
-  const { t } = getRequestT()
+  const { t, locale } = getRequestT()
   const user = getSessionUser()
   const sharedIds = parseFavoritesCode(searchParams?.list)
   const sharedCode = sharedIds ? buildFavoritesCode(sharedIds) : ''
@@ -195,10 +343,14 @@ export default async function AccountPage({ searchParams }) {
 
   const requested = searchParams?.tab
   const tab = sharedCode ? 'favorites' : TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
-  const counts = { updates: updates.length, favorites: favorites.length, downloads: downloads.all }
+  const collections = listCollections(user.id)
+  const collectionId = tab === 'collections' ? parseCollectionId(searchParams?.c) : null
+  const collection = collectionId ? getCollectionItems(user.id, collectionId) : null
+  const collectionPage = collection ? paginate(collection.items, requestedPage) : null
+  const counts = { updates: updates.length, favorites: favorites.length, collections: collections.length, downloads: downloads.all }
   const mutes = tab === 'downloads' ? getNotifyMutes(user.id) : new Set()
   const trackDownloads = !user.skip_download_updates
-  const fadeKey = `${typeFilter || 'all'}-${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : 1}`
+  const fadeKey = `${typeFilter || 'all'}-${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : collectionPage ? `${collectionId}-${collectionPage.page}` : searchParams?.c || 1}`
 
   return (
     <div className="mx-auto max-w-7xl pb-8">
@@ -215,7 +367,7 @@ export default async function AccountPage({ searchParams }) {
       />
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-center gap-3">
-          <HeaderKitten />
+          {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
           <UsernameEditor username={user.username} />
         </div>
         <LogoutButton />
@@ -341,6 +493,14 @@ export default async function AccountPage({ searchParams }) {
               <SleepyKitten text={t('account.emptyFavorites')} />
             )}
           </>
+        ) : null}
+
+        {tab === 'collections' ? (
+          searchParams?.c ? (
+            <CollectionView collection={collection} page={collectionPage} t={t} locale={locale} />
+          ) : (
+            <CollectionsGrid collections={collections} t={t} locale={locale} />
+          )
         ) : null}
 
         {tab === 'downloads' && !user.record_history ? (
