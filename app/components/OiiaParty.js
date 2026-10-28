@@ -255,29 +255,41 @@ function Arms({ pose }) {
   if (pose === 'wave') {
     return (
       <>
-        <path d="M6.6 6.2Q3.6 5.4 2.4 2" />
-        <circle cx="2.2" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
-        <path d="M17.4 6.8Q20.6 9 19.4 12.2" />
-        <circle cx="19.3" cy="12.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        <g className="oiia-arm-left">
+          <path d="M6.6 6.2Q3.6 5.4 2.4 2" />
+          <circle cx="2.2" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        </g>
+        <g className="oiia-arm-right">
+          <path d="M17.4 6.8Q20.6 9 19.4 12.2" />
+          <circle cx="19.3" cy="12.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        </g>
       </>
     )
   }
   if (pose === 'hips') {
     return (
       <>
-        <path d="M6.6 6.6Q2.8 8.4 5.4 11.6" />
-        <circle cx="5.9" cy="11.8" r="1.4" fill="currentColor" fillOpacity="0.2" />
-        <path d="M17.4 6.6Q21.2 8.4 18.6 11.6" />
-        <circle cx="18.1" cy="11.8" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        <g className="oiia-arm-left">
+          <path d="M6.6 6.6Q2.8 8.4 5.4 11.6" />
+          <circle cx="5.9" cy="11.8" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        </g>
+        <g className="oiia-arm-right">
+          <path d="M17.4 6.6Q21.2 8.4 18.6 11.6" />
+          <circle cx="18.1" cy="11.8" r="1.4" fill="currentColor" fillOpacity="0.2" />
+        </g>
       </>
     )
   }
   return (
     <>
-      <path d="M6.6 6.2Q3.6 5.4 2.4 2" />
-      <path d="M17.4 6.2Q20.4 5.4 21.6 2" />
-      <circle cx="2.2" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
-      <circle cx="21.8" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+      <g className="oiia-arm-left">
+        <path d="M6.6 6.2Q3.6 5.4 2.4 2" />
+        <circle cx="2.2" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+      </g>
+      <g className="oiia-arm-right">
+        <path d="M17.4 6.2Q20.4 5.4 21.6 2" />
+        <circle cx="21.8" cy="1.6" r="1.4" fill="currentColor" fillOpacity="0.2" />
+      </g>
     </>
   )
 }
@@ -292,8 +304,8 @@ function KittenBody({ pose }) {
       <ellipse cx="12" cy="11" rx="6.4" ry="8" fill="currentColor" fillOpacity="0.1" />
       <ellipse cx="12" cy="12" rx="3.4" ry="5" stroke="none" fill="currentColor" fillOpacity="0.2" />
       {pose === 'hips' ? <Arms pose={pose} /> : null}
-      <ellipse cx="8.6" cy="19.6" rx="2.7" ry="1.4" className="fill-[#0f1a14]" />
-      <ellipse cx="15.4" cy="19.6" rx="2.7" ry="1.4" className="fill-[#0f1a14]" />
+      <ellipse cx="8.6" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-left fill-[#0f1a14]" />
+      <ellipse cx="15.4" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-right fill-[#0f1a14]" />
     </svg>
   )
 }
@@ -311,10 +323,12 @@ function Dancer({ spinRef, pose, mood, look, onClick, label, size }) {
       style={{ originY: 1 }}
     >
       <span ref={spinRef} className="flex flex-col items-center [transform-style:preserve-3d]">
-        <span className="relative z-10 w-full">
-          <KittenFace mood={mood} look={look} className="h-auto w-full" />
+        <span className="oiia-groove flex flex-col items-center w-full">
+          <span className="relative z-10 w-full">
+            <KittenFace mood={mood} look={look} className="h-auto w-full" />
+          </span>
+          <KittenBody pose={pose} />
         </span>
-        <KittenBody pose={pose} />
       </span>
     </motion.button>
   )

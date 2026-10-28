@@ -4183,6 +4183,31 @@ html.hide-disclaimer-badge .disclaimer-badge {
   50% { transform: rotate(14deg); }
 }
 
+@keyframes oiia-step-l {
+  0%, 50%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-0.5px, -2.5px) rotate(-8deg); }
+}
+
+@keyframes oiia-step-r {
+  0%, 50%, 100% { transform: translate(0, 0) rotate(0deg); }
+  75% { transform: translate(0.5px, -2.5px) rotate(8deg); }
+}
+
+@keyframes oiia-arm-l {
+  0%, 100% { transform: rotate(-8deg) translateY(0); }
+  50% { transform: rotate(14deg) translateY(-1px); }
+}
+
+@keyframes oiia-arm-r {
+  0%, 100% { transform: rotate(14deg) translateY(-1px); }
+  50% { transform: rotate(-8deg) translateY(0); }
+}
+
+@keyframes oiia-groove {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-1.2px) rotate(1.5deg); }
+}
+
 .oiia-light {
   transform-origin: top center;
   mix-blend-mode: screen;
@@ -4193,6 +4218,31 @@ html.hide-disclaimer-badge .disclaimer-badge {
   transform-box: fill-box;
   transform-origin: 0% 100%;
   animation: oiia-tail 0.4s ease-in-out infinite;
+}
+
+.oiia-arm-left {
+  transform-origin: 6.6px 6.2px;
+  animation: oiia-arm-l 0.48s ease-in-out infinite;
+}
+
+.oiia-arm-right {
+  transform-origin: 17.4px 6.2px;
+  animation: oiia-arm-r 0.48s ease-in-out infinite;
+}
+
+.oiia-foot-left {
+  transform-origin: 8.6px 21px;
+  animation: oiia-step-l 0.48s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
+
+.oiia-foot-right {
+  transform-origin: 15.4px 21px;
+  animation: oiia-step-r 0.48s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+}
+
+.oiia-groove {
+  transform-origin: 50% 100%;
+  animation: oiia-groove 0.48s ease-in-out infinite;
 }
 
 html.oiia main,
