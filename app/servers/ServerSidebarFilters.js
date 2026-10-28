@@ -279,7 +279,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                       }}
                       className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
                         selectedVersion === version
-                          ? 'bg-modrinth-green text-black font-semibold'
+                          ? 'text-modrinth-green font-semibold hover:bg-gray-800'
                           : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                       }`}
                     >

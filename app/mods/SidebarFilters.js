@@ -200,7 +200,7 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                 onClick={() => toggleVersion(version)}
                   className={`w-full text-left px-3 py-1.5 rounded-full text-sm transition-all group flex items-center justify-between ${
                   isSelected
-                    ? 'bg-modrinth-green text-black font-semibold'
+                    ? 'text-modrinth-green font-semibold hover:bg-gray-800'
                     : 'text-gray-400 hover:bg-gray-800 hover:text-white'
                 }`}
               >
@@ -306,10 +306,10 @@ export default function SidebarFilters({ onFilterChange, isMobile = false, initi
                   setSelectedEnvironment(newEnv)
                   updateFilters({ e: newEnv })
                 }}
-                className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                className={`glass-btn w-full text-left px-3 py-2 rounded-lg text-sm font-medium ${
                   selectedEnvironment === env.id
-                    ? 'bg-modrinth-green text-black font-semibold'
-                    : 'bg-gray-800 text-gray-400 hover:bg-gray-700 hover:text-white'
+                    ? 'text-modrinth-green font-semibold'
+                    : 'text-gray-400 hover:text-white'
                 }`}
               >
                 {t(`filter.env.${env.id}`)}

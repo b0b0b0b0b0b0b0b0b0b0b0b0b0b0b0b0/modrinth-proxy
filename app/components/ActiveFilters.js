@@ -287,7 +287,7 @@ export default function ActiveFilters({ categoryPath = 'plugins', dependencies =
             saveVisibleDisclosureExclusions([], categoryPath)
             saveStoredOpenSource('none')
           }}
-          className="bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer"
+          className="glass-chip text-gray-900 dark:text-gray-300 dark:hover:text-white px-2.5 py-1.5 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 active:scale-[0.95] cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="10"></circle>
@@ -310,10 +310,10 @@ export default function ActiveFilters({ categoryPath = 'plugins', dependencies =
             }
             if (filter.type === 'openSource') saveStoredOpenSource('none')
           }}
-          className={`px-2 py-1 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer ${
+          className={`px-2.5 py-1.5 leading-none rounded-full font-semibold text-sm inline-flex items-center gap-1 transition-colors border-none active:scale-[0.95] cursor-pointer ${
             filter.type === 'disclosure' || filter.excluded
-              ? 'bg-red-500/15 text-red-400 hover:bg-red-500/25'
-              : 'bg-gray-200 hover:bg-gray-300 text-gray-900 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-300 dark:hover:text-white'
+              ? 'glass-edge bg-red-500/15 text-red-400 hover:bg-red-500/25'
+              : 'glass-chip text-gray-900 dark:text-gray-300 dark:hover:text-white'
           }`}
         >
           {filter.type === 'disclosure' || filter.excluded ? (

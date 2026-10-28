@@ -41,7 +41,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
           <Popover.Trigger asChild>
             <button
               type="button"
-              className={`${SERVER_CATEGORY_TAG_CLASS} cursor-pointer hover:underline`}
+              className={`${SERVER_CATEGORY_TAG_CLASS} cursor-pointer`}
               aria-label={t('server.moreTags', { n: overflow.length })}
             >
               +{overflow.length}

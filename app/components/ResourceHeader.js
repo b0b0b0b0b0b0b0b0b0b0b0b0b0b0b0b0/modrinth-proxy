@@ -195,10 +195,9 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                               <Link
                                 key={catId}
                                 href={`/${contentTypeRoute}?f=categories:${catId}`}
-                                className="px-2 py-1 text-xs font-semibold rounded-lg hover:brightness-110 transition-all flex items-center gap-1.5"
-                                style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-muted)' }}
+                                className="glass-chip flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] hover:text-[var(--text-primary)]"
                               >
-                                <div className="h-3.5 w-3.5 flex-shrink-0">{category.icon}</div>
+                                <div className="h-4 w-4 flex-shrink-0">{category.icon}</div>
                                 <span>{categoryLabel(t, catId, category.name)}</span>
                               </Link>
                             )

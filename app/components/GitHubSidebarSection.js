@@ -96,18 +96,20 @@ export default function GitHubSidebarSection({ sourceUrl }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="mb-3 flex items-center gap-2.5 rounded-lg border border-gray-200/80 bg-gray-50/80 px-2.5 py-2 text-left no-underline dark:border-[#2e3035] dark:bg-[#16181c]/80"
+        className="glass-btn group mb-3 flex items-center gap-3 rounded-xl px-2.5 py-2 text-left no-underline"
       >
-        <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md bg-gray-200/80 text-gray-600 dark:bg-[#2e3035] dark:text-gray-300">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <span className="glass-edge flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-[#c084fc]" style={{ backgroundColor: 'color-mix(in srgb, #c084fc 16%, transparent)' }}>
+          <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6l-6 6 6 6M16 18l6-6-6-6" />
           </svg>
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-xs font-medium text-gray-800 dark:text-gray-200">{t('links.source')}</span>
-          <span className="block truncate font-mono text-[11px] text-gray-500 dark:text-gray-500">{repo}</span>
+          <span className="block text-sm font-semibold text-[var(--text-primary)]">{t('links.source')}</span>
+          <span className="block truncate font-mono text-xs text-gray-500">{repo}</span>
         </span>
-        <ExternalIcon />
+        <svg className="h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--text-primary)]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+          <path d="M7 17 17 7M8 7h9v9" />
+        </svg>
       </a>
 
       {stats && (

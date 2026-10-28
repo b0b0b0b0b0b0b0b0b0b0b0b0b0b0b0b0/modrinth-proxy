@@ -60,7 +60,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
   const browseRoute = resolveContentTypeRoute(resolvedContentType, resource.project_type)
   const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
-  const environment = getEnvironment(t, resource.client_side, resource.server_side)
+  const environment = ENV_FILTER_ROUTES.has(browseRoute) ? getEnvironment(resource.client_side, resource.server_side) : null
   const alternateFormatRaw = resolveAlternateProjectFormat({
     project: resource,
     contentType: resolvedContentType,
@@ -141,12 +141,23 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
             {environment && (
               <div>
                 <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.environments')}</h3>
-                <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-full w-fit">
-                  <svg className="w-4 h-4 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17v-4m0 0V9m0 4h.01" />
-                  </svg>
-                  <span className="text-xs text-gray-700 dark:text-gray-300 font-medium">{environment}</span>
+                <div className="flex flex-wrap gap-2">
+                  {environment.map((side) => {
+                    const chipClass = 'glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-none text-[var(--text-muted)]'
+                    const content = (
+                      <>
+                        <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        {t(`filter.env.${side}`)}
+                      </>
+                    )
+                    return (
+                      <Link key={side} href={`/${browseRoute}?e=${side}`} className={`${chipClass} hover:text-[var(--text-primary)]`}>
+                        {content}
+                      </Link>
+                    )
+                  })}
                 </div>
               </div>
             )}
@@ -321,17 +332,13 @@ function resolveContentTypeRoute(contentTypeProp, projectType) {
   return 'mods'
 }
 
-function getEnvironment(t, clientSide, serverSide) {
-  if (!clientSide && !serverSide) return null
+const ENV_FILTER_ROUTES = new Set(['mods', 'modpacks'])
 
-  const client = clientSide === 'required' || clientSide === 'optional'
-  const server = serverSide === 'required' || serverSide === 'optional'
-
-  if (client && server) return t('filter.env.both')
-  if (client) return t('filter.env.client')
-  if (server) return t('filter.env.server')
-
-  return null
+function getEnvironment(clientSide, serverSide) {
+  const sides = []
+  if (clientSide === 'required' || clientSide === 'optional') sides.push('client')
+  if (serverSide === 'required' || serverSide === 'optional') sides.push('server')
+  return sides.length > 0 ? sides : null
 }
 
 function formatExactDate(dateString, locale) {
