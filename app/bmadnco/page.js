@@ -44,13 +44,13 @@ export default function AboutPage() {
         </div>
 
         <div className="space-y-8 animate-fade-in-up">
-          <section className="relative bg-gradient-to-br from-modrinth-green/10 via-gray-900/80 to-purple-900/20 rounded-2xl p-8 md:p-12 border border-modrinth-green/30 shadow-2xl overflow-hidden">
+          <section className="card-glass relative bg-gradient-to-br from-modrinth-green/10 via-gray-900/80 to-purple-900/20 rounded-2xl p-8 md:p-12 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-modrinth-green/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-600/5 rounded-full blur-3xl"></div>
             
             <div className="relative">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 flex items-center gap-4">
-                <div className="p-3 bg-modrinth-green/20 rounded-xl border-2 border-modrinth-green/40">
+                <div className="p-3 bg-modrinth-green/20 rounded-xl">
                   <svg className="w-10 h-10 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-4 mt-8">
-                  <div className="group bg-gradient-to-br from-modrinth-green/5 to-transparent rounded-xl p-5 border border-modrinth-green/20 hover:border-modrinth-green/40 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="group bg-gradient-to-br from-modrinth-green/10 to-white/[0.02] rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                     <div className="flex items-start gap-3">
                       <div className="p-2 bg-modrinth-green/20 rounded-lg mt-1">
                         <svg className="w-5 h-5 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div className="group bg-gradient-to-br from-blue-500/5 to-transparent rounded-xl p-5 border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="group bg-gradient-to-br from-blue-500/10 to-white/[0.02] rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                     <div className="flex items-start gap-3">
                       <div className="p-2 bg-blue-500/20 rounded-lg mt-1">
                         <svg className="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div className="group bg-gradient-to-br from-purple-500/5 to-transparent rounded-xl p-5 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="group bg-gradient-to-br from-purple-500/10 to-white/[0.02] rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                     <div className="flex items-start gap-3">
                       <div className="p-2 bg-purple-500/20 rounded-lg mt-1">
                         <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -108,7 +108,7 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <div className="group bg-gradient-to-br from-orange-500/5 to-transparent rounded-xl p-5 border border-orange-500/20 hover:border-orange-500/40 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                  <div className="group bg-gradient-to-br from-orange-500/10 to-white/[0.02] rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                     <div className="flex items-start gap-3">
                       <div className="p-2 bg-orange-500/20 rounded-lg mt-1">
                         <svg className="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,7 +123,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 bg-gradient-to-r from-modrinth-green/10 via-blue-500/10 to-purple-500/10 border border-modrinth-green/30 rounded-xl p-6">
+                <div className="mt-8 bg-gradient-to-r from-modrinth-green/10 via-blue-500/10 to-purple-500/10 rounded-xl p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 bg-modrinth-green/20 rounded-full">
                       <svg className="w-6 h-6 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,12 +142,14 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="relative bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-purple-800/40 rounded-2xl p-8 md:p-10 shadow-2xl overflow-hidden">
+          <ProtectionBlock />
+
+          <section className="card-glass relative bg-gradient-to-br from-purple-900/40 via-indigo-900/30 to-purple-800/40 rounded-2xl p-8 md:p-10 overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl"></div>
             <div className="relative">
               <div className="flex items-center gap-4 mb-6">
-                <div className="p-3 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-xl border border-purple-400/40">
+                <div className="p-3 bg-gradient-to-br from-purple-500/30 to-indigo-500/30 rounded-xl">
                   <svg className="w-8 h-8 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
@@ -178,7 +180,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="relative bg-gradient-to-br from-emerald-900/30 via-gray-900/60 to-teal-800/20 rounded-2xl p-8 md:p-10 border border-emerald-700/40 shadow-2xl overflow-hidden">
+          <section className="card-glass relative bg-gradient-to-br from-emerald-900/30 via-gray-900/60 to-teal-800/20 rounded-2xl p-8 md:p-10 overflow-hidden">
             <div className="absolute top-0 left-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-0 w-64 h-64 bg-teal-500/5 rounded-full blur-3xl"></div>
             <div className="relative">
@@ -191,7 +193,7 @@ export default function AboutPage() {
               <p className="text-gray-300 leading-relaxed">{t('about.accLead')}</p>
 
               <div className="grid md:grid-cols-3 gap-4 mt-6">
-                <div className="bg-gradient-to-br from-amber-500/10 to-transparent rounded-xl p-5 border border-amber-500/25 hover:border-amber-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                <div className="bg-gradient-to-br from-amber-500/10 to-transparent rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                   <div className="inline-flex p-2 bg-amber-500/20 rounded-lg mb-3">
                     <svg className="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -201,7 +203,7 @@ export default function AboutPage() {
                   <p className="text-sm text-gray-400 leading-relaxed">{t('about.accNotD')}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-emerald-500/10 to-transparent rounded-xl p-5 border border-emerald-500/25 hover:border-emerald-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                <div className="bg-gradient-to-br from-emerald-500/10 to-transparent rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                   <div className="inline-flex p-2 bg-emerald-500/20 rounded-lg mb-3">
                     <svg className="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -211,7 +213,7 @@ export default function AboutPage() {
                   <p className="text-sm text-gray-400 leading-relaxed">{t('about.accSafeD')}</p>
                 </div>
 
-                <div className="bg-gradient-to-br from-teal-500/10 to-transparent rounded-xl p-5 border border-teal-500/25 hover:border-teal-500/50 transition-all duration-300 hover:scale-[1.02] cursor-default select-none">
+                <div className="bg-gradient-to-br from-teal-500/10 to-transparent rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] cursor-default select-none hover:brightness-110">
                   <div className="inline-flex p-2 bg-teal-500/20 rounded-lg mb-3">
                     <svg className="w-5 h-5 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88L6.59 6.59m7.532 7.532l3.29 3.29M3 3l18 18" />
@@ -222,7 +224,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="mt-6 bg-emerald-950/30 border border-emerald-700/30 rounded-xl p-6">
+              <div className="mt-6 bg-emerald-950/30 rounded-xl p-6">
                 <h3 className="text-lg font-bold text-emerald-300 mb-4">{t('about.accStoredT')}</h3>
                 <ul className="space-y-3 text-gray-300 leading-relaxed">
                   {['accStored1', 'accStored2', 'accStored3'].map((key) => (
@@ -238,7 +240,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8 border border-blue-700/50 shadow-2xl">
+          <section className="card-glass bg-gradient-to-br from-blue-900/30 to-blue-800/20 rounded-2xl p-8">
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
               <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
@@ -250,8 +252,8 @@ export default function AboutPage() {
               <div className="flex flex-col md:flex-row items-center gap-4 my-8">
                 <TiltCardDirectional className="flex-1 relative group" direction="top">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600/30 to-cyan-600/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-blue-900/50 to-blue-800/30 rounded-2xl p-6 border border-blue-600/40 text-center">
-                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-blue-500/20 border-2 border-blue-400 mx-auto">
+                  <div className="relative bg-gradient-to-br from-blue-900/50 to-blue-800/30 rounded-2xl p-6 text-center">
+                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-blue-500/20 mx-auto">
                       <svg className="w-7 h-7 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                       </svg>
@@ -274,8 +276,8 @@ export default function AboutPage() {
 
                 <TiltCardDirectional className="flex-1 relative group" direction="bottom">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-600/30 to-teal-600/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-cyan-900/50 to-cyan-800/30 rounded-2xl p-6 border border-cyan-600/40 text-center">
-                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-cyan-500/20 border-2 border-cyan-400 mx-auto">
+                  <div className="relative bg-gradient-to-br from-cyan-900/50 to-cyan-800/30 rounded-2xl p-6 text-center">
+                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-cyan-500/20 mx-auto">
                       <svg className="w-7 h-7 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4" />
                       </svg>
@@ -298,8 +300,8 @@ export default function AboutPage() {
 
                 <TiltCardDirectional className="flex-1 relative group" direction="top">
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-teal-600/30 to-green-600/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-                  <div className="relative bg-gradient-to-br from-teal-900/50 to-teal-800/30 rounded-2xl p-6 border border-teal-600/40 text-center">
-                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-green-500/20 border-2 border-modrinth-green-light mx-auto">
+                  <div className="relative bg-gradient-to-br from-teal-900/50 to-teal-800/30 rounded-2xl p-6 text-center">
+                    <div className="flex items-center justify-center w-14 h-14 mb-4 rounded-full bg-green-500/20 mx-auto">
                       <svg className="w-7 h-7 text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -312,7 +314,7 @@ export default function AboutPage() {
               <p>
                 <RichText text={t('about.middle')} strongClassName="font-semibold text-blue-400" />
               </p>
-              <div className="bg-blue-950/30 border border-blue-700/30 rounded-lg p-4 mt-4">
+              <div className="bg-blue-950/30 rounded-lg p-4 mt-4">
                 <p className="text-sm text-blue-200">
                   <RichText text={t('about.dlNote')} />
                 </p>
@@ -320,7 +322,7 @@ export default function AboutPage() {
             </div>
           </section>
 
-          <section className="bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-2xl p-8 border border-purple-700/50 shadow-2xl">
+          <section className="card-glass bg-gradient-to-br from-purple-900/30 to-purple-800/20 rounded-2xl p-8">
             <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
               <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
@@ -361,7 +363,7 @@ export default function AboutPage() {
               <div className="mt-8 bg-gradient-to-br from-purple-950/50 to-indigo-950/50 rounded-xl p-6">
                 <h3 className="text-xl font-bold text-purple-300 mb-6 text-center">{t('about.stats')}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <TiltCard className="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 border border-red-600/30 hover:border-red-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(239, 68, 68, 0.2)">
+                  <TiltCard className="bg-gradient-to-br from-red-900/40 to-red-800/20 rounded-xl p-6 transition-all duration-500 select-none cursor-default hover:brightness-110" shadowColor="rgba(239, 68, 68, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-red-400 mb-2 animate-pulse-slow">
                         {projectsCount}
@@ -376,7 +378,7 @@ export default function AboutPage() {
                     </div>
                   </TiltCard>
 
-                  <TiltCard className="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 border border-orange-600/30 hover:border-orange-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(249, 115, 22, 0.2)">
+                  <TiltCard className="bg-gradient-to-br from-orange-900/40 to-orange-800/20 rounded-xl p-6 transition-all duration-500 select-none cursor-default hover:brightness-110" shadowColor="rgba(249, 115, 22, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-orange-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.2s' }}>
                         {orgsCount}
@@ -391,7 +393,7 @@ export default function AboutPage() {
                     </div>
                   </TiltCard>
 
-                  <TiltCard className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 border border-yellow-600/30 hover:border-yellow-500/60 transition-all duration-500 select-none cursor-default" shadowColor="rgba(234, 179, 8, 0.2)">
+                  <TiltCard className="bg-gradient-to-br from-yellow-900/40 to-yellow-800/20 rounded-xl p-6 transition-all duration-500 select-none cursor-default hover:brightness-110" shadowColor="rgba(234, 179, 8, 0.2)">
                     <div className="text-center">
                       <div className="text-5xl font-bold text-yellow-400 mb-2 animate-pulse-slow" style={{ animationDelay: '0.4s' }}>
                         {mediaCount}
@@ -408,7 +410,7 @@ export default function AboutPage() {
                 </div>
               </div>
 
-              <div className="bg-purple-950/30 border border-purple-700/30 rounded-lg p-4 mt-4">
+              <div className="bg-purple-950/30 rounded-lg p-4 mt-4">
                 <p className="text-sm text-purple-200">
                   {t('about.autoFilters')}
                 </p>
@@ -417,7 +419,7 @@ export default function AboutPage() {
               <div className="mt-6 bg-gradient-to-br from-purple-900/20 via-indigo-900/20 to-purple-900/20 rounded-2xl p-4 md:p-5">
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   <div className="flex-shrink-0">
-                    <div className="p-3 bg-purple-500/20 rounded-full border-2 border-purple-400/40">
+                    <div className="p-3 bg-purple-500/20 rounded-full">
                       <svg className="w-6 h-6 text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
@@ -507,8 +509,6 @@ export default function AboutPage() {
                   </div>
                 </div>
               </div>
-
-              <ProtectionBlock />
             </div>
           </section>
         </div>
