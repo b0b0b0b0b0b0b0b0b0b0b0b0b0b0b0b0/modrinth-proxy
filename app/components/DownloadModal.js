@@ -854,7 +854,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                     <button
                       type="button"
                       onClick={handleInstallClick}
-                      className={`w-fit flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-bold transition-all duration-200 active:scale-[0.98] text-sm${
+                      className={`download-glass w-fit flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-bold transition-all duration-200 active:scale-[0.98] text-sm${
                         accent ? ' hover:brightness-[1.08]' : ' bg-modrinth-green text-black hover:brightness-110'
                       }`}
                       style={downloadBtnAccentStyle}

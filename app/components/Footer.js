@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="relative mb-20 lg:mb-0 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-modrinth-green to-transparent opacity-50"></div>
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent blur-sm"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-modrinth-darker via-black to-black"></div>
+      <div className="footer-base absolute inset-0 bg-gradient-to-b from-modrinth-darker via-black to-black"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-modrinth-green/5 via-transparent to-modrinth-green-light/5"></div>
       <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.04) 1px, transparent 0)', backgroundSize: '50px 50px', transform: 'skewY(-2deg) translateY(10px)'}}></div>
       <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(var(--color-green-rgb),0.03) 1px, transparent 0)', backgroundSize: '35px 35px', transform: 'skewX(3deg)'}}></div>

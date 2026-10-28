@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import * as Popover from '@radix-ui/react-popover'
@@ -9,6 +9,35 @@ import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
 
 const BOOKMARK = 'm19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'
+
+function GlassBookmark({ saved }) {
+  const id = useId().replace(/:/g, '')
+  return (
+    <>
+      <defs>
+        <clipPath id={`${id}-clip`}>
+          <path d={BOOKMARK} />
+        </clipPath>
+        <linearGradient id={`${id}-sheen`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity={saved ? 0.55 : 0.3} />
+          <stop offset="0.48" stopColor="#fff" stopOpacity={saved ? 0.12 : 0.06} />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id={`${id}-depth`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0.55" stopColor="#000" stopOpacity="0" />
+          <stop offset="1" stopColor="#000" stopOpacity={saved ? 0.28 : 0.12} />
+        </linearGradient>
+      </defs>
+      <path d={BOOKMARK} fill="currentColor" fillOpacity={saved ? 1 : 0.12} stroke="none" />
+      <g clipPath={`url(#${id}-clip)`} stroke="none">
+        <rect x="5" y="3" width="14" height="18" fill={`url(#${id}-sheen)`} />
+        <rect x="5" y="3" width="14" height="18" fill={`url(#${id}-depth)`} />
+        <path d="M7.6 5.2v9.5" stroke="#fff" strokeOpacity={saved ? 0.6 : 0.35} strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      </g>
+      <path d={BOOKMARK} fill="none" strokeOpacity={saved ? 0.9 : 1} />
+    </>
+  )
+}
 const NAME_MAX = 64
 const SAVED_KEY = 'mp-collections-saved'
 const SAVED_LIMIT = 500
@@ -206,19 +235,18 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
           >
             <motion.svg
               key={saved ? 'on' : 'off'}
-              initial={bounceRef.current && !reduceMotion ? { scale: 0.6, y: -3 } : false}
-              animate={{ scale: 1, y: 0 }}
+              initial={bounceRef.current && !reduceMotion ? { scale: 0.6, y: -1 } : { y: 2 }}
+              animate={{ scale: 1, y: 2 }}
               transition={{ type: 'spring', stiffness: 520, damping: 18 }}
-              className={`h-6 w-6 transition-colors ${saved ? 'text-modrinth-green' : 'text-gray-400 group-hover:text-white'}`}
-              fill={saved ? 'currentColor' : 'none'}
+              className={`h-9 w-9 transition-colors lg:h-10 lg:w-10 ${saved ? 'text-modrinth-green' : 'text-gray-400 group-hover:text-white'}`}
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.6"
               strokeLinecap="round"
               strokeLinejoin="round"
               viewBox="0 0 24 24"
               aria-hidden
             >
-              <path d={BOOKMARK} />
+              <GlassBookmark saved={saved} />
             </motion.svg>
           </button>
         </Popover.Trigger>

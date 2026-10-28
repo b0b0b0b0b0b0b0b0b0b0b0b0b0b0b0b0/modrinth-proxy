@@ -101,7 +101,7 @@ export default function DownloadCompatibleVersions({
           const cardClass = versionChannelCardClass(version.version_type, checked)
 
           const cardShellClass =
-            'grid items-center gap-3 rounded-2xl border border-solid px-3 py-3 transition-[border-color,background-color,box-shadow] grid-cols-[minmax(0,1fr)_2.25rem]'
+            'grid items-center gap-3 rounded-2xl px-3 py-3 transition-[background-color,box-shadow] grid-cols-[minmax(0,1fr)_2.25rem]'
 
           if (!isChannelPicker) {
             return (

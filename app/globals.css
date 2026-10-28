@@ -228,20 +228,12 @@ html:not(.dark) .bg-gradient-to-r.from-white.via-modrinth-green.to-blue-400 {
   --tw-gradient-stops: var(--tw-gradient-from), var(--color-green) var(--tw-gradient-via-position), rgb(96 165 250) var(--tw-gradient-to-position) !important;
 }
 
-html:not(.dark) footer {
-  background: transparent !important;
-}
-
-html:not(.dark) footer > div[class*="absolute"] {
-  display: none !important;
-}
-
-html:not(.dark) footer > div.absolute.inset-0 {
-  display: none !important;
+html:not(.dark) footer .footer-base {
+  background: linear-gradient(to bottom, var(--bg-secondary), #f1f1f1 45%, var(--bg-primary)) !important;
 }
 
 html:not(.dark) footer .bg-black\/40 {
-  background-color: transparent !important;
+  background-color: rgb(255 255 255 / 0.6) !important;
 }
 
 html:not(.dark) footer .text-gray-400 {
@@ -2966,6 +2958,80 @@ button.text-white {
   white-space: nowrap;
 }
 
+.modrinth-download-button:not(.modrinth-download-button--muted),
+.modrinth-modal-download-button,
+.download-glass {
+  border-width: 0;
+  padding-inline: 1rem;
+  background-image: linear-gradient(180deg, rgb(255 255 255 / 0.35), rgb(255 255 255 / 0.08) 50%, rgb(255 255 255 / 0) 51%);
+  box-shadow:
+    inset 0 1.5px 0.5px rgb(255 255 255 / 0.6),
+    inset 0 -1.5px 1px rgb(0 0 0 / 0.3),
+    inset 0 -8px 12px -8px rgb(0 0 0 / 0.25);
+}
+
+.channel-glass {
+  --channel-rgb: 46 224 122;
+  --channel-ring: transparent;
+  box-shadow:
+    inset 0 1px 3px rgb(255 255 255 / 0.1),
+    inset 0 16px 28px -18px rgb(255 255 255 / 0.12),
+    inset 0 -2px 6px rgb(0 0 0 / 0.18),
+    inset 0 -22px 36px -24px rgb(0 0 0 / 0.3),
+    inset 0 0 0 1.5px var(--channel-ring);
+}
+
+html:not(.dark) .channel-glass {
+  box-shadow:
+    inset 0 1px 3px rgb(255 255 255 / 0.7),
+    inset 0 16px 28px -18px rgb(255 255 255 / 0.6),
+    inset 0 -2px 6px rgb(0 0 0 / 0.06),
+    inset 0 -22px 36px -24px rgb(0 0 0 / 0.1),
+    inset 0 0 0 1.5px var(--channel-ring);
+}
+
+.icon-glass {
+  transition: background-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+
+.icon-glass:hover {
+  background-color: rgb(255 255 255 / 0.08);
+  box-shadow:
+    inset 0 1px 0.5px rgb(255 255 255 / 0.2),
+    inset 0 -1px 1px rgb(0 0 0 / 0.3),
+    inset 0 -6px 10px -6px rgb(0 0 0 / 0.25);
+}
+
+html:not(.dark) .icon-glass:hover {
+  background-color: rgb(255 255 255 / 0.7);
+  box-shadow:
+    inset 0 1px 0.5px rgb(255 255 255 / 0.95),
+    inset 0 -1px 0.5px rgb(0 0 0 / 0.1),
+    inset 0 0 0 1px rgb(0 0 0 / 0.06);
+}
+
+.icon-glass:active {
+  transform: scale(0.94);
+}
+
+.channel-glass--beta {
+  --channel-rgb: 196 154 108;
+}
+
+.channel-glass--alpha {
+  --channel-rgb: 155 143 245;
+}
+
+.channel-glass--selected {
+  --channel-ring: rgb(var(--channel-rgb) / 0.6);
+}
+
+.modrinth-download-button:not(.modrinth-download-button--muted):hover,
+.modrinth-modal-download-button:hover,
+.download-glass:hover {
+  filter: brightness(1.06);
+}
+
 @media (min-width: 1024px) {
   .modrinth-download-button {
     display: flex !important;
@@ -2989,7 +3055,9 @@ button.text-white {
   color: var(--text-secondary, #c0c0c0);
   font-weight: 600;
   font-variation-settings: 'wght' 600;
-  box-shadow: none;
+  border-width: 0;
+  padding-inline: 1rem;
+  box-shadow: var(--btn-glass);
 }
 
 .modrinth-download-button--muted:hover {
@@ -3223,10 +3291,6 @@ html:not(.dark) .nav-indicator {
   box-shadow:
     inset 0 1px 0.5px rgb(255 255 255 / 0.7),
     inset 0 -1px 0.5px rgb(0 0 0 / 0.08);
-}
-
-[role='switch'] {
-  box-shadow: var(--check-glass) !important;
 }
 
 input:not([type]),

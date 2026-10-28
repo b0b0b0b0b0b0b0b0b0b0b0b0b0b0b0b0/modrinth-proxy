@@ -62,7 +62,7 @@ export function DownloadIconButton({ href, download, label, className = '' }) {
         href={href}
         download={download}
         aria-label={label}
-        className={`inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-gray-700 transition-colors hover:bg-gray-200/80 dark:text-gray-300 dark:hover:bg-[#2e3035] ${className}`}
+        className={`inline-flex h-9 w-9 shrink-0 cursor-pointer items-center justify-center rounded-full text-gray-700 dark:text-gray-300 icon-glass ${className}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
