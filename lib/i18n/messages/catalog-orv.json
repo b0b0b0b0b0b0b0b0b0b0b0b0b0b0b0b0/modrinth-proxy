@@ -194,7 +194,6 @@
     "environments": "Дозволенныя обстановки",
     "also": "А такъ же",
     "dependents": "Зависимые труды",
-    "dependentsTip": "Труды, коимъ надобенъ {name}",
     "aboutServer": "О станціи",
     "region": "Губернія",
     "languages": "Рѣчи",
@@ -233,7 +232,13 @@
     "plays4w": "{n} пусковъ черезъ Modrinth App за послѣдній мѣсяцъ",
     "playersNow": "{n} игроковъ нынѣ играютъ",
     "playerNow": "{n} игрокъ нынѣ играетъ",
-    "playersFew": "{n} игрока нынѣ играютъ"
+    "playersFew": "{n} игрока нынѣ играютъ",
+    "dependentsTipBy": {
+      "mods": "Моды, коимъ надобенъ {name}",
+      "plugins": "Плагины, коимъ надобенъ {name}",
+      "datapacks": "Датапаки, коимъ надобенъ {name}",
+      "modpacks": "Сборки, въ коихъ есть {name}"
+    }
   },
   "version": {
     "metadata": "Помѣты",

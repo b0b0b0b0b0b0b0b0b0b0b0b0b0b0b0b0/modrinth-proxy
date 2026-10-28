@@ -194,7 +194,6 @@
     "environments": "Môi trường hỗ trợ",
     "also": "Cũng",
     "dependents": "Dự án phụ thuộc",
-    "dependentsTip": "Các dự án cần {name}",
     "aboutServer": "Về máy chủ",
     "region": "Khu vực",
     "languages": "Ngôn ngữ",
@@ -233,7 +232,13 @@
     "plays4w": "{n} lần mở Modrinth App trong tháng qua",
     "playersNow": "{n} người chơi đang online",
     "playerNow": "{n} người chơi đang online",
-    "playersFew": "{n} người chơi đang online"
+    "playersFew": "{n} người chơi đang online",
+    "dependentsTipBy": {
+      "mods": "Các mod cần {name}",
+      "plugins": "Các plugin cần {name}",
+      "datapacks": "Các datapack cần {name}",
+      "modpacks": "Các modpack có {name}"
+    }
   },
   "version": {
     "metadata": "Metadata",

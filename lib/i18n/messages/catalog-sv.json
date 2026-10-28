@@ -194,7 +194,6 @@
     "environments": "Stödda miljöer",
     "also": "Också",
     "dependents": "Beroende projekt",
-    "dependentsTip": "Projekt som behöver {name}",
     "aboutServer": "Om servern",
     "region": "Region",
     "languages": "Språk",
@@ -233,7 +232,13 @@
     "plays4w": "{n} Modrinth App-starter den senaste månaden",
     "playersNow": "{n} spelare online nu",
     "playerNow": "{n} spelare online nu",
-    "playersFew": "{n} spelare online nu"
+    "playersFew": "{n} spelare online nu",
+    "dependentsTipBy": {
+      "mods": "Moddar som behöver {name}",
+      "plugins": "Plugins som behöver {name}",
+      "datapacks": "Datapaket som behöver {name}",
+      "modpacks": "Modpaket som innehåller {name}"
+    }
   },
   "version": {
     "metadata": "Metadata",

@@ -194,7 +194,6 @@
     "environments": "Environnements pris en charge",
     "also": "Aussi",
     "dependents": "Projets dépendants",
-    "dependentsTip": "Projets qui ont besoin de {name}",
     "aboutServer": "À propos du serveur",
     "region": "Région",
     "languages": "Langues",
@@ -233,7 +232,13 @@
     "plays4w": "{n} lancements de Modrinth App le mois dernier",
     "playersNow": "{n} joueurs en ligne maintenant",
     "playerNow": "{n} joueur en ligne maintenant",
-    "playersFew": "{n} joueurs en ligne maintenant"
+    "playersFew": "{n} joueurs en ligne maintenant",
+    "dependentsTipBy": {
+      "mods": "Mods qui ont besoin de {name}",
+      "plugins": "Plugins qui ont besoin de {name}",
+      "datapacks": "Datapacks qui ont besoin de {name}",
+      "modpacks": "Modpacks qui contiennent {name}"
+    }
   },
   "version": {
     "metadata": "Métadonnées",

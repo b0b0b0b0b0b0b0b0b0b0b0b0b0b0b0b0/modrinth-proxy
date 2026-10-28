@@ -194,7 +194,6 @@
     "environments": "支持环境",
     "also": "同时",
     "dependents": "依赖它的项目",
-    "dependentsTip": "需要 {name} 的项目",
     "aboutServer": "关于服务器",
     "region": "地区",
     "languages": "语言",
@@ -233,7 +232,13 @@
     "plays4w": "近一个月 Modrinth App 启动 {n} 次",
     "playersNow": "当前 {n} 名玩家在线",
     "playerNow": "当前 {n} 名玩家在线",
-    "playersFew": "当前 {n} 名玩家在线"
+    "playersFew": "当前 {n} 名玩家在线",
+    "dependentsTipBy": {
+      "mods": "需要 {name} 的模组",
+      "plugins": "需要 {name} 的插件",
+      "datapacks": "需要 {name} 的数据包",
+      "modpacks": "包含 {name} 的整合包"
+    }
   },
   "version": {
     "metadata": "元数据",

@@ -54,6 +54,10 @@ const TYPE_LABEL_KEYS = {
   minecraft_java_server: 'nav.servers',
 }
 
+function countByType(rows) {
+  return rows.reduce((map, row) => ({ ...map, [row.project_type]: (map[row.project_type] || 0) + 1 }), {})
+}
+
 function typeItems(byType, total, t) {
   return [
     { id: '', label: t('account.filterAll'), count: total },
@@ -245,8 +249,9 @@ function CollectionsGrid({ collections, t, locale }) {
   )
 }
 
-function CollectionView({ collection, page, t, locale }) {
-  const back = (
+function CollectionHeader({ collection, filter, type, t, locale }) {
+  return (
+    <>
     <Link
       href="/account?tab=collections"
       className="inline-flex items-center gap-1 text-xs font-semibold text-gray-500 transition-colors hover:text-modrinth-green"
@@ -256,20 +261,8 @@ function CollectionView({ collection, page, t, locale }) {
       </svg>
       {t('ucol.all')}
     </Link>
-  )
-
-  if (!collection) {
-    return (
+    {collection ? (
       <>
-        {back}
-        <SleepyKitten text={t('ucol.notFound')} />
-      </>
-    )
-  }
-
-  return (
-    <>
-      {back}
       <div className="mt-3 flex flex-wrap items-center gap-4 border-b border-gray-800 pb-4">
         <div className="min-w-0 flex-1">
           <h2 className="break-words text-xl font-bold text-white">{collection.name}</h2>
@@ -289,6 +282,22 @@ function CollectionView({ collection, page, t, locale }) {
         </div>
       </div>
       {collection.items.length > 0 ? (
+        <div className="mt-4">
+          <TypeFilter items={filter} active={type || ''} tab="collections" base={`/account?tab=collections&c=${collection.id}`} />
+        </div>
+      ) : null}
+      </>
+    ) : null}
+    </>
+  )
+}
+
+function CollectionItems({ collection, page, type, t }) {
+  if (!collection) return <SleepyKitten text={t('ucol.notFound')} />
+
+  return (
+    <>
+      {collection.items.length > 0 ? (
         <>
           <ul className="divide-y divide-gray-800">
             {page.rows.map((row) => (
@@ -303,7 +312,7 @@ function CollectionView({ collection, page, t, locale }) {
             page={page.page}
             totalPages={page.pages}
             pathname="/account"
-            searchParams={{ tab: 'collections', c: String(collection.id) }}
+            searchParams={type ? { tab: 'collections', c: String(collection.id), type } : { tab: 'collections', c: String(collection.id) }}
             className="mt-4 border-t border-gray-800 pt-4"
           />
         </>
@@ -336,7 +345,7 @@ export default async function AccountPage({ searchParams }) {
   const requestedPage = parseInt(searchParams?.page, 10)
   const typeFilter = TYPE_ORDER.includes(searchParams?.type) ? searchParams.type : null
   const downloads = getDownloadsPage(user.id, requestedPage, typeFilter)
-  const favoritesByType = favorites.reduce((map, row) => ({ ...map, [row.project_type]: (map[row.project_type] || 0) + 1 }), {})
+  const favoritesByType = countByType(favorites)
   const shownFavorites = typeFilter ? favorites.filter((row) => row.project_type === typeFilter) : favorites
   const updatesPage = paginate(updates, requestedPage)
   const favoritesPage = paginate(shownFavorites, requestedPage)
@@ -346,7 +355,10 @@ export default async function AccountPage({ searchParams }) {
   const collections = listCollections(user.id)
   const collectionId = tab === 'collections' ? parseCollectionId(searchParams?.c) : null
   const collection = collectionId ? getCollectionItems(user.id, collectionId) : null
-  const collectionPage = collection ? paginate(collection.items, requestedPage) : null
+  const collectionByType = collection ? countByType(collection.items) : {}
+  const collectionPage = collection
+    ? paginate(typeFilter ? collection.items.filter((row) => row.project_type === typeFilter) : collection.items, requestedPage)
+    : null
   const counts = { updates: updates.length, favorites: favorites.length, collections: collections.length, downloads: downloads.all }
   const mutes = tab === 'downloads' ? getNotifyMutes(user.id) : new Set()
   const trackDownloads = !user.skip_download_updates
@@ -434,6 +446,15 @@ export default async function AccountPage({ searchParams }) {
         {tab === 'favorites' && favorites.length > 0 ? (
           <TypeFilter items={typeItems(favoritesByType, favorites.length, t)} active={typeFilter || ''} tab="favorites" />
         ) : null}
+        {tab === 'collections' && searchParams?.c ? (
+          <CollectionHeader
+            collection={collection}
+            filter={collection ? typeItems(collectionByType, collection.items.length, t) : []}
+            type={typeFilter}
+            t={t}
+            locale={locale}
+          />
+        ) : null}
         {tab === 'downloads' && downloads.all > 0 ? (
           <TypeFilter items={typeItems(downloads.byType, downloads.all, t)} active={typeFilter || ''} tab="downloads" />
         ) : null}
@@ -497,7 +518,7 @@ export default async function AccountPage({ searchParams }) {
 
         {tab === 'collections' ? (
           searchParams?.c ? (
-            <CollectionView collection={collection} page={collectionPage} t={t} locale={locale} />
+            <CollectionItems collection={collection} page={collectionPage} type={typeFilter} t={t} />
           ) : (
             <CollectionsGrid collections={collections} t={t} locale={locale} />
           )

@@ -194,7 +194,6 @@
     "environments": "Atbalstītās vides",
     "also": "Arī",
     "dependents": "Atkarīgie projekti",
-    "dependentsTip": "Projekti, kuriem vajag {name}",
     "aboutServer": "Par serveri",
     "region": "Reģions",
     "languages": "Valodas",
@@ -233,7 +232,13 @@
     "plays4w": "{n} Modrinth App palaišanas pēdējā mēnesī",
     "playersNow": "{n} spēlētāji tagad tiešsaistē",
     "playerNow": "{n} spēlētājs tagad tiešsaistē",
-    "playersFew": "{n} spēlētāji tagad tiešsaistē"
+    "playersFew": "{n} spēlētāji tagad tiešsaistē",
+    "dependentsTipBy": {
+      "mods": "Modi, kuriem vajag {name}",
+      "plugins": "Spraudņi, kuriem vajag {name}",
+      "datapacks": "Datu pakotnes, kurām vajag {name}",
+      "modpacks": "Modpakas, kurās ir {name}"
+    }
   },
   "version": {
     "metadata": "Metadati",

@@ -303,7 +303,6 @@
     "environments": "Поддерживаемые окружения",
     "also": "А так же",
     "dependents": "Зависимые проекты",
-    "dependentsTip": "Проекты, которым нужен {name}",
     "aboutServer": "О сервере",
     "region": "Регион",
     "languages": "Языки",
@@ -359,7 +358,13 @@
     "plays4w": "{n} запусков через Modrinth App за последний месяц",
     "playersNow": "{n} игроков сейчас играют",
     "playerNow": "{n} игрок сейчас играет",
-    "playersFew": "{n} игрока сейчас играют"
+    "playersFew": "{n} игрока сейчас играют",
+    "dependentsTipBy": {
+      "mods": "Моды, которым нужен {name}",
+      "plugins": "Плагины, которым нужен {name}",
+      "datapacks": "Датапаки, которым нужен {name}",
+      "modpacks": "Модпаки, в которых есть {name}"
+    }
   },
   "version": {
     "metadata": "Метаданные",

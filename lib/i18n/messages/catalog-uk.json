@@ -194,7 +194,6 @@
     "environments": "Підтримувані середовища",
     "also": "Також",
     "dependents": "Залежні проєкти",
-    "dependentsTip": "Проєкти, яким потрібен {name}",
     "aboutServer": "Про сервер",
     "region": "Регіон",
     "languages": "Мови",
@@ -233,7 +232,13 @@
     "plays4w": "{n} запусків Modrinth App за останній місяць",
     "playersNow": "{n} гравців зараз онлайн",
     "playerNow": "{n} гравець зараз онлайн",
-    "playersFew": "{n} гравці зараз онлайн"
+    "playersFew": "{n} гравці зараз онлайн",
+    "dependentsTipBy": {
+      "mods": "Моди, яким потрібен {name}",
+      "plugins": "Плагіни, яким потрібен {name}",
+      "datapacks": "Датапаки, яким потрібен {name}",
+      "modpacks": "Модпаки, у яких є {name}"
+    }
   },
   "version": {
     "metadata": "Метадані",

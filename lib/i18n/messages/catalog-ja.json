@@ -194,7 +194,6 @@
     "environments": "対応環境",
     "also": "その他",
     "dependents": "依存しているプロジェクト",
-    "dependentsTip": "{name} を必要とするプロジェクト",
     "aboutServer": "サーバーについて",
     "region": "地域",
     "languages": "言語",
@@ -233,7 +232,13 @@
     "plays4w": "過去1か月のModrinth App起動 {n}回",
     "playersNow": "現在オンライン {n}人",
     "playerNow": "現在オンライン {n}人",
-    "playersFew": "現在オンライン {n}人"
+    "playersFew": "現在オンライン {n}人",
+    "dependentsTipBy": {
+      "mods": "{name} を必要とする MOD",
+      "plugins": "{name} を必要とするプラグイン",
+      "datapacks": "{name} を必要とするデータパック",
+      "modpacks": "{name} を含む Modパック"
+    }
   },
   "version": {
     "metadata": "メタデータ",

@@ -57,7 +57,7 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
       </h3>
       <div className="flex flex-wrap gap-2">
         {dependents.map(({ catalog, count }) => (
-          <StyledTooltip key={catalog} label={t('project.dependentsTip', { name: title })}>
+          <StyledTooltip key={catalog} label={t(`project.dependentsTipBy.${catalog}`, { name: title })}>
             <Link
               href={dependentCatalogHref(catalog, projectId)}
               className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors text-xs font-medium text-gray-700 dark:text-gray-300"

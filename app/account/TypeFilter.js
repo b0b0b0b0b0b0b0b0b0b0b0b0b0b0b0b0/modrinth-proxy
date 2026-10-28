@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 
-export default function TypeFilter({ items, active, tab }) {
+export default function TypeFilter({ items, active, tab, base = `/account?tab=${tab}` }) {
   const reduceMotion = useReducedMotion()
   if (items.length < 3) return null
 
@@ -15,7 +15,7 @@ export default function TypeFilter({ items, active, tab }) {
           return (
             <Link
               key={item.id}
-              href={item.id ? `/account?tab=${tab}&type=${item.id}` : `/account?tab=${tab}`}
+              href={item.id ? `${base}&type=${item.id}` : base}
               scroll={false}
               aria-current={selected ? 'page' : undefined}
               className={`relative z-[1] flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 transition-colors ${
