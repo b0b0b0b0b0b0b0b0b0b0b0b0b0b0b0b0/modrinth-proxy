@@ -63,7 +63,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
       <span className="mb-1 block text-xs font-semibold text-gray-400">{label}</span>
       <Popover.Root open={open} onOpenChange={setOpen}>
         <Popover.Anchor asChild>
-          <div ref={anchorRef} className="rounded-xl bg-gray-100 dark:bg-[#34363c]">
+          <div ref={anchorRef} className="glass-btn rounded-xl">
             {open && searchPlaceholder ? (
               <div className="relative flex items-center">
                 <input
@@ -132,7 +132,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                   exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -4, scale: 0.98 }}
                   transition={{ duration: 0.14, ease: 'easeOut' }}
                   style={{ width: 'var(--radix-popover-trigger-width)', transformOrigin: 'var(--radix-popover-content-transform-origin)' }}
-                  className="z-50 flex max-h-[min(260px,var(--radix-popover-content-available-height))] min-w-[180px] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl dark:border-[#2e3035] dark:bg-[#27292e]"
+                  className="z-50 flex max-h-[min(260px,var(--radix-popover-content-available-height))] min-w-[180px] flex-col overflow-hidden rounded-xl glass-pop"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-b border-gray-200 px-3 py-2 dark:border-[#2e3035]">
                     <span className="text-xs font-semibold text-gray-500 dark:text-gray-400">{label}</span>
@@ -173,13 +173,13 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                             onClick={() => pick(option.value)}
                             className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium outline-none transition-all ${
                               selected
-                                ? 'bg-modrinth-green text-black'
+                                ? 'font-semibold text-modrinth-green hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-[#34363c] dark:focus-visible:bg-[#34363c]'
                                 : 'text-gray-700 hover:bg-gray-100 focus-visible:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c] dark:focus-visible:bg-[#34363c]'
                             }`}
                           >
                             <span className="min-w-0 truncate">{option.label}</span>
                             {option.hint ? (
-                              <span className={`shrink-0 text-[11px] ${selected ? 'text-black/60' : 'text-gray-600 dark:text-gray-500'}`}>
+                              <span className={`shrink-0 text-[11px] ${'text-gray-600 dark:text-gray-500'}`}>
                                 {option.hint}
                               </span>
                             ) : null}

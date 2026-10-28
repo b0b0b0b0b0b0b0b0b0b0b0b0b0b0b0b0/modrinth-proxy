@@ -376,7 +376,8 @@
     "donatePatreon": "Patreon で支援",
     "donatePaypal": "PayPal",
     "donateKofi": "Ko-fi",
-    "donateOpenCollective": "Open Collective"
+    "donateOpenCollective": "Open Collective",
+    "support": "作者を応援"
   },
   "gh": {
     "starOne": "{n}つのスター",

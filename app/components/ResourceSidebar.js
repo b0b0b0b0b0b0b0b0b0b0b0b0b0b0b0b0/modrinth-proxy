@@ -116,7 +116,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                       >
                         <Link
                           href={filterUrl}
-                          className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors group"
+                          className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-full group"
                         >
                           <div 
                             className="w-4 h-4 flex-shrink-0" 
@@ -141,7 +141,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
             {environment && (
               <div>
                 <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.environments')}</h3>
-                <div className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg w-fit">
+                <div className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-full w-fit">
                   <svg className="w-4 h-4 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 17v-4m0 0V9m0 4h.01" />

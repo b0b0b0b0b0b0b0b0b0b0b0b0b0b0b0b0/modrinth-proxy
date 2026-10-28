@@ -121,7 +121,7 @@ export default function SortDropdown({
         onClick={() => setIsOpen(!isOpen)}
         onMouseEnter={() => setHovered('button')}
         onMouseLeave={() => setHovered('')}
-        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg transition-all group bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        className="glass-btn inline-flex items-center gap-2 px-4 py-2 rounded-lg group"
       >
         {currentOption.heart ? <SortHeart playing={hovered === 'button'} /> : (
         <svg className="w-4 h-4 text-gray-600 group-hover:text-modrinth-green dark:text-gray-400 transition-colors" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -144,7 +144,7 @@ export default function SortDropdown({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-56 rounded-xl border border-gray-200 bg-white p-1.5 shadow-xl z-50 overflow-hidden dark:border-[#2e3035] dark:bg-[#27292e]">
+        <div className="absolute top-full left-0 mt-2 w-56 glass-pop rounded-xl p-1.5 z-50 overflow-hidden">
           {sortOptions.map((option) => (
             <button
               key={option.value}
@@ -153,7 +153,7 @@ export default function SortDropdown({
               onMouseLeave={() => setHovered('')}
               className={`flex w-full items-center gap-1.5 rounded-lg px-3 py-2 text-left text-sm font-medium transition-all ${
                 currentSort === option.value 
-                  ? 'bg-modrinth-green/20 text-modrinth-green font-semibold' 
+                  ? 'text-modrinth-green font-semibold hover:bg-gray-100 dark:hover:bg-[#34363c]'
                   : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]'
               }`}
             >

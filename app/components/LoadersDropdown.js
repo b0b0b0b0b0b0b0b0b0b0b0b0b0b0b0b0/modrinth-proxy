@@ -7,7 +7,7 @@ import { useT } from './I18nProvider'
 function FilterCheckbox({ checked }) {
   return (
     <div
-      className={`w-4 h-4 shrink-0 rounded border-2 flex items-center justify-center transition ${
+      className={`glass-check w-4 h-4 shrink-0 rounded border-2 flex items-center justify-center transition ${
         checked
           ? 'bg-modrinth-green border-modrinth-green'
           : 'border-gray-400 dark:border-gray-600'
@@ -64,7 +64,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 text-sm font-medium transition capitalize rounded-xl bg-gray-200 text-gray-900 dark:bg-gray-800 dark:text-white"
+        className="glass-btn flex items-center gap-2 px-3 py-2 text-sm font-medium capitalize rounded-xl text-gray-900 dark:text-white"
       >
         <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 3H2l8 9.46V19l4 2v-8.54z" />
@@ -76,7 +76,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 mt-2 w-64 border shadow-2xl z-50 overflow-hidden animate-fade-in rounded-xl border-gray-200 bg-white dark:border-[#2e3035] dark:bg-[#27292e]">
+        <div className="absolute top-full left-0 mt-2 w-64 glass-pop z-50 overflow-hidden animate-fade-in rounded-xl">
           <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-1">
               {loaders.map(loaderId => {

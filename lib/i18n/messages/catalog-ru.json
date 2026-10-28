@@ -530,7 +530,8 @@
     "donatePatreon": "Поддержать на Patreon",
     "donatePaypal": "PayPal",
     "donateKofi": "Ko-fi",
-    "donateOpenCollective": "Open Collective"
+    "donateOpenCollective": "Open Collective",
+    "support": "Поддержать автора"
   },
   "gh": {
     "starOne": "{n} звезда",

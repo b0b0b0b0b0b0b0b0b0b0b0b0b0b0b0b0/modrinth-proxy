@@ -223,7 +223,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                   <Link
                     key={String(loader)}
                     href={`/discover/servers?sc=${encodeURIComponent(String(loader).toLowerCase())}`}
-                    className="z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-2 py-1 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform hover:underline active:scale-[0.95] outline-none capitalize"
+                    className="z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none capitalize"
                   >
                     {loader}
                   </Link>

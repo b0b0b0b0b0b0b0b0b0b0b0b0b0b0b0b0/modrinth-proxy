@@ -72,14 +72,16 @@ function Check({ on }) {
   return (
     <span
       className={[
-        'flex h-5 w-5 shrink-0 items-center justify-center rounded-md transition-colors',
+        'glass-check flex h-5 w-5 shrink-0 items-center justify-center rounded-md transition-colors',
         on ? 'bg-modrinth-green text-black' : 'bg-[var(--bg-tertiary)] text-transparent group-hover/check:bg-gray-700',
       ].join(' ')}
       aria-hidden
     >
-      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
-        <path d="M20 6 9 17l-5-5" />
-      </svg>
+      {on ? (
+        <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      ) : null}
     </span>
   )
 }
@@ -253,7 +255,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
           ) : (
             <>
               {collections.length > 5 ? (
-                <label className="mb-2 flex h-9 items-center gap-2 rounded-xl border border-gray-700 bg-[var(--bg-primary)] px-3 text-gray-500 focus-within:border-modrinth-green/60 focus-within:text-white">
+                <label className="mb-2 flex h-9 items-center gap-2 rounded-xl border border-gray-700 bg-[var(--bg-primary)] px-3 text-gray-500 focus-within:text-white">
                   <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
                     <path d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0" />
                   </svg>

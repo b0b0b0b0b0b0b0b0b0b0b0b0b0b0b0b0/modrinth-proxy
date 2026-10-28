@@ -188,7 +188,11 @@ export default function CodeBlockActions({ children }) {
         <Tooltip.Portal>
           <Tooltip.Content side="top" sideOffset={6} className="radix-tooltip-content">
             {tip?.label}
-            <Tooltip.Arrow width={11} height={5} className="radix-tooltip-arrow" />
+            <Tooltip.Arrow asChild className="radix-tooltip-arrow">
+              <svg width="14" height="7" viewBox="0 0 14 7" aria-hidden>
+                <path d="M0 0h14L8.6 5.9a2.2 2.2 0 0 1-3.2 0Z" />
+              </svg>
+            </Tooltip.Arrow>
           </Tooltip.Content>
         </Tooltip.Portal>
       </Tooltip.Root>

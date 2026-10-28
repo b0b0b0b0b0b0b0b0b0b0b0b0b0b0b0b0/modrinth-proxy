@@ -164,7 +164,7 @@ function ProjectSearch({ placeholder, excludeIds, onSelect }) {
         )}
       </div>
       {showDropdown && (
-        <div className="absolute left-0 right-0 top-full mt-1 z-30 max-h-72 overflow-y-auto custom-scrollbar rounded-xl border border-gray-700 bg-modrinth-dark p-1 shadow-xl">
+        <div className="absolute left-0 right-0 top-full mt-1 z-30 max-h-72 overflow-y-auto custom-scrollbar glass-pop rounded-xl p-1">
           {loading && visible.length === 0 ? (
             <div className="px-3 py-2 text-sm text-gray-500">{t('filter.dep.searching')}</div>
           ) : visible.length === 0 ? (
@@ -236,7 +236,7 @@ function DependencyTypePicker({ types, onCommit }) {
         <Chevron open={open} />
       </button>
       {open && (
-        <div role="listbox" aria-multiselectable="true" className="absolute left-0 top-full mt-1 z-30 min-w-[220px] rounded-xl border border-gray-700 bg-modrinth-dark p-1 shadow-xl">
+        <div role="listbox" aria-multiselectable="true" className="absolute left-0 top-full mt-1 z-30 min-w-[220px] glass-pop rounded-xl p-1">
           {DEPENDENCY_TYPES.map((type) => {
             const checked = draft.includes(type)
             return (
@@ -246,10 +246,10 @@ function DependencyTypePicker({ types, onCommit }) {
                 role="option"
                 aria-selected={checked}
                 onClick={() => toggle(type)}
-                className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-colors"
+                className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-sm text-gray-300 hover:text-white transition-colors group"
               >
                 <span className="flex-1">{t(`filter.dep.${type}`)}</span>
-                <span className={`flex h-4 w-4 items-center justify-center rounded border ${checked ? 'border-modrinth-green bg-modrinth-green text-black' : 'border-gray-600'}`}>
+                <span className={`glass-check flex h-4 w-4 items-center justify-center rounded border ${checked ? 'border-modrinth-green bg-modrinth-green text-black' : 'border-gray-600'}`}>
                   {checked && <CheckIcon />}
                 </span>
               </button>

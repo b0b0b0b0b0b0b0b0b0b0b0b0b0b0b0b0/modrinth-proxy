@@ -238,9 +238,9 @@ export default function PluginSidebarFilters({ isMobile = false, onFilterChange,
           <div className="pt-2 border-t border-gray-800">
             <button
               onClick={() => setShowAllVersions(!showAllVersions)}
-              className="w-full flex items-center gap-2 px-2 py-1.5 hover:bg-gray-800 rounded transition-colors group"
+              className="w-full flex items-center gap-2 px-2 py-1.5 rounded transition-colors group"
             >
-              <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
+              <div className={`glass-check w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
                 showAllVersions 
                   ? 'bg-modrinth-green border-modrinth-green' 
                   : 'border-gray-600 group-hover:border-gray-500'

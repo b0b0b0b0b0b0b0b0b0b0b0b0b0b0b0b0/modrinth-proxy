@@ -376,7 +376,8 @@
     "donatePatreon": "在 Patreon 上支持",
     "donatePaypal": "PayPal",
     "donateKofi": "Ko-fi",
-    "donateOpenCollective": "Open Collective"
+    "donateOpenCollective": "Open Collective",
+    "support": "支持作者"
   },
   "gh": {
     "starOne": "{n} 星标",

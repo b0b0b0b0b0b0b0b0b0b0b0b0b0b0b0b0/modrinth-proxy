@@ -60,7 +60,7 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
           <StyledTooltip key={catalog} label={t(`project.dependentsTipBy.${catalog}`, { name: title })}>
             <Link
               href={dependentCatalogHref(catalog, projectId)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 bg-gray-200 dark:bg-gray-800 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors text-xs font-medium text-gray-700 dark:text-gray-300"
+              className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-sm font-medium text-gray-700 dark:text-gray-300"
             >
               <span>{t(`nav.${catalog}`)}</span>
               <span className="text-modrinth-green font-semibold">{new Intl.NumberFormat(intlLocale(locale)).format(count)}</span>

@@ -45,7 +45,7 @@ export default function ContentNavigation({
   return (
     <div className="overflow-x-auto mb-4 mobile-nav-spacing">
       <nav
-        className={`relative flex w-fit rounded-full p-1 text-sm font-bold ${effectiveAccent ? '' : 'bg-gray-800'}`}
+        className={`glass-track relative flex w-fit rounded-full p-1 text-sm font-bold ${effectiveAccent ? '' : 'bg-gray-800'}`}
         style={
           effectiveAccent
             ? { backgroundColor: effectiveAccent.trackBgCss }
@@ -61,8 +61,8 @@ export default function ContentNavigation({
               className={`button-animation z-[1] flex flex-row items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
                 active
                   ? effectiveAccent
-                    ? ''
-                    : 'bg-modrinth-green text-black'
+                    ? 'glass-pill'
+                    : 'glass-pill bg-modrinth-green text-black'
                   : 'text-gray-400 hover:text-white'
               }`}
               style={

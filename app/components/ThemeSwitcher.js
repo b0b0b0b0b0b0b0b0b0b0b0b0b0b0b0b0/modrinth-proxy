@@ -95,7 +95,7 @@ export default function ThemeSwitcher() {
                     setIsOpen(false)
                   }}
                   className={`flex items-center justify-between px-3 py-2.5 sm:py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 transition text-left rounded-lg ${
-                    theme === themeOption.id ? 'bg-gray-100 dark:bg-gray-700' : ''
+                    theme === themeOption.id ? 'font-semibold text-modrinth-green' : ''
                   }`}
                 >
                   <span className="flex items-center gap-2 text-gray-900 dark:text-white">

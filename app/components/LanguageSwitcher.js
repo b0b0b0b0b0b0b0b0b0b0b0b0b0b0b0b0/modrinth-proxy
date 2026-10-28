@@ -53,7 +53,7 @@ export default function LanguageSwitcher({ compact = false }) {
                   onClick={() => setLocale(item.id)}
                   className={`flex items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition ${
                     active
-                      ? 'bg-[rgba(var(--color-green-rgb),0.16)] text-modrinth-green'
+                      ? 'text-modrinth-green hover:bg-gray-800'
                       : 'text-gray-300 hover:bg-gray-800 hover:text-white'
                   }`}
                 >

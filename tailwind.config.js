@@ -9,6 +9,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        xs: ['0.8125rem', { lineHeight: '1.125rem' }],
+        sm: ['0.9375rem', { lineHeight: '1.375rem' }],
+      },
       colors: {
         'version-release-bg': 'rgba(27, 217, 106, 0.1)',
         'version-release-fg': '#2ee07a',

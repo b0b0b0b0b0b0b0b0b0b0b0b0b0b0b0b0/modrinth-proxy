@@ -120,7 +120,7 @@ function PickerDropdownPortal({ anchorRef, open, children, dropdownRef }) {
         maxHeight: layout.maxHeight,
         zIndex: 260,
       }}
-      className="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xl dark:border-[#2e3035] dark:bg-[#27292e]"
+      className="glass-pop flex flex-col overflow-hidden rounded-xl"
     >
       {children}
     </div>,
@@ -198,7 +198,7 @@ export default function DownloadModalPickers({
         className={`grid w-full gap-2 ${showLoaderPicker ? 'grid-cols-1 min-[480px]:grid-cols-2' : 'grid-cols-1'}`}
       >
         <div ref={versionAnchorRef} className="relative min-w-0">
-          <div className="rounded-xl bg-gray-100 dark:bg-[#34363c]">
+          <div className="glass-btn rounded-xl">
             {versionOpen ? (
               <div className="relative flex items-center">
                 <input
@@ -252,10 +252,10 @@ export default function DownloadModalPickers({
             <button
               type="button"
               onClick={openLoaderPicker}
-              className={`flex h-9 w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left transition-all duration-200 hover:brightness-[115%] active:brightness-[115%] ${
+              className={`glass-btn flex h-9 w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left active:brightness-[115%] ${
                 selectedLoader
-                  ? 'bg-gray-200 text-gray-900 dark:bg-[#34363c] dark:text-white'
-                  : 'bg-gray-100 text-gray-500 dark:bg-[#34363c] dark:text-gray-400'
+                  ? 'text-gray-900 dark:text-white'
+                  : 'text-gray-500 dark:text-gray-400'
               }`}
             >
               <span className="min-w-0 truncate text-sm font-semibold leading-tight min-[480px]:text-base">
@@ -325,7 +325,7 @@ export default function DownloadModalPickers({
                 }}
                 className={`flex-1 rounded-lg px-3 py-2 text-left text-sm font-medium transition-all ${
                   selectedMcVersion === version
-                    ? 'bg-modrinth-green text-black'
+                    ? 'font-semibold text-modrinth-green hover:bg-gray-100 dark:hover:bg-[#34363c]'
                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]'
                 }`}
               >
@@ -372,7 +372,7 @@ export default function DownloadModalPickers({
                 }}
                 className={`flex-1 rounded-lg px-3 py-2 text-left text-sm font-medium transition-all ${
                   selected
-                    ? 'bg-modrinth-green text-black'
+                    ? 'font-semibold text-modrinth-green hover:bg-gray-100 dark:hover:bg-[#34363c]'
                     : compatible
                       ? 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c]'
                       : 'cursor-not-allowed text-red-500 opacity-40'

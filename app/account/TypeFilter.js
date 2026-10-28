@@ -9,7 +9,7 @@ export default function TypeFilter({ items, active, tab, base = `/account?tab=${
 
   return (
     <div className="mb-3 overflow-x-auto">
-      <nav className="relative flex w-fit rounded-full bg-[var(--bg-primary)] p-1 text-sm font-bold">
+      <nav className="glass-track relative flex w-fit rounded-full bg-[var(--bg-primary)] p-1 text-sm font-bold">
         {items.map((item) => {
           const selected = item.id === active
           return (
@@ -25,7 +25,7 @@ export default function TypeFilter({ items, active, tab, base = `/account?tab=${
               {selected ? (
                 <motion.span
                   layoutId={`type-filter-${tab}`}
-                  className="absolute inset-0 -z-[1] rounded-full bg-modrinth-green"
+                  className="glass-pill absolute inset-0 -z-[1] rounded-full bg-modrinth-green"
                   transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
                 />
               ) : null}

@@ -530,7 +530,8 @@
     "donatePatreon": "Support on Patreon",
     "donatePaypal": "PayPal",
     "donateKofi": "Ko-fi",
-    "donateOpenCollective": "Open Collective"
+    "donateOpenCollective": "Open Collective",
+    "support": "Support the author"
   },
   "gh": {
     "starOne": "{n} star",

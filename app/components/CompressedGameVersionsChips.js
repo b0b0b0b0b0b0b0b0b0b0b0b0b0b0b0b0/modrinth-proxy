@@ -7,13 +7,13 @@ import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
 
 const chipLinkCls =
-  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-2 py-1 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform hover:underline active:scale-[0.95] outline-none'
+  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none'
 
 const chipPlainCls =
-  'z-[1] inline-flex shrink-0 cursor-default items-center gap-1 whitespace-nowrap rounded-full border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-2 py-1 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none hover:no-underline'
+  'z-[1] inline-flex shrink-0 cursor-default items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none hover:no-underline'
 
 const chipMoreCls =
-  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full border border-[var(--border-color)] bg-[var(--bg-tertiary)] px-2 py-1 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform hover:underline active:scale-[0.95] outline-none'
+  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none'
 
 function versionHref(browseRoute, versionSearchParam, v) {
   return `/${browseRoute}?${versionSearchParam}=${encodeURIComponent(v)}`
@@ -132,7 +132,7 @@ export default function CompressedGameVersionsChips({
           <Popover.Trigger asChild>
             <button
               type="button"
-              className={`${chipMoreCls} hover:underline`}
+              className={`${chipMoreCls}`}
               aria-label={t('server.more', { n: overflow.length })}
             >
               +{overflow.length}

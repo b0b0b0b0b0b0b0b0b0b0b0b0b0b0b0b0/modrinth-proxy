@@ -97,7 +97,7 @@ export default function DisclosureLinkMismatchBanner() {
           onClick={() => setDontShowAgain((value) => !value)}
           className="flex items-center gap-3 bg-transparent p-0 text-left text-sm font-medium text-gray-200"
         >
-          <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${
+          <span className={`glass-check flex h-5 w-5 shrink-0 items-center justify-center rounded-md border ${
             dontShowAgain
               ? 'border-modrinth-green bg-modrinth-green text-black'
               : 'border-gray-600 bg-gray-800'

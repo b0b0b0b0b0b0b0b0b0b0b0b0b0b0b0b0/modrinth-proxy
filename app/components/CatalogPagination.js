@@ -9,7 +9,7 @@ import { intlLocale } from '@/lib/i18n/config'
 import { buildCatalogPageUrl, getPaginationItems } from '@/lib/pagination'
 
 const buttonBase =
-  'inline-flex h-10 min-w-10 items-center justify-center rounded-lg border px-3 text-sm font-medium transition'
+  'glass-btn inline-flex h-10 min-w-10 items-center justify-center rounded-lg px-3 text-sm font-semibold'
 
 function NavLink({ href, label, children }) {
   return (
@@ -17,7 +17,7 @@ function NavLink({ href, label, children }) {
       <Link
         href={href}
         aria-label={label}
-        className={`${buttonBase} border-gray-700 bg-modrinth-dark text-gray-300 hover:border-modrinth-green hover:text-white`}
+        className={`${buttonBase} text-gray-300 hover:text-white`}
       >
         {children}
       </Link>
@@ -82,7 +82,7 @@ function EditableCurrentPage({ page, totalPages, pathname, searchParams, t }) {
           }
         }}
         onBlur={cancel}
-        className={`${buttonBase} w-[4.5rem] border-modrinth-green bg-modrinth-dark text-center font-medium text-modrinth-green-light outline-none ring-2 ring-modrinth-green/40`}
+        className={`${buttonBase} glass-btn--active w-[4.5rem] text-center text-modrinth-green-light outline-none`}
         aria-label={t('catalog.pager.enterPage')}
       />
     )
@@ -94,7 +94,7 @@ function EditableCurrentPage({ page, totalPages, pathname, searchParams, t }) {
         type="button"
         onClick={() => setEditing(true)}
         aria-current="page"
-        className={`${buttonBase} cursor-text border-modrinth-green bg-modrinth-green/15 text-modrinth-green-light hover:bg-modrinth-green/25`}
+        className={`${buttonBase} glass-btn--active cursor-text text-modrinth-green-light`}
       >
         {page}
       </button>
@@ -151,7 +151,7 @@ export default function CatalogPagination({
             <StyledTooltip key={item.key} label={t('catalog.pager.pageN', { n: item.page.toLocaleString(nf) })}>
               <Link
                 href={hrefForPage(item.page)}
-                className={`${buttonBase} border-gray-700 bg-modrinth-dark text-gray-300 hover:border-modrinth-green hover:text-white`}
+                className={`${buttonBase} text-gray-300 hover:text-white`}
               >
                 {item.page}
               </Link>
