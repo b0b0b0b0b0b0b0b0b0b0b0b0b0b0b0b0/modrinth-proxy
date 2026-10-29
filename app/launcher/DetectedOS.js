@@ -122,10 +122,25 @@ export default function DetectedOS() {
               refY="3"
               orient="auto"
             >
-              <path d="M0,0 L7,3 L0,6 Z" fill="rgb(var(--color-green-rgb))" />
+              <path
+                d="M0,0 L7,3 L0,6 Z"
+                fill="rgb(var(--color-green-rgb))"
+                stroke="var(--bg-primary)"
+                strokeWidth="0.9"
+                strokeLinejoin="round"
+                paintOrder="stroke"
+              />
             </marker>
           </defs>
-          <circle cx={path.start.x} cy={path.start.y} r="3" fill="rgb(var(--color-green-rgb))" />
+          <circle cx={path.start.x} cy={path.start.y} r="3" fill="rgb(var(--color-green-rgb))" stroke="var(--bg-primary)" strokeWidth="2" paintOrder="stroke" />
+          <path
+            d={path.d}
+            stroke="var(--bg-primary)"
+            strokeWidth="5"
+            strokeLinecap="round"
+            strokeDasharray="6 6"
+            className="os-connector-path"
+          />
           <path
             d={path.d}
             stroke="rgb(var(--color-green-rgb))"

@@ -163,7 +163,9 @@
     "dlFlathub": "Tải trên Flathub",
     "advancedOnly": "Các tùy chọn này dành cho người dùng nâng cao",
     "astralFiles": "Tất cả tệp AstralRinth cho {os}",
-    "experimental": "thử nghiệm"
+    "experimental": "thử nghiệm",
+    "notOs": "Tôi không dùng {os}",
+    "andMore": "và hơn nữa"
   },
   "lookup": {
     "metaTitle": "Tìm tệp theo hash | ModrinthProxy",

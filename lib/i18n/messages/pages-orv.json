@@ -163,7 +163,9 @@
     "dlFlathub": "Скачати на Flathub",
     "advancedOnly": "Сии пути — для искусныхъ людей",
     "astralFiles": "Вся писания AstralRinth для {os}",
-    "experimental": "испытательная"
+    "experimental": "испытательная",
+    "notOs": "У меня не {os}",
+    "andMore": "и прочіе"
   },
   "lookup": {
     "metaTitle": "Розыскъ бумаги по оттиску | ModrinthProxy",

@@ -163,7 +163,9 @@
     "dlFlathub": "在 Flathub 上获取",
     "advancedOnly": "这些选项仅适用于高级用户",
     "astralFiles": "适用于 {os} 的所有 AstralRinth 文件",
-    "experimental": "实验版"
+    "experimental": "实验版",
+    "notOs": "我没有 {os}",
+    "andMore": "以及更多"
   },
   "lookup": {
     "metaTitle": "按哈希查找文件 | ModrinthProxy",

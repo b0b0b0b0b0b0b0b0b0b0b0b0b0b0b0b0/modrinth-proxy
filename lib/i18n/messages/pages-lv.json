@@ -163,7 +163,9 @@
     "dlFlathub": "Lejupielādēt no Flathub",
     "advancedOnly": "Šīs iespējas ir pieredzējušiem lietotājiem",
     "astralFiles": "Visi AstralRinth faili priekš {os}",
-    "experimental": "eksperimentāla"
+    "experimental": "eksperimentāla",
+    "notOs": "Man nav {os}",
+    "andMore": "un vēl"
   },
   "lookup": {
     "metaTitle": "Atrodi failu pēc hash | ModrinthProxy",

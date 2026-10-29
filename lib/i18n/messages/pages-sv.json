@@ -163,7 +163,9 @@
     "dlFlathub": "Hämta på Flathub",
     "advancedOnly": "Dessa alternativ är för avancerade användare",
     "astralFiles": "Alla AstralRinth-filer för {os}",
-    "experimental": "experimentell"
+    "experimental": "experimentell",
+    "notOs": "Jag har inte {os}",
+    "andMore": "och mer"
   },
   "lookup": {
     "metaTitle": "Hitta en fil via hash | ModrinthProxy",

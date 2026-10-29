@@ -163,7 +163,9 @@
     "dlFlathub": "Télécharger sur Flathub",
     "advancedOnly": "Ces options sont destinées aux utilisateurs avancés",
     "astralFiles": "Tous les fichiers AstralRinth pour {os}",
-    "experimental": "expérimental"
+    "experimental": "expérimental",
+    "notOs": "Je n’ai pas {os}",
+    "andMore": "et plus"
   },
   "lookup": {
     "metaTitle": "Trouver un fichier par hash | ModrinthProxy",

@@ -163,7 +163,9 @@
     "dlFlathub": "Flathub で入手",
     "advancedOnly": "これらは上級ユーザー向けのオプションです",
     "astralFiles": "{os} 向けの AstralRinth の全ファイル",
-    "experimental": "実験版"
+    "experimental": "実験版",
+    "notOs": "{os}ではありません",
+    "andMore": "その他"
   },
   "lookup": {
     "metaTitle": "ハッシュでファイルを探す | ModrinthProxy",

@@ -19,7 +19,7 @@ const ASTRALRINTH_FALLBACK = {
   rpm: 'https://git.xorison.dev/didirus/AstralRinth/releases/download/AR-0.10.1601/AstralRinth%20App-0.10.1601-1.x86_64.rpm',
 }
 
-const FLATHUB_URL = 'https://flathub.org/apps/com.modrinth.ModrinthApp'
+export const FLATHUB_URL = 'https://flathub.org/apps/com.modrinth.ModrinthApp'
 
 const LINUX_FORMATS = [
   { id: 'flathub', label: 'Flathub' },
@@ -28,7 +28,7 @@ const LINUX_FORMATS = [
   { id: 'rpm', label: 'RPM' },
 ]
 
-function FlathubIcon({ className = 'h-5 w-5' }) {
+export function FlathubIcon({ className = 'h-5 w-5' }) {
   return (
     <svg className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0.04 -1.13 62.99 60.24" aria-hidden>
       <g fill="currentColor" strokeWidth="1.123" transform="translate(-247.445 -135.95)scale(1.56993)">
