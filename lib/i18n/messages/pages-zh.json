@@ -133,10 +133,10 @@
     "otherTip": "查看其他选项",
     "otherOs": "macOS · Linux · 以及更多",
     "notWindows": "我没有 Windows",
-    "noLicenseTip": "无需 Minecraft 正版也能玩",
-    "astralTip": "AstralRinth 是同一启动器，带离线模式",
-    "noLicense": "没有 Minecraft 正版？这里有",
-    "withOffline": "带离线模式",
+    "noLicenseTip": "无需 Minecraft 账户即可游玩",
+    "astralTip": "AstralRinth 是同一个启动器，但只需昵称即可登录，无需 Minecraft 账户",
+    "noLicense": "没有 Minecraft 账户？试试",
+    "withOffline": "——只用昵称即可登录",
     "detected": "你正在使用",
     "best": "最好的",
     "bestRest": "Minecraft 模组启动器",
@@ -159,7 +159,11 @@
     "offlinePlay": "可离线游玩",
     "release": "发布：",
     "checked": "已核验：",
-    "notChecked": "尚未核验"
+    "notChecked": "尚未核验",
+    "dlFlathub": "在 Flathub 上获取",
+    "advancedOnly": "这些选项仅适用于高级用户",
+    "astralFiles": "适用于 {os} 的所有 AstralRinth 文件",
+    "experimental": "实验版"
   },
   "lookup": {
     "metaTitle": "按哈希查找文件 | ModrinthProxy",

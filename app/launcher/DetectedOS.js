@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useT } from '../components/I18nProvider'
 
-function detectOS() {
+export function detectOS() {
   if (typeof navigator === 'undefined') return null
   const platform = (navigator.userAgentData?.platform || navigator.platform || '').toLowerCase()
   const ua = (navigator.userAgent || '').toLowerCase()
@@ -21,12 +21,6 @@ const OS_TARGET = {
   Windows: 'download-os-windows',
   macOS: 'download-os-macos',
   Linux: 'download-os-linux',
-}
-
-const OS_END_OFFSET_X = {
-  Windows: 16,
-  macOS: 0,
-  Linux: -16,
 }
 
 export default function DetectedOS() {
@@ -61,7 +55,7 @@ export default function DetectedOS() {
       const t = target.getBoundingClientRect()
 
       const start = { x: w.left + w.width / 2, y: w.bottom + 4 }
-      const end = { x: t.left + t.width / 2 + (OS_END_OFFSET_X[os] || 0), y: t.top - 24 }
+      const end = { x: t.left + t.width / 2, y: t.top - 10 }
 
       if (end.y <= start.y + 20) {
         setPath(null)

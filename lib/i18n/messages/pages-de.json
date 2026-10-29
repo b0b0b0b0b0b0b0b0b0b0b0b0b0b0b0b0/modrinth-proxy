@@ -133,10 +133,10 @@
     "otherTip": "Weitere Optionen ansehen",
     "otherOs": "macOS · Linux · und mehr",
     "notWindows": "Ich habe kein Windows",
-    "noLicenseTip": "Ohne Minecraft-Lizenz spielen",
-    "astralTip": "AstralRinth ist derselbe Launcher, mit Offline-Modus",
-    "noLicense": "Keine Minecraft-Lizenz? Es gibt",
-    "withOffline": "mit Offline-Modus",
+    "noLicenseTip": "Spiele ohne Minecraft-Konto",
+    "astralTip": "AstralRinth ist derselbe Launcher, aber du meldest dich einfach mit einem Nickname an – ohne Minecraft-Konto",
+    "noLicense": "Kein Minecraft-Konto? Es gibt",
+    "withOffline": "– melde dich einfach mit einem Nickname an",
     "detected": "Du bist auf",
     "best": "Der beste",
     "bestRest": "Launcher für Minecraft-Mods",
@@ -159,7 +159,11 @@
     "offlinePlay": "Ermöglicht Offline-Spiel",
     "release": "veröffentlicht:",
     "checked": "geprüft:",
-    "notChecked": "noch nicht geprüft"
+    "notChecked": "noch nicht geprüft",
+    "dlFlathub": "Auf Flathub herunterladen",
+    "advancedOnly": "Diese Optionen sind für erfahrene Nutzer",
+    "astralFiles": "Alle AstralRinth-Dateien für {os}",
+    "experimental": "experimentell"
   },
   "lookup": {
     "metaTitle": "Datei per Hash finden | ModrinthProxy",

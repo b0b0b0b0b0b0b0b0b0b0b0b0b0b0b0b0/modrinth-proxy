@@ -133,10 +133,10 @@
     "otherTip": "Посмотрѣть прочіе роды",
     "otherOs": "macOS · Linux · и прочіе",
     "notWindows": "У меня не Windows",
-    "noLicenseTip": "Играй безъ грамоты Майнкрафтъ",
-    "astralTip": "AstralRinth — тотъ же пускъ, но съ ходомъ не въ сѣти",
-    "noLicense": "Нѣтъ грамоты Майнкрафтъ? Есть",
-    "withOffline": "съ ходомъ не въ сѣти",
+    "noLicenseTip": "Играй безъ запиши Майнкрафтъ",
+    "astralTip": "AstralRinth — тотъ же запускальникъ, но входъ по прозвищу, безъ запиши Майнкрафтъ",
+    "noLicense": "Нѣтъ запиши Майнкрафтъ? Есть",
+    "withOffline": "— входи по прозвищу единому",
     "detected": "А у тебя нынѣ",
     "best": "Лучшій",
     "bestRest": "пускъ для модификацій Майнкрафтъ",
@@ -159,7 +159,11 @@
     "offlinePlay": "Позволяетъ играть не въ сѣти",
     "release": "выпускъ:",
     "checked": "провѣрено:",
-    "notChecked": "ещё не провѣряли"
+    "notChecked": "ещё не провѣряли",
+    "dlFlathub": "Скачати на Flathub",
+    "advancedOnly": "Сии пути — для искусныхъ людей",
+    "astralFiles": "Вся писания AstralRinth для {os}",
+    "experimental": "испытательная"
   },
   "lookup": {
     "metaTitle": "Розыскъ бумаги по оттиску | ModrinthProxy",

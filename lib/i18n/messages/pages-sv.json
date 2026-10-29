@@ -133,10 +133,10 @@
     "otherTip": "Se andra alternativ",
     "otherOs": "macOS · Linux · och mer",
     "notWindows": "Jag har inte Windows",
-    "noLicenseTip": "Spela utan Minecraft-licens",
-    "astralTip": "AstralRinth är samma launcher, med offlineläge",
-    "noLicense": "Ingen Minecraft-licens? Det finns",
-    "withOffline": "med offlineläge",
+    "noLicenseTip": "Spela utan Minecraft-konto",
+    "astralTip": "AstralRinth är samma launcher, men du loggar bara in med ett smeknamn – utan Minecraft-konto",
+    "noLicense": "Inget Minecraft-konto? Det finns",
+    "withOffline": "– logga bara in med ett smeknamn",
     "detected": "Du är på",
     "best": "Den bästa",
     "bestRest": "launchern för Minecraft-mods",
@@ -159,7 +159,11 @@
     "offlinePlay": "Låter dig spela offline",
     "release": "släppt:",
     "checked": "kontrollerad:",
-    "notChecked": "inte kontrollerad ännu"
+    "notChecked": "inte kontrollerad ännu",
+    "dlFlathub": "Hämta på Flathub",
+    "advancedOnly": "Dessa alternativ är för avancerade användare",
+    "astralFiles": "Alla AstralRinth-filer för {os}",
+    "experimental": "experimentell"
   },
   "lookup": {
     "metaTitle": "Hitta en fil via hash | ModrinthProxy",

@@ -133,10 +133,10 @@
     "otherTip": "Xem tùy chọn khác",
     "otherOs": "macOS · Linux · và hơn nữa",
     "notWindows": "Tôi không dùng Windows",
-    "noLicenseTip": "Chơi không cần bản quyền Minecraft",
-    "astralTip": "AstralRinth là cùng launcher, có chế độ ngoại tuyến",
-    "noLicense": "Không có bản quyền Minecraft? Có",
-    "withOffline": "với chế độ ngoại tuyến",
+    "noLicenseTip": "Chơi không cần tài khoản Minecraft",
+    "astralTip": "AstralRinth là cùng một launcher, nhưng bạn chỉ cần đăng nhập bằng biệt danh, không cần tài khoản Minecraft",
+    "noLicense": "Không có tài khoản Minecraft? Có",
+    "withOffline": "— chỉ cần đăng nhập bằng biệt danh",
     "detected": "Bạn đang dùng",
     "best": "Launcher tốt nhất",
     "bestRest": "cho mod Minecraft",
@@ -159,7 +159,11 @@
     "offlinePlay": "Cho phép chơi ngoại tuyến",
     "release": "phát hành:",
     "checked": "đã kiểm:",
-    "notChecked": "chưa kiểm"
+    "notChecked": "chưa kiểm",
+    "dlFlathub": "Tải trên Flathub",
+    "advancedOnly": "Các tùy chọn này dành cho người dùng nâng cao",
+    "astralFiles": "Tất cả tệp AstralRinth cho {os}",
+    "experimental": "thử nghiệm"
   },
   "lookup": {
     "metaTitle": "Tìm tệp theo hash | ModrinthProxy",

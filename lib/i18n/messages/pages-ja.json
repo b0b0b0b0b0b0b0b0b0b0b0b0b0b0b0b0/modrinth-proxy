@@ -133,10 +133,10 @@
     "otherTip": "その他の選択肢を見る",
     "otherOs": "macOS · Linux · その他",
     "notWindows": "Windowsではありません",
-    "noLicenseTip": "Minecraftライセンスなしで遊ぶ",
-    "astralTip": "AstralRinthは同じランチャーで、オフラインモード付きです",
-    "noLicense": "Minecraftライセンスがありませんか？こちらがあります：",
-    "withOffline": "オフラインモード付き",
+    "noLicenseTip": "Minecraft アカウントなしでプレイ",
+    "astralTip": "AstralRinth は同じランチャーですが、Minecraft アカウントなしでニックネームだけでログインできます",
+    "noLicense": "Minecraft アカウントがない？",
+    "withOffline": "なら、ニックネームだけでログイン",
     "detected": "お使いの環境は",
     "best": "最高の",
     "bestRest": "Minecraft Mod向けランチャー",
@@ -159,7 +159,11 @@
     "offlinePlay": "オフラインでプレイできます",
     "release": "公開：",
     "checked": "確認済み：",
-    "notChecked": "まだ未確認"
+    "notChecked": "まだ未確認",
+    "dlFlathub": "Flathub で入手",
+    "advancedOnly": "これらは上級ユーザー向けのオプションです",
+    "astralFiles": "{os} 向けの AstralRinth の全ファイル",
+    "experimental": "実験版"
   },
   "lookup": {
     "metaTitle": "ハッシュでファイルを探す | ModrinthProxy",

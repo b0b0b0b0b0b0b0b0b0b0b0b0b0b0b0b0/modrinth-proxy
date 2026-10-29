@@ -133,10 +133,10 @@
     "otherTip": "Skatīt citus variantus",
     "otherOs": "macOS · Linux · un vēl",
     "notWindows": "Man nav Windows",
-    "noLicenseTip": "Spēlē bez Minecraft licences",
-    "astralTip": "AstralRinth ir tas pats launcheris, ar bezsaistes režīmu",
-    "noLicense": "Nav Minecraft licences? Ir",
-    "withOffline": "ar bezsaistes režīmu",
+    "noLicenseTip": "Spēlē bez Minecraft konta",
+    "astralTip": "AstralRinth ir tas pats palaidējs, bet ienāc vienkārši ar segvārdu, bez Minecraft konta",
+    "noLicense": "Nav Minecraft konta? Ir",
+    "withOffline": "— ienāc vienkārši ar segvārdu",
     "detected": "Tu esi uz",
     "best": "Labākais",
     "bestRest": "launcheris Minecraft modiem",
@@ -159,7 +159,11 @@
     "offlinePlay": "Ļauj spēlēt bezsaistē",
     "release": "izlaists:",
     "checked": "pārbaudīts:",
-    "notChecked": "vēl nav pārbaudīts"
+    "notChecked": "vēl nav pārbaudīts",
+    "dlFlathub": "Lejupielādēt no Flathub",
+    "advancedOnly": "Šīs iespējas ir pieredzējušiem lietotājiem",
+    "astralFiles": "Visi AstralRinth faili priekš {os}",
+    "experimental": "eksperimentāla"
   },
   "lookup": {
     "metaTitle": "Atrodi failu pēc hash | ModrinthProxy",

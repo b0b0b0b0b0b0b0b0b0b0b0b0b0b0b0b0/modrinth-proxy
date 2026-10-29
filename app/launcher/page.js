@@ -179,7 +179,7 @@ export default async function AppPage() {
             <DetectedOS />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-6 items-center justify-center">
+          <div>
             <DownloadSection launcherData={launcherData} astralData={astralData} />
           </div>
         </div>

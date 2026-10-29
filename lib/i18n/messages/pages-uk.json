@@ -133,10 +133,10 @@
     "otherTip": "Інші варіанти",
     "otherOs": "macOS · Linux · і ще",
     "notWindows": "У мене не Windows",
-    "noLicenseTip": "Грати без ліцензії Minecraft",
-    "astralTip": "AstralRinth — той самий лаунчер, з офлайн-режимом",
-    "noLicense": "Немає ліцензії Minecraft? Є",
-    "withOffline": "з офлайн-режимом",
+    "noLicenseTip": "Грай без акаунта Майнкрафт",
+    "astralTip": "AstralRinth — той самий лаунчер, але вхід просто за ніком, без акаунта Майнкрафт",
+    "noLicense": "Немає акаунта Майнкрафт? Є",
+    "withOffline": "— заходь просто за ніком",
     "detected": "Ти на",
     "best": "Найкращий",
     "bestRest": "лаунчер для модів Minecraft",
@@ -159,7 +159,11 @@
     "offlinePlay": "Дозволяє грати офлайн",
     "release": "вийшло:",
     "checked": "перевірено:",
-    "notChecked": "ще не перевірено"
+    "notChecked": "ще не перевірено",
+    "dlFlathub": "Завантажити з Flathub",
+    "advancedOnly": "Ці варіанти — для досвідчених користувачів",
+    "astralFiles": "Усі файли AstralRinth для {os}",
+    "experimental": "експериментальна"
   },
   "lookup": {
     "metaTitle": "Знайти файл за хешем | ModrinthProxy",

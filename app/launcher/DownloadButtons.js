@@ -3,6 +3,7 @@
 import StyledTooltip from '../components/StyledTooltip'
 import { PirateIcon } from '../components/icons'
 import { useT } from '../components/I18nProvider'
+import { EDITION_EVENT } from './download-section-replacement'
 
 export default function DownloadButtons({ launcherData }) {
   const t = useT()
@@ -17,6 +18,11 @@ export default function DownloadButtons({ launcherData }) {
 
   const handleScrollToOptions = () => {
     document.getElementById('download-options')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleAstralRinth = () => {
+    window.dispatchEvent(new CustomEvent(EDITION_EVENT, { detail: 'astral' }));
+    handleScrollToOptions();
   };
 
   if (!launcherData) return null;
@@ -68,10 +74,10 @@ export default function DownloadButtons({ launcherData }) {
         }
       >
         <button
-          onClick={handleScrollToOptions}
+          onClick={handleAstralRinth}
           className="group glass-chip inline-flex items-center gap-2.5 rounded-full px-4 py-2 text-sm text-gray-300 hover:text-white cursor-pointer"
         >
-          <PirateIcon className="w-4 h-4 text-modrinth-green" />
+          <PirateIcon className="w-4 h-4 -translate-y-px text-modrinth-green" />
           <span>
             {t('app.noLicense')}{' '}
             <span className="font-semibold text-modrinth-green">AstralRinth</span> {t('app.withOffline')}
