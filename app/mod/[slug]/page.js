@@ -27,6 +27,7 @@ export async function generateMetadata({ params }) {
     return {
       title,
       description: fullDescription,
+      keywords: mod.title ? t('project.downloadNamed', { title: mod.title }) : undefined,
       robots: 'all',
       openGraph: {
         siteName: 'modrinth.black',
