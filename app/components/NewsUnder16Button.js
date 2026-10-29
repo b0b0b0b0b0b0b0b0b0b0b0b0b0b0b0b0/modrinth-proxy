@@ -23,7 +23,7 @@ export default function NewsUnder16Button() {
     <button
       type="button"
       onClick={() => router.push(targetPath)}
-      className="mt-4 inline-flex w-fit cursor-pointer items-center justify-center rounded border border-modrinth-green/50 bg-modrinth-green/10 px-5 py-2 text-sm font-semibold text-modrinth-green transition-[color,background-color,border-color] duration-150 hover:border-modrinth-green/80 hover:bg-modrinth-green/[0.14] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
+      className="glass-btn glass-btn--active mt-4 inline-flex w-fit cursor-pointer items-center justify-center rounded px-5 py-2 text-sm font-semibold text-modrinth-green hover:brightness-110 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900"
     >
       {t('news.under16')}
     </button>

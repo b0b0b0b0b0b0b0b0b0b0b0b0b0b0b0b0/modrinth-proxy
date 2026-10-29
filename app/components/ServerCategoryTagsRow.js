@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import * as Popover from '@radix-ui/react-popover'
-import { getServerCategoryName } from '@/lib/serverCategories'
+import { getServerCategoryIcon, getServerCategoryName } from '@/lib/serverCategories'
 import { SERVER_CATEGORY_TAG_CLASS } from '@/lib/serverTagStyles'
 import { categoryLabel } from '@/lib/i18n/label'
 import { useT } from './I18nProvider'
 
-function CategoryTag({ catId, t }) {
+export function ServerCategoryTag({ catId }) {
+  const t = useT()
   let name
   try {
     if (!catId || typeof catId !== 'string') return null
@@ -15,10 +16,12 @@ function CategoryTag({ catId, t }) {
   } catch {
     return null
   }
+  const icon = getServerCategoryIcon(catId)
 
   return (
     <Link href={`/discover/servers?sc=${catId}`} className={SERVER_CATEGORY_TAG_CLASS}>
-      {name}
+      {icon ? <span className="h-4 w-4 shrink-0 [&>svg]:h-4 [&>svg]:w-4">{icon}</span> : null}
+      <span>{name}</span>
     </Link>
   )
 }
@@ -34,7 +37,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
   return (
     <div className="flex flex-wrap items-center gap-1.5">
       {visible.map((catId) => (
-        <CategoryTag key={catId} catId={catId} t={t} />
+        <ServerCategoryTag key={catId} catId={catId} />
       ))}
       {overflow.length > 0 && (
         <Popover.Root>
@@ -52,13 +55,12 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
               side="bottom"
               align="start"
               sideOffset={6}
-              className="z-[100] max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl border border-gray-700 p-2 shadow-xl"
-              style={{ backgroundColor: 'var(--bg-primary)' }}
+              className="glass-pop z-[100] max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl p-2"
               onOpenAutoFocus={(e) => e.preventDefault()}
             >
               <div className="flex flex-wrap gap-1.5">
                 {overflow.map((catId) => (
-                  <CategoryTag key={catId} catId={catId} t={t} />
+                  <ServerCategoryTag key={catId} catId={catId} />
                 ))}
               </div>
             </Popover.Content>

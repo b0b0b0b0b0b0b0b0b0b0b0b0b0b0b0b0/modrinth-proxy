@@ -1,5 +1,4 @@
-export default function ServerLinkIcon({ platform }) {
-  const className = 'w-4 h-4 shrink-0 text-current opacity-80'
+export default function ServerLinkIcon({ platform, className = 'w-4 h-4 shrink-0 text-current opacity-80' }) {
 
   if (platform === 'discord') {
     return (
@@ -13,6 +12,22 @@ export default function ServerLinkIcon({ platform }) {
     return (
       <svg className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
         <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </svg>
+    )
+  }
+
+  if (platform === 'issues') {
+    return (
+      <svg className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0M12 9v4M12 17h.01" />
+      </svg>
+    )
+  }
+
+  if (platform === 'source') {
+    return (
+      <svg className={className} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+        <path d="m16 18 6-6-6-6M8 6l-6 6 6 6" />
       </svg>
     )
   }

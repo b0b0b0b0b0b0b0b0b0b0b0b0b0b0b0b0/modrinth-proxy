@@ -82,7 +82,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
         <button
           type="button"
           onClick={handlePlay}
-          className="modrinth-button-font w-fit px-5 h-10 bg-modrinth-green hover:bg-modrinth-green-light text-black rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 active:scale-[0.98] shadow-lg shadow-modrinth-green/10 text-base whitespace-nowrap"
+          className="modrinth-button-font download-glass w-fit !px-5 h-10 bg-modrinth-green hover:bg-modrinth-green-light text-black rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 active:scale-[0.98] shadow-lg shadow-modrinth-green/10 text-base whitespace-nowrap"
         >
           <svg className="w-6 h-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
             <path d="m5 3 14 9-14 9z" />
@@ -156,7 +156,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
             className="bg-modrinth-dark card-glass rounded-3xl p-6 md:p-8 max-w-md w-full shadow-2xl flex flex-col items-center gap-6"
           >
             <div className="flex flex-col gap-6 w-full">
-              <div className="relative w-24 h-24 mx-auto flex items-center justify-center">
+              {progress > 0 && <div className="relative w-24 h-24 mx-auto flex items-center justify-center">
                 <svg className="absolute w-full h-full -rotate-90" viewBox="0 0 100 100">
                   <circle
                     className="stroke-gray-800"
@@ -179,7 +179,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                   />
                 </svg>
                 <span className="text-3xl font-bold text-white z-10">{countdown}</span>
-              </div>
+              </div>}
 
               <h2 className="m-0 text-xl md:text-2xl font-bold text-white text-center">
                 {t('server.openingApp')}
@@ -255,7 +255,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
             <div className="grid grid-cols-2 gap-3 w-full">
               <button
                 onClick={() => setModalOpen(false)}
-                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-bold h-10 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                className="glass-btn flex-1 text-white font-bold h-10 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
@@ -265,7 +265,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
               <a
                 href="/app"
                 target="_blank"
-                className="flex-1 bg-modrinth-green hover:bg-modrinth-green-light text-black font-bold h-10 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
+                className="download-glass flex-1 bg-modrinth-green hover:bg-modrinth-green-light text-black font-bold h-10 rounded-xl flex items-center justify-center gap-1.5 cursor-pointer transition-colors"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />

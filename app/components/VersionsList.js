@@ -3,7 +3,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { compressVersionRanges, formatFileSize, resolveModrinthProjectAccent } from '@/lib/modrinth'
+import { compressVersionRanges, formatFileSize, resolveModrinthProjectAccent, VERSION_ENV_GROUPS, versionEnvironmentGroup } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { compareMinecraftVersionsDesc, versionsForCompressedRange } from '@/lib/minecraftVersionSort'
 import {
@@ -14,7 +14,7 @@ import {
 } from '@/lib/contextualVersions'
 import { resolveLoader } from '@/lib/loaders'
 import VersionsDropdown from './VersionsDropdown'
-import LoadersDropdown from './LoadersDropdown'
+import LoadersDropdown, { MultiSelectDropdown } from './LoadersDropdown'
 import ChannelsDropdown from './ChannelsDropdown'
 import RelativeTime from './RelativeTime'
 import DownloadsCompactTooltip from './DownloadsCompactTooltip'
@@ -78,6 +78,7 @@ export default function VersionsList({
       .map(normalizeLoaderParam)
   )
   const [selectedChannel, setSelectedChannel] = useState('all')
+  const [selectedEnvs, setSelectedEnvs] = useState([])
   const [showOnlyReleases, setShowOnlyReleases] = useState(true)
   const [currentPage, setCurrentPage] = useState(1)
   const [filtersReady, setFiltersReady] = useState(false)
@@ -209,15 +210,22 @@ export default function VersionsList({
     setCurrentPage(1)
   }
 
+  const handleEnvsChange = (envs) => {
+    setSelectedEnvs(envs)
+    setCurrentPage(1)
+  }
+
   const hasActiveFilters =
     selectedMcVersions.length > 0 ||
     selectedLoaders.length > 0 ||
+    selectedEnvs.length > 0 ||
     selectedChannel !== 'all'
 
   const clearAllFilters = () => {
     setSelectedMcVersions([])
     setSelectedLoaders([])
     setSelectedChannel('all')
+    setSelectedEnvs([])
     setCurrentPage(1)
     writeFiltersToUrl([], [])
   }
@@ -304,6 +312,22 @@ export default function VersionsList({
 
   const showChannelFilter = channelTypesPresent.size > 1
 
+  const envGroupsPresent = useMemo(() => {
+    const s = new Set()
+    contextualVersions.forEach((v) => {
+      const group = versionEnvironmentGroup(v.environment)
+      if (group) s.add(group)
+    })
+    return VERSION_ENV_GROUPS.filter((g) => s.has(g))
+  }, [contextualVersions])
+
+  useEffect(() => {
+    setSelectedEnvs((envs) => {
+      const next = envs.filter((e) => envGroupsPresent.includes(e))
+      return next.length === envs.length ? envs : next
+    })
+  }, [envGroupsPresent])
+
   const releaseVersions = useMemo(() => {
     return mcVersions.filter(v => {
       return /^\d+\.\d+(\.\d+)?$/.test(v)
@@ -346,6 +370,8 @@ export default function VersionsList({
         if (!hasSelectedLoader) return false
       }
 
+      if (selectedEnvs.length > 0 && !selectedEnvs.includes(versionEnvironmentGroup(version.environment))) return false
+
       if (selectedChannel !== 'all') {
         const t =
           version.version_type != null
@@ -356,7 +382,7 @@ export default function VersionsList({
 
       return true
     })
-  }, [contextualVersions, searchQuery, selectedMcVersions, selectedLoaders, selectedChannel, showOnlyReleases, releaseVersions])
+  }, [contextualVersions, searchQuery, selectedMcVersions, selectedLoaders, selectedEnvs, selectedChannel, showOnlyReleases, releaseVersions])
 
   const totalPages = Math.ceil(filteredVersions.length / versionsPerPage)
   const paginatedVersions = filteredVersions.slice(
@@ -409,6 +435,15 @@ export default function VersionsList({
               hasSnapshotVersions={hasSnapshotVersions}
             />
 
+            {envGroupsPresent.length > 0 && (
+              <MultiSelectDropdown
+                options={envGroupsPresent.map((id) => ({ id, name: t(`filter.env.${id}`) }))}
+                selected={selectedEnvs}
+                onChange={handleEnvsChange}
+                placeholder={t('version.environment')}
+              />
+            )}
+
             {showChannelFilter && (
               <ChannelsDropdown 
                 selectedChannel={selectedChannel}
@@ -425,7 +460,7 @@ export default function VersionsList({
 
           {hasActiveFilters && (
             <div className="flex flex-wrap items-center gap-1">
-              {(selectedMcVersions.length + selectedLoaders.length + (selectedChannel !== 'all' ? 1 : 0)) >= 2 && (
+              {(selectedMcVersions.length + selectedLoaders.length + selectedEnvs.length + (selectedChannel !== 'all' ? 1 : 0)) >= 2 && (
                 <button type="button" onClick={clearAllFilters} className={chipClassName}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
                     <circle cx="12" cy="12" r="10" />
@@ -462,6 +497,18 @@ export default function VersionsList({
                   </button>
                 )
               })}
+
+              {selectedEnvs.map((envId) => (
+                <button
+                  key={`e-${envId}`}
+                  type="button"
+                  onClick={() => handleEnvsChange(selectedEnvs.filter((e) => e !== envId))}
+                  className={chipClassName}
+                >
+                  {chipXIcon}
+                  {t(`filter.env.${envId}`)}
+                </button>
+              ))}
 
               {selectedChannel !== 'all' && (
                 <button type="button" onClick={removeChannelFilter} className={chipClassName}>

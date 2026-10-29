@@ -22,7 +22,7 @@ function FilterCheckbox({ checked }) {
   )
 }
 
-export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersChange }) {
+export function MultiSelectDropdown({ options, selected, onChange, placeholder, capitalize = false }) {
   const t = useT()
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -43,20 +43,14 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
     }
   }, [isOpen])
 
-  const toggleLoader = (loader) => {
-    const newLoaders = selectedLoaders.includes(loader)
-      ? selectedLoaders.filter(l => l !== loader)
-      : [...selectedLoaders, loader]
-    onLoadersChange(newLoaders)
+  const toggle = (id) => {
+    onChange(selected.includes(id) ? selected.filter((s) => s !== id) : [...selected, id])
   }
 
   const getLabel = () => {
-    if (selectedLoaders.length === 0) return t('filter.platform')
-    if (selectedLoaders.length === 1) {
-      const loaderData = resolveLoader(selectedLoaders[0])
-      return loaderData.name
-    }
-    return t('filter.selected', { n: selectedLoaders.length })
+    if (selected.length === 0) return placeholder
+    if (selected.length === 1) return options.find((o) => o.id === selected[0])?.name ?? selected[0]
+    return t('filter.selected', { n: selected.length })
   }
 
   return (
@@ -64,7 +58,7 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="glass-btn flex items-center gap-2 px-3 py-2 text-sm font-medium capitalize rounded-xl text-gray-900 dark:text-white"
+        className={`glass-btn flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-xl text-gray-900 dark:text-white ${capitalize ? 'capitalize' : ''}`}
       >
         <svg className="w-4 h-4 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M22 3H2l8 9.46V19l4 2v-8.54z" />
@@ -79,32 +73,43 @@ export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersCha
         <div className="absolute top-full left-0 mt-2 w-64 glass-pop z-50 overflow-hidden animate-fade-in rounded-xl">
           <div className="p-2 max-h-96 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-1">
-              {loaders.map(loaderId => {
-                const loaderData = resolveLoader(loaderId)
-                const checked = selectedLoaders.includes(loaderId)
-
-                return (
-                  <button
-                    key={loaderId}
-                    type="button"
-                    onClick={() => toggleLoader(loaderId)}
-                    className="flex items-center gap-2 px-3 py-2 text-sm transition text-left rounded-xl hover:bg-gray-100 dark:hover:bg-[#34363c]"
-                    style={{ color: loaderData.color || 'var(--text-primary)' }}
-                  >
-                    <FilterCheckbox checked={checked} />
-                    <span className="flex items-center gap-2 min-w-0">
-                      <div className="w-4 h-4 flex-shrink-0">
-                        {loaderData.icon}
-                      </div>
-                      <span className="truncate">{loaderData.name}</span>
-                    </span>
-                  </button>
-                )
-              })}
+              {options.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => toggle(option.id)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm transition text-left rounded-xl hover:bg-gray-100 dark:hover:bg-[#34363c]"
+                  style={{ color: option.color || 'var(--text-primary)' }}
+                >
+                  <FilterCheckbox checked={selected.includes(option.id)} />
+                  <span className="flex items-center gap-2 min-w-0">
+                    {option.icon ? <div className="w-4 h-4 flex-shrink-0">{option.icon}</div> : null}
+                    <span className="truncate">{option.name}</span>
+                  </span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
       )}
     </div>
+  )
+}
+
+export default function LoadersDropdown({ loaders, selectedLoaders, onLoadersChange }) {
+  const t = useT()
+  const options = loaders.map((loaderId) => {
+    const loaderData = resolveLoader(loaderId)
+    return { id: loaderId, name: loaderData.name, icon: loaderData.icon, color: loaderData.color }
+  })
+
+  return (
+    <MultiSelectDropdown
+      options={options}
+      selected={selectedLoaders}
+      onChange={onLoadersChange}
+      placeholder={t('filter.platform')}
+      capitalize
+    />
   )
 }

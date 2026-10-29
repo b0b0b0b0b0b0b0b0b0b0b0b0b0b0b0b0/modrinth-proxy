@@ -1,20 +1,29 @@
-import Link from 'next/link'
 import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import { getServer, getOrganization, getTeamMembers, getVersion, isModrinthNotFound } from '@/lib/modrinth'
 import { filterModContent, filterTeamMembers, isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
-import { getServerCategoryName } from '@/lib/serverCategories'
-import { categoryLabel } from '@/lib/i18n/label'
 import { buildServerPageMetadata, buildServerNotFoundMetadata } from '@/lib/serverPageSeo'
-import { SERVER_CATEGORY_TAG_CLASS } from '@/lib/serverTagStyles'
+import { withReferralUtm } from '@/lib/referralUtm'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import ServerSidebarDetails from '@/app/components/ServerSidebarDetails'
 import ServerGallery from '@/app/components/ServerGallery'
-import ServerSidebarLink from '@/app/components/ServerSidebarLink'
+import { LinksCard, LinkRow } from '@/app/components/ProjectLinksCard'
+import { ServerCategoryTag } from '@/app/components/ServerCategoryTagsRow'
 import ServerLinkIcon from '@/app/components/ServerLinkIcon'
 import AuthorsSection from '@/app/components/AuthorsSection'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
 import { notFoundOrThrow } from '@/lib/projectPageError'
+
+const LINK_TINTS = {
+  discord: '#8891f2',
+  wiki: '#fb923c',
+  issues: '#f87171',
+  source: '#c084fc',
+  store: '#34d399',
+  site: '#60a5fa',
+  website: '#60a5fa',
+  link: '#94a3b8',
+}
 
 export async function generateMetadata({ params }) {
   try {
@@ -110,14 +119,13 @@ export default async function ServerPage({ params }) {
           <ServerSidebarDetails server={server} requiredContentVersion={requiredContentVersion} />
 
           {links.length > 0 && (
-            <div className="bg-modrinth-dark card-glass rounded-2xl p-4 flex flex-col gap-3 shadow-lg">
-              <h2 className="text-lg font-bold text-white m-0">{t('links.title')}</h2>
-              <div className="flex flex-col gap-3 font-semibold">
-                {links.map((link, idx) => (
-                  <ServerSidebarLink key={idx} link={link} icon={<ServerLinkIcon platform={link.platform} />} />
-                ))}
-              </div>
-            </div>
+            <LinksCard>
+              {links.map((link, idx) => (
+                <LinkRow key={idx} href={withReferralUtm(link.url)} label={link.name} tint={LINK_TINTS[link.platform] || LINK_TINTS.link}>
+                  <ServerLinkIcon platform={link.platform} className="shrink-0" />
+                </LinkRow>
+              ))}
+            </LinksCard>
           )}
 
           {allTags.length > 0 && (
@@ -125,13 +133,7 @@ export default async function ServerPage({ params }) {
               <h2 className="text-lg font-bold text-white m-0">{t('project.tags')}</h2>
               <div className="flex flex-wrap gap-1.5">
                 {allTags.map(tag => (
-                  <Link
-                    key={tag}
-                    href={`/discover/servers?sc=${tag}`}
-                    className={SERVER_CATEGORY_TAG_CLASS}
-                  >
-                    {categoryLabel(t, tag, getServerCategoryName(tag) || tag)}
-                  </Link>
+                  <ServerCategoryTag key={tag} catId={tag} />
                 ))}
               </div>
             </div>

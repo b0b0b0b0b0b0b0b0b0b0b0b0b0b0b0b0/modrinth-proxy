@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { resolveLoader } from '@/lib/loaders'
+import { projectEnvironments } from '@/lib/modrinth'
 import { buildAllowedLoaderIds } from '@/lib/contextualVersions'
 import { resolveAlternateProjectFormat } from '@/lib/alternateProjectFormat'
 import { compressSidebarGameVersions } from '@/lib/minecraftVersionSort'
@@ -60,7 +61,8 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
   const browseRoute = resolveContentTypeRoute(resolvedContentType, resource.project_type)
   const gameVersionRanges = compressSidebarGameVersions(gameVersions)
 
-  const environment = ENV_FILTER_ROUTES.has(browseRoute) ? getEnvironment(resource.client_side, resource.server_side) : null
+  const environment = ENV_HIDDEN_ROUTES.has(browseRoute) ? null : getEnvironment(resource)
+  const envLinkable = ENV_FILTER_ROUTES.has(browseRoute)
   const alternateFormatRaw = resolveAlternateProjectFormat({
     project: resource,
     contentType: resolvedContentType,
@@ -146,16 +148,23 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                     const chipClass = 'glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-none text-[var(--text-muted)]'
                     const content = (
                       <>
-                        <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+                          {ENV_ICONS[side]}
                         </svg>
                         {t(`filter.env.${side}`)}
                       </>
                     )
+                    if (envLinkable && (side === 'client' || side === 'server')) {
+                      return (
+                        <Link key={side} href={`/${browseRoute}?e=${side}`} className={`${chipClass} hover:text-[var(--text-primary)]`}>
+                          {content}
+                        </Link>
+                      )
+                    }
                     return (
-                      <Link key={side} href={`/${browseRoute}?e=${side}`} className={`${chipClass} hover:text-[var(--text-primary)]`}>
+                      <span key={side} className={chipClass}>
                         {content}
-                      </Link>
+                      </span>
                     )
                   })}
                 </div>
@@ -333,11 +342,32 @@ function resolveContentTypeRoute(contentTypeProp, projectType) {
 }
 
 const ENV_FILTER_ROUTES = new Set(['mods', 'modpacks'])
+const ENV_HIDDEN_ROUTES = new Set(['resourcepacks', 'shaders'])
 
-function getEnvironment(clientSide, serverSide) {
+const ENV_ICONS = {
+  client: <path d="M9.75 17 9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" />,
+  server: <path d="M22 12H2M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11M6 16h.01M10 16h.01" />,
+  singleplayer: (
+    <>
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+      <circle cx="12" cy="7" r="4" />
+    </>
+  ),
+  both: (
+    <>
+      <path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8M10 19v-3.96 3.15M7 19h5" />
+      <rect width="6" height="10" x="16" y="12" rx="2" />
+    </>
+  ),
+}
+
+function getEnvironment(resource) {
+  if (resource.project_type === 'minecraft_java_server' || resource.minecraft_java_server) return null
+  const fromEnv = projectEnvironments(resource.environment)
+  if (fromEnv.length > 0) return fromEnv
   const sides = []
-  if (clientSide === 'required' || clientSide === 'optional') sides.push('client')
-  if (serverSide === 'required' || serverSide === 'optional') sides.push('server')
+  if (resource.client_side === 'required' || resource.client_side === 'optional') sides.push('client')
+  if (resource.server_side === 'required' || resource.server_side === 'optional') sides.push('server')
   return sides.length > 0 ? sides : null
 }
 
