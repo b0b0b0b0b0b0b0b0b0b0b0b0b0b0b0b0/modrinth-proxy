@@ -4,25 +4,21 @@ import StyledTooltip from './StyledTooltip'
 import { useI18n, useT } from './I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
 
-function formatAbsolute(date, locale) {
-  const tag = intlLocale(locale)
-  return new Intl.DateTimeFormat(tag, {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
+export function formatAbsolute(dateString, locale) {
+  const date = dateString instanceof Date ? dateString : new Date(dateString)
+  if (isNaN(date.getTime())) return null
+  return new Intl.DateTimeFormat(intlLocale(locale), {
+    dateStyle: 'long',
+    timeStyle: 'medium',
   }).format(date)
 }
 
-export function formatRelative(dateString, t) {
+export function formatRelative(dateString, t, locale) {
   const date = new Date(dateString)
   if (isNaN(date.getTime())) return null
 
   const diffMs = Date.now() - date.getTime()
-  if (diffMs < 0) return date.toLocaleDateString()
+  if (diffMs < 0) return formatAbsolute(date, locale)
 
   const diffMinutes = Math.floor(diffMs / (1000 * 60))
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
@@ -51,7 +47,7 @@ export default function RelativeTime({ dateString, className = '' }) {
   }
 
   const absolute = formatAbsolute(date, locale)
-  const timeText = formatRelative(dateString, t) || t('time.unknown')
+  const timeText = formatRelative(dateString, t, locale) || t('time.unknown')
   const hintCls = `${className} cursor-help rounded-sm outline-none`.trim()
 
   return (

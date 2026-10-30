@@ -21,8 +21,7 @@ import ProjectLinksCard from './ProjectLinksCard'
 import ProjectDependentsCard from './ProjectDependentsCard'
 import { DisclosureIcon } from './ProjectDisclosureIcons'
 import { useI18n, useT } from './I18nProvider'
-import { formatRelative } from './RelativeTime'
-import { intlLocale } from '@/lib/i18n/config'
+import { formatAbsolute, formatRelative } from './RelativeTime'
 
 function contentTypeFromPathname(pathname) {
   const match = pathname?.match(/^\/(mod|plugin|datapack|shader|resourcepack|modpack)\//)
@@ -257,19 +256,19 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           )}
 
           {resource.published && (
-            <StyledTooltip label={formatExactDate(resource.published, locale)}>
+            <StyledTooltip label={formatAbsolute(resource.published, locale)}>
               <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
                 <DisclosureIcon type="published" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
-                <div>{t('project.published', { when: formatRelative(resource.published, t) })}</div>
+                <div>{t('project.published', { when: formatRelative(resource.published, t, locale) })}</div>
               </div>
             </StyledTooltip>
           )}
 
           {resource.updated && (
-            <StyledTooltip label={formatExactDate(resource.updated, locale)}>
+            <StyledTooltip label={formatAbsolute(resource.updated, locale)}>
               <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
                 <DisclosureIcon type="updated" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
-                <div>{t('project.updated', { when: formatRelative(resource.updated, t) })}</div>
+                <div>{t('project.updated', { when: formatRelative(resource.updated, t, locale) })}</div>
               </div>
             </StyledTooltip>
           )}
@@ -369,16 +368,4 @@ function getEnvironment(resource) {
   if (resource.client_side === 'required' || resource.client_side === 'optional') sides.push('client')
   if (resource.server_side === 'required' || resource.server_side === 'optional') sides.push('server')
   return sides.length > 0 ? sides : null
-}
-
-function formatExactDate(dateString, locale) {
-  const date = new Date(dateString)
-  if (Number.isNaN(date.getTime())) return dateString
-  return date.toLocaleString(intlLocale(locale), {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  })
 }

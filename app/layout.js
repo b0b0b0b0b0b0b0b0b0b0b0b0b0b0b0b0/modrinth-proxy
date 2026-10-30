@@ -121,6 +121,27 @@ export default async function RootLayout({ children }) {
                 if (localStorage.getItem('show-disclaimer-badge') === 'false') {
                   document.documentElement.classList.add('hide-disclaimer-badge');
                 }
+                try {
+                  var filterSections = localStorage.getItem('catalog-filter-sections');
+                  if (filterSections) {
+                    var filterIds = JSON.parse(filterSections);
+                    var filterCss = '';
+                    if (Array.isArray(filterIds)) {
+                      for (var fi = 0; fi < filterIds.length; fi++) {
+                        var filterId = String(filterIds[fi]).replace(/[^a-zA-Z0-9_-]/g, '');
+                        if (!filterId) continue;
+                        filterCss += '[data-filter-section="' + filterId + '"]>.filter-section-body{display:none}';
+                        filterCss += '[data-filter-section="' + filterId + '"] .filter-section-chevron{transform:none}';
+                      }
+                    }
+                    if (filterCss) {
+                      var filterStyle = document.createElement('style');
+                      filterStyle.id = 'filter-section-collapsed';
+                      filterStyle.textContent = filterCss;
+                      document.head.appendChild(filterStyle);
+                    }
+                  }
+                } catch (filterError) {}
                 (function() {
                   var p = localStorage.getItem('color-palette') || 'pink';
                   var m = ${JSON.stringify(activeColorPalettesStoreDisclaimerUpdate)};

@@ -1,14 +1,15 @@
 'use client'
 
 import StyledTooltip from '../components/StyledTooltip'
-import { formatRelative } from '../components/RelativeTime'
-import { useT } from '../components/I18nProvider'
+import { formatAbsolute } from '../components/RelativeTime'
+import { useI18n, useT } from '../components/I18nProvider'
 
 function ApiLink({ href, label, path, data }) {
   const t = useT()
+  const { locale } = useI18n()
   const version = data?.version
-  const published = data?.published_at ? formatRelative(data.published_at, t) : null
-  const checked = data?.checked_at ? formatRelative(data.checked_at, t) : null
+  const published = data?.published_at ? formatAbsolute(data.published_at, locale) : null
+  const checked = data?.checked_at ? formatAbsolute(data.checked_at, locale) : null
 
   const tooltip = (
     <span className="flex flex-col gap-1 text-left leading-snug">

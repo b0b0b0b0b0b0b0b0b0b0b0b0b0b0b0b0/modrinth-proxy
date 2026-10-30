@@ -8,6 +8,7 @@ import { appendDisclosureExclusionParams, catalogResetUrl, parseDisclosureExclus
 import { appendFacetParams, parseFacetList, toggleExcluded, toggleIncluded } from '@/lib/catalogFacetParams'
 import AdvancedExclusionsFilter from '@/app/components/AdvancedExclusionsFilter'
 import CatalogFilterOption from '@/app/components/CatalogFilterOption'
+import CatalogFilterSection from '@/app/components/CatalogFilterSection'
 import { useI18n } from '@/app/components/I18nProvider'
 import { categoryLabel, languageDisplayName, serverRegionLabel } from '@/lib/i18n/label'
 
@@ -66,18 +67,6 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
   const [showAllLanguages, setShowAllLanguages] = useState(false)
   const [languageSearch, setLanguageSearch] = useState('')
 
-  const [openSections, setOpenSections] = useState({
-    type: true,
-    features: true,
-    gameplay: true,
-    config: true,
-    community: true,
-    version: true,
-    region: true,
-    language: true,
-    status: true
-  })
-
   useEffect(() => {
     const parsedFilters = parseFacets()
     const urlQuery = searchParams.get('q') || ''
@@ -91,10 +80,6 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     setSelectedRegions(searchParams.getAll('sr') || [])
     setSelectedLanguages(searchParams.getAll('sl') || [])
   }, [searchParams])
-
-  const toggleSection = (section) => {
-    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }))
-  }
 
   const updateFilters = (updates) => {
     const params = new URLSearchParams()
@@ -163,23 +148,6 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     updateFilters({ c: next.included, xc: next.excluded })
   }
 
-  const SectionHeader = ({ sectionKey, label }) => (
-    <button
-      onClick={() => toggleSection(sectionKey)}
-      className="flex items-center justify-between w-full px-4 py-3 bg-transparent text-left cursor-pointer border-none"
-    >
-      <span className="text-sm font-semibold text-gray-300">{label}</span>
-      <svg
-        className={`w-4 h-4 text-gray-500 transition-transform duration-300 ${openSections[sectionKey] ? 'rotate-180' : ''}`}
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-      </svg>
-    </button>
-  )
-
   const CategoryButton = ({ cat }) => (
     <CatalogFilterOption
       icon={cat.icon}
@@ -195,55 +163,38 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
     <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
       <div className="space-y-4">
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="type" label={t('filter.type')} />
-          {openSections.type && (
-            <div className="p-4 pt-0 space-y-1">
-              {SERVER_TYPES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
-            </div>
-          )}
-        </div>
+        <CatalogFilterSection id="type" title={t('filter.type')}>
+          <div className="space-y-1">
+            {SERVER_TYPES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="features" label={t('filter.features')} />
-          {openSections.features && (
-            <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-              {SERVER_FEATURES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
-            </div>
-          )}
-        </div>
+        <CatalogFilterSection id="features" title={t('filter.features')}>
+          <div className="space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+            {SERVER_FEATURES.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="gameplay" label={t('filter.gameplay')} />
-          {openSections.gameplay && (
-            <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-              {SERVER_GAMEPLAY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
-            </div>
-          )}
-        </div>
+        <CatalogFilterSection id="gameplay" title={t('filter.gameplay')}>
+          <div className="space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+            {SERVER_GAMEPLAY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="config" label={t('filter.config')} />
-          {openSections.config && (
-            <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-              {SERVER_CONFIG.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
-            </div>
-          )}
-        </div>
+        <CatalogFilterSection id="config" title={t('filter.config')}>
+          <div className="space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+            {SERVER_CONFIG.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="community" label={t('filter.community')} />
-          {openSections.community && (
-            <div className="p-4 pt-0 space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
-              {SERVER_COMMUNITY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
-            </div>
-          )}
-        </div>
+        <CatalogFilterSection id="community" title={t('filter.community')}>
+          <div className="space-y-1 max-h-[300px] overflow-y-auto custom-scrollbar pr-2">
+            {SERVER_COMMUNITY.map(cat => <CategoryButton key={cat.id} cat={cat} />)}
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="version" label={t('filter.gameVersion')} />
-          {openSections.version && (
-            <div className="p-4 pt-0">
+        <CatalogFilterSection id="gameVersion" title={t('filter.gameVersion')}>
+          <div>
               <div className="mb-2 relative">
                 <input
                   type="text"
@@ -315,14 +266,11 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   </span>
                 </button>
               </div>
-            </div>
-          )}
-        </div>
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="region" label={t('filter.region')} />
-          {openSections.region && (
-            <div className="p-4 pt-0 space-y-1">
+        <CatalogFilterSection id="region" title={t('filter.region')}>
+          <div className="space-y-1">
               {SERVER_REGIONS.map(reg => {
                 const isSelected = selectedRegions.includes(reg.id)
                 return (
@@ -357,14 +305,11 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   </button>
                 )
               })}
-            </div>
-          )}
-        </div>
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="language" label={t('filter.language')} />
-          {openSections.language && (
-            <div className="p-4 pt-0">
+        <CatalogFilterSection id="language" title={t('filter.language')}>
+          <div>
               <div className="mb-2 relative">
                 <input
                   type="text"
@@ -453,14 +398,11 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   </button>
                 </div>
               )}
-            </div>
-          )}
-        </div>
+          </div>
+        </CatalogFilterSection>
 
-        <div className="bg-modrinth-dark card-glass rounded-xl overflow-hidden">
-          <SectionHeader sectionKey="status" label={t('filter.status')} />
-          {openSections.status && (
-            <div className="p-4 pt-0 space-y-1">
+        <CatalogFilterSection id="status" title={t('filter.status')}>
+          <div className="space-y-1">
               <button
                 onClick={() => {
                   setSelectedStatus('online')
@@ -500,9 +442,8 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   </svg>
                 )}
               </button>
-            </div>
-          )}
-        </div>
+          </div>
+        </CatalogFilterSection>
 
         <AdvancedExclusionsFilter />
 

@@ -1,9 +1,11 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import CopyButton from './CopyButton'
 import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
+
+const OPEN_KEY = 'version-dev-info-open'
 
 const GRADLE_KEYWORDS = new Set([
   'repositories',
@@ -86,9 +88,32 @@ function CopyCodeButton({ text, t }) {
   )
 }
 
+function readOpen() {
+  try {
+    return localStorage.getItem(OPEN_KEY) === 'true'
+  } catch {
+    return false
+  }
+}
+
 export default function VersionDeveloperInfo({ projectId, versionId }) {
   const t = useT()
   const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    setOpen(readOpen())
+  }, [])
+
+  const toggle = () => {
+    setOpen((current) => {
+      const next = !current
+      try {
+        localStorage.setItem(OPEN_KEY, String(next))
+      } catch {
+      }
+      return next
+    })
+  }
 
   const mavenCoords = projectId && versionId ? `maven.modrinth:${projectId}:${versionId}` : ''
   const buildGradle = useMemo(() => {
@@ -130,7 +155,7 @@ dependencies {
     <div className="bg-modrinth-dark card-glass rounded-2xl mb-6 overflow-hidden">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={toggle}
         className={`group m-0 flex w-full min-w-0 appearance-none items-center gap-3 p-4 text-left transition-colors hover:bg-[var(--bg-hover)] ${
           open ? 'rounded-b-none' : ''
         }`}

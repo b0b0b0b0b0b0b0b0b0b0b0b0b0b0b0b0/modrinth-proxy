@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { DEPENDENCY_TYPES, parseDependentOptions, replaceDependentParams } from '@/lib/dependentsFilter'
 import { useT } from './I18nProvider'
+import { useCatalogFilterOpen } from './CatalogFilterSection'
 
 const SEARCH_DELAY_MS = 350
 const MIN_QUERY_LENGTH = 2
@@ -12,7 +13,7 @@ const searchCache = new Map()
 
 function Chevron({ open, className = 'h-4 w-4' }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className={`${className} shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className={`${className} filter-section-chevron shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7" />
     </svg>
   )
@@ -292,7 +293,7 @@ export default function DependencyFilter() {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const [open, setOpen] = useState(true)
+  const [open, toggleOpen] = useCatalogFilterOpen('dependency')
   const multi = pathname.endsWith('modpacks')
   const options = parseDependentOptions(searchParams)
   const { projects, remember } = useProjectInfo(options.map((option) => option.id))
@@ -313,10 +314,11 @@ export default function DependencyFilter() {
   const selectedProject = selected ? projects[selected.id] : null
 
   return (
-    <div className="rounded-xl card-glass bg-modrinth-dark">
+    <div data-filter-section="dependency" className="rounded-xl card-glass bg-modrinth-dark">
       <button
         type="button"
-        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        onClick={toggleOpen}
         className="flex w-full items-center gap-2 px-4 py-3 text-left"
       >
         <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">
@@ -325,7 +327,7 @@ export default function DependencyFilter() {
         <Chevron open={open} />
       </button>
       {open && (
-        <div className="px-3 pb-3 flex flex-col gap-3">
+        <div className="filter-section-body px-3 pb-3 flex flex-col gap-3">
           {multi ? (
             <>
               {options.length === 0 && (

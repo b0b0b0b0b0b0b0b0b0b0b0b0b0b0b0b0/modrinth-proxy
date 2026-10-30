@@ -317,7 +317,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
             {server.published && (
               <div className="flex justify-between border-b border-gray-800/40 pb-1.5">
                 <span className="font-semibold text-[var(--text-gray)]">{t('version.published')}</span>
-                <span className="font-semibold text-white">{formatRelative(server.published, t) || '—'}</span>
+                <span className="font-semibold text-white">{formatRelative(server.published, t, locale) || '—'}</span>
               </div>
             )}
             {projectId && (

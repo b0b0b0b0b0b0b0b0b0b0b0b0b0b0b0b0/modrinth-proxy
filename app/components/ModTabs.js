@@ -4,7 +4,8 @@ import { useState, useMemo, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
-import RelativeTime from './RelativeTime'
+import RelativeTime, { formatRelative } from './RelativeTime'
+import { useI18n } from './I18nProvider'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
 import {
   filterVersionsByContentType,
@@ -22,6 +23,7 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 
 export default function ModTabs({ mod, versions, initialTab = 'description', initialLoader = 'all' }) {
+  const { t, locale } = useI18n()
   const [activeTab, setActiveTab] = useState(initialTab)
   const router = useRouter()
   const pathname = usePathname()
@@ -409,20 +411,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2" />
                             </svg>
-                            {(() => {
-                              const date = new Date(version.date_published)
-                              const now = new Date()
-                              const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24))
-                              const diffHours = Math.floor((now - date) / (1000 * 60 * 60))
-                              
-                              if (diffHours < 1) return 'just now'
-                              if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`
-                              if (diffDays === 1) return 'yesterday'
-                              if (diffDays < 7) return `${diffDays} days ago`
-                              if (diffDays < 30) return `${Math.floor(diffDays / 7)} week${Math.floor(diffDays / 7) > 1 ? 's' : ''} ago`
-                              if (diffDays < 365) return `${Math.floor(diffDays / 30)} month${Math.floor(diffDays / 30) > 1 ? 's' : ''} ago`
-                              return `${Math.floor(diffDays / 365)} year${Math.floor(diffDays / 365) > 1 ? 's' : ''} ago`
-                            })()}
+                            {formatRelative(version.date_published, t, locale) || t('time.unknown')}
                           </div>
                           <div className="flex items-center gap-1">
                             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

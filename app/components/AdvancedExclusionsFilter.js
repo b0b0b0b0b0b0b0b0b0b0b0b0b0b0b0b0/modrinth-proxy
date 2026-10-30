@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useT } from './I18nProvider'
+import { useCatalogFilterOpen } from './CatalogFilterSection'
 import { labeled } from '@/lib/i18n/label'
 import {
   EPILEPSY_EXCLUSION_ID,
@@ -30,7 +31,7 @@ function BanIcon() {
 
 function Chevron({ open }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className={`h-4 w-4 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className={`filter-section-chevron h-4 w-4 shrink-0 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 9-7 7-7-7" />
     </svg>
   )
@@ -230,7 +231,7 @@ export default function AdvancedExclusionsFilter() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const hydrated = useRef(false)
-  const [open, setOpen] = useState(true)
+  const [open, toggleOpen] = useCatalogFilterOpen('advanced')
   const [expanded, setExpanded] = useState({})
   const urlIds = parseDisclosureExclusions(searchParams)
   const selected = filterDisclosureIdsForCatalog(urlIds, pathname)
@@ -301,17 +302,18 @@ export default function AdvancedExclusionsFilter() {
   }, [queryString, pathname])
 
   return (
-    <div className="overflow-hidden rounded-xl card-glass bg-modrinth-dark">
+    <div data-filter-section="advanced" className="overflow-hidden rounded-xl card-glass bg-modrinth-dark">
       <button
         type="button"
-        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        onClick={toggleOpen}
         className="flex w-full items-center gap-2 px-4 py-3 text-left"
       >
         <h3 className="m-0 flex-1 text-sm font-semibold text-gray-300">{t('filter.advanced')}</h3>
         <Chevron open={open} />
       </button>
       {open && (
-        <div className="px-3 pb-3">
+        <div className="filter-section-body px-3 pb-3">
           <div className="mb-2 flex gap-2 px-1 text-xs text-gray-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0">
               <circle cx="12" cy="12" r="10" />
