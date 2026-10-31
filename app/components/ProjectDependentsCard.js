@@ -10,8 +10,10 @@ import { useI18n } from './I18nProvider'
 export default function ProjectDependentsCard({ projectId, projectType, loaders = [], title }) {
   const { t, locale } = useI18n()
   const sentinelRef = useRef(null)
-  const [dependents, setDependents] = useState([])
   const loadersKey = loaders.join(',')
+  const requestKey = `${projectId}|${projectType}|${loadersKey}`
+  const [result, setResult] = useState({ key: '', dependents: null })
+  const dependents = result.key === requestKey ? result.dependents : null
   const enabled = Boolean(projectId) && dependentCatalogsFor(projectType, loaders).length > 0
 
   useEffect(() => {
@@ -22,9 +24,11 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
       fetch(`/api/dependencies/dependents?${params.toString()}`)
         .then((response) => (response.ok ? response.json() : null))
         .then((data) => {
-          if (!cancelled) setDependents(data?.dependents || [])
+          if (!cancelled) setResult({ key: requestKey, dependents: data?.dependents || [] })
         })
-        .catch(() => {})
+        .catch(() => {
+          if (!cancelled) setResult({ key: requestKey, dependents: [] })
+        })
     }
     const observer = new IntersectionObserver(
       (entries) => {
@@ -39,22 +43,15 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
       cancelled = true
       observer.disconnect()
     }
-  }, [enabled, projectId, projectType, loadersKey])
+  }, [enabled, projectId, projectType, loadersKey, requestKey])
 
   if (!enabled) return null
-  if (dependents.length === 0) return <div ref={sentinelRef} aria-hidden="true" className="h-0" style={{ marginTop: '-1rem' }} />
+  if (dependents == null) return <DependentsSkeleton sentinelRef={sentinelRef} title={t('project.dependents')} />
+  if (dependents.length === 0) return null
 
   return (
     <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-      <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
-        <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
-          <circle cx="6" cy="6" r="3" />
-          <circle cx="6" cy="18" r="3" />
-          <circle cx="18" cy="12" r="3" />
-          <path d="M9 6h2a4 4 0 0 1 4 4v0M9 18h2a4 4 0 0 0 4-4v0" />
-        </svg>
-        {t('project.dependents')}
-      </h3>
+      <DependentsHeading title={t('project.dependents')} />
       <div className="flex flex-wrap gap-2">
         {dependents.map(({ catalog, count }) => (
           <StyledTooltip key={catalog} label={t(`project.dependentsTipBy.${catalog}`, { name: title })}>
@@ -67,6 +64,32 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
             </Link>
           </StyledTooltip>
         ))}
+      </div>
+    </div>
+  )
+}
+
+function DependentsHeading({ title }) {
+  return (
+    <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+      <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+        <circle cx="6" cy="6" r="3" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="12" r="3" />
+        <path d="M9 6h2a4 4 0 0 1 4 4v0M9 18h2a4 4 0 0 0 4-4v0" />
+      </svg>
+      {title}
+    </h3>
+  )
+}
+
+function DependentsSkeleton({ sentinelRef, title }) {
+  return (
+    <div ref={sentinelRef} aria-busy="true" className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
+      <DependentsHeading title={title} />
+      <div className="flex flex-wrap gap-2">
+        <div className="h-8 w-24 animate-pulse rounded-full bg-black/10 dark:bg-white/15" />
+        <div className="h-8 w-28 animate-pulse rounded-full bg-black/10 dark:bg-white/15" />
       </div>
     </div>
   )
