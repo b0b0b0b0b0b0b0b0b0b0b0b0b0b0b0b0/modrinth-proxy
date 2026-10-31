@@ -22,16 +22,10 @@ Clean-param: fbclid
 Clean-param: gclid
 
 User-agent: Bingbot
-Allow: /
-Disallow: /api/
-Disallow: /_next/
-Disallow: /ads/
-Disallow: /LICENSE
-Disallow: /license
-Disallow: /banner.webp
-Disallow: /sw.js
-Disallow: /sw-v2.js
-Crawl-delay: 10
+User-agent: msnbot
+User-agent: BingPreview
+User-agent: AdIdxBot
+Disallow: /
 
 User-agent: Yandex
 Allow: /
