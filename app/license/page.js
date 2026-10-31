@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import LicenseDocument from '@/app/components/LicenseDocument'
 import {
-  SITE_LICENSE_COPYRIGHT,
+  siteLicenseCopyright,
   SITE_LICENSE_GNU_URL,
   SITE_LICENSE_GITHUB_URL,
   SITE_LICENSE_ID,
@@ -47,7 +47,7 @@ export default function LicensePage() {
         <p className="mx-auto max-w-2xl text-gray-400 md:text-lg">
           {t('license.leadBefore')}{' '}
           <span className="font-mono text-modrinth-green">{SITE_LICENSE_ID}</span>
-          {t('license.leadAfter', { copyright: SITE_LICENSE_COPYRIGHT })}
+          {t('license.leadAfter', { copyright: siteLicenseCopyright() })}
         </p>
       </header>
 

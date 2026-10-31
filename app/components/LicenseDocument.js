@@ -1,9 +1,18 @@
 import { cache } from 'react'
 import { parseLicenseDocument, splitLicenseLinks } from '@/lib/parseLicenseDocument'
-import { readSiteLicenseText } from '@/lib/siteLicense'
+import { readSiteLicenseText, siteLicenseCopyright } from '@/lib/siteLicense'
 import { getRequestT } from '@/lib/i18n/server'
 
-export const getParsedSiteLicense = cache(() => parseLicenseDocument(readSiteLicenseText()))
+export const getParsedSiteLicense = cache(() => {
+  const document = parseLicenseDocument(readSiteLicenseText())
+  const years = siteLicenseCopyright()
+  return {
+    ...document,
+    notice: document.notice.map((paragraph) =>
+      paragraph.replace(/Copyright \(C\) \d{4}(?:\s*[–-]\s*\d{4})?/, `Copyright (C) ${years}`),
+    ),
+  }
+})
 
 function LicenseParagraph({ text, className = '' }) {
   const parts = splitLicenseLinks(text)
