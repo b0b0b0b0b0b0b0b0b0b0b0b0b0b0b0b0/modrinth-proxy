@@ -183,13 +183,13 @@ export default function MobileNav({ onFilterClick }) {
   return (
     <>
       <div data-mobile-nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe">
-        <div className="flex items-center justify-center gap-2 px-4 py-3 bg-modrinth-darker backdrop-blur-xl shadow-[0_-4px_20px_rgba(var(--color-green-rgb),0.15)] rounded-t-[24px]">
+        <div className="flex items-center justify-center gap-2 rounded-t-[24px] bg-modrinth-dark card-glass px-4 py-3">
           <Link
             href="/"
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               pathname === '/' 
-                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105' 
-                : 'bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green'
+                ? 'card-glass scale-105 bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black' 
+                : 'glass-btn text-gray-300 hover:text-modrinth-green'
             }`}
           >
             <svg className="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
@@ -203,8 +203,8 @@ export default function MobileNav({ onFilterClick }) {
             onClick={() => setIsOpen(!isOpen)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               isOpen 
-                ? 'bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105' 
-                : 'bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green'
+                ? 'card-glass scale-105 bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black' 
+                : 'glass-btn text-gray-300 hover:text-modrinth-green'
             }`}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,7 +216,7 @@ export default function MobileNav({ onFilterClick }) {
           {showFilterButton && (
             <button
               onClick={handleFilterClick}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green rounded-xl text-xs font-semibold transition-all duration-300"
+              className="glass-btn flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all duration-300 hover:text-modrinth-green"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -228,7 +228,7 @@ export default function MobileNav({ onFilterClick }) {
           {showSettingsNavButton && (
             <button
               onClick={handleSettingsNavClick}
-              className="flex items-center justify-center gap-1.5 px-4 py-2.5 bg-modrinth-dark hover:bg-modrinth-darker text-gray-300 hover:text-modrinth-green rounded-xl text-xs font-semibold transition-all duration-300"
+              className="glass-btn flex items-center justify-center gap-1.5 rounded-xl px-4 py-2.5 text-xs font-semibold text-gray-300 transition-all duration-300 hover:text-modrinth-green"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h8M4 18h16" />
@@ -247,7 +247,7 @@ export default function MobileNav({ onFilterClick }) {
           <div className="absolute inset-0 bg-black/70 backdrop-blur-md"></div>
           
           <div 
-            className="absolute bottom-0 left-0 right-0 bg-modrinth-darker rounded-t-[32px] shadow-[0_-8px_40px_rgba(var(--color-green-rgb),0.25)] pb-safe animate-slide-up"
+            className="absolute bottom-0 left-0 right-0 animate-slide-up rounded-t-[32px] bg-modrinth-dark card-glass pb-safe"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-center pt-4 pb-3">
@@ -269,10 +269,10 @@ export default function MobileNav({ onFilterClick }) {
                       key={item.href}
                       href={withCatalogDiscoveryQuery(item.href, searchParams)}
                       onClick={() => setIsOpen(false)}
-                      className={`group relative flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
+                      className={`group flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
                         active
-                          ? 'bg-gradient-to-br ' + item.color + ' shadow-lg shadow-[rgba(var(--color-green-rgb),0.3)] scale-105'
-                          : 'bg-modrinth-dark hover:bg-modrinth-darker hover:scale-105'
+                          ? 'card-glass scale-105 bg-gradient-to-br ' + item.color
+                          : 'card-glass bg-modrinth-dark hover:scale-105 hover:brightness-110'
                       }`}
                     >
                       <div className={`transition-all duration-300 ${active ? 'text-white scale-110' : 'text-gray-400 group-hover:text-modrinth-green group-hover:scale-110'}`}>
@@ -283,9 +283,6 @@ export default function MobileNav({ onFilterClick }) {
                       }`}>
                         {t(item.labelKey)}
                       </span>
-                      {active && (
-                        <div className="absolute -top-1 -right-1 w-3 h-3 bg-modrinth-green rounded-full shadow-lg shadow-[rgba(var(--color-green-rgb),0.5)] animate-pulse"></div>
-                      )}
                     </Link>
                   )
                 })}
