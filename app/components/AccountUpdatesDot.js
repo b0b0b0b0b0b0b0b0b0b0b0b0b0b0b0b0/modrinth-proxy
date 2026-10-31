@@ -7,6 +7,37 @@ import { NEWS_BADGE_EVENT } from './NewsCounter'
 export const ACCOUNT_UPDATES_KEY = 'account-updates'
 const CACHE_MS = 10 * 60 * 1000
 
+function readAccountUpdates() {
+  try {
+    const cached = JSON.parse(sessionStorage.getItem(ACCOUNT_UPDATES_KEY) || 'null')
+    if (cached && Date.now() - cached.at < CACHE_MS) return cached
+  } catch {}
+  return null
+}
+
+let accountUpdatesInflight = null
+
+export function loadAccountUpdates() {
+  const cached = readAccountUpdates()
+  if (cached) return Promise.resolve(cached)
+  if (accountUpdatesInflight) return accountUpdatesInflight
+  accountUpdatesInflight = fetch('/api/account/updates')
+    .then((response) => (response.ok ? response.json() : null))
+    .then((data) => {
+      if (!data) return null
+      const stored = { at: Date.now(), count: data.count || 0, username: data.username, avatar: data.avatar || null }
+      try {
+        sessionStorage.setItem(ACCOUNT_UPDATES_KEY, JSON.stringify(stored))
+      } catch {}
+      return stored
+    })
+    .catch(() => null)
+    .finally(() => {
+      accountUpdatesInflight = null
+    })
+  return accountUpdatesInflight
+}
+
 export default function AccountUpdatesDot() {
   const pathname = usePathname()
   const [count, setCount] = useState(0)
@@ -18,21 +49,17 @@ export default function AccountUpdatesDot() {
     }
     let alive = true
     try {
-      const cached = JSON.parse(sessionStorage.getItem(ACCOUNT_UPDATES_KEY) || 'null')
-      if (cached && Date.now() - cached.at < CACHE_MS) {
-        setCount(cached.count)
+      const cached = readAccountUpdates()
+      if (cached) {
+        setCount(cached.count || 0)
         return undefined
       }
     } catch {}
-    fetch('/api/account/updates')
-      .then((response) => (response.ok ? response.json() : null))
+    loadAccountUpdates()
       .then((data) => {
         if (!alive || !data) return
         window.dispatchEvent(new Event(NEWS_BADGE_EVENT))
-        setCount(data.count)
-        try {
-          sessionStorage.setItem(ACCOUNT_UPDATES_KEY, JSON.stringify({ at: Date.now(), count: data.count }))
-        } catch {}
+        setCount(data.count || 0)
       })
       .catch(() => {})
     return () => {

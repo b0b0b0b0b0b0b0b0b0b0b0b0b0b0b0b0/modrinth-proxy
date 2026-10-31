@@ -4,7 +4,7 @@ import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import AccountUpdatesDot, { ACCOUNT_UPDATES_KEY } from './AccountUpdatesDot'
+import AccountUpdatesDot, { ACCOUNT_UPDATES_KEY, loadAccountUpdates } from './AccountUpdatesDot'
 import { useT } from './I18nProvider'
 import { clearFavoritesCache } from '@/lib/favoritesCache'
 import { clearSavedCollectionsCache } from './ProjectSaveButton'
@@ -93,8 +93,7 @@ export default function ProfileMenu({ account, linkClassName }) {
     }
     if (username) return undefined
     let alive = true
-    fetch('/api/account/updates')
-      .then((response) => (response.ok ? response.json() : null))
+    loadAccountUpdates()
       .then((data) => {
         if (alive && data?.username) {
           setUsername(data.username)
