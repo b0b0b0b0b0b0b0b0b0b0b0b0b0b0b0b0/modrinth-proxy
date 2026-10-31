@@ -10,7 +10,6 @@ import { useT } from './I18nProvider'
 
 const BOOKMARK = 'm19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'
 const HEART_OUTLINE = '#0c3b22'
-const HEART_OUTLINE_IDLE = '#777675'
 
 function GlassBookmark({ saved }) {
   const id = useId().replace(/:/g, '')
@@ -21,8 +20,8 @@ function GlassBookmark({ saved }) {
           <path d={BOOKMARK} />
         </clipPath>
         <linearGradient id={`${id}-sheen`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity={saved ? 0.55 : 0.3} />
-          <stop offset="0.48" stopColor="#fff" stopOpacity={saved ? 0.12 : 0.06} />
+          <stop offset="0" stopColor="#fff" stopOpacity={saved ? 0.55 : 0.45} />
+          <stop offset="0.48" stopColor="#fff" stopOpacity={saved ? 0.12 : 0.1} />
           <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
         </linearGradient>
         <linearGradient id={`${id}-depth`} x1="0" y1="0" x2="0" y2="1">
@@ -30,17 +29,16 @@ function GlassBookmark({ saved }) {
           <stop offset="1" stopColor="#000" stopOpacity={saved ? 0.28 : 0.12} />
         </linearGradient>
       </defs>
-      <path d={BOOKMARK} fill="currentColor" fillOpacity={saved ? 1 : 0.45} stroke="none" />
+      <path d={BOOKMARK} fill="currentColor" fillOpacity={saved ? 1 : 0.82} stroke="none" />
       <g clipPath={`url(#${id}-clip)`} stroke="none">
         <rect x="5" y="3" width="14" height="18" fill={`url(#${id}-sheen)`} />
         <rect x="5" y="3" width="14" height="18" fill={`url(#${id}-depth)`} />
-        <path d="M7.6 5.2v9.5" stroke="#fff" strokeOpacity={saved ? 0.6 : 0.35} strokeWidth="1.2" strokeLinecap="round" fill="none" />
+        <path d="M7.6 5.2v9.5" stroke="#fff" strokeOpacity={saved ? 0.6 : 0.5} strokeWidth="1.2" strokeLinecap="round" fill="none" />
       </g>
       <path
         d={BOOKMARK}
         fill="none"
-        stroke={saved ? HEART_OUTLINE : HEART_OUTLINE_IDLE}
-        className={saved ? '' : 'transition-[stroke] group-hover:stroke-[#414141]'}
+        stroke={HEART_OUTLINE}
       />
     </>
   )
@@ -245,7 +243,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
               initial={bounceRef.current && !reduceMotion ? { scale: 0.6, y: -1 } : { y: 2 }}
               animate={{ scale: 1, y: 2 }}
               transition={{ type: 'spring', stiffness: 520, damping: 18 }}
-              className={`h-9 w-9 transition-colors lg:h-10 lg:w-10 ${saved ? 'text-modrinth-green' : 'text-gray-400 group-hover:text-white'}`}
+              className="h-9 w-9 text-modrinth-green transition-colors lg:h-10 lg:w-10"
               stroke="currentColor"
               strokeWidth="0.95"
               strokeLinecap="round"
