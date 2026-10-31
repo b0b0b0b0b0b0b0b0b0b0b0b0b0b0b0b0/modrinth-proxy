@@ -11,7 +11,7 @@ import CountUp from './CountUp'
 import RoyalKitten from './RoyalKitten'
 import { DaysChart, TypeSplit } from './StatsCharts'
 import ModrinthTrafficChart from './ModrinthTrafficChart'
-import { getModrinthTraffic } from '@/lib/modrinthTraffic'
+import { getModrinthTrafficReport } from '@/lib/modrinthTrafficReport'
 
 export const dynamic = 'force-dynamic'
 
@@ -141,7 +141,7 @@ export default function StatsPage() {
       </Card>
 
       <Card title={t('st.mrTitle')}>
-        <ModrinthTrafficChart initial={getModrinthTraffic()} />
+        <ModrinthTrafficChart initial={getModrinthTrafficReport()} />
       </Card>
 
       <div className="grid gap-4 sm:grid-cols-2">
