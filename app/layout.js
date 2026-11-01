@@ -10,6 +10,7 @@ import TopNav from "./components/TopNav"
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import GameProfileSync from './components/GameProfileSync'
+import FestiveScoreSync from './components/FestiveScoreSync'
 import Footer from './components/Footer'
 import PeekKitten from './components/PeekKitten'
 import OiiaParty from './components/OiiaParty'
@@ -198,6 +199,7 @@ export default async function RootLayout({ children }) {
           <VersionsPreloader />
           <DownloadHistoryTracker />
           <GameProfileSync />
+          <FestiveScoreSync />
           <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser) } : null} />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">

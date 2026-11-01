@@ -1,7 +1,8 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { onSnowTurboChange, readSnowTurbo, readTree, writeTree } from '@/lib/newYear'
+import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
 import { playChime, playPop, playTrill } from './softSounds'
 
@@ -185,10 +186,21 @@ export default function NewYearGame() {
   const flying = useRef(0)
   const seq = useRef(0)
 
+  useLayoutEffect(() => {
+    const saved = readTree()
+    treeData.current = { total: saved.total, hung: saved.hung }
+    const apply = () => {
+      const total = festiveBook.shown('ornaments')
+      const hung = treeData.current.hung.length ? treeData.current.hung : saved.hung
+      treeData.current = { total, hung }
+      setTree({ total, hung })
+    }
+    apply()
+    return festiveBook.subscribe(apply)
+  }, [])
+
   useEffect(() => {
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return
-    treeData.current = readTree()
-    setTree(treeData.current)
     setTurbo(readSnowTurbo())
     try {
       setBanner(sessionStorage.getItem('nyTreeBannerOff') !== '1')
@@ -218,12 +230,13 @@ export default function NewYearGame() {
   }, [enabled, turbo])
 
   const hang = (kind) => {
+    const total = festiveBook.catch('ornaments')
     const current = treeData.current
-    const total = current.total + 1
     const hung = current.hung.length < SLOTS.length ? [...current.hung, kind] : current.hung
+    const kept = readTree()
+    writeTree({ total: kept.total, hung })
     const next = { total, hung }
     treeData.current = next
-    writeTree(next)
     setTree(next)
     if (hung.length !== current.hung.length) setFresh(hung.length - 1)
     if (total === GARLAND_AT || total === STAR_AT) window.setTimeout(playChime, 160)

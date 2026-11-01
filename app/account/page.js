@@ -35,6 +35,7 @@ import {
 } from './CollectionActions'
 import TypeFilter from './TypeFilter'
 import { HeaderKitten, SleepyKitten } from './AccountKitten'
+import FestiveScoreCard from './FestiveScoreCard'
 import { AvatarImage } from './MinecraftAvatarPicker'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 
@@ -384,6 +385,7 @@ export default async function AccountPage({ searchParams }) {
         </div>
         <LogoutButton />
       </div>
+      <FestiveScoreCard />
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row">
         <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:flex-shrink-0">

@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { isHalloweenSeason, onGhostTurboChange, readGhostScore, readGhostTurbo, writeGhostScore } from '@/lib/halloween'
+import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo } from '@/lib/halloween'
+import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
 import { playPoof } from './softSounds'
 
@@ -267,8 +268,10 @@ export default function HalloweenEffects() {
   const [anchors, setAnchors] = useState([])
   const [caught, setCaught] = useState(0)
 
-  useEffect(() => {
-    setCaught(readGhostScore())
+  useLayoutEffect(() => {
+    const apply = () => setCaught(festiveBook.shown('ghosts'))
+    apply()
+    return festiveBook.subscribe(apply)
   }, [])
 
   useEffect(() => {
@@ -309,13 +312,7 @@ export default function HalloweenEffects() {
     <>
     <GhostBanner caught={caught} />
     <GhostGame
-      onCatch={() =>
-        setCaught((n) => {
-          const next = n + 1
-          writeGhostScore(next)
-          return next
-        })
-      }
+      onCatch={() => festiveBook.catch('ghosts')}
     />
     <div className="halloween-layer" aria-hidden>
       {anchors.map((item) => (

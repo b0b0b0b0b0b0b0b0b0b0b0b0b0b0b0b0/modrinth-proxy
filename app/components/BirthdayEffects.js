@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
-import { isBirthdaySeason, readCookieScore, writeCookieScore } from '@/lib/birthday'
+import { isBirthdaySeason } from '@/lib/birthday'
+import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
 
 const CONFETTI = Array.from({ length: 28 }, (_, i) => ({
@@ -320,8 +321,10 @@ export default function BirthdayEffects() {
   const balloonSeq = useRef(0)
   const balloonTimers = useRef(new Set())
 
-  useEffect(() => {
-    setEaten(readCookieScore())
+  useLayoutEffect(() => {
+    const apply = () => setEaten(festiveBook.shown('cookies'))
+    apply()
+    return festiveBook.subscribe(apply)
   }, [])
 
   useEffect(() => {
@@ -393,13 +396,7 @@ export default function BirthdayEffects() {
       <BirthdayBanner on={on} eaten={eaten} />
       <CookieGame
         on={on}
-        onEat={() => {
-          setEaten((n) => {
-            const next = n + 1
-            writeCookieScore(next)
-            return next
-          })
-        }}
+        onEat={() => festiveBook.catch('cookies')}
       />
       {on ? (
         <div className="bday-layer" aria-hidden>
