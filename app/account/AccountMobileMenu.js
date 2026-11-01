@@ -42,7 +42,7 @@ export default function AccountMobileMenu({ items, settings }) {
           {items.map((item) => (
             <Link
               key={item.id}
-              href={`/account?tab=${item.id}`}
+              href={item.href || `/account?tab=${item.id}`}
               onClick={() => setIsOpen(false)}
               aria-current={item.active ? 'page' : undefined}
               className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm transition-colors ${

@@ -27,6 +27,7 @@ import NotifyMuteButton from './NotifyMuteButton'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
 import PageFade from './PageFade'
+import Crumbs from '../components/Crumbs'
 import {
   CreateCollectionButton,
   DeleteCollectionButton,
@@ -35,9 +36,10 @@ import {
 } from './CollectionActions'
 import TypeFilter from './TypeFilter'
 import { HeaderKitten, SleepyKitten } from './AccountKitten'
-import FestiveScoreCard from './FestiveScoreCard'
 import { AvatarImage } from './MinecraftAvatarPicker'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
+import { AccountFestiveScore } from '@/lib/festiveScore'
+import FestiveScoreCard from './FestiveScoreCard'
 
 export const dynamic = 'force-dynamic'
 
@@ -70,6 +72,7 @@ function typeItems(byType, total, t) {
   ]
 }
 const TAB_ICONS = {
+  home: 'M20 21a8 8 0 0 0-16 0M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8',
   updates: 'M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.94 1.94 0 0 0 3.4 0',
   favorites:
     'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z',
@@ -324,6 +327,40 @@ function CollectionItems({ collection, page, type, t }) {
   )
 }
 
+function AccountHome({ user, scores, festive, t, locale }) {
+  const avatar = userAvatarUrl(user)
+  const since = new Date(user.created_at).toLocaleDateString(intlLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+
+  return (
+    <>
+      <div className="flex flex-wrap items-center gap-4">
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-[var(--bg-primary)]">
+          {avatar ? <AvatarImage src={avatar} className="h-16 w-16" /> : <HeaderKitten />}
+        </div>
+        <div className="min-w-0 flex-1">
+          <UsernameEditor username={user.username} />
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">{t('account.since', { date: since })}</p>
+          {user.mc_name ? <p className="mt-0.5 text-sm font-semibold text-gray-300">{user.mc_name}</p> : null}
+        </div>
+        <div className="flex shrink-0 items-center gap-2">
+          <Link
+            href="/settings/profile"
+            className="rounded-lg border border-gray-800 px-3 py-1.5 text-sm font-semibold text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white"
+          >
+            {t('nav.settings')}
+          </Link>
+          <LogoutButton />
+        </div>
+      </div>
+      <FestiveScoreCard initial={scores} festive={festive} />
+    </>
+  )
+}
+
 function paginate(list, requested) {
   const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE))
   const page = Math.min(pages, Math.max(1, Number.isInteger(requested) ? requested : 1))
@@ -352,7 +389,7 @@ export default async function AccountPage({ searchParams }) {
   const favoritesPage = paginate(shownFavorites, requestedPage)
 
   const requested = searchParams?.tab
-  const tab = sharedCode ? 'favorites' : TABS.includes(requested) ? requested : updates.length > 0 ? 'updates' : 'favorites'
+  const tab = sharedCode ? 'favorites' : TABS.includes(requested) ? requested : 'home'
   const collections = listCollections(user.id)
   const collectionId = tab === 'collections' ? parseCollectionId(searchParams?.c) : null
   const collection = collectionId ? getCollectionItems(user.id, collectionId) : null
@@ -361,72 +398,91 @@ export default async function AccountPage({ searchParams }) {
     ? paginate(typeFilter ? collection.items.filter((row) => row.project_type === typeFilter) : collection.items, requestedPage)
     : null
   const counts = { updates: updates.length, favorites: favorites.length, collections: collections.length, downloads: downloads.all }
+  const navItems = [
+    {
+      id: 'home',
+      href: '/account',
+      label: t('account.title'),
+      icon: TAB_ICONS.home,
+      count: null,
+      highlight: false,
+      active: tab === 'home',
+    },
+    ...TABS.map((value) => ({
+      id: value,
+      href: `/account?tab=${value}`,
+      label: t(`account.${value}`),
+      icon: TAB_ICONS[value],
+      count: counts[value],
+      highlight: value === 'updates' && counts.updates > 0,
+      active: value === tab,
+    })),
+  ]
   const mutes = tab === 'downloads' ? getNotifyMutes(user.id) : new Set()
   const trackDownloads = !user.skip_download_updates
   const fadeKey = `${typeFilter || 'all'}-${tab}-${tab === 'updates' ? updatesPage.page : tab === 'favorites' ? favoritesPage.page : tab === 'downloads' ? downloads.page : collectionPage ? `${collectionId}-${collectionPage.page}` : searchParams?.c || 1}`
 
   return (
     <div className="mx-auto max-w-7xl pb-8">
+      <div className="mb-5">
+        <Crumbs
+          label={t('nav.navigation')}
+          items={[
+            { href: '/', label: t('nav.home') },
+            { label: tab === 'home' ? t('account.title') : t(`account.${tab}`) },
+          ]}
+        />
+      </div>
       <AccountMobileMenu
-        items={TABS.map((value) => ({
-          id: value,
-          label: t(`account.${value}`),
-          icon: TAB_ICONS[value],
-          count: value in counts ? counts[value] : null,
-          highlight: value === 'updates' && counts.updates > 0,
-          active: value === tab,
-        }))}
+        items={navItems}
         settings={{ label: t('nav.settings'), icon: TAB_ICONS.settings }}
       />
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3">
-          {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
-          <UsernameEditor username={user.username} />
+      {tab === 'home' ? null : (
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex min-w-0 items-center gap-3">
+            {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
+            <UsernameEditor username={user.username} />
+          </div>
+          <LogoutButton />
         </div>
-        <LogoutButton />
-      </div>
-      <FestiveScoreCard />
+      )}
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row">
         <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:flex-shrink-0">
           <div className="sticky top-4 space-y-1 rounded-xl card-glass bg-modrinth-dark p-4">
             <h2 className="mb-3 text-sm font-semibold text-gray-300">{t('nav.sections')}</h2>
-            {TABS.map((value) => {
-              const active = value === tab
-              const highlight = value === 'updates' && counts.updates > 0
-              return (
+            {navItems.map((item) => (
                 <Link
-                  key={value}
-                  href={`/account?tab=${value}`}
-                  aria-current={active ? 'page' : undefined}
+                  key={item.id}
+                  href={item.href}
+                  aria-current={item.active ? 'page' : undefined}
                   className={[
                     'flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors',
-                    active
+                    item.active
                       ? 'bg-[rgba(var(--color-green-rgb),0.15)] font-semibold text-modrinth-green'
                       : 'text-gray-400 hover:bg-gray-800/50 hover:text-white',
                   ].join(' ')}
                 >
                   <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
-                    <path d={TAB_ICONS[value]} />
+                    <path d={item.icon} />
                   </svg>
-                  <span className="flex-1">{t(`account.${value}`)}</span>
-                  {value in counts ? (
+                  <span className="flex-1">{item.label}</span>
+                  {item.count !== null ? (
                     <span
                       className={[
                         'rounded-full px-1.5 py-0.5 text-[11px] font-bold leading-none',
-                        active
+                        item.active
                           ? 'bg-modrinth-green/20 text-modrinth-green'
-                          : highlight
+                          : item.highlight
                             ? 'bg-modrinth-green text-black'
                             : 'bg-[var(--bg-tertiary)] text-gray-400',
                       ].join(' ')}
                     >
-                      {counts[value]}
+                      {item.count}
                     </span>
                   ) : null}
                 </Link>
-              )
-            })}
+            ))}
             <div className="!mt-3 border-t border-gray-800 pt-3">
               <Link
                 href="/settings/profile"
@@ -445,6 +501,9 @@ export default async function AccountPage({ searchParams }) {
         </nav>
 
       <section className="min-w-0 flex-1 rounded-2xl card-glass bg-modrinth-dark p-4 md:p-5 lg:self-start">
+        {tab === 'home' ? (
+          <AccountHome user={user} scores={new AccountFestiveScore().read(user.id)} festive={!user.hide_festive} t={t} locale={locale} />
+        ) : null}
         {tab === 'favorites' && favorites.length > 0 ? (
           <TypeFilter items={typeItems(favoritesByType, favorites.length, t)} active={typeFilter || ''} tab="favorites" />
         ) : null}
@@ -460,6 +519,7 @@ export default async function AccountPage({ searchParams }) {
         {tab === 'downloads' && downloads.all > 0 ? (
           <TypeFilter items={typeItems(downloads.byType, downloads.all, t)} active={typeFilter || ''} tab="downloads" />
         ) : null}
+        {tab === 'home' ? null : (
         <PageFade key={fadeKey}>
         {tab === 'updates' ? (
           updates.length > 0 ? (
@@ -571,6 +631,7 @@ export default async function AccountPage({ searchParams }) {
           )
         ) : null}
         </PageFade>
+        )}
       </section>
       </div>
     </div>
