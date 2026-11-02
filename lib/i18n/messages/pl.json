@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Dziś urodziny ModrinthProxy."
   },
+  "mcbday": {
+    "eveTitle": "Jutro Minecraft kończy {age} lat!",
+    "dayTitle": "Dziś Minecraft kończy {age} lat!",
+    "afterTitle": "Wczoraj Minecraft skończył {age} lat!",
+    "banner": "18 listopada 2011 roku wyszła wersja 1.0 — i zaczęła się wielka przygoda.",
+    "play": "Łap diamenty — dzyń!",
+    "scoreTitle": "Złapane diamenty",
+    "close": "Zamknij"
+  },
   "halloween": {
     "title": "Duszki wyszły na spacer!",
     "play": "Łap je myszką albo palcem — puf! Nie są straszne, po prostu lubią chowanego.",

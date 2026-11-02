@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Šodien ModrinthProxy dzimšanas diena."
   },
+  "mcbday": {
+    "eveTitle": "Rīt Minecraft paliek {age}!",
+    "dayTitle": "Šodien Minecraft paliek {age}!",
+    "afterTitle": "Vakar Minecraft palika {age}!",
+    "banner": "2011. gada 18. novembrī iznāca versija 1.0 — un sākās lielais piedzīvojums.",
+    "play": "Ķer dimantus — dzin!",
+    "scoreTitle": "Noķertie dimanti",
+    "close": "Aizvērt"
+  },
   "halloween": {
     "title": "Spoki izgājuši pastaigā!",
     "play": "Ķer tos ar peli vai pirkstu — puf! Tie nav baisi, tie vienkārši mīl paslēpes.",

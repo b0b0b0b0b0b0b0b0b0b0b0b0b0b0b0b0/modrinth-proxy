@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Heute hat ModrinthProxy Geburtstag."
   },
+  "mcbday": {
+    "eveTitle": "Morgen wird Minecraft {age}!",
+    "dayTitle": "Heute wird Minecraft {age}!",
+    "afterTitle": "Gestern wurde Minecraft {age}!",
+    "banner": "Am 18. November 2011 erschien Version 1.0 — damit begann das große Abenteuer.",
+    "play": "Fang die Diamanten — ding!",
+    "scoreTitle": "Gefangene Diamanten",
+    "close": "Schließen"
+  },
   "halloween": {
     "title": "Die Geister machen einen Spaziergang!",
     "play": "Fang sie mit der Maus oder dem Finger — puff! Sie sind nicht gruselig, sie lieben nur Verstecken.",

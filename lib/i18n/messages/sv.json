@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Idag fyller ModrinthProxy år."
   },
+  "mcbday": {
+    "eveTitle": "I morgon fyller Minecraft {age}!",
+    "dayTitle": "I dag fyller Minecraft {age}!",
+    "afterTitle": "I går fyllde Minecraft {age}!",
+    "banner": "Den 18 november 2011 kom version 1.0 — och det stora äventyret började.",
+    "play": "Fånga diamanterna — pling!",
+    "scoreTitle": "Fångade diamanter",
+    "close": "Stäng"
+  },
   "halloween": {
     "title": "Spökena är ute på promenad!",
     "play": "Fånga dem med musen eller fingret — poff! De är inte läskiga, de älskar bara kurragömma.",

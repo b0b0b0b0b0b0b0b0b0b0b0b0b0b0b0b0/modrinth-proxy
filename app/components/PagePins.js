@@ -30,6 +30,56 @@ export function pinHeading() {
   return heading
 }
 
+const OBSTACLES = 'main a, main button, main input, main select, main textarea, main [role="button"], main [role="link"], header'
+const GAP = 6
+
+function textRect(el) {
+  const range = document.createRange()
+  range.selectNodeContents(el)
+  const r = range.getBoundingClientRect()
+  range.detach?.()
+  return r.width > 0 && r.height > 0 ? r : el.getBoundingClientRect()
+}
+
+function overlaps(a, b) {
+  return a.left < b.right + GAP && a.right > b.left - GAP && a.top < b.bottom + GAP && a.bottom > b.top - GAP
+}
+
+export function spotIsFree(left, top, width, height) {
+  const rect = { left, top, right: left + width, bottom: top + height }
+  for (const el of document.querySelectorAll(OBSTACLES)) {
+    const r = el.getBoundingClientRect()
+    if (r.width > 0 && r.height > 0 && overlaps(rect, r)) return false
+  }
+  return true
+}
+
+export function headingSpot(width, height) {
+  const heading = pinHeading()
+  if (!heading) return null
+  const text = textRect(heading)
+  if (text.width < 24 || text.height < 16) return null
+  const vw = document.documentElement.clientWidth
+  const band = { top: text.top - height * 2, bottom: text.bottom + height }
+  const obstacles = [...document.querySelectorAll(OBSTACLES)]
+    .map((el) => el.getBoundingClientRect())
+    .filter((r) => r.width > 0 && r.height > 0 && r.bottom > band.top && r.top < band.bottom)
+  const middle = text.top + text.height / 2 - height / 2
+  const candidates = [
+    { left: text.right + 10, top: middle },
+    { left: text.right - width * 0.7, top: text.top - height * 0.85 },
+    { left: text.left - width - 10, top: middle },
+    { left: text.left - width * 0.2, top: text.top - height * 0.85 },
+  ]
+  for (const spot of candidates) {
+    const rect = { left: spot.left, top: spot.top, right: spot.left + width, bottom: spot.top + height }
+    if (rect.left < 4 || rect.right > vw - 4) continue
+    if (obstacles.some((o) => overlaps(rect, o))) continue
+    return { x: spot.left, y: spot.top }
+  }
+  return null
+}
+
 export function usePagePins(collect, { enabled, pathname }) {
   const layerRef = useRef(null)
   const collectRef = useRef(collect)
@@ -45,7 +95,10 @@ export function usePagePins(collect, { enabled, pathname }) {
     const sync = () => {
       const box = layerRef.current?.getBoundingClientRect()
       if (!box) return
-      setPins(collectRef.current({ x: box.left, y: box.top }))
+      const base = { x: box.left, y: box.top }
+      setPins(
+        collectRef.current(base).filter((pin) => !pin.w || spotIsFree(pin.x + base.x, pin.y + base.y, pin.w, pin.h)),
+      )
     }
     const schedule = () => {
       if (frame) return

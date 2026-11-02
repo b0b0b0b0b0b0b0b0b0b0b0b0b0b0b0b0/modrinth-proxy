@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { isHalloweenSeason } from '@/lib/halloween'
+import { isMinecraftBirthdaySeason } from '@/lib/minecraftBirthday'
 import { isNewYearSeason } from '@/lib/newYear'
 import { onFestiveChange } from '@/lib/festive'
+import { PIXEL_DIAMOND_SIZE, PixelDiamondPixels } from './PixelDiamond'
 
 const HEART_PATH =
   'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z'
@@ -21,7 +23,10 @@ const random = (min, max) => min + Math.random() * (max - min)
 export function useKittenSeason() {
   const [season, setSeason] = useState(null)
   useEffect(() => {
-    const update = () => setSeason(isHalloweenSeason() ? 'halloween' : isNewYearSeason() ? 'winter' : null)
+    const update = () =>
+      setSeason(
+        isMinecraftBirthdaySeason() ? 'minecraft' : isHalloweenSeason() ? 'halloween' : isNewYearSeason() ? 'winter' : null,
+      )
     update()
     return onFestiveChange(update)
   }, [])
@@ -86,6 +91,42 @@ function SpookyEyes({ mood, look }) {
         </g>
       ))}
     </>
+  )
+}
+
+function PixelEyes({ mood, look }) {
+  if (mood === 'happy' || mood === 'sleep') return <Eyes mood={mood} look={look} />
+  if (mood === 'blink') return <path d="M8 10.2h2.4M13.6 10.2h2.4" strokeLinecap="butt" />
+  const dx = Math.round(look.x * 0.7 * 2) / 2
+  const dy = Math.round(look.y * 0.6 * 2) / 2
+  const open = mood === 'wink' ? [9.2] : [9.2, 14.8]
+  return (
+    <>
+      {mood === 'wink' ? <path d="M13.5 10.6q1.3-1.8 2.6 0" /> : null}
+      <g stroke="none">
+        {open.map((cx) => (
+          <g key={cx}>
+            <rect x={cx - 1.3 + dx} y={8.7 + dy} width="2.6" height="2.6" fill="currentColor" />
+            <rect x={cx - 1.3 + dx} y={8.7 + dy} width="1" height="1" fill="white" />
+          </g>
+        ))}
+      </g>
+    </>
+  )
+}
+
+function DiamondHelmet() {
+  return (
+    <g strokeWidth="0.7" strokeLinejoin="miter" stroke="#1f8f8b">
+      <path d="M3.6 8.6V4.4L5.6 2.2h12.8l2 2.2v4.2h-2.2V6.4H5.8v2.2Z" fill="#4fe3dc" />
+      <path d="M5.8 6.4h12.4" stroke="#25b2b0" strokeWidth="0.9" />
+      <g stroke="none">
+        <rect x="6.6" y="3.2" width="2.2" height="1.1" fill="#c4fffb" />
+        <rect x="9.6" y="3.2" width="1.1" height="1.1" fill="#c4fffb" />
+        <rect x="16.4" y="3.6" width="1.4" height="1.4" fill="#25b2b0" />
+        <rect x="4.4" y="5.6" width="0.9" height="2.2" fill="#8ff3ee" />
+      </g>
+    </g>
   )
 }
 
@@ -167,6 +208,8 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
   const season = useKittenSeason()
   const spooky = !royal && season === 'halloween'
   const winter = !royal && season === 'winter'
+  const blocky = !royal && season === 'minecraft'
+  const ears = EARS.map((ear) => <Ear key={ear.side} ear={ear} transition={earTransition} down={earsDown} spooky={spooky} />)
   return (
     <svg
       className={`${className} overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`}
@@ -177,22 +220,35 @@ export function KittenFace({ earTransition, earsDown = false, mood = 'look', loo
       viewBox="0 0 24 24"
       aria-hidden
     >
-      {EARS.map((ear) => (
-        <Ear key={ear.side} ear={ear} transition={earTransition} down={earsDown} spooky={spooky} />
-      ))}
+      {blocky ? null : ears}
       <circle cx="12" cy="12" r="9" className={spooky ? 'fill-[#f08a24]/10' : 'fill-modrinth-green/10'} />
       {spooky ? <WitchHat /> : null}
       {winter ? <SantaHat /> : null}
       {royal ? <Crown /> : null}
-      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
-      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+      {blocky ? <DiamondHelmet /> : null}
+      {blocky ? ears : null}
+      {blocky ? (
+        <g stroke="none" className="fill-pink-400/50">
+          <rect x="6.2" y="12.8" width="2.4" height="1.2" />
+          <rect x="15.4" y="12.8" width="2.4" height="1.2" />
+        </g>
+      ) : (
+        <>
+          <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+          <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={spooky ? 'fill-violet-400/40' : winter || royal ? 'fill-pink-400/45' : 'fill-modrinth-green/35'} />
+        </>
+      )}
       {spooky && mood !== 'sleep' ? <path d="M7.4 7.7 10.5 8.6M16.6 7.7 13.5 8.6" strokeWidth="1.1" /> : null}
-      {spooky ? <SpookyEyes mood={mood} look={look} /> : <Eyes mood={mood} look={look} />}
+      {spooky ? <SpookyEyes mood={mood} look={look} /> : blocky ? <PixelEyes mood={mood} look={look} /> : <Eyes mood={mood} look={look} />}
       <AnimatePresence>
         {paws ? <Paw key="left" cx={9.2} shift={paws === 'peek' ? -1.6 : 0} lift={paws === 'peek' ? 2.2 : 0} delay={0} /> : null}
         {paws ? <Paw key="right" cx={14.8} lift={0} delay={0.05} /> : null}
       </AnimatePresence>
-      <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round" />
+      {blocky ? (
+        <rect x="11.3" y="12.3" width="1.4" height="1" fill="currentColor" stroke="none" />
+      ) : (
+        <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round" />
+      )}
       {spooky ? (
         <>
           <path d="M10.2 13.6q1.8 1.6 3.6 0" />
@@ -334,6 +390,27 @@ function WinterTreat({ kind }) {
   )
 }
 
+function BlockTreat({ kind }) {
+  if (kind === 0) return <PixelDiamondPixels x={2} y={2} scale={20 / PIXEL_DIAMOND_SIZE} />
+  if (kind === 1) {
+    return (
+      <>
+        <path d="M9 3h6l4 5v8l-4 5H9l-4-5V8Z" fill="#2fd06b" />
+        <path d="M12 3h3l4 5v8l-4 5h-3Z" fill="#13914a" />
+        <path d="M9 6h3v4H9Z" fill="#a9ffc4" />
+      </>
+    )
+  }
+  return (
+    <>
+      <path d="M4 4h16v16H4Z" fill="#8b5a2b" />
+      <path d="M4 4h16v6H4Z" fill="#6fbf3f" />
+      <path d="M4 10h3v2H4ZM10 10h2v3h-2ZM16 10h4v2h-4Z" fill="#6fbf3f" />
+      <path d="M7 15h2v2H7ZM14 16h2v2h-2Z" fill="#6b4220" />
+    </>
+  )
+}
+
 export function KittenHearts({ items, className = 'bottom-20 h-4 w-4' }) {
   const season = useKittenSeason()
   return (
@@ -349,7 +426,15 @@ export function KittenHearts({ items, className = 'bottom-20 h-4 w-4' }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.1, ease: 'easeOut' }}
         >
-          {season === 'halloween' ? <Treat kind={heart.kind} /> : season === 'winter' ? <WinterTreat kind={heart.kind} /> : <path d={HEART_PATH} />}
+          {season === 'halloween' ? (
+            <Treat kind={heart.kind} />
+          ) : season === 'winter' ? (
+            <WinterTreat kind={heart.kind} />
+          ) : season === 'minecraft' ? (
+            <BlockTreat kind={heart.kind} />
+          ) : (
+            <path d={HEART_PATH} />
+          )}
         </motion.svg>
       ))}
     </AnimatePresence>

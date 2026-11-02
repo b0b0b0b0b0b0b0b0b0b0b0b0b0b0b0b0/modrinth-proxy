@@ -25,6 +25,7 @@ import FeedbackThoughtBanner from './components/FeedbackThoughtBanner'
 import HalloweenEffects from './components/HalloweenEffects'
 import NewYearEffects from './components/NewYearEffects'
 import BirthdayEffects from './components/BirthdayEffects'
+import MinecraftBirthdayEffects from './components/MinecraftBirthdayEffects'
 import FestiveGate from './components/FestiveGate'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
@@ -234,6 +235,7 @@ export default async function RootLayout({ children }) {
             <NewYearEffects />
             <KittenSnowball />
             <BirthdayEffects />
+            <MinecraftBirthdayEffects />
           </FestiveGate>
           </I18nProvider>
           </AppTooltipProvider>

@@ -5,7 +5,8 @@ import { usePathname } from 'next/navigation'
 import { isBirthdaySeason } from '@/lib/birthday'
 import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
-import PagePinsLayer, { pinCards, pinHeading, usePagePins } from './PagePins'
+import PagePinsLayer, { headingSpot, pinCards, usePagePins } from './PagePins'
+import useCandle from './useCandle'
 
 const CONFETTI = Array.from({ length: 28 }, (_, i) => ({
   left: ((i * 19) % 100) + (i % 5) * 0.4,
@@ -30,15 +31,14 @@ const COLORS = ['#ff6b9d', '#62c4ff', '#7ee0a0', '#ffd166', '#c084fc', '#ff8a5b'
 function collectPins(base) {
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return []
   const out = []
-  const heading = pinHeading()
-  if (heading) {
-    const r = heading.getBoundingClientRect()
+  const spot = headingSpot(34, 34)
+  if (spot) {
     out.push({
       id: 'cake-h1',
       type: 'cake',
-      x: Math.min(r.right + 8, document.documentElement.clientWidth - 48) - base.x,
-      y: r.top + Math.max(0, r.height / 2 - 16) - base.y,
-      show: r.width > 24 && r.height > 16,
+      x: spot.x - base.x,
+      y: spot.y - base.y,
+      show: true,
     })
   }
   pinCards(3).forEach((r, i) => {
@@ -48,6 +48,8 @@ function collectPins(base) {
       type: 'hat',
       x: (left ? r.left + 10 : r.right - 36) - base.x,
       y: r.top - 10 - base.y,
+      w: 34,
+      h: 38,
       show: true,
       color: COLORS[i % COLORS.length],
       tilt: left ? -26 - (i % 3) * 4 : 18 + (i % 3) * 5,
@@ -56,15 +58,31 @@ function collectPins(base) {
   return out
 }
 
-function Cake() {
+function Cake({ lit = false }) {
   return (
-    <svg viewBox="0 0 40 40" className="bday-cake" aria-hidden>
+    <svg viewBox="0 0 40 40" className={`bday-cake${lit ? ' bday-cake--lit' : ''}`} aria-hidden>
       <rect x="8" y="18" width="24" height="14" rx="3" fill="#f4c2d7" />
       <rect x="8" y="14" width="24" height="8" rx="3" fill="#ffe08a" />
       <rect x="8" y="22" width="24" height="5" fill="#ff8fb8" opacity="0.85" />
       <rect x="19" y="6" width="2.4" height="9" rx="1" fill="#8d6e63" />
-      <ellipse cx="20.2" cy="5" rx="2.2" ry="2.6" fill="#ffb703" />
+      {lit ? (
+        <g className="bday-flame">
+          <ellipse cx="20.2" cy="4.2" rx="2.4" ry="3.4" fill="#ffb703" />
+          <ellipse cx="20.2" cy="5" rx="1.1" ry="1.7" fill="#fff3b0" />
+        </g>
+      ) : (
+        <path d="M20.2 6V4.6" stroke="#3a2a1a" strokeWidth="0.9" strokeLinecap="round" />
+      )}
     </svg>
+  )
+}
+
+function CakeButton({ className }) {
+  const [lit, light] = useCandle()
+  return (
+    <button type="button" tabIndex={-1} aria-hidden className={className} onPointerDown={light}>
+      <Cake lit={lit} />
+    </button>
   )
 }
 
@@ -220,7 +238,7 @@ function BirthdayBanner({ on, eaten }) {
 
   return (
     <div className="bday-banner" role="status">
-      <Cake />
+      <CakeButton className="bday-cake-btn bday-banner-cake" />
       <div className="bday-banner-copy">
         <p className="bday-banner-title">{t('birthday.title')}</p>
         <p className="bday-banner-text">{t('birthday.banner')}</p>
@@ -415,7 +433,7 @@ export default function BirthdayEffects() {
               }}
             >
               {pin.type === 'cake' ? (
-                <Cake />
+                <CakeButton className="bday-cake-btn" />
               ) : (
                 <span className="bday-hat-tilt" style={{ '--bday-tilt': `${pin.tilt}deg` }}>
                   <Hat color={pin.color} />

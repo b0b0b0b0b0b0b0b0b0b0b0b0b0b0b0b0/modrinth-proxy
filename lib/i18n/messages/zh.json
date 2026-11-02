@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "今天是 ModrinthProxy 的生日。"
   },
+  "mcbday": {
+    "eveTitle": "明天 Minecraft 就 {age} 岁啦！",
+    "dayTitle": "今天 Minecraft {age} 岁啦！",
+    "afterTitle": "昨天 Minecraft 刚满 {age} 岁！",
+    "banner": "2011 年 11 月 18 日，1.0 版正式发布——伟大的冒险从此开始。",
+    "play": "接住钻石——叮！",
+    "scoreTitle": "已接住的钻石",
+    "close": "关闭"
+  },
   "halloween": {
     "title": "小幽灵出来散步啦！",
     "play": "用鼠标或手指抓住它们——噗！它们一点也不可怕，只是喜欢捉迷藏。",

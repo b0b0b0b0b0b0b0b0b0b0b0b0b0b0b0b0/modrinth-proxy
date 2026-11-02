@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Oggi è il compleanno di ModrinthProxy."
   },
+  "mcbday": {
+    "eveTitle": "Domani Minecraft compie {age} anni!",
+    "dayTitle": "Oggi Minecraft compie {age} anni!",
+    "afterTitle": "Ieri Minecraft ha compiuto {age} anni!",
+    "banner": "Il 18 novembre 2011 è uscita la versione 1.0: così è iniziata la grande avventura.",
+    "play": "Prendi i diamanti: ding!",
+    "scoreTitle": "Diamanti presi",
+    "close": "Chiudi"
+  },
   "halloween": {
     "title": "I fantasmi sono usciti a passeggio!",
     "play": "Prendili con il mouse o con il dito — puf! Non fanno paura, amano solo giocare a nascondino.",

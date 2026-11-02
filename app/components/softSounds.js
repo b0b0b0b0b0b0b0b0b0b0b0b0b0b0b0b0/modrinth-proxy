@@ -84,6 +84,14 @@ export function playChime() {
   tone(ctx, { from: base * 1.5, start: 0.18, length: 0.6, volume: 0.03, attack: 0.012 })
 }
 
+export function playDing() {
+  const ctx = audio()
+  if (!ctx) return
+  const base = vary(1480, 0.2)
+  tone(ctx, { from: base, length: 0.18, volume: 0.045, attack: 0.004, cutoff: 5200 })
+  tone(ctx, { from: base * 2, start: 0.012, length: 0.09, volume: 0.012, attack: 0.004, cutoff: 6000 })
+}
+
 export function playBloop() {
   const ctx = audio()
   if (!ctx) return

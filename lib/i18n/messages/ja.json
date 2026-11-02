@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "今日は ModrinthProxy の誕生日。"
   },
+  "mcbday": {
+    "eveTitle": "明日、Minecraft は {age} 歳に！",
+    "dayTitle": "今日、Minecraft は {age} 歳！",
+    "afterTitle": "昨日、Minecraft は {age} 歳になりました！",
+    "banner": "2011年11月18日にバージョン1.0が登場。そこから大冒険が始まりました。",
+    "play": "ダイヤモンドをキャッチ — チリン！",
+    "scoreTitle": "集めたダイヤモンド",
+    "close": "閉じる"
+  },
   "halloween": {
     "title": "おばけたちがお散歩中！",
     "play": "マウスや指でつかまえよう — ぽふっ！ こわくないよ、かくれんぼが大好きなだけ。",

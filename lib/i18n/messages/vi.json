@@ -165,6 +165,15 @@
     "score": "{n}",
     "title": "Hôm nay là sinh nhật ModrinthProxy."
   },
+  "mcbday": {
+    "eveTitle": "Ngày mai Minecraft tròn {age} tuổi!",
+    "dayTitle": "Hôm nay Minecraft tròn {age} tuổi!",
+    "afterTitle": "Hôm qua Minecraft vừa tròn {age} tuổi!",
+    "banner": "Ngày 18 tháng 11 năm 2011, phiên bản 1.0 ra mắt — và cuộc phiêu lưu lớn bắt đầu.",
+    "play": "Bắt kim cương — ting!",
+    "scoreTitle": "Kim cương đã bắt",
+    "close": "Đóng"
+  },
   "halloween": {
     "title": "Các bé ma ra ngoài dạo chơi!",
     "play": "Bắt chúng bằng chuột hoặc ngón tay — bụp! Chúng không đáng sợ đâu, chỉ thích chơi trốn tìm thôi.",

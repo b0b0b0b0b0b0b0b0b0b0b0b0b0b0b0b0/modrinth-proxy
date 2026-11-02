@@ -166,6 +166,15 @@
     "score": "{n}",
     "title": "It's ModrinthProxy's birthday."
   },
+  "mcbday": {
+    "eveTitle": "Minecraft turns {age} tomorrow!",
+    "dayTitle": "Minecraft turns {age} today!",
+    "afterTitle": "Minecraft turned {age} yesterday!",
+    "banner": "Version 1.0 came out on November 18, 2011 — and the big adventure began.",
+    "play": "Catch the diamonds — ding!",
+    "scoreTitle": "Diamonds caught",
+    "close": "Close"
+  },
   "halloween": {
     "title": "The ghosts are out for a walk!",
     "play": "Catch them with your mouse or finger — poof! They are not scary, they just love hide-and-seek.",

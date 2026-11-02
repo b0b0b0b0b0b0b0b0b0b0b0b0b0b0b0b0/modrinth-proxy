@@ -6,7 +6,7 @@ import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo } from '@/lib/hal
 import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
 import { playPoof } from './softSounds'
-import PagePinsLayer, { pinCards, pinHeading, usePagePins } from './PagePins'
+import PagePinsLayer, { headingSpot, pinCards, usePagePins } from './PagePins'
 
 const EMBERS = [
   { left: 18, delay: 0, duration: 9 },
@@ -17,22 +17,14 @@ const EMBERS = [
 
 function collectAnchors(base) {
   const out = []
-  const vw = document.documentElement.clientWidth
-
-  const heading = pinHeading()
-  if (heading) {
-    const r = heading.getBoundingClientRect()
-    let right = r.right
-    for (let el = heading.nextElementSibling; el; el = el.nextElementSibling) {
-      const s = el.getBoundingClientRect()
-      if (s.width > 0 && s.top < r.bottom && s.bottom > r.top) right = Math.max(right, s.right)
-    }
+  const spot = headingSpot(34, 18)
+  if (spot) {
     out.push({
       id: 'eyes-h1',
       type: 'eyes',
-      x: right + 12 - base.x,
-      y: r.top + Math.max(2, r.height / 2 - 10) - base.y,
-      show: r.width > 24 && r.height > 16 && right + 64 <= vw,
+      x: spot.x - base.x,
+      y: spot.y - base.y,
+      show: true,
     })
   }
 
@@ -43,6 +35,8 @@ function collectAnchors(base) {
         type: 'pumpkin',
         x: r.right - 62 - base.x,
         y: r.bottom - 58 - base.y,
+        w: 54,
+        h: 54,
         show: true,
         size: 54,
       })
@@ -53,6 +47,8 @@ function collectAnchors(base) {
         type: 'eyes',
         x: (left ? r.left + 14 : r.right - 46) - base.x,
         y: r.top + 12 - base.y,
+        w: 30,
+        h: 16,
         show: true,
       })
     }

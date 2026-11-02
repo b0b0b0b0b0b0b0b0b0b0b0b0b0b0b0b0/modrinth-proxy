@@ -22,6 +22,11 @@ const ROWS = [
     label: 'account.caughtCookies',
     icon: 'M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5zM8.5 8.5h.01M15 9h.01M10 13h.01M15.5 14.5h.01',
   },
+  {
+    id: 'diamonds',
+    label: 'account.caughtDiamonds',
+    icon: 'M6 3h12l4 6-10 12L2 9zM2 9h20M12 21 8 9l4-6 4 6z',
+  },
 ]
 
 function stored(initial) {
@@ -29,6 +34,7 @@ function stored(initial) {
     ghosts: initial?.ghosts || 0,
     ornaments: initial?.ornaments || 0,
     cookies: initial?.cookies || 0,
+    diamonds: initial?.diamonds || 0,
   }
 }
 
@@ -45,6 +51,7 @@ export default function FestiveScoreCard({ initial, festive }) {
         ghosts: Math.max(base.ghosts, live.ghosts || 0),
         ornaments: Math.max(base.ornaments, live.ornaments || 0),
         cookies: Math.max(base.cookies, live.cookies || 0),
+        diamonds: Math.max(base.diamonds, live.diamonds || 0),
         pending: Boolean(live.pending),
       })
     }
