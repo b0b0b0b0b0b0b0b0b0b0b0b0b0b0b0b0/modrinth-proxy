@@ -6,6 +6,7 @@ import { isHalloweenSeason, onGhostTurboChange, readGhostTurbo } from '@/lib/hal
 import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
 import { playPoof } from './softSounds'
+import PagePinsLayer, { pinCards, pinHeading, usePagePins } from './PagePins'
 
 const EMBERS = [
   { left: 18, delay: 0, duration: 9 },
@@ -14,15 +15,11 @@ const EMBERS = [
   { left: 84, delay: 1.6, duration: 12 },
 ]
 
-function inView(r, pad = 24) {
-  return r.width > 24 && r.height > 16 && r.bottom > pad && r.top < window.innerHeight - pad
-}
-
-function collectAnchors() {
+function collectAnchors(base) {
   const out = []
-  const vw = window.innerWidth
+  const vw = document.documentElement.clientWidth
 
-  const heading = document.querySelector('main h1')
+  const heading = pinHeading()
   if (heading) {
     const r = heading.getBoundingClientRect()
     let right = r.right
@@ -33,29 +30,20 @@ function collectAnchors() {
     out.push({
       id: 'eyes-h1',
       type: 'eyes',
-      x: right + 12,
-      y: r.top + Math.max(2, r.height / 2 - 10),
-      show: inView(r, 48) && right + 64 <= vw,
+      x: right + 12 - base.x,
+      y: r.top + Math.max(2, r.height / 2 - 10) - base.y,
+      show: r.width > 24 && r.height > 16 && right + 64 <= vw,
     })
   }
 
-  const cards = [...document.querySelectorAll('main .universal-card, main .rounded-xl, main .rounded-lg')].filter(
-    (el) => {
-      const r = el.getBoundingClientRect()
-      return r.width > 200 && r.height > 90
-    },
-  )
-
-  cards.slice(0, 4).forEach((el, i) => {
-    const r = el.getBoundingClientRect()
-    const show = inView(r, 56)
+  pinCards(4).forEach((r, i) => {
     if (i === 0) {
       out.push({
         id: 'pk-card',
         type: 'pumpkin',
-        x: r.right - 62,
-        y: r.bottom - 58,
-        show,
+        x: r.right - 62 - base.x,
+        y: r.bottom - 58 - base.y,
+        show: true,
         size: 54,
       })
     } else {
@@ -63,9 +51,9 @@ function collectAnchors() {
       out.push({
         id: `eyes-card-${i}`,
         type: 'eyes',
-        x: left ? r.left + 14 : r.right - 46,
-        y: r.top + 12,
-        show,
+        x: (left ? r.left + 14 : r.right - 46) - base.x,
+        y: r.top + 12 - base.y,
+        show: true,
       })
     }
   })
@@ -265,8 +253,8 @@ function Eyes() {
 export default function HalloweenEffects() {
   const pathname = usePathname()
   const [on, setOn] = useState(false)
-  const [anchors, setAnchors] = useState([])
   const [caught, setCaught] = useState(0)
+  const { layerRef, pins: anchors } = usePagePins(collectAnchors, { enabled: on, pathname })
 
   useLayoutEffect(() => {
     const apply = () => setCaught(festiveBook.shown('ghosts'))
@@ -281,31 +269,6 @@ export default function HalloweenEffects() {
     setOn(true)
   }, [])
 
-  useEffect(() => {
-    if (!on) return
-    let frame = 0
-    const sync = () => {
-      setAnchors(collectAnchors())
-    }
-    const onScroll = () => {
-      if (frame) return
-      frame = requestAnimationFrame(() => {
-        frame = 0
-        sync()
-      })
-    }
-    const start = window.setTimeout(sync, 80)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.clearTimeout(start)
-      cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [on, pathname])
-
-
   if (!on) return null
 
   return (
@@ -314,7 +277,7 @@ export default function HalloweenEffects() {
     <GhostGame
       onCatch={() => festiveBook.catch('ghosts')}
     />
-    <div className="halloween-layer" aria-hidden>
+    <PagePinsLayer layerRef={layerRef}>
       {anchors.map((item) => (
         <span
           key={item.id}
@@ -328,6 +291,8 @@ export default function HalloweenEffects() {
           {item.type === 'pumpkin' ? <Pumpkin className="halloween-pumpkin" /> : <Eyes />}
         </span>
       ))}
+    </PagePinsLayer>
+    <div className="halloween-layer" aria-hidden>
       {EMBERS.map((ember, i) => (
         <span
           key={`e${i}`}

@@ -1079,6 +1079,16 @@ body {
   -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
+.page-pins {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  z-index: 24;
+  pointer-events: none;
+}
+
 .halloween-layer {
   position: fixed;
   inset: 0;
@@ -1201,7 +1211,7 @@ html:not(.dark) .footer-drift path {
 }
 
 .halloween-pin {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 2;
@@ -1988,7 +1998,7 @@ html:not(.dark) .halloween-banner-close:hover {
 }
 
 .bday-pin {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   z-index: 2;

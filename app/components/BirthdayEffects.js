@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation'
 import { isBirthdaySeason } from '@/lib/birthday'
 import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
+import PagePinsLayer, { pinCards, pinHeading, usePagePins } from './PagePins'
 
 const CONFETTI = Array.from({ length: 28 }, (_, i) => ({
   left: ((i * 19) % 100) + (i % 5) * 0.4,
@@ -26,38 +27,28 @@ const BALLOON_SLOTS = [
 
 const COLORS = ['#ff6b9d', '#62c4ff', '#7ee0a0', '#ffd166', '#c084fc', '#ff8a5b']
 
-function inView(r, pad = 24) {
-  return r.width > 24 && r.height > 16 && r.bottom > pad && r.top < window.innerHeight - pad
-}
-
-function collectPins() {
+function collectPins(base) {
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return []
   const out = []
-  const heading = document.querySelector('main h1')
+  const heading = pinHeading()
   if (heading) {
     const r = heading.getBoundingClientRect()
     out.push({
       id: 'cake-h1',
       type: 'cake',
-      x: Math.min(r.right + 8, window.innerWidth - 48),
-      y: r.top + Math.max(0, r.height / 2 - 16),
-      show: inView(r, 40),
+      x: Math.min(r.right + 8, document.documentElement.clientWidth - 48) - base.x,
+      y: r.top + Math.max(0, r.height / 2 - 16) - base.y,
+      show: r.width > 24 && r.height > 16,
     })
   }
-  const cards = [...document.querySelectorAll('main .universal-card, main .rounded-xl, main .rounded-lg')].filter(
-    (el) => {
-      const r = el.getBoundingClientRect()
-      return r.width > 200 && r.height > 90
-    },
-  )
-  cards.slice(0, 3).forEach((el, i) => {
-    const r = el.getBoundingClientRect()
+  pinCards(3).forEach((r, i) => {
     const left = i % 2 === 0
     out.push({
       id: `hat-${i}`,
       type: 'hat',
-      x: left ? r.left + 10 : r.right - 36,
-      y: r.top - 10,
-      show: inView(r, 40),
+      x: (left ? r.left + 10 : r.right - 36) - base.x,
+      y: r.top - 10 - base.y,
+      show: true,
       color: COLORS[i % COLORS.length],
       tilt: left ? -26 - (i % 3) * 4 : 18 + (i % 3) * 5,
     })
@@ -315,7 +306,7 @@ function CookieGame({ on, onEat }) {
 export default function BirthdayEffects() {
   const pathname = usePathname()
   const [on, setOn] = useState(false)
-  const [pins, setPins] = useState([])
+  const { layerRef, pins } = usePagePins(collectPins, { enabled: on, pathname })
   const [eaten, setEaten] = useState(0)
   const [balloons, setBalloons] = useState([])
   const balloonSeq = useRef(0)
@@ -367,30 +358,6 @@ export default function BirthdayEffects() {
     setOn(true)
   }, [])
 
-  useEffect(() => {
-    if (!on) return
-    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)')
-    if (reduce?.matches) return
-    let frame = 0
-    const sync = () => setPins(collectPins())
-    const onScroll = () => {
-      if (frame) return
-      frame = requestAnimationFrame(() => {
-        frame = 0
-        sync()
-      })
-    }
-    const start = window.setTimeout(sync, 80)
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      window.clearTimeout(start)
-      cancelAnimationFrame(frame)
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [on, pathname])
-
   return (
     <>
       <BirthdayBanner on={on} eaten={eaten} />
@@ -434,6 +401,10 @@ export default function BirthdayEffects() {
               </span>
             ) : null,
           )}
+        </div>
+      ) : null}
+      {on ? (
+        <PagePinsLayer layerRef={layerRef}>
           {pins.map((pin) => (
             <span
               key={pin.id}
@@ -452,7 +423,7 @@ export default function BirthdayEffects() {
               )}
             </span>
           ))}
-        </div>
+        </PagePinsLayer>
       ) : null}
     </>
   )
