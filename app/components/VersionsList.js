@@ -169,7 +169,7 @@ export default function VersionsList({
               type="button"
               onClick={(e) => handleGameVersionChipClick(e, range, source)}
               className={`${chipClass} rounded-full whitespace-nowrap hover:underline cursor-pointer relative z-10 ${
-                active ? 'glass-edge bg-modrinth-green/20 text-modrinth-green' : 'glass-chip text-[var(--text-muted)]'
+                active ? 'glass-edge bg-modrinth-green/20 text-modrinth-green' : 'glass-chip text-(--text-muted)'
               }`}
             >
               {range}
@@ -186,11 +186,11 @@ export default function VersionsList({
                 ) : null}
               </span>
             }
-            contentClassName="!max-w-[min(320px,calc(100vw-24px))]"
+            contentClassName="max-w-[min(320px,calc(100vw-24px))]!"
           >
             <span
               tabIndex={0}
-              className={`${chipClass} glass-chip rounded-full whitespace-nowrap cursor-default relative z-10 text-[var(--text-muted)]`}
+              className={`${chipClass} glass-chip rounded-full whitespace-nowrap cursor-default relative z-10 text-(--text-muted)`}
             >
               +{rest.length}
             </span>
@@ -258,7 +258,7 @@ export default function VersionsList({
         }`}
         style={{ color: loaderData.color || 'var(--text-muted)' }}
       >
-        <div className="w-3 h-3 flex-shrink-0">{loaderData.icon}</div>
+        <div className="w-3 h-3 shrink-0">{loaderData.icon}</div>
         {loaderData.name}
       </button>
     )
@@ -413,7 +413,7 @@ export default function VersionsList({
                 setSearchQuery(e.target.value)
                 setCurrentPage(1)
               }}
-              className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded text-sm border border-gray-700 focus:border-modrinth-green focus:outline-none"
+              className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded-sm text-sm border border-gray-700 focus:border-modrinth-green focus:outline-hidden"
             />
           </div>
 
@@ -657,7 +657,7 @@ export default function VersionsList({
                         {primaryFile && (
                           <StyledTooltip
                             side="top"
-                            contentClassName="!max-w-[260px]"
+                            contentClassName="max-w-[260px]!"
                             label={
                               <div className="flex flex-col gap-0.5 text-left">
                                 <div className="text-[13px] font-semibold leading-snug break-all">
@@ -676,9 +676,9 @@ export default function VersionsList({
                               href={primaryFile.url}
                               download
                               onClick={(e) => e.stopPropagation()}
-                              className={`dl-glass relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all group/btn max-[390px]:mx-auto sm:mx-0 ${
+                              className={`dl-glass relative z-10 shrink-0 w-9 h-9 flex items-center justify-center rounded-full transition-all group/btn max-[390px]:mx-auto sm:mx-0 ${
                                 accent
-                                  ? 'hover:[background-color:var(--version-dl-bg)] hover:[color:var(--version-dl-fg)]'
+                                  ? 'hover:bg-(--version-dl-bg) hover:text-(--version-dl-fg)'
                                   : 'hover:bg-modrinth-green hover:text-black'
                               }`}
                               style={

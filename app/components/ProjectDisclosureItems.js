@@ -9,7 +9,7 @@ function DisclosureNote({ text }) {
   if (!text?.trim()) return null
   return (
     <MarkdownContent
-      className="text-sm text-[var(--text-gray)] prose prose-invert prose-sm max-w-none [&_p]:m-0 [&_a]:text-modrinth-green [&_a]:hover:underline"
+      className="text-sm text-(--text-gray) prose prose-invert prose-sm max-w-none [&_p]:m-0 [&_a]:text-modrinth-green hover:[&_a]:underline"
       content={text}
     />
   )
@@ -21,7 +21,7 @@ function DisclosureRow({ type, title, children, accentClassName = '' }) {
     : 'w-6 h-6 shrink-0 mt-px text-modrinth-green'
 
   return (
-    <div className={`flex gap-2 items-start ${accentClassName || 'text-[var(--text-primary)]'}`.trim()}>
+    <div className={`flex gap-2 items-start ${accentClassName || 'text-(--text-primary)'}`.trim()}>
       <DisclosureIcon type={type} className={iconClassName} />
       <div className="min-w-0 flex flex-col gap-1">
         {title ? <span>{title}</span> : null}
@@ -41,7 +41,7 @@ function DerivativeSources({ sources }) {
               href={source.link}
               target="_blank"
               rel="noopener nofollow ugc"
-              className="text-sm text-blue-400 min-w-0 break-words hover:underline inline-flex items-start gap-1"
+              className="text-sm text-blue-400 min-w-0 wrap-break-word hover:underline inline-flex items-start gap-1"
             >
               <span>{source.label || source.link}</span>
               <ExternalLinkIcon />

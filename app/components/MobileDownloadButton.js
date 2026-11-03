@@ -37,7 +37,7 @@ export default function MobileDownloadButton({ accent = null, resourceTitle, mut
         <button
           type="button"
           onClick={handleClick}
-          className="ny-snow-cap download-glass lg:hidden px-4 py-3 rounded-full font-bold text-sm transition-transform duration-150 active:scale-95 flex items-center gap-2 max-[340px]:px-3"
+          className="ny-snow-cap download-glass lg:hidden px-4 py-3 rounded-full font-bold text-sm transition-transform duration-150 active:scale-95 flex items-center gap-2 max-[340px]:px-3!"
           style={{ backgroundColor: accent.accentHex, color: accent.activeFgHex }}
         >
           <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +54,7 @@ export default function MobileDownloadButton({ accent = null, resourceTitle, mut
       <button
         type="button"
         onClick={handleClick}
-        className="ny-snow-cap download-glass lg:hidden bg-modrinth-green text-black px-4 py-3 rounded-full font-bold text-sm transition-transform duration-150 active:scale-95 flex items-center gap-2 max-[340px]:px-3"
+        className="ny-snow-cap download-glass lg:hidden bg-modrinth-green text-black px-4 py-3 rounded-full font-bold text-sm transition-transform duration-150 active:scale-95 flex items-center gap-2 max-[340px]:px-3!"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

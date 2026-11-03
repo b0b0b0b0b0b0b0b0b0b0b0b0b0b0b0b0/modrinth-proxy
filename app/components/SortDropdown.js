@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import Lottie from 'lottie-react'
+import { Lottie } from 'lottie-react'
 import heartAnimation from '@/public/animations/heart.json'
 import { useT } from './I18nProvider'
 
@@ -11,20 +11,24 @@ function SortHeart({ playing }) {
 
   const rest = useCallback(() => {
     const player = lottieRef.current
-    if (player) player.goToAndStop(player.getDuration(true) - 1, true)
+    if (!player) return
+    player.pause()
+    player.seek({ percent: 100 })
   }, [])
 
   useEffect(() => {
-    if (playing) lottieRef.current?.goToAndPlay(0, true)
+    if (!playing) return
+    lottieRef.current?.seek(0)
+    lottieRef.current?.play()
   }, [playing])
 
   return (
     <Lottie
       lottieRef={lottieRef}
-      animationData={heartAnimation}
+      src={heartAnimation}
       loop={false}
       autoplay={false}
-      onDOMLoaded={rest}
+      subscriptions={{ ready: rest }}
       className="pointer-events-none -my-1.5 h-7 w-7 shrink-0"
     />
   )

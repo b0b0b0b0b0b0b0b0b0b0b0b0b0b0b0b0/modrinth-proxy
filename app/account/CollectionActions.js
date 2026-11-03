@@ -9,7 +9,7 @@ import StyledTooltip from '../components/StyledTooltip'
 const NAME_MAX = 64
 const POPOVER = 'z-50 w-72 max-w-[calc(100vw-24px)] rounded-xl border border-gray-700 p-4 shadow-lg shadow-black/50'
 const INPUT =
-  'h-9 w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] px-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-modrinth-green/60 focus:ring-0'
+  'h-9 w-full rounded-xl border border-gray-700 bg-(--bg-primary) px-3 text-sm text-white outline-hidden placeholder:text-gray-500 focus:border-modrinth-green/60 focus:ring-0'
 const CANCEL =
   'rounded-lg border border-gray-700 px-3 py-1.5 text-xs font-semibold text-gray-300 transition-colors hover:text-white'
 const CONFIRM =
@@ -106,7 +106,7 @@ function NamePopover({ trigger, title, initial = '', submitLabel, onSubmit }) {
               </button>
             </div>
           </form>
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+          <Popover.Arrow className="fill-(--bg-gradient-start)" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
@@ -214,7 +214,7 @@ export function DeleteCollectionButton({ id, name }) {
           style={{ backgroundColor: 'var(--bg-gradient-start)' }}
         >
           <div className="text-sm font-bold text-white">{t('ucol.delete')}?</div>
-          <p className="mt-1 break-words text-xs leading-relaxed text-gray-400">{t('ucol.deleteText', { name })}</p>
+          <p className="mt-1 wrap-break-word text-xs leading-relaxed text-gray-400">{t('ucol.deleteText', { name })}</p>
           {failed ? (
             <p className="mt-2 text-xs text-amber-600 dark:text-amber-400" role="alert">
               {t('ucol.errGeneric')}
@@ -236,7 +236,7 @@ export function DeleteCollectionButton({ id, name }) {
               {t('ucol.deleteConfirm')}
             </button>
           </div>
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+          <Popover.Arrow className="fill-(--bg-gradient-start)" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

@@ -136,10 +136,10 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
       <CatalogReturnLink
         href={href}
         catalogSlug={resource.slug}
-        className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]"
+        className="group block h-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-primary)"
       >
         <article className="ny-snow-host flex h-full flex-col overflow-hidden rounded-lg card-glass bg-modrinth-dark">
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-modrinth-darker">
+          <div className="relative aspect-video w-full overflow-hidden bg-modrinth-darker">
             {packPreview ? (
               <img
                 src={packPreview}
@@ -225,7 +225,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
                   count={favoriteCount}
                   muted
                   className="gap-0 text-gray-400"
-                  iconClassName="-ml-1.5 -mr-1 !h-6 !w-6"
+                  iconClassName="-ml-1.5 -mr-1 h-6! w-6!"
                   numberClassName="font-semibold text-gray-300"
                 />
               </div>
@@ -264,7 +264,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
           <img
             src={resource.icon_url}
             alt={resource.title}
-            className="w-12 h-12 md:w-16 md:h-16 rounded-xl object-cover flex-shrink-0"
+            className="w-12 h-12 md:w-16 md:h-16 rounded-xl object-cover shrink-0"
             referrerPolicy="no-referrer"
           />
         )}
@@ -300,7 +300,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
           </div>
         </div>
 
-        <div className="hidden md:flex flex-col justify-between items-end text-right flex-shrink-0 min-w-[120px] self-stretch">
+        <div className="hidden md:flex flex-col justify-between items-end text-right shrink-0 min-w-[120px] self-stretch">
           <div className="flex flex-col gap-2.5 items-end">
             {playersOnline !== null ? (
               <div className="inline-flex items-center gap-2 font-semibold bg-modrinth-green/10 px-3 py-1.5 rounded-xl">
@@ -315,7 +315,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               </div>
             ) : isOffline ? (
               <div className="flex items-center gap-1.5">
-                <span className="h-2 w-2 rounded-full bg-gray-600 flex-shrink-0"></span>
+                <span className="h-2 w-2 rounded-full bg-gray-600 shrink-0"></span>
                 <span className="text-xs text-gray-500">{t('card.offline')}</span>
               </div>
             ) : null}
@@ -347,12 +347,12 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
 
   return (
     <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-3 md:p-4 flex items-start gap-3 md:gap-4">
-      <div className="flex flex-col items-center gap-2 flex-shrink-0">
+      <div className="flex flex-col items-center gap-2 shrink-0">
         {resource.icon_url && (
           <img
             src={resource.icon_url}
             alt={resource.title}
-            className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-cover flex-shrink-0"
+            className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-cover shrink-0"
             referrerPolicy="no-referrer"
           />
         )}
@@ -379,7 +379,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
             <h3
               className={`text-lg md:text-xl font-bold transition-colors cursor-pointer ${
                 pluginTitleHoverAccent
-                  ? 'hover:text-[color:var(--plugin-title-hover)]'
+                  ? 'hover:text-(--plugin-title-hover)'
                   : 'hover:text-modrinth-green'
               }`}
               style={
@@ -437,7 +437,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
         </div>
       </div>
 
-      <div className="hidden md:flex flex-col justify-between items-end text-right flex-shrink-0 min-w-[110px] self-stretch">
+      <div className="hidden md:flex flex-col justify-between items-end text-right shrink-0 min-w-[110px] self-stretch">
         <div className="flex flex-col gap-2.5 items-end">
           <div className="flex items-center gap-1.5 text-gray-400">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

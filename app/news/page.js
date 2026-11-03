@@ -43,12 +43,12 @@ export default async function NewsPage() {
           <h2 className="mt-2 mb-2 text-xs font-medium uppercase tracking-[0.2em] text-modrinth-green">
             {t('news.subtitle')}
           </h2>
-          <div className="mt-4 h-px w-full max-w-[4.5rem] bg-modrinth-green/80" aria-hidden />
+          <div className="mt-4 h-px w-full max-w-18 bg-modrinth-green/80" aria-hidden />
           <div className="mt-4 flex flex-wrap items-stretch gap-3">
             <div className="flex shrink-0 items-center justify-center self-stretch rounded-md border border-gray-700 bg-gray-800/50 px-5 py-3 text-2xl font-black uppercase tracking-wide text-gray-200">
               16+
             </div>
-            <div className="flex min-w-0 flex-1 max-w-3xl flex-col rounded-md border border-gray-700/90 bg-gradient-to-br from-gray-800/70 via-gray-800/50 to-gray-900/60 px-4 py-3.5 md:px-5 md:py-4">
+            <div className="flex min-w-0 flex-1 max-w-3xl flex-col rounded-md border border-gray-700/90 bg-linear-to-br from-gray-800/70 via-gray-800/50 to-gray-900/60 px-4 py-3.5 md:px-5 md:py-4">
               <p className="text-base leading-[1.75] text-gray-300 md:text-lg md:leading-[1.8]">
                 <span className="font-semibold tracking-wide text-modrinth-green/90">{t('news.ahtung')}</span>{' '}
                 <span className="text-gray-400/95">{disclaimer}</span>
@@ -87,11 +87,11 @@ export default async function NewsPage() {
                               referrerPolicy="no-referrer"
                             />
                           ) : (
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold text-white shadow-md">
+                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold text-white shadow-md">
                               {commit.commit.author.name.charAt(0).toUpperCase()}
                             </div>
                           )}
-                          <span className="max-w-[12rem] truncate md:max-w-none">
+                          <span className="max-w-48 truncate md:max-w-none">
                             {commit.commit.author.name}
                           </span>
                         </div>
@@ -122,12 +122,12 @@ export default async function NewsPage() {
 
         <div className="mt-12 text-center">
           <div className="relative inline-block">
-            <div className="absolute inset-0 bg-gradient-to-r from-modrinth-green/30 to-modrinth-green-light/30 blur-2xl"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-modrinth-green/30 to-modrinth-green-light/30 blur-2xl"></div>
             <Link
               href={GITHUB_REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative inline-flex items-center gap-3 bg-gradient-to-r from-modrinth-green to-modrinth-green-light hover:from-modrinth-green/90 hover:to-modrinth-green-light/90 text-black px-8 py-4 rounded-xl font-bold text-lg transition-colors"
+              className="relative inline-flex items-center gap-3 bg-linear-to-r from-modrinth-green to-modrinth-green-light hover:from-modrinth-green/90 hover:to-modrinth-green-light/90 text-black px-8 py-4 rounded-xl font-bold text-lg transition-colors"
             >
               <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />

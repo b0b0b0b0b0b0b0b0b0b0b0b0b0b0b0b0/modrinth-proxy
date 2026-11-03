@@ -101,7 +101,7 @@ function EditableCurrentPage({ page, totalPages, go, t }) {
           }
         }}
         onBlur={cancel}
-        className={`${buttonBase} glass-btn--active w-[4.5rem] text-center text-modrinth-green-light outline-none`}
+        className={`${buttonBase} glass-btn--active w-18 text-center text-modrinth-green-light outline-hidden`}
         aria-label={t('catalog.pager.enterPage')}
       />
     )

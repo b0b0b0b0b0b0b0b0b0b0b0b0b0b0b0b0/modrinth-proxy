@@ -146,7 +146,7 @@ function VersionMetadata({ version, author, t }) {
 function MetadataItem({ label, value }) {
   return (
     <div>
-      <h4 className="text-base font-bold mb-1.5 text-[var(--text-gray)]">{label}</h4>
+      <h4 className="text-base font-bold mb-1.5 text-(--text-gray)">{label}</h4>
       <div className="text-white text-sm">{value}</div>
     </div>
   )
@@ -166,7 +166,7 @@ function VersionCompatibility({ version, project, t }) {
       <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.compatibility')}</h3>
       <div className="grid gap-3 md:gap-4 md:grid-cols-3">
         {gameRanges.length > 0 && (
-          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-(--bg-tertiary) p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">Minecraft: Java Edition</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {gameRanges.map((range) => (
@@ -179,7 +179,7 @@ function VersionCompatibility({ version, project, t }) {
         )}
 
         {platforms.length > 0 && (
-          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-(--bg-tertiary) p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.platforms')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {platforms.map((loaderId) => {
@@ -190,7 +190,7 @@ function VersionCompatibility({ version, project, t }) {
                     className={PILL_CLASS}
                     style={{ color: loaderData.color || undefined }}
                   >
-                    <span className="w-4 h-4 flex-shrink-0" style={{ color: loaderData.color || undefined }}>
+                    <span className="w-4 h-4 shrink-0" style={{ color: loaderData.color || undefined }}>
                       {loaderData.icon}
                     </span>
                     {loaderData.name}
@@ -202,7 +202,7 @@ function VersionCompatibility({ version, project, t }) {
         )}
 
         {environments.length > 0 && (
-          <div className="card-glass bg-gray-100 dark:bg-[var(--bg-tertiary)] p-4 rounded-2xl">
+          <div className="card-glass bg-gray-100 dark:bg-(--bg-tertiary) p-4 rounded-2xl">
             <div className="text-sm text-gray-600 dark:text-gray-300">{t('version.environments')}</div>
             <div className="flex gap-1 flex-wrap mt-2">
               {environments.map((env) => (
@@ -238,9 +238,9 @@ function SupplementaryVersionFiles({ files, t }) {
       <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.extraResources')}</h3>
       <div className="overflow-hidden rounded-2xl border border-solid border-gray-800">
         <div className="overflow-x-auto overflow-y-hidden">
-          <table className="w-full min-w-[36rem] border-separate border-spacing-0 table-fixed">
+          <table className="w-full min-w-xl border-separate border-spacing-0 table-fixed">
             <thead>
-              <tr className="bg-[var(--bg-tertiary)]">
+              <tr className="bg-(--bg-tertiary)">
                 <th className="h-12 px-4 text-left text-sm font-semibold text-gray-200" style={{ width: '20rem' }}>
                   {t('version.fileCol')}
                 </th>
@@ -360,7 +360,7 @@ export default async function VersionPage({ project, version, author, contentTyp
               {primaryFile?.url && (
                 <div className="flex gap-2 flex-wrap items-center">
                   <StyledTooltip
-                    contentClassName="!max-w-[260px]"
+                    contentClassName="max-w-[260px]!"
                     label={
                       <div className="flex flex-col gap-0.5 text-left">
                         <div className="text-[13px] font-semibold leading-snug break-all">
@@ -398,7 +398,7 @@ export default async function VersionPage({ project, version, author, contentTyp
             {version.changelog && (
               <section id="changes">
                 <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.changelog')}</h3>
-                <div className="card-glass p-4 bg-gray-100 dark:bg-[var(--bg-tertiary)] rounded-2xl">
+                <div className="card-glass p-4 bg-gray-100 dark:bg-(--bg-tertiary) rounded-2xl">
                   <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                       {filterVersionChangelog(version.changelog)}

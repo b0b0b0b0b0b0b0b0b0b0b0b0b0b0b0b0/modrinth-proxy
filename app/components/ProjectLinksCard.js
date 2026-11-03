@@ -10,7 +10,7 @@ import { useT } from './I18nProvider'
 
 function ExternalIcon() {
   return (
-    <svg className="h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--text-primary)]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+    <svg className="h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-(--text-primary)" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
       <path d="M7 17 17 7M8 7h9v9" />
     </svg>
   )
@@ -48,7 +48,7 @@ export function LinkRow({ href, label, tint, children }) {
         {children}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate text-sm font-semibold text-[var(--text-primary)]">{label}</span>
+        <span className="block truncate text-sm font-semibold text-(--text-primary)">{label}</span>
         {host ? <span className="block truncate text-xs text-gray-500">{host}</span> : null}
       </span>
       <ExternalIcon />
@@ -92,7 +92,7 @@ export function LinksCard({ children }) {
   const t = useT()
   return (
     <div className="ny-snow-host bg-modrinth-dark card-glass rounded-2xl p-4">
-      <h3 className="text-base font-bold m-0 mb-2 flex items-center gap-2 text-[var(--text-primary)]">
+      <h3 className="text-base font-bold m-0 mb-2 flex items-center gap-2 text-(--text-primary)">
         <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
         </svg>

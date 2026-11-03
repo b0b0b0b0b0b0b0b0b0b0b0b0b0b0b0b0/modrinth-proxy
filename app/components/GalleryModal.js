@@ -93,12 +93,12 @@ export default function GalleryModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[220] flex items-center justify-center bg-black/86 backdrop-blur-[2px]"
+      className="fixed inset-0 z-220 flex items-center justify-center bg-black/86 backdrop-blur-[2px]"
       role="presentation"
       onClick={onClose}
     >
       <div
-        className="relative z-[221] flex max-h-[85vh] max-w-[90vw] items-center justify-center"
+        className="relative z-221 flex max-h-[85vh] max-w-[90vw] items-center justify-center"
         onClick={(e) => e.stopPropagation()}
       >
         {!fullLoaded &&
@@ -106,7 +106,7 @@ export default function GalleryModal({
             <img
               src={thumbSrc}
               alt=""
-              className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain opacity-60 blur-sm"
+              className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain opacity-60 blur-xs"
               referrerPolicy="no-referrer"
               aria-hidden
             />
@@ -130,7 +130,7 @@ export default function GalleryModal({
         />
       </div>
 
-      <div className="fixed bottom-8 left-1/2 z-[222] flex -translate-x-1/2 transform items-center gap-2 rounded-full bg-black/40 px-2 py-2 opacity-60 backdrop-blur-sm transition-all duration-200 hover:opacity-100">
+      <div className="fixed bottom-8 left-1/2 z-222 flex -translate-x-1/2 transform items-center gap-2 rounded-full bg-black/40 px-2 py-2 opacity-60 backdrop-blur-xs transition-all duration-200 hover:opacity-100">
         <button
           onClick={onClose}
           className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-all duration-200 hover:scale-110 hover:bg-white/20"

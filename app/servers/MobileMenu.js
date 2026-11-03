@@ -17,7 +17,7 @@ export default function MobileMenu({ initialVersions = null }) {
   if (!isOpen) return null
 
   return (
-    <div className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-fade-in" onClick={() => setIsOpen(false)}>
+    <div className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-xs animate-fade-in" onClick={() => setIsOpen(false)}>
       <div 
         className="absolute top-0 left-0 h-full w-80 bg-modrinth-darker shadow-2xl overflow-y-auto p-4 transform transition-transform animate-slide-in-left"
         onClick={(e) => e.stopPropagation()}

@@ -82,7 +82,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
         <button
           type="button"
           onClick={handlePlay}
-          className="modrinth-button-font download-glass w-fit !px-5 h-10 bg-modrinth-green hover:bg-modrinth-green-light text-black rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 active:scale-[0.98] shadow-lg shadow-modrinth-green/10 text-base whitespace-nowrap"
+          className="modrinth-button-font download-glass w-fit px-5! h-10 bg-modrinth-green hover:bg-modrinth-green-light text-black rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 active:scale-[0.98] shadow-lg shadow-modrinth-green/10 text-base whitespace-nowrap"
         >
           <svg className="w-6 h-6 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} viewBox="0 0 24 24" aria-hidden="true">
             <path d="m5 3 14 9-14 9z" />
@@ -94,21 +94,21 @@ export default function PlayServerSection({ resource, playersOnline, region, add
       {address && (
         <div className="flex flex-col gap-1.5 w-full items-center">
           <div className="flex items-center gap-3 w-full my-0.5">
-            <div className="flex-1 h-[1px] bg-gray-700/40"></div>
+            <div className="flex-1 h-px bg-gray-700/40"></div>
             <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">{t('dl.or')}</span>
-            <div className="flex-1 h-[1px] bg-gray-700/40"></div>
+            <div className="flex-1 h-px bg-gray-700/40"></div>
           </div>
           <StyledTooltip label={copied ? t('copy.copied') : t('server.copyAddress')}>
             <button
               type="button"
               onClick={handleCopy}
-              className="group flex w-full min-w-0 items-center justify-center gap-2 py-1 text-center outline-none"
+              className="group flex w-full min-w-0 items-center justify-center gap-2 py-1 text-center outline-hidden"
             >
               <span
                 className={`min-w-0 truncate font-mono text-sm leading-snug transition-colors duration-150 ${
                   copied
                     ? 'text-modrinth-green'
-                    : 'text-[var(--text-muted)] group-hover:text-[var(--text-primary)]'
+                    : 'text-(--text-muted) group-hover:text-(--text-primary)'
                 }`}
               >
                 {address}
@@ -149,7 +149,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
       {modalOpen && portalTarget && createPortal(
         <div 
           onClick={() => setModalOpen(false)}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          className="fixed inset-0 z-200 flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
         >
           <div 
             onClick={(e) => e.stopPropagation()}
@@ -189,7 +189,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                 <div className="flex items-center gap-3 rounded-xl bg-gray-900/80 border border-gray-800/40 p-3 w-full">
                   {resource.icon_url && (
                     <img
-                      className="w-12 h-12 rounded-xl object-cover flex-shrink-0" 
+                      className="w-12 h-12 rounded-xl object-cover shrink-0" 
                       src={resource.icon_url}
                       alt=""
                       referrerPolicy="no-referrer"
@@ -224,7 +224,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                   </span>
                   <div className="flex flex-col gap-2">
                     <div className="flex text-sm gap-2 items-center text-gray-300">
-                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green flex-shrink-0">
+                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green shrink-0">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
@@ -232,7 +232,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                       <span>{t('server.launchDirect')}</span>
                     </div>
                     <div className="flex text-sm gap-2 items-center text-gray-300">
-                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green flex-shrink-0">
+                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green shrink-0">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>
@@ -240,7 +240,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
                       <span>{t('server.autoMods')}</span>
                     </div>
                     <div className="flex text-sm gap-2 items-center text-gray-300">
-                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green flex-shrink-0">
+                      <div className="w-5 h-5 border border-solid rounded-full flex items-center justify-center border-modrinth-green/30 bg-modrinth-green/10 text-modrinth-green shrink-0">
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
                         </svg>

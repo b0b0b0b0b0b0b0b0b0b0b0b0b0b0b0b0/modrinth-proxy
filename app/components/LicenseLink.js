@@ -10,7 +10,7 @@ import {
 function ExternalIcon({ className = 'w-3 h-3' }) {
   return (
     <svg
-      className={`inline flex-shrink-0 opacity-60 ${className}`}
+      className={`inline shrink-0 opacity-60 ${className}`}
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
@@ -71,10 +71,10 @@ export default function LicenseLink({ license, className = '' }) {
           className="z-50 max-w-xs rounded-lg border border-gray-300 bg-white p-3 text-sm shadow-lg dark:border-gray-700 dark:bg-[#1a1b1e]"
         >
           {fullName && (
-            <p className="m-0 mb-2 font-medium text-[var(--text-primary)]">{fullName}</p>
+            <p className="m-0 mb-2 font-medium text-(--text-primary)">{fullName}</p>
           )}
           {license?.id && license.id !== label && (
-            <p className="m-0 mb-2 text-xs text-[var(--text-gray)]">{license.id}</p>
+            <p className="m-0 mb-2 text-xs text-(--text-gray)">{license.id}</p>
           )}
           {spdxUrl && (
             <a

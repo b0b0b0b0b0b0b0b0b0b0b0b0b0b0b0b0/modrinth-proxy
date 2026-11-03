@@ -55,7 +55,7 @@ export default function ServerCategoryTagsRow({ categoryIds = [], maxVisible = 3
               side="bottom"
               align="start"
               sideOffset={6}
-              className="glass-pop z-[100] max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl p-2"
+              className="glass-pop z-100 max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl p-2"
               onOpenAutoFocus={(e) => e.preventDefault()}
             >
               <div className="flex flex-wrap gap-1.5">

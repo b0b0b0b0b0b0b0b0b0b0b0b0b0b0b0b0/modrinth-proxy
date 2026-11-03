@@ -23,9 +23,9 @@ export async function generateMetadata() {
 }
 
 const SUMMARY_STYLES = {
-  allow: 'border-modrinth-green/30 bg-modrinth-green/[0.08]',
-  require: 'border-amber-500/30 bg-amber-500/[0.08]',
-  network: 'border-sky-500/30 bg-sky-500/[0.08]',
+  allow: 'border-modrinth-green/30 bg-modrinth-green/8',
+  require: 'border-amber-500/30 bg-amber-500/8',
+  network: 'border-sky-500/30 bg-sky-500/8',
 }
 
 const SUMMARY_TITLE_STYLES = {

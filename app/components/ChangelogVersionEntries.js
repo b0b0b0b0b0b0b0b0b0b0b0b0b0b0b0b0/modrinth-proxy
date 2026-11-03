@@ -31,7 +31,7 @@ export function ChangelogTimelineRow({ channel, isLast, header, children, resour
       className={`changelog-item ${!isLast ? 'pb-2.5' : ''}`}
     >
       <div className="flex gap-x-2">
-        <div className="changelog-bar-cell relative w-[1.625rem] shrink-0 self-stretch pt-0.5">
+        <div className="changelog-bar-cell relative w-6.5 shrink-0 self-stretch pt-0.5">
           <div
             className={`changelog-bar ${resourceBarHex ? '' : barMod}`}
             style={barStyle}
@@ -105,7 +105,7 @@ export default function ChangelogVersionEntries({
                   {href ? (
                     <Link
                       href={href}
-                      className="transition-colors hover:text-modrinth-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)] rounded-sm"
+                      className="transition-colors hover:text-modrinth-green focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-primary) rounded-xs"
                     >
                       {title}
                     </Link>
@@ -114,7 +114,7 @@ export default function ChangelogVersionEntries({
                   )}
                 </h3>
                 <span
-                    className={`rounded px-2 py-0.5 text-xs border ${versionChannelLetterRingClass(version.version_type)}`}
+                    className={`rounded-sm px-2 py-0.5 text-xs border ${versionChannelLetterRingClass(version.version_type)}`}
                 >
                   {version.version_type}
                 </span>

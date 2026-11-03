@@ -18,7 +18,7 @@ export default function SettingsMobileMenu({ signedIn }) {
 
   return (
     <div
-      className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-fade-in"
+      className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-xs animate-fade-in"
       onClick={() => setIsOpen(false)}
     >
       <div

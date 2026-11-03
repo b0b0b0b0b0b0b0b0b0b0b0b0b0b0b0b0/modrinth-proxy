@@ -40,7 +40,7 @@ export default function ExtensionKitten() {
         aria-label={t('account.petKitten')}
         animate={hop}
         style={{ originY: 0.9 }}
-        className="block h-full w-full rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green"
+        className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
       >
         <motion.div
           animate={reduceMotion ? undefined : { scaleY: [1, 1.035, 1], scaleX: [1, 0.985, 1] }}

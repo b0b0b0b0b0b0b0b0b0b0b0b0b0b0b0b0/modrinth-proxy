@@ -156,7 +156,7 @@ dependencies {
       <button
         type="button"
         onClick={toggle}
-        className={`group m-0 flex w-full min-w-0 appearance-none items-center gap-3 p-4 text-left transition-colors hover:bg-[var(--bg-hover)] ${
+        className={`group m-0 flex w-full min-w-0 appearance-none items-center gap-3 p-4 text-left transition-colors hover:bg-(--bg-hover) ${
           open ? 'rounded-b-none' : ''
         }`}
       >
@@ -221,7 +221,7 @@ dependencies {
               <CopyCodeButton text={buildGradle} t={t} />
             </div>
             <pre
-              className="gradle-code m-0 overflow-x-auto rounded-xl border border-gray-800 bg-[var(--bg-tertiary)] p-3 pr-12 text-sm font-mono leading-relaxed whitespace-pre"
+              className="gradle-code m-0 overflow-x-auto rounded-xl border border-gray-800 bg-(--bg-tertiary) p-3 pr-12 text-sm font-mono leading-relaxed whitespace-pre"
               dangerouslySetInnerHTML={{ __html: highlightedGradle }}
             />
           </div>

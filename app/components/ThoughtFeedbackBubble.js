@@ -24,7 +24,7 @@ export default function ThoughtFeedbackBubble() {
   if (!visible) return null
 
   return (
-    <div className="fixed top-20 right-4 sm:right-8 z-[100] w-72 sm:w-80 max-w-[calc(100vw-2rem)] animate-thought-pop pointer-events-auto">
+    <div className="fixed top-20 right-4 sm:right-8 z-100 w-72 sm:w-80 max-w-[calc(100vw-2rem)] animate-thought-pop pointer-events-auto">
       <div className="relative animate-thought-float">
         <div className="relative overflow-hidden rounded-2xl border border-modrinth-green/40 bg-gray-950 p-4 shadow-2xl backdrop-blur-md">
           <button
@@ -42,7 +42,7 @@ export default function ThoughtFeedbackBubble() {
           <div className="flex items-start gap-3 pr-4">
             <span className="text-xl leading-none select-none mt-0.5">💭</span>
             <div className="flex-1 min-w-0">
-              <p className="text-xs sm:text-sm font-bold text-white leading-snug mb-3 tracking-wide whitespace-normal break-words">
+              <p className="text-xs sm:text-sm font-bold text-white leading-snug mb-3 tracking-wide whitespace-normal wrap-break-word">
                 У тебя есть предложение или нашёл баг?
               </p>
               <a

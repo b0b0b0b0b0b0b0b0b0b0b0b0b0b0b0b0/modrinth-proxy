@@ -35,7 +35,7 @@ function BundledFileRow({ file }) {
           href={file.url}
           download={file.filename}
           label={`Скачать ${file.filename}`}
-          className="!text-gray-500 dark:!text-gray-400"
+          className="text-gray-500! dark:text-gray-400!"
         />
       )}
     </div>

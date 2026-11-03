@@ -51,11 +51,11 @@ export default async function UserProfileHeader({ author, stats }) {
             <img
               src={author.avatar_url}
               alt={author.username}
-              className="w-24 h-24 rounded-lg object-cover flex-shrink-0"
+              className="w-24 h-24 rounded-lg object-cover shrink-0"
               referrerPolicy="no-referrer"
             />
           ) : (
-            <div className="w-24 h-24 bg-gradient-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-2xl font-bold flex-shrink-0">
+            <div className="w-24 h-24 bg-linear-to-br from-modrinth-green to-modrinth-green-light rounded-lg flex items-center justify-center text-2xl font-bold shrink-0">
               {author.username.charAt(0).toUpperCase()}
             </div>
           )}

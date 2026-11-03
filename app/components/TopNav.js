@@ -137,7 +137,7 @@ export default function TopNav({ account = null }) {
   return (
     <nav className="top-nav">
       <div className="top-nav-content top-nav-content--stack">
-        <div className="top-nav-mobile-stack md:hidden">
+        <div className="top-nav-mobile-stack flex flex-col md:hidden">
           <div className="top-nav-mobile-toolbar">
             <button
               type="button"
@@ -167,7 +167,7 @@ export default function TopNav({ account = null }) {
                     className={`top-nav-mobile-chevrider-inner ${chevronDown ? 'top-nav-mobile-chevrider-inner--down' : ''}`}
                   >
                     <svg
-                      className="h-5 w-5 text-[var(--color-green)]"
+                      className="h-5 w-5 text-(--color-green)"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -243,7 +243,7 @@ export default function TopNav({ account = null }) {
           ))}
         </div>
 
-        <div className="hidden md:flex flex-row items-center gap-2 md:max-xl:gap-1 flex-shrink-0">
+        <div className="hidden md:flex flex-row items-center gap-2 md:max-xl:gap-1 shrink-0">
           <ProfileMenu account={account} linkClassName={iconLinkClass} />
           <Link
             href="/news"

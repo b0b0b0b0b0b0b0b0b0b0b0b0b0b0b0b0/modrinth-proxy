@@ -22,7 +22,7 @@ export default function CommitMessage({ message }) {
   const escapedMessage = escapeHtml(message)
 
   return (
-    <div className="prose prose-invert prose-sm max-w-none mb-3 break-words">
+    <div className="prose prose-invert prose-sm max-w-none mb-3 wrap-break-word">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>
         {escapedMessage}
       </ReactMarkdown>

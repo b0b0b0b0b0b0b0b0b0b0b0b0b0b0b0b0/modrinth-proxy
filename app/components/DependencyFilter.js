@@ -148,7 +148,7 @@ function ProjectSearch({ placeholder, excludeIds, onSelect }) {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
-          className="w-full px-3 py-2 pl-9 pr-8 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
+          className="w-full px-3 py-2 pl-9 pr-8 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-hidden focus:border-modrinth-green transition-colors"
         />
         <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0" />
@@ -250,7 +250,7 @@ function DependencyTypePicker({ types, onCommit }) {
                 className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-sm text-gray-300 hover:text-white transition-colors group"
               >
                 <span className="flex-1">{t(`filter.dep.${type}`)}</span>
-                <span className={`glass-check flex h-4 w-4 items-center justify-center rounded border ${checked ? 'border-modrinth-green bg-modrinth-green text-black' : 'border-gray-600'}`}>
+                <span className={`glass-check flex h-4 w-4 items-center justify-center rounded-sm border ${checked ? 'border-modrinth-green bg-modrinth-green text-black' : 'border-gray-600'}`}>
                   {checked && <CheckIcon />}
                 </span>
               </button>

@@ -36,8 +36,8 @@ export default function ExtensionBanner() {
 
   return (
     <div className="fixed bottom-4 left-4 right-4 z-50 sm:bottom-6 sm:left-auto sm:right-6 sm:max-w-md animate-slide-up">
-      <div className="relative overflow-hidden rounded-2xl border border-modrinth-green/30 bg-gradient-to-br from-modrinth-green/20 via-modrinth-green-light/10 to-modrinth-green-light/20 p-4 shadow-2xl backdrop-blur-xl sm:p-5 group">
-        <div className="absolute inset-0 bg-gradient-to-br from-modrinth-green/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="relative overflow-hidden rounded-2xl border border-modrinth-green/30 bg-linear-to-br from-modrinth-green/20 via-modrinth-green-light/10 to-modrinth-green-light/20 p-4 shadow-2xl backdrop-blur-xl sm:p-5 group">
+        <div className="absolute inset-0 bg-linear-to-br from-modrinth-green/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
         <button
           type="button"
@@ -51,7 +51,7 @@ export default function ExtensionBanner() {
         </button>
 
         <div className="relative flex gap-3 pr-6 sm:gap-4">
-          <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 sm:h-12 sm:w-12">
+          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/5 ring-1 ring-white/10 sm:h-12 sm:w-12">
             <BrowserLogo name={browser.name} className="h-7 w-7 sm:h-8 sm:w-8" />
           </div>
           <div className="min-w-0 flex-1">
@@ -81,7 +81,7 @@ export default function ExtensionBanner() {
           </div>
         </div>
 
-        <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-modrinth-green via-modrinth-green-light to-modrinth-green opacity-50" />
+        <div className="absolute left-0 top-0 h-1 w-full bg-linear-to-r from-modrinth-green via-modrinth-green-light to-modrinth-green opacity-50" />
       </div>
     </div>
   )

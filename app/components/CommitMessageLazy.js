@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 function CommitMessageLoading() {
   return (
-    <div className="prose prose-invert prose-sm max-w-none mb-3 break-words opacity-50">
+    <div className="prose prose-invert prose-sm max-w-none mb-3 wrap-break-word opacity-50">
       …
     </div>
   )

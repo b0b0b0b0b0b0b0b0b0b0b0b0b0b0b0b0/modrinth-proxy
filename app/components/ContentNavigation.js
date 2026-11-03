@@ -41,7 +41,7 @@ export default function ContentNavigation({
     <div className="overflow-x-auto mb-4 mobile-nav-spacing">
       <nav
         className={`glass-track relative flex w-fit rounded-full p-1 text-sm font-bold bg-gray-800 ${
-          accent ? 'dark:[background-color:var(--nav-track)]' : ''
+          accent ? 'dark:bg-(--nav-track)' : ''
         }`}
         style={
           accent
@@ -59,10 +59,10 @@ export default function ContentNavigation({
             <Link
               key={tab.href}
               href={tab.href}
-              className={`button-animation z-[1] flex flex-row items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
+              className={`button-animation z-1 flex flex-row items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-colors ${
                 active
                   ? `glass-pill bg-modrinth-green text-black ${
-                      accent ? 'dark:[background-color:var(--nav-accent)] dark:[color:var(--nav-accent-fg)]' : ''
+                      accent ? 'dark:bg-(--nav-accent) dark:text-(--nav-accent-fg)' : ''
                     }`
                   : 'text-gray-400 hover:text-white'
               }`}

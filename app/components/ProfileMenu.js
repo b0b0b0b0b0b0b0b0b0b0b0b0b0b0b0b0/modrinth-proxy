@@ -26,7 +26,7 @@ const ICONS = {
 }
 
 const ITEM =
-  'flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-semibold text-gray-300 transition-colors hover:bg-gray-800/60 hover:text-white focus-visible:bg-gray-800/60 focus-visible:outline-none disabled:opacity-60'
+  'flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left text-sm font-semibold text-gray-300 transition-colors hover:bg-gray-800/60 hover:text-white focus-visible:bg-gray-800/60 focus-visible:outline-hidden disabled:opacity-60'
 
 function Icon({ paths, className = 'h-[18px] w-[18px] shrink-0' }) {
   return (
@@ -212,7 +212,7 @@ export default function ProfileMenu({ account, linkClassName }) {
             exit={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: -4 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             style={{ transformOrigin: 'top right' }}
-            className="absolute right-0 top-full z-[60] mt-2 w-64 rounded-2xl glass-pop p-2"
+            className="absolute right-0 top-full z-60 mt-2 w-64 rounded-2xl glass-pop p-2"
           >
             {username ? (
               <Link
@@ -258,7 +258,7 @@ export default function ProfileMenu({ account, linkClassName }) {
                 role="menuitem"
                 onClick={logout}
                 disabled={busy}
-                className={`${ITEM} hover:!text-red-400`}
+                className={`${ITEM} hover:text-red-400!`}
               >
                 <Icon paths={ICONS.logOut} />
                 <span className="min-w-0 flex-1 truncate">{t('account.logout')}</span>

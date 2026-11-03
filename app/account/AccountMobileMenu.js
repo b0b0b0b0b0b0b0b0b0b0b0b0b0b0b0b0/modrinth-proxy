@@ -18,7 +18,7 @@ export default function AccountMobileMenu({ items, settings }) {
 
   return (
     <div
-      className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm animate-fade-in"
+      className="lg:hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-xs animate-fade-in"
       onClick={() => setIsOpen(false)}
     >
       <div
@@ -62,7 +62,7 @@ export default function AccountMobileMenu({ items, settings }) {
                       ? 'bg-modrinth-green/20 text-modrinth-green'
                       : item.highlight
                         ? 'bg-modrinth-green text-black'
-                        : 'bg-[var(--bg-tertiary)] text-gray-400'
+                        : 'bg-(--bg-tertiary) text-gray-400'
                   }`}
                 >
                   {item.count}
@@ -73,7 +73,7 @@ export default function AccountMobileMenu({ items, settings }) {
           <Link
             href="/settings/profile"
             onClick={() => setIsOpen(false)}
-            className="!mt-3 flex w-full items-center gap-2.5 rounded-lg border-t border-gray-800 px-3 py-2.5 text-sm text-gray-400 transition-colors hover:bg-gray-800/50 hover:text-white"
+            className="mt-3! flex w-full items-center gap-2.5 rounded-lg border-t border-gray-800 px-3 py-2.5 text-sm text-gray-400 transition-colors hover:bg-gray-800/50 hover:text-white"
           >
             <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
               <path d={settings.icon} />

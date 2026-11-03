@@ -361,10 +361,10 @@ export default function ModrinthTrafficChart({ initial }) {
                 <button
                   type="button"
                   onClick={() => pick(minute.at)}
-                  className={`group flex h-full min-w-0 flex-1 flex-col justify-end rounded-sm ${active ? 'bg-white/10' : ''}`}
+                  className={`group flex h-full min-w-0 flex-1 flex-col justify-end rounded-xs ${active ? 'bg-white/10' : ''}`}
                 >
                   <div
-                    className="flex w-full flex-col overflow-hidden rounded-sm"
+                    className="flex w-full flex-col overflow-hidden rounded-xs"
                     style={{ height: `${Math.max(minute.requests ? 2 : 1, height)}%` }}
                   >
                     {minute.limited ? <div className="w-full bg-red-500" style={{ height: `${limitedShare * 100}%` }} /> : null}

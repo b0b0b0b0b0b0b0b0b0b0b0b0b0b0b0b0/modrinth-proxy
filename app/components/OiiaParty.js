@@ -297,7 +297,7 @@ function Arms({ pose }) {
 function KittenBody({ pose }) {
   const spooky = useKittenSeason() === 'halloween'
   return (
-    <svg className={`-mt-[25%] h-auto w-full overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 22" aria-hidden>
+    <svg className={`mt-[-25%] h-auto w-full overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 22" aria-hidden>
       <path d="M17.6 15.5q5.4-.6 4.6-6.4-.3-2 1-2.6" className="oiia-tail" />
       {pose === 'hips' ? null : <Arms pose={pose} />}
       <ellipse cx="12" cy="11" rx="6.4" ry="8" className="fill-[#0f1a14]" />
@@ -316,13 +316,13 @@ function Dancer({ spinRef, pose, mood, look, onClick, label, size }) {
       type="button"
       onClick={onClick}
       aria-label={label}
-      className={`pointer-events-auto block outline-none ${size}`}
+      className={`pointer-events-auto block outline-hidden ${size}`}
       initial={{ scaleY: 0.55 }}
       animate={{ scaleY: 1 }}
       transition={{ type: 'spring', stiffness: 420, damping: 10, delay: 0.14 }}
       style={{ originY: 1 }}
     >
-      <span ref={spinRef} className="flex flex-col items-center [transform-style:preserve-3d]">
+      <span ref={spinRef} className="flex flex-col items-center transform-3d">
         <span className="oiia-groove flex flex-col items-center w-full">
           <span className="relative z-10 w-full">
             <KittenFace mood={mood} look={look} className="h-auto w-full" />
@@ -570,7 +570,7 @@ export default function OiiaParty() {
       {shown ? (
         <motion.div
           key="oiia"
-          className="pointer-events-none fixed inset-0 z-[2147483000] overflow-hidden"
+          className="pointer-events-none fixed inset-0 z-2147483000 overflow-hidden"
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
           {phase === 'outro' ? (
@@ -604,7 +604,7 @@ export default function OiiaParty() {
             ? SIDEKICKS.map((kick, index) => (
                 <motion.div
                   key={kick.pose}
-                  className={`absolute bottom-[16vh] [perspective:600px] ${kick.place}`}
+                  className={`absolute bottom-[16vh] perspective-[600px] ${kick.place}`}
                   initial={{ x: `${kick.side * 60}vw`, y: '-60vh', rotate: kick.side * 540 }}
                   animate={running ? { x: `${kick.side * 70}vw`, rotate: kick.side * 8, ...hop } : { x: 0, y: 0, rotate: 0 }}
                   transition={{ duration: 0.75, ease: [0.25, 0.8, 0.35, 1], delay: index * 0.35 }}
@@ -616,13 +616,13 @@ export default function OiiaParty() {
                     look={outro ? { x: kick.side * 0.9, y: 0 } : { x: -kick.side * 0.8, y: 0.2 }}
                     onClick={stop}
                     label={label}
-                    size="w-[4.5rem] sm:w-20"
+                    size="w-18 sm:w-20"
                   />
                 </motion.div>
               ))
             : null}
           <motion.div
-            className="absolute bottom-[22vh] left-1/2 -ml-14 [perspective:600px]"
+            className="absolute bottom-[22vh] left-1/2 -ml-14 perspective-[600px]"
             initial={{ x: '-70vw', skewX: -28 }}
             animate={running ? { x: `${runDir * 85}vw`, skewX: 0, rotate: runDir * 6, ...hop } : { x: 0, skewX: 0 }}
             transition={{ x: { duration: 0.16, ease: [0.2, 0.9, 0.3, 1] }, skewX: { type: 'spring', stiffness: 500, damping: 14, delay: 0.12 } }}

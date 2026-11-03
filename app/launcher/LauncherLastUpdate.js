@@ -26,7 +26,7 @@ function ApiLink({ href, label, path, data }) {
   )
 
   return (
-    <StyledTooltip side="top" contentClassName="!px-3.5 !py-2.5" label={tooltip}>
+    <StyledTooltip side="top" contentClassName="px-3.5! py-2.5!" label={tooltip}>
       <a
         href={href}
         target="_blank"

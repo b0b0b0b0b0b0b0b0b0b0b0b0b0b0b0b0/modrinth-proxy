@@ -147,7 +147,7 @@ export default async function ServerPage(props) {
               <AuthorsSection
                 organization={organization}
                 members={teamMembers}
-                linkClassName="!p-0 hover:!bg-transparent"
+                linkClassName="p-0! hover:bg-transparent!"
               />
             </div>
           )}        </div>

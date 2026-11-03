@@ -125,7 +125,7 @@ function ProjectRow({ row, meta, action = null }) {
 
 function Chip({ children }) {
   return (
-    <span className="rounded-full bg-[var(--bg-tertiary)] px-2 py-0.5 text-[11px] font-semibold text-gray-400">
+    <span className="rounded-full bg-(--bg-tertiary) px-2 py-0.5 text-[11px] font-semibold text-gray-400">
       {children}
     </span>
   )
@@ -207,7 +207,7 @@ function CollectionCard({ href, title, count, t, locale }) {
   return (
     <Link
       href={href}
-      className="group block min-w-0 rounded-2xl bg-[var(--bg-primary)] p-4 transition-colors hover:bg-gray-800/60"
+      className="group block min-w-0 rounded-2xl bg-(--bg-primary) p-4 transition-colors hover:bg-gray-800/60"
     >
       <div className="min-w-0">
         <div className="truncate text-base font-bold text-white group-hover:text-modrinth-green">{title}</div>
@@ -269,7 +269,7 @@ function CollectionHeader({ collection, filter, type, t, locale }) {
       <>
       <div className="mt-3 flex flex-wrap items-center gap-4 border-b border-gray-800 pb-4">
         <div className="min-w-0 flex-1">
-          <h2 className="break-words text-xl font-bold text-white">{collection.name}</h2>
+          <h2 className="wrap-break-word text-xl font-bold text-white">{collection.name}</h2>
           <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold text-gray-500">
             <span>{projectsLabel(t, locale, collection.items.length)}</span>
             <PrivateBadge t={t} />
@@ -338,7 +338,7 @@ function AccountHome({ user, scores, festive, t, locale }) {
   return (
     <>
       <div className="flex flex-wrap items-center gap-4">
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-[var(--bg-primary)]">
+        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-(--bg-primary)">
           {avatar ? <AvatarImage src={avatar} className="h-16 w-16" /> : <HeaderKitten />}
         </div>
         <div className="min-w-0 flex-1">
@@ -449,7 +449,7 @@ export default async function AccountPage(props) {
       )}
 
       <div className="mt-5 flex flex-col gap-6 lg:flex-row">
-        <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:flex-shrink-0">
+        <nav aria-label={t('nav.sections')} className="hidden lg:block lg:w-80 lg:shrink-0">
           <div className="sticky top-4 space-y-1 rounded-xl card-glass bg-modrinth-dark p-4">
             <h2 className="mb-3 text-sm font-semibold text-gray-300">{t('nav.sections')}</h2>
             {navItems.map((item) => (
@@ -476,7 +476,7 @@ export default async function AccountPage(props) {
                           ? 'bg-modrinth-green/20 text-modrinth-green'
                           : item.highlight
                             ? 'bg-modrinth-green text-black'
-                            : 'bg-[var(--bg-tertiary)] text-gray-400',
+                            : 'bg-(--bg-tertiary) text-gray-400',
                       ].join(' ')}
                     >
                       {item.count}
@@ -484,7 +484,7 @@ export default async function AccountPage(props) {
                   ) : null}
                 </Link>
             ))}
-            <div className="!mt-3 border-t border-gray-800 pt-3">
+            <div className="mt-3! border-t border-gray-800 pt-3">
               <Link
                 href="/settings/profile"
                 className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-sm text-gray-400 transition-colors hover:bg-gray-800/50 hover:text-white"

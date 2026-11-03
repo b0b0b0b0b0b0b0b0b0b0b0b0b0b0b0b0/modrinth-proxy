@@ -12,7 +12,7 @@ import { useI18n } from './I18nProvider'
 function ExternalIcon() {
   return (
     <svg
-      className="w-3 h-3 flex-shrink-0 opacity-60"
+      className="w-3 h-3 shrink-0 opacity-60"
       fill="none"
       stroke="currentColor"
       strokeLinecap="round"
@@ -34,7 +34,7 @@ function GitHubRow({ href, icon, label }) {
       rel="noopener noreferrer"
       className="flex items-center gap-2 text-xs text-gray-700 dark:text-gray-300 hover:text-white transition-colors group"
     >
-      <span className="flex h-4 w-4 flex-shrink-0 items-center justify-center text-gray-500 group-hover:text-gray-300">
+      <span className="flex h-4 w-4 shrink-0 items-center justify-center text-gray-500 group-hover:text-gray-300">
         {icon}
       </span>
       <span className="min-w-0 flex-1 group-hover:underline">{label}</span>
@@ -85,7 +85,7 @@ export default function GitHubSidebarSection({ sourceUrl }) {
 
   return (
     <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-      <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+      <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-(--text-primary)">
         <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden>
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
         </svg>
@@ -98,16 +98,16 @@ export default function GitHubSidebarSection({ sourceUrl }) {
         rel="noopener noreferrer"
         className="glass-btn group mb-3 flex items-center gap-3 rounded-xl px-2.5 py-2 text-left no-underline"
       >
-        <span className="glass-edge flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg text-[#c084fc]" style={{ backgroundColor: 'color-mix(in srgb, #c084fc 16%, transparent)' }}>
+        <span className="glass-edge flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[#c084fc]" style={{ backgroundColor: 'color-mix(in srgb, #c084fc 16%, transparent)' }}>
           <svg className="h-[18px] w-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 6l-6 6 6 6M16 18l6-6-6-6" />
           </svg>
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block text-sm font-semibold text-[var(--text-primary)]">{t('links.source')}</span>
+          <span className="block text-sm font-semibold text-(--text-primary)">{t('links.source')}</span>
           <span className="block truncate font-mono text-xs text-gray-500">{repo}</span>
         </span>
-        <svg className="h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--text-primary)]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
+        <svg className="h-4 w-4 shrink-0 text-gray-500 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-(--text-primary)" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
           <path d="M7 17 17 7M8 7h9v9" />
         </svg>
       </a>

@@ -71,7 +71,7 @@ export default function LostKitten({ text, found = false, className = '' }) {
         aria-label={t('account.petKitten')}
         animate={hop}
         style={{ originY: 0.9 }}
-        className={`block rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green ${size}`}
+        className={`block rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green ${size}`}
       >
         <motion.div
           animate={reduceMotion ? undefined : { rotate: look.x * 7 }}

@@ -207,7 +207,7 @@ export default function DownloadModalPickers({
                   placeholder={t('dl.pickVersion')}
                   value={versionSearch}
                   onChange={(event) => onVersionSearchChange(event.target.value)}
-                  className="h-9 w-full rounded-xl border-none bg-transparent py-2 pl-3 pr-9 text-sm font-medium text-gray-900 outline-none placeholder:text-gray-500 focus:ring-4 focus:ring-modrinth-green/20 min-[480px]:text-base dark:text-white dark:placeholder:text-gray-400"
+                  className="h-9 w-full rounded-xl border-none bg-transparent py-2 pl-3 pr-9 text-sm font-medium text-gray-900 outline-hidden placeholder:text-gray-500 focus:ring-4 focus:ring-modrinth-green/20 min-[480px]:text-base dark:text-white dark:placeholder:text-gray-400"
                 />
                 <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
                   <ChevronIcon open />
@@ -252,7 +252,7 @@ export default function DownloadModalPickers({
             <button
               type="button"
               onClick={openLoaderPicker}
-              className={`glass-btn flex h-9 w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left active:brightness-[115%] ${
+              className={`glass-btn flex h-9 w-full items-center justify-between gap-2 rounded-xl px-3 py-2 text-left active:brightness-115 ${
                 selectedLoader
                   ? 'text-gray-900 dark:text-white'
                   : 'text-gray-500 dark:text-gray-400'

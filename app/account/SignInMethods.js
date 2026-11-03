@@ -177,7 +177,7 @@ function PasswordRow({ hasPassword, username, onSaved }) {
             onKeyDown={(event) => {
               if (event.key === 'Escape') close()
             }}
-            className="max-w-md space-y-4 pb-1 sm:ml-[3.25rem]"
+            className="max-w-md space-y-4 pb-1 sm:ml-13"
           >
             <input type="text" name="username" autoComplete="username" hidden readOnly value={username || ''} />
             {hasPassword ? (

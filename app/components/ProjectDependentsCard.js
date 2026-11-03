@@ -71,7 +71,7 @@ export default function ProjectDependentsCard({ projectId, projectType, loaders 
 
 function DependentsHeading({ title }) {
   return (
-    <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+    <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-(--text-primary)">
       <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
         <circle cx="6" cy="6" r="3" />
         <circle cx="6" cy="18" r="3" />

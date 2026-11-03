@@ -34,7 +34,7 @@ export default function CopyButton({ text, tooltipLabel, inline = false }) {
       <span>{text}</span>
       {copied ? (
         <svg 
-          className="w-4 h-4 text-modrinth-green flex-shrink-0" 
+          className="w-4 h-4 text-modrinth-green shrink-0" 
           fill="none" 
           stroke="currentColor" 
           strokeLinecap="round" 
@@ -46,7 +46,7 @@ export default function CopyButton({ text, tooltipLabel, inline = false }) {
         </svg>
       ) : (
         <svg 
-          className="w-4 h-4 text-gray-400 flex-shrink-0" 
+          className="w-4 h-4 text-gray-400 shrink-0" 
           fill="none" 
           stroke="currentColor" 
           strokeLinecap="round" 

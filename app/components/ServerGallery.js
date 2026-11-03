@@ -46,7 +46,7 @@ export default function ServerGallery({ gallery = [] }) {
       
       <div 
         onClick={() => setModalOpen(true)}
-        className="relative group aspect-[21/9] md:aspect-[24/10] w-full rounded-2xl overflow-hidden bg-gray-950 border border-gray-800/80 shadow-2xl flex items-center justify-center cursor-zoom-in transition-all duration-300 hover:border-modrinth-green/30"
+        className="relative group aspect-21/9 md:aspect-24/10 w-full rounded-2xl overflow-hidden bg-gray-950 border border-gray-800/80 shadow-2xl flex items-center justify-center cursor-zoom-in transition-all duration-300 hover:border-modrinth-green/30"
       >
         {images.map((img, idx) => {
           const src = img.url || img.raw_url
@@ -74,7 +74,7 @@ export default function ServerGallery({ gallery = [] }) {
               />
               
               {(name || desc) && (
-                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/90 via-black/40 to-transparent pointer-events-none" />
               )}
               {(name || desc) && (
                 <div className="absolute bottom-4 left-4 right-16 text-white z-10 flex flex-col gap-0.5 pointer-events-none">
@@ -136,7 +136,7 @@ export default function ServerGallery({ gallery = [] }) {
               <button
                 key={idx}
                 onClick={() => setActiveIndex(idx)}
-                className={`relative w-20 h-12 md:w-24 md:h-14 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all duration-300 active:scale-95 cursor-pointer ${
+                className={`relative w-20 h-12 md:w-24 md:h-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all duration-300 active:scale-95 cursor-pointer ${
                   isActive 
                     ? 'border-modrinth-green scale-105 shadow-md shadow-modrinth-green/10' 
                     : 'border-gray-800 hover:border-gray-700 opacity-60 hover:opacity-100'
@@ -157,7 +157,7 @@ export default function ServerGallery({ gallery = [] }) {
       {modalOpen && (
         <div 
           onClick={() => setModalOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm p-4 cursor-zoom-out"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xs p-4 cursor-zoom-out"
         >
           <button 
             onClick={() => setModalOpen(false)}

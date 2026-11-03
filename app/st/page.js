@@ -46,7 +46,7 @@ function NumberCrown() {
   return (
     <span
       aria-hidden
-      className="pointer-events-none absolute -right-[0.1em] -top-[0.32em] h-[0.5em] w-[0.64em] rotate-[18deg] transition-transform duration-300 ease-out group-hover/crown:-translate-y-[0.04em] group-hover/crown:rotate-[26deg]"
+      className="pointer-events-none absolute right-[-0.1em] top-[-0.32em] h-[0.5em] w-[0.64em] rotate-18 transition-transform duration-300 ease-out group-hover/crown:translate-y-[-0.04em] group-hover/crown:rotate-26"
     >
       <svg className="h-full w-full overflow-visible drop-shadow-[0_2px_6px_rgba(251,191,36,0.45)]" viewBox="0 0 24 18">
         <defs>
@@ -114,7 +114,7 @@ export default async function StatsPage() {
           <RoyalKitten />
           <div className="mt-16 text-7xl font-extrabold tabular-nums leading-none">
             <span className="group/crown relative inline-block">
-              <span className="bg-gradient-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-modrinth-green to-modrinth-green-light bg-clip-text text-transparent">
                 <CountUp value={stats.users} />
               </span>
               <NumberCrown />

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { isPhantomCrawlerPath } from './lib/relativeContentUrls'
 
-export function middleware(request) {
+export function proxy(request) {
   const { pathname, search } = request.nextUrl
 
   if (isPhantomCrawlerPath(pathname)) {

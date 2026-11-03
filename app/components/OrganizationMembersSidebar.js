@@ -11,7 +11,7 @@ export default function OrganizationMembersSidebar({ members = [] }) {
 
   return (
     <div className="bg-modrinth-dark card-glass rounded-lg p-4">
-      <h3 className="text-base font-bold m-0 mb-3 text-[var(--text-primary)]">Участники</h3>
+      <h3 className="text-base font-bold m-0 mb-3 text-(--text-primary)">Участники</h3>
       <div className="flex flex-col gap-3">
         {items.map((member) => (
           <Link
@@ -27,7 +27,7 @@ export default function OrganizationMembersSidebar({ members = [] }) {
                 referrerPolicy="no-referrer"
               />
             ) : (
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">
                 {member.user.username.charAt(0).toUpperCase()}
               </div>
             )}

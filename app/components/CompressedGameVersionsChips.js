@@ -7,13 +7,13 @@ import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
 
 const chipLinkCls =
-  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none'
+  'z-1 inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) transition-transform active:scale-[0.95] outline-hidden'
 
 const chipPlainCls =
-  'z-[1] inline-flex shrink-0 cursor-default items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none hover:no-underline'
+  'z-1 inline-flex shrink-0 cursor-default items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) transition-transform active:scale-[0.95] outline-hidden hover:no-underline'
 
 const chipMoreCls =
-  'z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none'
+  'z-1 inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) transition-transform active:scale-[0.95] outline-hidden'
 
 function versionHref(browseRoute, versionSearchParam, v) {
   return `/${browseRoute}?${versionSearchParam}=${encodeURIComponent(v)}`
@@ -54,7 +54,7 @@ function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam,
     return (
       <StyledTooltip
         label={tooltipBody}
-        contentClassName={expanded.length > 1 ? '!max-w-[min(380px,calc(100vw-24px))]' : ''}
+        contentClassName={expanded.length > 1 ? 'max-w-[min(380px,calc(100vw-24px))]!' : ''}
       >
         <Link
           href={versionHref(browseRoute, versionSearchParam, v)}
@@ -70,7 +70,7 @@ function VersionRangeChip({ range, browseRoute, rawVersions, versionSearchParam,
   return (
     <StyledTooltip
       label={tooltipBody}
-      contentClassName={expanded.length > 1 ? '!max-w-[min(380px,calc(100vw-24px))]' : ''}
+      contentClassName={expanded.length > 1 ? 'max-w-[min(380px,calc(100vw-24px))]!' : ''}
     >
       <span className={chipPlainCls} tabIndex={0} aria-label={ariaLabel}>
         {range}
@@ -86,7 +86,7 @@ function RecommendedVersionChip({ version, browseRoute, versionSearchParam, t })
       className={chipLinkCls}
     >
       {version}
-      <span className="text-[var(--text-muted)] opacity-80"> ({t('server.recommended')})</span>
+      <span className="text-(--text-muted) opacity-80"> ({t('server.recommended')})</span>
     </Link>
   )
 }
@@ -143,7 +143,7 @@ export default function CompressedGameVersionsChips({
               side="bottom"
               align="start"
               sideOffset={6}
-              className="z-[100] max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl border border-gray-700 p-2 shadow-xl"
+              className="z-100 max-h-[min(320px,50vh)] max-w-[min(320px,calc(100vw-24px))] overflow-y-auto rounded-xl border border-gray-700 p-2 shadow-xl"
               style={{ backgroundColor: 'var(--bg-primary)' }}
               onOpenAutoFocus={(e) => e.preventDefault()}
             >

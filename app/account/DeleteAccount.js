@@ -26,7 +26,7 @@ function Modal({ title, onClose, children, closable }) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-200 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs animate-fade-in"
       onClick={() => closable && onClose()}
     >
       <div

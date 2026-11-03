@@ -7,7 +7,7 @@ const STRENGTH_COLORS = ['#ef4444', '#f59e0b', '#eab308', '#22c55e']
 const LOCK_PATH = 'M7 11V7a5 5 0 0 1 10 0v4M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z'
 
 export const fieldInputClass =
-  'w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] py-3 pl-10 pr-4 text-sm text-white outline-none transition-[border-color,box-shadow] placeholder:text-gray-600 focus:border-modrinth-green focus:shadow-[0_0_0_3px_rgba(var(--color-green-rgb),0.18)] dark:border-gray-800'
+  'w-full rounded-xl border border-gray-700 bg-(--bg-primary) py-3 pl-10 pr-4 text-sm text-white outline-hidden transition-[border-color,box-shadow] placeholder:text-gray-600 focus:border-modrinth-green focus:shadow-[0_0_0_3px_rgba(var(--color-green-rgb),0.18)] dark:border-gray-800'
 
 export function passwordStrength(password) {
   if (!password) return 0

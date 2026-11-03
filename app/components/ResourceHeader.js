@@ -107,14 +107,14 @@ export default async function ResourceHeader({ resource, contentType, versions =
         {!isServer && (
           <ProjectActivityBackground versions={activityVersions} />
         )}
-        <div className="relative z-[1]">
+        <div className="relative z-1">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 lg:items-start">
           <div className="flex gap-3 md:gap-4 flex-1">
             {iconUrl && (
               <img
                 src={iconUrl}
                 alt={resource.title}
-                className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover flex-shrink-0"
+                className="w-16 h-16 md:w-20 md:h-20 rounded-lg object-cover shrink-0"
                 referrerPolicy="no-referrer"
               />
             )}
@@ -158,8 +158,8 @@ export default async function ResourceHeader({ resource, contentType, versions =
                       </div>
                     )}
                     <ProjectFavoriteCount projectId={resource.id} />
-                    <ProjectFavoriteButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
-                    <ProjectSaveButton projectId={resource.id} className="!h-9 !w-9 lg:!h-9 lg:!w-9" />
+                    <ProjectFavoriteButton projectId={resource.id} className="h-9! w-9! lg:h-9! lg:w-9!" />
+                    <ProjectSaveButton projectId={resource.id} className="h-9! w-9! lg:h-9! lg:w-9!" />
                     {allResourceCategories.length > 0 && (
                       <ServerCategoryTagsRow categoryIds={allResourceCategories} maxVisible={3} />
                     )}
@@ -195,9 +195,9 @@ export default async function ResourceHeader({ resource, contentType, versions =
                               <Link
                                 key={catId}
                                 href={`/${contentTypeRoute}?f=categories:${catId}`}
-                                className="glass-chip flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] hover:text-[var(--text-primary)]"
+                                className="glass-chip flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) hover:text-(--text-primary)"
                               >
-                                <div className="h-4 w-4 flex-shrink-0">{category.icon}</div>
+                                <div className="h-4 w-4 shrink-0">{category.icon}</div>
                                 <span>{categoryLabel(t, catId, category.name)}</span>
                               </Link>
                             )

@@ -81,7 +81,7 @@ export default function DownloadButtons({ launcherData }) {
       </button>
       <StyledTooltip
         side="bottom"
-        contentClassName="!px-4 !py-3"
+        contentClassName="px-4! py-3!"
         label={
           <span className="flex flex-col items-center gap-1 text-center leading-snug">
             <span className="text-sm font-semibold text-white">{t('app.otherTip')}</span>
@@ -103,11 +103,11 @@ export default function DownloadButtons({ launcherData }) {
     <div className="flex justify-center mb-12">
       <StyledTooltip
         side="bottom"
-        contentClassName="!px-4 !py-3"
+        contentClassName="px-4! py-3!"
         label={
           <span className="flex flex-col items-center gap-1 text-center leading-snug">
             <span className="text-sm font-semibold text-white">{t('app.noLicenseTip')}</span>
-            <span className="max-w-[15rem] text-[11px] font-medium text-gray-300">
+            <span className="max-w-60 text-[11px] font-medium text-gray-300">
               {t('app.astralTip')}
             </span>
           </span>

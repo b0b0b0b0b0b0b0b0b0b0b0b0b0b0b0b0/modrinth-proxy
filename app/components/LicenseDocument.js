@@ -125,7 +125,7 @@ export default async function LicenseDocument() {
 
         <article className="license-document px-5 py-6 md:px-8 md:py-8">
           {document.notice.length > 0 && (
-            <div className="mb-8 rounded-xl border border-modrinth-green/25 bg-modrinth-green/[0.06] p-5">
+            <div className="mb-8 rounded-xl border border-modrinth-green/25 bg-modrinth-green/6 p-5">
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-modrinth-green/80">
                 {t('license.notice')}
               </p>
@@ -179,7 +179,7 @@ export default async function LicenseDocument() {
                 <div className="border-b border-gray-800 px-4 py-2 text-xs font-medium uppercase tracking-wider text-gray-500">
                   {t('license.template')}
                 </div>
-                <pre className="overflow-x-auto whitespace-pre-wrap break-words px-4 py-4 font-mono text-xs leading-relaxed text-gray-400 md:text-sm">
+                <pre className="overflow-x-auto whitespace-pre-wrap wrap-break-word px-4 py-4 font-mono text-xs leading-relaxed text-gray-400 md:text-sm">
                   {document.howToApply.template.join('\n')}
                 </pre>
               </div>

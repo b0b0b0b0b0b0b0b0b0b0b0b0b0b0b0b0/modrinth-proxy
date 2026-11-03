@@ -13,7 +13,7 @@ export default async function SettingsLayout({ children }) {
       <SettingsCrumbs />
       <SettingsMobileMenu signedIn={signedIn} />
       <div className="flex flex-col gap-6 lg:flex-row">
-        <aside className="hidden lg:block lg:w-72 lg:flex-shrink-0">
+        <aside className="hidden lg:block lg:w-72 lg:shrink-0">
           <div className="sticky top-4">
             <SettingsSidebar signedIn={signedIn} />
           </div>

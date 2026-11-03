@@ -41,7 +41,7 @@ export function FlathubIcon({ className = 'h-5 w-5' }) {
 }
 
 const DOWNLOAD_BUTTON_CLASS =
-  'download-glass flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-modrinth-green font-bold text-black outline-none transition-transform duration-150 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg-primary)]'
+  'download-glass flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-modrinth-green font-bold text-black outline-hidden transition-transform duration-150 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-primary)'
 
 function OsCard({ id, icon, title, subtitle, detected, url, buttonText, buttonIcon, extra, wide = false, first = false, note, children }) {
   return (
@@ -93,7 +93,7 @@ function AstralFilesMenu({ files, version, platform }) {
       <Popover.Trigger asChild>
         <button
           type="button"
-          className="group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-gray-400 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-modrinth-green data-[state=open]:text-white"
+          className="group inline-flex items-center gap-1 rounded-lg px-2 py-1 text-sm font-medium text-gray-400 outline-hidden transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-modrinth-green data-[state=open]:text-white"
         >
           {t('app.astralFiles', { os: OS_NAMES[platform] })}
           <svg className="h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
@@ -120,7 +120,7 @@ function AstralFilesMenu({ files, version, platform }) {
                 href={file.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 rounded-xl px-2 py-2 text-sm outline-none transition-colors hover:bg-white/5 focus-visible:bg-white/5"
+                className="group flex items-center gap-3 rounded-xl px-2 py-2 text-sm outline-hidden transition-colors hover:bg-white/5 focus-visible:bg-white/5"
               >
                 <DownloadIcon className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-modrinth-green" />
                 <span className="min-w-0 flex-1">
@@ -147,7 +147,7 @@ function AstralFilesMenu({ files, version, platform }) {
 function SegmentedSwitch({ options, value, onChange, layoutId, accent = false, className = '' }) {
   const reduceMotion = useReducedMotion()
   return (
-    <div className={`glass-track relative flex rounded-full bg-[var(--bg-primary)] p-1 text-sm font-bold ${className}`} role="radiogroup">
+    <div className={`glass-track relative flex rounded-full bg-(--bg-primary) p-1 text-sm font-bold ${className}`} role="radiogroup">
       {options.map((option) => {
         const selected = option.id === value
         return (
@@ -157,14 +157,14 @@ function SegmentedSwitch({ options, value, onChange, layoutId, accent = false, c
             role="radio"
             aria-checked={selected}
             onClick={() => onChange(option.id)}
-            className={`relative z-[1] flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 outline-none transition-colors focus-visible:ring-2 focus-visible:ring-modrinth-green ${
+            className={`relative z-1 flex flex-1 items-center justify-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 outline-hidden transition-colors focus-visible:ring-2 focus-visible:ring-modrinth-green ${
               selected ? (accent ? 'text-black' : 'text-white') : 'text-gray-500 hover:text-gray-300'
             }`}
           >
             {selected ? (
               <motion.span
                 layoutId={layoutId}
-                className={`glass-pill absolute inset-0 -z-[1] rounded-full ${accent ? 'bg-modrinth-green' : 'bg-[var(--bg-tertiary)]'}`}
+                className={`glass-pill absolute inset-0 z-[-1] rounded-full ${accent ? 'bg-modrinth-green' : 'bg-(--bg-tertiary)'}`}
                 transition={reduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 32 }}
               />
             ) : null}
@@ -215,7 +215,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
   const format = isAstral && linuxFormat === 'flathub' ? 'appimage' : linuxFormat
   const formatLabel = LINUX_FORMATS.find((f) => f.id === format)?.label
   const isFlathub = format === 'flathub'
-  const skull = <PirateIcon className="h-5 w-5 -translate-y-[1.5px]" />
+  const skull = <PirateIcon className="h-5 w-5 translate-y-[-1.5px]" />
 
   const filesMenu = (platform) =>
     isAstral && astralData?.files?.[platform]?.length > 1 ? (
@@ -242,7 +242,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
           <button
             type="button"
             onClick={() => setEdition('astral')}
-            className="rounded-lg px-2 py-0.5 text-center text-sm text-gray-400 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-modrinth-green"
+            className="rounded-lg px-2 py-0.5 text-center text-sm text-gray-400 outline-hidden transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-modrinth-green"
           >
             {t('app.noLicense')}{' '}
             <span className="font-semibold text-modrinth-green">AstralRinth</span>{' '}

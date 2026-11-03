@@ -83,7 +83,7 @@ export function MultiSelectDropdown({ options, selected, onChange, placeholder, 
                 >
                   <FilterCheckbox checked={selected.includes(option.id)} />
                   <span className="flex items-center gap-2 min-w-0">
-                    {option.icon ? <div className="w-4 h-4 flex-shrink-0">{option.icon}</div> : null}
+                    {option.icon ? <div className="w-4 h-4 shrink-0">{option.icon}</div> : null}
                     <span className="truncate">{option.name}</span>
                   </span>
                 </button>

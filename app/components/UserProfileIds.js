@@ -19,7 +19,7 @@ export default function UserProfileIds({ userId }) {
   return (
     <div className="flex flex-col gap-3 text-sm">
       <div className="flex flex-wrap items-center gap-1">
-        <span className="font-semibold text-[var(--text-gray)]">{t('copy.userId')}</span>
+        <span className="font-semibold text-(--text-gray)">{t('copy.userId')}</span>
         <CopyButton text={userId} inline />
       </div>
       {url ? (

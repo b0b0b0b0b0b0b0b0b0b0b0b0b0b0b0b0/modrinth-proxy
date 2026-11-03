@@ -28,7 +28,7 @@ export default async function AppPage() {
         <div className="landing-hero relative mt-4 mb-16">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
-              <h1 className="main-header text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 text-gray-900 dark:text-white max-w-[60rem] mx-auto leading-tight">
+              <h1 className="main-header text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-6 text-gray-900 dark:text-white max-w-240 mx-auto leading-tight">
                 {t('app.h1')}
               </h1>
               
@@ -52,7 +52,7 @@ export default async function AppPage() {
       </div>
 
       <div className="features-section max-w-7xl mx-auto">
-        <h1 className="subheader text-4xl md:text-5xl lg:text-6xl font-black text-center mb-16 bg-gradient-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
+        <h1 className="subheader text-4xl md:text-5xl lg:text-6xl font-black text-center mb-16 bg-linear-to-r from-modrinth-green via-blue-400 to-purple-400 bg-clip-text text-transparent">
           {t('app.unlike1')}<br />{t('app.unlike2')}
         </h1>
 

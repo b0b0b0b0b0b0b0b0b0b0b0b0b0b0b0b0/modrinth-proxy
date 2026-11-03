@@ -107,7 +107,7 @@ function Check({ on }) {
     <span
       className={[
         'glass-check flex h-5 w-5 shrink-0 items-center justify-center rounded-md transition-colors',
-        on ? 'bg-modrinth-green text-black' : 'bg-[var(--bg-tertiary)] text-transparent group-hover/check:bg-gray-700',
+        on ? 'bg-modrinth-green text-black' : 'bg-(--bg-tertiary) text-transparent group-hover/check:bg-gray-700',
       ].join(' ')}
       aria-hidden
     >
@@ -236,7 +236,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
             type="button"
             aria-label={label}
             aria-pressed={saved}
-            className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-none transition-[transform,background-color] duration-200 hover:scale-110 hover:bg-gray-800/50 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green data-[state=open]:bg-gray-800/60 lg:h-12 lg:w-12 ${className}`}
+            className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-hidden transition-[transform,background-color] duration-200 hover:scale-110 hover:bg-gray-800/50 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green data-[state=open]:bg-gray-800/60 lg:h-12 lg:w-12 ${className}`}
           >
             <motion.svg
               key={saved ? 'on' : 'off'}
@@ -288,7 +288,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
           ) : (
             <>
               {collections.length > 5 ? (
-                <label className="mb-2 flex h-9 items-center gap-2 rounded-xl border border-gray-700 bg-[var(--bg-primary)] px-3 text-gray-500 focus-within:text-white">
+                <label className="mb-2 flex h-9 items-center gap-2 rounded-xl border border-gray-700 bg-(--bg-primary) px-3 text-gray-500 focus-within:text-white">
                   <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
                     <path d="m21 21-6-6m2-5a7 7 0 1 1-14 0 7 7 0 0 1 14 0" />
                   </svg>
@@ -298,12 +298,12 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
                     onChange={(event) => setQuery(event.target.value)}
                     placeholder={t('ucol.search')}
                     spellCheck={false}
-                    className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-0"
+                    className="min-w-0 flex-1 border-0 bg-transparent p-0 text-sm text-white outline-hidden placeholder:text-gray-500 focus:ring-0"
                   />
                 </label>
               ) : null}
 
-              <div className="max-h-72 overflow-y-auto rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-1.5">
+              <div className="max-h-72 overflow-y-auto rounded-xl border border-gray-800 bg-(--bg-primary) p-1.5">
                 {shown.length > 0 ? (
                   shown.map((collection) => (
                     <button
@@ -313,7 +313,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
                       aria-checked={collection.has}
                       onClick={() => toggle(collection)}
                       disabled={busy === collection.id}
-                      className="group/check flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-sm font-semibold text-gray-200 transition-colors hover:bg-gray-800/60 hover:text-white focus-visible:bg-gray-800/60 focus-visible:outline-none"
+                      className="group/check flex w-full items-center gap-3 rounded-lg px-2 py-2 text-left text-sm font-semibold text-gray-200 transition-colors hover:bg-gray-800/60 hover:text-white focus-visible:bg-gray-800/60 focus-visible:outline-hidden"
                     >
                       <Check on={collection.has} />
                       <span className="min-w-0 flex-1 truncate">{collection.name}</span>
@@ -350,7 +350,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
                         }
                       }}
                       placeholder={t('ucol.namePlaceholder')}
-                      className="h-9 w-full rounded-xl border border-gray-700 bg-[var(--bg-primary)] px-3 text-sm text-white outline-none placeholder:text-gray-500 focus:border-modrinth-green/60 focus:ring-0"
+                      className="h-9 w-full rounded-xl border border-gray-700 bg-(--bg-primary) px-3 text-sm text-white outline-hidden placeholder:text-gray-500 focus:border-modrinth-green/60 focus:ring-0"
                     />
                     <div className="flex gap-2">
                       <button
@@ -391,7 +391,7 @@ export default function ProjectSaveButton({ projectId, className = '' }) {
               {error ? <p className="mt-2 text-xs text-red-400">{error}</p> : null}
             </>
           )}
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+          <Popover.Arrow className="fill-(--bg-gradient-start)" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

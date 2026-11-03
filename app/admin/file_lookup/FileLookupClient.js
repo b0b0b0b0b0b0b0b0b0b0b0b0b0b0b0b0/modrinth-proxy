@@ -487,8 +487,8 @@ export default function FileLookupClient() {
         className={[
           'flex w-full flex-col items-center justify-center rounded-2xl border px-6 py-10 text-center transition-colors duration-200',
           dragActive
-            ? 'border-modrinth-green/50 bg-modrinth-green/[0.04]'
-            : 'border-gray-700 bg-[var(--bg-tertiary)] hover:border-modrinth-green/40 dark:border-gray-800',
+            ? 'border-modrinth-green/50 bg-modrinth-green/4'
+            : 'border-gray-700 bg-(--bg-tertiary) hover:border-modrinth-green/40 dark:border-gray-800',
         ].join(' ')}
       >
         <svg
@@ -524,7 +524,7 @@ export default function FileLookupClient() {
           }}
           placeholder={t('lookup.placeholder')}
           spellCheck={false}
-          className="min-w-0 flex-1 rounded-xl border border-gray-700 bg-gray-900 px-4 py-2.5 font-mono text-sm text-white outline-none focus:border-modrinth-green dark:border-gray-800"
+          className="min-w-0 flex-1 rounded-xl border border-gray-700 bg-gray-900 px-4 py-2.5 font-mono text-sm text-white outline-hidden focus:border-modrinth-green dark:border-gray-800"
         />
         <button
           type="submit"
@@ -537,7 +537,7 @@ export default function FileLookupClient() {
       {hashInputError ? <p className="text-sm text-amber-400">{hashInputError}</p> : null}
 
       {hasResults ? (
-        <div className="space-y-6 rounded-2xl border border-gray-700 bg-[var(--bg-tertiary)] p-5 dark:border-gray-800 md:p-6">
+        <div className="space-y-6 rounded-2xl border border-gray-700 bg-(--bg-tertiary) p-5 dark:border-gray-800 md:p-6">
           {loadingHash ? <Spinner label={t('lookup.hashing')} /> : null}
           {loadingLookup ? <Spinner label={t('lookup.searching')} /> : null}
 

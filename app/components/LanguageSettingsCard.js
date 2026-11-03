@@ -9,7 +9,7 @@ function Flag({ locale }) {
       src={localeFlagSrc(locale)}
       alt=""
       aria-hidden="true"
-      className="h-4 w-6 shrink-0 rounded-sm object-cover"
+      className="h-4 w-6 shrink-0 rounded-xs object-cover"
       loading="lazy"
     />
   )
@@ -24,7 +24,7 @@ export default function LanguageSettingsCard() {
         {t('settings.languageTitle')}
       </h2>
 
-      <div className="relative mt-2 mb-4 flex items-center gap-3 rounded-2xl border border-solid border-orange-500/40 bg-orange-500/[0.12] px-3 py-2.5">
+      <div className="relative mt-2 mb-4 flex items-center gap-3 rounded-2xl border border-solid border-orange-500/40 bg-orange-500/12 px-3 py-2.5">
         <span className="flex size-8 shrink-0 items-center justify-center rounded-xl bg-orange-500/20 text-orange-600 dark:text-orange-400">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ export default function LanguageSettingsCard() {
             <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0M12 9v4M12 17h.01" />
           </svg>
         </span>
-        <p className="m-0 min-w-0 text-sm font-normal leading-snug text-[var(--text-primary)]">
+        <p className="m-0 min-w-0 text-sm font-normal leading-snug text-(--text-primary)">
           {t('settings.languageWarn')}
         </p>
       </div>

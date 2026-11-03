@@ -28,7 +28,7 @@ import DownloadModalPickers from './DownloadModalPickers'
 import DownloadCompatibleVersions from './DownloadCompatibleVersions'
 import DownloadVersionBundledFiles from './DownloadVersionBundledFiles'
 import { getInstallBundleFiles } from '@/lib/downloadBundledFiles'
-import Lottie from 'lottie-react'
+import { Lottie } from 'lottie-react'
 import bookmarkAnimation from '@/public/animations/bookmark.json'
 import noBookmarkAnimation from '@/public/animations/no_bookmark.json'
 
@@ -46,12 +46,14 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
 
     if (isFavorite) {
       if (justClickedRef.current) {
-        player.goToAndPlay(0, true)
+        player.seek(0)
+        player.play()
       } else {
-        player.goToAndStop(player.getDuration(true) - 1, true)
+        player.pause()
+        player.seek({ percent: 100 })
       }
     } else {
-      player.goToAndStop(0, true)
+      player.stop()
     }
     justClickedRef.current = false
   }
@@ -71,7 +73,8 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
 
   const handleMouseEnter = () => {
     if (lottieRef.current) {
-      lottieRef.current.goToAndPlay(0, true)
+      lottieRef.current.seek(0)
+      lottieRef.current.play()
     }
   }
 
@@ -79,9 +82,10 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
     const player = lottieRef.current
     if (!player) return
     if (isFavorite) {
-      player.goToAndStop(player.getDuration(true) - 1, true)
+      player.pause()
+      player.seek({ percent: 100 })
     } else {
-      player.goToAndStop(0, true)
+      player.stop()
     }
   }
 
@@ -120,11 +124,10 @@ function LottieStar({ isFavorite, animationData, onClick, label, alwaysVisible =
       >
         <Lottie
           lottieRef={lottieRef}
-          animationData={animationData}
+          src={animationData}
           loop={false}
           autoplay={false}
-          onDOMLoaded={handleDOMLoaded}
-          onDataReady={handleDOMLoaded}
+          subscriptions={{ ready: handleDOMLoaded }}
           style={{ width: '100%', height: '100%', pointerEvents: 'none' }}
         />
       </button>
@@ -771,7 +774,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
 
       {isOpen && portalTarget && createPortal(
         <div 
-          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-200 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs animate-fade-in"
           onClick={() => setIsOpen(false)}
         >
           <div 
@@ -855,16 +858,16 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                       type="button"
                       onClick={handleInstallClick}
                       className={`download-glass w-fit flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl font-bold transition-all duration-200 active:scale-[0.98] text-sm${
-                        accent ? ' hover:brightness-[1.08]' : ' bg-modrinth-green text-black hover:brightness-110'
+                        accent ? ' hover:brightness-[1.08]!' : ' bg-modrinth-green text-black hover:brightness-110!'
                       }`}
                       style={downloadBtnAccentStyle}
                     >
-                      <svg className="w-5 h-5 flex-shrink-0" viewBox="0 0 512 514" fill="currentColor">
+                      <svg className="w-5 h-5 shrink-0" viewBox="0 0 512 514" fill="currentColor">
                         <path fillRule="evenodd" d="M503.16 323.56c11.39-42.09 12.16-87.65.04-132.8C466.57 54.23 326.04-26.8 189.33 9.78 83.81 38.02 11.39 128.07.69 230.47h43.3c10.3-83.14 69.75-155.74 155.76-178.76 106.3-28.45 215.38 28.96 253.42 129.67l-42.14 11.27c-19.39-46.85-58.46-81.2-104.73-95.83l-7.74 43.84c36.53 13.47 66.16 43.84 77 84.25 15.8 58.89-13.62 119.23-67 144.26l11.53 42.99c70.16-28.95 112.31-101.86 102.34-177.02l41.98-11.23a210.2 210.2 0 0 1-3.86 84.16z" clipRule="evenodd" />
                         <path d="M321.99 504.22C185.27 540.8 44.75 459.77 8.11 323.24A257.6 257.6 0 0 1 0 275.46h43.27c1.09 11.91 3.2 23.89 6.41 35.83 3.36 12.51 7.77 24.46 13.11 35.78l38.59-23.15c-3.25-7.5-5.99-15.32-8.17-23.45-24.04-89.6 29.2-181.7 118.92-205.71 17-4.55 34.1-6.32 50.8-5.61L255.19 133c-10.46.05-21.08 1.42-31.66 4.25-66.22 17.73-105.52 85.7-87.78 151.84 1.1 4.07 2.38 8.04 3.84 11.9l49.35-29.61-14.87-39.43 46.6-47.87 58.9-12.69 17.05 20.99-27.15 27.5-23.68 7.45-16.92 17.39 8.29 23.07s16.79 17.84 16.82 17.85l23.72-6.31 16.88-18.54 36.86-11.67 10.98 24.7-38.03 46.63-63.73 20.18-28.58-31.82-49.82 29.89c25.54 29.08 63.94 45.23 103.75 41.86l11.53 42.99c-59.41 7.86-117.44-16.73-153.49-61.91l-38.41 23.04c50.61 66.49 138.2 99.43 223.97 76.48 61.74-16.52 109.79-58.6 135.81-111.78l42.64 15.5c-30.89 66.28-89.84 118.94-166.07 139.34" />
                       </svg>
                       <span>{t('dl.installApp')}</span>
-                      <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" />
                       </svg>
                     </button>
@@ -880,7 +883,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
                   </div>
                   <div className="flex items-center gap-4 px-4 my-2">
                     <div className="flex h-[2px] w-full rounded-2xl bg-gray-200 dark:bg-gray-800"></div>
-                    <span className="flex-shrink-0 text-sm font-semibold text-gray-500 dark:text-gray-400">{t('dl.or')}</span>
+                    <span className="shrink-0 text-sm font-semibold text-gray-500 dark:text-gray-400">{t('dl.or')}</span>
                     <div className="flex h-[2px] w-full rounded-2xl bg-gray-200 dark:bg-gray-800"></div>
                   </div>
                 </>

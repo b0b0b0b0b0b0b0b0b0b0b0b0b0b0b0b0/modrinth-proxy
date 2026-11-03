@@ -27,7 +27,7 @@ export default function DownloadsCompactTooltip({ downloads, className = '' }) {
       <span
         tabIndex={0}
         aria-label={label}
-        className={`cursor-help rounded-sm outline-none ${className}`.trim()}
+        className={`cursor-help rounded-xs outline-hidden ${className}`.trim()}
       >
         {short}
       </span>

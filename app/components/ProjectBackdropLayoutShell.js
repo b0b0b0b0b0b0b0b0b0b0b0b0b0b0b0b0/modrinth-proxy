@@ -40,7 +40,7 @@ export default async function ProjectBackdropLayoutShell({ slug, children }) {
   return (
     <div className="relative">
       {showBackdrop ? <ProjectBackdrop src={backdropSrc} /> : null}
-      <div className="relative z-[1]">{children}</div>
+      <div className="relative z-1">{children}</div>
     </div>
   )
 }

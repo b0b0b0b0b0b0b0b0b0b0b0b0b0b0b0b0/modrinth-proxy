@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import Lottie from 'lottie-react'
+import { Lottie } from 'lottie-react'
 
 export default function InfrastructureIcon() {
   const lottieRef = useRef(null)
@@ -16,7 +16,6 @@ export default function InfrastructureIcon() {
 
   useEffect(() => {
     if (lottieRef.current && animationData) {
-      lottieRef.current.setSpeed(1)
       lottieRef.current.play()
     }
   }, [animationData])
@@ -33,7 +32,7 @@ export default function InfrastructureIcon() {
     <div className="w-10 h-10">
       <Lottie
         lottieRef={lottieRef}
-        animationData={animationData}
+        src={animationData}
         loop={true}
         autoplay={true}
         style={{ width: '100%', height: '100%' }}

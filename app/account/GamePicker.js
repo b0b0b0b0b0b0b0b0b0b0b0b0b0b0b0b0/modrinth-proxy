@@ -93,7 +93,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                   }}
                   placeholder={searchPlaceholder}
                   aria-label={label}
-                  className="h-9 w-full rounded-xl border-none bg-transparent py-2 pl-3 pr-9 text-sm font-medium text-gray-900 outline-none placeholder:text-gray-500 focus:ring-4 focus:ring-modrinth-green/20 min-[480px]:text-base dark:text-white dark:placeholder:text-gray-400"
+                  className="h-9 w-full rounded-xl border-none bg-transparent py-2 pl-3 pr-9 text-sm font-medium text-gray-900 outline-hidden placeholder:text-gray-500 focus:ring-4 focus:ring-modrinth-green/20 min-[480px]:text-base dark:text-white dark:placeholder:text-gray-400"
                 />
                 <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
                   <ChevronIcon open />
@@ -183,7 +183,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                             role="option"
                             aria-selected={selected}
                             onClick={() => pick(option.value)}
-                            className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium outline-none transition-all ${
+                            className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium outline-hidden transition-all ${
                               selected
                                 ? 'font-semibold text-modrinth-green hover:bg-gray-100 focus-visible:bg-gray-100 dark:hover:bg-[#34363c] dark:focus-visible:bg-[#34363c]'
                                 : 'text-gray-700 hover:bg-gray-100 focus-visible:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#34363c] dark:focus-visible:bg-[#34363c]'

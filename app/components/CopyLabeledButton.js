@@ -34,7 +34,7 @@ export default function CopyLabeledButton({
         <span>{copied ? done : label}</span>
         {copied ? (
           <svg
-            className="h-4 w-4 flex-shrink-0 text-modrinth-green"
+            className="h-4 w-4 shrink-0 text-modrinth-green"
             fill="none"
             stroke="currentColor"
             strokeLinecap="round"
@@ -47,7 +47,7 @@ export default function CopyLabeledButton({
           </svg>
         ) : (
           <svg
-            className="h-4 w-4 flex-shrink-0 text-gray-400"
+            className="h-4 w-4 shrink-0 text-gray-400"
             fill="none"
             stroke="currentColor"
             strokeLinecap="round"

@@ -70,7 +70,7 @@ function StatTile({ value, label, icon, tone }) {
   const [ref, shown] = useCountUp(value)
   const colors = STAT_TONES[tone]
   return (
-    <div ref={ref} className="flex items-center gap-3 rounded-xl bg-[var(--bg-tertiary)] p-3 sm:p-4">
+    <div ref={ref} className="flex items-center gap-3 rounded-xl bg-(--bg-tertiary) p-3 sm:p-4">
       <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${colors.tile}`}>
         <StatIcon path={STAT_ICONS[icon]} className="h-5 w-5" />
       </span>
@@ -247,7 +247,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   <p className="text-gray-400 text-sm">{t('home.platformsLead')}</p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
-                  <Link href="/mods?g=categories%3Aforge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Aforge" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-orange-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
@@ -256,7 +256,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Forge</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Afabric" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Afabric" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" clipRule="evenodd" viewBox="0 0 24 24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
@@ -265,7 +265,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Fabric</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Aquilt" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Aquilt" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-purple-400" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="2" clipRule="evenodd" viewBox="0 0 24 24">
                         <defs>
@@ -280,7 +280,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Quilt</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Aneoforge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Aneoforge" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-modrinth-green-light" enableBackground="new 0 0 24 24" version="1.1" viewBox="0 0 24 24" xmlSpace="preserve">
                         <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
@@ -298,7 +298,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">NeoForge</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Ababric" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Ababric" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="none">
                         <path d="M12.35 5.89001L12.34 5.90001C10.59 7.37001 5.67003 11.13 2.64003 13.76C2.09003 14.23 1.97003 15.38 2.44003 15.93C4.24003 17.97 6.24003 20.2 6.89003 20.97C7.52003 21.69 8.91003 22.39 10 21.49C11.8 20 16.78 16.01 19.62 13.7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -309,7 +309,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </div>
                     <div className="text-white font-medium text-sm">Babric</div>
                   </Link>
-                  <Link href="/mods?g=categories%3Arift" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                  <Link href="/mods?g=categories%3Arift" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                     <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                       <svg className="w-6 h-6 text-indigo-400" viewBox="0 0 24 24" xmlSpace="preserve">
                         <path fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M2.7 6.6v10.8l9.3 5.3 9.3-5.3V6.6L12 1.3zm0 0L12 12m9.3-5.4L12 12m0 10.7V12"></path>
@@ -329,7 +329,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center shrink-0 mt-0.5">
                     <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                     </svg>
@@ -342,7 +342,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center shrink-0">
                     <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
                     </svg>
@@ -399,7 +399,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 <p className="text-gray-400 text-sm">{t('home.serverCores')}</p>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-8">
-                <Link href="/plugins?g=categories%3Abukkit" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Abukkit" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-yellow-500" viewBox="0 0 292 319" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12,109.5L12,155L34.5,224L57.5,224L57.5,271L81,294L160,294L160,172L259.087,172L265,155L265,109.5M12,109.5L12,64L34.5,64L34.5,41L81,17L195.5,17L241,41L241,64L265,64L265,109.5M12,109.5L81,109.5L81,132L195.5,132L195.5,109.5L265,109.5M264.087,204L264.087,244M207.5,272L207.5,312M250,272L250,312L280,312L280,272L250,272ZM192.5,204L192.5,244L222.5,244L222.5,204L192.5,204Z" strokeWidth="24"></path>
@@ -407,7 +407,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Bukkit</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Afolia" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Afolia" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-green-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
@@ -416,7 +416,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Folia</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Apaper" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Apaper" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-blue-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                       <path fill="none" d="M0 0h24v24H0z"></path>
@@ -427,7 +427,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Paper</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Apurpur" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Apurpur" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-purple-500" xmlSpace="preserve" fillRule="evenodd" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="1.5" clipRule="evenodd" viewBox="0 0 24 24">
                       <defs>
@@ -444,7 +444,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Purpur</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Aspigot" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Aspigot" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-orange-500" viewBox="0 0 332 284" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="24">
                       <path d="M147.5,27l27,-15l27.5,15l66.5,0l0,33.5l-73,-0.912l0,45.5l26,-0.088l0,31.5l-12.5,0l0,15.5l16,21.5l35,0l0,-21.5l35.5,0l0,21.5l24.5,0l0,55.5l-24.5,0l0,17l-35.5,0l0,-27l-35,0l-55.5,14.5l-67.5,-14.5l-15,14.5l18,12.5l-3,24.5l-41.5,1.5l-48.5,-19.5l6,-19l24.5,-4.5l16,-41l79,-36l-7,-15.5l0,-31.5l23.5,0l0,-45.5l-73.5,0l0,-32.5l67,0Z"></path>
@@ -452,7 +452,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   </div>
                   <div className="text-white font-medium text-sm">Spigot</div>
                 </Link>
-                <Link href="/plugins?g=categories%3Asponge" className="relative text-center p-4 pt-12 bg-[var(--bg-tertiary)] rounded-xl transition-[filter] hover:brightness-110">
+                <Link href="/plugins?g=categories%3Asponge" className="relative text-center p-4 pt-12 bg-(--bg-tertiary) rounded-xl transition-[filter] hover:brightness-110">
                   <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-modrinth-darkest rounded-lg flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
                     <svg className="w-6 h-6 text-cyan-500" viewBox="0 0 268 313" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24">
                       <path d="M84.299,35.5c-5.547,-13.776 -19.037,-23.5 -34.799,-23.5c-20.711,0 -37.5,16.789 -37.5,37.5c-0,20.711 16.789,37.5 37.5,37.5c20.711,0 37.5,-16.789 37.5,-37.5c0,-4.949 -0.959,-9.674 -2.701,-14Zm0,0l44.701,-8.5l28,65m0,0l-99,20l-18,47.5l15.5,37l-25,32.5l0,72l222.5,0l2.5,-72l-33.5,-117l-65,-20Zm-60,65l0,15m94,-13.5l0,13.5m-67.5,45l46,0l-12.5,50.5l-14.5,0l-19,-50.5Z"></path>
@@ -470,7 +470,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
          
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                <span className="bg-gradient-to-r from-white via-modrinth-green to-blue-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white via-modrinth-green to-blue-400 bg-clip-text text-transparent">
                   {t('home.startAdventure')}
                 </span>
               </h2>

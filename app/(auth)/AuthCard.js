@@ -26,7 +26,7 @@ const ERROR_KEYS = {
 
 const PROVIDER_NAMES = { github: 'GitHub', telegram: 'Telegram' }
 const AUTO_BUTTON =
-  'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-[var(--bg-primary)] text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green disabled:opacity-50 dark:border-gray-800'
+  'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-(--bg-primary) text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green disabled:opacity-50 dark:border-gray-800'
 const TELEGRAM_ICON =
   'M21.94 4.3 18.6 20.05c-.25 1.1-.9 1.38-1.83.86l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.37-8.47c.4-.36-.09-.56-.63-.2L5.78 13.5.8 11.95c-1.08-.34-1.1-1.08.23-1.6L20.5 2.84c.9-.33 1.69.21 1.44 1.46Z'
 
@@ -394,7 +394,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                     tabIndex={-1}
                     autoComplete="off"
                     aria-hidden="true"
-                    className="pointer-events-none absolute -left-[9999px] h-0 w-0 opacity-0"
+                    className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
                   />
 
                   <AnimatePresence>

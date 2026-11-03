@@ -95,7 +95,7 @@ export default function VersionsDropdown({
                 placeholder={t('filter.search')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 text-sm border focus:border-modrinth-green focus:outline-none rounded-xl bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-700"
+                className="w-full pl-10 pr-3 py-2 text-sm border focus:border-modrinth-green focus:outline-hidden rounded-xl bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-900 dark:text-white dark:border-gray-700"
               />
             </div>
 

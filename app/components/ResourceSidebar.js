@@ -81,7 +81,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
     <div className="space-y-4">
       {(gameVersions.length > 0 || loaders.length > 0 || environment) && (
         <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-(--text-primary)">
             <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
@@ -91,7 +91,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           <div className="space-y-3">
             {gameVersions.length > 0 && (
               <div>
-                <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">Minecraft: Java Edition</h3>
+                <h3 className="text-base font-bold m-0 mb-2 text-(--text-gray)">Minecraft: Java Edition</h3>
                 <CompressedGameVersionsChips
                   browseRoute={browseRoute}
                   rawVersions={gameVersions}
@@ -103,7 +103,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
             {loaders.length > 0 && (
               <div>
-                <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.platforms')}</h3>
+                <h3 className="text-base font-bold m-0 mb-2 text-(--text-gray)">{t('project.platforms')}</h3>
                 <div className="flex flex-wrap gap-2">
                   {loaders.map((loaderId) => {
                     const loader = resolveLoader(loaderId)
@@ -121,7 +121,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                           className="glass-chip flex items-center gap-1.5 px-2.5 py-1.5 rounded-full group"
                         >
                           <div 
-                            className="w-4 h-4 flex-shrink-0" 
+                            className="w-4 h-4 shrink-0" 
                             style={loader.color ? { color: loader.color } : { color: 'var(--text-secondary)' }}
                           >
                             {loader.icon}
@@ -142,10 +142,10 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
             {environment && (
               <div>
-                <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.environments')}</h3>
+                <h3 className="text-base font-bold m-0 mb-2 text-(--text-gray)">{t('project.environments')}</h3>
                 <div className="flex flex-wrap gap-2">
                   {environment.map((side) => {
-                    const chipClass = 'glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-none text-[var(--text-muted)]'
+                    const chipClass = 'glass-chip inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm leading-none text-(--text-muted)'
                     const content = (
                       <>
                         <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>
@@ -156,7 +156,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
                     )
                     if (envLinkable && (side === 'client' || side === 'server')) {
                       return (
-                        <Link key={side} href={`/${browseRoute}?e=${side}`} className={`${chipClass} hover:text-[var(--text-primary)]`}>
+                        <Link key={side} href={`/${browseRoute}?e=${side}`} className={`${chipClass} hover:text-(--text-primary)`}>
                           {content}
                         </Link>
                       )
@@ -176,7 +176,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
       {alternateFormat && (
         <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-          <h3 className="text-base font-bold m-0 mb-3 text-[var(--text-gray)] text-center">{t('project.also')}</h3>
+          <h3 className="text-base font-bold m-0 mb-3 text-(--text-gray) text-center">{t('project.also')}</h3>
           <div className="flex justify-center">
             <AlternateProjectFormatLink {...alternateFormat} />
           </div>
@@ -192,7 +192,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
       {resource.project_type === 'minecraft_java_server' && (
         <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-(--text-primary)">
             <svg className="w-4 h-4 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14M5 12a2 2 0 012-2h10a2 2 0 012 2m-14 0a2 2 0 002 2h10a2 2 0 002-2M7 8l-2 2 2 2m8-4l2 2-2 2" />
             </svg>
@@ -201,19 +201,19 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           <div className="space-y-3 text-xs md:text-sm">
             {resource.minecraft_server?.region && (
               <div className="flex justify-between border-b border-gray-800 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('project.region')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('project.region')}</span>
                 <span className="font-semibold text-white uppercase">{resource.minecraft_server.region}</span>
               </div>
             )}
             {resource.minecraft_server?.languages && resource.minecraft_server.languages.length > 0 && (
               <div className="flex justify-between border-b border-gray-800 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('project.languages')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('project.languages')}</span>
                 <span className="font-semibold text-white uppercase">{resource.minecraft_server.languages.join(', ')}</span>
               </div>
             )}
             {(resource.minecraft_java_server?.ping?.data?.version_name ?? resource.minecraft_java_server?.ping?.version_name) && (
               <div className="flex justify-between border-b border-gray-800 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('project.core')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('project.core')}</span>
                 <span className="font-semibold text-white text-right truncate max-w-[160px]">{resource.minecraft_java_server.ping.data?.version_name ?? resource.minecraft_java_server.ping.version_name}</span>
               </div>
             )}
@@ -229,7 +229,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
       {(organization || authorMembers.length > 0) && (
         <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-[var(--text-primary)]">
+          <h3 className="text-base font-bold m-0 mb-3 flex items-center gap-2 text-(--text-primary)">
             <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
             </svg>
@@ -240,14 +240,14 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
       )}
 
       <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">
-        <h3 className="text-lg font-bold m-0 mb-3 text-[var(--text-primary)]">
+        <h3 className="text-lg font-bold m-0 mb-3 text-(--text-primary)">
           {t('project.details')}
         </h3>
         <div className="flex flex-col gap-3 text-sm [&>div>svg]:shrink-0 [&>div>svg]:mt-px [&>div]:flex [&>div]:gap-2 [&>div]:items-start [&>div>div]:min-w-0">
           <ProjectDisclosureItems disclosures={disclosures} />
 
           {resource.license && (resource.license.id || resource.license.name) && (
-            <div className="flex gap-2 items-start text-[var(--text-primary)]">
+            <div className="flex gap-2 items-start text-(--text-primary)">
               <DisclosureIcon type="license" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
               <div className="min-w-0">
                 <span>{t('project.license')}</span>
@@ -258,7 +258,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
           {resource.published && (
             <StyledTooltip label={formatAbsolute(resource.published, locale)}>
-              <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
+              <div className="flex gap-2 items-start text-(--text-primary) cursor-default">
                 <DisclosureIcon type="published" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
                 <div>{t('project.published', { when: formatRelative(resource.published, t, locale) })}</div>
               </div>
@@ -267,7 +267,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
           {resource.updated && (
             <StyledTooltip label={formatAbsolute(resource.updated, locale)}>
-              <div className="flex gap-2 items-start text-[var(--text-primary)] cursor-default">
+              <div className="flex gap-2 items-start text-(--text-primary) cursor-default">
                 <DisclosureIcon type="updated" className="w-6 h-6 shrink-0 mt-px text-modrinth-green" />
                 <div>{t('project.updated', { when: formatRelative(resource.updated, t, locale) })}</div>
               </div>
@@ -276,7 +276,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
 
           {projectId && (
             <div className="flex flex-wrap items-center gap-1 pt-1 border-t border-gray-800">
-              <span className="font-semibold text-[var(--text-gray)]">{t('project.projectId')}</span>
+              <span className="font-semibold text-(--text-gray)">{t('project.projectId')}</span>
               <CopyButton text={projectId} inline />
             </div>
           )}

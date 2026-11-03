@@ -88,7 +88,7 @@ export default function GalleryGrid({ gallery }) {
             className="group flex flex-col overflow-hidden rounded-lg card-glass bg-modrinth-dark transition-[filter] hover:brightness-110"
           >
             {item.isBlocked ? (
-              <div className="relative flex aspect-video w-full items-center justify-center border-b border-red-500/20 bg-gradient-to-br from-red-500/10 to-orange-500/10">
+              <div className="relative flex aspect-video w-full items-center justify-center border-b border-red-500/20 bg-linear-to-br from-red-500/10 to-orange-500/10">
                 <div className="px-4 py-8 text-center">
                   <svg
                     className="mx-auto mb-3 h-12 w-12 text-red-400"

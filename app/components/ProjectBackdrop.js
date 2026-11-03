@@ -5,7 +5,7 @@ export default function ProjectBackdrop({ src }) {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[var(--bg-primary)]"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-(--bg-primary)"
       data-project-backdrop
       aria-hidden
     >

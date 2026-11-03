@@ -6,7 +6,7 @@ import { useT } from './I18nProvider'
 export function DownloadPromoConnector({ className = '' }) {
   return (
     <div className={`flex flex-col items-center text-modrinth-green ${className}`} aria-hidden>
-      <div className="h-7 w-[2px] rounded-full bg-gradient-to-b from-modrinth-green via-modrinth-green/70 to-transparent" />
+      <div className="h-7 w-[2px] rounded-full bg-linear-to-b from-modrinth-green via-modrinth-green/70 to-transparent" />
       <svg
         className="-mt-1 h-3 w-3 shrink-0 text-modrinth-green"
         viewBox="0 0 24 24"

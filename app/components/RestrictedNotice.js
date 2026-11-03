@@ -56,7 +56,7 @@ export default function RestrictedNotice({ title, kid, details = [], href = '/',
           onClick={tryOpen}
           aria-label={t('account.petKitten')}
           animate={hop}
-          className="block h-24 w-24 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green"
+          className="block h-24 w-24 rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
         >
           <KittenFace earsDown mood={mood} look={mood === 'look' ? { x: look.x * 0.5, y: -0.7 } : look} className="h-24 w-24" />
         </motion.button>

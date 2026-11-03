@@ -41,7 +41,7 @@ export default function FooterSnow() {
   if (!on) return null
 
   return (
-    <div ref={ref} className="pointer-events-none relative z-[5] h-0 overflow-x-clip">
+    <div ref={ref} className="pointer-events-none relative z-5 h-0 overflow-x-clip">
       {width > 0 ? (
         <svg className="footer-drift" viewBox={`0 0 ${width} 16`} preserveAspectRatio="none" aria-hidden>
           <path d={driftPath(width, 1)} />

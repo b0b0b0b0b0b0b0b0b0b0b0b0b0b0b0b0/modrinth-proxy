@@ -140,7 +140,7 @@ export default function SearchInput({
           value={query}
           onChange={handleChange}
           placeholder={searchPlaceholder}
-          className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-modrinth-green transition-colors"
+          className="w-full pl-10 pr-4 py-2.5 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-hidden focus:border-modrinth-green transition-colors"
         />
       </div>
     </form>

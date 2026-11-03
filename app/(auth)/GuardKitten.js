@@ -43,7 +43,7 @@ export default function GuardKitten({ field, reveal, typed }) {
         aria-label={t('account.petKitten')}
         animate={hop}
         style={{ originY: 0.9 }}
-        className="block h-14 w-14 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green"
+        className="block h-14 w-14 rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
       >
         <motion.div
           animate={reduceMotion ? undefined : { rotate: paws ? -4 : reading ? 3 : 0 }}

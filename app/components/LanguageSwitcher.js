@@ -29,7 +29,7 @@ export default function LanguageSwitcher({ compact = false }) {
             src={localeFlagSrc(current)}
             alt=""
             aria-hidden="true"
-            className="h-3.5 w-5 shrink-0 rounded-sm object-cover"
+            className="h-3.5 w-5 shrink-0 rounded-xs object-cover"
           />
           {!compact ? <span>{current.nativeName}</span> : <span>{current.short}</span>}
         </button>
@@ -38,7 +38,7 @@ export default function LanguageSwitcher({ compact = false }) {
         <Popover.Content
           sideOffset={8}
           align="end"
-          className="z-[80] w-64 overflow-hidden rounded-2xl border border-gray-800 bg-modrinth-darker p-2 shadow-2xl shadow-black/40"
+          className="z-80 w-64 overflow-hidden rounded-2xl border border-gray-800 bg-modrinth-darker p-2 shadow-2xl shadow-black/40"
         >
           <p className="px-2 pb-2 pt-1 text-[11px] font-semibold uppercase tracking-widest text-gray-500">
             {t('lang.label')}
@@ -62,7 +62,7 @@ export default function LanguageSwitcher({ compact = false }) {
                       src={localeFlagSrc(item)}
                       alt=""
                       aria-hidden="true"
-                      className="h-4 w-6 shrink-0 rounded-sm object-cover"
+                      className="h-4 w-6 shrink-0 rounded-xs object-cover"
                     />
                     <span className="flex flex-col">
                     <span>{item.nativeName}</span>

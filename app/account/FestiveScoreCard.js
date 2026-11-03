@@ -76,7 +76,7 @@ export default function FestiveScoreCard({ initial, festive }) {
       <h2 className="m-0 text-sm font-semibold text-gray-400">{t('account.caughtTitle')}</h2>
       <div className="mt-3 flex flex-wrap gap-2">
         {visible.map((row) => (
-          <div key={row.id} className="inline-flex items-center gap-2.5 rounded-2xl bg-[var(--bg-primary)] px-3.5 py-2.5">
+          <div key={row.id} className="inline-flex items-center gap-2.5 rounded-2xl bg-(--bg-primary) px-3.5 py-2.5">
             <svg className="block h-4 w-4 shrink-0 text-modrinth-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <path d={row.icon} />
             </svg>

@@ -133,7 +133,7 @@ function PhotosensitivityWarningModal({ open, onConfirm }) {
   if (!open || !portalTarget) return null
 
   return createPortal(
-    <div className="fixed inset-0 z-[220] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-220 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs">
       <div
         role="dialog"
         aria-modal="true"

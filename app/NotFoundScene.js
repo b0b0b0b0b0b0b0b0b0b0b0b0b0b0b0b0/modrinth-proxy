@@ -328,7 +328,7 @@ function SoundToggle({ labels }) {
 
 function Burst({ x, y }) {
   return (
-    <div aria-hidden className="pointer-events-none fixed z-[300]" style={{ left: x, top: y }}>
+    <div aria-hidden className="pointer-events-none fixed z-300" style={{ left: x, top: y }}>
       <motion.span
         className="absolute -left-3 -top-3 h-6 w-6 rounded-[3px] border-2 border-modrinth-green"
         initial={{ scale: 0.3, opacity: 0.9, rotate: 0 }}
@@ -398,7 +398,7 @@ export default function NotFoundScene({ label, soundLabels }) {
       <h1 className="sr-only">{label}</h1>
       <div
         ref={gridRef}
-        className="mx-auto mt-8 grid w-full max-w-[19rem] grid-cols-[repeat(11,minmax(0,1fr))] gap-1 sm:max-w-sm sm:gap-1.5"
+        className="mx-auto mt-8 grid w-full max-w-76 grid-cols-11 gap-1 sm:max-w-sm sm:gap-1.5"
       >
         {blocks.map((block) => (
           <Block

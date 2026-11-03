@@ -80,7 +80,7 @@ export default function ThoughtFeedbackTooltip({
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleDismiss}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-modrinth-green px-3 py-1.5 text-[11px] font-bold text-black shadow transition-all duration-200 hover:bg-modrinth-green-light hover:scale-95 active:scale-90"
+                className="inline-flex items-center gap-1.5 rounded-lg bg-modrinth-green px-3 py-1.5 text-[11px] font-bold text-black shadow-sm transition-all duration-200 hover:bg-modrinth-green-light hover:scale-95 active:scale-90"
               >
                 <span>Напиши нам</span>
                 <svg className="w-3 h-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">

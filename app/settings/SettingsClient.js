@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useTheme } from 'next-themes'
 import StyledTooltip from '../components/StyledTooltip'
-import Lottie from 'lottie-react'
+import { Lottie } from 'lottie-react'
 import fixAnimation from '@/public/animations/fix.json'
 import { PALETTES } from '../../lib/paletteManager'
 import { useT } from '../components/I18nProvider'
@@ -279,12 +279,12 @@ export default function SettingsClient() {
                         className="w-2.5 h-2.5 rounded-full shrink-0" 
                         style={{ backgroundColor: palette.variables['--color-green'] }} 
                       />
-                      <div className="w-10 h-1 bg-gray-500/30 rounded-sm shrink-0" />
+                      <div className="w-10 h-1 bg-gray-500/30 rounded-xs shrink-0" />
                     </div>
-                    <div className="flex-1 rounded border border-gray-700/20 bg-gray-800/10 p-1 flex flex-col justify-between">
-                      <div className="w-12 h-1 bg-gray-500/20 rounded-sm" />
+                    <div className="flex-1 rounded-sm border border-gray-700/20 bg-gray-800/10 p-1 flex flex-col justify-between">
+                      <div className="w-12 h-1 bg-gray-500/20 rounded-xs" />
                       <div 
-                        className="w-full h-2.5 rounded-sm" 
+                        className="w-full h-2.5 rounded-xs" 
                         style={{ 
                           background: `linear-gradient(135deg, ${palette.variables['--color-green']}, ${palette.variables['--color-green-light']})` 
                         }} 
@@ -338,12 +338,12 @@ export default function SettingsClient() {
                 role="switch"
                 aria-checked={toggles['advanced-rendering']}
                 onClick={() => handleToggle('advanced-rendering')}
-                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 !w-[48px] border-2 border-transparent ${toggles['advanced-rendering'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
+                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 w-[48px]! border-2 border-transparent ${toggles['advanced-rendering'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
               >
                 <span className={`rounded-full transition-all duration-200 w-4 h-4 ${
                   toggles['advanced-rendering'] 
-                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]' 
-                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
+                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px' 
+                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
                 }`} />
               </button>
             </StyledTooltip>
@@ -362,12 +362,12 @@ export default function SettingsClient() {
                 role="switch"
                 aria-checked={toggles['search-sidebar-right']}
                 onClick={() => handleToggle('search-sidebar-right')}
-                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 !w-[48px] border-2 border-transparent ${toggles['search-sidebar-right'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
+                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 w-[48px]! border-2 border-transparent ${toggles['search-sidebar-right'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
               >
                 <span className={`rounded-full transition-all duration-200 w-4 h-4 ${
                   toggles['search-sidebar-right'] 
-                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]' 
-                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
+                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px' 
+                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
                 }`} />
               </button>
             </StyledTooltip>
@@ -385,12 +385,12 @@ export default function SettingsClient() {
                 role="switch"
                 aria-checked={toggles['project-sidebar-left']}
                 onClick={() => handleToggle('project-sidebar-left')}
-                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 !w-[48px] border-2 border-transparent ${toggles['project-sidebar-left'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
+                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 w-[48px]! border-2 border-transparent ${toggles['project-sidebar-left'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
               >
                 <span className={`rounded-full transition-all duration-200 w-4 h-4 ${
                   toggles['project-sidebar-left'] 
-                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]' 
-                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
+                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px' 
+                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
                 }`} />
               </button>
             </StyledTooltip>
@@ -408,12 +408,12 @@ export default function SettingsClient() {
                 role="switch"
                 aria-checked={toggles['show-disclaimer-badge']}
                 onClick={() => handleToggle('show-disclaimer-badge')}
-                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 !w-[48px] border-2 border-transparent ${toggles['show-disclaimer-badge'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
+                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 w-[48px]! border-2 border-transparent ${toggles['show-disclaimer-badge'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
               >
                 <span className={`rounded-full transition-all duration-200 w-4 h-4 ${
                   toggles['show-disclaimer-badge'] 
-                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]' 
-                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
+                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px' 
+                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
                 }`} />
               </button>
             </StyledTooltip>
@@ -431,12 +431,12 @@ export default function SettingsClient() {
                 role="switch"
                 aria-checked={toggles['hide-project-activity-graph']}
                 onClick={() => handleToggle('hide-project-activity-graph')}
-                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 !w-[48px] border-2 border-transparent ${toggles['hide-project-activity-graph'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
+                className={`group inline-flex shrink-0 items-center rounded-full m-0 p-[2px] transition-all duration-200 cursor-pointer h-6 w-[48px]! border-2 border-transparent ${toggles['hide-project-activity-graph'] ? 'switch-active-bg' : 'bg-[#b8bfc9] dark:bg-[#404959]'}`}
               >
                 <span className={`rounded-full transition-all duration-200 w-4 h-4 ${
                   toggles['hide-project-activity-graph']
-                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
-                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:m-[-1px] group-active:w-[14px] group-active:h-[14px] group-active:m-[1px]'
+                    ? 'translate-x-[24px] bg-modrinth-green group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
+                    : 'translate-x-0 bg-white dark:bg-[#a1a1aa] group-hover:w-[18px] group-hover:h-[18px] group-hover:-m-px group-active:w-[14px] group-active:h-[14px] group-active:m-px'
                 }`} />
               </button>
             </StyledTooltip>
@@ -527,7 +527,7 @@ export default function SettingsClient() {
             { label: t('settings.resetGoneLabel'), text: t('settings.resetGone'), path: 'M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2', tone: 'text-amber-600 dark:text-amber-400 bg-amber-500/10' },
             { label: t('settings.resetKeptLabel'), text: t('settings.resetKept'), path: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10M9 12l2 2 4-4', tone: 'text-modrinth-green bg-[rgba(var(--color-green-rgb),0.12)]' },
           ].map((row) => (
-            <li key={row.label} className="flex items-start gap-3 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
+            <li key={row.label} className="flex items-start gap-3 rounded-xl border border-gray-800 bg-(--bg-primary) p-3">
               <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${row.tone}`}>
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
                   <path d={row.path} />
@@ -546,7 +546,7 @@ export default function SettingsClient() {
           disabled={isResetting}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          className="px-5 py-2.5 bg-gradient-to-r from-modrinth-green/15 to-modrinth-green-light/15 hover:from-modrinth-green/25 hover:to-modrinth-green-light/25 dark:from-modrinth-green/20 dark:to-modrinth-green-light/20 dark:hover:from-modrinth-green/30 dark:hover:to-modrinth-green-light/30 text-modrinth-green hover:brightness-110 font-bold rounded-xl text-sm transition-all duration-500 ease-in-out flex items-center gap-2.5 hover:shadow-[0_0_15px_rgba(var(--color-green-rgb),0.35)] dark:hover:shadow-[0_0_15px_rgba(var(--color-green-rgb),0.25)] active:scale-[0.97] cursor-pointer disabled:opacity-50 select-none"
+          className="px-5 py-2.5 bg-linear-to-r from-modrinth-green/15 to-modrinth-green-light/15 hover:from-modrinth-green/25 hover:to-modrinth-green-light/25 dark:from-modrinth-green/20 dark:to-modrinth-green-light/20 dark:hover:from-modrinth-green/30 dark:hover:to-modrinth-green-light/30 text-modrinth-green hover:brightness-110 font-bold rounded-xl text-sm transition-all duration-500 ease-in-out flex items-center gap-2.5 hover:shadow-[0_0_15px_rgba(var(--color-green-rgb),0.35)] dark:hover:shadow-[0_0_15px_rgba(var(--color-green-rgb),0.25)] active:scale-[0.97] cursor-pointer disabled:opacity-50 select-none"
         >
           {isResetting ? (
             <>
@@ -558,10 +558,10 @@ export default function SettingsClient() {
             </>
           ) : (
             <>
-              <div className="w-5 h-5 flex-shrink-0">
+              <div className="w-5 h-5 shrink-0">
                 <Lottie
                   lottieRef={lottieRef}
-                  animationData={fixAnimation}
+                  src={fixAnimation}
                   loop={true}
                   autoplay={false}
                   style={{ width: '100%', height: '100%' }}

@@ -32,11 +32,11 @@ function OrganizationRow({ organization, linkClassName = '' }) {
         <img
           src={org.iconUrl}
           alt={org.name}
-          className="size-8 shrink-0 rounded object-cover"
+          className="size-8 shrink-0 rounded-sm object-cover"
           referrerPolicy="no-referrer"
         />
       ) : (
-        <div className="flex size-8 shrink-0 items-center justify-center rounded border border-orange-400/30 bg-gradient-to-br from-orange-500/20 to-orange-400/10">
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-sm border border-orange-400/30 bg-linear-to-br from-orange-500/20 to-orange-400/10">
           <IconBuilding2 className="h-4 w-4 text-orange-400" />
         </div>
       )}
@@ -69,7 +69,7 @@ function TeamMemberRow({ member, linkClassName = '' }) {
           referrerPolicy="no-referrer"
         />
       ) : (
-        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">
+        <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-linear-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold">
           {member.user.username.charAt(0).toUpperCase()}
         </div>
       )}

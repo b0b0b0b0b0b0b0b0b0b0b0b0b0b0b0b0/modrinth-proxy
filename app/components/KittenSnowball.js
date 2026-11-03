@@ -148,7 +148,7 @@ export function Walker({ width, dir, onDone, className = 'bottom-[6px]' }) {
         animate={{ y: [0, -3, 0], rotate: [dir * 3, dir * 9, dir * 3] }}
         transition={{ duration: 0.42, repeat: Infinity, ease: 'easeInOut' }}
         style={{ originY: 1 }}
-        className="pointer-events-auto block h-full w-full rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green"
+        className="pointer-events-auto block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
       >
         <KittenFace mood={mood} look={{ x: dir * 0.8, y: 0.5 }} className="h-full w-full" />
       </motion.button>
@@ -213,7 +213,7 @@ export default function KittenSnowball() {
   if (!walk) return null
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 z-[60] h-0 overflow-x-clip" style={{ bottom: walk.bottom }} aria-hidden={gone}>
+    <div className="pointer-events-none fixed inset-x-0 z-60 h-0 overflow-x-clip" style={{ bottom: walk.bottom }} aria-hidden={gone}>
       <AnimatePresence
         onExitComplete={() => {
           setWalk(null)

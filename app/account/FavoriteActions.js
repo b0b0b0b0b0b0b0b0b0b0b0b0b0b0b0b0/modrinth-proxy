@@ -157,7 +157,7 @@ function ClearListButton({ count, request, labels }) {
               {t('account.clearFavoritesConfirm')}
             </button>
           </div>
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+          <Popover.Arrow className="fill-(--bg-gradient-start)" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

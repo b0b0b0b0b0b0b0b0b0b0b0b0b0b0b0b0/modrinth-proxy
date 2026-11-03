@@ -709,7 +709,7 @@ export default function DependencyExplorer({
   const modal = isOpen && portalTarget
     ? createPortal(
         <div
-          className={`dependency-explorer-overlay fixed inset-0 z-[120] flex items-center justify-center bg-black/75 p-4 backdrop-blur-sm ${overlayClassName}`}
+          className={`dependency-explorer-overlay fixed inset-0 z-120 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs ${overlayClassName}`}
           onClick={closeModal}
         >
           <div

@@ -4,7 +4,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import * as Popover from '@radix-ui/react-popover'
-import Lottie from 'lottie-react'
+import { Lottie } from 'lottie-react'
 import heartAnimation from '@/public/animations/heart.json'
 import StyledTooltip from './StyledTooltip'
 import { useI18n, useT } from './I18nProvider'
@@ -101,15 +101,19 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
   const rest = useCallback(() => {
     const player = lottieRef.current
     if (!player) return
-    if (favorite) player.goToAndStop(player.getDuration(true) - 1, true)
-    else player.goToAndStop(0, true)
+    if (favorite) {
+      player.pause()
+      player.seek({ percent: 100 })
+    } else player.stop()
   }, [favorite])
 
   useEffect(() => {
     const player = lottieRef.current
     if (!player) return
-    if (favorite && justClickedRef.current) player.goToAndPlay(0, true)
-    else rest()
+    if (favorite && justClickedRef.current) {
+      player.seek(0)
+      player.play()
+    } else rest()
     justClickedRef.current = false
   }, [favorite, rest])
 
@@ -127,19 +131,22 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
       <button
         type="button"
         onClick={handleClick}
-        onMouseEnter={() => lottieRef.current?.goToAndPlay(0, true)}
+        onMouseEnter={() => {
+          lottieRef.current?.seek(0)
+          lottieRef.current?.play()
+        }}
         onMouseLeave={rest}
         disabled={busy}
         aria-pressed={favorite}
         aria-label={label}
-        className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-none transition-[transform,opacity] duration-200 ${ready ? 'opacity-100' : 'opacity-0'} hover:scale-110 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green lg:h-12 lg:w-12 ${className}`}
+        className={`group inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full outline-hidden transition-[transform,opacity] duration-200 ${ready ? 'opacity-100' : 'opacity-0'} hover:scale-110 active:scale-90 focus-visible:ring-2 focus-visible:ring-modrinth-green lg:h-12 lg:w-12 ${className}`}
       >
         <Lottie
           lottieRef={lottieRef}
-          animationData={heartAnimation}
+          src={heartAnimation}
           loop={false}
           autoplay={false}
-          onDOMLoaded={rest}
+          subscriptions={{ ready: rest }}
           className={[
             'pointer-events-none h-full w-full transition-[filter,opacity] duration-150',
             favorite ? 'opacity-60 grayscale group-hover:opacity-90' : '',
@@ -173,7 +180,7 @@ export function ProjectFavoriteButton({ projectId, className = '' }) {
               {t('account.submitLogin')}
             </Link>
           </div>
-          <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+          <Popover.Arrow className="fill-(--bg-gradient-start)" />
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>
@@ -186,7 +193,9 @@ export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray
 
   const rest = useCallback(() => {
     const player = lottieRef.current
-    if (player) player.goToAndStop(player.getDuration(true) - 1, true)
+    if (!player) return
+    player.pause()
+    player.seek({ percent: 100 })
   }, [])
 
   if (!(count > 0)) return null
@@ -195,15 +204,18 @@ export function FavoriteCount({ count, className = 'text-gray-600 dark:text-gray
     <StyledTooltip label={t('account.favoritesCount', { n: count })}>
       <div
         className={`group/fav flex cursor-default items-center gap-1 ${className}`}
-        onMouseEnter={() => lottieRef.current?.goToAndPlay(0, true)}
+        onMouseEnter={() => {
+          lottieRef.current?.seek(0)
+          lottieRef.current?.play()
+        }}
         onMouseLeave={rest}
       >
         <Lottie
           lottieRef={lottieRef}
-          animationData={heartAnimation}
+          src={heartAnimation}
           loop={false}
           autoplay={false}
-          onDOMLoaded={rest}
+          subscriptions={{ ready: rest }}
           className={`pointer-events-none -my-1.5 h-7 w-7 transition-[filter,opacity] duration-150 ${iconClassName} ${muted ? 'opacity-60 grayscale group-hover/fav:opacity-100 group-hover/fav:grayscale-0' : ''}`}
         />
         <span className={`translate-y-[0.14em] ${numberClassName}`}>

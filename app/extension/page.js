@@ -25,7 +25,7 @@ function InstallButton({ family, logo, label, highlighted, className = '' }) {
           : 'border border-modrinth-green/40 bg-modrinth-green/10 text-gray-900 hover:border-modrinth-green/70 hover:bg-modrinth-green/20 dark:text-white'
       } ${className}`}
     >
-      <BrowserLogo name={logo} className="h-7 w-7 flex-shrink-0" />
+      <BrowserLogo name={logo} className="h-7 w-7 shrink-0" />
       <span className="min-w-0">{label}</span>
     </a>
   )
@@ -36,7 +36,7 @@ function StoreCard({ family, logo, store, note, button, current, yours }) {
     <div
       className={`relative flex flex-col rounded-3xl border p-5 transition-colors sm:p-7 ${
         current
-          ? 'border-modrinth-green/60 bg-gradient-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark shadow-xl shadow-modrinth-green/10'
+          ? 'border-modrinth-green/60 bg-linear-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark shadow-xl shadow-modrinth-green/10'
           : 'border-modrinth-border bg-modrinth-dark'
       }`}
     >
@@ -44,7 +44,7 @@ function StoreCard({ family, logo, store, note, button, current, yours }) {
         <span className="absolute right-4 top-4 rounded-full bg-modrinth-green px-2.5 py-1 text-xs font-bold text-black">{yours}</span>
       ) : null}
       <div className="mb-4 flex items-center gap-4 pr-20">
-        <BrowserLogo name={logo} className="h-14 w-14 flex-shrink-0 drop-shadow-md" />
+        <BrowserLogo name={logo} className="h-14 w-14 shrink-0 drop-shadow-md" />
         <h3 className="text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">{store}</h3>
       </div>
       <p className="mb-6 flex-1 text-sm leading-relaxed text-gray-600 dark:text-gray-400 sm:text-base">{note}</p>
@@ -85,7 +85,7 @@ export default async function ExtensionPage() {
     <div className="min-h-screen overflow-x-hidden">
       <div className="mx-auto max-w-6xl px-4 pb-16 pt-6 sm:pt-10">
         <section className="relative mb-16 text-center sm:mb-24">
-          <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-modrinth-green/10 blur-3xl sm:h-96 sm:w-[36rem]" />
+          <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-modrinth-green/10 blur-3xl sm:h-96 sm:w-xl" />
 
           <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-modrinth-green/30 bg-modrinth-green/10 px-3 py-1.5 text-sm font-semibold text-modrinth-green">
             <BrowserLogo name="firefox" className="h-4 w-4" />
@@ -111,7 +111,7 @@ export default async function ExtensionPage() {
                 <div className="min-w-0 flex-1 truncate rounded-xl bg-black/20 px-3 py-2 font-mono text-xs text-gray-500 line-through decoration-gray-500/60 sm:text-sm">
                   {t('ext.demoFrom')}
                 </div>
-                <ArrowRight className="mx-auto h-5 w-5 flex-shrink-0 rotate-90 animate-pulse text-modrinth-green sm:mx-0 sm:rotate-0" aria-hidden />
+                <ArrowRight className="mx-auto h-5 w-5 shrink-0 rotate-90 animate-pulse text-modrinth-green sm:mx-0 sm:rotate-0" aria-hidden />
                 <div className="min-w-0 flex-1 truncate rounded-xl bg-modrinth-green/15 px-3 py-2 font-mono text-xs font-semibold text-modrinth-green ring-1 ring-modrinth-green/40 sm:text-sm">
                   {t('ext.demoTo')}
                 </div>
@@ -208,7 +208,7 @@ export default async function ExtensionPage() {
               <details key={n} className="group rounded-2xl border border-modrinth-border bg-modrinth-dark px-5 open:border-modrinth-green/40">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold text-gray-900 dark:text-white [&::-webkit-details-marker]:hidden">
                   {t(`ext.faq.q${n}`)}
-                  <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-modrinth-green/15 text-modrinth-green transition-transform duration-300 group-open:rotate-45">
+                  <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-modrinth-green/15 text-modrinth-green transition-transform duration-300 group-open:rotate-45">
                     <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                       <path strokeLinecap="round" strokeWidth={2.4} d="M12 5v14M5 12h14" />
                     </svg>
@@ -220,7 +220,7 @@ export default async function ExtensionPage() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden rounded-3xl border border-modrinth-green/30 bg-gradient-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark p-6 text-center sm:p-12">
+        <section className="relative overflow-hidden rounded-3xl border border-modrinth-green/30 bg-linear-to-br from-modrinth-green/15 via-modrinth-dark to-modrinth-dark p-6 text-center sm:p-12">
           <h2 className="mb-3 text-3xl font-black text-gray-900 dark:text-white sm:text-4xl">{t('ext.cta')}</h2>
           <p className="mx-auto mb-8 max-w-xl text-gray-600 dark:text-gray-400">{t('ext.ctaLead')}</p>
           <div className="mx-auto flex max-w-md flex-col gap-3 sm:max-w-none sm:flex-row sm:justify-center">

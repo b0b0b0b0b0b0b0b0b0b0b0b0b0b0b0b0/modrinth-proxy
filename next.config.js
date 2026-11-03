@@ -89,9 +89,6 @@ const nextConfig = {
     ],
     unoptimized: true,
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   staticPageGenerationTimeout: 300,
   trailingSlash: false,
   poweredByHeader: false,

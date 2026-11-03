@@ -12,7 +12,7 @@ export default function FrogPage() {
         <img
           src="https://cdn.modrinth.com/frog.png"
           alt="A photorealistic painting of a frog labyrinth"
-          className="mx-auto mb-6 w-[60%] max-w-[40rem]"
+          className="mx-auto mb-6 w-[60%] max-w-160"
         />
       </div>
     </div>

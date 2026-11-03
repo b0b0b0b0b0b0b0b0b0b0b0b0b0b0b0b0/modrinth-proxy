@@ -82,7 +82,7 @@ export default function PlayfulThoughtCloud() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={handleDismiss}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-modrinth-green px-3 py-1.5 text-xs font-bold text-black shadow transition-all duration-200 hover:bg-modrinth-green-light active:scale-95"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-modrinth-green px-3 py-1.5 text-xs font-bold text-black shadow-sm transition-all duration-200 hover:bg-modrinth-green-light active:scale-95"
             >
               <span>{t('fb.write')}</span>
             </a>

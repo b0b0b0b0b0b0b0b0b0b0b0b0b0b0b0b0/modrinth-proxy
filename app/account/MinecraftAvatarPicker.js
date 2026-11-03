@@ -133,11 +133,11 @@ export default function MinecraftAvatarPicker({ avatar, name }) {
           : { text: t('mcava.hint'), tone: 'text-gray-500' }
 
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-4 rounded-2xl bg-[var(--bg-primary)] p-4">
+    <div className="mt-5 flex flex-wrap items-center gap-4 rounded-2xl bg-(--bg-primary) p-4">
       {avatar ? (
         <AvatarImage src={avatar} className="h-16 w-16" />
       ) : (
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-[var(--bg-tertiary)] text-gray-500">
+        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-(--bg-tertiary) text-gray-500">
           <CreeperIcon className="h-8 w-8" />
         </div>
       )}
@@ -185,7 +185,7 @@ export default function MinecraftAvatarPicker({ avatar, name }) {
               <form onSubmit={apply}>
                 <div className="text-sm font-bold text-white">{t('mcava.title')}</div>
                 <div className="mt-3 flex items-center gap-3">
-                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[var(--bg-tertiary)] text-gray-500">
+                  <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-(--bg-tertiary) text-gray-500">
                     {lookup.state === 'found' ? (
                       <motion.div
                         key={lookup.image}
@@ -213,7 +213,7 @@ export default function MinecraftAvatarPicker({ avatar, name }) {
                         setFailure('')
                         schedule(event.target.value)
                       }}
-                      className="h-9 w-full rounded-xl bg-[var(--bg-primary)] px-3 text-sm text-white outline-none placeholder:text-gray-500 focus:ring-2 focus:ring-modrinth-green/50"
+                      className="h-9 w-full rounded-xl bg-(--bg-primary) px-3 text-sm text-white outline-hidden placeholder:text-gray-500 focus:ring-2 focus:ring-modrinth-green/50"
                     />
                     <p className={`mt-1 truncate text-xs ${status.tone}`}>{status.text}</p>
                   </div>
@@ -239,7 +239,7 @@ export default function MinecraftAvatarPicker({ avatar, name }) {
                   </button>
                 </div>
               </form>
-              <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />
+              <Popover.Arrow className="fill-(--bg-gradient-start)" />
             </Popover.Content>
           </Popover.Portal>
         </Popover.Root>

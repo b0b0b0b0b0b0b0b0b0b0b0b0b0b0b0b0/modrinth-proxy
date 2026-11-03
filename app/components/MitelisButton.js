@@ -1,18 +1,12 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
-import Lottie from 'lottie-react'
+import { useRef, useState } from 'react'
+import { Lottie } from 'lottie-react'
 import { useT } from './I18nProvider'
 
 export default function MitelisButton({ animationData }) {
   const t = useT()
   const lottieRef = useRef(null)
-
-  useEffect(() => {
-    if (lottieRef.current) {
-      lottieRef.current.setSpeed(1.2)
-    }
-  }, [])
 
   const handleMouseEnter = () => {
     if (lottieRef.current) {
@@ -31,17 +25,18 @@ export default function MitelisButton({ animationData }) {
       href="https://mitelis.net"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-600/90 to-red-600/90 hover:from-orange-500 hover:to-red-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-orange-500/50 backdrop-blur-sm group relative overflow-hidden"
+      className="inline-flex items-center gap-3 bg-linear-to-r from-orange-600/90 to-red-600/90 hover:from-orange-500 hover:to-red-500 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-orange-500/50 backdrop-blur-xs group relative overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-400/20 to-red-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      <div className="absolute inset-0 bg-linear-to-r from-orange-400/20 to-red-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <div className="relative z-10 flex items-center gap-3">
         {animationData && (
-          <div className="w-8 h-8 flex-shrink-0">
+          <div className="w-8 h-8 shrink-0">
             <Lottie
               lottieRef={lottieRef}
-              animationData={animationData}
+              src={animationData}
+              speed={1.2}
               loop={false}
               autoplay={false}
               style={{ width: '100%', height: '100%' }}

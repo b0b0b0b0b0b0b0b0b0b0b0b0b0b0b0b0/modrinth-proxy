@@ -18,16 +18,16 @@ export default function EmailCopyButton({ email }) {
   return (
     <button
       onClick={handleCopy}
-      className="inline-flex items-center gap-2 px-3 py-2 bg-gradient-to-b from-transparent via-transparent to-transparent hover:from-modrinth-green/10 hover:via-modrinth-green-light/10 hover:to-modrinth-green/10 rounded-lg transition-all duration-300 group"
+      className="inline-flex items-center gap-2 px-3 py-2 bg-linear-to-b from-transparent via-transparent to-transparent hover:from-modrinth-green/10 hover:via-modrinth-green-light/10 hover:to-modrinth-green/10 rounded-lg transition-all duration-300 group"
       title="Скопировать email в буфер обмена"
     >
-      <svg className="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
       <span className="text-sm text-gray-300 font-mono select-text">{email}</span>
       {copied ? (
         <svg 
-          className="w-4 h-4 text-modrinth-green flex-shrink-0 transition-all duration-300" 
+          className="w-4 h-4 text-modrinth-green shrink-0 transition-all duration-300" 
           fill="none" 
           stroke="currentColor" 
           strokeLinecap="round" 
@@ -39,7 +39,7 @@ export default function EmailCopyButton({ email }) {
         </svg>
       ) : (
         <svg 
-          className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 group-hover:text-gray-300 flex-shrink-0 transition-all duration-300" 
+          className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 group-hover:text-gray-300 shrink-0 transition-all duration-300" 
           fill="none" 
           stroke="currentColor" 
           strokeLinecap="round" 

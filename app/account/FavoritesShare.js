@@ -228,7 +228,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
       </div>
 
       {panel === 'share' ? (
-        <div className="mt-2 rounded-xl border border-gray-800 bg-[var(--bg-primary)] p-3">
+        <div className="mt-2 rounded-xl border border-gray-800 bg-(--bg-primary) p-3">
           <div className="flex items-center gap-2">
             <input
               type="text"
@@ -237,7 +237,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
               placeholder={t('account.shareLinkLoading')}
               aria-label={t('account.shareLink')}
               onFocus={(event) => event.target.select()}
-              className="min-w-0 flex-1 rounded-lg card-glass bg-modrinth-dark px-3 py-1.5 font-mono text-xs text-gray-300 outline-none focus:border-modrinth-green"
+              className="min-w-0 flex-1 rounded-lg card-glass bg-modrinth-dark px-3 py-1.5 font-mono text-xs text-gray-300 outline-hidden focus:border-modrinth-green"
             />
             <button type="button" onClick={() => copyText(link, flashLink)} disabled={!link} className={PRIMARY}>
               <Icon name={linkCopied ? 'done' : 'link'} />
@@ -250,7 +250,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
               type="button"
               disabled={!link}
               onClick={() => openShare(`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(shareText)}`)}
-              className={`${BUTTON} hover:!border-[#29a9eb]/60 hover:!text-[#29a9eb]`}
+              className={`${BUTTON} hover:border-[#29a9eb]/60! hover:text-[#29a9eb]!`}
             >
               <Icon name="telegram" />
               Telegram
@@ -259,7 +259,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
               type="button"
               disabled={!link}
               onClick={() => openShare(`https://wa.me/?text=${encodeURIComponent(`${shareText} ${link}`)}`)}
-              className={`${BUTTON} hover:!border-[#25d366]/60 hover:!text-[#25d366]`}
+              className={`${BUTTON} hover:border-[#25d366]/60! hover:text-[#25d366]!`}
             >
               <Icon name="whatsapp" />
               WhatsApp
@@ -296,7 +296,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
       {panel === 'import' ? (
         <form
           onSubmit={submit}
-          className={`mt-2 rounded-xl border bg-[var(--bg-primary)] p-3 ${sharedCode && value ? 'border-modrinth-green/50' : 'border-gray-800'}`}
+          className={`mt-2 rounded-xl border bg-(--bg-primary) p-3 ${sharedCode && value ? 'border-modrinth-green/50' : 'border-gray-800'}`}
         >
           <div className="flex items-center gap-2">
             <input
@@ -309,7 +309,7 @@ export default function FavoritesShare({ code, count, titles = [], sharedCode = 
               autoCapitalize="none"
               spellCheck={false}
               maxLength={4000}
-              className="min-w-0 flex-1 rounded-lg card-glass bg-modrinth-dark px-3 py-1.5 font-mono text-xs text-white outline-none transition-colors placeholder:text-gray-600 focus:border-modrinth-green"
+              className="min-w-0 flex-1 rounded-lg card-glass bg-modrinth-dark px-3 py-1.5 font-mono text-xs text-white outline-hidden transition-colors placeholder:text-gray-600 focus:border-modrinth-green"
             />
             <button type="submit" disabled={busy || !value.trim()} className={PRIMARY}>
               {busy ? <span className="inline-flex h-3 w-3 animate-spin rounded-full border-2 border-black border-t-transparent" /> : null}

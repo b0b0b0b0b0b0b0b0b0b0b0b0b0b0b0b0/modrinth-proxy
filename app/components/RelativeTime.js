@@ -48,7 +48,7 @@ export default function RelativeTime({ dateString, className = '' }) {
 
   const absolute = formatAbsolute(date, locale)
   const timeText = formatRelative(dateString, t, locale) || t('time.unknown')
-  const hintCls = `${className} cursor-help rounded-sm outline-none`.trim()
+  const hintCls = `${className} cursor-help rounded-xs outline-hidden`.trim()
 
   return (
     <StyledTooltip label={absolute}>

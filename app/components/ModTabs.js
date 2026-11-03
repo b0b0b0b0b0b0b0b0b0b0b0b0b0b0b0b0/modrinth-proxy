@@ -219,7 +219,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                         {vHref ? (
                           <Link
                             href={vHref}
-                            className="transition-colors hover:text-modrinth-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green rounded-sm"
+                            className="transition-colors hover:text-modrinth-green focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green rounded-xs"
                           >
                             {titleText}
                           </Link>
@@ -228,7 +228,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                         )}
                       </h3>
                       <span
-                        className={`text-xs px-2 py-0.5 rounded ${versionChannelLetterRingClass(version.version_type)}`}
+                        className={`text-xs px-2 py-0.5 rounded-sm ${versionChannelLetterRingClass(version.version_type)}`}
                       >
                         {version.version_type}
                       </span>
@@ -269,7 +269,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                   placeholder="Search..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded text-sm border border-gray-700 focus:border-modrinth-green focus:outline-none"
+                  className="w-full bg-gray-800 text-white pl-10 pr-4 py-2 rounded-sm text-sm border border-gray-700 focus:border-modrinth-green focus:outline-hidden"
                 />
               </div>
 
@@ -279,7 +279,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                   <select
                     value={selectedMcVersion}
                     onChange={(e) => setSelectedMcVersion(e.target.value)}
-                    className="bg-gray-800 text-white px-3 py-2 pr-8 rounded text-sm border border-gray-700 focus:border-modrinth-green focus:outline-none appearance-none cursor-pointer"
+                    className="bg-gray-800 text-white px-3 py-2 pr-8 rounded-sm text-sm border border-gray-700 focus:border-modrinth-green focus:outline-hidden appearance-none cursor-pointer"
                   >
                     <option value="all">All MC versions</option>
                     {(showOnlyReleases ? releaseVersions : mcVersions).map(v => (
@@ -311,7 +311,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                 )}
 
                 {loaders.length > 1 && (
-                  <div className="flex gap-1 bg-gray-800 rounded p-1">
+                  <div className="flex gap-1 bg-gray-800 rounded-sm p-1">
                     <button
                       onClick={() => handleLoaderChange('all')}
                       className={`px-3 py-1 rounded text-sm transition capitalize ${
@@ -397,7 +397,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                                 className="px-2 py-1 bg-gray-800 rounded-full text-xs font-semibold hover:underline cursor-pointer capitalize inline-flex items-center gap-1"
                                 style={{ color: loaderData.color || 'var(--text-secondary)' }}
                               >
-                                <div className="w-3 h-3 flex-shrink-0">
+                                <div className="w-3 h-3 shrink-0">
                                   {loaderData.icon}
                                 </div>
                                 {loaderData.name}
@@ -428,7 +428,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                             href={primaryFile.url}
                             download
                             onClick={(e) => e.stopPropagation()}
-                            className="relative z-10 flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full hover:bg-modrinth-green hover:text-black transition-all group/btn"
+                            className="relative z-10 shrink-0 w-9 h-9 flex items-center justify-center rounded-full hover:bg-modrinth-green hover:text-black transition-all group/btn"
                             title="Download"
                           >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

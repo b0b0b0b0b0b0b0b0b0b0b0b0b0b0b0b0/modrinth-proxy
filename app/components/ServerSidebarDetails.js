@@ -45,7 +45,7 @@ function ServerAddressCopy({ address, tooltip, variant = 'prominent', ourIpLabel
       <button
         type="button"
         onClick={handleCopy}
-        className="group flex w-full min-w-0 items-center gap-2 py-0.5 text-left outline-none"
+        className="group flex w-full min-w-0 items-center gap-2 py-0.5 text-left outline-hidden"
       >
         {!subtle && (
           <span className="shrink-0 text-xs font-medium text-gray-500">{ourIpLabel}</span>
@@ -131,7 +131,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       {(javaAddress || gameVersions.length > 0 || loaders.length > 0) && (
         <div className="space-y-3">
           <div>
-            <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">
+            <h3 className="text-base font-bold m-0 mb-2 text-(--text-gray)">
               {javaAddress && bedrockAddress && javaAddress === bedrockAddress
                 ? t('server.javaAndBedrock')
                 : t('server.javaEdition')}
@@ -159,7 +159,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
             {server.minecraft_java_server?.content && server.minecraft_java_server.content.kind !== 'vanilla' && (server.minecraft_java_server.content.project_name || server.minecraft_java_server.content.version_id) && (
               <div className="flex flex-col gap-2 mb-3 pb-3 border-b border-gray-800/70">
                 <StyledTooltip label={t('server.requiredPackTip')}>
-                  <h3 className="text-base font-bold m-0 text-[var(--text-gray)] cursor-help hover:text-white transition-colors w-fit">
+                  <h3 className="text-base font-bold m-0 text-(--text-gray) cursor-help hover:text-white transition-colors w-fit">
                     {t('server.requiredPack')}
                   </h3>
                 </StyledTooltip>
@@ -167,7 +167,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                   <div className="flex gap-2 items-center min-w-0">
                     {server.minecraft_java_server.content.project_icon && (
                       <img
-                        className="w-9 h-9 rounded-lg object-cover flex-shrink-0"
+                        className="w-9 h-9 rounded-lg object-cover shrink-0"
                         src={server.minecraft_java_server.content.project_icon}
                         alt=""
                         referrerPolicy="no-referrer"
@@ -201,7 +201,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
             )}
             {(displayRanges.length > 0 || recommendedVersion) && (
               <div className="pt-0.5">
-                <h3 className="text-base font-bold m-0 mb-2.5 text-[var(--text-gray)]">
+                <h3 className="text-base font-bold m-0 mb-2.5 text-(--text-gray)">
                   {t('server.joinVersions')}
                 </h3>
                 <CompressedGameVersionsChips
@@ -217,13 +217,13 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
           </div>
           {loaders.length > 0 && (
             <div>
-              <h3 className="text-base font-bold m-0 mb-2 text-[var(--text-gray)]">{t('project.platforms')}</h3>
+              <h3 className="text-base font-bold m-0 mb-2 text-(--text-gray)">{t('project.platforms')}</h3>
               <div className="flex flex-wrap gap-1">
                 {loaders.map((loader) => (
                   <Link
                     key={String(loader)}
                     href={`/discover/servers?sc=${encodeURIComponent(String(loader).toLowerCase())}`}
-                    className="z-[1] inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-[var(--text-muted)] transition-transform active:scale-[0.95] outline-none capitalize"
+                    className="z-1 inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full glass-chip px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) transition-transform active:scale-[0.95] outline-hidden capitalize"
                   >
                     {loader}
                   </Link>
@@ -236,7 +236,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
 
       {bedrockAddress && javaAddress !== bedrockAddress && (
         <div className="flex flex-col gap-1.5">
-          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">
+          <h3 className="text-base font-bold m-0 text-(--text-gray)">
             {t('server.bedrockEdition')}
           </h3>
           <ServerAddressCopy
@@ -249,7 +249,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       )}
 
       <div className="flex flex-col gap-2">
-        <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('server.location')}</h3>
+        <h3 className="text-base font-bold m-0 text-(--text-gray)">{t('server.location')}</h3>
         <div className="flex flex-wrap gap-1.5 items-center">
           {server.minecraft_java_server?.ping?.data ? (
             <>
@@ -264,7 +264,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
               {latencyMs != null && (
                 <StyledTooltip label={t('server.latencyTip', { n: latencyMs })}>
                   <span className="bg-gray-800/60 border border-gray-700/40 px-2.5 py-1.5 leading-none rounded-full text-xs font-semibold text-gray-300 flex items-center gap-1 cursor-help hover:text-white transition-colors">
-                    <svg className="w-5 h-5 text-modrinth-green shrink-0 relative -translate-y-[2px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-modrinth-green shrink-0 relative translate-y-[-2px]" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} viewBox="0 0 24 24">
                       <path d="M12 20h.01M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 14 0" />
                     </svg>
                     <span>{t('server.latency', { n: latencyMs })}</span>
@@ -294,7 +294,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
 
       {server.minecraft_server?.languages && server.minecraft_server.languages.length > 0 && (
         <div className="flex flex-col gap-2">
-          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('server.languages')}</h3>
+          <h3 className="text-base font-bold m-0 text-(--text-gray)">{t('server.languages')}</h3>
           <div className="flex flex-wrap gap-1.5">
             {server.minecraft_server.languages.map(lang => (
               <span key={lang} className="bg-gray-800/60 border border-gray-700/40 px-2.5 py-1.5 leading-none rounded-full text-xs font-semibold text-gray-300">
@@ -306,29 +306,29 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
       )}
       {(projectId || versionId) && (
         <div className="flex flex-col gap-2 pt-3 border-t border-gray-800/50">
-          <h3 className="text-base font-bold m-0 text-[var(--text-gray)]">{t('project.details')}</h3>
+          <h3 className="text-base font-bold m-0 text-(--text-gray)">{t('project.details')}</h3>
           <div className="space-y-2 text-xs md:text-sm">
             {followers > 0 && (
               <div className="flex justify-between border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('server.followers')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('server.followers')}</span>
                 <span className="font-semibold text-white">{formatFollowers(followers, locale, t)}</span>
               </div>
             )}
             {server.published && (
               <div className="flex justify-between border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('version.published')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('version.published')}</span>
                 <span className="font-semibold text-white">{formatRelative(server.published, t, locale) || '—'}</span>
               </div>
             )}
             {projectId && (
               <div className="flex justify-between items-center border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('server.projectId')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('server.projectId')}</span>
                 <CopyButton text={projectId} inline />
               </div>
             )}
             {versionId && (
               <div className="flex justify-between items-center border-b border-gray-800/40 pb-1.5">
-                <span className="font-semibold text-[var(--text-gray)]">{t('server.versionId')}</span>
+                <span className="font-semibold text-(--text-gray)">{t('server.versionId')}</span>
                 <CopyButton text={versionId} inline />
               </div>
             )}

@@ -162,7 +162,7 @@ function DependencyTreeRow({ item, nested = false, isLastChild = false }) {
         href={item.url}
         download={item.filename}
         label={`Скачать ${item.filename}`}
-        className="!text-gray-500 dark:!text-gray-400"
+        className="text-gray-500! dark:text-gray-400!"
       />
     </div>
   )
@@ -413,7 +413,7 @@ export default function DownloadVersionDependencies({
           versionNumber={versionNumber}
           defaultOpen
           hideTrigger
-          overlayClassName="!z-[210]"
+          overlayClassName="z-210!"
           onClose={() => setGraphOpen(false)}
         />
       )}

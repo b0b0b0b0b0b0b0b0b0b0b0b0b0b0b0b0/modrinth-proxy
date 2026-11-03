@@ -71,7 +71,7 @@ export default function DownloadCompatibleVersions({
           Совместимые версии
           <StyledTooltip
             side="right"
-            contentClassName="!text-left !max-w-[18rem]"
+            contentClassName="text-left! max-w-[18rem]!"
             label={
               <span className="flex flex-col gap-1.5">
                 <span>Под одну версию Minecraft и платформу иногда лежит несколько сборок.</span>
@@ -84,7 +84,7 @@ export default function DownloadCompatibleVersions({
           >
             <button
               type="button"
-              className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:text-gray-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green/50 dark:text-gray-500 dark:hover:text-gray-300"
+              className="inline-flex size-5 shrink-0 items-center justify-center rounded-full text-gray-400 transition-colors hover:text-gray-700 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green/50 dark:text-gray-500 dark:hover:text-gray-300"
               aria-label="Какую версию выбрать"
             >
               <ChannelHelpIcon />
@@ -116,7 +116,7 @@ export default function DownloadCompatibleVersions({
                       href={primaryFile.url}
                       download={primaryFile.filename}
                       label={`Скачать ${primaryFile.filename}`}
-                      className="!text-gray-500 dark:!text-gray-400"
+                      className="text-gray-500! dark:text-gray-400!"
                     />
                   )}
                 </div>
@@ -154,7 +154,7 @@ export default function DownloadCompatibleVersions({
                     href={primaryFile.url}
                     download={primaryFile.filename}
                     label={`Скачать ${primaryFile.filename}`}
-                    className="!text-gray-500 dark:!text-gray-400"
+                    className="text-gray-500! dark:text-gray-400!"
                   />
                 )}
               </div>

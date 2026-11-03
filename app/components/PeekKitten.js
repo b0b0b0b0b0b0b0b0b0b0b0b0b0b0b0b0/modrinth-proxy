@@ -154,7 +154,7 @@ export default function PeekKitten() {
           initial={{ y: POSES.wide.rest }}
           animate={body}
           style={{ originY: 1 }}
-          className="block h-full w-full rounded-full outline-none focus-visible:ring-2 focus-visible:ring-modrinth-green"
+          className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
         >
           <KittenFace mood={mood} look={look} className="h-full w-full" />
         </motion.button>

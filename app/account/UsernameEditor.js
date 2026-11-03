@@ -99,7 +99,7 @@ export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
           autoCapitalize="none"
           spellCheck={false}
           maxLength={24}
-          className="w-56 max-w-full rounded-lg border border-gray-800 bg-[var(--bg-primary)] px-3 py-1.5 text-lg font-bold text-white outline-none transition-colors focus:border-modrinth-green"
+          className="w-56 max-w-full rounded-lg border border-gray-800 bg-(--bg-primary) px-3 py-1.5 text-lg font-bold text-white outline-hidden transition-colors focus:border-modrinth-green"
         />
         <StyledTooltip label={t('account.saveUsername')}>
           <button type="submit" disabled={busy} aria-label={t('account.saveUsername')} className={ICON_BUTTON}>

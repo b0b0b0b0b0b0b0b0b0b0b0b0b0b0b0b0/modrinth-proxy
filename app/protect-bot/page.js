@@ -30,7 +30,7 @@ export default async function ProtectBotLandingPage() {
         </div>
 
         <div className="animate-fade-in-up space-y-8">
-          <section className="card-glass rounded-2xl bg-gradient-to-br from-modrinth-green/[0.12] via-gray-900/90 to-transparent p-8 md:p-10">
+          <section className="card-glass rounded-2xl bg-linear-to-br from-modrinth-green/12 via-gray-900/90 to-transparent p-8 md:p-10">
             <h2 className="mb-6 text-xl font-bold text-white md:text-2xl">{t('bot.service')}</h2>
             <div className="grid gap-6 md:grid-cols-3">
               <div className="card-glass rounded-xl bg-black/25 p-5">
@@ -57,7 +57,7 @@ export default async function ProtectBotLandingPage() {
             </p>
           </section>
 
-          <section className="card-glass relative overflow-hidden rounded-2xl bg-gradient-to-br from-sky-500/15 via-gray-900/80 to-blue-950/40 p-8 md:p-12">
+          <section className="card-glass relative overflow-hidden rounded-2xl bg-linear-to-br from-sky-500/15 via-gray-900/80 to-blue-950/40 p-8 md:p-12">
             <div className="absolute right-0 top-0 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl"></div>
             <div className="relative">
               <h2 className="mb-6 flex flex-wrap items-center gap-4 text-2xl font-bold text-white md:text-3xl">
@@ -79,7 +79,7 @@ export default async function ProtectBotLandingPage() {
             </div>
           </section>
 
-          <section className="card-glass rounded-2xl bg-gradient-to-br from-amber-950/20 via-gray-900/85 to-transparent p-8 md:p-10">
+          <section className="card-glass rounded-2xl bg-linear-to-br from-amber-950/20 via-gray-900/85 to-transparent p-8 md:p-10">
             <h2 className="mb-4 text-xl font-bold text-white md:text-2xl">{t('bot.chat')}</h2>
             <p className="mb-4 text-gray-300 leading-relaxed">
               <RichText text={t('bot.chatP1')} />
@@ -100,7 +100,7 @@ export default async function ProtectBotLandingPage() {
             </p>
           </section>
 
-          <section className="card-glass relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-950/50 via-gray-900/80 to-purple-950/35 p-8 md:p-10">
+          <section className="card-glass relative overflow-hidden rounded-2xl bg-linear-to-br from-indigo-950/50 via-gray-900/80 to-purple-950/35 p-8 md:p-10">
             <div className="absolute left-0 top-0 h-56 w-56 rounded-full bg-indigo-500/15 blur-3xl"></div>
             <div className="relative">
               <h2 className="mb-2 text-2xl font-bold text-white md:text-3xl">{t('bot.deep')}</h2>
@@ -136,7 +136,7 @@ export default async function ProtectBotLandingPage() {
             </div>
           </section>
 
-          <section className="card-glass rounded-2xl bg-gradient-to-br from-modrinth-green/10 via-gray-900/90 to-gray-950/90 p-8 md:p-10">
+          <section className="card-glass rounded-2xl bg-linear-to-br from-modrinth-green/10 via-gray-900/90 to-gray-950/90 p-8 md:p-10">
             <h2 className="mb-6 flex items-center gap-3 text-2xl font-bold text-white md:text-3xl">
               <svg className="h-8 w-8 text-modrinth-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -170,7 +170,7 @@ export default async function ProtectBotLandingPage() {
             </ul>
           </section>
 
-          <section className="card-glass rounded-2xl bg-gradient-to-br from-purple-950/40 via-gray-900/75 to-blue-950/25 p-8 md:p-10">
+          <section className="card-glass rounded-2xl bg-linear-to-br from-purple-950/40 via-gray-900/75 to-blue-950/25 p-8 md:p-10">
             <h2 className="mb-4 text-xl font-bold text-white md:text-2xl">{t('bot.confused')}</h2>
             <p className="mb-4 text-gray-300">
               {t('bot.confused1')}
@@ -186,7 +186,7 @@ export default async function ProtectBotLandingPage() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={t('bot.tgAria')}
-              className="download-glass group inline-flex items-center gap-4 rounded-2xl bg-modrinth-green px-8 py-5 text-[17px] font-bold tracking-tight text-white transition hover:bg-modrinth-green-light hover:text-gray-950 active:scale-[0.99] md:px-12 md:py-6 md:text-lg"
+              className="download-glass group inline-flex items-center gap-4 rounded-2xl bg-modrinth-green px-8 py-5 text-[17px] font-bold tracking-tight text-white transition hover:bg-modrinth-green-light hover:text-gray-950 active:scale-[0.99] md:px-12! md:py-6 md:text-lg"
             >
               <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl ring-2 ring-white/35 md:h-14 md:w-14">
                 <Image
@@ -222,7 +222,7 @@ export default async function ProtectBotLandingPage() {
           </section>
 
           <section
-            className="card-glass rounded-2xl bg-[var(--bg-tertiary)]/90 p-8 md:p-10"
+            className="card-glass rounded-2xl bg-(--bg-tertiary)/90 p-8 md:p-10"
             aria-labelledby="protect-bot-seo-heading"
           >
             <h2 id="protect-bot-seo-heading" className="mb-6 text-xl font-bold text-gray-900 dark:text-white md:text-2xl">

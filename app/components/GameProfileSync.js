@@ -45,7 +45,7 @@ export default function GameProfileSync() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.97 }}
           transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-          className="fixed bottom-24 left-4 right-4 z-[70] rounded-2xl border border-modrinth-green/30 bg-modrinth-dark p-4 shadow-2xl sm:right-auto sm:w-[380px] lg:bottom-6"
+          className="fixed bottom-24 left-4 right-4 z-70 rounded-2xl border border-modrinth-green/30 bg-modrinth-dark p-4 shadow-2xl sm:right-auto sm:w-[380px] lg:bottom-6"
         >
           <div className="flex gap-3">
             <KittenFace mood="happy" className="h-12 w-12 shrink-0" />

@@ -188,7 +188,7 @@ export default function MobileNav({ onFilterClick }) {
             href="/"
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               pathname === '/' 
-                ? 'card-glass scale-105 bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black' 
+                ? 'card-glass scale-105 bg-linear-to-r from-modrinth-green to-modrinth-green-light text-black' 
                 : 'glass-btn text-gray-300 hover:text-modrinth-green'
             }`}
           >
@@ -203,7 +203,7 @@ export default function MobileNav({ onFilterClick }) {
             onClick={() => setIsOpen(!isOpen)}
             className={`flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all duration-300 ${
               isOpen 
-                ? 'card-glass scale-105 bg-gradient-to-r from-modrinth-green to-modrinth-green-light text-black' 
+                ? 'card-glass scale-105 bg-linear-to-r from-modrinth-green to-modrinth-green-light text-black' 
                 : 'glass-btn text-gray-300 hover:text-modrinth-green'
             }`}
           >
@@ -251,14 +251,14 @@ export default function MobileNav({ onFilterClick }) {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-center pt-4 pb-3">
-              <div className="w-16 h-1.5 bg-gradient-to-r from-transparent via-modrinth-green to-transparent rounded-full"></div>
+              <div className="w-16 h-1.5 bg-linear-to-r from-transparent via-modrinth-green to-transparent rounded-full"></div>
             </div>
             
             <div className="px-4 pb-20">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
-                <h3 className="text-base font-bold text-transparent bg-clip-text bg-gradient-to-r from-modrinth-green to-modrinth-green-light px-3">{t('nav.navigation')}</h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
+                <div className="h-px flex-1 bg-linear-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
+                <h3 className="text-base font-bold text-transparent bg-clip-text bg-linear-to-r from-modrinth-green to-modrinth-green-light px-3">{t('nav.navigation')}</h3>
+                <div className="h-px flex-1 bg-linear-to-r from-transparent via-modrinth-green/30 to-transparent"></div>
               </div>
               
               <div className="grid grid-cols-2 gap-3 mobile-nav-grid">
@@ -271,7 +271,7 @@ export default function MobileNav({ onFilterClick }) {
                       onClick={() => setIsOpen(false)}
                       className={`group flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl transition-all duration-300 transform ${
                         active
-                          ? 'card-glass scale-105 bg-gradient-to-br ' + item.color
+                          ? 'card-glass scale-105 bg-linear-to-br ' + item.color
                           : 'card-glass bg-modrinth-dark hover:scale-105 hover:brightness-110'
                       }`}
                     >

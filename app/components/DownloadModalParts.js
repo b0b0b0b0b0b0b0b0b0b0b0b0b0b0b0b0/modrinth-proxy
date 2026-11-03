@@ -148,7 +148,7 @@ export function DownloadFooterButton({
   if (!tooltip) return button
 
   return (
-    <StyledTooltip label={tooltip} side={tooltipSide} contentClassName="!max-w-[280px]">
+    <StyledTooltip label={tooltip} side={tooltipSide} contentClassName="max-w-[280px]!">
       {button}
     </StyledTooltip>
   )

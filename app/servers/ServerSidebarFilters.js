@@ -160,7 +160,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
   )
 
   return (
-    <div className={isMobile ? "w-full" : "hidden lg:block w-80 flex-shrink-0"}>
+    <div className={isMobile ? "w-full" : "hidden lg:block w-80 shrink-0"}>
       <div className="space-y-4">
 
         <CatalogFilterSection id="type" title={t('filter.type')}>
@@ -201,7 +201,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   placeholder={t('filter.search')}
                   value={versionSearch}
                   onChange={(e) => setVersionSearch(e.target.value)}
-                  className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
+                  className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-hidden focus:border-modrinth-green transition-colors"
                 />
                 <svg
                   className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
@@ -236,7 +236,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                     >
                       <span>{version}</span>
                       {selectedVersion === version && (
-                        <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                           <path d="M20 6 9 17l-5-5" />
                         </svg>
                       )}
@@ -248,7 +248,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
               <div className="pt-2 border-t border-gray-800">
                 <button
                   onClick={() => setShowAllVersions(!showAllVersions)}
-                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded transition-colors group"
+                  className="w-full flex items-center gap-2 px-2 py-1.5 rounded-sm transition-colors group"
                 >
                   <div className={`glass-check w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
                     showAllVersions
@@ -292,13 +292,13 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                         : 'bg-transparent text-gray-400 hover:bg-gray-800/50 hover:text-white'
                     }`}
                   >
-                    <svg className="h-4 w-4 flex-shrink-0 text-gray-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg className="h-4 w-4 shrink-0 text-gray-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
                       <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                     <span className="truncate text-sm flex-1">{serverRegionLabel(t, reg.id, reg.name)}</span>
                     {isSelected && (
-                      <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                         <path d="M20 6 9 17l-5-5" />
                       </svg>
                     )}
@@ -316,7 +316,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                   placeholder={t('filter.search')}
                   value={languageSearch}
                   onChange={(e) => setLanguageSearch(e.target.value)}
-                  className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:border-modrinth-green transition-colors"
+                  className="w-full px-3 py-2 pl-9 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-hidden focus:border-modrinth-green transition-colors"
                 />
                 <svg
                   className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
@@ -365,7 +365,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                       >
                         <span className="truncate text-sm flex-1">{languageDisplayName(locale, lang.id)}</span>
                         {isSelected && (
-                          <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                             <path d="M20 6 9 17l-5-5" />
                           </svg>
                         )}
@@ -379,7 +379,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 <div className="pt-2 border-t border-gray-800">
                   <button
                     onClick={() => setShowAllLanguages(!showAllLanguages)}
-                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded transition-colors group"
+                    className="w-full flex items-center gap-2 px-2 py-1.5 rounded-sm transition-colors group"
                   >
                     <div className={`glass-check w-4 h-4 rounded border-2 flex items-center justify-center transition-colors ${
                       showAllLanguages
@@ -417,7 +417,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 <div className={`h-2.5 w-2.5 rounded-full ${selectedStatus === 'online' ? 'bg-modrinth-green shadow-[0_0_8px_rgba(236,127,171,0.5)]' : 'bg-gray-600'}`}></div>
                 <span className="truncate text-sm flex-1">{t('server.onlineBadge')}</span>
                 {selectedStatus === 'online' && (
-                  <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
                 )}
@@ -437,7 +437,7 @@ export default function ServerSidebarFilters({ onFilterChange, isMobile = false,
                 <div className={`h-2.5 w-2.5 rounded-full ${selectedStatus === 'offline' ? 'bg-red-500' : 'bg-gray-600'}`}></div>
                 <span className="truncate text-sm flex-1">{t('server.offline')}</span>
                 {selectedStatus === 'offline' && (
-                  <svg className="w-4 h-4 flex-shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 shrink-0 ml-auto" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24">
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
                 )}
