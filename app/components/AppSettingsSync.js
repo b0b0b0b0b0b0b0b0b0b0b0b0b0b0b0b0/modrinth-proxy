@@ -21,7 +21,9 @@ export default function AppSettingsSync() {
       if (!a || a.target) return
 
       try {
-        if (new URL(a.href).hostname !== hostname) {
+        const linkHost = new URL(a.href).hostname
+        const ownSite = linkHost === 'modrinth.black' || linkHost.endsWith('.modrinth.black')
+        if (linkHost !== hostname && !ownSite) {
           a.target = '_blank'
           a.rel = 'noopener noreferrer'
         }
