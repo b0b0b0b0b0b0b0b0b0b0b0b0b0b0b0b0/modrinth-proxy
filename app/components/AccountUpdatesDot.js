@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import { NEWS_BADGE_EVENT } from './NewsCounter'
+import { hasSignedHint } from '@/lib/signedHint'
 
 export const ACCOUNT_UPDATES_KEY = 'account-updates'
 const CACHE_MS = 10 * 60 * 1000
@@ -43,7 +44,7 @@ export default function AccountUpdatesDot() {
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (!document.cookie.includes('mp_signed=1')) {
+    if (!hasSignedHint()) {
       setCount(0)
       return undefined
     }

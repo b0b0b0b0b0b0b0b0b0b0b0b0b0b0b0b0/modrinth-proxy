@@ -28,6 +28,7 @@ import BirthdayEffects from './components/BirthdayEffects'
 import MinecraftBirthdayEffects from './components/MinecraftBirthdayEffects'
 import FestiveGate from './components/FestiveGate'
 import AppSettingsSync from './components/AppSettingsSync'
+import SessionWatcher from './components/SessionWatcher'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { I18nProvider } from './components/I18nProvider'
 import DisclaimerBadge from './components/DisclaimerBadge'
@@ -195,6 +196,7 @@ export default async function RootLayout({ children }) {
           <AppTooltipProvider>
           <I18nProvider locale={locale}>
           <AppSettingsSync />
+          <SessionWatcher userId={sessionUser?.id ?? null} />
           <CatalogReturnLifecycle />
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />

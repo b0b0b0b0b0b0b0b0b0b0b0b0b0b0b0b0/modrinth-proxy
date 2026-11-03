@@ -3,11 +3,12 @@
 import { useState, useEffect } from 'react'
 import { SITE_VERSION } from '@/lib/siteVersion'
 import { NEWS_LAST_SHA_KEY, NEWS_SITE_VERSION_KEY, NEWS_UNREAD_KEY } from '@/lib/newsUnread'
+import { hasSignedHint } from '@/lib/signedHint'
 
 export const NEWS_BADGE_EVENT = 'newsBadgeChange'
 
 function badgeHidden() {
-  return document.cookie.includes('mp_signed=1') && document.cookie.includes('mp_news_off=1')
+  return hasSignedHint() && document.cookie.includes('mp_news_off=1')
 }
 
 export default function NewsCounter() {

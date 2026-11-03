@@ -8,6 +8,7 @@ import { syncGameProfile } from '@/lib/gameProfileSync'
 import { getLoaderDisplayName } from '@/lib/loaders'
 import { KittenFace } from './Kitten'
 import { useT } from './I18nProvider'
+import { hasSignedHint } from '@/lib/signedHint'
 
 function joinParts(loader, version) {
   return [loader ? getLoaderDisplayName(loader) : '', version || ''].filter(Boolean).join(', ')
@@ -22,7 +23,7 @@ export default function GameProfileSync() {
   const [imported, setImported] = useState(null)
 
   useEffect(() => {
-    const signed = document.cookie.includes('mp_signed=1')
+    const signed = hasSignedHint()
     if (signed && !signedRef.current) {
       syncGameProfile().then((changes) => {
         if (!changes) return

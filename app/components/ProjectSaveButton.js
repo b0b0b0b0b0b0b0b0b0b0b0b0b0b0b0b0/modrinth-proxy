@@ -7,6 +7,7 @@ import * as Popover from '@radix-ui/react-popover'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import StyledTooltip from './StyledTooltip'
 import { useT } from './I18nProvider'
+import { hasSignedHint } from '@/lib/signedHint'
 
 const BOOKMARK = 'm19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'
 const HEART_OUTLINE = '#0c3b22'
@@ -51,7 +52,7 @@ const useBeforePaint = typeof window === 'undefined' ? useEffect : useLayoutEffe
 const pending = new Map()
 
 function isSigned() {
-  return typeof document !== 'undefined' && document.cookie.includes('mp_signed=1')
+  return hasSignedHint()
 }
 
 function readSaved() {

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useT } from './I18nProvider'
+import { hasSignedHint } from '@/lib/signedHint'
 
 const STORAGE_KEY = 'feedbackThoughtDismissed'
 const SIGNUP_KEY = 'signupThoughtDismissedAt'
@@ -14,7 +15,7 @@ const PIN_KEY = 'feedbackThoughtPin'
 
 function isSignedIn() {
   try {
-    return document.cookie.split('; ').some((part) => part.startsWith('mp_signed='))
+    return hasSignedHint()
   } catch {
     return false
   }

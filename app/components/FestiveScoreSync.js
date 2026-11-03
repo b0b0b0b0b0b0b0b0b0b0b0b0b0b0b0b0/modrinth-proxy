@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { festiveBook } from '@/lib/festiveScoreClient'
+import { hasSignedHint } from '@/lib/signedHint'
 
 export default function FestiveScoreSync() {
   const pathname = usePathname()
@@ -13,7 +14,7 @@ export default function FestiveScoreSync() {
   }, [])
 
   useEffect(() => {
-    const signed = document.cookie.includes('mp_signed=1')
+    const signed = hasSignedHint()
     if (!signed) {
       if (signedRef.current) festiveBook.detach()
       signedRef.current = false

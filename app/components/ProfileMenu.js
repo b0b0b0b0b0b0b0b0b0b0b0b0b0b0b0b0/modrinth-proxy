@@ -8,6 +8,7 @@ import AccountUpdatesDot, { ACCOUNT_UPDATES_KEY, loadAccountUpdates } from './Ac
 import { useT } from './I18nProvider'
 import { clearFavoritesCache } from '@/lib/favoritesCache'
 import { clearSavedCollectionsCache } from './ProjectSaveButton'
+import { hasSignedHint } from '@/lib/signedHint'
 
 const ICONS = {
   user: ['M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2', 'M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0'],
@@ -52,7 +53,7 @@ function Avatar({ src, className }) {
 }
 
 function isSigned() {
-  return document.cookie.includes('mp_signed=1')
+  return hasSignedHint()
 }
 
 function readUpdatesCount() {
