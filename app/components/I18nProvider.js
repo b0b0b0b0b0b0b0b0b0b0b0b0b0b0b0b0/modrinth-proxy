@@ -2,8 +2,9 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { LOCALE_COOKIE, DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/config'
+import { DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/config'
 import { getMessage, translate } from '@/lib/i18n/translate'
+import { writeSharedLocale } from '@/lib/i18n/sharedLocale'
 
 const I18nContext = createContext({
   locale: DEFAULT_LOCALE,
@@ -13,7 +14,7 @@ const I18nContext = createContext({
 })
 
 function writeLocaleCookie(locale) {
-  document.cookie = `${LOCALE_COOKIE}=${locale};path=/;max-age=31536000;samesite=lax`
+  writeSharedLocale(locale)
 }
 
 export function I18nProvider({ locale: initialLocale, children }) {

@@ -7,8 +7,8 @@ import { Lottie } from 'lottie-react'
 import fixAnimation from '@/public/animations/fix.json'
 import { PALETTES } from '../../lib/paletteManager'
 import { useT } from '../components/I18nProvider'
-import { LOCALE_COOKIE } from '@/lib/i18n/config'
 import { BDAY_COOKIES_KEY } from '@/lib/birthday'
+import { clearSharedLocale } from '@/lib/i18n/sharedLocale'
 
 const DEFAULT_LAYOUTS = {
   mods: 'rows',
@@ -137,7 +137,7 @@ export default function SettingsClient() {
         localStorage.setItem(BDAY_COOKIES_KEY, cookieScore)
       } catch {}
     }
-    document.cookie = `${LOCALE_COOKIE}=;path=/;max-age=0;samesite=lax`
+    clearSharedLocale()
     setTimeout(() => {
       window.location.reload()
     }, 1000)
