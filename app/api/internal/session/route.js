@@ -5,7 +5,7 @@ import { userAvatarUrl } from '@/lib/minecraftAvatar'
 export const dynamic = 'force-dynamic'
 
 function allowed(request) {
-  if (request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip')) return false
+  if (request.headers.get('x-real-ip')) return false
   const expected = Buffer.from(String(process.env.SSO_INTERNAL_KEY || ''))
   const actual = Buffer.from(request.headers.get('x-internal-key') || '')
   return expected.length >= 32 && expected.length === actual.length && timingSafeEqual(expected, actual)

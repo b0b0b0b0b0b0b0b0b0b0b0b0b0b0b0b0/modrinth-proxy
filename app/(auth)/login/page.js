@@ -15,6 +15,9 @@ export async function generateMetadata() {
 
 export default async function LoginPage(props) {
   const searchParams = await props.searchParams
-  if (await getSessionUser()) redirect(safeNext(searchParams?.next) || '/account')
+  if (await getSessionUser()) {
+    const next = safeNext(searchParams?.next)
+    redirect(next && !next.startsWith('/') ? `/api/auth/sso?next=${encodeURIComponent(next)}` : next || '/account')
+  }
   return null
 }

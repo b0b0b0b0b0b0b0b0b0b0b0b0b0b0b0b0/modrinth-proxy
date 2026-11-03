@@ -54,7 +54,6 @@ export async function generateMetadata() {
   return {
     title: 'ModrinthProxy',
     description: t('home.metaDesc'),
-    manifest: '/manifest.json',
     icons: {
       icon: '/icon.png?v=2',
       apple: '/icon.png?v=2',
@@ -159,6 +158,7 @@ export default async function RootLayout({ children }) {
         <Script id="__posterity" strategy="beforeInteractive">
           {`(function(){var h=document.documentElement,t=${JSON.stringify(POSTERITY_COMMENT_BODY)},c=document.createComment(t),f=h.firstChild;if(f)h.insertBefore(c,f);else h.appendChild(c);var s=document.currentScript||document.getElementById("__posterity");if(s&&s.parentNode)s.parentNode.removeChild(s);})();`}
         </Script>
+        <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
         <link rel="apple-touch-icon" href="/icon.png?v=2" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
