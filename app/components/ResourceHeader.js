@@ -36,8 +36,8 @@ const CONTENT_TYPE_ROUTES = {
   servers: 'servers',
 }
 
-export default function ResourceHeader({ resource, contentType, versions = [], mutedDownload = false }) {
-  const { t, locale } = getRequestT()
+export default async function ResourceHeader({ resource, contentType, versions = [], mutedDownload = false }) {
+  const { t, locale } = await getRequestT()
   const nf = intlLocale(locale)
   const safeVersions = Array.isArray(versions) ? versions : []
 
