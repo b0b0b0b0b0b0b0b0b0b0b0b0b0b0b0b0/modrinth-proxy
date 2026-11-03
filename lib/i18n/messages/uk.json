@@ -27,7 +27,10 @@
     "deluxeMenu": "Редактор DeluxeMenu",
     "deluxeMenuTip": "Редактор DeluxeMenu і AbstractMenus",
     "pingServers": "Пінг серверів",
-    "pingServersTip": "Пінг серверів Minecraft (у РФ може бути недоступний)"
+    "pingServersTip": "Пінг серверів Minecraft (у РФ може бути недоступний)",
+    "more": "Ще сервіси",
+    "mtools": "MTools",
+    "mtoolsTip": "Інструменти для серверів Minecraft"
   },
   "lang": {
     "label": "Мова",

@@ -27,7 +27,10 @@
     "deluxeMenu": "Trình sửa DeluxeMenu",
     "deluxeMenuTip": "Trình sửa DeluxeMenu và AbstractMenus",
     "pingServers": "Ping máy chủ",
-    "pingServersTip": "Ping máy chủ Minecraft (có thể bị chặn tại Nga)"
+    "pingServersTip": "Ping máy chủ Minecraft (có thể bị chặn tại Nga)",
+    "more": "More services",
+    "mtools": "MTools",
+    "mtoolsTip": "Tools for Minecraft servers"
   },
   "lang": {
     "label": "Ngôn ngữ",

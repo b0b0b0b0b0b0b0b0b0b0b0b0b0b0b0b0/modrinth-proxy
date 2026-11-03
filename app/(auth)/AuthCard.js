@@ -51,6 +51,7 @@ const PERKS = [
 export default function AuthCard({ github = false, telegram = null, claim = null }) {
   const t = useT()
   const router = useRouter()
+  const goNext = (target) => (target.startsWith('/') ? router.push(target) : window.location.assign(target))
   const pathname = usePathname()
   const reduceMotion = useReducedMotion()
   const searchParams = useSearchParams()
@@ -81,7 +82,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
     const outcome = await signInWithTelegram(telegram, next)
     if (outcome.result === 'session') {
       setDone(true)
-      router.push(next || '/account')
+      goNext(next || '/account')
       router.refresh()
     } else if (outcome.result === 'held') {
       setHeld({ name: outcome.name, provider: 'telegram' })
@@ -100,7 +101,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
       const response = await fetch('/api/auth/claim', { method: 'POST' })
       if (response.ok) {
         setDone(true)
-        router.push(next || '/account')
+        goNext(next || '/account')
         router.refresh()
         return
       }
@@ -133,7 +134,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
       })
       if (response.ok) {
         setDone(true)
-        router.push(next || '/account')
+        goNext(next || '/account')
         router.refresh()
         return
       }

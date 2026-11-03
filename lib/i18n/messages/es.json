@@ -27,7 +27,10 @@
     "deluxeMenu": "Editor DeluxeMenu",
     "deluxeMenuTip": "Editor de DeluxeMenu y AbstractMenus",
     "pingServers": "Ping de servidores",
-    "pingServersTip": "Haz ping a servidores de Minecraft (en RU puede estar bloqueado)"
+    "pingServersTip": "Haz ping a servidores de Minecraft (en RU puede estar bloqueado)",
+    "more": "More services",
+    "mtools": "MTools",
+    "mtoolsTip": "Tools for Minecraft servers"
   },
   "lang": {
     "label": "Idioma",

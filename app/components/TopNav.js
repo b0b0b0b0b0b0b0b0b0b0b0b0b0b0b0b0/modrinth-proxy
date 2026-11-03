@@ -34,10 +34,17 @@ export default function TopNav({ account = null }) {
       tooltip: t('nav.deluxeMenuTip'),
       children: t('nav.deluxeMenu'),
     },
+  ]
+  const MORE_LINKS = [
+    {
+      href: 'https://mtools.modrinth.black',
+      title: t('nav.mtools'),
+      description: t('nav.mtoolsTip'),
+    },
     {
       href: 'https://ping.modrinth.black',
-      tooltip: t('nav.pingServersTip'),
-      children: t('nav.pingServers'),
+      title: t('nav.pingServers'),
+      description: t('nav.pingServersTip'),
     },
   ]
 
@@ -218,6 +225,17 @@ export default function TopNav({ account = null }) {
                     {link.children}
                   </a>
                 ))}
+                {MORE_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="top-nav-link top-nav-link--mobile-sheet"
+                    data-tooltip={link.description}
+                    tabIndex={panelExpanded ? undefined : -1}
+                  >
+                    {link.title}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -241,6 +259,25 @@ export default function TopNav({ account = null }) {
               {link.children}
             </a>
           ))}
+          <div className="nav-more">
+            <button type="button" className="top-nav-link nav-more-trigger" aria-label={t('nav.more')} aria-haspopup="true">
+              <svg className="nav-more-dots" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <circle cx="12" cy="5" r="1.9" />
+                <circle cx="12" cy="12" r="1.9" />
+                <circle cx="12" cy="19" r="1.9" />
+              </svg>
+            </button>
+            <div className="nav-more-panel" role="menu">
+              <div className="nav-more-list">
+                {MORE_LINKS.map((link) => (
+                  <a key={link.href} href={link.href} className="nav-more-item" role="menuitem">
+                    <span className="nav-more-title">{link.title}</span>
+                    <span className="nav-more-desc">{link.description}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="hidden md:flex flex-row items-center gap-2 md:max-xl:gap-1 shrink-0">

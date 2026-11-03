@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { FESTIVE_OFF_COOKIE, getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
+import { FESTIVE_OFF_COOKIE, ensureSsoCookie, getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 
@@ -14,6 +14,7 @@ export async function GET() {
   if (Boolean(user.hide_festive) !== ((await cookies()).get(FESTIVE_OFF_COOKIE)?.value === '1')) {
     await setFestiveCookie(!user.hide_festive)
   }
+  await ensureSsoCookie()
   const updates = await getUpdates(user.id)
   return Response.json({ count: updates.length, username: user.username, avatar: userAvatarUrl(user) })
 }

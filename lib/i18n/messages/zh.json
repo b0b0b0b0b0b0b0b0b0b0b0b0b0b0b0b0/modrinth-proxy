@@ -27,7 +27,10 @@
     "deluxeMenu": "DeluxeMenu 编辑器",
     "deluxeMenuTip": "DeluxeMenu 与 AbstractMenus 编辑器",
     "pingServers": "服务器延迟",
-    "pingServersTip": "Ping Minecraft 服务器（在俄罗斯可能被拦截）"
+    "pingServersTip": "Ping Minecraft 服务器（在俄罗斯可能被拦截）",
+    "more": "More services",
+    "mtools": "MTools",
+    "mtoolsTip": "Tools for Minecraft servers"
   },
   "lang": {
     "label": "语言",
