@@ -25,14 +25,14 @@ function formatAltCount(t, locale, key, count) {
   )
 }
 
-export default function CatalogSearchAlternatives({
+export default async function CatalogSearchAlternatives({
   query,
   categoryPath,
   version,
   catalogKey,
   alternatives = [],
 }) {
-  const { t, locale } = getRequestT()
+  const { t, locale } = await getRequestT()
   if (!alternatives.length || !catalogKey) return null
 
   return (

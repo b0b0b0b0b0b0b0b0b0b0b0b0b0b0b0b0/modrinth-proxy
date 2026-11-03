@@ -3,11 +3,13 @@ import ProjectAccessRestricted from '@/app/components/ProjectAccessRestricted'
 import VersionPage from '@/app/components/VersionPage'
 import { generateVersionMetadata, loadVersionPage } from '@/lib/loadVersionPage'
 
-export async function generateMetadata({ params }) {
-  return generateVersionMetadata('plugin', params)
+export async function generateMetadata(props) {
+  const params = await props.params
+  return await generateVersionMetadata('plugin', params)
 }
 
-export default async function PluginVersionPage({ params }) {
+export default async function PluginVersionPage(props) {
+  const params = await props.params
   const data = await loadVersionPage(params.slug, params.versionNumber)
   if (data.denied) {
     return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />

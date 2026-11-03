@@ -7,17 +7,13 @@ import { resolveOrganizationsFromProjects } from '@/lib/organizations'
 import { resolveUserBadges } from '@/lib/userBadges'
 import CollectionCard from '@/app/components/CollectionCard'
 import UserProfileHeader from '@/app/components/UserProfileHeader'
-import dynamic from 'next/dynamic'
+import AuthorProjectTabs from '@/app/components/AuthorProjectTabsLazy'
 import UserSidebar from '@/app/components/UserSidebar'
 import { getRequestT } from '@/lib/i18n/server'
 
-const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTabs'), {
-  ssr: false,
-  loading: () => <div className="mb-6 h-12 bg-modrinth-dark card-glass rounded-full animate-pulse"></div>,
-})
-
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
@@ -33,8 +29,9 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function AuthorCollectionsPage({ params }) {
-  const { t } = getRequestT()
+export default async function AuthorCollectionsPage(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   const { userId } = params
 
   if (isUserBlocked(userId)) {

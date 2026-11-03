@@ -11,5 +11,5 @@ export async function GET(request) {
   const rate = checkRateLimit(`auth-github:${getClientIp(request)}`, RATE_LIMIT)
   if (!rate.ok) return redirectTo('/login?error=rate_limit')
 
-  return redirectTo(beginGithubAuth(new URL(request.url).searchParams.get('next')))
+  return redirectTo(await beginGithubAuth(new URL(request.url).searchParams.get('next')))
 }

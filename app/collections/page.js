@@ -3,7 +3,7 @@ import CollectionsCatalog from '@/app/components/CollectionsCatalog'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('col.seoTitle'),
     description: t('col.seoDesc'),
@@ -18,7 +18,7 @@ export async function generateMetadata() {
 }
 
 export default async function CollectionsPage() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   const collections = await getCatalogCollections()
 
   return (

@@ -9,8 +9,8 @@ import { accountSettingsMetadata, requireUser } from '../accountPage'
 
 export const dynamic = 'force-dynamic'
 
-export function generateMetadata() {
-  return accountSettingsMetadata('sn.profile')
+export async function generateMetadata() {
+  return await accountSettingsMetadata('sn.profile')
 }
 
 function profileFields(source) {
@@ -22,9 +22,9 @@ function profileFields(source) {
   }
 }
 
-export default function ProfileSettingsPage() {
-  const { t } = getRequestT()
-  const user = requireUser('/settings/profile')
+export default async function ProfileSettingsPage() {
+  const { t } = await getRequestT()
+  const user = await requireUser('/settings/profile')
   const profile = getGameProfile(user.id)
   const chosen = profileFields(profile.chosen)
   const avatar = userAvatarUrl(user)

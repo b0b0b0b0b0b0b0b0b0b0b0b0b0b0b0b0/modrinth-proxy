@@ -5,8 +5,8 @@ import SettingsMobileMenu from './SettingsMobileMenu'
 
 export const dynamic = 'force-dynamic'
 
-export default function SettingsLayout({ children }) {
-  const signedIn = Boolean(getSessionUser())
+export default async function SettingsLayout({ children }) {
+  const signedIn = Boolean(await getSessionUser())
 
   return (
     <div className="max-w-7xl mx-auto py-8">

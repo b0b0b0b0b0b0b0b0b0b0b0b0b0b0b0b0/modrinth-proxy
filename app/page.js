@@ -6,7 +6,7 @@ import {
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('home.metaTitle'),
     description: t('home.metaDesc'),

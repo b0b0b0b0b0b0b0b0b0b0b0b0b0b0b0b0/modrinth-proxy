@@ -24,17 +24,19 @@ import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
-export async function generateMetadata({ searchParams }) {
-  return buildCatalogSearchMetadata('datapacks', searchParams, { basePath: 'discover/datapacks' })
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
+  return await buildCatalogSearchMetadata('datapacks', searchParams, { basePath: 'discover/datapacks' })
 }
 
-export default async function DatapacksPage({ searchParams }) {
+export default async function DatapacksPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -49,10 +51,10 @@ export default async function DatapacksPage({ searchParams }) {
   }
 
   const fParams = Array.isArray(searchParams.f) ? searchParams.f : (searchParams.f ? [searchParams.f] : []);
-  
+
   let categories = [];
   let excludedCategories = [];
-  
+
   fParams.forEach(param => {
     const decoded = decodeURIComponent(param);
     if (decoded.includes('categories:')) {
@@ -65,14 +67,14 @@ export default async function DatapacksPage({ searchParams }) {
   });
 
   const facets = [['project_type:datapack']];
-  
+
   const versionsFacet = versionFacets(versions);
   if (versionsFacet) facets.push(versionsFacet);
-  
+
   if (categories.length > 0) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
-  
+
   appendDisclosureExclusionFacets(facets, searchParams, 'datapacks');
   appendOpenSourceFacets(facets, searchParams);
   appendDependentFacets(facets, searchParams, 'datapacks');
@@ -124,7 +126,7 @@ export default async function DatapacksPage({ searchParams }) {
     }
   }
 
-  const ui = catalogUi('datapacks', data?.total_hits);
+  const ui = await catalogUi('datapacks', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

@@ -8,19 +8,21 @@ import ResourceHeader from '@/app/components/ResourceHeader'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const shader = await getMod(params.slug)
-    return buildProjectOverviewMetadata('shader', params.slug, shader)
+    return await buildProjectOverviewMetadata('shader', params.slug, shader)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('shader')
+    return await buildProjectNotFoundMetadata('shader')
   }
 }
 
-export default async function ShaderPage({ params }) {
+export default async function ShaderPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/shaders" backKey="project.backToShaders" />
   }

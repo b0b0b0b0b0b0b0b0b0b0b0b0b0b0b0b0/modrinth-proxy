@@ -4,7 +4,8 @@ import { isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { resolveProjectHref } from '@/lib/dependencies'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export default async function ProjectRedirectPage({ params }) {
+export default async function ProjectRedirectPage(props) {
+  const params = await props.params
   const { slug, path } = params
 
   let project
@@ -14,7 +15,7 @@ export default async function ProjectRedirectPage({ params }) {
     notFoundOrThrow(error)
   }
 
-  if (await isProjectBlocked(project.slug, project.id) || isOrganizationBlocked(project.organization)) {
+  if ((await isProjectBlocked(project.slug, project.id)) || isOrganizationBlocked(project.organization)) {
     notFound()
   }
 

@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic'
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const rate = checkRateLimit(`account-settings:${user.id}`, RATE_LIMIT)
@@ -54,10 +54,10 @@ export async function POST(request) {
   if (hasProfile) setGameProfile(user.id, profile)
 
   for (const [key, value] of booleans) {
-    if (key === 'telegram') setTelegramNotify(user.id, value, getRequestLocale())
+    if (key === 'telegram') setTelegramNotify(user.id, value, await getRequestLocale())
     else setAccountPreference(user.id, key, value)
-    if (key === 'newsBadge') setNewsBadgeCookie(value)
-    if (key === 'festive') setFestiveCookie(value)
+    if (key === 'newsBadge') await setNewsBadgeCookie(value)
+    if (key === 'festive') await setFestiveCookie(value)
   }
   if (unmuteAll) clearNotifyMutes(user.id)
   return Response.json({ ok: true })

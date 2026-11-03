@@ -9,8 +9,9 @@ import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { getRequestT } from '@/lib/i18n/server'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const mod = await getMod(params.slug)
     if (mod.project_type === 'minecraft_java_server') {
@@ -56,9 +57,10 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function ModPage({ params }) {
+export default async function ModPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/mods" backKey="project.backToMods" />
   }

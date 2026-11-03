@@ -17,7 +17,8 @@ import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
 import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 import { appendNegatedFacets } from '@/lib/catalogFacetParams'
 
-export async function generateMetadata({ searchParams }) {
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
   const { title, description } = buildServerCatalogSeo({ searchParams })
 
   return {
@@ -33,13 +34,14 @@ export async function generateMetadata({ searchParams }) {
   }
 }
 
-export default async function ServersPage({ searchParams }) {
+export default async function ServersPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   let version = searchParams.v || '';
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -52,11 +54,11 @@ export default async function ServersPage({ searchParams }) {
   } catch (error) {
     console.error('Failed to load Minecraft versions:', error);
   }
-  
+
   const fParams = Array.isArray(searchParams.f) ? searchParams.f : (searchParams.f ? [searchParams.f] : []);
   let categories = [];
   let excludedCategories = [];
-  
+
   fParams.forEach(param => {
     const decoded = decodeURIComponent(param);
     if (decoded.includes('categories:')) {
@@ -69,11 +71,11 @@ export default async function ServersPage({ searchParams }) {
   });
 
   const facets = [['project_type:minecraft_java_server']];
-  
+
   if (version) {
     facets.push([`versions:${version}`]);
   }
-  
+
   if (categories.length > 0) {
     facets.push(categories.map(c => `categories:${c}`));
   }
@@ -84,7 +86,7 @@ export default async function ServersPage({ searchParams }) {
   let blockedCount = 0, blockedByProject = 0, blockedByOrganization = 0;
   let layoutCorrection = null;
   let error = null;
-  
+
   try {
     const initialData = await searchMods({ query, facets, limit: 1, offset: 0, index: sortBy });
     layoutCorrection = initialData.layoutCorrection ?? null;
@@ -138,7 +140,7 @@ export default async function ServersPage({ searchParams }) {
     return `/servers?${params.toString()}`;
   };
 
-  const ui = catalogUi('servers', data?.total_hits);
+  const ui = await catalogUi('servers', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

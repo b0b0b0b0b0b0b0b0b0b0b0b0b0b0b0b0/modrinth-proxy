@@ -4,12 +4,12 @@ import { accountSettingsMetadata, requireUser } from '../accountPage'
 
 export const dynamic = 'force-dynamic'
 
-export function generateMetadata() {
-  return accountSettingsMetadata('sn.data')
+export async function generateMetadata() {
+  return await accountSettingsMetadata('sn.data')
 }
 
-export default function DataSettingsPage() {
-  const user = requireUser('/settings/data')
+export default async function DataSettingsPage() {
+  const user = await requireUser('/settings/data')
   const favorites = getFavorites(user.id)
   const downloads = getDownloadsPage(user.id, 1).all
 

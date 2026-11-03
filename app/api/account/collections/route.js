@@ -26,7 +26,7 @@ function stateFor(userId, projectId) {
 
 async function guard(request) {
   if (!isSameOrigin(request)) return { response: fail('forbidden', 403) }
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return { response: fail('unauthorized', 401) }
   const rate = checkRateLimit(`account-collections:${user.id}`, RATE_LIMIT)
   if (!rate.ok) return { response: fail('rate_limit', 429) }
@@ -43,7 +43,7 @@ async function addProject(userId, collectionId, projectId) {
 }
 
 export async function GET(request) {
-  const user = getSessionUser()
+  const user = await getSessionUser()
   const projectId = new URL(request.url).searchParams.get('projectId')
   if (!user) return Response.json({ signedIn: false, collections: [] })
   if (projectId == null) {

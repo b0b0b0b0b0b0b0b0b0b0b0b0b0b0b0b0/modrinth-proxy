@@ -9,19 +9,21 @@ import IconPreload from '@/app/components/IconPreload'
 import ChangelogVersionEntries from '@/app/components/ChangelogVersionEntries'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const plugin = await getMod(params.slug)
-    return buildProjectChangelogMetadata('plugin', params.slug, plugin)
+    return await buildProjectChangelogMetadata('plugin', params.slug, plugin)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('plugin')
+    return await buildProjectNotFoundMetadata('plugin')
   }
 }
 
-export default async function PluginChangelogPage({ params }) {
+export default async function PluginChangelogPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />
   }

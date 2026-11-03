@@ -12,7 +12,7 @@ function snapshot(userId) {
 }
 
 export async function GET() {
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
   const rate = checkRateLimit(`festive-read:${user.id}`, RATE_LIMIT)
   if (!rate.ok) return Response.json({ error: 'rate_limit' }, { status: 429 })
@@ -21,7 +21,7 @@ export async function GET() {
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
   const rate = checkRateLimit(`festive-absorb:${user.id}`, RATE_LIMIT)
   if (!rate.ok) return Response.json({ error: 'rate_limit' }, { status: 429 })

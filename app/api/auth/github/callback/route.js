@@ -15,15 +15,15 @@ export async function GET(request) {
   if (!rate.ok) return redirectTo('/login?error=rate_limit')
 
   const params = new URL(request.url).searchParams
-  const pending = consumeGithubState(params.get('state'))
+  const pending = await consumeGithubState(params.get('state'))
   const code = params.get('code')
   if (!pending || !code) return redirectTo('/login?error=github')
 
   const identity = await fetchGithubIdentity(code)
   if (!identity) return redirectTo('/login?error=github')
 
-  const result = resolveExternalSignIn('github', identity, {
-    currentUser: getSessionUser(),
+  const result = await resolveExternalSignIn('github', identity, {
+    currentUser: await getSessionUser(),
     ip,
     next: pending.next,
   })

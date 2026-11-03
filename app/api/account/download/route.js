@@ -7,7 +7,7 @@ const RATE_LIMIT = { limit: 120, windowMs: 60_000 }
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user || !user.record_history) return new Response(null, { status: 204 })
 
   const rate = checkRateLimit(`account-download:${user.id}`, RATE_LIMIT)

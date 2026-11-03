@@ -25,17 +25,19 @@ import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
-export async function generateMetadata({ searchParams }) {
-  return buildCatalogSearchMetadata('plugins', searchParams, { basePath: 'discover/plugins' })
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
+  return await buildCatalogSearchMetadata('plugins', searchParams, { basePath: 'discover/plugins' })
 }
 
-export default async function PluginsPage({ searchParams }) {
+export default async function PluginsPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -103,18 +105,18 @@ export default async function PluginsPage({ searchParams }) {
   })
 
   const facets = [['project_type:plugin']];
-  
+
   const versionsFacet = versionFacets(versions);
   if (versionsFacet) facets.push(versionsFacet);
-  
+
   if (loaders.length > 0) {
     loaders.forEach(l => facets.push([`categories:${l}`]));
   }
-  
+
   if (platforms.length > 0) {
     platforms.forEach(p => facets.push([`categories:${p}`]));
   }
-  
+
   if (categories.length > 0) {
     categories.forEach(c => facets.push([`categories:${c}`]));
   }
@@ -192,7 +194,7 @@ export default async function PluginsPage({ searchParams }) {
     }
   }
 
-  const ui = catalogUi('plugins', data?.total_hits);
+  const ui = await catalogUi('plugins', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

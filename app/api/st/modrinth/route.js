@@ -10,7 +10,7 @@ function timeParam(value) {
 }
 
 export async function GET(request) {
-  if (!isAdmin(getSessionUser())) return new Response(null, { status: 404 })
+  if (!isAdmin(await getSessionUser())) return new Response(null, { status: 404 })
   const params = new URL(request.url).searchParams
   const report = getModrinthTrafficReport({ from: timeParam(params.get('from')), to: timeParam(params.get('to')) })
   return Response.json(report, { headers: { 'Cache-Control': 'no-store' } })

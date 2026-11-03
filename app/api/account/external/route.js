@@ -9,7 +9,7 @@ export const dynamic = 'force-dynamic'
 export async function DELETE(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const rate = checkRateLimit(`account-external:${user.id}`, RATE_LIMIT)

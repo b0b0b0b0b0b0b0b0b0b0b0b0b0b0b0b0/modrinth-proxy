@@ -9,15 +9,15 @@ import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('about.metaTitle'),
     description: t('about.metaDesc'),
   }
 }
 
-export default function AboutPage() {
-  const { t, locale } = getRequestT()
+export default async function AboutPage() {
+  const { t, locale } = await getRequestT()
   const projectsCount = BLACKLIST_PROJECTS.length
   const orgsCount = BLACKLIST_ORGANIZATIONS.length
   const mediaCount = BLACKLIST_PATTERNS.length + BLACKLIST_AVATARS.length

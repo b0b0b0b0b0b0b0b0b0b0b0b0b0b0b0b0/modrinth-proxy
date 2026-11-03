@@ -10,17 +10,20 @@ import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const shader = await getMod(params.slug)
-    return buildProjectVersionsMetadata('shader', params.slug, shader)
+    return await buildProjectVersionsMetadata('shader', params.slug, shader)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('shader')
+    return await buildProjectNotFoundMetadata('shader')
   }
 }
 
-export default async function ShaderVersionsPage({ params, searchParams = {} }) {
+export default async function ShaderVersionsPage(props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
   const { slug } = params;
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/shaders" backKey="project.backToShaders" />

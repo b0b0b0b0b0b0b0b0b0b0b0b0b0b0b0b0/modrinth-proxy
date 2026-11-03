@@ -2,8 +2,8 @@ import { getRequestT } from '@/lib/i18n/server'
 import { intlLocale } from '@/lib/i18n/config'
 import { pluralize } from '@/lib/i18n/pluralize'
 
-export default function CatalogSearchBlockedNote({ count }) {
-  const { t, locale } = getRequestT()
+export default async function CatalogSearchBlockedNote({ count }) {
+  const { t, locale } = await getRequestT()
   if (!(count > 0)) return null
   const n = Number(count).toLocaleString(intlLocale(locale))
   const text = pluralize(

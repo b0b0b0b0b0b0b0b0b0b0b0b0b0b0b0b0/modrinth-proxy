@@ -29,8 +29,8 @@ function getRoleBadgeStyle(role) {
   return styles[role] || 'bg-gray-500/20 text-gray-400 border border-gray-500/30'
 }
 
-export default function UserProfileHeader({ author, stats }) {
-  const { t, locale } = getRequestT()
+export default async function UserProfileHeader({ author, stats }) {
+  const { t, locale } = await getRequestT()
   const projectsWord = pluralCount(locale, stats.projectCount, t('author.pOne'), t('author.pFew'), t('author.pMany'))
   return (
     <div className="p-6 mb-6">

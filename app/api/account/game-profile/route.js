@@ -21,7 +21,7 @@ function snapshot(user) {
 }
 
 export async function GET() {
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
   return Response.json(snapshot(user))
 }
@@ -29,7 +29,7 @@ export async function GET() {
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const rate = checkRateLimit(`account-game-import:${user.id}`, RATE_LIMIT)

@@ -6,7 +6,7 @@ const RATE_LIMIT = { limit: 5, windowMs: 60 * 60 * 1000 }
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const body = await request.json().catch(() => null)

@@ -3,25 +3,10 @@ import MarkCommitsRead from '../components/MarkCommitsRead'
 import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
 import RelativeTime from '../components/RelativeTime'
-import nextDynamic from 'next/dynamic'
+import CommitMessage from '../components/CommitMessageLazy'
 import { getSiteCommits } from '@/lib/commits'
 import { GITHUB_REPO_URL } from '@/lib/githubRepo'
 import { getRequestT } from '@/lib/i18n/server'
-
-const CommitMessage = nextDynamic(() => import('../components/CommitMessage'), {
-  ssr: false,
-  loading: () => (
-    <NewsCommitLoading />
-  )
-})
-
-function NewsCommitLoading() {
-  return (
-    <div className="prose prose-invert prose-sm max-w-none mb-3 break-words opacity-50">
-      …
-    </div>
-  )
-}
 
 function getShortSha(sha) {
   return sha.substring(0, 7)
@@ -33,7 +18,7 @@ function pickDisclaimer(list) {
 }
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('news.metaTitle'),
     description: t('news.metaDesc'),
@@ -43,7 +28,7 @@ export async function generateMetadata() {
 export const dynamic = 'force-dynamic'
 
 export default async function NewsPage() {
-  const { t, m } = getRequestT()
+  const { t, m } = await getRequestT()
   const commits = await getSiteCommits()
   const disclaimer = pickDisclaimer(m('news.disclaimers'))
 

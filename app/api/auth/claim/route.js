@@ -11,7 +11,7 @@ export async function POST(request) {
   const rate = checkRateLimit(`auth-claim:${ip}`, RATE_LIMIT)
   if (!rate.ok) return Response.json({ error: 'rate_limit' }, { status: 429 })
 
-  const result = createFromHeldIdentity(ip)
+  const result = await createFromHeldIdentity(ip)
   if (result === 'session') return Response.json({ result })
   if (result === 'signup_limit') return Response.json({ error: 'signup_limit' }, { status: 429 })
   if (result === 'missing') return Response.json({ error: 'generic' }, { status: 400 })

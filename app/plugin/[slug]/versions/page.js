@@ -10,19 +10,22 @@ import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const plugin = await getMod(params.slug)
-    return buildProjectVersionsMetadata('plugin', params.slug, plugin)
+    return await buildProjectVersionsMetadata('plugin', params.slug, plugin)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('plugin')
+    return await buildProjectNotFoundMetadata('plugin')
   }
 }
 
-export default async function PluginVersionsPage({ params, searchParams }) {
+export default async function PluginVersionsPage(props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />
   }

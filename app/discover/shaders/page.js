@@ -24,17 +24,19 @@ import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
-export async function generateMetadata({ searchParams }) {
-  return buildCatalogSearchMetadata('shaders', searchParams, { basePath: 'discover/shaders' })
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
+  return await buildCatalogSearchMetadata('shaders', searchParams, { basePath: 'discover/shaders' })
 }
 
-export default async function ShadersPage({ searchParams }) {
+export default async function ShadersPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -50,7 +52,7 @@ export default async function ShadersPage({ searchParams }) {
 
   const fParams = Array.isArray(searchParams.f) ? searchParams.f : (searchParams.f ? [searchParams.f] : []);
   const gParams = Array.isArray(searchParams.g) ? searchParams.g : (searchParams.g ? [searchParams.g] : []);
-  
+
   let styles = [];
   let excludedStyles = [];
   let features = [];
@@ -95,26 +97,26 @@ export default async function ShadersPage({ searchParams }) {
   });
 
   const facets = [['project_type:shader']];
-  
+
   const versionsFacet = versionFacets(versions);
   if (versionsFacet) facets.push(versionsFacet);
-  
+
   if (styles.length > 0) {
     styles.forEach(s => facets.push([`categories:${s}`]));
   }
-  
+
   if (features.length > 0) {
     features.forEach(f => facets.push([`categories:${f}`]));
   }
-  
+
   if (performance.length > 0) {
     performance.forEach(p => facets.push([`categories:${p}`]));
   }
-  
+
   if (loaders.length > 0) {
     loaders.forEach(l => facets.push([`categories:${l}`]));
   }
-  
+
   appendDisclosureExclusionFacets(facets, searchParams, 'shaders');
   appendOpenSourceFacets(facets, searchParams);
   appendDependentFacets(facets, searchParams, 'shaders');
@@ -175,7 +177,7 @@ export default async function ShadersPage({ searchParams }) {
     }
   }
 
-  const ui = catalogUi('shaders', data?.total_hits);
+  const ui = await catalogUi('shaders', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

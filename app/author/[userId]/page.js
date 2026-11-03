@@ -8,19 +8,16 @@ import { resolveOrganizationsFromProjects } from '@/lib/organizations'
 import { resolveUserBadges } from '@/lib/userBadges'
 import ResourceList from '@/app/components/ResourceList'
 import UserProfileHeader from '@/app/components/UserProfileHeader'
-import dynamic from 'next/dynamic'
-
-const AuthorProjectTabs = dynamic(() => import('@/app/components/AuthorProjectTabs'), {
-  ssr: false,
-  loading: () => <div className="mb-6 h-12 bg-modrinth-dark card-glass rounded-full animate-pulse"></div>,
-})
+import AuthorProjectTabs from '@/app/components/AuthorProjectTabsLazy'
 import UserSidebar from '@/app/components/UserSidebar'
 import { buildUserProfileMetadata } from '@/lib/profileSeo'
 import { getRequestT } from '@/lib/i18n/server'
 import { projectTypeLabel } from '@/lib/i18n/label'
 
-export async function generateMetadata({ params, searchParams }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
@@ -34,7 +31,7 @@ export async function generateMetadata({ params, searchParams }) {
     const projects = await getAuthorProjects(author.id, { projectType })
     const stats = formatAuthorStats(author, projects.hits)
 
-    return buildUserProfileMetadata(
+    return await buildUserProfileMetadata(
       author,
       {
         projectCount: stats.projectCount,
@@ -51,8 +48,10 @@ export async function generateMetadata({ params, searchParams }) {
   }
 }
 
-export default async function AuthorPage({ params, searchParams }) {
-  const { t } = getRequestT()
+export default async function AuthorPage(props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
+  const { t } = await getRequestT()
   const { userId } = params
   const projectType = searchParams.type || null
 

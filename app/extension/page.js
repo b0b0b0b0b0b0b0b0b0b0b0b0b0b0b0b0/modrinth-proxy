@@ -6,7 +6,7 @@ import { BROWSER_LABELS, BrowserLogo, browserLabel } from '../components/Browser
 import ExtensionKitten from './ExtensionKitten'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('ext.metaTitle'),
     description: t('ext.metaDesc'),
@@ -70,9 +70,9 @@ const STEPS = [
 
 const FAQ = ['1', '2', '3', '4', '5', '6']
 
-export default function ExtensionPage() {
-  const { t, locale } = getRequestT()
-  const requestHeaders = headers()
+export default async function ExtensionPage() {
+  const { t, locale } = await getRequestT()
+  const requestHeaders = await headers()
   const browser = detectBrowser(requestHeaders.get('user-agent'), requestHeaders.get('sec-ch-ua'))
   const chromiumLabel = browser.family === 'chromium' ? browserLabel(browser.name, locale, browser.product) : null
   const logoName = (family) => (family === 'firefox' ? 'firefox' : browser.family === 'chromium' ? browser.name : 'chrome')

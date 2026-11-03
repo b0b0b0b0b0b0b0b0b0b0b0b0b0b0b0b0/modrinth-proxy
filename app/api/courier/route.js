@@ -52,11 +52,12 @@ export async function POST(request) {
     return Response.json({ error: 'bad_request' }, { status: 400 })
   }
 
-  let token = cookies().get(COURIER_COOKIE)?.value
+  const cookieStore = await cookies()
+  let token = cookieStore.get(COURIER_COOKIE)?.value
   if (!token || !/^[\w-]{16,64}$/.test(token)) {
     token = randomBytes(18).toString('base64url')
   }
-  cookies().set(COURIER_COOKIE, token, {
+  cookieStore.set(COURIER_COOKIE, token, {
     httpOnly: true,
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production',

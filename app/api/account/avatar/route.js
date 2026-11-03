@@ -13,7 +13,7 @@ function fail(error) {
 }
 
 export async function GET(request) {
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
   if (!checkRateLimit(`account-avatar-lookup:${user.id}`, LOOKUP_LIMIT).ok) return fail('rate_limit')
 
@@ -27,7 +27,7 @@ export async function GET(request) {
 
 async function guard(request) {
   if (!isSameOrigin(request)) return { response: Response.json({ error: 'forbidden' }, { status: 403 }) }
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return { response: Response.json({ error: 'unauthorized' }, { status: 401 }) }
   if (!checkRateLimit(`account-avatar-write:${user.id}`, WRITE_LIMIT).ok) return { response: fail('rate_limit') }
   return { user }

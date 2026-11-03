@@ -24,18 +24,20 @@ import { appendDisclosureExclusionFacets, appendDisclosureExclusionParams } from
 import { appendOpenSourceFacets, copyOpenSourceParams } from '@/lib/openSourceFilter'
 import { appendDependentFacets, copyDependentParams } from '@/lib/dependentsFilter'
 
-export async function generateMetadata({ searchParams }) {
-  return buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'discover/modpacks' })
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
+  return await buildCatalogSearchMetadata('modpacks', searchParams, { basePath: 'discover/modpacks' })
 }
 
-export default async function ModpacksPage({ searchParams }) {
+export default async function ModpacksPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   const versions = parseVersionParams(searchParams);
   const sortBy = searchParams.sort || 'relevance';
   const environment = searchParams.e || '';
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -87,18 +89,18 @@ export default async function ModpacksPage({ searchParams }) {
   })
 
   const facets = [['project_type:modpack']];
-  
+
   const versionsFacet = versionFacets(versions);
   if (versionsFacet) facets.push(versionsFacet);
-  
+
   if (loaders.length > 0) {
     facets.push(loaders.map(l => `categories:${l}`));
   }
-  
+
   if (categories.length > 0) {
     facets.push(categories.map(c => `categories:${c}`));
   }
-  
+
   if (environment === 'client') {
     facets.push(['client_side:required']);
   } else if (environment === 'server') {
@@ -172,7 +174,7 @@ export default async function ModpacksPage({ searchParams }) {
     }
   }
 
-  const ui = catalogUi('modpacks', data?.total_hits);
+  const ui = await catalogUi('modpacks', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

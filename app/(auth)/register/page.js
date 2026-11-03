@@ -6,14 +6,15 @@ import { safeNext } from '@/lib/safeNext'
 export const dynamic = 'force-dynamic'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('account.registerMetaTitle'),
     robots: 'noindex, nofollow',
   }
 }
 
-export default function RegisterPage({ searchParams }) {
-  if (getSessionUser()) redirect(safeNext(searchParams?.next) || '/account')
+export default async function RegisterPage(props) {
+  const searchParams = await props.searchParams
+  if (await getSessionUser()) redirect(safeNext(searchParams?.next) || '/account')
   return null
 }

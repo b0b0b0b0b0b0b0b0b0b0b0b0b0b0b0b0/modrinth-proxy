@@ -20,8 +20,8 @@ export async function POST(request) {
   const identity = verifyTelegramAuth(body?.auth)
   if (!identity) return Response.json({ error: 'telegram' }, { status: 400 })
 
-  const result = resolveExternalSignIn('telegram', identity, {
-    currentUser: getSessionUser(),
+  const result = await resolveExternalSignIn('telegram', identity, {
+    currentUser: await getSessionUser(),
     ip,
     next: safeNext(body?.next),
   })

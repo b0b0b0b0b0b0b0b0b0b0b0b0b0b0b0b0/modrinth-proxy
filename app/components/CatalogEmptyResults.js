@@ -2,7 +2,7 @@ import { catalogBlockedCopy } from '@/lib/i18n/catalogListing'
 import LostKitten from './LostKitten'
 import RestrictedNotice from './RestrictedNotice'
 
-export default function CatalogEmptyResults({
+export default async function CatalogEmptyResults({
   data,
   blockedCount,
   blockedByProject,
@@ -17,7 +17,7 @@ export default function CatalogEmptyResults({
       <RestrictedNotice
         title={blockedTitle}
         details={[
-          catalogBlockedCopy({
+          await catalogBlockedCopy({
             totalHits: data.total_hits,
             foundLabel,
             blockedCount,

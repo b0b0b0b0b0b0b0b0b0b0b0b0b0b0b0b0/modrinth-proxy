@@ -3,7 +3,7 @@ import { getRequestT } from '@/lib/i18n/server'
 import NotFoundScene from './NotFoundScene'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('notfound.metaTitle'),
     description: t('notfound.metaDesc'),
@@ -19,8 +19,8 @@ const SECTIONS = [
   { href: '/datapacks', key: 'nav.datapacks' },
 ]
 
-export default function NotFound() {
-  const { t } = getRequestT()
+export default async function NotFound() {
+  const { t } = await getRequestT()
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-10">
       <div className="mx-auto w-full max-w-xl text-center">

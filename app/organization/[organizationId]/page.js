@@ -19,8 +19,9 @@ import OrganizationMembersSidebar from '@/app/components/OrganizationMembersSide
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
 
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const organization = await getOrganization(params.organizationId)
     if (!organization?.id) {
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }) {
       isOrganizationBlocked(organization.id) ||
       isOrganizationBlocked(organization.slug)
     ) {
-      const { t } = getRequestT()
+      const { t } = await getRequestT()
       return {
         title: t('restricted.metaTitle'),
         description: t('restricted.orgMetaDesc'),
@@ -77,8 +78,9 @@ function StatItem({ icon: Icon, children, withDivider = true }) {
   )
 }
 
-export default async function OrganizationPage({ params }) {
-  const { t, locale } = getRequestT()
+export default async function OrganizationPage(props) {
+  const params = await props.params
+  const { t, locale } = await getRequestT()
   const { organizationId } = params
 
   let organization

@@ -9,13 +9,13 @@ export const dynamic = 'force-dynamic'
 export async function GET(request) {
   const id = new URL(request.url).searchParams.get('id')
   if (!isProjectId(id)) return Response.json({ error: 'bad_id' }, { status: 400 })
-  return Response.json(getProjectState(getSessionUser()?.id ?? null, id))
+  return Response.json(getProjectState((await getSessionUser())?.id ?? null, id))
 }
 
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const rate = checkRateLimit(`account-project:${user.id}`, RATE_LIMIT)

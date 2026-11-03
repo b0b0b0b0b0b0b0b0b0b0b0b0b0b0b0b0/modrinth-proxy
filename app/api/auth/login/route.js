@@ -26,7 +26,7 @@ export async function POST(request) {
   }
 
   clearLoginFailures(ip)
-  startSession(user.id)
-  if (body?.linkHeld) linkHeldIdentity(user.id)
+  await startSession(user.id)
+  if (body?.linkHeld) await linkHeldIdentity(user.id)
   return Response.json({ user: { username: user.username } })
 }

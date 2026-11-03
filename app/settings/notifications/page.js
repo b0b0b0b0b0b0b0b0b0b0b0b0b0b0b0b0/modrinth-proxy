@@ -5,12 +5,12 @@ import { accountSettingsMetadata, requireUser } from '../accountPage'
 
 export const dynamic = 'force-dynamic'
 
-export function generateMetadata() {
-  return accountSettingsMetadata('sn.notifications')
+export async function generateMetadata() {
+  return await accountSettingsMetadata('sn.notifications')
 }
 
-export default function NotificationSettingsPage() {
-  const user = requireUser('/settings/notifications')
+export default async function NotificationSettingsPage() {
+  const user = await requireUser('/settings/notifications')
 
   return (
     <NotificationSettings

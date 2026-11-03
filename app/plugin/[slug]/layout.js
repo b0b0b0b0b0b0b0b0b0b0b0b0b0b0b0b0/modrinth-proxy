@@ -1,6 +1,9 @@
 import ProjectBackdropLayoutShell from '@/app/components/ProjectBackdropLayoutShell'
 
-export default async function PluginSlugLayout({ children, params }) {
+export default async function PluginSlugLayout(props) {
+  const params = await props.params
+  const { children } = props
+
   return (
     <ProjectBackdropLayoutShell slug={params.slug}>{children}</ProjectBackdropLayoutShell>
   )

@@ -9,8 +9,9 @@ import ChangelogVersionEntries from '@/app/components/ChangelogVersionEntries'
 import { getRequestT } from '@/lib/i18n/server'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const mod = await getMod(params.slug)
     const url = `https://modrinth.black/mod/${params.slug}/changelog`
@@ -43,9 +44,10 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function ModChangelogPage({ params }) {
+export default async function ModChangelogPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/mods" backKey="project.backToMods" />
   }

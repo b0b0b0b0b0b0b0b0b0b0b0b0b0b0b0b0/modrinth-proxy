@@ -87,7 +87,7 @@ const PRIMARY_BUTTON =
   'inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-modrinth-green px-2.5 py-1 text-xs font-bold text-black transition-opacity hover:opacity-90'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('account.metaTitle'),
     robots: 'noindex, nofollow',
@@ -367,9 +367,10 @@ function paginate(list, requested) {
   return { rows: list.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE), page, pages }
 }
 
-export default async function AccountPage({ searchParams }) {
-  const { t, locale } = getRequestT()
-  const user = getSessionUser()
+export default async function AccountPage(props) {
+  const searchParams = await props.searchParams
+  const { t, locale } = await getRequestT()
+  const user = await getSessionUser()
   const sharedIds = parseFavoritesCode(searchParams?.list)
   const sharedCode = sharedIds ? buildFavoritesCode(sharedIds) : ''
 

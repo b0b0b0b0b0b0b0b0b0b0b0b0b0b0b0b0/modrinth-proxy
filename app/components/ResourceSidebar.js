@@ -20,6 +20,7 @@ import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 import ProjectLinksCard from './ProjectLinksCard'
 import ProjectDependentsCard from './ProjectDependentsCard'
 import { DisclosureIcon } from './ProjectDisclosureIcons'
+import ProjectDisclosureItems from './ProjectDisclosureItems'
 import { useI18n, useT } from './I18nProvider'
 import { formatAbsolute, formatRelative } from './RelativeTime'
 
@@ -28,7 +29,7 @@ function contentTypeFromPathname(pathname) {
   return match?.[1] ?? null
 }
 
-export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosureItems = null }) {
+export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosures = [] }) {
   const t = useT()
   const { locale } = useI18n()
   const pathname = usePathname()
@@ -243,7 +244,7 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
           {t('project.details')}
         </h3>
         <div className="flex flex-col gap-3 text-sm [&>div>svg]:shrink-0 [&>div>svg]:mt-px [&>div]:flex [&>div]:gap-2 [&>div]:items-start [&>div>div]:min-w-0">
-          {disclosureItems}
+          <ProjectDisclosureItems disclosures={disclosures} />
 
           {resource.license && (resource.license.id || resource.license.name) && (
             <div className="flex gap-2 items-start text-[var(--text-primary)]">

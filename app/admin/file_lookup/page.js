@@ -2,7 +2,7 @@ import FileLookupClient from './FileLookupClient'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('lookup.metaTitle'),
     description: t('lookup.metaDesc'),
@@ -10,8 +10,8 @@ export async function generateMetadata() {
   }
 }
 
-export default function FileLookupPage() {
-  const { t } = getRequestT()
+export default async function FileLookupPage() {
+  const { t } = await getRequestT()
   return (
     <div className="mx-auto max-w-3xl px-4 py-8">
       <h1 className="mb-2 text-3xl font-extrabold text-white">{t('lookup.title')}</h1>

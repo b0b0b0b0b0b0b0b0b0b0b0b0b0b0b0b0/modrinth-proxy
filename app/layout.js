@@ -50,7 +50,7 @@ const nunito = Nunito({
 })
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: 'ModrinthProxy',
     description: t('home.metaDesc'),
@@ -82,12 +82,12 @@ const POSTERITY_COMMENT_BODY = ` _    _
 
 export default async function RootLayout({ children }) {
   const locale = resolveLocale(
-    cookies().get(LOCALE_COOKIE)?.value,
-    headers().get('accept-language'),
+    (await cookies()).get(LOCALE_COOKIE)?.value,
+    (await headers()).get('accept-language'),
   )
-  const { t } = getRequestT()
-  const sessionUser = getSessionUser()
-  const discordEmbed = await discordEmbedJson(headers().get('x-modrinth-pathname'))
+  const { t } = await getRequestT()
+  const sessionUser = await getSessionUser()
+  const discordEmbed = await discordEmbedJson((await headers()).get('x-modrinth-pathname'))
   const consoleStop = t('console.stop')
   const consoleWarn = t('console.warn')
   const consoleReport = t('console.report')

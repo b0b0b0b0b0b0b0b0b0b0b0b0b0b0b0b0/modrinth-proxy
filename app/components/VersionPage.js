@@ -297,7 +297,7 @@ function SupplementaryVersionFiles({ files, t }) {
 }
 
 export default async function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   const disclosures = project?.slug ? await getProjectDisclosures(project.slug) : []
   const archived = findArchivedDisclosure(disclosures)
   const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]

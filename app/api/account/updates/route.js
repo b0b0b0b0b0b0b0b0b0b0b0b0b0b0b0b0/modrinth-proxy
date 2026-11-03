@@ -6,13 +6,13 @@ import { userAvatarUrl } from '@/lib/minecraftAvatar'
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ count: 0 })
-  if (Boolean(user.hide_news_badge) !== (cookies().get('mp_news_off')?.value === '1')) {
-    setNewsBadgeCookie(!user.hide_news_badge)
+  if (Boolean(user.hide_news_badge) !== ((await cookies()).get('mp_news_off')?.value === '1')) {
+    await setNewsBadgeCookie(!user.hide_news_badge)
   }
-  if (Boolean(user.hide_festive) !== (cookies().get(FESTIVE_OFF_COOKIE)?.value === '1')) {
-    setFestiveCookie(!user.hide_festive)
+  if (Boolean(user.hide_festive) !== ((await cookies()).get(FESTIVE_OFF_COOKIE)?.value === '1')) {
+    await setFestiveCookie(!user.hide_festive)
   }
   const updates = await getUpdates(user.id)
   return Response.json({ count: updates.length, username: user.username, avatar: userAvatarUrl(user) })
@@ -21,7 +21,7 @@ export async function GET() {
 export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
 
-  const user = getSessionUser()
+  const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
 
   const body = await request.json().catch(() => null)

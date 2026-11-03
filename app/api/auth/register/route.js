@@ -25,6 +25,6 @@ export async function POST(request) {
   if (!user) return Response.json({ error: 'taken' }, { status: 409 })
 
   recordSignup(ip)
-  startSession(user.id)
+  await startSession(user.id)
   return Response.json({ user: { username: user.username } })
 }

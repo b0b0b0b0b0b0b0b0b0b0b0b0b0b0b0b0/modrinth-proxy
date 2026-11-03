@@ -9,8 +9,9 @@ import IconPreload from '@/app/components/IconPreload'
 import { getRequestT } from '@/lib/i18n/server'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   try {
     const mod = filterModContent(await getMod(params.slug))
     const url = `https://modrinth.black/mod/${params.slug}/gallery`
@@ -42,9 +43,10 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function ModGalleryPage({ params }) {
+export default async function ModGalleryPage(props) {
+  const params = await props.params
   const { slug } = params
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/mods" backKey="project.backToMods" />
   }

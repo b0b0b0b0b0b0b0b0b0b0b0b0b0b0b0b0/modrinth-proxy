@@ -8,7 +8,7 @@ import { getAstralRinthData } from '@/lib/astralrinth'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('app.metaTitle'),
     description: t('app.metaDesc'),
@@ -16,7 +16,7 @@ export async function generateMetadata() {
 }
 
 export default async function AppPage() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   const [launcherData, astralData] = await Promise.all([
     getLauncherData(),
     getAstralRinthData(),

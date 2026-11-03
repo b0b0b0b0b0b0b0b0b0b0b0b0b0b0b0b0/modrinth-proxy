@@ -2,7 +2,7 @@ import LanguageSettingsCard from '../../components/LanguageSettingsCard'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('settings.metaTitle'),
     robots: 'noindex, nofollow',

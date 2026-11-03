@@ -10,8 +10,9 @@ import { getRequestT } from '@/lib/i18n/server'
 import { intlLocale } from '@/lib/i18n/config'
 import { pluralize } from '@/lib/i18n/pluralize'
 
-export async function generateMetadata({ params }) {
-  const { t } = getRequestT()
+export async function generateMetadata(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   const collection = await getCollection(params.id)
   if (!collection) {
     return {
@@ -33,8 +34,10 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export default async function CollectionPage({ params, searchParams }) {
-  const { t, locale } = getRequestT()
+export default async function CollectionPage(props) {
+  const searchParams = await props.searchParams
+  const params = await props.params
+  const { t, locale } = await getRequestT()
   const collection = await getCollection(params.id)
   if (!collection) notFound()
 

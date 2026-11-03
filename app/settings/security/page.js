@@ -9,13 +9,14 @@ import { accountSettingsMetadata, requireUser } from '../accountPage'
 
 export const dynamic = 'force-dynamic'
 
-export function generateMetadata() {
-  return accountSettingsMetadata('sn.security')
+export async function generateMetadata() {
+  return await accountSettingsMetadata('sn.security')
 }
 
-export default function SecuritySettingsPage({ searchParams }) {
-  const { t } = getRequestT()
-  const user = requireUser('/settings/security')
+export default async function SecuritySettingsPage(props) {
+  const searchParams = await props.searchParams
+  const { t } = await getRequestT()
+  const user = await requireUser('/settings/security')
   const githubEnabled = githubAuthEnabled()
   const telegramBot = telegramBotId()
   const favorites = getFavorites(user.id)

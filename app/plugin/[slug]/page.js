@@ -8,19 +8,21 @@ import ResourceHeader from '@/app/components/ResourceHeader'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const plugin = await getMod(params.slug)
-    return buildProjectOverviewMetadata('plugin', params.slug, plugin)
+    return await buildProjectOverviewMetadata('plugin', params.slug, plugin)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('plugin')
+    return await buildProjectNotFoundMetadata('plugin')
   }
 }
 
-export default async function PluginPage({ params }) {
+export default async function PluginPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/plugins" backKey="project.backToPlugins" />
   }

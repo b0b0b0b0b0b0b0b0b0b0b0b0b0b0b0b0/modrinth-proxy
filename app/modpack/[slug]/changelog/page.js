@@ -10,17 +10,19 @@ import IconPreload from '@/app/components/IconPreload'
 import ChangelogVersionEntries from '@/app/components/ChangelogVersionEntries'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const modpack = await getMod(params.slug)
-    return buildProjectChangelogMetadata('modpack', params.slug, modpack)
+    return await buildProjectChangelogMetadata('modpack', params.slug, modpack)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('modpack')
+    return await buildProjectNotFoundMetadata('modpack')
   }
 }
 
-export default async function ModpackChangelogPage({ params }) {
+export default async function ModpackChangelogPage(props) {
+  const params = await props.params
   const { slug } = params;
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/modpacks" backKey="project.backToModpacks" />

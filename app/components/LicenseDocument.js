@@ -105,8 +105,8 @@ function LicenseTableOfContents({ document, t }) {
   )
 }
 
-export default function LicenseDocument() {
-  const { t } = getRequestT()
+export default async function LicenseDocument() {
+  const { t } = await getRequestT()
   const document = getParsedSiteLicense()
 
   return (

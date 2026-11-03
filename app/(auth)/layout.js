@@ -6,8 +6,8 @@ import AuthCard from './AuthCard'
 
 export const dynamic = 'force-dynamic'
 
-export default function AuthLayout({ children }) {
-  const held = heldIdentity()
+export default async function AuthLayout({ children }) {
+  const held = await heldIdentity()
   return (
     <>
       <Suspense fallback={null}>

@@ -26,9 +26,9 @@ const TYPE_LABEL_KEYS = {
 }
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
-    title: isAdmin(getSessionUser()) ? t('st.metaTitle') : t('notfound.metaTitle'),
+    title: isAdmin(await getSessionUser()) ? t('st.metaTitle') : t('notfound.metaTitle'),
     robots: 'noindex, nofollow',
   }
 }
@@ -87,10 +87,10 @@ function Tile({ value, label, index }) {
   )
 }
 
-export default function StatsPage() {
-  if (!isAdmin(getSessionUser())) notFound()
+export default async function StatsPage() {
+  if (!isAdmin(await getSessionUser())) notFound()
 
-  const { t, locale } = getRequestT()
+  const { t, locale } = await getRequestT()
   const stats = getSiteStats()
   const label = pluralize(stats.users, locale, t('st.userOne'), t('st.userFew'), t('st.userMany'))
   const typeLabels = Object.fromEntries(Object.entries(TYPE_LABEL_KEYS).map(([type, key]) => [type, t(key)]))

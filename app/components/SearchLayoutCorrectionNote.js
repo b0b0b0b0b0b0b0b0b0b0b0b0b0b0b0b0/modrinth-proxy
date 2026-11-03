@@ -1,8 +1,8 @@
 import DisclosureLinkMismatchBanner from '@/app/components/DisclosureLinkMismatchBanner'
 import { getRequestT } from '@/lib/i18n/server'
 
-export default function SearchLayoutCorrectionNote({ correction }) {
-  const { t } = getRequestT()
+export default async function SearchLayoutCorrectionNote({ correction }) {
+  const { t } = await getRequestT()
   return (
     <>
       <DisclosureLinkMismatchBanner />

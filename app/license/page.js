@@ -11,7 +11,7 @@ import {
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('license.metaTitle'),
     description: t('license.metaDesc'),
@@ -34,8 +34,8 @@ const SUMMARY_TITLE_STYLES = {
   network: 'text-sky-300',
 }
 
-export default function LicensePage() {
-  const { t } = getRequestT()
+export default async function LicensePage() {
+  const { t } = await getRequestT()
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 md:py-12">

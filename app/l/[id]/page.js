@@ -7,7 +7,8 @@ export const metadata = {
   robots: 'noindex, nofollow',
 }
 
-export default function SharedListPage({ params }) {
+export default async function SharedListPage(props) {
+  const params = await props.params
   const code = resolveList(params?.id)
   if (!code) notFound()
   redirect(`/account?tab=favorites&list=${code}`)

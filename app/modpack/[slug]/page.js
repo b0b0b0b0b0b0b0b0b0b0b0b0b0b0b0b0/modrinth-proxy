@@ -8,25 +8,27 @@ import ResourceHeader from '@/app/components/ResourceHeader'
 import RichMarkdownContent from '@/app/components/RichMarkdownContent'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const modpack = await getMod(params.slug)
-    return buildProjectOverviewMetadata('modpack', params.slug, modpack)
+    return await buildProjectOverviewMetadata('modpack', params.slug, modpack)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildProjectNotFoundMetadata('modpack')
+    return await buildProjectNotFoundMetadata('modpack')
   }
 }
 
-export default async function ModpackPage({ params }) {
+export default async function ModpackPage(props) {
+  const params = await props.params
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/modpacks" backKey="project.backToModpacks" />;
   }
 
   let modpack, versions, teamMembers, organization;
-  
+
   try {
     [modpack, versions, teamMembers] = await Promise.all([
       getMod(slug),

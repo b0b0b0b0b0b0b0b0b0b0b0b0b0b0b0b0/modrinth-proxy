@@ -25,20 +25,22 @@ const LINK_TINTS = {
   link: '#94a3b8',
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const server = await getServer(params.slug)
-    return buildServerPageMetadata(server, params.slug)
+    return await buildServerPageMetadata(server, params.slug)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return buildServerNotFoundMetadata()
+    return await buildServerNotFoundMetadata()
   }
 }
 
-export default async function ServerPage({ params }) {
-  const { t } = getRequestT()
+export default async function ServerPage(props) {
+  const params = await props.params
+  const { t } = await getRequestT()
   const { slug } = params;
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/servers" backKey="project.backToServers" />
   }

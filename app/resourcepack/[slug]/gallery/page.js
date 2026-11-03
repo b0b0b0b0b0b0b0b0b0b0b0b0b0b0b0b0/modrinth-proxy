@@ -9,19 +9,21 @@ import GalleryGrid from '@/app/components/GalleryGrid'
 import IconPreload from '@/app/components/IconPreload'
 import { notFoundOrThrow } from '@/lib/projectPageError'
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata(props) {
+  const params = await props.params
   try {
     const pack = filterModContent(await getMod(params.slug))
-    return buildProjectGalleryMetadata('resourcepack', params.slug, pack)
+    return await buildProjectGalleryMetadata('resourcepack', params.slug, pack)
   } catch (error) {
     if (!isModrinthNotFound(error)) return {}
-    return galleryNotFoundMetadata()
+    return await galleryNotFoundMetadata()
   }
 }
 
-export default async function ResourcepackGalleryPage({ params }) {
+export default async function ResourcepackGalleryPage(props) {
+  const params = await props.params
   const { slug } = params
-  
+
   if (await isProjectBlocked(slug)) {
     return <ProjectAccessRestricted href="/resourcepacks" backKey="project.backToResourcepacks" />
   }

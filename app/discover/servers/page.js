@@ -18,7 +18,8 @@ import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
 import { appendDisclosureExclusionNewFilters, appendDisclosureExclusionParams } from '@/lib/disclosureExclusions'
 
-export async function generateMetadata({ searchParams }) {
+export async function generateMetadata(props) {
+  const searchParams = await props.searchParams
   const { title, description } = buildServerCatalogSeo({ searchParams })
 
   return {
@@ -34,12 +35,13 @@ export async function generateMetadata({ searchParams }) {
   }
 }
 
-export default async function ServersPage({ searchParams }) {
+export default async function ServersPage(props) {
+  const searchParams = await props.searchParams
   const query = searchParams.q || '';
   const version = searchParams.sgv || searchParams.v || '';
   const sst = (searchParams.sst === 'online' || searchParams.sst === 'offline') ? searchParams.sst : 'online';
   const sort = searchParams.sort || (searchParams.sst && !['online', 'offline'].includes(searchParams.sst) ? searchParams.sst : 'relevance');
-  
+
   let sortBy = 'relevance';
   if (sort === 'plays') sortBy = 'minecraft_java_server.verified_plays_2w';
   else if (sort === 'players') sortBy = 'minecraft_java_server.ping.data.players_online';
@@ -50,7 +52,7 @@ export default async function ServersPage({ searchParams }) {
 
   const page = parseInt(searchParams.page || '1');
   const limit = 20;
-  
+
   let mcVersions = { release: [], full: [] };
   try {
     const apiVersions = await getMinecraftVersions();
@@ -63,17 +65,17 @@ export default async function ServersPage({ searchParams }) {
   } catch (error) {
     console.error('Failed to load Minecraft versions:', error);
   }
-  
+
 
   const scParams = Array.isArray(searchParams.sc) ? searchParams.sc : (searchParams.sc ? [searchParams.sc] : []);
   const sctParams = Array.isArray(searchParams.sct) ? searchParams.sct : (searchParams.sct ? [searchParams.sct] : []);
   const fParams = Array.isArray(searchParams.f) ? searchParams.f : (searchParams.f ? [searchParams.f] : []);
   const srParams = Array.isArray(searchParams.sr) ? searchParams.sr : (searchParams.sr ? [searchParams.sr] : []);
   const slParams = Array.isArray(searchParams.sl) ? searchParams.sl : (searchParams.sl ? [searchParams.sl] : []);
-  
+
   let categories = [...scParams];
   let excludedCategories = [];
-  
+
   fParams.forEach(param => {
     const decoded = decodeURIComponent(param);
     if (decoded.includes('categories:')) {
@@ -240,7 +242,7 @@ export default async function ServersPage({ searchParams }) {
     redirect(buildPageUrl(effectivePage))
   }
 
-  const ui = catalogUi('servers', data?.total_hits);
+  const ui = await catalogUi('servers', data?.total_hits);
   return (
     <>
       <MobileMenu initialVersions={mcVersions} />

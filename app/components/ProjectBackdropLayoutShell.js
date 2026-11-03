@@ -23,7 +23,7 @@ export default async function ProjectBackdropLayoutShell({ slug, children }) {
   if (project && !await isProjectBlocked(project.slug, project.id)) {
     const org = project.organization ?? project.organization_id
     if (!isOrganizationBlocked(org)) {
-      const currentPath = headers().get('x-modrinth-pathname')
+      const currentPath = (await headers()).get('x-modrinth-pathname')
       const canonicalPath = rewriteProjectPathToCanonical(currentPath, project)
       if (canonicalPath) {
         permanentRedirect(canonicalPath)

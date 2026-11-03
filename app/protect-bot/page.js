@@ -4,7 +4,7 @@ import RichText from '@/app/components/RichText'
 import { getRequestT } from '@/lib/i18n/server'
 
 export async function generateMetadata() {
-  const { t } = getRequestT()
+  const { t } = await getRequestT()
   return {
     title: t('bot.metaTitle'),
     description: t('bot.metaDesc'),
@@ -15,8 +15,8 @@ export async function generateMetadata() {
   }
 }
 
-export default function ProtectBotLandingPage() {
-  const { t } = getRequestT()
+export default async function ProtectBotLandingPage() {
+  const { t } = await getRequestT()
   return (
     <div className="min-h-screen pb-16">
       <div className="mx-auto max-w-7xl px-4">
