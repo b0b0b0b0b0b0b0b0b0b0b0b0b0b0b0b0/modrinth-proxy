@@ -43,6 +43,7 @@ export default function TopNav({ account = null }) {
     },
     {
       href: 'https://ping.modrinth.black',
+      newTab: true,
       title: t('nav.pingServers'),
       description: t('nav.pingServersTip'),
     },
@@ -218,6 +219,8 @@ export default function TopNav({ account = null }) {
                   <a
                     key={link.href}
                     href={link.href}
+                    target={link.newTab ? '_blank' : undefined}
+                    rel={link.newTab ? 'noopener noreferrer' : undefined}
                     className="top-nav-link top-nav-link--mobile-sheet"
                     data-tooltip={link.tooltip}
                     tabIndex={panelExpanded ? undefined : -1}
@@ -270,7 +273,7 @@ export default function TopNav({ account = null }) {
             <div className="nav-more-panel" role="menu">
               <div className="nav-more-list">
                 {MORE_LINKS.map((link) => (
-                  <a key={link.href} href={link.href} className="nav-more-item" role="menuitem">
+                  <a key={link.href} href={link.href} target={link.newTab ? '_blank' : undefined} rel={link.newTab ? 'noopener noreferrer' : undefined} className="nav-more-item" role="menuitem">
                     <span className="nav-more-title">{link.title}</span>
                     <span className="nav-more-desc">{link.description}</span>
                   </a>
