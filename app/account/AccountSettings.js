@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useI18n, useT } from '../components/I18nProvider'
 import { intlLocale } from '@/lib/i18n/config'
-import { timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
+import { loadTimeZoneCities, timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import GamePicker from './GamePicker'
 import ZoneClock from './ZoneClock'
@@ -292,12 +292,23 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   const { locale } = useI18n()
   const [mounted, setMounted] = useState(false)
   const [deviceZone, setDeviceZone] = useState('')
+  const [zoneCities, setZoneCities] = useState(null)
   const zones = useMemo(() => {
-    if (!mounted) return []
-    const list = timeZoneOptions(intlLocale(locale))
+    if (!mounted || !zoneCities) return []
+    const list = timeZoneOptions(intlLocale(locale), zoneCities)
     if (!timezone || list.some((option) => option.value === timezone)) return list
-    return [timeZoneOption(timezone, intlLocale(locale)), ...list]
-  }, [mounted, locale, timezone])
+    return [timeZoneOption(timezone, intlLocale(locale), zoneCities), ...list]
+  }, [mounted, locale, timezone, zoneCities])
+
+  useEffect(() => {
+    let alive = true
+    loadTimeZoneCities(intlLocale(locale))
+      .then((cities) => alive && setZoneCities(cities))
+      .catch(() => alive && setZoneCities({}))
+    return () => {
+      alive = false
+    }
+  }, [locale])
 
   useEffect(() => {
     setMounted(true)
@@ -448,7 +459,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
                 onChange={pickTimezone}
               />
               <ZoneClock timeZone={timezone} locale={appLocale} />
-              {deviceZone && deviceZone !== timezone ? (
+              {deviceZone && zoneCities && deviceZone !== timezone ? (
                 <StyledTooltip label={t('tg.timezoneDeviceTip')}>
                   <button
                     type="button"
@@ -456,7 +467,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
                     onClick={() => pickTimezone(deviceZone)}
                     className={`${GHOST_BUTTON} mt-2`}
                   >
-                    {t('tg.timezoneDevice', { zone: timeZoneOption(deviceZone, appLocale).label })}
+                    {t('tg.timezoneDevice', { zone: timeZoneOption(deviceZone, appLocale, zoneCities).label })}
                   </button>
                 </StyledTooltip>
               ) : null}
