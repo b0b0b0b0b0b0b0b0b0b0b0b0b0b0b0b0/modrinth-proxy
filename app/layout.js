@@ -98,7 +98,7 @@ export default async function RootLayout({ children }) {
   }
 
   return (
-    <html lang={locale} className={`scroll-smooth ${nunito.variable}`} suppressHydrationWarning>
+    <html lang={locale} className={`scroll-smooth ${nunito.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <script
           id="discord:component-embed"
