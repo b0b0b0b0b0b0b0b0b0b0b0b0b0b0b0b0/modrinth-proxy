@@ -105,10 +105,14 @@ export default async function RootLayout({ children }) {
           type="application/json"
           dangerouslySetInnerHTML={{ __html: discordEmbed }}
         />
-        <script
+        <Script
+          id="chunk-load-recovery"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: CHUNK_LOAD_RECOVERY_INLINE }}
         />
-        <script
+        <Script
+          id="early-preferences"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               try {

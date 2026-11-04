@@ -254,6 +254,7 @@ export default function ModrinthTrafficChart({ initial }) {
   const { limit, minutes } = data
   const scale = Math.max(limit, ...minutes.map((minute) => minute.requests)) * 1.08
   const total = minutes.reduce((sum, minute) => sum + minute.requests, 0)
+  const details = data.details !== false
   const peak = Math.max(0, ...minutes.map((minute) => minute.requests))
   const limited = minutes.reduce((sum, minute) => sum + minute.limited, 0)
   const latest = [...minutes].reverse().find((minute) => minute.minRemaining !== null)
@@ -360,7 +361,7 @@ export default function ModrinthTrafficChart({ initial }) {
               <StyledTooltip key={minute.at} label={tip}>
                 <button
                   type="button"
-                  onClick={() => pick(minute.at)}
+                  onClick={details ? () => pick(minute.at) : undefined}
                   className={`group flex h-full min-w-0 flex-1 flex-col justify-end rounded-xs ${active ? 'bg-white/10' : ''}`}
                 >
                   <div
@@ -382,7 +383,7 @@ export default function ModrinthTrafficChart({ initial }) {
       </div>
       <div className="mt-1 flex justify-between text-[10px] tabular-nums text-gray-600 dark:text-gray-500">
         <span>{time.format(new Date(minutes[0].at))}</span>
-        <span>{t('st.mrClickHint')}</span>
+        {details ? <span>{t('st.mrClickHint')}</span> : null}
         <span>{time.format(new Date(minutes[minutes.length - 1].at))}</span>
       </div>
 
@@ -402,6 +403,8 @@ export default function ModrinthTrafficChart({ initial }) {
         </div>
       ) : null}
 
+      {details ? (
+      <>
       <div className="mt-6">
         <div className="mb-2 flex items-center justify-between gap-3">
           <h3 className="text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{t('st.mrMinutesTitle')}</h3>
@@ -498,6 +501,8 @@ export default function ModrinthTrafficChart({ initial }) {
           </p>
         ) : null}
       </div>
+      </>
+      ) : null}
 
       <p className="mt-3 text-[11px] leading-relaxed text-gray-600 dark:text-gray-500">{t('st.mrHint')}</p>
     </div>
