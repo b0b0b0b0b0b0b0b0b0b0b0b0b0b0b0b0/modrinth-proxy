@@ -225,6 +225,11 @@ export default function ModrinthTrafficChart({ initial }) {
   const [data, setData] = useState(initial)
   const [selected, setSelected] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [zone, setZone] = useState('UTC')
+
+  useEffect(() => {
+    setZone(undefined)
+  }, [])
 
   const load = useCallback(
     (minute) => {
@@ -258,10 +263,10 @@ export default function ModrinthTrafficChart({ initial }) {
   const peak = Math.max(0, ...minutes.map((minute) => minute.requests))
   const limited = minutes.reduce((sum, minute) => sum + minute.limited, 0)
   const latest = [...minutes].reverse().find((minute) => minute.minRemaining !== null)
-  const time = useMemo(() => new Intl.DateTimeFormat(intlLocale(locale), { hour: '2-digit', minute: '2-digit' }), [locale])
+  const time = useMemo(() => new Intl.DateTimeFormat(intlLocale(locale), { hour: '2-digit', minute: '2-digit', timeZone: zone }), [locale, zone])
   const date = useMemo(
-    () => new Intl.DateTimeFormat(intlLocale(locale), { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }),
-    [locale],
+    () => new Intl.DateTimeFormat(intlLocale(locale), { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit', timeZoneName: 'short', timeZone: zone }),
+    [locale, zone],
   )
   const sources = data.sources || []
   const subnets = data.subnets || []
