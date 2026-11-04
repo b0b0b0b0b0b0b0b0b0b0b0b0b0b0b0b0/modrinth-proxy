@@ -502,6 +502,7 @@
     "errPassword": "Password: 8 to 128 characters.",
     "errRate": "Too many attempts. Try again later.",
     "errGeneric": "That didn’t work. Try again.",
+    "errShield": "The guard kitten is double-checking your browser — that’s how we keep intruders out. Wait a minute and try again.",
     "noRecovery": "We don’t ask for an email, so a lost password can’t be recovered — keep it safe.",
     "hello": "Hi, {name}",
     "caughtTitle": "Caught",

@@ -484,6 +484,7 @@
     "errPassword": "Password: da 8 a 128 caratteri.",
     "errRate": "Troppi tentativi. Riprova più tardi.",
     "errGeneric": "Non ha funzionato. Riprova.",
+    "errShield": "Il gattino di guardia sta ricontrollando il tuo browser: così teniamo lontani gli intrusi. Aspetta un minuto e riprova.",
     "noRecovery": "Non chiediamo l’email, quindi la password non si può recuperare — conservala bene.",
     "hello": "Ciao, {name}",
     "caughtTitle": "Presi",

@@ -157,10 +157,10 @@ export default function AuthCard({ github = false, telegram = null, claim = null
         return
       }
       const data = await response.json().catch(() => null)
-      fail(ERROR_KEYS[data?.error] || 'account.errGeneric')
+      fail(data ? ERROR_KEYS[data.error] || 'account.errGeneric' : 'account.errShield')
       captcha.prepare()
     } catch {
-      fail('account.errGeneric')
+      fail('account.errShield')
       captcha.prepare()
     } finally {
       setBusy(false)

@@ -484,6 +484,7 @@
     "errPassword": "Mot de passe : de 8 à 128 caractères.",
     "errRate": "Trop de tentatives. Réessaie plus tard.",
     "errGeneric": "Ça n’a pas marché. Réessaie.",
+    "errShield": "Le chaton gardien revérifie ton navigateur : c’est comme ça qu’on tient les intrus à l’écart. Attends une minute et réessaie.",
     "noRecovery": "On ne demande pas d’e-mail, donc le mot de passe ne peut pas être récupéré — garde-le bien.",
     "hello": "Salut, {name}",
     "caughtTitle": "Attrapé",

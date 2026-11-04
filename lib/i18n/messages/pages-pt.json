@@ -484,6 +484,7 @@
     "errPassword": "Senha: de 8 a 128 caracteres.",
     "errRate": "Tentativas demais. Tente mais tarde.",
     "errGeneric": "Não deu certo. Tente de novo.",
+    "errShield": "O gatinho de guarda está conferindo seu navegador de novo — é assim que mantemos invasores longe. Espere um minuto e tente de novo.",
     "noRecovery": "Não pedimos e-mail, então a senha não pode ser recuperada — guarde bem.",
     "hello": "Olá, {name}",
     "caughtTitle": "Pegos",

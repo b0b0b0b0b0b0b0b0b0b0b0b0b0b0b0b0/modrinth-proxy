@@ -484,6 +484,7 @@
     "errPassword": "Hasło: od 8 do 128 znaków.",
     "errRate": "Za dużo prób. Spróbuj później.",
     "errGeneric": "Nie udało się. Spróbuj jeszcze raz.",
+    "errShield": "Kotek-strażnik jeszcze raz sprawdza twoją przeglądarkę — tak chronimy konta przed włamywaczami. Poczekaj chwilę i spróbuj jeszcze raz.",
     "noRecovery": "Nie pytamy o e-mail, więc hasła nie da się odzyskać — zachowaj je.",
     "hello": "Cześć, {name}",
     "caughtTitle": "Złapane",

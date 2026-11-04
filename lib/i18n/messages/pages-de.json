@@ -484,6 +484,7 @@
     "errPassword": "Passwort: 8 bis 128 Zeichen.",
     "errRate": "Zu viele Versuche. Probier es später noch mal.",
     "errGeneric": "Das hat nicht geklappt. Probier es noch mal.",
+    "errShield": "Das Wachkätzchen prüft deinen Browser noch einmal — so halten wir Einbrecher fern. Warte kurz und probier es noch mal.",
     "noRecovery": "Wir fragen nicht nach einer E-Mail, deshalb lässt sich das Passwort nicht wiederherstellen — heb es gut auf.",
     "hello": "Hallo, {name}",
     "caughtTitle": "Gefangen",

@@ -484,6 +484,7 @@
     "errPassword": "Mật khẩu: từ 8 đến 128 ký tự.",
     "errRate": "Thử quá nhiều lần. Hãy thử lại sau.",
     "errGeneric": "Không được rồi. Hãy thử lại.",
+    "errShield": "Mèo canh gác đang kiểm tra lại trình duyệt của bạn — đó là cách chúng tôi chặn kẻ xâm nhập. Đợi một phút rồi thử lại nhé.",
     "noRecovery": "Chúng tôi không hỏi email nên không thể khôi phục mật khẩu — hãy lưu lại cẩn thận.",
     "hello": "Chào {name}",
     "caughtTitle": "Đã bắt",

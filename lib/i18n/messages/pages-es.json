@@ -484,6 +484,7 @@
     "errPassword": "Contraseña: de 8 a 128 caracteres.",
     "errRate": "Demasiados intentos. Prueba más tarde.",
     "errGeneric": "No ha funcionado. Inténtalo otra vez.",
+    "errShield": "El gatito guardián está revisando tu navegador: así mantenemos fuera a los intrusos. Espera un minuto e inténtalo otra vez.",
     "noRecovery": "No pedimos correo, así que la contraseña no se puede recuperar — guárdala bien.",
     "hello": "Hola, {name}",
     "caughtTitle": "Atrapados",

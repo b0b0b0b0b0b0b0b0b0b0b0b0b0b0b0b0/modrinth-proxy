@@ -484,6 +484,7 @@
     "errPassword": "Lösenord: 8 till 128 tecken.",
     "errRate": "För många försök. Försök igen senare.",
     "errGeneric": "Det gick inte. Försök igen.",
+    "errShield": "Vaktkattungen dubbelkollar din webbläsare — så håller vi inkräktare borta. Vänta en minut och försök igen.",
     "noRecovery": "Vi frågar inte efter e-post, så lösenordet går inte att återställa — spara det.",
     "hello": "Hej, {name}",
     "caughtTitle": "Fångat",
