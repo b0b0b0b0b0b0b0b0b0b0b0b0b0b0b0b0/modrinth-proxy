@@ -11,6 +11,7 @@ import CountUp from './CountUp'
 import RoyalKitten from './RoyalKitten'
 import { DaysChart, TypeSplit } from './StatsCharts'
 import ModrinthTrafficChart from './ModrinthTrafficChart'
+import { trafficLogEnabled } from '@/lib/modrinthTraffic'
 import { getModrinthTrafficReport } from '@/lib/modrinthTrafficReport'
 
 export const dynamic = 'force-dynamic'
@@ -140,9 +141,11 @@ export default async function StatsPage() {
         <DaysChart days={stats.days} label={t('st.byDay')} />
       </Card>
 
-      <Card title={t('st.mrTitle')}>
-        <ModrinthTrafficChart initial={getModrinthTrafficReport()} />
-      </Card>
+      {trafficLogEnabled() ? (
+        <Card title={t('st.mrTitle')}>
+          <ModrinthTrafficChart initial={getModrinthTrafficReport()} />
+        </Card>
+      ) : null}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Card title={t('st.likes')}>

@@ -8,6 +8,7 @@ import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
+import { isAdmin } from '@/lib/admins'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import GameProfileSync from './components/GameProfileSync'
 import FestiveScoreSync from './components/FestiveScoreSync'
@@ -203,7 +204,7 @@ export default async function RootLayout({ children }) {
           <DownloadHistoryTracker />
           <GameProfileSync />
           <FestiveScoreSync />
-          <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser) } : null} />
+          <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser), admin: isAdmin(sessionUser) } : null} />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4!">
               <div className="flex min-w-0 items-center gap-4 md:gap-6">

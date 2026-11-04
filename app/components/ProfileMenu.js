@@ -24,6 +24,7 @@ const ICONS = {
   ],
   logIn: ['M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3'],
   logOut: ['M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9'],
+  stats: ['M3 3v16a2 2 0 0 0 2 2h16', 'M18 17V9', 'M13 17V5', 'M8 17v-3'],
 }
 
 const ITEM =
@@ -247,6 +248,13 @@ export default function ProfileMenu({ account, linkClassName }) {
             ))}
 
             <div className="mx-2 my-1.5 h-px bg-gray-800" role="separator" />
+
+            {account?.admin ? (
+              <Link href="/st" role="menuitem" onClick={close} className={ITEM}>
+                <Icon paths={ICONS.stats} />
+                <span className="min-w-0 flex-1 truncate">{t('nav.stats')}</span>
+              </Link>
+            ) : null}
 
             <Link href="/settings" role="menuitem" onClick={close} className={ITEM}>
               <Icon paths={ICONS.settings} />
