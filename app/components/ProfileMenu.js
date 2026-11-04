@@ -47,7 +47,7 @@ function Avatar({ src, className }) {
       width={128}
       height={128}
       draggable={false}
-      className={`shrink-0 -scale-x-100 scale-y-[1.12] object-contain ${className}`}
+      className={`shrink-0 object-contain ${className}`}
     />
   )
 }

@@ -10,7 +10,7 @@ import {
 } from '@/lib/auth'
 import { clearLoginFailures, createCaptcha, recordLoginFailure, recordSignup, signupAllowed, verifyCaptcha } from '@/lib/captcha'
 import { isInternalRequest } from '@/lib/internalApi'
-import { userAvatarUrl } from '@/lib/minecraftAvatar'
+import { absoluteAvatarUrl, userAvatarUrl } from '@/lib/minecraftAvatar'
 import { checkRateLimit } from '@/lib/rateLimit'
 
 export const dynamic = 'force-dynamic'
@@ -29,7 +29,7 @@ function clientIp(value) {
 }
 
 function publicUser(user) {
-  return { id: user.id, username: user.username, mcName: user.mc_name || null, avatar: userAvatarUrl(user) }
+  return { id: user.id, username: user.username, mcName: user.mc_name || null, avatar: absoluteAvatarUrl(userAvatarUrl(user)) }
 }
 
 function issue(userId) {

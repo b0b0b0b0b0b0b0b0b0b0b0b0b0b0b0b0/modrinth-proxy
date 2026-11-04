@@ -95,7 +95,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path((?!_next/static|_next/image|favicon.ico|icon.png|manifest.json|sw.js|sw-v2.js|workbox-).*)',
+        source: '/:path((?!_next/static|_next/image|api/avatar/|favicon.ico|icon.png|manifest.json|sw.js|sw-v2.js|workbox-).*)',
         headers: [
           {
             key: 'Cache-Control',
