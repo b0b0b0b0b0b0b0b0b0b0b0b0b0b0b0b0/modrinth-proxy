@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useT } from '../components/I18nProvider'
+import { useI18n, useT } from '../components/I18nProvider'
+import { intlLocale } from '@/lib/i18n/config'
+import { timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import GamePicker from './GamePicker'
 import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
@@ -237,27 +239,6 @@ export function GameSettings({ game }) {
   )
 }
 
-function timeZoneOptions(saved) {
-  let zones = []
-  try {
-    zones = Intl.supportedValuesOf('timeZone')
-  } catch {}
-  if (saved && !zones.includes(saved)) zones = [saved, ...zones]
-  const now = new Date()
-  return zones.map((zone) => {
-    let offset = ''
-    try {
-      offset =
-        new Intl.DateTimeFormat('en-US', { timeZone: zone, timeZoneName: 'shortOffset' })
-          .formatToParts(now)
-          .find((part) => part.type === 'timeZoneName')?.value || ''
-    } catch {}
-    const label = zone.replace(/_/g, ' ')
-    const hint = offset.replace('GMT', 'UTC') || 'UTC'
-    return { value: zone, label, hint, search: `${label} ${hint}` }
-  })
-}
-
 function browserTimeZone() {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone || ''
@@ -274,7 +255,12 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [quiet, setQuiet] = useState(telegram.quiet)
   const [timezone, setTimezone] = useState(telegram.timezone || '')
-  const zones = useMemo(() => timeZoneOptions(timezone), [timezone])
+  const { locale } = useI18n()
+  const zones = useMemo(() => {
+    const list = timeZoneOptions(intlLocale(locale))
+    if (!timezone || list.some((option) => option.value === timezone)) return list
+    return [timeZoneOption(timezone, intlLocale(locale)), ...list]
+  }, [locale, timezone])
 
   useEffect(() => {
     if (!telegram.timezone) setTimezone(browserTimeZone())
