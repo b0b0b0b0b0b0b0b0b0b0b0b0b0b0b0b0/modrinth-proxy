@@ -646,11 +646,19 @@
     "muteProject": "Nie śledź nowych wersji tego projektu",
     "unmuteProject": "Znowu śledź nowe wersje",
     "muteHint": "Przekreślony dzwonek przy wierszu wyłącza śledzenie nowych wersji tego projektu: znika z „Aktualizacji” i z Telegrama. Ulubionych to nie dotyczy.",
-    "quietTitle": "Nie przeszkadzać w nocy",
-    "quietHint": "Od 23:00 do 7:00 twojego czasu bot śpi, a wszystko, co wyszło w nocy, wyśle po 7 rano.",
+    "quietTitle": "Nie przeszkadzać",
+    "quietHint": "W tym czasie bot milczy, a wszystko wyśle jednym podsumowaniem, gdy cisza się skończy.",
     "timezoneTitle": "Strefa czasowa",
     "timezoneHint": "Dzięki niej bot wie, kiedy masz noc.",
-    "timezoneSearch": "Miasto lub UTC…"
+    "timezoneSearch": "Miasto lub UTC…",
+    "quietCard": "Godziny ciszy",
+    "quietWindowTitle": "Czas ciszy",
+    "quietWindowHint": "Dowolny: noc, szkoła, praca. Do 7 godzin.",
+    "quietFrom": "Początek",
+    "quietTo": "Koniec",
+    "quietLength": "{h} h ciszy na dobę",
+    "quietNowOn": "Teraz cisza — bot napisze o {t}",
+    "quietNowOff": "Bot jest teraz aktywny, cisza zacznie się o {t}"
   },
   "set": {
     "trackDownloads": "Śledź nowe wersje pobranych",

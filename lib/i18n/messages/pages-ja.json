@@ -646,11 +646,19 @@
     "muteProject": "このプロジェクトの新バージョンを追跡しない",
     "unmuteProject": "新バージョンの追跡を再開",
     "muteHint": "行の横の斜線入りベルで、そのプロジェクトの新バージョンを追跡しなくなります。「アップデート」と Telegram から消えます。お気に入りには影響しません。",
-    "quietTitle": "夜間は通知しない",
-    "quietHint": "あなたの時間で 23:00〜7:00 はボットがお休みし、夜の間に出たものは朝 7 時以降に届きます。",
+    "quietTitle": "通知しない",
+    "quietHint": "この時間はボットが静かにし、終わったらまとめて一通で届けます。",
     "timezoneTitle": "タイムゾーン",
     "timezoneHint": "ボットはこれであなたの夜の時間を判断します。",
-    "timezoneSearch": "都市名または UTC…"
+    "timezoneSearch": "都市名または UTC…",
+    "quietCard": "おやすみ時間",
+    "quietWindowTitle": "おやすみの時間帯",
+    "quietWindowHint": "夜、学校、仕事など自由に。最大 7 時間。",
+    "quietFrom": "開始",
+    "quietTo": "終了",
+    "quietLength": "1 日 {h} 時間おやすみ",
+    "quietNowOn": "今はおやすみ中 — {t} に届きます",
+    "quietNowOff": "今は通知オン、{t} からおやすみ"
   },
   "set": {
     "trackDownloads": "ダウンロードしたものの新バージョンを追跡",

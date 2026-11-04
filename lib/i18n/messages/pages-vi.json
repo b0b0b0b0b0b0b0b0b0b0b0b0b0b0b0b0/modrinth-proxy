@@ -646,11 +646,19 @@
     "muteProject": "Không theo dõi phiên bản mới của dự án này",
     "unmuteProject": "Theo dõi phiên bản mới trở lại",
     "muteHint": "Chuông gạch chéo cạnh mỗi dòng sẽ ngừng theo dõi phiên bản mới của dự án đó: nó biến mất khỏi “Cập nhật” và Telegram. Mục yêu thích không bị ảnh hưởng.",
-    "quietTitle": "Không làm phiền ban đêm",
-    "quietHint": "Từ 23:00 đến 7:00 theo giờ của bạn, bot sẽ ngủ, và những gì ra mắt trong đêm sẽ được gửi sau 7 giờ sáng.",
+    "quietTitle": "Không làm phiền",
+    "quietHint": "Trong thời gian này bot im lặng và gửi mọi thứ trong một bản tóm tắt khi hết giờ yên lặng.",
     "timezoneTitle": "Múi giờ",
     "timezoneHint": "Bot dựa vào đây để biết khi nào là ban đêm ở chỗ bạn.",
-    "timezoneSearch": "Thành phố hoặc UTC…"
+    "timezoneSearch": "Thành phố hoặc UTC…",
+    "quietCard": "Giờ yên lặng",
+    "quietWindowTitle": "Khung giờ yên lặng",
+    "quietWindowHint": "Tùy bạn: ban đêm, đi học, đi làm. Tối đa 7 giờ.",
+    "quietFrom": "Bắt đầu",
+    "quietTo": "Kết thúc",
+    "quietLength": "{h} giờ yên lặng mỗi ngày",
+    "quietNowOn": "Đang yên lặng — bot sẽ nhắn lúc {t}",
+    "quietNowOff": "Bot đang hoạt động, yên lặng bắt đầu lúc {t}"
   },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",

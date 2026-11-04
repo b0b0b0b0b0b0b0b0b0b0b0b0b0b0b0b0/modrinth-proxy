@@ -20,6 +20,8 @@ export default async function NotificationSettingsPage() {
         notify: Boolean(user.telegram_notify),
         quiet: Boolean(user.quiet_nights),
         timezone: user.timezone || '',
+        quietFrom: user.quiet_from,
+        quietTo: user.quiet_to,
       }}
       trackDownloads={!user.skip_download_updates}
       mutedCount={getNotifyMutes(user.id).size}

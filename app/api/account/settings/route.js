@@ -6,10 +6,11 @@ import {
   isServerCore,
   setAccountPreference,
   setGameProfile,
+  setQuietWindow,
   setUserTimezone,
 } from '@/lib/account'
 import { getRequestLocale } from '@/lib/i18n/server'
-import { isValidTimeZone } from '@/lib/quietHours'
+import { isValidQuietWindow, isValidTimeZone } from '@/lib/quietHours'
 import { checkRateLimit } from '@/lib/rateLimit'
 import { setTelegramNotify } from '@/lib/telegramBot'
 
@@ -53,11 +54,16 @@ export async function POST(request) {
   const hasProfile = Object.keys(profile).length > 0
   const hasTimezone = body?.timezone !== undefined
   if (hasTimezone && !isValidTimeZone(body.timezone)) return Response.json({ error: 'bad_request' }, { status: 400 })
-  if (booleans.length === 0 && !unmuteAll && !hasProfile && !hasTimezone) {
+  const hasQuietWindow = body?.quietFrom !== undefined || body?.quietTo !== undefined
+  if (hasQuietWindow && !isValidQuietWindow(body.quietFrom, body.quietTo)) {
+    return Response.json({ error: 'bad_request' }, { status: 400 })
+  }
+  if (booleans.length === 0 && !unmuteAll && !hasProfile && !hasTimezone && !hasQuietWindow) {
     return Response.json({ error: 'bad_request' }, { status: 400 })
   }
   if (hasProfile) setGameProfile(user.id, profile)
   if (hasTimezone) setUserTimezone(user.id, body.timezone)
+  if (hasQuietWindow) setQuietWindow(user.id, body.quietFrom, body.quietTo)
 
   for (const [key, value] of booleans) {
     if (key === 'telegram') setTelegramNotify(user.id, value, await getRequestLocale())

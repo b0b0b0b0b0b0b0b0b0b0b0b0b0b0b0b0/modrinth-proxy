@@ -646,11 +646,19 @@
     "muteProject": "Neue Versionen dieses Projekts nicht verfolgen",
     "unmuteProject": "Neue Versionen wieder verfolgen",
     "muteHint": "Die durchgestrichene Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt.",
-    "quietTitle": "Nachts nicht stören",
-    "quietHint": "Von 23:00 bis 7:00 deiner Zeit schläft der Bot, und alles, was über Nacht erschienen ist, kommt nach 7 Uhr.",
+    "quietTitle": "Nicht stören",
+    "quietHint": "In dieser Zeit schweigt der Bot und schickt alles in einer Übersicht, sobald die Ruhezeit vorbei ist.",
     "timezoneTitle": "Zeitzone",
     "timezoneHint": "Daran erkennt der Bot, wann bei dir Nacht ist.",
-    "timezoneSearch": "Stadt oder UTC…"
+    "timezoneSearch": "Stadt oder UTC…",
+    "quietCard": "Ruhezeiten",
+    "quietWindowTitle": "Ruhezeit",
+    "quietWindowHint": "Wie du willst: Nacht, Schule, Arbeit. Bis zu 7 Stunden.",
+    "quietFrom": "Beginn",
+    "quietTo": "Ende",
+    "quietLength": "{h} Std. Ruhe pro Tag",
+    "quietNowOn": "Gerade ist Ruhe – der Bot schreibt um {t}",
+    "quietNowOff": "Der Bot ist gerade aktiv, Ruhe beginnt um {t}"
   },
   "set": {
     "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",

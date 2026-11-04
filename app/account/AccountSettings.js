@@ -8,6 +8,15 @@ import { timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import GamePicker from './GamePicker'
 import ZoneClock from './ZoneClock'
+import QuietDayBar from './QuietDayBar'
+import {
+  DAY_MINUTES,
+  QUIET_STEP,
+  isValidQuietWindow,
+  msUntilQuietEnd,
+  normalizeQuietWindow,
+  quietLength,
+} from '@/lib/quietHours'
 import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
 import { rememberProfileField } from '@/lib/gameProfileSync'
 import {
@@ -244,6 +253,21 @@ export function GameSettings({ game }) {
   )
 }
 
+function clockLabel(minutes, locale) {
+  const hour = Math.floor(minutes / 60) % 24
+  const minute = String(minutes % 60).padStart(2, '0')
+  if (locale.toLowerCase().startsWith('en')) return `${hour % 12 || 12}:${minute} ${hour < 12 ? 'AM' : 'PM'}`
+  return `${String(hour).padStart(2, '0')}:${minute}`
+}
+
+function quietTimeOptions(locale, isAllowed = () => true) {
+  const options = []
+  for (let minutes = 0; minutes < DAY_MINUTES; minutes += QUIET_STEP) {
+    if (isAllowed(minutes)) options.push({ value: String(minutes), label: clockLabel(minutes, locale) })
+  }
+  return options
+}
+
 function browserTimeZone() {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone || ''
@@ -260,6 +284,10 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [quiet, setQuiet] = useState(telegram.quiet)
   const [timezone, setTimezone] = useState(telegram.timezone || '')
+  const [savedWindow, setSavedWindow] = useState(() => normalizeQuietWindow(telegram.quietFrom, telegram.quietTo))
+  const [draftWindow, setDraftWindow] = useState(null)
+  const quietWindow = draftWindow || savedWindow
+  const [, setClockTick] = useState(0)
   const { locale } = useI18n()
   const [mounted, setMounted] = useState(false)
   const zones = useMemo(() => {
@@ -273,6 +301,49 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
     setMounted(true)
     if (!telegram.timezone) setTimezone(browserTimeZone())
   }, [telegram.timezone])
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setClockTick((value) => value + 1), 30 * 1000)
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const appLocale = intlLocale(locale)
+  const fromOptions = useMemo(() => quietTimeOptions(appLocale), [appLocale])
+  const toOptions = useMemo(
+    () => quietTimeOptions(appLocale, (minutes) => isValidQuietWindow(quietWindow.from, minutes)),
+    [appLocale, quietWindow.from],
+  )
+
+  const saveQuietWindow = (next) => {
+    const previous = savedWindow
+    save('quietWindow', { quietFrom: next.from, quietTo: next.to }, () => setSavedWindow(next), () => setSavedWindow(previous))
+  }
+
+  const pickQuietFrom = (value) => {
+    const from = Number(value)
+    const to = isValidQuietWindow(from, quietWindow.to) ? quietWindow.to : (from + 7 * 60) % DAY_MINUTES
+    saveQuietWindow({ from, to })
+  }
+
+  const pickQuietTo = (value) => saveQuietWindow({ from: quietWindow.from, to: Number(value) })
+
+  const commitQuietWindow = (next) => {
+    setDraftWindow(null)
+    if (next.from !== savedWindow.from || next.to !== savedWindow.to) saveQuietWindow(next)
+  }
+
+  let quietStatus = ''
+  if (mounted && quiet && timezone) {
+    try {
+      const left = msUntilQuietEnd(timezone, quietWindow.from, quietWindow.to)
+      quietStatus = left > 0
+        ? t('tg.quietNowOn', { t: clockLabel(quietWindow.to, appLocale) })
+        : t('tg.quietNowOff', { t: clockLabel(quietWindow.from, appLocale) })
+    } catch {}
+  }
+  const quietHours = new Intl.NumberFormat(appLocale, { maximumFractionDigits: 1 }).format(
+    quietLength(quietWindow.from, quietWindow.to) / 60,
+  )
 
   const toggleQuiet = () =>
     save(
@@ -318,29 +389,64 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
               </button>
             )}
           </Setting>
-          {telegram.linked && notify ? (
-            <>
-              <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
-                <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />
-              </Setting>
-              <Setting wide title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
-                <div className="w-full shrink-0 sm:w-72">
-                  <GamePicker
-                    compact
-                    wideMenu
-                    label={t('tg.timezoneTitle')}
-                    value={timezone}
-                    disabled={Boolean(busy)}
-                    searchPlaceholder={t('tg.timezoneSearch')}
-                    emptyText={t('set.nothingFound')}
-                    options={zones.some((option) => option.value === timezone) ? zones : [{ value: timezone, label: '…' }, ...zones]}
-                    onChange={pickTimezone}
-                  />
-                  <ZoneClock timeZone={timezone} locale={intlLocale(locale)} />
-                </div>
-              </Setting>
-            </>
-          ) : null}
+        </SettingsCard>
+      ) : null}
+
+      {telegram.botId && telegram.linked && notify ? (
+        <SettingsCard title={t('tg.quietCard')}>
+          <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
+            <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />
+          </Setting>
+          <Setting wide title={t('tg.quietWindowTitle')} hint={t('tg.quietWindowHint')}>
+            <div className={`w-full shrink-0 transition-opacity sm:w-72 ${quiet ? '' : 'opacity-60'}`}>
+              <div className="grid grid-cols-2 gap-2">
+                <GamePicker
+                  label={t('tg.quietFrom')}
+                  value={String(quietWindow.from)}
+                  disabled={Boolean(busy)}
+                  options={fromOptions}
+                  onChange={pickQuietFrom}
+                />
+                <GamePicker
+                  label={t('tg.quietTo')}
+                  value={String(quietWindow.to)}
+                  disabled={Boolean(busy)}
+                  options={toOptions}
+                  onChange={pickQuietTo}
+                />
+              </div>
+              <QuietDayBar
+                from={quietWindow.from}
+                to={quietWindow.to}
+                active={quiet}
+                disabled={Boolean(busy)}
+                labels={{ from: t('tg.quietFrom'), to: t('tg.quietTo') }}
+                formatTime={(minutes) => clockLabel(minutes, appLocale)}
+                onChange={setDraftWindow}
+                onCommit={commitQuietWindow}
+              />
+              <p className="mt-1.5 text-xs leading-snug text-gray-600 dark:text-gray-500">
+                {t('tg.quietLength', { h: quietHours })}
+                {quietStatus ? <span className="block text-modrinth-green/90">{quietStatus}</span> : null}
+              </p>
+            </div>
+          </Setting>
+          <Setting wide title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
+            <div className="w-full shrink-0 sm:w-72">
+              <GamePicker
+                compact
+                wideMenu
+                label={t('tg.timezoneTitle')}
+                value={timezone}
+                disabled={Boolean(busy)}
+                searchPlaceholder={t('tg.timezoneSearch')}
+                emptyText={t('set.nothingFound')}
+                options={zones.some((option) => option.value === timezone) ? zones : [{ value: timezone, label: '…' }, ...zones]}
+                onChange={pickTimezone}
+              />
+              <ZoneClock timeZone={timezone} locale={appLocale} />
+            </div>
+          </Setting>
         </SettingsCard>
       ) : null}
 

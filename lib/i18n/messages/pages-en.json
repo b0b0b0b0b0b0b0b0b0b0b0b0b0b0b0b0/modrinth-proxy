@@ -664,11 +664,19 @@
     "muteProject": "Stop tracking new versions of this project",
     "unmuteProject": "Track new versions again",
     "muteHint": "The crossed-out bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected.",
-    "quietTitle": "Don’t disturb at night",
-    "quietHint": "From 23:00 to 7:00 your time the bot sleeps, and whatever came out overnight arrives after 7 am.",
+    "quietTitle": "Do not disturb",
+    "quietHint": "During this time the bot stays silent and sends everything in one summary once quiet hours end.",
     "timezoneTitle": "Time zone",
     "timezoneHint": "The bot uses it to know when it’s night for you.",
-    "timezoneSearch": "City or UTC…"
+    "timezoneSearch": "City or UTC…",
+    "quietCard": "Quiet hours",
+    "quietWindowTitle": "Quiet time",
+    "quietWindowHint": "Any span you like: night, school, work. Up to 7 hours.",
+    "quietFrom": "Start",
+    "quietTo": "End",
+    "quietLength": "{h} h of quiet a day",
+    "quietNowOn": "Quiet now — the bot will write at {t}",
+    "quietNowOff": "The bot is on right now, quiet starts at {t}"
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",

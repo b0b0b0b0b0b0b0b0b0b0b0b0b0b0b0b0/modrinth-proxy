@@ -45,10 +45,10 @@ export default async function NewsPage() {
           </h2>
           <div className="mt-4 h-px w-full max-w-18 bg-modrinth-green/80" aria-hidden />
           <div className="mt-4 flex flex-wrap items-stretch gap-3">
-            <div className="flex shrink-0 items-center justify-center self-stretch rounded-md border border-gray-700 bg-gray-800/50 px-5 py-3 text-2xl font-black uppercase tracking-wide text-gray-200">
+            <div className="flex shrink-0 items-center justify-center self-stretch rounded-md border border-gray-700 px-5 py-3 text-2xl font-black uppercase tracking-wide text-gray-200">
               16+
             </div>
-            <div className="flex min-w-0 flex-1 max-w-3xl flex-col rounded-md border border-gray-700/90 bg-linear-to-br from-gray-800/70 via-gray-800/50 to-gray-900/60 px-4 py-3.5 md:px-5 md:py-4">
+            <div className="flex min-w-0 flex-1 max-w-3xl flex-col rounded-md border border-gray-700/90 px-4 py-3.5 md:px-5 md:py-4">
               <p className="text-base leading-[1.75] text-gray-300 md:text-lg md:leading-[1.8]">
                 <span className="font-semibold tracking-wide text-modrinth-green/90">{t('news.ahtung')}</span>{' '}
                 <span className="text-gray-400/95">{disclaimer}</span>
