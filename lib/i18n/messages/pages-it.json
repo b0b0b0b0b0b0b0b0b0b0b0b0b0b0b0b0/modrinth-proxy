@@ -645,7 +645,12 @@
     "notifyNeedLink": "Per ricevere le notifiche, collega Telegram. Il bot manderà un riepilogo quando qualcosa di scaricato o salvato riceve una nuova versione.",
     "muteProject": "Non seguire le nuove versioni di questo progetto",
     "unmuteProject": "Segui di nuovo le nuove versioni",
-    "muteHint": "La campanella barrata accanto a una riga smette di seguire le nuove versioni di quel progetto: sparisce da «Aggiornamenti» e da Telegram. I preferiti non cambiano."
+    "muteHint": "La campanella barrata accanto a una riga smette di seguire le nuove versioni di quel progetto: sparisce da «Aggiornamenti» e da Telegram. I preferiti non cambiano.",
+    "quietTitle": "Non disturbare di notte",
+    "quietHint": "Dalle 23:00 alle 7:00 della tua ora il bot dorme, e quello che esce di notte arriva dopo le 7.",
+    "timezoneTitle": "Fuso orario",
+    "timezoneHint": "Serve al bot per capire quando da te è notte.",
+    "timezoneSearch": "Città o UTC…"
   },
   "set": {
     "trackDownloads": "Segui le nuove versioni dei download",

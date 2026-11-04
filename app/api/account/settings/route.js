@@ -6,8 +6,10 @@ import {
   isServerCore,
   setAccountPreference,
   setGameProfile,
+  setUserTimezone,
 } from '@/lib/account'
 import { getRequestLocale } from '@/lib/i18n/server'
+import { isValidTimeZone } from '@/lib/quietHours'
 import { checkRateLimit } from '@/lib/rateLimit'
 import { setTelegramNotify } from '@/lib/telegramBot'
 
@@ -32,6 +34,7 @@ export async function POST(request) {
     newsBadge: body?.newsBadge,
     festive: body?.festive,
     ownServer: body?.ownServer,
+    quietNights: body?.quietNights,
   }
   const booleans = Object.entries(changes).filter(([, value]) => typeof value === 'boolean')
   const unmuteAll = body?.unmuteAll === true
@@ -48,10 +51,13 @@ export async function POST(request) {
     profile[key] = value
   }
   const hasProfile = Object.keys(profile).length > 0
-  if (booleans.length === 0 && !unmuteAll && !hasProfile) {
+  const hasTimezone = body?.timezone !== undefined
+  if (hasTimezone && !isValidTimeZone(body.timezone)) return Response.json({ error: 'bad_request' }, { status: 400 })
+  if (booleans.length === 0 && !unmuteAll && !hasProfile && !hasTimezone) {
     return Response.json({ error: 'bad_request' }, { status: 400 })
   }
   if (hasProfile) setGameProfile(user.id, profile)
+  if (hasTimezone) setUserTimezone(user.id, body.timezone)
 
   for (const [key, value] of booleans) {
     if (key === 'telegram') setTelegramNotify(user.id, value, await getRequestLocale())

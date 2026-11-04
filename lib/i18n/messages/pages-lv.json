@@ -645,7 +645,12 @@
     "notifyNeedLink": "Lai saņemtu paziņojumus, piesaisti Telegram. Bots atsūtīs kopsavilkumu, kad lejupielādētajam vai izlasē esošajam iznāks jauna versija.",
     "muteProject": "Nesekot šī projekta jaunajām versijām",
     "unmuteProject": "Atkal sekot jaunajām versijām",
-    "muteHint": "Pārsvītrotais zvaniņš pie rindas pārtrauc sekot šī projekta jaunajām versijām: tas pazūd no «Atjauninājumiem» un Telegram. Izlasi tas neietekmē."
+    "muteHint": "Pārsvītrotais zvaniņš pie rindas pārtrauc sekot šī projekta jaunajām versijām: tas pazūd no «Atjauninājumiem» un Telegram. Izlasi tas neietekmē.",
+    "quietTitle": "Netraucēt naktī",
+    "quietHint": "No 23:00 līdz 7:00 pēc tava laika bots guļ, un visu, kas iznāca naktī, atsūtīs pēc 7 rītā.",
+    "timezoneTitle": "Laika josla",
+    "timezoneHint": "Pēc tās bots saprot, kad tev ir nakts.",
+    "timezoneSearch": "Pilsēta vai UTC…"
   },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",

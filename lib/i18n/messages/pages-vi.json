@@ -645,7 +645,12 @@
     "notifyNeedLink": "Để nhận thông báo, hãy liên kết Telegram. Bot sẽ gửi bản tóm tắt khi thứ bạn đã tải hoặc yêu thích có phiên bản mới.",
     "muteProject": "Không theo dõi phiên bản mới của dự án này",
     "unmuteProject": "Theo dõi phiên bản mới trở lại",
-    "muteHint": "Chuông gạch chéo cạnh mỗi dòng sẽ ngừng theo dõi phiên bản mới của dự án đó: nó biến mất khỏi “Cập nhật” và Telegram. Mục yêu thích không bị ảnh hưởng."
+    "muteHint": "Chuông gạch chéo cạnh mỗi dòng sẽ ngừng theo dõi phiên bản mới của dự án đó: nó biến mất khỏi “Cập nhật” và Telegram. Mục yêu thích không bị ảnh hưởng.",
+    "quietTitle": "Không làm phiền ban đêm",
+    "quietHint": "Từ 23:00 đến 7:00 theo giờ của bạn, bot sẽ ngủ, và những gì ra mắt trong đêm sẽ được gửi sau 7 giờ sáng.",
+    "timezoneTitle": "Múi giờ",
+    "timezoneHint": "Bot dựa vào đây để biết khi nào là ban đêm ở chỗ bạn.",
+    "timezoneSearch": "Thành phố hoặc UTC…"
   },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",

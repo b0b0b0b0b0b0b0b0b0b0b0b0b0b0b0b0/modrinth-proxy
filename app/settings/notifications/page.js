@@ -14,7 +14,13 @@ export default async function NotificationSettingsPage() {
 
   return (
     <NotificationSettings
-      telegram={{ botId: telegramBotId(), linked: Boolean(user.telegram_id), notify: Boolean(user.telegram_notify) }}
+      telegram={{
+        botId: telegramBotId(),
+        linked: Boolean(user.telegram_id),
+        notify: Boolean(user.telegram_notify),
+        quiet: Boolean(user.quiet_nights),
+        timezone: user.timezone || '',
+      }}
       trackDownloads={!user.skip_download_updates}
       mutedCount={getNotifyMutes(user.id).size}
     />

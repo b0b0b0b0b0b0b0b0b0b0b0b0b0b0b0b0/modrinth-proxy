@@ -645,7 +645,12 @@
     "notifyNeedLink": "想收到通知，请先绑定 Telegram。下载过或收藏的内容有新版本时，机器人会发送一条汇总。",
     "muteProject": "不再跟踪此项目的新版本",
     "unmuteProject": "重新跟踪新版本",
-    "muteHint": "点每行旁边带斜线的铃铛，就不再跟踪该项目的新版本：它会从“更新”和 Telegram 中消失。收藏不受影响。"
+    "muteHint": "点每行旁边带斜线的铃铛，就不再跟踪该项目的新版本：它会从“更新”和 Telegram 中消失。收藏不受影响。",
+    "quietTitle": "夜间免打扰",
+    "quietHint": "按你的时间 23:00 至 7:00 机器人会休息，夜里出的更新会在早上 7 点后发来。",
+    "timezoneTitle": "时区",
+    "timezoneHint": "机器人靠它知道你那边什么时候是夜里。",
+    "timezoneSearch": "城市或 UTC…"
   },
   "set": {
     "trackDownloads": "跟踪已下载内容的新版本",

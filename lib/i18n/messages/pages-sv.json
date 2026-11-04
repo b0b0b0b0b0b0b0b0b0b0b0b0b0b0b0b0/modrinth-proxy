@@ -645,7 +645,12 @@
     "notifyNeedLink": "Koppla Telegram för att få aviseringar. Boten skickar en sammanfattning när något du laddat ner eller sparat får en ny version.",
     "muteProject": "Följ inte nya versioner av det här projektet",
     "unmuteProject": "Följ nya versioner igen",
-    "muteHint": "Den överstrukna klockan bredvid en rad slutar följa nya versioner av projektet: det försvinner från ”Uppdateringar” och från Telegram. Favoriter påverkas inte."
+    "muteHint": "Den överstrukna klockan bredvid en rad slutar följa nya versioner av projektet: det försvinner från ”Uppdateringar” och från Telegram. Favoriter påverkas inte.",
+    "quietTitle": "Stör inte på natten",
+    "quietHint": "Från 23:00 till 7:00 din tid sover boten, och allt som kom ut under natten skickas efter 7 på morgonen.",
+    "timezoneTitle": "Tidszon",
+    "timezoneHint": "Med den vet boten när det är natt hos dig.",
+    "timezoneSearch": "Stad eller UTC…"
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",

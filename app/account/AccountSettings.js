@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import { signInWithTelegram } from '@/lib/telegramPopup'
@@ -237,12 +237,62 @@ export function GameSettings({ game }) {
   )
 }
 
+function timeZoneOptions(saved) {
+  let zones = []
+  try {
+    zones = Intl.supportedValuesOf('timeZone')
+  } catch {}
+  if (saved && !zones.includes(saved)) zones = [saved, ...zones]
+  const now = new Date()
+  return zones.map((zone) => {
+    let offset = ''
+    try {
+      offset =
+        new Intl.DateTimeFormat('en-US', { timeZone: zone, timeZoneName: 'shortOffset' })
+          .formatToParts(now)
+          .find((part) => part.type === 'timeZoneName')?.value || ''
+    } catch {}
+    const label = zone.replace(/_/g, ' ')
+    const hint = offset.replace('GMT', 'UTC') || 'UTC'
+    return { value: zone, label, hint, search: `${label} ${hint}` }
+  })
+}
+
+function browserTimeZone() {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+  } catch {
+    return ''
+  }
+}
+
 export function NotificationSettings({ telegram, trackDownloads: initialTrack, mutedCount }) {
   const t = useT()
   const router = useRouter()
   const { busy, setBusy, error, setError, save } = useAccountSave()
   const [notify, setNotify] = useState(telegram.notify)
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
+  const [quiet, setQuiet] = useState(telegram.quiet)
+  const [timezone, setTimezone] = useState(telegram.timezone || '')
+  const zones = useMemo(() => timeZoneOptions(timezone), [timezone])
+
+  useEffect(() => {
+    if (!telegram.timezone) setTimezone(browserTimeZone())
+  }, [telegram.timezone])
+
+  const toggleQuiet = () =>
+    save(
+      'quiet',
+      quiet ? { quietNights: false } : { quietNights: true, ...(timezone ? { timezone } : {}) },
+      () => setQuiet(!quiet),
+      () => setQuiet(quiet),
+    )
+
+  const pickTimezone = (next) => {
+    if (!next) return
+    const previous = timezone
+    save('timezone', { timezone: next }, () => setTimezone(next), () => setTimezone(previous))
+  }
 
   const linkTelegram = async () => {
     if (busy) return
@@ -274,6 +324,27 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
               </button>
             )}
           </Setting>
+          {telegram.linked && notify ? (
+            <>
+              <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
+                <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />
+              </Setting>
+              <Setting title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
+                <div className="w-44 shrink-0 min-[480px]:w-60">
+                  <GamePicker
+                    compact
+                    label={t('tg.timezoneTitle')}
+                    value={timezone}
+                    disabled={Boolean(busy)}
+                    searchPlaceholder={t('tg.timezoneSearch')}
+                    emptyText={t('set.nothingFound')}
+                    options={timezone ? zones : [{ value: '', label: '…' }, ...zones]}
+                    onChange={pickTimezone}
+                  />
+                </div>
+              </Setting>
+            </>
+          ) : null}
         </SettingsCard>
       ) : null}
 

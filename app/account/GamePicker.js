@@ -18,7 +18,7 @@ function OptionIcon({ option }) {
   )
 }
 
-export default function GamePicker({ label, help, value, options, allOptions, onChange, disabled, searchPlaceholder, emptyText }) {
+export default function GamePicker({ label, help, value, options, allOptions, onChange, disabled, searchPlaceholder, emptyText, compact }) {
   const t = useT()
   const reduceMotion = useReducedMotion()
   const anchorRef = useRef(null)
@@ -30,7 +30,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
   const source = showAll && hasMore ? allOptions : options
   const current = [...options, ...(allOptions || [])].find((option) => !option.section && option.value === value) || options[0]
   const needle = query.trim().toLowerCase()
-  const shown = needle ? source.filter((option) => option.value && option.label.toLowerCase().includes(needle)) : source
+  const shown = needle ? source.filter((option) => option.value && (option.search || option.label).toLowerCase().includes(needle)) : source
 
   useEffect(() => {
     if (hasMore && value && !options.some((option) => option.value === value)) setShowAll(true)
@@ -69,7 +69,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
 
   return (
     <div className="min-w-0">
-      <span className="mb-1 block text-xs font-semibold text-gray-400">{label}</span>
+      {compact ? null : <span className="mb-1 block text-xs font-semibold text-gray-400">{label}</span>}
       <Popover.Root open={open} onOpenChange={setOpen}>
         <Popover.Anchor asChild>
           <div ref={anchorRef} className="glass-btn rounded-xl">

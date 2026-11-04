@@ -645,7 +645,12 @@
     "notifyNeedLink": "Um Benachrichtigungen zu bekommen, verknüpfe Telegram. Der Bot schickt eine Übersicht, wenn etwas Heruntergeladenes oder Gespeichertes eine neue Version bekommt.",
     "muteProject": "Neue Versionen dieses Projekts nicht verfolgen",
     "unmuteProject": "Neue Versionen wieder verfolgen",
-    "muteHint": "Die durchgestrichene Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt."
+    "muteHint": "Die durchgestrichene Glocke neben einer Zeile beendet das Verfolgen neuer Versionen dieses Projekts: Es verschwindet aus „Updates“ und aus Telegram. Favoriten bleiben unberührt.",
+    "quietTitle": "Nachts nicht stören",
+    "quietHint": "Von 23:00 bis 7:00 deiner Zeit schläft der Bot, und alles, was über Nacht erschienen ist, kommt nach 7 Uhr.",
+    "timezoneTitle": "Zeitzone",
+    "timezoneHint": "Daran erkennt der Bot, wann bei dir Nacht ist.",
+    "timezoneSearch": "Stadt oder UTC…"
   },
   "set": {
     "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",

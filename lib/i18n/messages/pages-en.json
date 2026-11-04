@@ -663,7 +663,12 @@
     "notifyNeedLink": "To get notifications, link Telegram. The bot will send a summary when something you downloaded or saved gets a new version.",
     "muteProject": "Stop tracking new versions of this project",
     "unmuteProject": "Track new versions again",
-    "muteHint": "The crossed-out bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected."
+    "muteHint": "The crossed-out bell next to a row stops tracking new versions of that project: it disappears from Updates and from Telegram. Favorites aren’t affected.",
+    "quietTitle": "Don’t disturb at night",
+    "quietHint": "From 23:00 to 7:00 your time the bot sleeps, and whatever came out overnight arrives after 7 am.",
+    "timezoneTitle": "Time zone",
+    "timezoneHint": "The bot uses it to know when it’s night for you.",
+    "timezoneSearch": "City or UTC…"
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",
