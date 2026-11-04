@@ -7,6 +7,7 @@ import { intlLocale } from '@/lib/i18n/config'
 import { timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import GamePicker from './GamePicker'
+import ZoneClock from './ZoneClock'
 import { useMinecraftVersions } from '../hooks/useMinecraftVersions'
 import { rememberProfileField } from '@/lib/gameProfileSync'
 import {
@@ -54,9 +55,11 @@ function Switch({ checked, onChange, disabled, label }) {
   )
 }
 
-function Setting({ title, hint, nested, children }) {
+function Setting({ title, hint, nested, stacked, children }) {
   return (
-    <div className={`flex items-center justify-between gap-4 ${nested ? 'py-2' : 'py-3'}`}>
+    <div
+      className={`flex gap-4 ${stacked ? 'flex-col items-stretch gap-2.5' : 'items-center justify-between'} ${nested ? 'py-2' : 'py-3'}`}
+    >
       <div className="min-w-0">
         <div className={`${nested ? 'text-[13px]' : 'text-sm'} font-semibold text-white`}>{title}</div>
         {hint ? <p className="mt-0.5 text-xs leading-relaxed text-gray-600 dark:text-gray-500">{hint}</p> : null}
@@ -315,8 +318,8 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
               <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
                 <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />
               </Setting>
-              <Setting title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
-                <div className="w-44 shrink-0 min-[480px]:w-60">
+              <Setting stacked title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
+                <div className="w-full max-w-md">
                   <GamePicker
                     compact
                     label={t('tg.timezoneTitle')}
@@ -327,6 +330,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
                     options={timezone ? zones : [{ value: '', label: '…' }, ...zones]}
                     onChange={pickTimezone}
                   />
+                  <ZoneClock timeZone={timezone} locale={intlLocale(locale)} />
                 </div>
               </Setting>
             </>
