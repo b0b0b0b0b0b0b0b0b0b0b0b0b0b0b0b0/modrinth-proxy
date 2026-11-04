@@ -671,7 +671,7 @@
     "timezoneSearch": "City or UTC…",
     "quietCard": "Quiet hours",
     "quietWindowTitle": "Quiet time",
-    "quietWindowHint": "Any span you like: night, school, work. Up to 7 hours.",
+    "quietWindowHint": "Any span you like: night, school, work. Up to 12 hours.",
     "quietFrom": "Start",
     "quietTo": "End",
     "quietLength": "{h} h of quiet a day",

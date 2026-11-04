@@ -653,7 +653,7 @@
     "timezoneSearch": "城市或 UTC…",
     "quietCard": "免打扰时段",
     "quietWindowTitle": "安静时间",
-    "quietWindowHint": "随你定：夜里、上学、上班。最多 7 小时。",
+    "quietWindowHint": "随你定：夜里、上学、上班。最多 12 小时。",
     "quietFrom": "开始",
     "quietTo": "结束",
     "quietLength": "每天安静 {h} 小时",

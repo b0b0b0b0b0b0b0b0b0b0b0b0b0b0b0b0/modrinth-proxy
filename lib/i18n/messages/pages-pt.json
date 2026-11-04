@@ -653,7 +653,7 @@
     "timezoneSearch": "Cidade ou UTC…",
     "quietCard": "Horas de silêncio",
     "quietWindowTitle": "Horário de silêncio",
-    "quietWindowHint": "O que quiser: noite, escola, trabalho. Até 7 horas.",
+    "quietWindowHint": "O que quiser: noite, escola, trabalho. Até 12 horas.",
     "quietFrom": "Início",
     "quietTo": "Fim",
     "quietLength": "{h} h de silêncio por dia",

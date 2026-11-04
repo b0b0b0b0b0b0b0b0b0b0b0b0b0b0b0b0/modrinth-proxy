@@ -653,7 +653,7 @@
     "timezoneSearch": "Градъ или UTC…",
     "quietCard": "Тихіе часы",
     "quietWindowTitle": "Время тишины",
-    "quietWindowHint": "Какое угодно: нощь, ученіе, трудъ. До 7 часовъ.",
+    "quietWindowHint": "Какое угодно: нощь, ученіе, трудъ. До 12 часовъ.",
     "quietFrom": "Начало",
     "quietTo": "Конецъ",
     "quietLength": "{h} ч тишины въ сутки",

@@ -653,7 +653,7 @@
     "timezoneSearch": "Thành phố hoặc UTC…",
     "quietCard": "Giờ yên lặng",
     "quietWindowTitle": "Khung giờ yên lặng",
-    "quietWindowHint": "Tùy bạn: ban đêm, đi học, đi làm. Tối đa 7 giờ.",
+    "quietWindowHint": "Tùy bạn: ban đêm, đi học, đi làm. Tối đa 12 giờ.",
     "quietFrom": "Bắt đầu",
     "quietTo": "Kết thúc",
     "quietLength": "{h} giờ yên lặng mỗi ngày",

@@ -653,7 +653,7 @@
     "timezoneSearch": "Stadt oder UTC…",
     "quietCard": "Ruhezeiten",
     "quietWindowTitle": "Ruhezeit",
-    "quietWindowHint": "Wie du willst: Nacht, Schule, Arbeit. Bis zu 7 Stunden.",
+    "quietWindowHint": "Wie du willst: Nacht, Schule, Arbeit. Bis zu 12 Stunden.",
     "quietFrom": "Beginn",
     "quietTo": "Ende",
     "quietLength": "{h} Std. Ruhe pro Tag",

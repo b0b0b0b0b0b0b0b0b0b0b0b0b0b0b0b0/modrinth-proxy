@@ -653,7 +653,7 @@
     "timezoneSearch": "Ville ou UTC…",
     "quietCard": "Heures calmes",
     "quietWindowTitle": "Plage de calme",
-    "quietWindowHint": "Celle que tu veux : nuit, école, travail. Jusqu’à 7 heures.",
+    "quietWindowHint": "Celle que tu veux : nuit, école, travail. Jusqu’à 12 heures.",
     "quietFrom": "Début",
     "quietTo": "Fin",
     "quietLength": "{h} h de calme par jour",

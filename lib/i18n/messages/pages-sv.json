@@ -653,7 +653,7 @@
     "timezoneSearch": "Stad eller UTC…",
     "quietCard": "Tysta timmar",
     "quietWindowTitle": "Tyst tid",
-    "quietWindowHint": "Vilken du vill: natt, skola, jobb. Upp till 7 timmar.",
+    "quietWindowHint": "Vilken du vill: natt, skola, jobb. Upp till 12 timmar.",
     "quietFrom": "Start",
     "quietTo": "Slut",
     "quietLength": "{h} h tystnad per dygn",

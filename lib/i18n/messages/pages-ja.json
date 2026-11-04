@@ -653,7 +653,7 @@
     "timezoneSearch": "都市名または UTC…",
     "quietCard": "おやすみ時間",
     "quietWindowTitle": "おやすみの時間帯",
-    "quietWindowHint": "夜、学校、仕事など自由に。最大 7 時間。",
+    "quietWindowHint": "夜、学校、仕事など自由に。最大 12 時間。",
     "quietFrom": "開始",
     "quietTo": "終了",
     "quietLength": "1 日 {h} 時間おやすみ",

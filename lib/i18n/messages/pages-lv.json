@@ -653,7 +653,7 @@
     "timezoneSearch": "Pilsēta vai UTC…",
     "quietCard": "Klusuma stundas",
     "quietWindowTitle": "Klusuma laiks",
-    "quietWindowHint": "Jebkurš: nakts, skola, darbs. Līdz 7 stundām.",
+    "quietWindowHint": "Jebkurš: nakts, skola, darbs. Līdz 12 stundām.",
     "quietFrom": "Sākums",
     "quietTo": "Beigas",
     "quietLength": "{h} h klusuma diennaktī",

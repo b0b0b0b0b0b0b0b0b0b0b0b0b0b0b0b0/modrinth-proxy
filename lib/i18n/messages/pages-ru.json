@@ -671,7 +671,7 @@
     "timezoneSearch": "Город или UTC…",
     "quietCard": "Тихие часы",
     "quietWindowTitle": "Время тишины",
-    "quietWindowHint": "Можно любое: ночь, школа, работа. До 7 часов.",
+    "quietWindowHint": "Можно любое: ночь, школа, работа. До 12 часов.",
     "quietFrom": "Начало",
     "quietTo": "Конец",
     "quietLength": "{h} ч тишины в сутки",

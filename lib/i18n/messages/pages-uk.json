@@ -653,7 +653,7 @@
     "timezoneSearch": "Місто або UTC…",
     "quietCard": "Тихі години",
     "quietWindowTitle": "Час тиші",
-    "quietWindowHint": "Будь-який: ніч, школа, робота. До 7 годин.",
+    "quietWindowHint": "Будь-який: ніч, школа, робота. До 12 годин.",
     "quietFrom": "Початок",
     "quietTo": "Кінець",
     "quietLength": "{h} год тиші на добу",
