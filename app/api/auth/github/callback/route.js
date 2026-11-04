@@ -18,9 +18,10 @@ export async function GET(request) {
   const pending = await consumeGithubState(params.get('state'))
   const code = params.get('code')
   if (!pending || !code) return redirectTo('/login?error=github')
+  const fail = (error) => redirectTo(`/login?error=${error}${pending.next ? `&next=${encodeURIComponent(pending.next)}` : ''}`)
 
   const identity = await fetchGithubIdentity(code)
-  if (!identity) return redirectTo('/login?error=github')
+  if (!identity) return fail('github')
 
   const result = await resolveExternalSignIn('github', identity, {
     currentUser: await getSessionUser(),
@@ -34,6 +35,6 @@ export async function GET(request) {
   if (result === 'held') {
     return redirectTo(pending.next ? `/login?next=${encodeURIComponent(pending.next)}` : '/login')
   }
-  if (result === 'signup_limit') return redirectTo('/login?error=signup_limit')
-  return redirectTo('/login?error=github')
+  if (result === 'signup_limit') return fail('signup_limit')
+  return fail('github')
 }

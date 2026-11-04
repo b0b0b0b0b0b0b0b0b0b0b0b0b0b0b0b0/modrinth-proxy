@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
 import { safeNext } from '@/lib/safeNext'
-import { signInWithTelegram } from '@/lib/telegramPopup'
+import { signInWithTelegram, submitTelegramAuth, takeTelegramRedirect, telegramRedirectUrl } from '@/lib/telegramPopup'
 import { useCaptcha } from './useCaptcha'
 import GuardKitten from './GuardKitten'
 import PasswordInput, { FieldIcon, fieldInputClass, PasswordStrength } from '../components/PasswordInput'
@@ -76,10 +76,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
 
   const fail = (key) => setError((prev) => ({ text: t(key), id: prev.id + 1 }))
 
-  const telegramLogin = async () => {
-    if (busy || done) return
-    setError((prev) => ({ text: '', id: prev.id }))
-    const outcome = await signInWithTelegram(telegram, next)
+  const applyTelegram = (outcome) => {
     if (outcome.result === 'session') {
       setDone(true)
       goNext(next || '/account')
@@ -92,6 +89,43 @@ export default function AuthCard({ github = false, telegram = null, claim = null
       fail(Object.hasOwn(ERROR_KEYS, outcome.error) ? ERROR_KEYS[outcome.error] : 'account.errTelegram')
     }
   }
+
+  const telegramLogin = async () => {
+    if (busy || done) return
+    setError((prev) => ({ text: '', id: prev.id }))
+    applyTelegram(await signInWithTelegram(telegram, next))
+  }
+
+  const telegramRedirect = useRef(false)
+  useEffect(() => {
+    if (telegramRedirect.current || !telegram || searchParams.get('via') !== 'telegram') return
+    telegramRedirect.current = true
+    const auth = takeTelegramRedirect()
+    if (auth === undefined) {
+      let recent = false
+      try {
+        recent = Date.now() - Number(sessionStorage.getItem('tg-redirect') || 0) < 120000
+        sessionStorage.setItem('tg-redirect', String(Date.now()))
+      } catch {}
+      if (!recent) {
+        window.location.replace(telegramRedirectUrl(telegram))
+        return
+      }
+    } else {
+      try { sessionStorage.removeItem('tg-redirect') } catch {}
+    }
+    router.replace(`${pathname}${query}`)
+    if (auth === undefined) return
+    if (!auth) {
+      fail('account.errTelegram')
+      return
+    }
+    setBusy(true)
+    submitTelegramAuth(auth, next).then((outcome) => {
+      setBusy(false)
+      applyTelegram(outcome)
+    })
+  }, [])
 
   const createFromHeld = async () => {
     if (busy || done) return
