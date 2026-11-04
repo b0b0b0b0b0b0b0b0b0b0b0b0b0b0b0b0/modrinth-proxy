@@ -55,10 +55,12 @@ function Switch({ checked, onChange, disabled, label }) {
   )
 }
 
-function Setting({ title, hint, nested, stacked, children }) {
+function Setting({ title, hint, nested, wide, children }) {
   return (
     <div
-      className={`flex gap-4 ${stacked ? 'flex-col items-stretch gap-2.5' : 'items-center justify-between'} ${nested ? 'py-2' : 'py-3'}`}
+      className={`flex gap-4 ${
+        wide ? 'flex-col items-stretch gap-2.5 sm:flex-row sm:items-start sm:justify-between sm:gap-4' : 'items-center justify-between'
+      } ${nested ? 'py-2' : 'py-3'}`}
     >
       <div className="min-w-0">
         <div className={`${nested ? 'text-[13px]' : 'text-sm'} font-semibold text-white`}>{title}</div>
@@ -318,10 +320,11 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
               <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
                 <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />
               </Setting>
-              <Setting stacked title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
-                <div className="w-full max-w-md">
+              <Setting wide title={t('tg.timezoneTitle')} hint={t('tg.timezoneHint')}>
+                <div className="w-full shrink-0 sm:w-72">
                   <GamePicker
                     compact
+                    wideMenu
                     label={t('tg.timezoneTitle')}
                     value={timezone}
                     disabled={Boolean(busy)}

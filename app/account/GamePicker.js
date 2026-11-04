@@ -18,7 +18,7 @@ function OptionIcon({ option }) {
   )
 }
 
-export default function GamePicker({ label, help, value, options, allOptions, onChange, disabled, searchPlaceholder, emptyText, compact }) {
+export default function GamePicker({ label, help, value, options, allOptions, onChange, disabled, searchPlaceholder, emptyText, compact, wideMenu }) {
   const t = useT()
   const reduceMotion = useReducedMotion()
   const anchorRef = useRef(null)
@@ -129,7 +129,7 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                 forceMount
                 asChild
                 side="bottom"
-                align="start"
+                align={wideMenu ? 'end' : 'start'}
                 sideOffset={4}
                 collisionPadding={12}
                 onKeyDown={moveFocus}
@@ -143,7 +143,16 @@ export default function GamePicker({ label, help, value, options, allOptions, on
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -4, scale: 0.98 }}
                   transition={{ duration: 0.14, ease: 'easeOut' }}
-                  style={{ width: 'var(--radix-popover-trigger-width)', transformOrigin: 'var(--radix-popover-content-transform-origin)' }}
+                  style={
+                    wideMenu
+                      ? {
+                          minWidth: 'var(--radix-popover-trigger-width)',
+                          width: 'max-content',
+                          maxWidth: 'min(380px, calc(100vw - 24px))',
+                          transformOrigin: 'var(--radix-popover-content-transform-origin)',
+                        }
+                      : { width: 'var(--radix-popover-trigger-width)', transformOrigin: 'var(--radix-popover-content-transform-origin)' }
+                  }
                   className="z-50 flex max-h-[min(260px,var(--radix-popover-content-available-height))] min-w-[180px] flex-col overflow-hidden rounded-xl glass-pop"
                 >
                   <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 border-b border-gray-200 px-3 py-2 dark:border-[#2e3035]">
