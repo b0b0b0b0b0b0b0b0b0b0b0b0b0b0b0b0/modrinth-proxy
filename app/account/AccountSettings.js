@@ -261,13 +261,16 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   const [quiet, setQuiet] = useState(telegram.quiet)
   const [timezone, setTimezone] = useState(telegram.timezone || '')
   const { locale } = useI18n()
+  const [mounted, setMounted] = useState(false)
   const zones = useMemo(() => {
+    if (!mounted) return []
     const list = timeZoneOptions(intlLocale(locale))
     if (!timezone || list.some((option) => option.value === timezone)) return list
     return [timeZoneOption(timezone, intlLocale(locale)), ...list]
-  }, [locale, timezone])
+  }, [mounted, locale, timezone])
 
   useEffect(() => {
+    setMounted(true)
     if (!telegram.timezone) setTimezone(browserTimeZone())
   }, [telegram.timezone])
 
@@ -330,7 +333,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
                     disabled={Boolean(busy)}
                     searchPlaceholder={t('tg.timezoneSearch')}
                     emptyText={t('set.nothingFound')}
-                    options={timezone ? zones : [{ value: '', label: '…' }, ...zones]}
+                    options={zones.some((option) => option.value === timezone) ? zones : [{ value: timezone, label: '…' }, ...zones]}
                     onChange={pickTimezone}
                   />
                   <ZoneClock timeZone={timezone} locale={intlLocale(locale)} />
