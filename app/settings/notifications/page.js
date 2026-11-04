@@ -11,12 +11,13 @@ export async function generateMetadata() {
 
 export default async function NotificationSettingsPage() {
   const user = await requireUser('/settings/notifications')
+  const devTelegram = process.env.NODE_ENV !== 'production'
 
   return (
     <NotificationSettings
       telegram={{
-        botId: telegramBotId(),
-        linked: Boolean(user.telegram_id),
+        botId: telegramBotId() || (devTelegram ? 'dev' : null),
+        linked: devTelegram || Boolean(user.telegram_id),
         notify: Boolean(user.telegram_notify),
         quiet: Boolean(user.quiet_nights),
         timezone: user.timezone || '',

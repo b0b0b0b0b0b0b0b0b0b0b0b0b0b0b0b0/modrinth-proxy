@@ -658,7 +658,9 @@
     "quietTo": "Kết thúc",
     "quietLength": "{h} giờ yên lặng mỗi ngày",
     "quietNowOn": "Đang yên lặng — bot sẽ nhắn lúc {t}",
-    "quietNowOff": "Bot đang hoạt động, yên lặng bắt đầu lúc {t}"
+    "quietNowOff": "Bot đang hoạt động, yên lặng bắt đầu lúc {t}",
+    "timezoneDevice": "Theo thiết bị này: {zone}",
+    "timezoneDeviceTip": "Dùng giờ của trình duyệt"
   },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",

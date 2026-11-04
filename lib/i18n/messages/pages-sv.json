@@ -658,7 +658,9 @@
     "quietTo": "Slut",
     "quietLength": "{h} h tystnad per dygn",
     "quietNowOn": "Tyst nu – boten skriver kl. {t}",
-    "quietNowOff": "Boten är aktiv nu, tystnaden börjar kl. {t}"
+    "quietNowOff": "Boten är aktiv nu, tystnaden börjar kl. {t}",
+    "timezoneDevice": "Som på den här enheten: {zone}",
+    "timezoneDeviceTip": "Använd webbläsarens tid"
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",

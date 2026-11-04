@@ -658,7 +658,9 @@
     "quietTo": "終了",
     "quietLength": "1 日 {h} 時間おやすみ",
     "quietNowOn": "今はおやすみ中 — {t} に届きます",
-    "quietNowOff": "今は通知オン、{t} からおやすみ"
+    "quietNowOff": "今は通知オン、{t} からおやすみ",
+    "timezoneDevice": "この端末に合わせる：{zone}",
+    "timezoneDeviceTip": "ブラウザの時刻に合わせる"
   },
   "set": {
     "trackDownloads": "ダウンロードしたものの新バージョンを追跡",

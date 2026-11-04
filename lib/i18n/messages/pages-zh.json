@@ -658,7 +658,9 @@
     "quietTo": "结束",
     "quietLength": "每天安静 {h} 小时",
     "quietNowOn": "现在是安静时间 — 机器人会在 {t} 发消息",
-    "quietNowOff": "机器人现在在线，{t} 开始安静"
+    "quietNowOff": "机器人现在在线，{t} 开始安静",
+    "timezoneDevice": "与此设备一致：{zone}",
+    "timezoneDeviceTip": "使用浏览器的时间"
   },
   "set": {
     "trackDownloads": "跟踪已下载内容的新版本",

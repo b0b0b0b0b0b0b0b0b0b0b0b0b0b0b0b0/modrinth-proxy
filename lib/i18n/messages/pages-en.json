@@ -676,7 +676,9 @@
     "quietTo": "End",
     "quietLength": "{h} h of quiet a day",
     "quietNowOn": "Quiet now — the bot will write at {t}",
-    "quietNowOff": "The bot is on right now, quiet starts at {t}"
+    "quietNowOff": "The bot is on right now, quiet starts at {t}",
+    "timezoneDevice": "Use this device: {zone}",
+    "timezoneDeviceTip": "Use the browser’s time"
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",

@@ -658,7 +658,9 @@
     "quietTo": "Beigas",
     "quietLength": "{h} h klusuma diennaktī",
     "quietNowOn": "Tagad ir klusums — bots rakstīs {t}",
-    "quietNowOff": "Tagad bots ir aktīvs, klusums sāksies {t}"
+    "quietNowOff": "Tagad bots ir aktīvs, klusums sāksies {t}",
+    "timezoneDevice": "Kā šajā ierīcē: {zone}",
+    "timezoneDeviceTip": "Iestatīt pārlūka laiku"
   },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",

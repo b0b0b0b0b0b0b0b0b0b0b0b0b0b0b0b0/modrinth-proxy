@@ -8,6 +8,7 @@ import { timeZoneOption, timeZoneOptions } from '@/lib/timeZones'
 import { signInWithTelegram } from '@/lib/telegramPopup'
 import GamePicker from './GamePicker'
 import ZoneClock from './ZoneClock'
+import StyledTooltip from '../components/StyledTooltip'
 import QuietDayBar from './QuietDayBar'
 import {
   DAY_MINUTES,
@@ -290,6 +291,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   const [, setClockTick] = useState(0)
   const { locale } = useI18n()
   const [mounted, setMounted] = useState(false)
+  const [deviceZone, setDeviceZone] = useState('')
   const zones = useMemo(() => {
     if (!mounted) return []
     const list = timeZoneOptions(intlLocale(locale))
@@ -299,6 +301,7 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
 
   useEffect(() => {
     setMounted(true)
+    setDeviceZone(browserTimeZone())
     if (!telegram.timezone) setTimezone(browserTimeZone())
   }, [telegram.timezone])
 
@@ -445,6 +448,18 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
                 onChange={pickTimezone}
               />
               <ZoneClock timeZone={timezone} locale={appLocale} />
+              {deviceZone && deviceZone !== timezone ? (
+                <StyledTooltip label={t('tg.timezoneDeviceTip')}>
+                  <button
+                    type="button"
+                    disabled={Boolean(busy)}
+                    onClick={() => pickTimezone(deviceZone)}
+                    className={`${GHOST_BUTTON} mt-2`}
+                  >
+                    {t('tg.timezoneDevice', { zone: timeZoneOption(deviceZone, appLocale).label })}
+                  </button>
+                </StyledTooltip>
+              ) : null}
             </div>
           </Setting>
         </SettingsCard>

@@ -658,7 +658,9 @@
     "quietTo": "Fim",
     "quietLength": "{h} h de silêncio por dia",
     "quietNowOn": "Agora é silêncio — o bot escreve às {t}",
-    "quietNowOff": "O bot está ativo agora, o silêncio começa às {t}"
+    "quietNowOff": "O bot está ativo agora, o silêncio começa às {t}",
+    "timezoneDevice": "Como neste dispositivo: {zone}",
+    "timezoneDeviceTip": "Usar o horário do navegador"
   },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",
