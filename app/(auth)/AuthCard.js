@@ -7,7 +7,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
 import { safeNext } from '@/lib/safeNext'
-import { signInWithTelegram, submitTelegramAuth, takeTelegramRedirect, telegramRedirectUrl } from '@/lib/telegramPopup'
+import { fetchTelegramAuth, signInWithTelegram, submitTelegramAuth } from '@/lib/telegramPopup'
 import { useCaptcha } from './useCaptcha'
 import GuardKitten from './GuardKitten'
 import PasswordInput, { FieldIcon, fieldInputClass, PasswordStrength } from '../components/PasswordInput'
@@ -96,34 +96,18 @@ export default function AuthCard({ github = false, telegram = null, claim = null
     applyTelegram(await signInWithTelegram(telegram, next))
   }
 
-  const telegramRedirect = useRef(false)
+  const [telegramNudge, setTelegramNudge] = useState(false)
+  const telegramVia = useRef(false)
   useEffect(() => {
-    if (telegramRedirect.current || !telegram || searchParams.get('via') !== 'telegram') return
-    telegramRedirect.current = true
-    const auth = takeTelegramRedirect()
-    if (auth === undefined) {
-      let recent = false
-      try {
-        recent = Date.now() - Number(sessionStorage.getItem('tg-redirect') || 0) < 120000
-        sessionStorage.setItem('tg-redirect', String(Date.now()))
-      } catch {}
-      if (!recent) {
-        window.location.replace(telegramRedirectUrl(telegram))
-        return
-      }
-    } else {
-      try { sessionStorage.removeItem('tg-redirect') } catch {}
-    }
+    if (telegramVia.current || !telegram || searchParams.get('via') !== 'telegram') return
+    telegramVia.current = true
     router.replace(`${pathname}${query}`)
-    if (auth === undefined) return
-    if (!auth) {
-      fail('account.errTelegram')
-      return
-    }
     setBusy(true)
-    submitTelegramAuth(auth, next).then((outcome) => {
+    fetchTelegramAuth(telegram).then(async (auth) => {
+      const outcome = auth ? await submitTelegramAuth(auth, next) : null
       setBusy(false)
-      applyTelegram(outcome)
+      if (outcome && outcome.result !== 'error') applyTelegram(outcome)
+      else setTelegramNudge(true)
     })
   }, [])
 
@@ -337,10 +321,13 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                           <StyledTooltip label={t('account.telegramContinue')}>
                             <button
                               type="button"
-                              onClick={telegramLogin}
+                              onClick={() => {
+                                setTelegramNudge(false)
+                                telegramLogin()
+                              }}
                               disabled={busy || done}
                               aria-label={t('account.telegramContinue')}
-                              className={AUTO_BUTTON}
+                              className={`${AUTO_BUTTON}${telegramNudge ? ' border-modrinth-green text-modrinth-green ring-2 ring-modrinth-green/40 animate-pulse' : ''}`}
                             >
                               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
                                 <path d={TELEGRAM_ICON} />
