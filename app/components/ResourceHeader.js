@@ -227,16 +227,16 @@ export default async function ResourceHeader({ resource, contentType, versions =
                   {showPromoBelowDownload ? (
                     <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
                       <div className="flex items-center gap-2">
-                        <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
-                        <ProjectSaveButton projectId={resource.id} className="hidden lg:inline-flex" />
+                        <ProjectFavoriteButton projectId={resource.id} className="max-lg:hidden" />
+                        <ProjectSaveButton projectId={resource.id} className="max-lg:hidden" />
                         <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                       </div>
-                      <DownloadPromoConnector className="hidden lg:flex pb-px" />
+                      <DownloadPromoConnector className="max-lg:hidden pb-px" />
                     </div>
                   ) : (
                     <div className="flex items-center gap-2">
-                      <ProjectFavoriteButton projectId={resource.id} className="hidden lg:inline-flex" />
-                      <ProjectSaveButton projectId={resource.id} className="hidden lg:inline-flex" />
+                      <ProjectFavoriteButton projectId={resource.id} className="max-lg:hidden" />
+                      <ProjectSaveButton projectId={resource.id} className="max-lg:hidden" />
                       <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                     </div>
                   )}

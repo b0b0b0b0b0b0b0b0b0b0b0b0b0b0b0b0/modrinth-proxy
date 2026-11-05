@@ -3968,13 +3968,13 @@
     filter: brightness(1.06);
   }
 
-  @media (min-width: 1024px) {
+  @media (width >= 64rem) {
     .modrinth-download-button {
       display: flex !important;
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (width < 64rem) {
     .modrinth-download-button {
       display: none !important;
     }
