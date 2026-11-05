@@ -171,7 +171,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               {resource.title}
             </h3>
             <p className="mt-1 text-xs text-gray-500">{t('card.by')}{getPublicUsername(resource.author, resource.author_id)}</p>
-            <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-gray-400">{resource.description}</p>
+            <p className="mt-2 line-clamp-2 break-words flex-1 text-sm leading-relaxed text-gray-400">{resource.description}</p>
             <div className="mt-3 flex flex-wrap items-center gap-1.5">
               {uniqueStrings(resource.display_categories).slice(0, 3).map((catId) => {
                 const categoryData = getCategoryIcon(catId)
@@ -277,7 +277,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
               </h3>
             </CatalogReturnLink>
           </div>
-          <p className="text-sm text-gray-400 mb-2 line-clamp-2">{resource.description}</p>
+          <p className="text-sm text-gray-400 mb-2 line-clamp-2 break-words">{resource.description}</p>
           <div className="flex flex-wrap gap-1.5 items-center">
             {regionData && (
               <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-gray-800/80 border border-gray-700/50 rounded-full text-xs text-gray-300">
@@ -393,7 +393,7 @@ export default function ResourceCard({ resource, type = 'mod', forceLayout = nul
           </CatalogReturnLink>
           <span className="text-xs text-gray-500">{t('card.by')}{getPublicUsername(resource.author, resource.author_id)}</span>
         </div>
-        <p className="text-sm text-gray-400 mb-2">
+        <p className="text-sm text-gray-400 mb-2 line-clamp-2 break-words">
           {resource.description}
         </p>
         <div className="flex flex-wrap gap-1.5 items-center">
