@@ -220,6 +220,77 @@ function GroupRow({ group, index, t, agent = false }) {
   )
 }
 
+const EMPTY_MIRROR = { served: 0, cached: 0, missed: 0, failed: 0, switched: 0 }
+
+function MirrorTraffic({ minutes, until, t, time }) {
+  const rows = minutes.map((minute) => {
+    const mirror = minute.mirror || EMPTY_MIRROR
+    return { at: minute.at, ...mirror, requests: mirror.served + mirror.missed + mirror.failed }
+  })
+  const sum = (key) => rows.reduce((total, row) => total + row[key], 0)
+  const requests = sum('requests')
+  const failed = sum('failed')
+  const switched = sum('switched')
+  const scale = Math.max(1, ...rows.map((row) => row.requests)) * 1.08
+
+  const summary = [
+    {
+      value: until ? t('st.mrMirrorOnUntil', { time: time.format(new Date(until)) }) : switched,
+      label: until ? t('st.mrMirrorOn') : t('st.mrMirrorSwitches'),
+      warn: Boolean(until),
+    },
+    { value: requests, label: t('st.mmRequests') },
+    { value: sum('cached'), label: t('st.mmCached') },
+    { value: sum('missed'), label: t('st.mmMissed') },
+    { value: failed, label: t('st.mmFailed'), warn: failed > 0 },
+  ]
+
+  return (
+    <div className="mt-6">
+      <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{t('st.mmTitle')}</h3>
+      <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-5">
+        {summary.map((item) => (
+          <div key={item.label} className="rounded-xl bg-gray-800/40 px-3 py-2">
+            <div className={`text-lg font-bold tabular-nums ${item.warn ? 'text-red-400' : 'text-white'}`}>{item.value}</div>
+            <div className="text-[11px] leading-snug text-gray-600 dark:text-gray-500">{item.label}</div>
+          </div>
+        ))}
+      </div>
+      <div role="img" aria-label={t('st.mmTitle')} className="flex h-28 items-end gap-[2px]">
+        {rows.map((row) => {
+          const tip = t('st.mmTip', {
+            time: time.format(new Date(row.at)),
+            n: row.requests,
+            cached: row.cached,
+            missed: row.missed,
+            failed: row.failed,
+          })
+          return (
+            <StyledTooltip key={row.at} label={row.switched ? `${tip} · ${t('st.mmSwitchedHere')}` : tip}>
+              <div className="group flex h-full min-w-0 flex-1 flex-col justify-end rounded-xs">
+                {row.switched ? <div aria-hidden className="mb-0.5 h-1 w-full rounded-full bg-amber-400" /> : null}
+                <div
+                  className="flex w-full flex-col overflow-hidden rounded-xs"
+                  style={{ height: `${Math.max(row.requests ? 2 : 1, (row.requests / scale) * 100)}%` }}
+                >
+                  {row.failed ? <div className="w-full bg-red-500" style={{ height: `${(row.failed / row.requests) * 100}%` }} /> : null}
+                  {row.missed ? <div className="w-full bg-amber-500/80" style={{ height: `${(row.missed / row.requests) * 100}%` }} /> : null}
+                  <div className={`w-full flex-1 ${row.requests ? 'bg-sky-500/70 group-hover:bg-sky-400' : 'bg-gray-800'}`} />
+                </div>
+              </div>
+            </StyledTooltip>
+          )
+        })}
+      </div>
+      <div className="mt-1 flex justify-between text-[10px] tabular-nums text-gray-600 dark:text-gray-500">
+        <span>{time.format(new Date(rows[0].at))}</span>
+        <span>{t('st.mmLegend')}</span>
+        <span>{time.format(new Date(rows[rows.length - 1].at))}</span>
+      </div>
+    </div>
+  )
+}
+
 export default function ModrinthTrafficChart({ initial }) {
   const { t, locale } = useI18n()
   const [data, setData] = useState(initial)
@@ -407,6 +478,8 @@ export default function ModrinthTrafficChart({ initial }) {
           ))}
         </div>
       ) : null}
+
+      <MirrorTraffic minutes={minutes} until={data.mirrorUntil} t={t} time={time} />
 
       {details ? (
       <>
