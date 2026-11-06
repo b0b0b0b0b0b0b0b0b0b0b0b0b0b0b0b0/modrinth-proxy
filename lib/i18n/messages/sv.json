@@ -54,7 +54,141 @@
     "siteVersion": "Webbplatsversion: {version}",
     "siteVersionTip": "Nyheter och ändringslogg",
     "snowball": "Kalla på kattungen att rulla en snöboll",
-    "snowballBusy": "Kattungen leker redan"
+    "snowballBusy": "Kattungen leker redan",
+    "kitten": {
+      "aria": "Klappa kattungen",
+      "pet": "Klappa kattungen",
+      "petMore": "Spinn! Klappa igen",
+      "waiting": "Den väntar på dig",
+      "petted": "Klappar: {count}",
+      "toNext": "{count} kvar till nästa prestation",
+      "unlocked": "Prestationer: {count} av {total}",
+      "signIn": "Logga in så att kattungen minns dig",
+      "waking": "Kattungen vaknar…",
+      "toastKicker": "Prestation upplåst",
+      "list": [
+        {
+          "title": "Första mötet",
+          "text": "Du klappade kattungen! Den kommer ihåg dig"
+        },
+        {
+          "title": "Kattungen spinner",
+          "text": "Den gillar det, fortsätt"
+        },
+        {
+          "title": "Varm tass",
+          "text": "Kattungen räckte dig tassen"
+        },
+        {
+          "title": "Bästa vän",
+          "text": "Kattungen spinner när den ser dig"
+        },
+        {
+          "title": "I sjunde himlen",
+          "text": "Så mycket kärlek har kattungen aldrig fått"
+        },
+        {
+          "title": "Kli bakom örat",
+          "text": "Du hittade dess favoritställe"
+        },
+        {
+          "title": "Spinnets mästare",
+          "text": "Kattungen ropar ditt namn"
+        },
+        {
+          "title": "Lyckotass",
+          "text": "Kattungen önskade sig något för din skull"
+        },
+        {
+          "title": "Mjuka händer",
+          "text": "Kattungen värmer sig mot din hand"
+        },
+        {
+          "title": "Legend på modrinth.black",
+          "text": "Kattungen har berättat om dig för sina vänner"
+        },
+        {
+          "title": "Kliarmästare",
+          "text": "Du vet precis var man ska klia"
+        },
+        {
+          "title": "Spinnmaraton",
+          "text": "Kattungen spinner utan paus"
+        },
+        {
+          "title": "Gosig kattunge",
+          "text": "Kattungen vill kramas"
+        },
+        {
+          "title": "Kattjackpott",
+          "text": "Kattungen hade jättetur"
+        },
+        {
+          "title": "Lyckans garnnystan",
+          "text": "Kattungen kom med sitt garnnystan till dig"
+        },
+        {
+          "title": "Fluffigt moln",
+          "text": "Kattungen är mjuk som ett moln"
+        },
+        {
+          "title": "Alla kattungars vän",
+          "text": "Kattungen har berättat om dig för alla kattungar"
+        },
+        {
+          "title": "Väktarkattunge",
+          "text": "Nu vaktar kattungen din sömn"
+        },
+        {
+          "title": "Stjärntass",
+          "text": "Kattungen gav dig en liten stjärna"
+        },
+        {
+          "title": "Kunglig kel",
+          "text": "Kattungen satte på sig en krona för dig"
+        },
+        {
+          "title": "Spinnorkester",
+          "text": "Kattungarna spinner i kör för dig"
+        },
+        {
+          "title": "Regnbågssvans",
+          "text": "Kattungens svans lyser i alla färger"
+        },
+        {
+          "title": "Kattens hjärtas hemlighet",
+          "text": "Kattungen berättade sin hemlighet för dig"
+        },
+        {
+          "title": "Resande kattunge",
+          "text": "Kattungen följer dig över alla sajter"
+        },
+        {
+          "title": "Månskensspinn",
+          "text": "Kattungen spinner till och med i sömnen"
+        },
+        {
+          "title": "Mysets väktare",
+          "text": "Bredvid dig är det alltid varmt"
+        },
+        {
+          "title": "Kattvis",
+          "text": "Kattungen tycker att du är klokare än den"
+        },
+        {
+          "title": "Spinnets universum",
+          "text": "Spinnet hörs ända ut i rymden"
+        },
+        {
+          "title": "Nästan en legend",
+          "text": "Bara en liten bit kvar till toppen"
+        },
+        {
+          "title": "Evig kärlek",
+          "text": "Kattungen är din för alltid"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Kopiera ID till urklipp",

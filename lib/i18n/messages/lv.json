@@ -54,7 +54,141 @@
     "siteVersion": "Vietnes versija: {version}",
     "siteVersionTip": "Jaunumi un izmaiņu saraksts",
     "snowball": "Pasaukt kaķēnu ripināt sniega piku",
-    "snowballBusy": "Kaķēns jau rotaļājas"
+    "snowballBusy": "Kaķēns jau rotaļājas",
+    "kitten": {
+      "aria": "Paglaudīt kaķēnu",
+      "pet": "Paglaudi kaķēnu",
+      "petMore": "Murr! Paglaudi vēl",
+      "waiting": "Viņš tevi ļoti gaida",
+      "petted": "Paglaudīts: {count}",
+      "toNext": "vēl {count} līdz sasniegumam",
+      "unlocked": "Sasniegumi: {count} no {total}",
+      "signIn": "Pieslēdzies, lai kaķēns tevi atcerētos",
+      "waking": "Kaķēns mostas…",
+      "toastKicker": "Sasniegums atbloķēts",
+      "list": [
+        {
+          "title": "Pirmā iepazīšanās",
+          "text": "Tu paglaudīji kaķēnu! Viņš tevi atcerēsies"
+        },
+        {
+          "title": "Kaķēns murrā",
+          "text": "Viņam patīk, turpini"
+        },
+        {
+          "title": "Siltā ķepiņa",
+          "text": "Kaķēns pasniedza tev ķepiņu"
+        },
+        {
+          "title": "Labākais draugs",
+          "text": "Kaķēns murrā, kad tevi ierauga"
+        },
+        {
+          "title": "Kaķēns sajūsmā",
+          "text": "Tik daudz mīļuma kaķēns vēl nav saņēmis"
+        },
+        {
+          "title": "Pakasīšana aiz austiņas",
+          "text": "Tu atradi viņa mīļāko vietiņu"
+        },
+        {
+          "title": "Murrāšanas valdnieks",
+          "text": "Kaķēns sauc tevi vārdā"
+        },
+        {
+          "title": "Laimīgā ķepiņa",
+          "text": "Kaķēns iedomājās vēlēšanos par tevi"
+        },
+        {
+          "title": "Mīkstās plaukstas",
+          "text": "Kaķēns sildās pie tavas rokas"
+        },
+        {
+          "title": "modrinth.black leģenda",
+          "text": "Kaķēns pastāstīja par tevi draugiem"
+        },
+        {
+          "title": "Kasīšanas meistars",
+          "text": "Tu zini, kur kaķēnu pakasīt"
+        },
+        {
+          "title": "Murrāšanas maratons",
+          "text": "Kaķēns murrā bez apstājas"
+        },
+        {
+          "title": "Apskāvienu kaķēns",
+          "text": "Kaķēns grib apskauties"
+        },
+        {
+          "title": "Kaķu džekpots",
+          "text": "Kaķēnam ļoti paveicās"
+        },
+        {
+          "title": "Laimes kamoliņš",
+          "text": "Kaķēns atnesa tev savu kamoliņu"
+        },
+        {
+          "title": "Pūkains mākonītis",
+          "text": "Kaķēns ir mīksts kā mākonītis"
+        },
+        {
+          "title": "Visu kaķēnu draugs",
+          "text": "Kaķēns pastāstīja par tevi visiem kaķēniem"
+        },
+        {
+          "title": "Sargkaķēns",
+          "text": "Tagad kaķēns sargā tavu miegu"
+        },
+        {
+          "title": "Zvaigžņu ķepiņa",
+          "text": "Kaķēns uzdāvināja tev zvaigznīti"
+        },
+        {
+          "title": "Karaliskie glāsti",
+          "text": "Kaķēns tevis dēļ uzlika kroni"
+        },
+        {
+          "title": "Murrāšanas orķestris",
+          "text": "Kaķēni murrā korī tev par godu"
+        },
+        {
+          "title": "Varavīksnes astīte",
+          "text": "Kaķēna astīte mirdz visās krāsās"
+        },
+        {
+          "title": "Kaķa sirds noslēpums",
+          "text": "Kaķēns uzticēja tev savu noslēpumu"
+        },
+        {
+          "title": "Ceļotājs kaķēns",
+          "text": "Kaķēns seko tev pa visām vietnēm"
+        },
+        {
+          "title": "Mēnesnīcas murrāšana",
+          "text": "Kaķēns murrā pat miegā"
+        },
+        {
+          "title": "Omulības sargs",
+          "text": "Tev blakus vienmēr ir silti"
+        },
+        {
+          "title": "Kaķu gudrais",
+          "text": "Kaķēns tevi uzskata par gudrāku par sevi"
+        },
+        {
+          "title": "Murrāšanas visums",
+          "text": "Murrāšanu var dzirdēt pat kosmosā"
+        },
+        {
+          "title": "Gandrīz leģenda",
+          "text": "Vēl mazliet līdz virsotnei"
+        },
+        {
+          "title": "Mūžīga mīlestība",
+          "text": "Kaķēns ir tavs uz visiem laikiem"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Kopēt ID starpliktuvē",

@@ -54,7 +54,141 @@
     "siteVersion": "Versión del sitio: {version}",
     "siteVersionTip": "Novedades y changelog",
     "snowball": "Llamar al gatito a rodar una bola de nieve",
-    "snowballBusy": "El gatito ya está jugando"
+    "snowballBusy": "El gatito ya está jugando",
+    "kitten": {
+      "aria": "Acariciar al gatito",
+      "pet": "Acaricia al gatito",
+      "petMore": "¡Purr! Acarícialo otra vez",
+      "waiting": "Te está esperando",
+      "petted": "Caricias: {count}",
+      "toNext": "{count} para el próximo logro",
+      "unlocked": "Logros: {count} de {total}",
+      "signIn": "Inicia sesión para que el gatito te recuerde",
+      "waking": "El gatito se está despertando…",
+      "toastKicker": "Logro desbloqueado",
+      "list": [
+        {
+          "title": "Primer encuentro",
+          "text": "¡Acariciaste al gatito! Te recordará"
+        },
+        {
+          "title": "El gatito ronronea",
+          "text": "Le gusta, sigue así"
+        },
+        {
+          "title": "Patita calentita",
+          "text": "El gatito te da la patita"
+        },
+        {
+          "title": "Mejor amigo",
+          "text": "El gatito ronronea cuando te ve"
+        },
+        {
+          "title": "Gatito feliz",
+          "text": "El gatito nunca había recibido tanto cariño"
+        },
+        {
+          "title": "Rasquitos detrás de la oreja",
+          "text": "Encontraste su lugar favorito"
+        },
+        {
+          "title": "Señor del ronroneo",
+          "text": "El gatito te llama por tu nombre"
+        },
+        {
+          "title": "Patita de la suerte",
+          "text": "El gatito pidió un deseo por ti"
+        },
+        {
+          "title": "Manos suavecitas",
+          "text": "El gatito se calienta en tu mano"
+        },
+        {
+          "title": "Leyenda de modrinth.black",
+          "text": "El gatito les habló de ti a sus amigos"
+        },
+        {
+          "title": "Maestro de los rasquidos",
+          "text": "Sabes justo dónde rascar"
+        },
+        {
+          "title": "Maratón de ronroneos",
+          "text": "El gatito ronronea sin parar"
+        },
+        {
+          "title": "Gatito abrazador",
+          "text": "El gatito quiere un abrazo"
+        },
+        {
+          "title": "Premio gatuno",
+          "text": "El gatito tuvo muchísima suerte"
+        },
+        {
+          "title": "Ovillo de felicidad",
+          "text": "El gatito te trajo su ovillo"
+        },
+        {
+          "title": "Nubecita esponjosa",
+          "text": "El gatito es suave como una nube"
+        },
+        {
+          "title": "Amigo de todos los gatitos",
+          "text": "El gatito les habló de ti a todos los gatitos"
+        },
+        {
+          "title": "Gatito guardián",
+          "text": "Ahora el gatito cuida tu sueño"
+        },
+        {
+          "title": "Patita estrellada",
+          "text": "El gatito te regaló una estrellita"
+        },
+        {
+          "title": "Mimos reales",
+          "text": "El gatito se puso una corona para ti"
+        },
+        {
+          "title": "Orquesta de ronroneos",
+          "text": "Los gatitos ronronean a coro por ti"
+        },
+        {
+          "title": "Colita arcoíris",
+          "text": "La colita del gatito brilla de todos los colores"
+        },
+        {
+          "title": "El secreto del corazón gatuno",
+          "text": "El gatito te contó su secreto"
+        },
+        {
+          "title": "Gatito viajero",
+          "text": "El gatito te sigue por todos los sitios"
+        },
+        {
+          "title": "Ronroneo de luna",
+          "text": "El gatito ronronea hasta dormido"
+        },
+        {
+          "title": "Guardián del calorcito",
+          "text": "A tu lado siempre se está calentito"
+        },
+        {
+          "title": "Sabio gatuno",
+          "text": "El gatito cree que eres más sabio que él"
+        },
+        {
+          "title": "Universo de ronroneos",
+          "text": "El ronroneo se oye hasta en el espacio"
+        },
+        {
+          "title": "Casi una leyenda",
+          "text": "Falta muy poquito para la cima"
+        },
+        {
+          "title": "Amor eterno",
+          "text": "El gatito es tuyo para siempre"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Copiar ID al portapapeles",

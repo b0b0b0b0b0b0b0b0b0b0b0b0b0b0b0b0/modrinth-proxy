@@ -5,6 +5,7 @@ import { SITE_VERSION } from '@/lib/siteVersion'
 import { IconSiteVersion } from '@/lib/icons'
 import StyledTooltip from './StyledTooltip'
 import SnowballButton from './SnowballButton'
+import FooterAchievementKitten from './FooterAchievementKitten'
 import { useT } from './I18nProvider'
 
 export default function Footer() {
@@ -32,6 +33,9 @@ export default function Footer() {
               <span className="text-modrinth-green/80 font-medium">{t('footer.homes')}</span>
             </p>
             <SnowballButton />
+            <div className="flex justify-center md:justify-start">
+              <FooterAchievementKitten />
+            </div>
           </div>
 
           <div className="text-center md:text-left">

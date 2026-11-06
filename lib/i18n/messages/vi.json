@@ -54,7 +54,141 @@
     "siteVersion": "Phiên bản trang: {version}",
     "siteVersionTip": "Tin tức và nhật ký thay đổi",
     "snowball": "Gọi mèo con lăn quả cầu tuyết",
-    "snowballBusy": "Mèo con đang đi chơi rồi"
+    "snowballBusy": "Mèo con đang đi chơi rồi",
+    "kitten": {
+      "aria": "Vuốt ve mèo con",
+      "pet": "Vuốt ve mèo con nhé",
+      "petMore": "Gừ gừ! Vuốt thêm nữa đi",
+      "waiting": "Mèo con đang chờ bạn",
+      "petted": "Đã vuốt: {count}",
+      "toNext": "còn {count} lần tới thành tích",
+      "unlocked": "Thành tích: {count}/{total}",
+      "signIn": "Đăng nhập để mèo con nhớ bạn",
+      "waking": "Mèo con đang thức dậy…",
+      "toastKicker": "Mở khóa thành tích",
+      "list": [
+        {
+          "title": "Lần đầu gặp gỡ",
+          "text": "Bạn đã vuốt mèo con! Nó sẽ nhớ bạn"
+        },
+        {
+          "title": "Mèo con gừ gừ",
+          "text": "Nó thích lắm, tiếp tục nào"
+        },
+        {
+          "title": "Bàn chân ấm áp",
+          "text": "Mèo con đưa chân cho bạn"
+        },
+        {
+          "title": "Bạn thân nhất",
+          "text": "Mèo con gừ gừ mỗi khi thấy bạn"
+        },
+        {
+          "title": "Mèo con sung sướng",
+          "text": "Chưa ai cưng mèo con nhiều đến thế"
+        },
+        {
+          "title": "Gãi sau tai",
+          "text": "Bạn đã tìm ra chỗ nó thích nhất"
+        },
+        {
+          "title": "Vua gừ gừ",
+          "text": "Mèo con gọi tên bạn rồi"
+        },
+        {
+          "title": "Bàn chân may mắn",
+          "text": "Mèo con đã ước một điều cho bạn"
+        },
+        {
+          "title": "Bàn tay mềm mại",
+          "text": "Mèo con sưởi ấm trên tay bạn"
+        },
+        {
+          "title": "Huyền thoại modrinth.black",
+          "text": "Mèo con kể về bạn cho bạn bè"
+        },
+        {
+          "title": "Bậc thầy gãi ngứa",
+          "text": "Bạn biết chính xác chỗ cần gãi"
+        },
+        {
+          "title": "Gừ gừ marathon",
+          "text": "Mèo con gừ gừ không ngừng"
+        },
+        {
+          "title": "Mèo con thích ôm",
+          "text": "Mèo con muốn được ôm"
+        },
+        {
+          "title": "Độc đắc của mèo",
+          "text": "Mèo con gặp may lớn rồi"
+        },
+        {
+          "title": "Cuộn len hạnh phúc",
+          "text": "Mèo con mang cuộn len đến cho bạn"
+        },
+        {
+          "title": "Đám mây bông",
+          "text": "Mèo con mềm như một đám mây"
+        },
+        {
+          "title": "Bạn của mọi mèo con",
+          "text": "Mèo con kể về bạn cho tất cả mèo con"
+        },
+        {
+          "title": "Mèo con hộ vệ",
+          "text": "Giờ mèo con canh giấc ngủ cho bạn"
+        },
+        {
+          "title": "Bàn chân ngôi sao",
+          "text": "Mèo con tặng bạn một ngôi sao nhỏ"
+        },
+        {
+          "title": "Cưng chiều hoàng gia",
+          "text": "Mèo con đội vương miện vì bạn"
+        },
+        {
+          "title": "Dàn nhạc gừ gừ",
+          "text": "Các mèo con cùng gừ gừ vì bạn"
+        },
+        {
+          "title": "Đuôi cầu vồng",
+          "text": "Đuôi mèo con lấp lánh đủ màu"
+        },
+        {
+          "title": "Bí mật trái tim mèo",
+          "text": "Mèo con kể cho bạn bí mật của nó"
+        },
+        {
+          "title": "Mèo con du hành",
+          "text": "Mèo con theo bạn khắp mọi trang"
+        },
+        {
+          "title": "Tiếng gừ dưới trăng",
+          "text": "Mèo con gừ gừ cả khi ngủ"
+        },
+        {
+          "title": "Người giữ ấm áp",
+          "text": "Bên bạn lúc nào cũng ấm"
+        },
+        {
+          "title": "Nhà hiền triết mèo",
+          "text": "Mèo con nghĩ bạn thông thái hơn nó"
+        },
+        {
+          "title": "Vũ trụ gừ gừ",
+          "text": "Tiếng gừ gừ vang tới tận vũ trụ"
+        },
+        {
+          "title": "Sắp thành huyền thoại",
+          "text": "Chỉ còn một chút nữa là tới đỉnh"
+        },
+        {
+          "title": "Tình yêu mãi mãi",
+          "text": "Mèo con là của bạn mãi mãi"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Sao chép ID vào clipboard",

@@ -55,7 +55,141 @@
     "siteVersion": "Site version: {version}",
     "siteVersionTip": "News and changelog",
     "snowball": "Call the kitten to roll a snowball",
-    "snowballBusy": "The kitten is already out playing"
+    "snowballBusy": "The kitten is already out playing",
+    "kitten": {
+      "aria": "Pet the kitten",
+      "pet": "Pet the kitten",
+      "petMore": "Purr! Pet me more",
+      "waiting": "He is waiting for you",
+      "petted": "Pets: {count}",
+      "toNext": "{count} to the next achievement",
+      "unlocked": "Achievements: {count} of {total}",
+      "signIn": "Sign in so the kitten remembers you",
+      "waking": "The kitten is waking up…",
+      "toastKicker": "Achievement unlocked",
+      "list": [
+        {
+          "title": "First meeting",
+          "text": "You petted the kitten! He will remember you"
+        },
+        {
+          "title": "The kitten purrs",
+          "text": "He likes it, keep going"
+        },
+        {
+          "title": "Warm paw",
+          "text": "The kitten gave you his paw"
+        },
+        {
+          "title": "Best friend",
+          "text": "The kitten purrs whenever he sees you"
+        },
+        {
+          "title": "Over the moon",
+          "text": "The kitten has never been petted so much"
+        },
+        {
+          "title": "Ear scratches",
+          "text": "You found his favourite spot"
+        },
+        {
+          "title": "Lord of purrs",
+          "text": "The kitten calls you by name"
+        },
+        {
+          "title": "Lucky paw",
+          "text": "The kitten made a wish about you"
+        },
+        {
+          "title": "Soft hands",
+          "text": "The kitten warms up on your hand"
+        },
+        {
+          "title": "Legend of modrinth.black",
+          "text": "The kitten told his friends about you"
+        },
+        {
+          "title": "Scratch master",
+          "text": "You know exactly where to scratch"
+        },
+        {
+          "title": "Purr marathon",
+          "text": "The kitten purrs non-stop"
+        },
+        {
+          "title": "Cuddle kitten",
+          "text": "The kitten wants a hug"
+        },
+        {
+          "title": "Kitty jackpot",
+          "text": "The kitten got really lucky"
+        },
+        {
+          "title": "Ball of happiness",
+          "text": "The kitten brought you his yarn ball"
+        },
+        {
+          "title": "Fluffy cloud",
+          "text": "The kitten is soft as a cloud"
+        },
+        {
+          "title": "Friend of all kittens",
+          "text": "The kitten told every kitten about you"
+        },
+        {
+          "title": "Guardian kitten",
+          "text": "Now the kitten guards your sleep"
+        },
+        {
+          "title": "Starry paw",
+          "text": "The kitten gave you a little star"
+        },
+        {
+          "title": "Royal cuddles",
+          "text": "The kitten put on a crown for you"
+        },
+        {
+          "title": "Purring orchestra",
+          "text": "Kittens purr in chorus for you"
+        },
+        {
+          "title": "Rainbow tail",
+          "text": "The kitten’s tail shines in every colour"
+        },
+        {
+          "title": "Secret of a cat’s heart",
+          "text": "The kitten told you his secret"
+        },
+        {
+          "title": "Travelling kitten",
+          "text": "The kitten follows you across every site"
+        },
+        {
+          "title": "Moonlight purr",
+          "text": "The kitten purrs even in his sleep"
+        },
+        {
+          "title": "Keeper of cosiness",
+          "text": "It is always warm next to you"
+        },
+        {
+          "title": "Cat sage",
+          "text": "The kitten thinks you are wiser than him"
+        },
+        {
+          "title": "Universe of purrs",
+          "text": "The purring can be heard in space"
+        },
+        {
+          "title": "Almost a legend",
+          "text": "Just a little more to the top"
+        },
+        {
+          "title": "Forever love",
+          "text": "The kitten is yours forever"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Copy ID to clipboard",

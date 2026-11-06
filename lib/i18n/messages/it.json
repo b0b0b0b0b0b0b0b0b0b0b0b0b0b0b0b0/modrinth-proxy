@@ -54,7 +54,141 @@
     "siteVersion": "Versione sito: {version}",
     "siteVersionTip": "Novità e changelog",
     "snowball": "Chiama il gattino a far rotolare la neve",
-    "snowballBusy": "Il gattino sta già giocando"
+    "snowballBusy": "Il gattino sta già giocando",
+    "kitten": {
+      "aria": "Accarezza il gattino",
+      "pet": "Accarezza il gattino",
+      "petMore": "Purr! Ancora una carezza",
+      "waiting": "Ti sta aspettando",
+      "petted": "Carezze: {count}",
+      "toNext": "{count} al prossimo trofeo",
+      "unlocked": "Trofei: {count} su {total}",
+      "signIn": "Accedi così il gattino si ricorderà di te",
+      "waking": "Il gattino si sta svegliando…",
+      "toastKicker": "Trofeo sbloccato",
+      "list": [
+        {
+          "title": "Primo incontro",
+          "text": "Hai accarezzato il gattino! Si ricorderà di te"
+        },
+        {
+          "title": "Il gattino fa le fusa",
+          "text": "Gli piace, continua"
+        },
+        {
+          "title": "Zampetta calda",
+          "text": "Il gattino ti dà la zampa"
+        },
+        {
+          "title": "Migliore amico",
+          "text": "Il gattino fa le fusa quando ti vede"
+        },
+        {
+          "title": "Al settimo cielo",
+          "text": "Il gattino non ha mai ricevuto tante coccole"
+        },
+        {
+          "title": "Grattini dietro l’orecchio",
+          "text": "Hai trovato il suo punto preferito"
+        },
+        {
+          "title": "Re delle fusa",
+          "text": "Il gattino ti chiama per nome"
+        },
+        {
+          "title": "Zampetta fortunata",
+          "text": "Il gattino ha espresso un desiderio per te"
+        },
+        {
+          "title": "Mani morbide",
+          "text": "Il gattino si scalda sulla tua mano"
+        },
+        {
+          "title": "Leggenda di modrinth.black",
+          "text": "Il gattino ha parlato di te agli amici"
+        },
+        {
+          "title": "Maestro dei grattini",
+          "text": "Sai proprio dove grattare"
+        },
+        {
+          "title": "Maratona di fusa",
+          "text": "Il gattino fa le fusa senza sosta"
+        },
+        {
+          "title": "Gattino coccolone",
+          "text": "Il gattino vuole un abbraccio"
+        },
+        {
+          "title": "Jackpot felino",
+          "text": "Il gattino ha avuto una gran fortuna"
+        },
+        {
+          "title": "Gomitolo della felicità",
+          "text": "Il gattino ti ha portato il suo gomitolo"
+        },
+        {
+          "title": "Nuvoletta soffice",
+          "text": "Il gattino è morbido come una nuvola"
+        },
+        {
+          "title": "Amico di tutti i gattini",
+          "text": "Il gattino ha parlato di te a tutti i gattini"
+        },
+        {
+          "title": "Gattino guardiano",
+          "text": "Ora il gattino veglia sul tuo sonno"
+        },
+        {
+          "title": "Zampetta stellata",
+          "text": "Il gattino ti ha regalato una stellina"
+        },
+        {
+          "title": "Coccole reali",
+          "text": "Il gattino ha messo la corona per te"
+        },
+        {
+          "title": "Orchestra di fusa",
+          "text": "I gattini fanno le fusa in coro per te"
+        },
+        {
+          "title": "Coda arcobaleno",
+          "text": "La coda del gattino brilla di tutti i colori"
+        },
+        {
+          "title": "Il segreto del cuore felino",
+          "text": "Il gattino ti ha svelato il suo segreto"
+        },
+        {
+          "title": "Gattino viaggiatore",
+          "text": "Il gattino ti segue su tutti i siti"
+        },
+        {
+          "title": "Fusa al chiaro di luna",
+          "text": "Il gattino fa le fusa anche nel sonno"
+        },
+        {
+          "title": "Custode del calduccio",
+          "text": "Accanto a te fa sempre caldo"
+        },
+        {
+          "title": "Saggio felino",
+          "text": "Il gattino ti crede più saggio di lui"
+        },
+        {
+          "title": "Universo di fusa",
+          "text": "Le fusa si sentono fino nello spazio"
+        },
+        {
+          "title": "Quasi una leggenda",
+          "text": "Manca pochissimo alla vetta"
+        },
+        {
+          "title": "Amore eterno",
+          "text": "Il gattino è tuo per sempre"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Copia ID negli appunti",

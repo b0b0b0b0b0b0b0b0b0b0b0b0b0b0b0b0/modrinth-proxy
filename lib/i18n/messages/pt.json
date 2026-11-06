@@ -54,7 +54,141 @@
     "siteVersion": "Versão do site: {version}",
     "siteVersionTip": "Novidades e changelog",
     "snowball": "Chamar o gatinho para rolar uma bola de neve",
-    "snowballBusy": "O gatinho já está brincando"
+    "snowballBusy": "O gatinho já está brincando",
+    "kitten": {
+      "aria": "Fazer carinho no gatinho",
+      "pet": "Faça carinho no gatinho",
+      "petMore": "Purr! Mais um carinho",
+      "waiting": "Ele está esperando você",
+      "petted": "Carinhos: {count}",
+      "toNext": "{count} para a próxima conquista",
+      "unlocked": "Conquistas: {count} de {total}",
+      "signIn": "Entre para o gatinho se lembrar de você",
+      "waking": "O gatinho está acordando…",
+      "toastKicker": "Conquista desbloqueada",
+      "list": [
+        {
+          "title": "Primeiro encontro",
+          "text": "Você fez carinho no gatinho! Ele vai se lembrar de você"
+        },
+        {
+          "title": "O gatinho ronrona",
+          "text": "Ele gostou, continue"
+        },
+        {
+          "title": "Patinha quentinha",
+          "text": "O gatinho te deu a patinha"
+        },
+        {
+          "title": "Melhor amigo",
+          "text": "O gatinho ronrona quando vê você"
+        },
+        {
+          "title": "Nas nuvens",
+          "text": "O gatinho nunca recebeu tanto carinho"
+        },
+        {
+          "title": "Coceguinha atrás da orelha",
+          "text": "Você achou o lugar favorito dele"
+        },
+        {
+          "title": "Mestre do ronronar",
+          "text": "O gatinho chama você pelo nome"
+        },
+        {
+          "title": "Patinha da sorte",
+          "text": "O gatinho fez um pedido por você"
+        },
+        {
+          "title": "Mãos macias",
+          "text": "O gatinho se aquece na sua mão"
+        },
+        {
+          "title": "Lenda do modrinth.black",
+          "text": "O gatinho contou de você para os amigos"
+        },
+        {
+          "title": "Mestre do coceguinha",
+          "text": "Você sabe exatamente onde coçar"
+        },
+        {
+          "title": "Maratona de ronrons",
+          "text": "O gatinho ronrona sem parar"
+        },
+        {
+          "title": "Gatinho abraçador",
+          "text": "O gatinho quer um abraço"
+        },
+        {
+          "title": "Sorte grande",
+          "text": "O gatinho teve uma sorte enorme"
+        },
+        {
+          "title": "Novelo da felicidade",
+          "text": "O gatinho trouxe o novelo dele para você"
+        },
+        {
+          "title": "Nuvenzinha fofa",
+          "text": "O gatinho está macio como uma nuvem"
+        },
+        {
+          "title": "Amigo de todos os gatinhos",
+          "text": "O gatinho contou de você para todos os gatinhos"
+        },
+        {
+          "title": "Gatinho guardião",
+          "text": "Agora o gatinho protege o seu sono"
+        },
+        {
+          "title": "Patinha estrelada",
+          "text": "O gatinho te deu uma estrelinha"
+        },
+        {
+          "title": "Carinho real",
+          "text": "O gatinho colocou uma coroa para você"
+        },
+        {
+          "title": "Orquestra de ronrons",
+          "text": "Os gatinhos ronronam em coro por você"
+        },
+        {
+          "title": "Rabinho arco-íris",
+          "text": "O rabinho do gatinho brilha com todas as cores"
+        },
+        {
+          "title": "O segredo do coração felino",
+          "text": "O gatinho te contou o segredo dele"
+        },
+        {
+          "title": "Gatinho viajante",
+          "text": "O gatinho segue você por todos os sites"
+        },
+        {
+          "title": "Ronrom ao luar",
+          "text": "O gatinho ronrona até dormindo"
+        },
+        {
+          "title": "Guardião do aconchego",
+          "text": "Perto de você está sempre quentinho"
+        },
+        {
+          "title": "Sábio felino",
+          "text": "O gatinho acha você mais sábio que ele"
+        },
+        {
+          "title": "Universo de ronrons",
+          "text": "O ronronar dá para ouvir até no espaço"
+        },
+        {
+          "title": "Quase uma lenda",
+          "text": "Falta só um pouquinho para o topo"
+        },
+        {
+          "title": "Amor eterno",
+          "text": "O gatinho é seu para sempre"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Copiar ID para a área de transferência",

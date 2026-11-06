@@ -54,7 +54,141 @@
     "siteVersion": "Wersja strony: {version}",
     "siteVersionTip": "Aktualności i changelog",
     "snowball": "Zawołaj kotka do toczenia śnieżki",
-    "snowballBusy": "Kotek już się bawi"
+    "snowballBusy": "Kotek już się bawi",
+    "kitten": {
+      "aria": "Pogłaszcz kotka",
+      "pet": "Pogłaszcz kotka",
+      "petMore": "Mrrr! Pogłaszcz jeszcze",
+      "waiting": "Bardzo na ciebie czeka",
+      "petted": "Pogłaskano: {count}",
+      "toNext": "jeszcze {count} do osiągnięcia",
+      "unlocked": "Osiągnięcia: {count} z {total}",
+      "signIn": "Zaloguj się, żeby kotek cię zapamiętał",
+      "waking": "Kotek się budzi…",
+      "toastKicker": "Osiągnięcie odblokowane",
+      "list": [
+        {
+          "title": "Pierwsze spotkanie",
+          "text": "Pogłaskałeś kotka! Zapamiętał cię"
+        },
+        {
+          "title": "Kotek mruczy",
+          "text": "Podoba mu się, głaszcz dalej"
+        },
+        {
+          "title": "Ciepła łapka",
+          "text": "Kotek podał ci łapkę"
+        },
+        {
+          "title": "Najlepszy przyjaciel",
+          "text": "Kotek mruczy na twój widok"
+        },
+        {
+          "title": "Kotek w siódmym niebie",
+          "text": "Jeszcze nikt go tak nie rozpieszczał"
+        },
+        {
+          "title": "Drapanie za uszkiem",
+          "text": "Znalazłeś jego ulubione miejsce"
+        },
+        {
+          "title": "Władca mruczenia",
+          "text": "Kotek woła cię po imieniu"
+        },
+        {
+          "title": "Szczęśliwa łapka",
+          "text": "Kotek pomyślał życzenie o tobie"
+        },
+        {
+          "title": "Miękkie dłonie",
+          "text": "Kotek grzeje się o twoją rękę"
+        },
+        {
+          "title": "Legenda modrinth.black",
+          "text": "Kotek opowiedział o tobie przyjaciołom"
+        },
+        {
+          "title": "Mistrz drapania",
+          "text": "Wiesz, gdzie kotka podrapać"
+        },
+        {
+          "title": "Maraton mruczenia",
+          "text": "Kotek mruczy bez przerwy"
+        },
+        {
+          "title": "Kotek-przytulak",
+          "text": "Kotek chce się przytulić"
+        },
+        {
+          "title": "Koci jackpot",
+          "text": "Kotek miał ogromne szczęście"
+        },
+        {
+          "title": "Kłębek szczęścia",
+          "text": "Kotek przyniósł ci swój kłębek"
+        },
+        {
+          "title": "Puszysta chmurka",
+          "text": "Kotek jest miękki jak chmurka"
+        },
+        {
+          "title": "Przyjaciel wszystkich kotków",
+          "text": "Kotek opowiedział o tobie wszystkim kotkom"
+        },
+        {
+          "title": "Kotek-strażnik",
+          "text": "Teraz kotek pilnuje twojego snu"
+        },
+        {
+          "title": "Gwiezdna łapka",
+          "text": "Kotek podarował ci gwiazdkę"
+        },
+        {
+          "title": "Królewskie pieszczoty",
+          "text": "Kotek założył dla ciebie koronę"
+        },
+        {
+          "title": "Mruczący chór",
+          "text": "Kotki mruczą chórem na twoją cześć"
+        },
+        {
+          "title": "Tęczowy ogonek",
+          "text": "Ogonek kotka zalśnił wszystkimi kolorami"
+        },
+        {
+          "title": "Tajemnica kociego serca",
+          "text": "Kotek zdradził ci swój sekret"
+        },
+        {
+          "title": "Kotek podróżnik",
+          "text": "Kotek chodzi za tobą po wszystkich stronach"
+        },
+        {
+          "title": "Księżycowe mruczenie",
+          "text": "Kotek mruczy nawet przez sen"
+        },
+        {
+          "title": "Strażnik przytulności",
+          "text": "Przy tobie zawsze jest ciepło"
+        },
+        {
+          "title": "Koci mędrzec",
+          "text": "Kotek uważa cię za mądrzejszego od siebie"
+        },
+        {
+          "title": "Wszechświat mruczenia",
+          "text": "Mruczenie słychać nawet w kosmosie"
+        },
+        {
+          "title": "Prawie legenda",
+          "text": "Jeszcze troszkę do szczytu"
+        },
+        {
+          "title": "Wieczna miłość",
+          "text": "Kotek jest twój na zawsze"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "Kopiuj ID do schowka",

@@ -300,12 +300,12 @@ function KittenBody({ pose }) {
     <svg className={`mt-[-25%] h-auto w-full overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 22" aria-hidden>
       <path d="M17.6 15.5q5.4-.6 4.6-6.4-.3-2 1-2.6" className="oiia-tail" />
       {pose === 'hips' ? null : <Arms pose={pose} />}
-      <ellipse cx="12" cy="11" rx="6.4" ry="8" className="fill-[#0f1a14]" />
+      <ellipse cx="12" cy="11" rx="6.4" ry="8" className="oiia-body" />
       <ellipse cx="12" cy="11" rx="6.4" ry="8" fill="currentColor" fillOpacity="0.1" />
       <ellipse cx="12" cy="12" rx="3.4" ry="5" stroke="none" fill="currentColor" fillOpacity="0.2" />
       {pose === 'hips' ? <Arms pose={pose} /> : null}
-      <ellipse cx="8.6" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-left fill-[#0f1a14]" />
-      <ellipse cx="15.4" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-right fill-[#0f1a14]" />
+      <ellipse cx="8.6" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-left oiia-body" />
+      <ellipse cx="15.4" cy="19.6" rx="2.7" ry="1.4" className="oiia-foot-right oiia-body" />
     </svg>
   )
 }

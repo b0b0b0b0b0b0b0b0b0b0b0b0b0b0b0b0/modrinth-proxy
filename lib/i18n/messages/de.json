@@ -54,7 +54,141 @@
     "siteVersion": "Site-Version: {version}",
     "siteVersionTip": "News und Changelog",
     "snowball": "Kätzchen zum Schneeballrollen rufen",
-    "snowballBusy": "Das Kätzchen spielt schon draußen"
+    "snowballBusy": "Das Kätzchen spielt schon draußen",
+    "kitten": {
+      "aria": "Kätzchen streicheln",
+      "pet": "Streichle das Kätzchen",
+      "petMore": "Schnurr! Noch mal streicheln",
+      "waiting": "Es wartet schon auf dich",
+      "petted": "Gestreichelt: {count}",
+      "toNext": "noch {count} bis zum Erfolg",
+      "unlocked": "Erfolge: {count} von {total}",
+      "signIn": "Melde dich an, damit sich das Kätzchen an dich erinnert",
+      "waking": "Das Kätzchen wacht auf…",
+      "toastKicker": "Erfolg freigeschaltet",
+      "list": [
+        {
+          "title": "Erstes Kennenlernen",
+          "text": "Du hast das Kätzchen gestreichelt! Es merkt sich dich"
+        },
+        {
+          "title": "Das Kätzchen schnurrt",
+          "text": "Es gefällt ihm, mach weiter"
+        },
+        {
+          "title": "Warme Pfote",
+          "text": "Das Kätzchen gibt dir Pfötchen"
+        },
+        {
+          "title": "Bester Freund",
+          "text": "Das Kätzchen schnurrt, wenn es dich sieht"
+        },
+        {
+          "title": "Ganz entzückt",
+          "text": "So viel Liebe hat das Kätzchen noch nie bekommen"
+        },
+        {
+          "title": "Hinterm Ohr kraulen",
+          "text": "Du hast seine Lieblingsstelle gefunden"
+        },
+        {
+          "title": "Meister des Schnurrens",
+          "text": "Das Kätzchen ruft dich beim Namen"
+        },
+        {
+          "title": "Glückspfote",
+          "text": "Das Kätzchen hat sich etwas für dich gewünscht"
+        },
+        {
+          "title": "Weiche Hände",
+          "text": "Das Kätzchen wärmt sich an deiner Hand"
+        },
+        {
+          "title": "Legende von modrinth.black",
+          "text": "Das Kätzchen erzählt seinen Freunden von dir"
+        },
+        {
+          "title": "Kraul-Meister",
+          "text": "Du weißt genau, wo man kraulen muss"
+        },
+        {
+          "title": "Schnurr-Marathon",
+          "text": "Das Kätzchen schnurrt ohne Pause"
+        },
+        {
+          "title": "Kuschelkätzchen",
+          "text": "Das Kätzchen will kuscheln"
+        },
+        {
+          "title": "Katzen-Jackpot",
+          "text": "Das Kätzchen hatte riesiges Glück"
+        },
+        {
+          "title": "Wollknäuel des Glücks",
+          "text": "Das Kätzchen bringt dir sein Wollknäuel"
+        },
+        {
+          "title": "Flauschige Wolke",
+          "text": "Das Kätzchen ist weich wie eine Wolke"
+        },
+        {
+          "title": "Freund aller Kätzchen",
+          "text": "Das Kätzchen hat allen Kätzchen von dir erzählt"
+        },
+        {
+          "title": "Wächterkätzchen",
+          "text": "Jetzt bewacht das Kätzchen deinen Schlaf"
+        },
+        {
+          "title": "Sternenpfote",
+          "text": "Das Kätzchen schenkt dir ein Sternchen"
+        },
+        {
+          "title": "Königliches Kuscheln",
+          "text": "Das Kätzchen trägt für dich eine Krone"
+        },
+        {
+          "title": "Schnurr-Orchester",
+          "text": "Die Kätzchen schnurren im Chor für dich"
+        },
+        {
+          "title": "Regenbogenschwanz",
+          "text": "Der Schwanz des Kätzchens leuchtet in allen Farben"
+        },
+        {
+          "title": "Geheimnis des Katzenherzens",
+          "text": "Das Kätzchen verrät dir sein Geheimnis"
+        },
+        {
+          "title": "Reisekätzchen",
+          "text": "Das Kätzchen folgt dir über alle Seiten"
+        },
+        {
+          "title": "Mondschein-Schnurren",
+          "text": "Das Kätzchen schnurrt sogar im Schlaf"
+        },
+        {
+          "title": "Hüter der Gemütlichkeit",
+          "text": "Bei dir ist es immer warm"
+        },
+        {
+          "title": "Katzenweiser",
+          "text": "Das Kätzchen hält dich für weiser als sich selbst"
+        },
+        {
+          "title": "Schnurr-Universum",
+          "text": "Das Schnurren hört man sogar im Weltall"
+        },
+        {
+          "title": "Fast eine Legende",
+          "text": "Nur noch ein kleines Stück bis zum Gipfel"
+        },
+        {
+          "title": "Ewige Liebe",
+          "text": "Das Kätzchen gehört für immer dir"
+        }
+      ]
+    }
   },
   "copy": {
     "id": "ID in die Zwischenablage kopieren",
