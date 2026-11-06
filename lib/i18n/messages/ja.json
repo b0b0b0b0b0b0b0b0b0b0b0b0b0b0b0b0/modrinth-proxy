@@ -28,7 +28,7 @@
     "deluxeMenu": "DeluxeMenuエディター",
     "deluxeMenuTip": "DeluxeMenuとAbstractMenusのエディター",
     "pingServers": "サーバーPing",
-    "pingServersTip": "MinecraftサーバーにPing（RUではブロックされることがあります）",
+    "pingServersTip": "MinecraftサーバーにPing",
     "more": "More services",
     "mtools": "MTools",
     "mtoolsTip": "Tools for Minecraft servers"

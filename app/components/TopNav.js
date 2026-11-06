@@ -41,12 +41,6 @@ export default function TopNav({ account = null }) {
       title: t('nav.mtools'),
       description: t('nav.mtoolsTip'),
     },
-    {
-      href: 'https://ping.modrinth.black',
-      newTab: true,
-      title: t('nav.pingServers'),
-      description: t('nav.pingServersTip'),
-    },
   ]
 
   const RAIL_MS = 520

@@ -146,7 +146,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
                 />
                 <button
                   type="button"
-                  onClick={() => window.location.assign(`https://ping.modrinth.black/?s=${encodeURIComponent(javaAddress)}`)}
+                  onClick={() => window.location.assign(`https://mtools.modrinth.black/tools/ping?s=${encodeURIComponent(javaAddress)}`)}
                   className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-modrinth-green/25 bg-modrinth-green/8 px-3 py-2 text-sm font-semibold text-modrinth-green transition-all hover:border-modrinth-green/50 hover:bg-modrinth-green/15 active:scale-[0.97]"
                 >
                   <svg className="h-4 w-4 shrink-0" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} viewBox="0 0 24 24" aria-hidden>

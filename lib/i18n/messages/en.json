@@ -29,7 +29,7 @@
     "deluxeMenu": "DeluxeMenu editor",
     "deluxeMenuTip": "DeluxeMenu and AbstractMenus editor",
     "pingServers": "Server ping",
-    "pingServersTip": "Ping Minecraft servers (may be blocked in RU)",
+    "pingServersTip": "Ping Minecraft servers",
     "more": "More services",
     "mtools": "MTools",
     "mtoolsTip": "Tools for Minecraft servers"
