@@ -1,15 +1,25 @@
 'use client'
 
 import { useEffect } from 'react'
+import { useTheme } from 'next-themes'
 import { applyPalette } from '../../lib/paletteManager'
+import { writeSharedPalette, writeSharedTheme } from '../../lib/sharedLook'
 
 export default function AppSettingsSync() {
+  const { theme } = useTheme()
+
+  useEffect(() => {
+    if (theme) writeSharedTheme(theme)
+  }, [theme])
+
   useEffect(() => {
     const palette = localStorage.getItem('color-palette') || 'pink'
     applyPalette(palette)
+    writeSharedPalette(palette)
 
     const handlePaletteChange = (e) => {
       applyPalette(e.detail)
+      writeSharedPalette(e.detail)
     }
 
     window.addEventListener('color-palette-changed', handlePaletteChange)
