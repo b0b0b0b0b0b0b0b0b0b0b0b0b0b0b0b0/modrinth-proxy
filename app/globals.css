@@ -5777,4 +5777,7 @@
   html:not(.dark) .oiia-body {
     fill: #ffffff;
   }
+  .fk-say--rank {
+    color: var(--color-green);
+  }
 }

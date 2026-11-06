@@ -2,25 +2,10 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useMessage, useT } from './I18nProvider';
 import { playMew } from './softSounds';
+import { KITTEN_GOALS } from '@/lib/kittenLevels';
 const FLUSH_MS = 700;
 const MAX_BATCH = 5;
-const LEVELS = 30;
-function buildKittenGoals(total) {
-  const goals = [];
-  let sum = 0;
-  let last = 0;
-  for (let level = 1; level <= total; level += 1) {
-    let gap = level === 1 ? 1 : Math.ceil(2.5 * Math.pow(level - 1, 1.45));
-    if (gap >= 20) gap = Math.ceil(gap / 5) * 5;
-    if (gap >= 200) gap = Math.ceil(gap / 10) * 10;
-    if (gap <= last) gap = last + 5;
-    last = gap;
-    sum += gap;
-    goals.push(sum);
-  }
-  return goals;
-}
-const GOALS = buildKittenGoals(LEVELS);
+const GOALS = KITTEN_GOALS;
 const EARS = [
     { outer: 'M5.7 5.6 5 0.9 10.1 3.2', inner: 'M6.6 5 6.3 2.6 8.8 3.7Z' },
     { outer: 'M18.3 5.6 19 0.9 13.9 3.2', inner: 'M17.4 5 17.7 2.6 15.2 3.7Z' },
@@ -176,6 +161,7 @@ export default function FooterAchievementKitten() {
     const count = pets ?? 0;
     const nextGoal = ACHIEVEMENTS.find((item) => item.count > count);
     const unlockedCount = ACHIEVEMENTS.filter((item) => item.count <= count).length;
+    const current = unlockedCount > 0 ? ACHIEVEMENTS[unlockedCount - 1] : null;
     return (<div className="fk">
       <div className="fk-stage">
         <button ref={ref} type="button" className={`fk-button${hop ? ' fk-button--hop' : ''}`} onClick={pet} onAnimationEnd={() => setHop(false)} aria-label={t('footer.kitten.aria')}>
@@ -195,7 +181,7 @@ export default function FooterAchievementKitten() {
 
       <div className="fk-info">
         {signedIn ? (<>
-            <p className="fk-say">{count ? t('footer.kitten.petMore') : t('footer.kitten.pet')}</p>
+            <p className={`fk-say${current ? ' fk-say--rank' : ''}`}>{current ? current.title : t('footer.kitten.pet')}</p>
             <p className="fk-count">
               {count ? t('footer.kitten.petted', { count }) : t('footer.kitten.waiting')}
               {nextGoal && count > 0 ? ` · ${t('footer.kitten.toNext', { count: nextGoal.count - count })}` : ''}
