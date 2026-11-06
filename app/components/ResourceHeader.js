@@ -86,6 +86,26 @@ export default async function ResourceHeader({ resource, contentType, versions =
 
   const iconUrl = resource.icon_url ? filterAvatar(resource.icon_url) : null
 
+  const categoryChips = allResourceCategories.length > 0 ? (
+    <div className="flex flex-wrap gap-1.5">
+      {allResourceCategories.slice(0, 4).map((catId) => {
+        if (!catId || typeof catId !== 'string') return null
+        const category = allCategories.find(c => c.id === catId)
+        if (!category || !category.icon || !category.name) return null
+        return (
+          <Link
+            key={catId}
+            href={`/${contentTypeRoute}?f=categories:${catId}`}
+            className="glass-chip flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) hover:text-(--text-primary)"
+          >
+            <div className="h-4 w-4 shrink-0">{category.icon}</div>
+            <span>{categoryLabel(t, catId, category.name)}</span>
+          </Link>
+        )
+      })}
+    </div>
+  ) : null
+
   return (
     <>
       <div className="mb-4 md:mb-6 flex items-center gap-2 text-sm flex-wrap">
@@ -183,33 +203,13 @@ export default async function ResourceHeader({ resource, contentType, versions =
                       </div>
                     )}
                     <ProjectFavoriteCount projectId={resource.id} />
-                    {allResourceCategories.length > 0 && (
-                      <div className="hidden sm:flex flex-wrap gap-1.5">
-                        {allResourceCategories.slice(0, 4).map((catId) => {
-                          try {
-                            if (!catId || typeof catId !== 'string') return null
-                            const category = allCategories.find(c => c.id === catId)
-                            if (!category || !category.icon || !category.name) return null
-                            
-                            return (
-                              <Link
-                                key={catId}
-                                href={`/${contentTypeRoute}?f=categories:${catId}`}
-                                className="glass-chip flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-normal leading-none text-(--text-muted) hover:text-(--text-primary)"
-                              >
-                                <div className="h-4 w-4 shrink-0">{category.icon}</div>
-                                <span>{categoryLabel(t, catId, category.name)}</span>
-                              </Link>
-                            )
-                          } catch (e) {
-                            return null
-                          }
-                        })}
-                      </div>
-                    )}
+                    {categoryChips}
                   </>
                 )}
               </div>
+              {!isServer && categoryChips ? (
+                <div className="lg:hidden">{categoryChips}</div>
+              ) : null}
             </div>
           </div>
 
