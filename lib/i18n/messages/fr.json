@@ -187,7 +187,19 @@
           "title": "Amour éternel",
           "text": "Le chaton est à toi pour toujours"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Le chaton ne veut pas être caressé",
+        "title": "Le chaton boude",
+        "text": "Pas de caresses, pas de succès",
+        "sulks": [
+          "Pfff ! Bas les pattes",
+          "Le chaton s’est détourné",
+          "Non, non, pas de caresses",
+          "Le chaton fait semblant de ne pas te voir",
+          "Il a remué la queue et il est parti"
+        ]
+      }
     }
   },
   "copy": {

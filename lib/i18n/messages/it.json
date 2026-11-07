@@ -187,7 +187,19 @@
           "title": "Amore eterno",
           "text": "Il gattino è tuo per sempre"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Il gattino non vuole essere accarezzato",
+        "title": "Il gattino ha il broncio",
+        "text": "Niente carezze, niente obiettivi",
+        "sulks": [
+          "Ffff! Giù le zampe",
+          "Il gattino si è girato",
+          "No, no, niente carezze",
+          "Il gattino fa finta di non vederti",
+          "Ha agitato la coda e se n’è andato"
+        ]
+      }
     }
   },
   "copy": {

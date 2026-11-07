@@ -187,7 +187,19 @@
           "title": "Mūžīga mīlestība",
           "text": "Kaķēns ir tavs uz visiem laikiem"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Kaķēns negrib, lai viņu glāsta",
+        "title": "Kaķēns ir apvainojies",
+        "text": "Glāstīt neļauj, sasniegumus neskaita",
+        "sulks": [
+          "Fū! Neaiztiec",
+          "Kaķēns novērsās",
+          "Nē, nē, neglāstīt",
+          "Kaķēns izliekas, ka tevi neredz",
+          "Pamāja ar asti un aizgāja"
+        ]
+      }
     }
   },
   "copy": {

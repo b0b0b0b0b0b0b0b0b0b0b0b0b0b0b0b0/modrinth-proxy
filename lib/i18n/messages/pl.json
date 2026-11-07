@@ -187,7 +187,19 @@
           "title": "Wieczna miłość",
           "text": "Kotek jest twój na zawsze"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Kotek nie chce, żeby go głaskać",
+        "title": "Kotek się obraził",
+        "text": "Nie daje się głaskać, osiągnięć nie liczy",
+        "sulks": [
+          "Prych! Nie dotykaj",
+          "Kotek się odwrócił",
+          "Nie, nie, bez głaskania",
+          "Kotek udaje, że cię nie widzi",
+          "Machnął ogonem i poszedł"
+        ]
+      }
     }
   },
   "copy": {

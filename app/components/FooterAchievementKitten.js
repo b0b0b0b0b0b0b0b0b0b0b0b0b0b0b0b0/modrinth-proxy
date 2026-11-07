@@ -10,6 +10,20 @@ const EARS = [
     { outer: 'M5.7 5.6 5 0.9 10.1 3.2', inner: 'M6.6 5 6.3 2.6 8.8 3.7Z' },
     { outer: 'M18.3 5.6 19 0.9 13.9 3.2', inner: 'M17.4 5 17.7 2.6 15.2 3.7Z' },
 ];
+function GrumpyKittenFace() {
+    return (<svg className="fk-face fk-face--grumpy" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
+      {EARS.map((ear, index) => (<g key={ear.outer} className={`fk-ear fk-ear--${index ? 'right' : 'left'}`}>
+          <path d={ear.outer} strokeLinejoin="round" className="fk-fill"/>
+          <path d={ear.inner} stroke="none" className="fk-inner"/>
+        </g>))}
+      <circle cx="12" cy="12" r="9" className="fk-fill"/>
+      <path d="M7.6 9.2l2.6.8M16.4 9.2l-2.6.8" strokeWidth="1.2"/>
+      <path d="M8.2 11h2.2M13.6 11h2.2"/>
+      <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round"/>
+      <path d="M10.7 14.9q1.3-1.1 2.6 0"/>
+      <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1"/>
+    </svg>);
+}
 function KittenFace({ mood, look }) {
     return (<svg className="fk-face" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
       {EARS.map((ear, index) => (<g key={ear.outer} className={`fk-ear fk-ear--${index ? 'right' : 'left'}`}>
@@ -33,6 +47,10 @@ function KittenFace({ mood, look }) {
 export default function FooterAchievementKitten() {
     const t = useT();
     const list = useMessage('footer.kitten.list');
+    const sulks = useMessage('footer.kitten.grumpy.sulks');
+    const [grumpy, setGrumpy] = useState(false);
+    const [sulk, setSulk] = useState(-1);
+    const [dodge, setDodge] = useState(false);
     const ACHIEVEMENTS = useMemo(() => GOALS.map((count, index) => ({ count, title: list?.[index]?.title || '', text: list?.[index]?.text || '' })), [list]);
     const ref = useRef(null);
     const [look, setLook] = useState({ x: 0, y: 0 });
@@ -57,6 +75,7 @@ export default function FooterAchievementKitten() {
             .then((data) => {
             const value = typeof data?.pets === 'number' ? data.pets : null;
             setSignedIn(value !== null);
+            setGrumpy(data?.grumpy === true);
             setPets(value);
         })
             .catch(() => setSignedIn(false));
@@ -122,6 +141,14 @@ export default function FooterAchievementKitten() {
         });
     }, []);
     const pet = useCallback(() => {
+        if (grumpy) {
+            setSulk((current) => current + 1);
+            if (calm.current)
+                return;
+            setDodge(false);
+            requestAnimationFrame(() => setDodge(true));
+            return;
+        }
         clearTimeout(moodTimer.current);
         setMood('happy');
         moodTimer.current = setTimeout(() => setMood('look'), 1300);
@@ -157,7 +184,22 @@ export default function FooterAchievementKitten() {
         }));
         setHearts((current) => [...current, ...fresh]);
         setTimeout(() => setHearts((current) => current.filter((heart) => !fresh.includes(heart))), 1500);
-    }, [signedIn, flush, ACHIEVEMENTS]);
+    }, [grumpy, signedIn, flush, ACHIEVEMENTS]);
+    if (grumpy) {
+        const phrases = Array.isArray(sulks) ? sulks : [];
+        const phrase = sulk >= 0 && phrases.length ? phrases[sulk % phrases.length] : t('footer.kitten.grumpy.text');
+        return (<div className="fk">
+          <div className="fk-stage">
+            <button type="button" className={`fk-button fk-button--grumpy${dodge ? ' fk-button--dodge' : ''}`} onClick={pet} onAnimationEnd={() => setDodge(false)} aria-label={t('footer.kitten.grumpy.aria')}>
+              <GrumpyKittenFace />
+            </button>
+          </div>
+          <div className="fk-info">
+            <p className="fk-say">{t('footer.kitten.grumpy.title')}</p>
+            <p className="fk-count" aria-live="polite">{phrase}</p>
+          </div>
+        </div>);
+    }
     const count = pets ?? 0;
     const nextGoal = ACHIEVEMENTS.find((item) => item.count > count);
     const unlockedCount = ACHIEVEMENTS.filter((item) => item.count <= count).length;

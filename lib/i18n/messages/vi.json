@@ -187,7 +187,19 @@
           "title": "Tình yêu mãi mãi",
           "text": "Mèo con là của bạn mãi mãi"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Mèo con không muốn được vuốt ve",
+        "title": "Mèo con đang dỗi",
+        "text": "Không cho vuốt, không tính thành tựu",
+        "sulks": [
+          "Hừ! Đừng chạm vào",
+          "Mèo con quay đi rồi",
+          "Không, không, đừng vuốt",
+          "Mèo con giả vờ không thấy bạn",
+          "Vẫy đuôi rồi bỏ đi"
+        ]
+      }
     }
   },
   "copy": {

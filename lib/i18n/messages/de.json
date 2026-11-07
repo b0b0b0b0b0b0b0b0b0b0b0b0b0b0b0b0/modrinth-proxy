@@ -187,7 +187,19 @@
           "title": "Ewige Liebe",
           "text": "Das Kätzchen gehört für immer dir"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Das Kätzchen will nicht gestreichelt werden",
+        "title": "Das Kätzchen ist beleidigt",
+        "text": "Kein Streicheln, keine Erfolge",
+        "sulks": [
+          "Pff! Finger weg",
+          "Das Kätzchen hat sich abgewandt",
+          "Nein, nein, nicht streicheln",
+          "Das Kätzchen tut so, als sähe es dich nicht",
+          "Mit dem Schwanz gewedelt und weg"
+        ]
+      }
     }
   },
   "copy": {

@@ -187,7 +187,19 @@
           "title": "Evig kärlek",
           "text": "Kattungen är din för alltid"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "Kattungen vill inte bli klappad",
+        "title": "Kattungen surar",
+        "text": "Ingen klappning, inga prestationer",
+        "sulks": [
+          "Fnys! Tassarna bort",
+          "Kattungen vände sig bort",
+          "Nej, nej, ingen klappning",
+          "Kattungen låtsas att den inte ser dig",
+          "Viftade på svansen och gick"
+        ]
+      }
     }
   },
   "copy": {

@@ -187,7 +187,19 @@
           "title": "Amor eterno",
           "text": "O gatinho é seu para sempre"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "O gatinho não quer carinho",
+        "title": "O gatinho está emburrado",
+        "text": "Não deixa fazer carinho nem conta conquistas",
+        "sulks": [
+          "Fff! Não toca",
+          "O gatinho virou a cara",
+          "Não, não, nada de carinho",
+          "O gatinho finge que não te vê",
+          "Balançou o rabo e foi embora"
+        ]
+      }
     }
   },
   "copy": {

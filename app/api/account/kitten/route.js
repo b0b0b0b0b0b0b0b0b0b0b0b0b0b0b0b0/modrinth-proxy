@@ -1,15 +1,16 @@
 import { getSessionUser, isSameOrigin } from '@/lib/auth'
-import { addKittenPets, readKittenPets } from '@/lib/kittenPets'
+import { addKittenPets, isGrumpyKitten, readKittenPets } from '@/lib/kittenPets'
 import { kittenProgress } from '@/lib/kittenLevels'
 import { checkRateLimit } from '@/lib/rateLimit'
 
-const RATE_LIMIT = { limit: 240, windowMs: 60 * 1000 }
+const RATE_LIMIT = { limit: 120, windowMs: 60 * 1000 }
 const NO_STORE = { 'Cache-Control': 'private, no-store' }
 
 export const dynamic = 'force-dynamic'
 
 function reply(user, pets) {
-  return Response.json({ ...kittenProgress(pets), name: user.username }, { headers: NO_STORE })
+  const grumpy = isGrumpyKitten(user.id)
+  return Response.json({ ...kittenProgress(pets), name: user.username, ...(grumpy && { grumpy }) }, { headers: NO_STORE })
 }
 
 export async function GET() {
@@ -22,6 +23,7 @@ export async function POST(request) {
   if (!isSameOrigin(request)) return Response.json({ error: 'forbidden' }, { status: 403 })
   const user = await getSessionUser()
   if (!user) return Response.json({ pets: null }, { headers: NO_STORE })
+  if (isGrumpyKitten(user.id)) return reply(user, 0)
   const rate = checkRateLimit(`kitten-pets:${user.id}`, RATE_LIMIT)
   if (!rate.ok) return reply(user, readKittenPets(user.id))
   const body = await request.json().catch(() => null)

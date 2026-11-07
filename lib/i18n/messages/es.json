@@ -187,7 +187,19 @@
           "title": "Amor eterno",
           "text": "El gatito es tuyo para siempre"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "El gatito no quiere que lo acaricien",
+        "title": "El gatito está enfurruñado",
+        "text": "No deja que lo acaricies ni cuenta logros",
+        "sulks": [
+          "¡Fff! No me toques",
+          "El gatito se dio la vuelta",
+          "No, no, nada de caricias",
+          "El gatito finge que no te ve",
+          "Movió la cola y se fue"
+        ]
+      }
     }
   },
   "copy": {

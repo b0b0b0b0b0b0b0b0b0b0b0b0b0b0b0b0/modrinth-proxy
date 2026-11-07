@@ -188,7 +188,19 @@
           "title": "Forever love",
           "text": "The kitten is yours forever"
         }
-      ]
+      ],
+      "grumpy": {
+        "aria": "The kitten does not want to be petted",
+        "title": "The kitten is sulking",
+        "text": "No petting allowed, no achievements counted",
+        "sulks": [
+          "Hmph! Paws off",
+          "The kitten turned away",
+          "Nope, no petting",
+          "The kitten pretends not to see you",
+          "Flicked its tail and walked off"
+        ]
+      }
     }
   },
   "copy": {
