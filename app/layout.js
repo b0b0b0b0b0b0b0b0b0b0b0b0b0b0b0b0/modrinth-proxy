@@ -116,6 +116,17 @@ export default async function RootLayout({ children }) {
           dangerouslySetInnerHTML={{
             __html: `
               try {
+                try {
+                  var shared = {};
+                  document.cookie.split(';').forEach(function(part) {
+                    var at = part.indexOf('=');
+                    if (at > 0) shared[part.slice(0, at).trim()] = decodeURIComponent(part.slice(at + 1));
+                  });
+                  var palettes = ${JSON.stringify(activeColorPalettesStoreDisclaimerUpdate)};
+                  if (shared['site-palette'] && palettes[shared['site-palette']]) localStorage.setItem('color-palette', shared['site-palette']);
+                  if (/^(dark|light|system)$/.test(shared['site-theme'] || '')) localStorage.setItem('modrinth-theme', shared['site-theme']);
+                  if (/^(on|off)$/.test(shared['site-kitten-sounds'] || '')) localStorage.setItem('kitten-sounds', shared['site-kitten-sounds']);
+                } catch (sharedError) {}
                 if (localStorage.getItem('advanced-rendering') === 'false') {
                   document.documentElement.classList.add('no-advanced-rendering');
                 }

@@ -1,5 +1,7 @@
 'use client'
 
+import { writeSharedSounds } from '@/lib/sharedLook'
+
 const STORAGE_KEY = 'kitten-sounds'
 const listeners = new Set()
 let context = null
@@ -24,6 +26,7 @@ export function setSoundsMuted(next) {
   try {
     localStorage.setItem(STORAGE_KEY, next ? 'off' : 'on')
   } catch {}
+  writeSharedSounds(next)
   listeners.forEach((listener) => listener(next))
 }
 

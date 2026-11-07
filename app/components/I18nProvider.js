@@ -4,7 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { useRouter } from 'next/navigation'
 import { DEFAULT_LOCALE, isEnabledLocale } from '@/lib/i18n/config'
 import { getMessage, translate } from '@/lib/i18n/translate'
-import { writeSharedLocale } from '@/lib/i18n/sharedLocale'
+import { readSharedLocale, writeSharedLocale } from '@/lib/i18n/sharedLocale'
 
 const I18nContext = createContext({
   locale: DEFAULT_LOCALE,
@@ -27,6 +27,25 @@ export function I18nProvider({ locale: initialLocale, children }) {
     document.documentElement.lang = locale
     writeLocaleCookie(locale)
   }, [locale])
+
+  useEffect(() => {
+    const adopt = () => {
+      const shared = readSharedLocale()
+      if (shared && shared !== locale && isEnabledLocale(shared)) {
+        setLocaleState(shared)
+        router.refresh()
+      }
+    }
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') adopt()
+    }
+    window.addEventListener('focus', adopt)
+    document.addEventListener('visibilitychange', onVisible)
+    return () => {
+      window.removeEventListener('focus', adopt)
+      document.removeEventListener('visibilitychange', onVisible)
+    }
+  }, [locale, router])
 
   const setLocale = useCallback((next) => {
     if (!isEnabledLocale(next)) return
