@@ -1,6 +1,8 @@
 import { zipSync } from 'fflate'
 import { MODRINTH_CDN_HOST, MODRINTH_USER_AGENT } from '@/lib/modrinth'
 import { sanitizeZipFilename } from '@/lib/downloadZip'
+import { countDownload } from '@/lib/downloadCounter'
+import { getClientIp } from '@/lib/rateLimit'
 
 const ALLOWED_HOST = MODRINTH_CDN_HOST
 
@@ -44,6 +46,8 @@ export async function POST(request) {
     }
 
     const zipped = zipSync(entries)
+    const ip = getClientIp(request)
+    for (const file of files) countDownload(file.url, ip)
     const safeName = sanitizeZipFilename(zipName)
 
     return new Response(zipped, {

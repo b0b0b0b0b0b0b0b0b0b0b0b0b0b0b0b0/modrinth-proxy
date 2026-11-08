@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation'
 import { getSessionUser } from '@/lib/auth'
 import { isAdmin } from '@/lib/admins'
 import { getSiteStats } from '@/lib/siteStats'
+import { getDownloadStats } from '@/lib/downloadCounter'
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
+import { intlLocale } from '@/lib/i18n/config'
 import { filterAvatar } from '@/lib/contentFilter'
 import CountUp from './CountUp'
 import RoyalKitten from './RoyalKitten'
@@ -92,8 +94,18 @@ export default async function StatsPage() {
 
   const { t, locale } = await getRequestT()
   const stats = getSiteStats()
+  const downloads = getDownloadStats()
   const label = pluralize(stats.users, locale, t('st.userOne'), t('st.userFew'), t('st.userMany'))
   const typeLabels = Object.fromEntries(Object.entries(TYPE_LABEL_KEYS).map(([type, key]) => [type, t(key)]))
+  const downloadTypeLabels = { ...typeLabels, unknown: t('st.dlUnknown') }
+  const since = downloads.since
+    ? new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }).format(new Date(downloads.since))
+    : null
+  const downloadTiles = [
+    { value: downloads.total, label: t('st.dlTotal') },
+    { value: downloads.month, label: t('st.dlMonth') },
+    { value: downloads.today, label: t('st.dlToday') },
+  ]
   const tiles = [
     { value: stats.active, label: t('st.active') },
     { value: stats.github, label: t('st.github') },
@@ -138,6 +150,26 @@ export default async function StatsPage() {
 
       <Card title={t('st.byDay')}>
         <DaysChart days={stats.days} label={t('st.byDay')} />
+      </Card>
+
+      <Card title={t('st.dlTitle')}>
+        <div className="mb-5 grid grid-cols-3 gap-3">
+          {downloadTiles.map((tile) => (
+            <div key={tile.label} className="rounded-xl bg-gray-800/40 px-3 py-3">
+              <div className="text-2xl font-extrabold tabular-nums text-white">
+                <CountUp value={tile.value} />
+              </div>
+              <div className="mt-1 text-xs leading-snug text-gray-600 dark:text-gray-500">{tile.label}</div>
+            </div>
+          ))}
+        </div>
+        <DaysChart days={downloads.days} label={t('st.dlTitle')} />
+        <div className="mt-5">
+          <TypeSplit title={t('st.dlByType')} rows={downloads.types} labels={downloadTypeLabels} />
+        </div>
+        <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
+          {since ? t('st.dlNote', { date: since }) : t('st.dlEmpty')}
+        </p>
       </Card>
 
       <Card title={t('st.mrTitle')}>
