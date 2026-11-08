@@ -10,10 +10,22 @@ import { intlLocale } from '@/lib/i18n/config'
 const REFRESH_MS = 30 * 1000
 const KINDS_IN_ROW = 4
 
-function kindsText(kinds, limit = KINDS_IN_ROW) {
+function kindLabel(t, kind) {
+  const key = `st.kinds.${kind}`
+  const label = t(key)
+  return label === key ? kind : label
+}
+
+function kindHint(t, kind) {
+  const key = `st.kindHints.${kind}`
+  const hint = t(key)
+  return hint === key ? kind : `${hint} · ${kind}`
+}
+
+function kindsText(t, kinds, limit = KINDS_IN_ROW) {
   return (kinds || [])
     .slice(0, limit)
-    .map((row) => `${row.kind} ${row.n}`)
+    .map((row) => `${kindLabel(t, row.kind)} ${row.n}`)
     .join(', ')
 }
 
@@ -133,7 +145,7 @@ function SourceRow({ source, index, t, time }) {
           ))}
           <div>
             <span className="text-gray-600 dark:text-gray-500">{t('st.mrKinds')}: </span>
-            {kindsText(source.kinds, 20)}
+            {kindsText(t, source.kinds, 20)}
           </div>
           {source.prefetch ? (
             <div>
@@ -465,7 +477,7 @@ export default function ModrinthTrafficChart({ initial }) {
         minute.minRemaining ?? '—',
         minute.sources,
         minute.top ? `${minute.top.ip} (${minute.top.n})` : '—',
-        kindsText(minute.kinds, 20),
+        kindsText(t, minute.kinds, 20),
       ].join('\t'),
     ),
   ].join('\n')
@@ -489,7 +501,7 @@ export default function ModrinthTrafficChart({ initial }) {
       [
         `#${index + 1} ${source.ip} — ${whoText(t, source)}`,
         `   ${t('st.mrSourceCounts', { n: source.requests, limited: source.limited, pages: source.pathsCount })}${source.prefetch ? ` · ${t('st.mrPrefetch')}: ${source.prefetch}` : ''}`,
-        `   ${t('st.mrKinds')}: ${kindsText(source.kinds, 20)}`,
+        `   ${t('st.mrKinds')}: ${kindsText(t, source.kinds, 20)}`,
         `   ${t('st.mrMinutes')}: ${source.minutes.map((minute) => `${time.format(new Date(minute.at))} ${minute.n}`).join(', ')}`,
         `   ${t('st.mrPages')}: ${source.paths.map((row) => `${row.path} ${row.n}`).join(', ')}`,
         ...source.uas.map((row) => `   UA ×${row.n}: ${row.ua}`),
@@ -568,7 +580,9 @@ export default function ModrinthTrafficChart({ initial }) {
         <div className="mt-4 space-y-1.5">
           {data.byKind.map((row) => (
             <div key={row.kind} className="flex items-center gap-3 text-xs">
-              <span className="w-40 shrink-0 truncate font-mono text-gray-400">{row.kind}</span>
+              <StyledTooltip label={kindHint(t, row.kind)}>
+                <span className="w-44 shrink-0 truncate text-gray-300 sm:w-56">{kindLabel(t, row.kind)}</span>
+              </StyledTooltip>
               <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-800">
                 <div className="h-full rounded-full bg-modrinth-green/70" style={{ width: `${(row.n / data.byKind[0].n) * 100}%` }} />
               </div>
@@ -618,7 +632,7 @@ export default function ModrinthTrafficChart({ initial }) {
                   <td className="px-2 py-1 text-right text-gray-400">{minute.minRemaining ?? '—'}</td>
                   <td className="px-2 py-1 text-right text-gray-400">{minute.sources}</td>
                   <td className="px-2 py-1 font-mono text-gray-300">{minute.top ? `${minute.top.ip} (${minute.top.n})` : '—'}</td>
-                  <td className="hidden px-2 py-1 text-gray-500 sm:table-cell">{kindsText(minute.kinds)}</td>
+                  <td className="hidden px-2 py-1 text-gray-500 sm:table-cell">{kindsText(t, minute.kinds)}</td>
                 </tr>
               ))}
             </tbody>
