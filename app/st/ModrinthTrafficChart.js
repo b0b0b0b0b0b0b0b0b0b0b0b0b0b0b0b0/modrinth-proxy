@@ -291,6 +291,80 @@ function MirrorTraffic({ minutes, until, t, time }) {
   )
 }
 
+const EMPTY_RELAY = { served: 0, refused: 0, failed: 0, capped: 0 }
+
+function RelayTraffic({ minutes, relays, usage, t, time }) {
+  const rows = minutes.map((minute) => {
+    const relay = minute.relay || EMPTY_RELAY
+    return { at: minute.at, ...relay, requests: relay.served + relay.refused + relay.failed }
+  })
+  const sum = (key) => rows.reduce((total, row) => total + row[key], 0)
+  const requests = sum('requests')
+  if (!relays && !requests) return null
+  const refused = sum('refused')
+  const failed = sum('failed')
+  const capped = sum('capped')
+  const spent = usage?.dailyLimit ? usage.used / usage.dailyLimit : 0
+  const scale = Math.max(1, ...rows.map((row) => row.requests)) * 1.08
+
+  const summary = [
+    { value: relays || t('st.rlOff'), label: t('st.rlCount'), warn: !relays },
+    {
+      value: usage ? `${usage.used} / ${usage.dailyLimit}` : 0,
+      label: t('st.rlToday', { perMinute: usage?.minuteLimit ?? 0 }),
+      warn: spent >= 0.9,
+    },
+    { value: sum('served'), label: t('st.rlServed') },
+    { value: refused, label: t('st.rlRefused'), warn: refused > 0 },
+    { value: failed, label: t('st.rlFailed'), warn: failed > 0 },
+    { value: capped, label: t('st.rlCapped'), warn: capped > 0 },
+  ]
+
+  return (
+    <div className="mt-6">
+      <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{t('st.rlTitle')}</h3>
+      <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+        {summary.map((item) => (
+          <div key={item.label} className="rounded-xl bg-gray-800/40 px-3 py-2">
+            <div className={`text-lg font-bold tabular-nums ${item.warn ? 'text-red-400' : 'text-white'}`}>{item.value}</div>
+            <div className="text-[11px] leading-snug text-gray-600 dark:text-gray-500">{item.label}</div>
+          </div>
+        ))}
+      </div>
+      <div role="img" aria-label={t('st.rlTitle')} className="flex h-28 items-end gap-[2px]">
+        {rows.map((row) => (
+          <StyledTooltip
+            key={row.at}
+            label={t('st.rlTip', {
+              time: time.format(new Date(row.at)),
+              served: row.served,
+              refused: row.refused,
+              failed: row.failed,
+              capped: row.capped,
+            })}
+          >
+            <div className="group flex h-full min-w-0 flex-1 flex-col justify-end rounded-xs">
+              <div
+                className="flex w-full flex-col overflow-hidden rounded-xs"
+                style={{ height: `${Math.max(row.requests ? 2 : 1, (row.requests / scale) * 100)}%` }}
+              >
+                {row.failed ? <div className="w-full bg-red-500" style={{ height: `${(row.failed / row.requests) * 100}%` }} /> : null}
+                {row.refused ? <div className="w-full bg-amber-500/80" style={{ height: `${(row.refused / row.requests) * 100}%` }} /> : null}
+                <div className={`w-full flex-1 ${row.requests ? 'bg-sky-500/70 group-hover:bg-sky-400' : 'bg-gray-800'}`} />
+              </div>
+            </div>
+          </StyledTooltip>
+        ))}
+      </div>
+      <div className="mt-1 flex justify-between text-[10px] tabular-nums text-gray-600 dark:text-gray-500">
+        <span>{time.format(new Date(rows[0].at))}</span>
+        <span>{t('st.rlLegend')}</span>
+        <span>{time.format(new Date(rows[rows.length - 1].at))}</span>
+      </div>
+    </div>
+  )
+}
+
 export default function ModrinthTrafficChart({ initial }) {
   const { t, locale } = useI18n()
   const [data, setData] = useState(initial)
@@ -480,6 +554,7 @@ export default function ModrinthTrafficChart({ initial }) {
       ) : null}
 
       <MirrorTraffic minutes={minutes} until={data.mirrorUntil} t={t} time={time} />
+      <RelayTraffic minutes={minutes} relays={data.relays || 0} usage={data.relayUsage} t={t} time={time} />
 
       {details ? (
       <>
