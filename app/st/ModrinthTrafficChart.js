@@ -293,7 +293,7 @@ function MirrorTraffic({ minutes, until, t, time }) {
 
 const EMPTY_RELAY = { served: 0, refused: 0, failed: 0, capped: 0 }
 
-function RelayTraffic({ minutes, relays, usage, t, time }) {
+function RelayTraffic({ minutes, relays, usage, relayBy, t, time }) {
   const rows = minutes.map((minute) => {
     const relay = minute.relay || EMPTY_RELAY
     return { at: minute.at, ...relay, requests: relay.served + relay.refused + relay.failed }
@@ -306,6 +306,7 @@ function RelayTraffic({ minutes, relays, usage, t, time }) {
   const capped = sum('capped')
   const spent = usage?.dailyLimit ? usage.used / usage.dailyLimit : 0
   const scale = Math.max(1, ...rows.map((row) => row.requests)) * 1.08
+  const perRelay = (usage?.relays || []).map((relay) => ({ ...relay, hour: relayBy?.[relay.name] || EMPTY_RELAY }))
 
   const summary = [
     { value: relays || t('st.rlOff'), label: t('st.rlCount'), warn: !relays },
@@ -331,6 +332,32 @@ function RelayTraffic({ minutes, relays, usage, t, time }) {
           </div>
         ))}
       </div>
+      {perRelay.length ? (
+        <div className="mb-4 space-y-1.5">
+          {perRelay.map((relay) => (
+            <div key={relay.name} className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl bg-gray-800/40 px-3 py-2 text-xs">
+              <span className="w-24 shrink-0 font-bold text-white">{relay.name}</span>
+              <div className="h-2 min-w-24 flex-1 overflow-hidden rounded-full bg-gray-800">
+                <div
+                  className={`h-full rounded-full ${relay.dailyLimit && relay.used / relay.dailyLimit >= 0.9 ? 'bg-red-500' : 'bg-sky-500/70'}`}
+                  style={{ width: `${relay.dailyLimit ? Math.min(100, (relay.used / relay.dailyLimit) * 100) : 0}%` }}
+                />
+              </div>
+              <span className="shrink-0 tabular-nums text-gray-300">
+                {t('st.rlRowToday', { used: relay.used, limit: relay.dailyLimit, perMinute: relay.minuteLimit })}
+              </span>
+              <span className="w-full tabular-nums text-gray-500 sm:w-auto">
+                {t('st.rlRowHour', {
+                  served: relay.hour.served,
+                  refused: relay.hour.refused,
+                  failed: relay.hour.failed,
+                  capped: relay.hour.capped,
+                })}
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : null}
       <div role="img" aria-label={t('st.rlTitle')} className="flex h-28 items-end gap-[2px]">
         {rows.map((row) => (
           <StyledTooltip
@@ -554,7 +581,7 @@ export default function ModrinthTrafficChart({ initial }) {
       ) : null}
 
       <MirrorTraffic minutes={minutes} until={data.mirrorUntil} t={t} time={time} />
-      <RelayTraffic minutes={minutes} relays={data.relays || 0} usage={data.relayUsage} t={t} time={time} />
+      <RelayTraffic minutes={minutes} relays={data.relays || 0} usage={data.relayUsage} relayBy={data.relayBy} t={t} time={time} />
 
       {details ? (
       <>

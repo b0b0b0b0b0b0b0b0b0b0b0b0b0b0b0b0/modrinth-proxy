@@ -791,6 +791,8 @@
     "rlCapped": "times the cap was hit",
     "rlTip": "{time} · helped: {served} · refused: {refused} · no answer: {failed} · cap: {capped}",
     "rlLegend": "blue — helped · yellow — refused · red — no answer",
+    "rlRowToday": "today {used} / {limit} · up to {perMinute} per minute",
+    "rlRowHour": "last hour: helped {served} · refused {refused} · no answer {failed} · cap {capped}",
     "mrLimit": "limit {n}/min",
     "mrTip": "{time} · requests: {n} · 429: {limited} · left: {left}",
     "mrHint": "Only real server requests to api.modrinth.com are counted; cached responses are not. Data lives in memory and resets when the site restarts.",
