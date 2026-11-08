@@ -68,6 +68,7 @@ export function TypeSplit({ title, rows, labels }) {
           <span key={row.type} className="inline-flex items-center gap-1.5 text-[11px] text-gray-400">
             <span className={`h-2 w-2 rounded-full ${TYPE_COLORS[row.type] || 'bg-gray-500'}`} />
             {labels[row.type] || row.type}
+            <span className="font-bold tabular-nums text-white">{row.n}</span>
             <span className="tabular-nums text-gray-600 dark:text-gray-500">{Math.round((row.n / total) * 100)}%</span>
           </span>
         ))}
