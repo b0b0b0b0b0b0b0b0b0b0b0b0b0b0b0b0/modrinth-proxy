@@ -110,9 +110,8 @@ export default async function RootLayout({ children }) {
           strategy="beforeInteractive"
           dangerouslySetInnerHTML={{ __html: CHUNK_LOAD_RECOVERY_INLINE }}
         />
-        <Script
+        <script
           id="early-preferences"
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `
               try {
