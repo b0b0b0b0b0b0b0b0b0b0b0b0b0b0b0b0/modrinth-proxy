@@ -772,6 +772,11 @@
     "soundOn": "Activar sonidos",
     "soundOff": "Silenciar sonidos"
   },
+  "console": {
+    "stop": "¡Alto, alto, alto!",
+    "warn": "No pegues nada en esta ventana. ¡Es muy peligroso!",
+    "report": "Si alguien te pidió que pegaras algo aquí, avisa de inmediato a los administradores del sitio."
+  },
   "codeBlock": {
     "copy": "Copiar código",
     "copied": "¡Copiado!"

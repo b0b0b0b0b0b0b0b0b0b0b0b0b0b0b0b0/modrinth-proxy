@@ -772,6 +772,11 @@
     "soundOn": "Ligar sons",
     "soundOff": "Desligar sons"
   },
+  "console": {
+    "stop": "Pare, pare, pare!",
+    "warn": "Não cole nada nesta janela. É muito perigoso!",
+    "report": "Se alguém pediu para você colar algo aqui, avise os administradores do site imediatamente!"
+  },
   "codeBlock": {
     "copy": "Copiar código",
     "copied": "Copiado!"

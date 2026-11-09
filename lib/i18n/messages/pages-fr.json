@@ -772,6 +772,11 @@
     "soundOn": "Activer les sons",
     "soundOff": "Couper les sons"
   },
+  "console": {
+    "stop": "Stop, stop, stop !",
+    "warn": "Ne collez rien dans cette fenêtre. C’est très dangereux !",
+    "report": "Si quelqu’un vous a demandé de coller quelque chose ici, prévenez immédiatement les administrateurs du site !"
+  },
   "codeBlock": {
     "copy": "Copier le code",
     "copied": "Copié !"

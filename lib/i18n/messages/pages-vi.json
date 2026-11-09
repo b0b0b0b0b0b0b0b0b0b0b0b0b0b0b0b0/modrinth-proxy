@@ -772,6 +772,11 @@
     "soundOn": "Bật âm thanh",
     "soundOff": "Tắt âm thanh"
   },
+  "console": {
+    "stop": "Dừng lại, dừng lại!",
+    "warn": "Đừng dán bất cứ thứ gì vào cửa sổ này. Rất nguy hiểm!",
+    "report": "Nếu ai đó bảo bạn dán thứ gì vào đây, hãy báo ngay cho quản trị viên của trang!"
+  },
   "codeBlock": {
     "copy": "Sao chép mã",
     "copied": "Đã sao chép!"

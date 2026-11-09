@@ -772,6 +772,11 @@
     "soundOn": "Slå på ljud",
     "soundOff": "Stäng av ljud"
   },
+  "console": {
+    "stop": "Stopp, stopp, stopp!",
+    "warn": "Klistra inte in något i det här fönstret. Det är mycket farligt!",
+    "report": "Om någon har bett dig klistra in något här, säg till sidans administratörer direkt!"
+  },
   "codeBlock": {
     "copy": "Kopiera kod",
     "copied": "Kopierat!"
