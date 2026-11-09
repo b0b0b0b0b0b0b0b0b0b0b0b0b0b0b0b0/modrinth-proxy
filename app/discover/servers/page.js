@@ -21,10 +21,12 @@ import { appendDisclosureExclusionNewFilters, appendDisclosureExclusionParams } 
 export async function generateMetadata(props) {
   const searchParams = await props.searchParams
   const { title, description } = buildServerCatalogSeo({ searchParams })
+  const sst = typeof searchParams?.sst === 'string' && /^[a-z_]{1,20}$/.test(searchParams.sst) ? searchParams.sst : 'online'
 
   return {
     title,
     description,
+    alternates: { canonical: `/discover/servers?sst=${sst}` },
     robots: 'all',
     openGraph: {
       siteName: 'modrinth.black',

@@ -9,6 +9,7 @@ import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { isAdmin } from '@/lib/admins'
+import { SITE_ORIGIN } from '@/lib/site'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import GameProfileSync from './components/GameProfileSync'
 import FestiveScoreSync from './components/FestiveScoreSync'
@@ -54,6 +55,8 @@ const nunito = Nunito({
 export async function generateMetadata() {
   const { t } = await getRequestT()
   return {
+    metadataBase: new URL(SITE_ORIGIN),
+    alternates: { canonical: './' },
     title: 'ModrinthProxy',
     description: t('home.metaDesc'),
     icons: {
