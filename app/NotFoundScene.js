@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './components/Kitten'
+import StyledTooltip from './components/StyledTooltip'
+import { useT } from './components/I18nProvider'
 import { onSoundsMutedChange, playBloop, playChime, playPop, playTrill, setSoundsMuted, soundsMuted } from './components/softSounds'
 
 const GLYPHS = {
@@ -222,6 +224,7 @@ function trickKeyframes(trick, from) {
 }
 
 function BouncingFace({ reduceMotion, onImpact }) {
+  const t = useT()
   const lastScale = useRef(1)
   const angle = useRef(0)
   const queued = useRef(null)
@@ -260,38 +263,40 @@ function BouncingFace({ reduceMotion, onImpact }) {
   }
 
   return (
-    <div className="relative mx-auto h-48 w-40">
-      {landing ? <Landing key={landing} /> : null}
-      <motion.span
-        aria-hidden
-        className="absolute bottom-0 left-1/2 h-2.5 w-16 rounded-[50%] bg-black/40 blur-[2px]"
-        style={{ x: '-50%', y: '50%' }}
-        animate={{ scaleX: [0.55, 1, 1.12, 1, 0.55], opacity: [0.25, 0.6, 0.75, 0.6, 0.25] }}
-        transition={contact}
-      />
-      <KittenHearts items={hearts} />
-      <motion.div
-        className="absolute -bottom-3 left-1/2 -ml-12"
-        style={{ originX: 0.5, originY: 0.875 }}
-        onUpdate={(latest) => {
-          const scale = Number(latest.scaleY)
-          if (!Number.isFinite(scale)) return
-          if (lastScale.current >= 0.97 && scale < 0.97) land()
-          lastScale.current = scale
-        }}
-        animate={{ y: [-JUMP_PX, 0, 0, -JUMP_PX], scaleY: [1, 1.06, 0.8, 1.03, 1], scaleX: [1, 0.96, 1.16, 0.99, 1] }}
-        transition={{
-          ...loop,
-          y: { ...loop, times: [0, IMPACT, IMPACT + 0.03, 1], ease: [FALL, 'linear', RISE] },
-          scaleY: contact,
-          scaleX: contact,
-        }}
-      >
-        <motion.div ref={faceRef} animate={spin} onPointerDown={pet} data-sound className="cursor-pointer">
-          <KittenFace earTransition={contact} mood={mood} look={look} />
+    <StyledTooltip label={t('pixel.notFound')}>
+      <div className="relative mx-auto h-48 w-40">
+        {landing ? <Landing key={landing} /> : null}
+        <motion.span
+          aria-hidden
+          className="absolute bottom-0 left-1/2 h-2.5 w-16 rounded-[50%] bg-black/40 blur-[2px]"
+          style={{ x: '-50%', y: '50%' }}
+          animate={{ scaleX: [0.55, 1, 1.12, 1, 0.55], opacity: [0.25, 0.6, 0.75, 0.6, 0.25] }}
+          transition={contact}
+        />
+        <KittenHearts items={hearts} />
+        <motion.div
+          className="absolute -bottom-3 left-1/2 -ml-12"
+          style={{ originX: 0.5, originY: 0.875 }}
+          onUpdate={(latest) => {
+            const scale = Number(latest.scaleY)
+            if (!Number.isFinite(scale)) return
+            if (lastScale.current >= 0.97 && scale < 0.97) land()
+            lastScale.current = scale
+          }}
+          animate={{ y: [-JUMP_PX, 0, 0, -JUMP_PX], scaleY: [1, 1.06, 0.8, 1.03, 1], scaleX: [1, 0.96, 1.16, 0.99, 1] }}
+          transition={{
+            ...loop,
+            y: { ...loop, times: [0, IMPACT, IMPACT + 0.03, 1], ease: [FALL, 'linear', RISE] },
+            scaleY: contact,
+            scaleX: contact,
+          }}
+        >
+          <motion.div ref={faceRef} animate={spin} onPointerDown={pet} data-sound className="cursor-pointer">
+            <KittenFace earTransition={contact} mood={mood} look={look} />
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
+      </div>
+    </StyledTooltip>
   )
 }
 

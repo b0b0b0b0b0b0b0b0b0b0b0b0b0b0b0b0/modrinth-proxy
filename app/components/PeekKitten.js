@@ -4,8 +4,10 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './Kitten'
 import { useT } from './I18nProvider'
+import StyledTooltip from './StyledTooltip'
 import { playMew } from './softSounds'
 import { OIIA_TAPS, onOiiaChange, startOiia } from './OiiaParty'
+import { useKittenShy } from './kittenShy'
 
 const POSES = {
   phone: { rest: '-5%', peek: '-25%' },
@@ -18,6 +20,7 @@ const random = (min, max) => min + Math.random() * (max - min)
 
 export default function PeekKitten() {
   const t = useT()
+  const shy = useKittenShy()
   const reduceMotion = useReducedMotion()
   const faceRef = useRef(null)
   const body = useAnimationControls()
@@ -140,25 +143,27 @@ export default function PeekKitten() {
 
   return (
     <div className={`pointer-events-none relative h-10 transition-opacity duration-300 sm:h-0 ${away || partying || !side ? 'invisible opacity-0' : ''}`}>
-      <div
-        className={`pointer-events-auto absolute bottom-0 h-20 w-20 translate-y-1/2 sm:h-14 sm:w-14 ${side === 'left' ? 'left-[8%]' : 'right-[8%]'}`}
-        onMouseEnter={caught}
-        onMouseLeave={release}
-      >
-        <KittenHearts items={hearts} className="bottom-16 h-3.5 w-3.5 sm:bottom-12 sm:h-3 sm:w-3" />
-        <motion.button
-          ref={faceRef}
-          type="button"
-          onClick={pet}
-          aria-label={t('account.petKitten')}
-          initial={{ y: POSES.wide.rest }}
-          animate={body}
-          style={{ originY: 1 }}
-          className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
+      <StyledTooltip label={t('pixel.peek')}>
+        <div
+          className={`pointer-events-auto absolute bottom-0 h-20 w-20 translate-y-1/2 sm:h-14 sm:w-14 ${side === 'left' ? 'left-[8%]' : 'right-[8%]'}`}
+          onMouseEnter={caught}
+          onMouseLeave={release}
         >
-          <KittenFace mood={mood} look={look} className="h-full w-full" />
-        </motion.button>
-      </div>
+          <KittenHearts items={hearts} className="bottom-16 h-3.5 w-3.5 sm:bottom-12 sm:h-3 sm:w-3" />
+          <motion.button
+            ref={faceRef}
+            type="button"
+            onClick={pet}
+            aria-label={t('account.petKitten')}
+            initial={{ y: POSES.wide.rest }}
+            animate={body}
+            style={{ originY: 1 }}
+            className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
+          >
+            <KittenFace mood={shy ? 'look' : mood} look={look} paws={shy} className="h-full w-full" />
+          </motion.button>
+        </div>
+      </StyledTooltip>
       <div
         aria-hidden
         className={`pointer-events-auto absolute bottom-0 z-20 hidden h-10 w-16 translate-y-1/2 cursor-pointer sm:block ${side === 'left' ? 'left-[calc(8%-4px)]' : 'right-[calc(8%-4px)]'}`}

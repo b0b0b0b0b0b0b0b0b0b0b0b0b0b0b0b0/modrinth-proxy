@@ -53,39 +53,39 @@
     "extension": "Webbläsartillägg",
     "siteVersion": "Webbplatsversion: {version}",
     "siteVersionTip": "Nyheter och ändringslogg",
-    "snowball": "Kalla på kattungen att rulla en snöboll",
-    "snowballBusy": "Kattungen leker redan",
+    "snowball": "Kalla på Pixel att rulla en snöboll",
+    "snowballBusy": "Pixel leker redan",
     "kitten": {
-      "aria": "Klappa kattungen",
-      "pet": "Klappa kattungen",
+      "aria": "Klappa Pixel",
+      "pet": "Klappa Pixel",
       "petMore": "Spinn! Klappa igen",
       "waiting": "Den väntar på dig",
       "petted": "Klappar: {count}",
       "toNext": "{count} kvar till nästa prestation",
       "unlocked": "Prestationer: {count} av {total}",
-      "signIn": "Logga in så att kattungen minns dig",
-      "waking": "Kattungen vaknar…",
+      "signIn": "Logga in så att Pixel minns dig",
+      "waking": "Pixel vaknar…",
       "toastKicker": "Prestation upplåst",
       "list": [
         {
           "title": "Första mötet",
-          "text": "Du klappade kattungen! Den kommer ihåg dig"
+          "text": "Du klappade Pixel! Han kommer ihåg dig"
         },
         {
-          "title": "Kattungen spinner",
+          "title": "Pixel spinner",
           "text": "Den gillar det, fortsätt"
         },
         {
           "title": "Varm tass",
-          "text": "Kattungen räckte dig tassen"
+          "text": "Pixel räckte dig tassen"
         },
         {
           "title": "Bästa vän",
-          "text": "Kattungen spinner när den ser dig"
+          "text": "Pixel spinner när han ser dig"
         },
         {
           "title": "I sjunde himlen",
-          "text": "Så mycket kärlek har kattungen aldrig fått"
+          "text": "Så mycket kärlek har Pixel aldrig fått"
         },
         {
           "title": "Kli bakom örat",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Spinnets mästare",
-          "text": "Kattungen ropar ditt namn"
+          "text": "Pixel ropar ditt namn"
         },
         {
           "title": "Lyckotass",
-          "text": "Kattungen önskade sig något för din skull"
+          "text": "Pixel önskade sig något för din skull"
         },
         {
           "title": "Mjuka händer",
-          "text": "Kattungen värmer sig mot din hand"
+          "text": "Pixel värmer sig mot din hand"
         },
         {
           "title": "Legend på modrinth.black",
-          "text": "Kattungen har berättat om dig för sina vänner"
+          "text": "Pixel har berättat om dig för sina vänner"
         },
         {
           "title": "Kliarmästare",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Spinnmaraton",
-          "text": "Kattungen spinner utan paus"
+          "text": "Pixel spinner utan paus"
         },
         {
-          "title": "Gosig kattunge",
-          "text": "Kattungen vill kramas"
+          "title": "Gosige Pixel",
+          "text": "Pixel vill kramas"
         },
         {
           "title": "Kattjackpott",
-          "text": "Kattungen hade jättetur"
+          "text": "Pixel hade jättetur"
         },
         {
           "title": "Lyckans garnnystan",
-          "text": "Kattungen kom med sitt garnnystan till dig"
+          "text": "Pixel kom med sitt garnnystan till dig"
         },
         {
           "title": "Fluffigt moln",
-          "text": "Kattungen är mjuk som ett moln"
+          "text": "Pixel är mjuk som ett moln"
         },
         {
           "title": "Alla kattungars vän",
-          "text": "Kattungen har berättat om dig för alla kattungar"
+          "text": "Pixel har berättat om dig för alla kattungar"
         },
         {
-          "title": "Väktarkattunge",
-          "text": "Nu vaktar kattungen din sömn"
+          "title": "Väktaren Pixel",
+          "text": "Nu vaktar Pixel din sömn"
         },
         {
           "title": "Stjärntass",
-          "text": "Kattungen gav dig en liten stjärna"
+          "text": "Pixel gav dig en liten stjärna"
         },
         {
           "title": "Kunglig kel",
-          "text": "Kattungen satte på sig en krona för dig"
+          "text": "Pixel satte på sig en krona för dig"
         },
         {
           "title": "Spinnorkester",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Regnbågssvans",
-          "text": "Kattungens svans lyser i alla färger"
+          "text": "Pixels svans lyser i alla färger"
         },
         {
           "title": "Kattens hjärtas hemlighet",
-          "text": "Kattungen berättade sin hemlighet för dig"
+          "text": "Pixel berättade sin hemlighet för dig"
         },
         {
-          "title": "Resande kattunge",
-          "text": "Kattungen följer dig över alla sajter"
+          "title": "Resande Pixel",
+          "text": "Pixel följer dig över alla sajter"
         },
         {
           "title": "Månskensspinn",
-          "text": "Kattungen spinner till och med i sömnen"
+          "text": "Pixel spinner till och med i sömnen"
         },
         {
           "title": "Mysets väktare",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Kattvis",
-          "text": "Kattungen tycker att du är klokare än den"
+          "text": "Pixel tycker att du är klokare än han"
         },
         {
           "title": "Spinnets universum",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Evig kärlek",
-          "text": "Kattungen är din för alltid"
+          "text": "Pixel är din för alltid"
         }
       ],
       "grumpy": {
-        "aria": "Kattungen vill inte bli klappad",
-        "title": "Kattungen surar",
+        "aria": "Pixel vill inte bli klappad",
+        "title": "Pixel surar",
         "text": "Ingen klappning, inga prestationer",
         "sulks": [
           "Fnys! Tassarna bort",
-          "Kattungen vände sig bort",
+          "Pixel vände sig bort",
           "Nej, nej, ingen klappning",
-          "Kattungen låtsas att den inte ser dig",
+          "Pixel låtsas att han inte ser dig",
           "Viftade på svansen och gick"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Den här samlingen är inte tillgänglig.",
     "metaTitle": "Åtkomst begränsad | ModrinthProxy",
     "orgMetaDesc": "Den här organisationen är inte tillgänglig",
-    "kid": "Hit får man inte gå just nu — kattungen vaktar det här hörnet. Titta runt, det finns tusentals andra roliga projekt!"
+    "kid": "Hit får man inte gå just nu — Pixel vaktar det här hörnet. Titta runt, det finns tusentals andra roliga projekt!"
   },
   "profile": {
     "info": "Uppgifter",
@@ -304,7 +304,7 @@
     "resetBtn": "Återställ i den här webbläsaren",
     "resetting": "Återställer…",
     "resetGoneLabel": "Glöms bort",
-    "resetGone": "tema, färg, listvy, språk, kattljud och stängda tips",
+    "resetGone": "tema, färg, listvy, språk, Pixels ljud och stängda tips",
     "resetKeptLabel": "Finns kvar",
     "resetKept": "ditt konto, favoriter och nedladdningshistorik — de sparas inte i webbläsaren"
   },
@@ -339,5 +339,16 @@
     "done": "Vilken gran! Var 50:e kula ger nytt fyrverkeri.",
     "scoreTitle": "Fångade kulor",
     "close": "Stäng"
+  },
+  "pixel": {
+    "peek": "Hej, jag heter Pixel! Tryck på mig",
+    "footer": "Det här är Pixel — han bor längst ner på sajten",
+    "lost": "Pixel letar också, men här är det tomt",
+    "found": "Pixel hittade något liknande!",
+    "guard": "Pixel vaktar ingången",
+    "header": "Pixel är glad att se dig",
+    "sleepy": "Pixel tar en tupplur. Klappa honom så vaknar han",
+    "extension": "Pixel bor i tillägget också",
+    "notFound": "Pixel har också gått vilse, men han är inte ledsen"
   }
 }

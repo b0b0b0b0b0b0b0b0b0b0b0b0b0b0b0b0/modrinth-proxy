@@ -53,39 +53,39 @@
     "extension": "Estensione browser",
     "siteVersion": "Versione sito: {version}",
     "siteVersionTip": "Novità e changelog",
-    "snowball": "Chiama il gattino a far rotolare la neve",
-    "snowballBusy": "Il gattino sta già giocando",
+    "snowball": "Chiama Pixel a far rotolare la neve",
+    "snowballBusy": "Pixel sta già giocando",
     "kitten": {
-      "aria": "Accarezza il gattino",
-      "pet": "Accarezza il gattino",
+      "aria": "Accarezza Pixel",
+      "pet": "Accarezza Pixel",
       "petMore": "Purr! Ancora una carezza",
       "waiting": "Ti sta aspettando",
       "petted": "Carezze: {count}",
       "toNext": "{count} al prossimo trofeo",
       "unlocked": "Trofei: {count} su {total}",
-      "signIn": "Accedi così il gattino si ricorderà di te",
-      "waking": "Il gattino si sta svegliando…",
+      "signIn": "Accedi così Pixel si ricorderà di te",
+      "waking": "Pixel si sta svegliando…",
       "toastKicker": "Trofeo sbloccato",
       "list": [
         {
           "title": "Primo incontro",
-          "text": "Hai accarezzato il gattino! Si ricorderà di te"
+          "text": "Hai accarezzato Pixel! Si ricorderà di te"
         },
         {
-          "title": "Il gattino fa le fusa",
+          "title": "Pixel fa le fusa",
           "text": "Gli piace, continua"
         },
         {
           "title": "Zampetta calda",
-          "text": "Il gattino ti dà la zampa"
+          "text": "Pixel ti dà la zampa"
         },
         {
           "title": "Migliore amico",
-          "text": "Il gattino fa le fusa quando ti vede"
+          "text": "Pixel fa le fusa quando ti vede"
         },
         {
           "title": "Al settimo cielo",
-          "text": "Il gattino non ha mai ricevuto tante coccole"
+          "text": "Pixel non ha mai ricevuto tante coccole"
         },
         {
           "title": "Grattini dietro l’orecchio",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Re delle fusa",
-          "text": "Il gattino ti chiama per nome"
+          "text": "Pixel ti chiama per nome"
         },
         {
           "title": "Zampetta fortunata",
-          "text": "Il gattino ha espresso un desiderio per te"
+          "text": "Pixel ha espresso un desiderio per te"
         },
         {
           "title": "Mani morbide",
-          "text": "Il gattino si scalda sulla tua mano"
+          "text": "Pixel si scalda sulla tua mano"
         },
         {
           "title": "Leggenda di modrinth.black",
-          "text": "Il gattino ha parlato di te agli amici"
+          "text": "Pixel ha parlato di te agli amici"
         },
         {
           "title": "Maestro dei grattini",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Maratona di fusa",
-          "text": "Il gattino fa le fusa senza sosta"
+          "text": "Pixel fa le fusa senza sosta"
         },
         {
-          "title": "Gattino coccolone",
-          "text": "Il gattino vuole un abbraccio"
+          "title": "Pixel coccolone",
+          "text": "Pixel vuole un abbraccio"
         },
         {
           "title": "Jackpot felino",
-          "text": "Il gattino ha avuto una gran fortuna"
+          "text": "Pixel ha avuto una gran fortuna"
         },
         {
           "title": "Gomitolo della felicità",
-          "text": "Il gattino ti ha portato il suo gomitolo"
+          "text": "Pixel ti ha portato il suo gomitolo"
         },
         {
           "title": "Nuvoletta soffice",
-          "text": "Il gattino è morbido come una nuvola"
+          "text": "Pixel è morbido come una nuvola"
         },
         {
           "title": "Amico di tutti i gattini",
-          "text": "Il gattino ha parlato di te a tutti i gattini"
+          "text": "Pixel ha parlato di te a tutti i gattini"
         },
         {
-          "title": "Gattino guardiano",
-          "text": "Ora il gattino veglia sul tuo sonno"
+          "title": "Pixel guardiano",
+          "text": "Ora Pixel veglia sul tuo sonno"
         },
         {
           "title": "Zampetta stellata",
-          "text": "Il gattino ti ha regalato una stellina"
+          "text": "Pixel ti ha regalato una stellina"
         },
         {
           "title": "Coccole reali",
-          "text": "Il gattino ha messo la corona per te"
+          "text": "Pixel ha messo la corona per te"
         },
         {
           "title": "Orchestra di fusa",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Coda arcobaleno",
-          "text": "La coda del gattino brilla di tutti i colori"
+          "text": "La coda di Pixel brilla di tutti i colori"
         },
         {
           "title": "Il segreto del cuore felino",
-          "text": "Il gattino ti ha svelato il suo segreto"
+          "text": "Pixel ti ha svelato il suo segreto"
         },
         {
-          "title": "Gattino viaggiatore",
-          "text": "Il gattino ti segue su tutti i siti"
+          "title": "Pixel viaggiatore",
+          "text": "Pixel ti segue su tutti i siti"
         },
         {
           "title": "Fusa al chiaro di luna",
-          "text": "Il gattino fa le fusa anche nel sonno"
+          "text": "Pixel fa le fusa anche nel sonno"
         },
         {
           "title": "Custode del calduccio",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Saggio felino",
-          "text": "Il gattino ti crede più saggio di lui"
+          "text": "Pixel ti crede più saggio di lui"
         },
         {
           "title": "Universo di fusa",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Amore eterno",
-          "text": "Il gattino è tuo per sempre"
+          "text": "Pixel è tuo per sempre"
         }
       ],
       "grumpy": {
-        "aria": "Il gattino non vuole essere accarezzato",
-        "title": "Il gattino ha il broncio",
+        "aria": "Pixel non vuole essere accarezzato",
+        "title": "Pixel ha il broncio",
         "text": "Niente carezze, niente obiettivi",
         "sulks": [
           "Ffff! Giù le zampe",
-          "Il gattino si è girato",
+          "Pixel si è girato",
           "No, no, niente carezze",
-          "Il gattino fa finta di non vederti",
+          "Pixel fa finta di non vederti",
           "Ha agitato la coda e se n’è andato"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Questa collezione non è disponibile.",
     "metaTitle": "Accesso limitato | ModrinthProxy",
     "orgMetaDesc": "Questa organizzazione non è disponibile",
-    "kid": "Qui ora non si può entrare: il gattino fa la guardia a questo angolo. Guardati intorno, ci sono migliaia di altri progetti fantastici!"
+    "kid": "Qui ora non si può entrare: Pixel fa la guardia a questo angolo. Guardati intorno, ci sono migliaia di altri progetti fantastici!"
   },
   "profile": {
     "info": "Dettagli",
@@ -304,7 +304,7 @@
     "resetBtn": "Ripristina in questo browser",
     "resetting": "Reimpostazione…",
     "resetGoneLabel": "Verrà dimenticato",
-    "resetGone": "tema, colore, vista elenchi, lingua, suoni dei gattini e suggerimenti chiusi",
+    "resetGone": "tema, colore, vista elenchi, lingua, suoni di Pixel e suggerimenti chiusi",
     "resetKeptLabel": "Resterà",
     "resetKept": "account, preferiti e cronologia download: non sono salvati nel browser"
   },
@@ -339,5 +339,16 @@
     "done": "Che albero! Ogni 50 decorazioni, nuovi fuochi d’artificio.",
     "scoreTitle": "Decorazioni prese",
     "close": "Chiudi"
+  },
+  "pixel": {
+    "peek": "Ciao, sono Pixel! Toccami",
+    "footer": "Questo è Pixel: vive in fondo al sito",
+    "lost": "Anche Pixel cerca, ma qui non c’è niente",
+    "found": "Pixel ha trovato qualcosa di simile!",
+    "guard": "Pixel fa la guardia all’ingresso",
+    "header": "Pixel è felice di vederti",
+    "sleepy": "Pixel sonnecchia. Accarezzalo e si sveglierà",
+    "extension": "Pixel vive anche nell’estensione",
+    "notFound": "Anche Pixel si è perso, ma non è triste"
   }
 }

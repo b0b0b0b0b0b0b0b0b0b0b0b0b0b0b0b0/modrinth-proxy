@@ -54,39 +54,39 @@
     "extension": "Browser extension",
     "siteVersion": "Site version: {version}",
     "siteVersionTip": "News and changelog",
-    "snowball": "Call the kitten to roll a snowball",
-    "snowballBusy": "The kitten is already out playing",
+    "snowball": "Call Pixel to roll a snowball",
+    "snowballBusy": "Pixel is already out playing",
     "kitten": {
-      "aria": "Pet the kitten",
-      "pet": "Pet the kitten",
+      "aria": "Pet Pixel",
+      "pet": "Pet Pixel",
       "petMore": "Purr! Pet me more",
       "waiting": "He is waiting for you",
       "petted": "Pets: {count}",
       "toNext": "{count} to the next achievement",
       "unlocked": "Achievements: {count} of {total}",
-      "signIn": "Sign in so the kitten remembers you",
-      "waking": "The kitten is waking up…",
+      "signIn": "Sign in so Pixel remembers you",
+      "waking": "Pixel is waking up…",
       "toastKicker": "Achievement unlocked",
       "list": [
         {
           "title": "First meeting",
-          "text": "You petted the kitten! He will remember you"
+          "text": "You petted Pixel! He will remember you"
         },
         {
-          "title": "The kitten purrs",
+          "title": "Pixel purrs",
           "text": "He likes it, keep going"
         },
         {
           "title": "Warm paw",
-          "text": "The kitten gave you his paw"
+          "text": "Pixel gave you his paw"
         },
         {
           "title": "Best friend",
-          "text": "The kitten purrs whenever he sees you"
+          "text": "Pixel purrs whenever he sees you"
         },
         {
           "title": "Over the moon",
-          "text": "The kitten has never been petted so much"
+          "text": "Pixel has never been petted so much"
         },
         {
           "title": "Ear scratches",
@@ -94,19 +94,19 @@
         },
         {
           "title": "Lord of purrs",
-          "text": "The kitten calls you by name"
+          "text": "Pixel calls you by name"
         },
         {
           "title": "Lucky paw",
-          "text": "The kitten made a wish about you"
+          "text": "Pixel made a wish about you"
         },
         {
           "title": "Soft hands",
-          "text": "The kitten warms up on your hand"
+          "text": "Pixel warms up on your hand"
         },
         {
           "title": "Legend of modrinth.black",
-          "text": "The kitten told his friends about you"
+          "text": "Pixel told his friends about you"
         },
         {
           "title": "Scratch master",
@@ -114,39 +114,39 @@
         },
         {
           "title": "Purr marathon",
-          "text": "The kitten purrs non-stop"
+          "text": "Pixel purrs non-stop"
         },
         {
-          "title": "Cuddle kitten",
-          "text": "The kitten wants a hug"
+          "title": "Cuddly Pixel",
+          "text": "Pixel wants a hug"
         },
         {
           "title": "Kitty jackpot",
-          "text": "The kitten got really lucky"
+          "text": "Pixel got really lucky"
         },
         {
           "title": "Ball of happiness",
-          "text": "The kitten brought you his yarn ball"
+          "text": "Pixel brought you his yarn ball"
         },
         {
           "title": "Fluffy cloud",
-          "text": "The kitten is soft as a cloud"
+          "text": "Pixel is soft as a cloud"
         },
         {
           "title": "Friend of all kittens",
-          "text": "The kitten told every kitten about you"
+          "text": "Pixel told every kitten about you"
         },
         {
-          "title": "Guardian kitten",
-          "text": "Now the kitten guards your sleep"
+          "title": "Guardian Pixel",
+          "text": "Now Pixel guards your sleep"
         },
         {
           "title": "Starry paw",
-          "text": "The kitten gave you a little star"
+          "text": "Pixel gave you a little star"
         },
         {
           "title": "Royal cuddles",
-          "text": "The kitten put on a crown for you"
+          "text": "Pixel put on a crown for you"
         },
         {
           "title": "Purring orchestra",
@@ -154,19 +154,19 @@
         },
         {
           "title": "Rainbow tail",
-          "text": "The kitten’s tail shines in every colour"
+          "text": "Pixel’s tail shines in every colour"
         },
         {
           "title": "Secret of a cat’s heart",
-          "text": "The kitten told you his secret"
+          "text": "Pixel told you his secret"
         },
         {
-          "title": "Travelling kitten",
-          "text": "The kitten follows you across every site"
+          "title": "Travelling Pixel",
+          "text": "Pixel follows you across every site"
         },
         {
           "title": "Moonlight purr",
-          "text": "The kitten purrs even in his sleep"
+          "text": "Pixel purrs even in his sleep"
         },
         {
           "title": "Keeper of cosiness",
@@ -174,7 +174,7 @@
         },
         {
           "title": "Cat sage",
-          "text": "The kitten thinks you are wiser than him"
+          "text": "Pixel thinks you are wiser than him"
         },
         {
           "title": "Universe of purrs",
@@ -186,18 +186,18 @@
         },
         {
           "title": "Forever love",
-          "text": "The kitten is yours forever"
+          "text": "Pixel is yours forever"
         }
       ],
       "grumpy": {
-        "aria": "The kitten does not want to be petted",
-        "title": "The kitten is sulking",
+        "aria": "Pixel does not want to be petted",
+        "title": "Pixel is sulking",
         "text": "No petting allowed, no achievements counted",
         "sulks": [
           "Hmph! Paws off",
-          "The kitten turned away",
+          "Pixel turned away",
           "Nope, no petting",
-          "The kitten pretends not to see you",
+          "Pixel pretends not to see you",
           "Flicked its tail and walked off"
         ]
       }
@@ -219,7 +219,7 @@
     "collection": "This collection is unavailable.",
     "metaTitle": "Access restricted | ModrinthProxy",
     "orgMetaDesc": "This organization is unavailable",
-    "kid": "You can’t go in here right now — the kitten is guarding this corner. Look around, there are thousands of other cool projects!"
+    "kid": "You can’t go in here right now — Pixel is guarding this corner. Look around, there are thousands of other cool projects!"
   },
   "profile": {
     "info": "Details",
@@ -305,7 +305,7 @@
     "resetBtn": "Reset in this browser",
     "resetting": "Resetting…",
     "resetGoneLabel": "Will be forgotten",
-    "resetGone": "theme, color, list view, language, kitten sounds and dismissed hints",
+    "resetGone": "theme, color, list view, language, Pixel’s sounds and dismissed hints",
     "resetKeptLabel": "Will stay",
     "resetKept": "your account, favorites and download history — they are not stored in the browser"
   },
@@ -340,5 +340,16 @@
     "done": "What a tree! Every 50 ornaments bring new fireworks.",
     "scoreTitle": "Ornaments caught",
     "close": "Close"
+  },
+  "pixel": {
+    "peek": "Hi, I’m Pixel! Tap me",
+    "footer": "This is Pixel — he lives at the bottom of the site",
+    "lost": "Pixel is searching too, but it’s empty here",
+    "found": "Pixel found something similar!",
+    "guard": "Pixel guards the door",
+    "header": "Pixel is happy to see you",
+    "sleepy": "Pixel is napping. Pet him to wake him up",
+    "extension": "Pixel lives in the extension too",
+    "notFound": "Pixel got lost too, but he isn’t sad"
   }
 }

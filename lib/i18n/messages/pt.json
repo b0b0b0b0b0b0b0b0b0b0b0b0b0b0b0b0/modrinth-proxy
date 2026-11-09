@@ -53,39 +53,39 @@
     "extension": "Extensão do navegador",
     "siteVersion": "Versão do site: {version}",
     "siteVersionTip": "Novidades e changelog",
-    "snowball": "Chamar o gatinho para rolar uma bola de neve",
-    "snowballBusy": "O gatinho já está brincando",
+    "snowball": "Chamar Pixel para rolar uma bola de neve",
+    "snowballBusy": "Pixel já está brincando",
     "kitten": {
-      "aria": "Fazer carinho no gatinho",
-      "pet": "Faça carinho no gatinho",
+      "aria": "Fazer carinho no Pixel",
+      "pet": "Faça carinho no Pixel",
       "petMore": "Purr! Mais um carinho",
       "waiting": "Ele está esperando você",
       "petted": "Carinhos: {count}",
       "toNext": "{count} para a próxima conquista",
       "unlocked": "Conquistas: {count} de {total}",
-      "signIn": "Entre para o gatinho se lembrar de você",
-      "waking": "O gatinho está acordando…",
+      "signIn": "Entre para Pixel se lembrar de você",
+      "waking": "Pixel está acordando…",
       "toastKicker": "Conquista desbloqueada",
       "list": [
         {
           "title": "Primeiro encontro",
-          "text": "Você fez carinho no gatinho! Ele vai se lembrar de você"
+          "text": "Você fez carinho no Pixel! Ele vai se lembrar de você"
         },
         {
-          "title": "O gatinho ronrona",
+          "title": "Pixel ronrona",
           "text": "Ele gostou, continue"
         },
         {
           "title": "Patinha quentinha",
-          "text": "O gatinho te deu a patinha"
+          "text": "Pixel te deu a patinha"
         },
         {
           "title": "Melhor amigo",
-          "text": "O gatinho ronrona quando vê você"
+          "text": "Pixel ronrona quando vê você"
         },
         {
           "title": "Nas nuvens",
-          "text": "O gatinho nunca recebeu tanto carinho"
+          "text": "Pixel nunca recebeu tanto carinho"
         },
         {
           "title": "Coceguinha atrás da orelha",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Mestre do ronronar",
-          "text": "O gatinho chama você pelo nome"
+          "text": "Pixel chama você pelo nome"
         },
         {
           "title": "Patinha da sorte",
-          "text": "O gatinho fez um pedido por você"
+          "text": "Pixel fez um pedido por você"
         },
         {
           "title": "Mãos macias",
-          "text": "O gatinho se aquece na sua mão"
+          "text": "Pixel se aquece na sua mão"
         },
         {
           "title": "Lenda do modrinth.black",
-          "text": "O gatinho contou de você para os amigos"
+          "text": "Pixel contou de você para os amigos"
         },
         {
           "title": "Mestre do coceguinha",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Maratona de ronrons",
-          "text": "O gatinho ronrona sem parar"
+          "text": "Pixel ronrona sem parar"
         },
         {
-          "title": "Gatinho abraçador",
-          "text": "O gatinho quer um abraço"
+          "title": "Pixel abraçador",
+          "text": "Pixel quer um abraço"
         },
         {
           "title": "Sorte grande",
-          "text": "O gatinho teve uma sorte enorme"
+          "text": "Pixel teve uma sorte enorme"
         },
         {
           "title": "Novelo da felicidade",
-          "text": "O gatinho trouxe o novelo dele para você"
+          "text": "Pixel trouxe o novelo dele para você"
         },
         {
           "title": "Nuvenzinha fofa",
-          "text": "O gatinho está macio como uma nuvem"
+          "text": "Pixel está macio como uma nuvem"
         },
         {
           "title": "Amigo de todos os gatinhos",
-          "text": "O gatinho contou de você para todos os gatinhos"
+          "text": "Pixel contou de você para todos os gatinhos"
         },
         {
-          "title": "Gatinho guardião",
-          "text": "Agora o gatinho protege o seu sono"
+          "title": "Pixel guardião",
+          "text": "Agora Pixel protege o seu sono"
         },
         {
           "title": "Patinha estrelada",
-          "text": "O gatinho te deu uma estrelinha"
+          "text": "Pixel te deu uma estrelinha"
         },
         {
           "title": "Carinho real",
-          "text": "O gatinho colocou uma coroa para você"
+          "text": "Pixel colocou uma coroa para você"
         },
         {
           "title": "Orquestra de ronrons",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Rabinho arco-íris",
-          "text": "O rabinho do gatinho brilha com todas as cores"
+          "text": "O rabinho do Pixel brilha com todas as cores"
         },
         {
           "title": "O segredo do coração felino",
-          "text": "O gatinho te contou o segredo dele"
+          "text": "Pixel te contou o segredo dele"
         },
         {
-          "title": "Gatinho viajante",
-          "text": "O gatinho segue você por todos os sites"
+          "title": "Pixel viajante",
+          "text": "Pixel segue você por todos os sites"
         },
         {
           "title": "Ronrom ao luar",
-          "text": "O gatinho ronrona até dormindo"
+          "text": "Pixel ronrona até dormindo"
         },
         {
           "title": "Guardião do aconchego",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Sábio felino",
-          "text": "O gatinho acha você mais sábio que ele"
+          "text": "Pixel acha você mais sábio que ele"
         },
         {
           "title": "Universo de ronrons",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Amor eterno",
-          "text": "O gatinho é seu para sempre"
+          "text": "Pixel é seu para sempre"
         }
       ],
       "grumpy": {
-        "aria": "O gatinho não quer carinho",
-        "title": "O gatinho está emburrado",
+        "aria": "Pixel não quer carinho",
+        "title": "Pixel está emburrado",
         "text": "Não deixa fazer carinho nem conta conquistas",
         "sulks": [
           "Fff! Não toca",
-          "O gatinho virou a cara",
+          "Pixel virou a cara",
           "Não, não, nada de carinho",
-          "O gatinho finge que não te vê",
+          "Pixel finge que não te vê",
           "Balançou o rabo e foi embora"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Esta coleção não está disponível.",
     "metaTitle": "Acesso restrito | ModrinthProxy",
     "orgMetaDesc": "Esta organização não está disponível",
-    "kid": "Aqui não dá para entrar agora — o gatinho está vigiando este cantinho. Dá uma olhada por aí, tem milhares de projetos legais!"
+    "kid": "Aqui não dá para entrar agora — Pixel está vigiando este cantinho. Dá uma olhada por aí, tem milhares de projetos legais!"
   },
   "profile": {
     "info": "Detalhes",
@@ -304,7 +304,7 @@
     "resetBtn": "Redefinir neste navegador",
     "resetting": "Redefinindo…",
     "resetGoneLabel": "Será esquecido",
-    "resetGone": "tema, cor, visualização das listas, idioma, sons dos gatinhos e dicas fechadas",
+    "resetGone": "tema, cor, visualização das listas, idioma, sons do Pixel e dicas fechadas",
     "resetKeptLabel": "Continua",
     "resetKept": "sua conta, favoritos e histórico de downloads — eles não ficam no navegador"
   },
@@ -339,5 +339,16 @@
     "done": "Que árvore! A cada 50 enfeites, novos fogos.",
     "scoreTitle": "Enfeites pegos",
     "close": "Fechar"
+  },
+  "pixel": {
+    "peek": "Oi, eu sou o Pixel! Toque em mim",
+    "footer": "Este é o Pixel — ele mora no rodapé do site",
+    "lost": "O Pixel também está procurando, mas aqui está vazio",
+    "found": "O Pixel encontrou algo parecido!",
+    "guard": "O Pixel vigia a entrada",
+    "header": "O Pixel está feliz em te ver",
+    "sleepy": "O Pixel está cochilando. Faça carinho e ele acorda",
+    "extension": "O Pixel também mora na extensão",
+    "notFound": "O Pixel também se perdeu, mas não está triste"
   }
 }

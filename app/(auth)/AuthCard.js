@@ -11,6 +11,10 @@ import { fetchTelegramAuth, signInWithTelegram, submitTelegramAuth } from '@/lib
 import { useCaptcha } from './useCaptcha'
 import GuardKitten from './GuardKitten'
 import PasswordInput, { FieldIcon, fieldInputClass, PasswordStrength } from '../components/PasswordInput'
+import { randomNickname } from '@/lib/nickname'
+
+const INSERT_PATH = 'M9 10l-5 5 5 5M20 4v7a4 4 0 0 1-4 4H4'
+const DICE_PATH ='M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01'
 
 const ERROR_KEYS = {
   invalid: 'account.errInvalid',
@@ -63,6 +67,21 @@ export default function AuthCard({ github = false, telegram = null, claim = null
 
   const [held, setHeld] = useState(claim)
   const [username, setUsername] = useState(claim?.name || '')
+  const [example, setExample] = useState('')
+
+  useEffect(() => {
+    setExample(randomNickname())
+  }, [])
+
+  const fillNickname = () => {
+    if (!username && example) {
+      setUsername(example)
+      return
+    }
+    let next = randomNickname()
+    while (next === username) next = randomNickname()
+    setUsername(next)
+  }
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [focused, setFocused] = useState(null)
@@ -366,14 +385,28 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                         onChange={(event) => setUsername(event.target.value)}
                         onFocus={() => setFocused('username')}
                         onBlur={() => setFocused((current) => (current === 'username' ? null : current))}
-                        placeholder={t('account.usernamePlaceholder')}
+                        placeholder={example ? t('account.usernamePlaceholder', { name: example }) : ''}
                         autoComplete="username"
                         autoCapitalize="none"
                         spellCheck={false}
                         maxLength={24}
                         required
-                        className={fieldInputClass}
+                        className={isRegister ? `${fieldInputClass} pr-11` : fieldInputClass}
                       />
+                      {isRegister ? (
+                        <StyledTooltip label={t(username ? 'account.randomNick' : 'account.useNick')}>
+                          <button
+                            type="button"
+                            onClick={fillNickname}
+                            aria-label={t(username ? 'account.randomNick' : 'account.useNick')}
+                            className={`absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-600 transition-[color,transform] duration-300 hover:text-white active:scale-90 dark:text-gray-500${username ? ' hover:rotate-90' : ''}`}
+                          >
+                            <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                              <path d={username ? DICE_PATH : INSERT_PATH} />
+                            </svg>
+                          </button>
+                        </StyledTooltip>
+                      ) : null}
                     </span>
                     {isRegister ? (
                       <span className="mt-1.5 block text-[11px] text-gray-600 dark:text-gray-500">{t('account.usernameHint')}</span>

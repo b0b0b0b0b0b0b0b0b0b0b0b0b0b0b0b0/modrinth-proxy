@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { useT } from './I18nProvider'
+import StyledTooltip from './StyledTooltip'
 
 const STRENGTH_COLORS = ['#ef4444', '#f59e0b', '#eab308', '#22c55e']
 const LOCK_PATH = 'M7 11V7a5 5 0 0 1 10 0v4M5 11h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2Z'
@@ -69,23 +70,25 @@ export default function PasswordInput({ visible, onToggleVisible, inputProps, to
     <span className="group relative block">
       <FieldIcon path={LOCK_PATH} />
       <input type={visible ? 'text' : 'password'} {...inputProps} className={`${fieldInputClass} pr-11`} />
-      <button
-        type="button"
-        data-password-toggle
-        onClick={onToggleVisible}
-        aria-label={t(visible ? 'account.hidePassword' : 'account.showPassword')}
-        aria-pressed={visible}
-        {...toggleProps}
-        className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-600 dark:text-gray-500 transition-colors hover:text-white"
-      >
-        <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
-          {visible ? (
-            <path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9.800 9.800 0 0 1 12 5c6 0 9.500 7 9.500 7a16 16 0 0 1-3.200 3.900M6.300 6.300A16 16 0 0 0 2.500 12S6 19 12 19a9.600 9.600 0 0 0 4-.9" />
-          ) : (
-            <path d="M2.500 12S6 5 12 5s9.500 7 9.500 7-3.500 7-9.500 7-9.500-7-9.500-7ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-          )}
-        </svg>
-      </button>
+      <StyledTooltip label={t(visible ? 'account.hidePassword' : 'account.showPassword')}>
+        <button
+          type="button"
+          data-password-toggle
+          onClick={onToggleVisible}
+          aria-label={t(visible ? 'account.hidePassword' : 'account.showPassword')}
+          aria-pressed={visible}
+          {...toggleProps}
+          className="absolute right-2 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-lg text-gray-600 dark:text-gray-500 transition-colors hover:text-white"
+        >
+          <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+            {visible ? (
+              <path d="M3 3l18 18M10.6 10.6a2 2 0 0 0 2.8 2.8M9.9 5.1A9.800 9.800 0 0 1 12 5c6 0 9.500 7 9.500 7a16 16 0 0 1-3.200 3.900M6.300 6.300A16 16 0 0 0 2.500 12S6 19 12 19a9.600 9.600 0 0 0 4-.9" />
+            ) : (
+              <path d="M2.500 12S6 5 12 5s9.500 7 9.500 7-3.500 7-9.500 7-9.500-7-9.500-7ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+            )}
+          </svg>
+        </button>
+      </StyledTooltip>
     </span>
   )
 }

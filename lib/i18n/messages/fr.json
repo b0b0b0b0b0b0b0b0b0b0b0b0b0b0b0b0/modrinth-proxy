@@ -53,39 +53,39 @@
     "extension": "Extension navigateur",
     "siteVersion": "Version du site : {version}",
     "siteVersionTip": "Actu et changelog",
-    "snowball": "Appeler le chaton pour rouler une boule de neige",
-    "snowballBusy": "Le chaton joue déjà dehors",
+    "snowball": "Appeler Pixel pour rouler une boule de neige",
+    "snowballBusy": "Pixel joue déjà dehors",
     "kitten": {
-      "aria": "Caresser le chaton",
-      "pet": "Caresse le chaton",
+      "aria": "Caresser Pixel",
+      "pet": "Caresse Pixel",
       "petMore": "Ronron ! Encore une caresse",
       "waiting": "Il t’attend avec impatience",
       "petted": "Caresses : {count}",
       "toNext": "encore {count} avant le succès",
       "unlocked": "Succès : {count} sur {total}",
-      "signIn": "Connecte-toi pour que le chaton se souvienne de toi",
-      "waking": "Le chaton se réveille…",
+      "signIn": "Connecte-toi pour que Pixel se souvienne de toi",
+      "waking": "Pixel se réveille…",
       "toastKicker": "Succès débloqué",
       "list": [
         {
           "title": "Première rencontre",
-          "text": "Tu as caressé le chaton ! Il se souviendra de toi"
+          "text": "Tu as caressé Pixel ! Il se souviendra de toi"
         },
         {
-          "title": "Le chaton ronronne",
+          "title": "Pixel ronronne",
           "text": "Il adore ça, continue"
         },
         {
           "title": "Petite patte chaude",
-          "text": "Le chaton te tend la patte"
+          "text": "Pixel te tend la patte"
         },
         {
           "title": "Meilleur ami",
-          "text": "Le chaton ronronne dès qu’il te voit"
+          "text": "Pixel ronronne dès qu’il te voit"
         },
         {
           "title": "Aux anges",
-          "text": "Le chaton n’a jamais reçu autant de câlins"
+          "text": "Pixel n’a jamais reçu autant de câlins"
         },
         {
           "title": "Grattouilles derrière l’oreille",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Maître du ronron",
-          "text": "Le chaton t’appelle par ton prénom"
+          "text": "Pixel t’appelle par ton prénom"
         },
         {
           "title": "Patte porte-bonheur",
-          "text": "Le chaton a fait un vœu pour toi"
+          "text": "Pixel a fait un vœu pour toi"
         },
         {
           "title": "Mains toutes douces",
-          "text": "Le chaton se réchauffe contre ta main"
+          "text": "Pixel se réchauffe contre ta main"
         },
         {
           "title": "Légende de modrinth.black",
-          "text": "Le chaton a parlé de toi à ses amis"
+          "text": "Pixel a parlé de toi à ses amis"
         },
         {
           "title": "Pro des grattouilles",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Marathon de ronrons",
-          "text": "Le chaton ronronne sans s’arrêter"
+          "text": "Pixel ronronne sans s’arrêter"
         },
         {
-          "title": "Chaton câlin",
-          "text": "Le chaton veut un câlin"
+          "title": "Pixel câlin",
+          "text": "Pixel veut un câlin"
         },
         {
           "title": "Jackpot félin",
-          "text": "Le chaton a eu une chance folle"
+          "text": "Pixel a eu une chance folle"
         },
         {
           "title": "Pelote de bonheur",
-          "text": "Le chaton t’apporte sa pelote"
+          "text": "Pixel t’apporte sa pelote"
         },
         {
           "title": "Petit nuage tout doux",
-          "text": "Le chaton est doux comme un nuage"
+          "text": "Pixel est doux comme un nuage"
         },
         {
           "title": "Ami de tous les chatons",
-          "text": "Le chaton a parlé de toi à tous les chatons"
+          "text": "Pixel a parlé de toi à tous les chatons"
         },
         {
-          "title": "Chaton gardien",
-          "text": "Désormais, le chaton veille sur ton sommeil"
+          "title": "Pixel gardien",
+          "text": "Désormais, Pixel veille sur ton sommeil"
         },
         {
           "title": "Patte étoilée",
-          "text": "Le chaton t’offre une petite étoile"
+          "text": "Pixel t’offre une petite étoile"
         },
         {
           "title": "Câlins royaux",
-          "text": "Le chaton a mis une couronne pour toi"
+          "text": "Pixel a mis une couronne pour toi"
         },
         {
           "title": "Orchestre de ronrons",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Queue arc-en-ciel",
-          "text": "La queue du chaton brille de toutes les couleurs"
+          "text": "La queue de Pixel brille de toutes les couleurs"
         },
         {
           "title": "Le secret du cœur félin",
-          "text": "Le chaton t’a confié son secret"
+          "text": "Pixel t’a confié son secret"
         },
         {
-          "title": "Chaton voyageur",
-          "text": "Le chaton te suit sur tous les sites"
+          "title": "Pixel voyageur",
+          "text": "Pixel te suit sur tous les sites"
         },
         {
           "title": "Ronron au clair de lune",
-          "text": "Le chaton ronronne même en dormant"
+          "text": "Pixel ronronne même en dormant"
         },
         {
           "title": "Gardien du cocon",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Sage félin",
-          "text": "Le chaton te trouve plus sage que lui"
+          "text": "Pixel te trouve plus sage que lui"
         },
         {
           "title": "Univers de ronrons",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Amour éternel",
-          "text": "Le chaton est à toi pour toujours"
+          "text": "Pixel est à toi pour toujours"
         }
       ],
       "grumpy": {
-        "aria": "Le chaton ne veut pas être caressé",
-        "title": "Le chaton boude",
+        "aria": "Pixel ne veut pas être caressé",
+        "title": "Pixel boude",
         "text": "Pas de caresses, pas de succès",
         "sulks": [
           "Pfff ! Bas les pattes",
-          "Le chaton s’est détourné",
+          "Pixel s’est détourné",
           "Non, non, pas de caresses",
-          "Le chaton fait semblant de ne pas te voir",
+          "Pixel fait semblant de ne pas te voir",
           "Il a remué la queue et il est parti"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Cette collection n’est pas disponible.",
     "metaTitle": "Accès restreint | ModrinthProxy",
     "orgMetaDesc": "Cette organisation n’est pas disponible",
-    "kid": "On ne peut pas entrer ici pour l’instant — le chaton garde ce coin. Va voir ailleurs, il y a des milliers d’autres super projets !"
+    "kid": "On ne peut pas entrer ici pour l’instant — Pixel garde ce coin. Va voir ailleurs, il y a des milliers d’autres super projets !"
   },
   "profile": {
     "info": "Détails",
@@ -304,7 +304,7 @@
     "resetBtn": "Réinitialiser dans ce navigateur",
     "resetting": "Réinitialisation…",
     "resetGoneLabel": "Sera oublié",
-    "resetGone": "thème, couleur, affichage des listes, langue, sons des chatons et astuces masquées",
+    "resetGone": "thème, couleur, affichage des listes, langue, sons de Pixel et astuces masquées",
     "resetKeptLabel": "Restera",
     "resetKept": "votre compte, vos favoris et l’historique des téléchargements — ils ne sont pas stockés dans le navigateur"
   },
@@ -339,5 +339,16 @@
     "done": "Quel sapin ! Tous les 50 ornements, un nouveau feu d’artifice.",
     "scoreTitle": "Ornements attrapés",
     "close": "Fermer"
+  },
+  "pixel": {
+    "peek": "Salut, je suis Pixel ! Touche-moi",
+    "footer": "Voici Pixel — il habite tout en bas du site",
+    "lost": "Pixel cherche aussi, mais il n’y a rien ici",
+    "found": "Pixel a trouvé quelque chose de proche !",
+    "guard": "Pixel garde l’entrée",
+    "header": "Pixel est content de te voir",
+    "sleepy": "Pixel fait la sieste. Caresse-le pour le réveiller",
+    "extension": "Pixel vit aussi dans l’extension",
+    "notFound": "Pixel s’est perdu aussi, mais il n’est pas triste"
   }
 }

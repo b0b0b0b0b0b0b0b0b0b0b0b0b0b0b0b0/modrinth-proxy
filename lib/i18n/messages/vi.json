@@ -53,39 +53,39 @@
     "extension": "Tiện ích trình duyệt",
     "siteVersion": "Phiên bản trang: {version}",
     "siteVersionTip": "Tin tức và nhật ký thay đổi",
-    "snowball": "Gọi mèo con lăn quả cầu tuyết",
-    "snowballBusy": "Mèo con đang đi chơi rồi",
+    "snowball": "Gọi Pixel lăn quả cầu tuyết",
+    "snowballBusy": "Pixel đang đi chơi rồi",
     "kitten": {
-      "aria": "Vuốt ve mèo con",
-      "pet": "Vuốt ve mèo con nhé",
+      "aria": "Vuốt ve Pixel",
+      "pet": "Vuốt ve Pixel nhé",
       "petMore": "Gừ gừ! Vuốt thêm nữa đi",
       "waiting": "Mèo con đang chờ bạn",
       "petted": "Đã vuốt: {count}",
       "toNext": "còn {count} lần tới thành tích",
       "unlocked": "Thành tích: {count}/{total}",
-      "signIn": "Đăng nhập để mèo con nhớ bạn",
-      "waking": "Mèo con đang thức dậy…",
+      "signIn": "Đăng nhập để Pixel nhớ bạn",
+      "waking": "Pixel đang thức dậy…",
       "toastKicker": "Mở khóa thành tích",
       "list": [
         {
           "title": "Lần đầu gặp gỡ",
-          "text": "Bạn đã vuốt mèo con! Nó sẽ nhớ bạn"
+          "text": "Bạn đã vuốt Pixel! Nó sẽ nhớ bạn"
         },
         {
-          "title": "Mèo con gừ gừ",
+          "title": "Pixel gừ gừ",
           "text": "Nó thích lắm, tiếp tục nào"
         },
         {
           "title": "Bàn chân ấm áp",
-          "text": "Mèo con đưa chân cho bạn"
+          "text": "Pixel đưa chân cho bạn"
         },
         {
           "title": "Bạn thân nhất",
-          "text": "Mèo con gừ gừ mỗi khi thấy bạn"
+          "text": "Pixel gừ gừ mỗi khi thấy bạn"
         },
         {
-          "title": "Mèo con sung sướng",
-          "text": "Chưa ai cưng mèo con nhiều đến thế"
+          "title": "Pixel sung sướng",
+          "text": "Chưa ai cưng Pixel nhiều đến thế"
         },
         {
           "title": "Gãi sau tai",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Vua gừ gừ",
-          "text": "Mèo con gọi tên bạn rồi"
+          "text": "Pixel gọi tên bạn rồi"
         },
         {
           "title": "Bàn chân may mắn",
-          "text": "Mèo con đã ước một điều cho bạn"
+          "text": "Pixel đã ước một điều cho bạn"
         },
         {
           "title": "Bàn tay mềm mại",
-          "text": "Mèo con sưởi ấm trên tay bạn"
+          "text": "Pixel sưởi ấm trên tay bạn"
         },
         {
           "title": "Huyền thoại modrinth.black",
-          "text": "Mèo con kể về bạn cho bạn bè"
+          "text": "Pixel kể về bạn cho bạn bè"
         },
         {
           "title": "Bậc thầy gãi ngứa",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Gừ gừ marathon",
-          "text": "Mèo con gừ gừ không ngừng"
+          "text": "Pixel gừ gừ không ngừng"
         },
         {
-          "title": "Mèo con thích ôm",
-          "text": "Mèo con muốn được ôm"
+          "title": "Pixel thích ôm",
+          "text": "Pixel muốn được ôm"
         },
         {
           "title": "Độc đắc của mèo",
-          "text": "Mèo con gặp may lớn rồi"
+          "text": "Pixel gặp may lớn rồi"
         },
         {
           "title": "Cuộn len hạnh phúc",
-          "text": "Mèo con mang cuộn len đến cho bạn"
+          "text": "Pixel mang cuộn len đến cho bạn"
         },
         {
           "title": "Đám mây bông",
-          "text": "Mèo con mềm như một đám mây"
+          "text": "Pixel mềm như một đám mây"
         },
         {
           "title": "Bạn của mọi mèo con",
-          "text": "Mèo con kể về bạn cho tất cả mèo con"
+          "text": "Pixel kể về bạn cho tất cả mèo con"
         },
         {
-          "title": "Mèo con hộ vệ",
-          "text": "Giờ mèo con canh giấc ngủ cho bạn"
+          "title": "Pixel hộ vệ",
+          "text": "Giờ Pixel canh giấc ngủ cho bạn"
         },
         {
           "title": "Bàn chân ngôi sao",
-          "text": "Mèo con tặng bạn một ngôi sao nhỏ"
+          "text": "Pixel tặng bạn một ngôi sao nhỏ"
         },
         {
           "title": "Cưng chiều hoàng gia",
-          "text": "Mèo con đội vương miện vì bạn"
+          "text": "Pixel đội vương miện vì bạn"
         },
         {
           "title": "Dàn nhạc gừ gừ",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Đuôi cầu vồng",
-          "text": "Đuôi mèo con lấp lánh đủ màu"
+          "text": "Đuôi Pixel lấp lánh đủ màu"
         },
         {
           "title": "Bí mật trái tim mèo",
-          "text": "Mèo con kể cho bạn bí mật của nó"
+          "text": "Pixel kể cho bạn bí mật của nó"
         },
         {
-          "title": "Mèo con du hành",
-          "text": "Mèo con theo bạn khắp mọi trang"
+          "title": "Pixel du hành",
+          "text": "Pixel theo bạn khắp mọi trang"
         },
         {
           "title": "Tiếng gừ dưới trăng",
-          "text": "Mèo con gừ gừ cả khi ngủ"
+          "text": "Pixel gừ gừ cả khi ngủ"
         },
         {
           "title": "Người giữ ấm áp",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Nhà hiền triết mèo",
-          "text": "Mèo con nghĩ bạn thông thái hơn nó"
+          "text": "Pixel nghĩ bạn thông thái hơn nó"
         },
         {
           "title": "Vũ trụ gừ gừ",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Tình yêu mãi mãi",
-          "text": "Mèo con là của bạn mãi mãi"
+          "text": "Pixel là của bạn mãi mãi"
         }
       ],
       "grumpy": {
-        "aria": "Mèo con không muốn được vuốt ve",
-        "title": "Mèo con đang dỗi",
+        "aria": "Pixel không muốn được vuốt ve",
+        "title": "Pixel đang dỗi",
         "text": "Không cho vuốt, không tính thành tựu",
         "sulks": [
           "Hừ! Đừng chạm vào",
-          "Mèo con quay đi rồi",
+          "Pixel quay đi rồi",
           "Không, không, đừng vuốt",
-          "Mèo con giả vờ không thấy bạn",
+          "Pixel giả vờ không thấy bạn",
           "Vẫy đuôi rồi bỏ đi"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Bộ sưu tập này không khả dụng.",
     "metaTitle": "Truy cập bị hạn chế | ModrinthProxy",
     "orgMetaDesc": "Tổ chức này không khả dụng",
-    "kid": "Bây giờ chưa vào đây được — mèo con đang canh góc này. Hãy xem chỗ khác, có hàng nghìn dự án thú vị!"
+    "kid": "Bây giờ chưa vào đây được — Pixel đang canh góc này. Hãy xem chỗ khác, có hàng nghìn dự án thú vị!"
   },
   "profile": {
     "info": "Chi tiết",
@@ -304,7 +304,7 @@
     "resetBtn": "Đặt lại trong trình duyệt này",
     "resetting": "Đang đặt lại…",
     "resetGoneLabel": "Sẽ bị quên",
-    "resetGone": "giao diện, màu sắc, kiểu danh sách, ngôn ngữ, tiếng mèo con và gợi ý đã đóng",
+    "resetGone": "giao diện, màu sắc, kiểu danh sách, ngôn ngữ, tiếng của Pixel và gợi ý đã đóng",
     "resetKeptLabel": "Vẫn giữ",
     "resetKept": "tài khoản, mục yêu thích và lịch sử tải xuống — chúng không lưu trong trình duyệt"
   },
@@ -339,5 +339,16 @@
     "done": "Cây thông thật đẹp! Cứ 50 món là có pháo hoa mới.",
     "scoreTitle": "Đồ trang trí đã bắt",
     "close": "Đóng"
+  },
+  "pixel": {
+    "peek": "Chào, mình là Pixel! Bấm vào mình nhé",
+    "footer": "Đây là Pixel — cậu ấy sống ở cuối trang",
+    "lost": "Pixel cũng đang tìm, nhưng ở đây trống trơn",
+    "found": "Pixel tìm thấy thứ gì đó tương tự!",
+    "guard": "Pixel canh cửa vào",
+    "header": "Pixel rất vui được gặp bạn",
+    "sleepy": "Pixel đang ngủ trưa. Vuốt ve là cậu ấy dậy ngay",
+    "extension": "Pixel cũng sống trong tiện ích mở rộng",
+    "notFound": "Pixel cũng lạc đường, nhưng không buồn đâu"
   }
 }

@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood, useKittenSeason } from '../components/Kitten'
 import { useT } from '../components/I18nProvider'
+import StyledTooltip from '../components/StyledTooltip'
 import { playTrill } from '../components/softSounds'
 
 export default function ExtensionKitten() {
@@ -33,23 +34,25 @@ export default function ExtensionKitten() {
   return (
     <div className="absolute -top-10 right-5 z-10 h-12 w-12 sm:-top-11 sm:right-8 sm:h-14 sm:w-14">
       <KittenHearts items={hearts} className="bottom-10 h-3 w-3" />
-      <motion.button
-        ref={faceRef}
-        type="button"
-        onClick={pet}
-        aria-label={t('account.petKitten')}
-        animate={hop}
-        style={{ originY: 0.9 }}
-        className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
-      >
-        <motion.div
-          animate={reduceMotion ? undefined : { scaleY: [1, 1.035, 1], scaleX: [1, 0.985, 1] }}
-          transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+      <StyledTooltip label={t('pixel.extension')}>
+        <motion.button
+          ref={faceRef}
+          type="button"
+          onClick={pet}
+          aria-label={t('account.petKitten')}
+          animate={hop}
           style={{ originY: 0.9 }}
+          className="block h-full w-full rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green"
         >
-          <KittenFace mood={mood} look={look} className="h-12 w-12 sm:h-14 sm:w-14" />
-        </motion.div>
-      </motion.button>
+          <motion.div
+            animate={reduceMotion ? undefined : { scaleY: [1, 1.035, 1], scaleX: [1, 0.985, 1] }}
+            transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ originY: 0.9 }}
+          >
+            <KittenFace mood={mood} look={look} className="h-12 w-12 sm:h-14 sm:w-14" />
+          </motion.div>
+        </motion.button>
+      </StyledTooltip>
       <svg
         className={`pointer-events-none absolute left-0 top-[80%] h-auto w-full overflow-visible ${spooky ? 'text-[#f08a24]' : 'text-modrinth-green'}`}
         viewBox="0 0 24 8"

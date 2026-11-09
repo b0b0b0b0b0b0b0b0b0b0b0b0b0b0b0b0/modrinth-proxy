@@ -53,39 +53,39 @@
     "extension": "Pārlūka paplašinājums",
     "siteVersion": "Vietnes versija: {version}",
     "siteVersionTip": "Jaunumi un izmaiņu saraksts",
-    "snowball": "Pasaukt kaķēnu ripināt sniega piku",
-    "snowballBusy": "Kaķēns jau rotaļājas",
+    "snowball": "Pasaukt Pikseli ripināt sniega piku",
+    "snowballBusy": "Pikselis jau rotaļājas",
     "kitten": {
-      "aria": "Paglaudīt kaķēnu",
-      "pet": "Paglaudi kaķēnu",
+      "aria": "Paglaudīt Pikseli",
+      "pet": "Paglaudi Pikseli",
       "petMore": "Murr! Paglaudi vēl",
       "waiting": "Viņš tevi ļoti gaida",
       "petted": "Paglaudīts: {count}",
       "toNext": "vēl {count} līdz sasniegumam",
       "unlocked": "Sasniegumi: {count} no {total}",
-      "signIn": "Pieslēdzies, lai kaķēns tevi atcerētos",
-      "waking": "Kaķēns mostas…",
+      "signIn": "Pieslēdzies, lai Pikselis tevi atcerētos",
+      "waking": "Pikselis mostas…",
       "toastKicker": "Sasniegums atbloķēts",
       "list": [
         {
           "title": "Pirmā iepazīšanās",
-          "text": "Tu paglaudīji kaķēnu! Viņš tevi atcerēsies"
+          "text": "Tu paglaudīji Pikseli! Viņš tevi atcerēsies"
         },
         {
-          "title": "Kaķēns murrā",
+          "title": "Pikselis murrā",
           "text": "Viņam patīk, turpini"
         },
         {
           "title": "Siltā ķepiņa",
-          "text": "Kaķēns pasniedza tev ķepiņu"
+          "text": "Pikselis pasniedza tev ķepiņu"
         },
         {
           "title": "Labākais draugs",
-          "text": "Kaķēns murrā, kad tevi ierauga"
+          "text": "Pikselis murrā, kad tevi ierauga"
         },
         {
-          "title": "Kaķēns sajūsmā",
-          "text": "Tik daudz mīļuma kaķēns vēl nav saņēmis"
+          "title": "Pikselis sajūsmā",
+          "text": "Tik daudz mīļuma Pikselis vēl nav saņēmis"
         },
         {
           "title": "Pakasīšana aiz austiņas",
@@ -93,59 +93,59 @@
         },
         {
           "title": "Murrāšanas valdnieks",
-          "text": "Kaķēns sauc tevi vārdā"
+          "text": "Pikselis sauc tevi vārdā"
         },
         {
           "title": "Laimīgā ķepiņa",
-          "text": "Kaķēns iedomājās vēlēšanos par tevi"
+          "text": "Pikselis iedomājās vēlēšanos par tevi"
         },
         {
           "title": "Mīkstās plaukstas",
-          "text": "Kaķēns sildās pie tavas rokas"
+          "text": "Pikselis sildās pie tavas rokas"
         },
         {
           "title": "modrinth.black leģenda",
-          "text": "Kaķēns pastāstīja par tevi draugiem"
+          "text": "Pikselis pastāstīja par tevi draugiem"
         },
         {
           "title": "Kasīšanas meistars",
-          "text": "Tu zini, kur kaķēnu pakasīt"
+          "text": "Tu zini, kur Pikseli pakasīt"
         },
         {
           "title": "Murrāšanas maratons",
-          "text": "Kaķēns murrā bez apstājas"
+          "text": "Pikselis murrā bez apstājas"
         },
         {
-          "title": "Apskāvienu kaķēns",
-          "text": "Kaķēns grib apskauties"
+          "title": "Apskāvienu Pikselis",
+          "text": "Pikselis grib apskauties"
         },
         {
           "title": "Kaķu džekpots",
-          "text": "Kaķēnam ļoti paveicās"
+          "text": "Pikselim ļoti paveicās"
         },
         {
           "title": "Laimes kamoliņš",
-          "text": "Kaķēns atnesa tev savu kamoliņu"
+          "text": "Pikselis atnesa tev savu kamoliņu"
         },
         {
           "title": "Pūkains mākonītis",
-          "text": "Kaķēns ir mīksts kā mākonītis"
+          "text": "Pikselis ir mīksts kā mākonītis"
         },
         {
           "title": "Visu kaķēnu draugs",
-          "text": "Kaķēns pastāstīja par tevi visiem kaķēniem"
+          "text": "Pikselis pastāstīja par tevi visiem kaķēniem"
         },
         {
-          "title": "Sargkaķēns",
-          "text": "Tagad kaķēns sargā tavu miegu"
+          "title": "Sargs Pikselis",
+          "text": "Tagad Pikselis sargā tavu miegu"
         },
         {
           "title": "Zvaigžņu ķepiņa",
-          "text": "Kaķēns uzdāvināja tev zvaigznīti"
+          "text": "Pikselis uzdāvināja tev zvaigznīti"
         },
         {
           "title": "Karaliskie glāsti",
-          "text": "Kaķēns tevis dēļ uzlika kroni"
+          "text": "Pikselis tevis dēļ uzlika kroni"
         },
         {
           "title": "Murrāšanas orķestris",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Varavīksnes astīte",
-          "text": "Kaķēna astīte mirdz visās krāsās"
+          "text": "Pikseļa astīte mirdz visās krāsās"
         },
         {
           "title": "Kaķa sirds noslēpums",
-          "text": "Kaķēns uzticēja tev savu noslēpumu"
+          "text": "Pikselis uzticēja tev savu noslēpumu"
         },
         {
-          "title": "Ceļotājs kaķēns",
-          "text": "Kaķēns seko tev pa visām vietnēm"
+          "title": "Ceļotājs Pikselis",
+          "text": "Pikselis seko tev pa visām vietnēm"
         },
         {
           "title": "Mēnesnīcas murrāšana",
-          "text": "Kaķēns murrā pat miegā"
+          "text": "Pikselis murrā pat miegā"
         },
         {
           "title": "Omulības sargs",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Kaķu gudrais",
-          "text": "Kaķēns tevi uzskata par gudrāku par sevi"
+          "text": "Pikselis tevi uzskata par gudrāku par sevi"
         },
         {
           "title": "Murrāšanas visums",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Mūžīga mīlestība",
-          "text": "Kaķēns ir tavs uz visiem laikiem"
+          "text": "Pikselis ir tavs uz visiem laikiem"
         }
       ],
       "grumpy": {
-        "aria": "Kaķēns negrib, lai viņu glāsta",
-        "title": "Kaķēns ir apvainojies",
+        "aria": "Pikselis negrib, lai viņu glāsta",
+        "title": "Pikselis ir apvainojies",
         "text": "Glāstīt neļauj, sasniegumus neskaita",
         "sulks": [
           "Fū! Neaiztiec",
-          "Kaķēns novērsās",
+          "Pikselis novērsās",
           "Nē, nē, neglāstīt",
-          "Kaķēns izliekas, ka tevi neredz",
+          "Pikselis izliekas, ka tevi neredz",
           "Pamāja ar asti un aizgāja"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Šī kolekcija nav pieejama.",
     "metaTitle": "Piekļuve ierobežota | ModrinthProxy",
     "orgMetaDesc": "Šī organizācija nav pieejama",
-    "kid": "Šeit pagaidām nevar ieiet — kaķēns sargā šo stūrīti. Paskaties apkārt, te ir tūkstošiem citu foršu projektu!"
+    "kid": "Šeit pagaidām nevar ieiet — Pikselis sargā šo stūrīti. Paskaties apkārt, te ir tūkstošiem citu foršu projektu!"
   },
   "profile": {
     "info": "Detaļas",
@@ -304,7 +304,7 @@
     "resetBtn": "Atiestatīt šajā pārlūkā",
     "resetting": "Atiestata…",
     "resetGoneLabel": "Tiks aizmirsts",
-    "resetGone": "tēma, krāsa, sarakstu skats, valoda, kaķēnu skaņas un aizvērtie padomi",
+    "resetGone": "tēma, krāsa, sarakstu skats, valoda, Pikseļa skaņas un aizvērtie padomi",
     "resetKeptLabel": "Paliks",
     "resetKept": "konts, izlase un lejupielāžu vēsture — tie netiek glabāti pārlūkā"
   },
@@ -339,5 +339,16 @@
     "done": "Eglīte izrotāta! Ik pēc 50 rotājumiem — jauns salūts.",
     "scoreTitle": "Noķertie rotājumi",
     "close": "Aizvērt"
+  },
+  "pixel": {
+    "peek": "Sveiki, es esmu Pikselis! Uzspied man",
+    "footer": "Šis ir Pikselis — viņš dzīvo vietnes pašā apakšā",
+    "lost": "Pikselis arī meklē, bet te ir tukšs",
+    "found": "Pikselis atrada kaut ko līdzīgu!",
+    "guard": "Pikselis sargā ieeju",
+    "header": "Pikselis priecājas tevi redzēt",
+    "sleepy": "Pikselis snauž. Paglaudi viņu, un viņš pamodīsies",
+    "extension": "Pikselis dzīvo arī paplašinājumā",
+    "notFound": "Pikselis arī apmaldījās, bet nebēdā"
   }
 }

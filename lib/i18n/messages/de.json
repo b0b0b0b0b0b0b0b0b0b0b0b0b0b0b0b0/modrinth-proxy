@@ -53,39 +53,39 @@
     "extension": "Browsererweiterung",
     "siteVersion": "Site-Version: {version}",
     "siteVersionTip": "News und Changelog",
-    "snowball": "Kätzchen zum Schneeballrollen rufen",
-    "snowballBusy": "Das Kätzchen spielt schon draußen",
+    "snowball": "Pixel zum Schneeballrollen rufen",
+    "snowballBusy": "Pixel spielt schon draußen",
     "kitten": {
-      "aria": "Kätzchen streicheln",
-      "pet": "Streichle das Kätzchen",
+      "aria": "Pixel streicheln",
+      "pet": "Streichle Pixel",
       "petMore": "Schnurr! Noch mal streicheln",
       "waiting": "Es wartet schon auf dich",
       "petted": "Gestreichelt: {count}",
       "toNext": "noch {count} bis zum Erfolg",
       "unlocked": "Erfolge: {count} von {total}",
-      "signIn": "Melde dich an, damit sich das Kätzchen an dich erinnert",
-      "waking": "Das Kätzchen wacht auf…",
+      "signIn": "Melde dich an, damit sich Pixel an dich erinnert",
+      "waking": "Pixel wacht auf…",
       "toastKicker": "Erfolg freigeschaltet",
       "list": [
         {
           "title": "Erstes Kennenlernen",
-          "text": "Du hast das Kätzchen gestreichelt! Es merkt sich dich"
+          "text": "Du hast Pixel gestreichelt! Er merkt sich dich"
         },
         {
-          "title": "Das Kätzchen schnurrt",
+          "title": "Pixel schnurrt",
           "text": "Es gefällt ihm, mach weiter"
         },
         {
           "title": "Warme Pfote",
-          "text": "Das Kätzchen gibt dir Pfötchen"
+          "text": "Pixel gibt dir Pfötchen"
         },
         {
           "title": "Bester Freund",
-          "text": "Das Kätzchen schnurrt, wenn es dich sieht"
+          "text": "Pixel schnurrt, wenn er dich sieht"
         },
         {
           "title": "Ganz entzückt",
-          "text": "So viel Liebe hat das Kätzchen noch nie bekommen"
+          "text": "So viel Liebe hat Pixel noch nie bekommen"
         },
         {
           "title": "Hinterm Ohr kraulen",
@@ -93,19 +93,19 @@
         },
         {
           "title": "Meister des Schnurrens",
-          "text": "Das Kätzchen ruft dich beim Namen"
+          "text": "Pixel ruft dich beim Namen"
         },
         {
           "title": "Glückspfote",
-          "text": "Das Kätzchen hat sich etwas für dich gewünscht"
+          "text": "Pixel hat sich etwas für dich gewünscht"
         },
         {
           "title": "Weiche Hände",
-          "text": "Das Kätzchen wärmt sich an deiner Hand"
+          "text": "Pixel wärmt sich an deiner Hand"
         },
         {
           "title": "Legende von modrinth.black",
-          "text": "Das Kätzchen erzählt seinen Freunden von dir"
+          "text": "Pixel erzählt seinen Freunden von dir"
         },
         {
           "title": "Kraul-Meister",
@@ -113,39 +113,39 @@
         },
         {
           "title": "Schnurr-Marathon",
-          "text": "Das Kätzchen schnurrt ohne Pause"
+          "text": "Pixel schnurrt ohne Pause"
         },
         {
-          "title": "Kuschelkätzchen",
-          "text": "Das Kätzchen will kuscheln"
+          "title": "Kuschel-Pixel",
+          "text": "Pixel will kuscheln"
         },
         {
           "title": "Katzen-Jackpot",
-          "text": "Das Kätzchen hatte riesiges Glück"
+          "text": "Pixel hatte riesiges Glück"
         },
         {
           "title": "Wollknäuel des Glücks",
-          "text": "Das Kätzchen bringt dir sein Wollknäuel"
+          "text": "Pixel bringt dir sein Wollknäuel"
         },
         {
           "title": "Flauschige Wolke",
-          "text": "Das Kätzchen ist weich wie eine Wolke"
+          "text": "Pixel ist weich wie eine Wolke"
         },
         {
           "title": "Freund aller Kätzchen",
-          "text": "Das Kätzchen hat allen Kätzchen von dir erzählt"
+          "text": "Pixel hat allen Kätzchen von dir erzählt"
         },
         {
-          "title": "Wächterkätzchen",
-          "text": "Jetzt bewacht das Kätzchen deinen Schlaf"
+          "title": "Wächter Pixel",
+          "text": "Jetzt bewacht Pixel deinen Schlaf"
         },
         {
           "title": "Sternenpfote",
-          "text": "Das Kätzchen schenkt dir ein Sternchen"
+          "text": "Pixel schenkt dir ein Sternchen"
         },
         {
           "title": "Königliches Kuscheln",
-          "text": "Das Kätzchen trägt für dich eine Krone"
+          "text": "Pixel trägt für dich eine Krone"
         },
         {
           "title": "Schnurr-Orchester",
@@ -153,19 +153,19 @@
         },
         {
           "title": "Regenbogenschwanz",
-          "text": "Der Schwanz des Kätzchens leuchtet in allen Farben"
+          "text": "Pixels Schwanz leuchtet in allen Farben"
         },
         {
           "title": "Geheimnis des Katzenherzens",
-          "text": "Das Kätzchen verrät dir sein Geheimnis"
+          "text": "Pixel verrät dir sein Geheimnis"
         },
         {
-          "title": "Reisekätzchen",
-          "text": "Das Kätzchen folgt dir über alle Seiten"
+          "title": "Reise-Pixel",
+          "text": "Pixel folgt dir über alle Seiten"
         },
         {
           "title": "Mondschein-Schnurren",
-          "text": "Das Kätzchen schnurrt sogar im Schlaf"
+          "text": "Pixel schnurrt sogar im Schlaf"
         },
         {
           "title": "Hüter der Gemütlichkeit",
@@ -173,7 +173,7 @@
         },
         {
           "title": "Katzenweiser",
-          "text": "Das Kätzchen hält dich für weiser als sich selbst"
+          "text": "Pixel hält dich für weiser als sich selbst"
         },
         {
           "title": "Schnurr-Universum",
@@ -185,18 +185,18 @@
         },
         {
           "title": "Ewige Liebe",
-          "text": "Das Kätzchen gehört für immer dir"
+          "text": "Pixel gehört für immer dir"
         }
       ],
       "grumpy": {
-        "aria": "Das Kätzchen will nicht gestreichelt werden",
-        "title": "Das Kätzchen ist beleidigt",
+        "aria": "Pixel will nicht gestreichelt werden",
+        "title": "Pixel ist beleidigt",
         "text": "Kein Streicheln, keine Erfolge",
         "sulks": [
           "Pff! Finger weg",
-          "Das Kätzchen hat sich abgewandt",
+          "Pixel hat sich abgewandt",
           "Nein, nein, nicht streicheln",
-          "Das Kätzchen tut so, als sähe es dich nicht",
+          "Pixel tut so, als sähe er dich nicht",
           "Mit dem Schwanz gewedelt und weg"
         ]
       }
@@ -218,7 +218,7 @@
     "collection": "Diese Sammlung ist nicht verfügbar.",
     "metaTitle": "Zugriff eingeschränkt | ModrinthProxy",
     "orgMetaDesc": "Diese Organisation ist nicht verfügbar",
-    "kid": "Hier geht’s gerade nicht rein — das Kätzchen bewacht diese Ecke. Schau dich um, es gibt tausende andere tolle Projekte!"
+    "kid": "Hier geht’s gerade nicht rein — Pixel bewacht diese Ecke. Schau dich um, es gibt tausende andere tolle Projekte!"
   },
   "profile": {
     "info": "Details",
@@ -304,7 +304,7 @@
     "resetBtn": "In diesem Browser zurücksetzen",
     "resetting": "Wird zurückgesetzt…",
     "resetGoneLabel": "Wird vergessen",
-    "resetGone": "Design, Farbe, Listenansicht, Sprache, Kätzchen-Klänge und ausgeblendete Hinweise",
+    "resetGone": "Design, Farbe, Listenansicht, Sprache, Pixels Klänge und ausgeblendete Hinweise",
     "resetKeptLabel": "Bleibt",
     "resetKept": "Konto, Favoriten und Download-Verlauf — sie liegen nicht im Browser"
   },
@@ -339,5 +339,16 @@
     "done": "Was für ein Baum! Alle 50 Kugeln gibt es ein neues Feuerwerk.",
     "scoreTitle": "Gefangener Schmuck",
     "close": "Schließen"
+  },
+  "pixel": {
+    "peek": "Hallo, ich bin Pixel! Tipp mich an",
+    "footer": "Das ist Pixel — er wohnt ganz unten auf der Seite",
+    "lost": "Pixel sucht auch, aber hier ist nichts",
+    "found": "Pixel hat etwas Ähnliches gefunden!",
+    "guard": "Pixel bewacht den Eingang",
+    "header": "Pixel freut sich, dich zu sehen",
+    "sleepy": "Pixel macht ein Nickerchen. Streichle ihn, dann wacht er auf",
+    "extension": "Pixel wohnt auch in der Erweiterung",
+    "notFound": "Pixel hat sich auch verlaufen, ist aber nicht traurig"
   }
 }

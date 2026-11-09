@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'framer-motion'
 import { KittenFace, KittenHearts, useKittenHearts, useKittenMood } from './Kitten'
 import { useT } from './I18nProvider'
+import StyledTooltip from './StyledTooltip'
 import { playTrill } from './softSounds'
 
 const FOUND_GLANCES = [
@@ -52,35 +53,37 @@ export default function LostKitten({ text, found = false, className = '' }) {
   const size = found ? 'h-16 w-16' : 'h-24 w-24'
 
   const kitten = (
-    <div className={`relative shrink-0 ${size}`}>
-      <KittenHearts items={hearts} className="bottom-16 h-4 w-4" />
-      {!reduceMotion ? (
-        <motion.span
-          aria-hidden
-          className="pointer-events-none absolute -right-3 -top-2 text-2xl font-black text-modrinth-green"
-          animate={{ y: [0, -5, 0], rotate: [-8, 8, -8], opacity: [0.6, 1, 0.6] }}
-          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+    <StyledTooltip label={t(found ? 'pixel.found' : 'pixel.lost')}>
+      <div className={`relative shrink-0 ${size}`}>
+        <KittenHearts items={hearts} className="bottom-16 h-4 w-4" />
+        {!reduceMotion ? (
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute -right-3 -top-2 text-2xl font-black text-modrinth-green"
+            animate={{ y: [0, -5, 0], rotate: [-8, 8, -8], opacity: [0.6, 1, 0.6] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            {found ? '!' : '?'}
+          </motion.span>
+        ) : null}
+        <motion.button
+          ref={faceRef}
+          type="button"
+          onClick={pet}
+          aria-label={t('account.petKitten')}
+          animate={hop}
+          style={{ originY: 0.9 }}
+          className={`block rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green ${size}`}
         >
-          {found ? '!' : '?'}
-        </motion.span>
-      ) : null}
-      <motion.button
-        ref={faceRef}
-        type="button"
-        onClick={pet}
-        aria-label={t('account.petKitten')}
-        animate={hop}
-        style={{ originY: 0.9 }}
-        className={`block rounded-full outline-hidden focus-visible:ring-2 focus-visible:ring-modrinth-green ${size}`}
-      >
-        <motion.div
-          animate={reduceMotion ? undefined : { rotate: look.x * 7 }}
-          transition={{ type: 'spring', stiffness: 160, damping: 14 }}
-        >
-          <KittenFace mood={mood} look={look} className={size} />
-        </motion.div>
-      </motion.button>
-    </div>
+          <motion.div
+            animate={reduceMotion ? undefined : { rotate: look.x * 7 }}
+            transition={{ type: 'spring', stiffness: 160, damping: 14 }}
+          >
+            <KittenFace mood={mood} look={look} className={size} />
+          </motion.div>
+        </motion.button>
+      </div>
+    </StyledTooltip>
   )
 
   if (found) return <div className={className}>{kitten}</div>
