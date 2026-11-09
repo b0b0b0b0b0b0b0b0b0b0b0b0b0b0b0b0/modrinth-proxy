@@ -95,7 +95,26 @@ export default function ProfileMenu({ account, linkClassName }) {
     }
     if (username) return undefined
     let alive = true
-    loadAccountUpdates()
+    const confirmed = account
+      ? Promise.resolve(true)
+      : fetch('/api/auth/state', { cache: 'no-store' })
+          .then((res) => (res.ok ? res.json() : { id: true }))
+          .then((data) => data?.id != null)
+          .catch(() => true)
+    confirmed
+      .then((stillSigned) => {
+        if (!alive) return null
+        if (!stillSigned) {
+          try {
+            sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
+          } catch {}
+          setSigned(false)
+          setUsername(null)
+          setAvatar(null)
+          return null
+        }
+        return loadAccountUpdates()
+      })
       .then((data) => {
         if (alive && data?.username) {
           setUsername(data.username)
