@@ -21,12 +21,6 @@ Clean-param: ref
 Clean-param: fbclid
 Clean-param: gclid
 
-User-agent: Bingbot
-User-agent: msnbot
-User-agent: BingPreview
-User-agent: AdIdxBot
-Disallow: /
-
 User-agent: Yandex
 Allow: /
 Disallow: /api/
