@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import * as Popover from '@radix-ui/react-popover'
-import { ACCOUNT_UPDATES_KEY } from '../components/AccountUpdatesDot'
+import { resetAccountUpdates } from '../components/AccountUpdatesDot'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
 
@@ -14,9 +14,7 @@ async function removeFavorites(payload) {
     body: JSON.stringify(payload),
   })
   if (!response.ok) throw new Error('failed')
-  try {
-    sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
-  } catch {}
+  resetAccountUpdates()
 }
 
 export function RemoveFavoriteButton({ projectId }) {
@@ -62,9 +60,7 @@ async function clearHistory() {
     body: JSON.stringify({ all: true }),
   })
   if (!response.ok) throw new Error('failed')
-  try {
-    sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
-  } catch {}
+  resetAccountUpdates()
 }
 
 export function ClearFavoritesButton({ count }) {

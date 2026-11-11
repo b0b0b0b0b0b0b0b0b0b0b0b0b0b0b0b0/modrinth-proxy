@@ -2,13 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ACCOUNT_UPDATES_KEY } from '../components/AccountUpdatesDot'
-
-function resetBadge() {
-  try {
-    sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
-  } catch {}
-}
+import { resetAccountUpdates } from '../components/AccountUpdatesDot'
 
 export default function MarkSeenButton({ projectId = null, versionId = null, variant = '', label, className }) {
   const router = useRouter()
@@ -22,7 +16,7 @@ export default function MarkSeenButton({ projectId = null, versionId = null, var
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(projectId ? { projectId, versionId, variant } : {}),
       })
-      resetBadge()
+      resetAccountUpdates()
       router.refresh()
     } catch {
     } finally {
@@ -41,8 +35,10 @@ export function UpdateDownloadLink({ href, fileName, label, className }) {
   const router = useRouter()
 
   const refreshSoon = () => {
-    resetBadge()
-    setTimeout(() => router.refresh(), 2000)
+    setTimeout(() => {
+      resetAccountUpdates()
+      router.refresh()
+    }, 2000)
   }
 
   return (

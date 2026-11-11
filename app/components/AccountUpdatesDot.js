@@ -7,6 +7,14 @@ import { hasSignedHint } from '@/lib/signedHint'
 
 export const ACCOUNT_UPDATES_KEY = 'account-updates'
 const CACHE_MS = 10 * 60 * 1000
+const ACCOUNT_UPDATES_EVENT = 'account-updates-changed'
+
+export function resetAccountUpdates() {
+  try {
+    sessionStorage.removeItem(ACCOUNT_UPDATES_KEY)
+  } catch {}
+  window.dispatchEvent(new Event(ACCOUNT_UPDATES_EVENT))
+}
 
 function readAccountUpdates() {
   try {
@@ -67,6 +75,22 @@ export default function AccountUpdatesDot() {
       alive = false
     }
   }, [pathname])
+
+  useEffect(() => {
+    let alive = true
+    const reload = () => {
+      loadAccountUpdates()
+        .then((data) => {
+          if (alive) setCount(data?.count || 0)
+        })
+        .catch(() => {})
+    }
+    window.addEventListener(ACCOUNT_UPDATES_EVENT, reload)
+    return () => {
+      alive = false
+      window.removeEventListener(ACCOUNT_UPDATES_EVENT, reload)
+    }
+  }, [])
 
   if (count <= 0) return null
   return (
