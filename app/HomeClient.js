@@ -111,6 +111,25 @@ const STATS_FALLBACK = {
   versions: 1100000,
 }
 
+function DomainSwap({ text }) {
+  return text.split(/\[\[(.+?)\]\]/).map((part, i) =>
+    i % 2 ? (
+      <code
+        key={i}
+        className={`mx-0.5 rounded-md px-1.5 py-0.5 font-mono text-[0.9em] ${
+          part === '.black'
+            ? 'bg-modrinth-green/15 font-semibold text-modrinth-green'
+            : 'bg-(--bg-tertiary) text-gray-400'
+        }`}
+      >
+        {part}
+      </code>
+    ) : (
+      part
+    ),
+  )
+}
+
 function HomeLead({ text }) {
   return text.split(/\[\[(.+?)\]\]/).map((part, i) =>
     i % 2 ? (
@@ -224,6 +243,11 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 <CheckItem>{t('home.currentFiles')}</CheckItem>
                 <CheckItem>{t('home.directLinks')}</CheckItem>
                 <CheckItem>{t('home.noStore')}</CheckItem>
+                <CheckItem>{t('home.extensionRedirect')}</CheckItem>
+                <CheckItem>{t('home.sameAsModrinth')}</CheckItem>
+                <CheckItem>
+                  <DomainSwap text={t('home.swapDomain')} />
+                </CheckItem>
               </div>
             </div>
             <PeelPanel className="card-glass bg-modrinth-dark rounded-2xl p-6 sm:p-8">
