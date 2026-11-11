@@ -160,8 +160,8 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 style={{
                   WebkitBackgroundClip: 'text',
                   backgroundClip: 'text',
-                  backgroundColor: 'var(--color-green-bright)',
-                  backgroundImage: 'linear-gradient(180deg, var(--color-blue-light) 0%, var(--color-green-bright) 60%)',
+                  backgroundColor: 'var(--hero-word-bottom)',
+                  backgroundImage: 'linear-gradient(180deg, var(--hero-word-top) 0%, var(--hero-word-bottom) 60%)',
                   backgroundSize: '100%',
                   fontWeight: 600,
                   WebkitTextFillColor: 'transparent',
