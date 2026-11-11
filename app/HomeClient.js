@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import PeelPanel from './components/PeelPanel'
 import HomeLoaders from './components/HomeLoaders'
-import { useEffect, useMemo, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
 import { useCountUp } from './hooks/useCountUp'
 import { getModsVersionRange } from '@/lib/minecraftVersionRange'
@@ -131,15 +131,20 @@ function DomainSwap({ text }) {
 }
 
 function HomeLead({ text }) {
-  return text.split(/\[\[(.+?)\]\]/).map((part, i) =>
-    i % 2 ? (
-      <span key={i} className="font-semibold text-modrinth-green">
-        {part}
-      </span>
-    ) : (
-      part
-    ),
-  )
+  return text.split('\n').map((line, n) => (
+    <Fragment key={n}>
+      {n > 0 && <br className="hidden md:inline" />}
+      {line.split(/\[\[(.+?)\]\]/).map((part, i) =>
+        i % 2 ? (
+          <span key={i} className="font-semibold text-modrinth-green">
+            {part}
+          </span>
+        ) : (
+          part
+        ),
+      )}
+    </Fragment>
+  ))
 }
 
 export default function HomeClient({ platformStats, categoryTotals }) {
