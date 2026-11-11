@@ -675,7 +675,19 @@
     "quietNowOn": "Đang yên lặng — bot sẽ nhắn lúc {t}",
     "quietNowOff": "Bot đang hoạt động, yên lặng bắt đầu lúc {t}",
     "timezoneDevice": "Theo thiết bị này: {zone}",
-    "timezoneDeviceTip": "Dùng giờ của trình duyệt"
+    "timezoneDeviceTip": "Dùng giờ của trình duyệt",
+    "welcomeHi": "Xin chào! Mình là Pixel, chú mèo con của modrinth.black",
+    "welcomeAbout": "Mình theo dõi các mod bạn đã tải hoặc thêm vào yêu thích, và sẽ nhắn ở đây ngay khi có phiên bản mới.",
+    "welcomeHow": "Cách bật:",
+    "welcomeStep1": "Nhấn “Bật thông báo” và đăng nhập trang web bằng Telegram.",
+    "welcomeStep2": "Bật “Thông báo qua Telegram” — xong rồi!",
+    "welcomeEnd": "Phần còn lại cứ để mình lo 🐾",
+    "welcomeReady": "Thông báo đã được bật. Hễ có gì mới là mình báo ngay!",
+    "welcomeAlmost": "Telegram của bạn đã được liên kết — chỉ cần bật thông báo bằng nút bên dưới.",
+    "btnNotify": "Bật thông báo",
+    "btnSettings": "Cài đặt thông báo",
+    "btnSite": "Mở trang web",
+    "btnUpdates": "Cập nhật của tôi"
   },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",

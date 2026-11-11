@@ -675,7 +675,19 @@
     "quietNowOn": "现在是安静时间 — 机器人会在 {t} 发消息",
     "quietNowOff": "机器人现在在线，{t} 开始安静",
     "timezoneDevice": "与此设备一致：{zone}",
-    "timezoneDeviceTip": "使用浏览器的时间"
+    "timezoneDeviceTip": "使用浏览器的时间",
+    "welcomeHi": "你好！我是 Pixel，modrinth.black 的小猫",
+    "welcomeAbout": "我会盯着你下载过或收藏的模组，一有新版本就在这里告诉你。",
+    "welcomeHow": "如何开启：",
+    "welcomeStep1": "点击“开启通知”，用 Telegram 登录网站。",
+    "welcomeStep2": "打开“Telegram 通知”，就完成啦！",
+    "welcomeEnd": "剩下的交给我 🐾",
+    "welcomeReady": "通知已经开启。一有新东西，我马上告诉你！",
+    "welcomeAlmost": "你的 Telegram 已经绑定，只差开启通知了——点下面的按钮。",
+    "btnNotify": "开启通知",
+    "btnSettings": "通知设置",
+    "btnSite": "打开网站",
+    "btnUpdates": "我的更新"
   },
   "set": {
     "trackDownloads": "跟踪已下载内容的新版本",

@@ -8,5 +8,7 @@ export async function register() {
     globalThis.__knownProjectStamp = knownProjectStamp
     const { startTelegramTicker } = await import('./lib/telegramTicker')
     startTelegramTicker()
+    const { startTelegramWelcome } = await import('./lib/telegramWelcome')
+    startTelegramWelcome()
   }
 }

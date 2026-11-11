@@ -675,7 +675,19 @@
     "quietNowOn": "Agora é silêncio — o bot escreve às {t}",
     "quietNowOff": "O bot está ativo agora, o silêncio começa às {t}",
     "timezoneDevice": "Como neste dispositivo: {zone}",
-    "timezoneDeviceTip": "Usar o horário do navegador"
+    "timezoneDeviceTip": "Usar o horário do navegador",
+    "welcomeHi": "Oi! Eu sou o Pixel, o gatinho do modrinth.black",
+    "welcomeAbout": "Eu fico de olho nos mods que você baixou ou favoritou e te aviso aqui assim que sai uma versão nova.",
+    "welcomeHow": "Como ativar:",
+    "welcomeStep1": "Toque em “Ativar notificações” e entre no site com o Telegram.",
+    "welcomeStep2": "Ative “Notificações no Telegram” — pronto!",
+    "welcomeEnd": "O resto é comigo 🐾",
+    "welcomeReady": "As notificações já estão ativadas. Assim que sair algo novo, eu te aviso!",
+    "welcomeAlmost": "Seu Telegram já está vinculado — só falta ativar as notificações no botão abaixo.",
+    "btnNotify": "Ativar notificações",
+    "btnSettings": "Configurar notificações",
+    "btnSite": "Abrir o site",
+    "btnUpdates": "Minhas atualizações"
   },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",

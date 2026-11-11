@@ -675,7 +675,19 @@
     "quietNowOn": "今はおやすみ中 — {t} に届きます",
     "quietNowOff": "今は通知オン、{t} からおやすみ",
     "timezoneDevice": "この端末に合わせる：{zone}",
-    "timezoneDeviceTip": "ブラウザの時刻に合わせる"
+    "timezoneDeviceTip": "ブラウザの時刻に合わせる",
+    "welcomeHi": "こんにちは！modrinth.black の子ねこ、Pixel です",
+    "welcomeAbout": "ダウンロードしたりお気に入りに入れたりした MOD を見守って、新しいバージョンが出たらすぐここでお知らせします。",
+    "welcomeHow": "オンにする方法：",
+    "welcomeStep1": "「通知をオンにする」を押して、Telegram でサイトにログインします。",
+    "welcomeStep2": "「Telegram 通知」をオンにすれば完了！",
+    "welcomeEnd": "あとはおまかせください 🐾",
+    "welcomeReady": "通知はもうオンです。新しいものが出たらすぐお知らせします！",
+    "welcomeAlmost": "Telegram はもう連携済みです。下のボタンから通知をオンにするだけです。",
+    "btnNotify": "通知をオンにする",
+    "btnSettings": "通知の設定",
+    "btnSite": "サイトを開く",
+    "btnUpdates": "マイアップデート"
   },
   "set": {
     "trackDownloads": "ダウンロードしたものの新バージョンを追跡",

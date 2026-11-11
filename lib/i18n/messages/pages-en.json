@@ -693,7 +693,19 @@
     "quietNowOn": "Quiet now — the bot will write at {t}",
     "quietNowOff": "The bot is on right now, quiet starts at {t}",
     "timezoneDevice": "Use this device: {zone}",
-    "timezoneDeviceTip": "Use the browser’s time"
+    "timezoneDeviceTip": "Use the browser’s time",
+    "welcomeHi": "Hi! I’m Pixel, the kitten from modrinth.black",
+    "welcomeAbout": "I keep an eye on the mods you’ve downloaded or added to favorites, and I’ll message you here as soon as a new version comes out.",
+    "welcomeHow": "How to turn it on:",
+    "welcomeStep1": "Tap “Turn on notifications” and sign in to the site with Telegram.",
+    "welcomeStep2": "Switch on “Telegram notifications” — that’s it!",
+    "welcomeEnd": "I’ll take care of the rest 🐾",
+    "welcomeReady": "Notifications are already on. As soon as something new comes out, I’ll let you know!",
+    "welcomeAlmost": "Your Telegram is already linked — just turn on notifications with the button below.",
+    "btnNotify": "Turn on notifications",
+    "btnSettings": "Notification settings",
+    "btnSite": "Open the site",
+    "btnUpdates": "My updates"
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",

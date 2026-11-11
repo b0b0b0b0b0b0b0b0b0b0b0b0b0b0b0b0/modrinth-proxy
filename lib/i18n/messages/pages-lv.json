@@ -675,7 +675,19 @@
     "quietNowOn": "Tagad ir klusums — bots rakstīs {t}",
     "quietNowOff": "Tagad bots ir aktīvs, klusums sāksies {t}",
     "timezoneDevice": "Kā šajā ierīcē: {zone}",
-    "timezoneDeviceTip": "Iestatīt pārlūka laiku"
+    "timezoneDeviceTip": "Iestatīt pārlūka laiku",
+    "welcomeHi": "Sveiks! Es esmu Pixel — kaķēns no modrinth.black",
+    "welcomeAbout": "Es sekoju modiem, kurus tu lejupielādēji vai pievienoji izlasei, un rakstu šeit, tiklīdz iznāk jauna versija.",
+    "welcomeHow": "Kā ieslēgt:",
+    "welcomeStep1": "Nospied «Ieslēgt paziņojumus» un ienāc vietnē ar Telegram.",
+    "welcomeStep2": "Ieslēdz «Telegram paziņojumi» — un gatavs!",
+    "welcomeEnd": "Par pārējo parūpēšos es 🐾",
+    "welcomeReady": "Paziņojumi jau ir ieslēgti. Tiklīdz kaut kas iznāks, uzreiz uzrakstīšu!",
+    "welcomeAlmost": "Tavs Telegram jau ir piesaistīts — atliek tikai ieslēgt paziņojumus ar pogu zemāk.",
+    "btnNotify": "Ieslēgt paziņojumus",
+    "btnSettings": "Paziņojumu iestatījumi",
+    "btnSite": "Atvērt vietni",
+    "btnUpdates": "Mani atjauninājumi"
   },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",

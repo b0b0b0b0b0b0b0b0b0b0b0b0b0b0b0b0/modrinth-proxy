@@ -675,7 +675,19 @@
     "quietNowOn": "Tyst nu – boten skriver kl. {t}",
     "quietNowOff": "Boten är aktiv nu, tystnaden börjar kl. {t}",
     "timezoneDevice": "Som på den här enheten: {zone}",
-    "timezoneDeviceTip": "Använd webbläsarens tid"
+    "timezoneDeviceTip": "Använd webbläsarens tid",
+    "welcomeHi": "Hej! Jag är Pixel, kattungen från modrinth.black",
+    "welcomeAbout": "Jag håller koll på moddarna du laddat ner eller sparat som favoriter och skriver hit så fort en ny version kommer.",
+    "welcomeHow": "Så slår du på det:",
+    "welcomeStep1": "Tryck på ”Slå på aviseringar” och logga in på sidan med Telegram.",
+    "welcomeStep2": "Slå på ”Telegram-aviseringar” – klart!",
+    "welcomeEnd": "Resten fixar jag 🐾",
+    "welcomeReady": "Aviseringar är redan på. Så fort något nytt kommer hör jag av mig!",
+    "welcomeAlmost": "Ditt Telegram är redan kopplat – slå bara på aviseringar med knappen nedan.",
+    "btnNotify": "Slå på aviseringar",
+    "btnSettings": "Aviseringsinställningar",
+    "btnSite": "Öppna sidan",
+    "btnUpdates": "Mina uppdateringar"
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",
