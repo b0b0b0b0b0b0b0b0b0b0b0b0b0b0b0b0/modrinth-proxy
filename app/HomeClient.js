@@ -208,7 +208,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 <CheckItem>{t('home.noStore')}</CheckItem>
               </div>
             </div>
-            <div className="card-glass bg-modrinth-dark rounded-2xl p-6 sm:p-8">
+            <PeelPanel className="card-glass bg-modrinth-dark rounded-2xl p-6 sm:p-8">
               <div className="text-center mb-6">
                 <h4 className="text-white font-semibold text-lg mb-2">{t('home.statsTitle')}</h4>
                 <p className="inline-flex items-center gap-2 text-gray-400 text-sm">
@@ -234,7 +234,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   <div className="text-gray-300 text-sm mt-1">{t('home.free')}</div>
                 </div>
               </div>
-            </div>
+            </PeelPanel>
           </div>
 
         <div className="relative overflow-hidden">
@@ -252,7 +252,6 @@ export default function HomeClient({ platformStats, categoryTotals }) {
               </p>
             </div>
 
-            <PeelPanel>
             <div className="grid md:grid-cols-2 gap-12">
               <Link href="/mods" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
                 <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
@@ -330,7 +329,6 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </Link>
             </div>
-            </PeelPanel>
 
             <div className="mt-8 text-center">
               <p className="text-sm text-gray-500">
