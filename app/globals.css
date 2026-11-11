@@ -5950,6 +5950,7 @@ html:not(.dark) .peel-under {
 .peel-flap {
   position: absolute;
   inset: 0;
+  border-radius: inherit;
   transform-origin: 100% 100%;
   clip-path: polygon(100% calc(100% - var(--peel)), 100% 100%, calc(100% - var(--peel)) 100%);
   background-image: linear-gradient(
