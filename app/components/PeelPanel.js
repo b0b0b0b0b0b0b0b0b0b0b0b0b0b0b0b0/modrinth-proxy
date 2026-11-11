@@ -9,21 +9,24 @@ const P = ({ children }) => <span className="pc-p">{children}</span>
 function Code() {
   return (
     <pre className="peel-code">
-      <K>import</K> {'{ '}<F>cache</F>{' }'} <K>from</K> <S>'react'</S>
-      {'\n\n'}
-      <K>export const</K> <F>getMod</F> = <F>cache</F>(<K>async</K> (<P>slug</P>) =&gt; {'{'}
-      {'\n  '}<K>const</K> <P>url</P> = <S>{'`${API}/project/${slug}`'}</S>
-      {'\n  '}<K>const</K> <P>res</P> = <K>await</K> <F>fetch</F>(<P>url</P>, {'{'}
-      {'\n    '}<P>next</P>: {'{ '}<P>revalidate</P>: <N>1800</N>{' }'},
-      {'\n  '}{'})'}
-      {'\n  '}<K>if</K> (!<P>res</P>.<P>ok</P>) <K>throw new</K> <F>HttpError</F>(<P>res</P>)
-      {'\n  '}<K>return</K> <F>normalize</F>(<K>await</K> <P>res</P>.<F>json</F>())
-      {'\n'}{'})'}
-      {'\n\n'}
-      <K>export async function</K> <F>getVersions</F>(<P>slug</P>) {'{'}
-      {'\n  '}<K>const</K> <P>mod</P> = <K>await</K> <F>getMod</F>(<P>slug</P>)
-      {'\n  '}<K>const</K> <P>v</P> = <F>stamp</F>(<P>mod</P>)
-      {'\n  '}<K>return</K> <F>fetchList</F>(<S>{'`${url(slug)}?v=${v}`'}</S>)
+      <K>async function</K> <F>fetchJsonWithStale</F>(
+      {'\n  '}<P>url</P>, <P>init</P>, <P>normalize</P>,
+      {'\n'}) {'{'}
+      {'\n  '}<K>for</K> (<K>let</K> <P>i</P> = <N>0</N>; <P>i</P> &lt; <N>2</N>; <P>i</P>++) {'{'}
+      {'\n    '}<K>const</K> <P>res</P> = <K>await</K> <F>modrinthFetch</F>(
+      {'\n      '}<P>url</P>,
+      {'\n      '}<P>i</P> ? {'{ '}<P>cache</P>: <S>'no-store'</S>{' }'}
+      {'\n        '}: <P>init</P>,
+      {'\n    '})
+      {'\n    '}<K>if</K> (<P>res</P>.<P>ok</P>) {'{'}
+      {'\n      '}<K>const</K> <P>data</P> = <F>normalize</F>(
+      {'\n        '}<K>await</K> <P>res</P>.<F>json</F>(),
+      {'\n      '})
+      {'\n      '}<F>setModrinthCache</F>(<P>url</P>, <P>data</P>)
+      {'\n      '}<K>return</K> <P>data</P>
+      {'\n    '}{'}'}
+      {'\n  '}{'}'}
+      {'\n  '}<K>return</K> <F>getModrinthCacheStale</F>(<P>url</P>)
       {'\n'}{'}'}
     </pre>
   )
