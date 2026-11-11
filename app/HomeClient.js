@@ -1,5 +1,6 @@
 'use client'
 import Link from 'next/link'
+import PeelPanel from './components/PeelPanel'
 import { useEffect, useMemo, useState } from 'react'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
 import { useCountUp } from './hooks/useCountUp'
@@ -188,9 +189,6 @@ export default function HomeClient({ platformStats, categoryTotals }) {
             <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
               {t('home.discover', { n: thousands(projectsShown, locale) })}
             </h2>
-            <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full text-base font-bold mb-4 glass-edge minecraft-players-badge" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
-              <span>{t('home.forPlayers')}</span>
-            </div>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto">
               {t('home.discoverLead')}
             </p>
@@ -237,6 +235,121 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 </div>
               </div>
             </div>
+          </div>
+
+        <div className="relative overflow-hidden">
+          
+          <div className="relative p-8 md:p-12">
+         
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
+                <span className="bg-linear-to-r from-white via-modrinth-green to-blue-400 bg-clip-text text-transparent">
+                  {t('home.startAdventure')}
+                </span>
+              </h2>
+              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                {t('home.startLead')} <span className="text-modrinth-green font-semibold">{t('home.startLeadEm')}</span>
+              </p>
+            </div>
+
+            <PeelPanel>
+            <div className="grid md:grid-cols-2 gap-12">
+              <Link href="/mods" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle title={t('home.catMods')} count={categoryTotals?.mod} tone="modrinth-green" />
+                  <p className="text-sm text-gray-400">{t('home.catModsDesc')}</p>
+                </div>
+              </Link>
+
+              <Link href="/plugins" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle title={t('home.catPlugins')} count={categoryTotals?.plugin} tone="blue" />
+                  <p className="text-sm text-gray-400">{t('home.catPluginsDesc')}</p>
+                </div>
+              </Link>
+
+              <Link href="/shaders" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle title={t('home.catShaders')} count={categoryTotals?.shader} tone="cyan" />
+                  <p className="text-sm text-gray-400">{t('home.catShadersDesc')}</p>
+                </div>
+              </Link>
+
+              <Link href="/resourcepacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle
+                    title={t('home.catRp')}
+                    count={categoryTotals?.resourcepack}
+                    tone="purple"
+                  />
+                  <p className="text-sm text-gray-400">{t('home.catRpDesc')}</p>
+                </div>
+              </Link>
+
+              <Link href="/datapacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle title={t('home.catDp')} count={categoryTotals?.datapack} tone="orange" />
+                  <p className="text-sm text-gray-400">{t('home.catDpDesc')}</p>
+                </div>
+              </Link>
+
+              <Link href="/modpacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
+                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
+                  <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                  </svg>
+                </div>
+                <div>
+                  <CategoryTitle title={t('home.catMp')} count={categoryTotals?.modpack} tone="red" />
+                  <p className="text-sm text-gray-400">{t('home.catMpDesc')}</p>
+                </div>
+              </Link>
+            </div>
+            </PeelPanel>
+
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-500">
+                {t('home.filesChecked')}
+              </p>
+            </div>
+            </div>
+          </div>
+
+          <div className="text-center mb-16 pt-8">
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-6">
+              {t('home.playersTitle')}
+            </h2>
+            <div className="inline-flex items-center px-4 py-2 rounded-full text-sm font-semibold mb-4 glass-edge minecraft-players-badge" style={{backgroundOrigin: 'border-box', backgroundClip: 'border-box'}}>
+              {t('home.forPlayers')}
+            </div>
+            <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+              {t('home.playersLead')}
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -348,6 +461,14 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                     </svg>
                   </div>
                   <span className="text-gray-300">{t('home.autoFilter')}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 bg-modrinth-green rounded-full flex items-center justify-center shrink-0">
+                    <svg className="w-4 h-4 text-black" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
+                  </div>
+                  <span className="text-gray-300">{t('home.allContentTypes')}</span>
                 </div>
               </div>
             </div>
@@ -461,107 +582,6 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                   <div className="text-white font-medium text-sm">Sponge</div>
                 </Link>
               </div>
-            </div>
-          </div>
-
-        <div className="relative overflow-hidden animate-fade-in-up animation-delay-2400">
-          
-          <div className="relative p-8 md:p-12">
-         
-            <div className="text-center mb-12">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-4 leading-tight">
-                <span className="bg-linear-to-r from-white via-modrinth-green to-blue-400 bg-clip-text text-transparent">
-                  {t('home.startAdventure')}
-                </span>
-              </h2>
-              <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                {t('home.startLead')} <span className="text-modrinth-green font-semibold">{t('home.startLeadEm')}</span>
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-12">
-              <Link href="/mods" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M13 3L4 14h7v7l9-11h-7V3z"/>
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle title={t('home.catMods')} count={categoryTotals?.mod} tone="modrinth-green" />
-                  <p className="text-sm text-gray-400">{t('home.catModsDesc')}</p>
-                </div>
-              </Link>
-
-              <Link href="/plugins" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle title={t('home.catPlugins')} count={categoryTotals?.plugin} tone="blue" />
-                  <p className="text-sm text-gray-400">{t('home.catPluginsDesc')}</p>
-                </div>
-              </Link>
-
-              <Link href="/shaders" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle title={t('home.catShaders')} count={categoryTotals?.shader} tone="cyan" />
-                  <p className="text-sm text-gray-400">{t('home.catShadersDesc')}</p>
-                </div>
-              </Link>
-
-              <Link href="/resourcepacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle
-                    title={t('home.catRp')}
-                    count={categoryTotals?.resourcepack}
-                    tone="purple"
-                  />
-                  <p className="text-sm text-gray-400">{t('home.catRpDesc')}</p>
-                </div>
-              </Link>
-
-              <Link href="/datapacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle title={t('home.catDp')} count={categoryTotals?.datapack} tone="orange" />
-                  <p className="text-sm text-gray-400">{t('home.catDpDesc')}</p>
-                </div>
-              </Link>
-
-              <Link href="/modpacks" className="relative card-glass bg-modrinth-dark rounded-2xl p-6 pt-12">
-                <div className="absolute -top-8 left-6 w-16 h-16 bg-modrinth-darkest rounded-2xl flex items-center justify-center z-10" style={{boxShadow: '2px 2px 12px rgba(0,0,0,0.16), inset 2px 2px 32px var(--shadow-color)'}}>
-                  <svg className="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                  </svg>
-                </div>
-                <div>
-                  <CategoryTitle title={t('home.catMp')} count={categoryTotals?.modpack} tone="red" />
-                  <p className="text-sm text-gray-400">{t('home.catMpDesc')}</p>
-                </div>
-              </Link>
-            </div>
-
-            <div className="mt-8 text-center">
-              <p className="text-sm text-gray-500">
-                {t('home.filesChecked')}
-              </p>
-            </div>
             </div>
           </div>
         </div>

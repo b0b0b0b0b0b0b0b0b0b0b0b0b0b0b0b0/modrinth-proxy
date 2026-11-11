@@ -5864,3 +5864,232 @@
     }
   }
 }
+
+@property --peel {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 0px;
+}
+
+.peel-panel {
+  --peel: 0px;
+  container-type: inline-size;
+  background: rgb(255 255 255 / 0.025);
+  box-shadow: inset 0 0 0 1px var(--border-color);
+  transition: --peel 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+html:not(.dark) .peel-panel {
+  background: rgb(0 0 0 / 0.025);
+}
+
+.peel-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.peel-under {
+  z-index: 20;
+  clip-path: polygon(100% calc(100% - var(--peel)), 100% 100%, calc(100% - var(--peel)) 100%);
+  background-color: rgb(var(--color-green-rgb));
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.18) 1px, transparent 1px),
+    linear-gradient(135deg, rgb(0 0 0 / 0) 70%, rgb(0 0 0 / 0.28));
+  background-size: 24px 24px, 24px 24px, 100% 100%;
+  background-position: right bottom;
+}
+
+.peel-flap-clip {
+  z-index: 21;
+  filter: drop-shadow(-4px -5px 8px rgb(0 0 0 / 0.22));
+}
+
+.peel-flap {
+  position: absolute;
+  inset: 0;
+  transform-origin: 100% 100%;
+  clip-path: polygon(100% calc(100% - var(--peel)), 100% 100%, calc(100% - var(--peel)) 100%);
+  background-image: linear-gradient(
+    -45deg,
+    var(--bg-tertiary) calc(var(--peel) * 0.2),
+    var(--bg-secondary) calc(var(--peel) * 0.52),
+    var(--bg-hover) calc(var(--peel) * 0.67),
+    var(--border-color) calc(var(--peel) * 0.7071)
+  );
+  transform: translate(calc(var(--peel) * -1), calc(var(--peel) * -1)) matrix(0, -1, -1, 0, 0, 0);
+}
+
+.peel-hot {
+  display: none;
+}
+
+.peel-scene {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  width: 170px;
+  height: 132px;
+  opacity: 0;
+  transform: translate(12px, 12px) scale(0.96);
+  transform-origin: 100% 100%;
+  transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.peel-route {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.peel-route path {
+  fill: none;
+  stroke: rgb(255 255 255 / 0.55);
+  stroke-width: 1.5;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.peel-packet,
+.peel-ping {
+  position: absolute;
+  top: 0;
+  left: 0;
+  offset-path: path('M130 32 C130 72 22 60 22 100');
+  offset-rotate: auto 45deg;
+}
+
+.peel-packet {
+  width: 7px;
+  height: 7px;
+  border-radius: 1.5px;
+  background: #fff;
+  box-shadow: 0 0 6px rgb(255 255 255 / 0.8);
+  animation: peel-travel 1.8s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+.peel-packet:nth-of-type(2) {
+  animation-delay: -0.6s;
+}
+
+.peel-packet:nth-of-type(3) {
+  animation-delay: -1.2s;
+}
+
+.peel-ping {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.7);
+  animation: peel-travel 1.8s linear infinite reverse;
+}
+
+@keyframes peel-travel {
+  0% {
+    offset-distance: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    offset-distance: 100%;
+    opacity: 0;
+  }
+}
+
+.peel-source,
+.peel-home {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border-radius: 9px;
+  background: rgba(var(--bg-primary-rgb), 0.92);
+  color: var(--text-primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.peel-source {
+  top: 6px;
+  right: 0;
+  padding: 6px 9px;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  color: var(--text-secondary);
+}
+
+.peel-home {
+  left: 0;
+  bottom: 0;
+  padding: 5px 10px 5px 6px;
+  border: 1px solid rgb(var(--color-green-rgb));
+  font-weight: 600;
+  animation: peel-arrive 0.6s ease-out infinite;
+}
+
+.peel-home-logo {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(var(--color-green-rgb));
+  -webkit-mask: url('/icon.png?v=2') no-repeat center / contain;
+  mask: url('/icon.png?v=2') no-repeat center / contain;
+  animation: peel-logo-beat 0.6s ease-out infinite;
+}
+
+@keyframes peel-arrive {
+  0% {
+    box-shadow: 0 0 0 0 rgb(255 255 255 / 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 7px rgb(255 255 255 / 0);
+  }
+}
+
+@keyframes peel-logo-beat {
+  0% {
+    transform: scale(1.18);
+  }
+  40%,
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .peel-panel {
+    --peel: 34px;
+  }
+
+  .peel-hot {
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 22;
+    width: max(96px, calc(var(--peel) + 32px));
+    height: max(96px, calc(var(--peel) + 32px));
+    border-bottom-right-radius: inherit;
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  .peel-panel:has(.peel-hot:hover) {
+    --peel: min(260px, 38cqw);
+  }
+
+  @container (min-width: 680px) {
+    .peel-panel:has(.peel-hot:hover) .peel-scene {
+      opacity: 1;
+      transform: none;
+      transition-delay: 0.2s;
+    }
+  }
+}
