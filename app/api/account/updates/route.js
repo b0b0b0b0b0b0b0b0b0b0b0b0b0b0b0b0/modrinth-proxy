@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { FESTIVE_OFF_COOKIE, ensureSsoCookie, getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
+import { CALM_COOKIE, FESTIVE_OFF_COOKIE, ensureSsoCookie, getSessionUser, isSameOrigin, setCalmCookie, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 
@@ -13,6 +13,9 @@ export async function GET() {
   }
   if (Boolean(user.hide_festive) !== ((await cookies()).get(FESTIVE_OFF_COOKIE)?.value === '1')) {
     await setFestiveCookie(!user.hide_festive)
+  }
+  if ((user.kitten_calm ? 'on' : 'off') !== (await cookies()).get(CALM_COOKIE)?.value) {
+    await setCalmCookie(Boolean(user.kitten_calm))
   }
   await ensureSsoCookie()
   const updates = await getUpdates(user.id)

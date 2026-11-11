@@ -5,6 +5,7 @@ import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { KittenFace, useKittenSeason } from './Kitten'
 import { soundsMuted } from './softSounds'
+import { calmMode } from './calmMode'
 import { useT } from './I18nProvider'
 
 const START_EVENT = 'kitten-oiia'
@@ -67,6 +68,7 @@ let track = null
 const rand = (min, max) => min + Math.random() * (max - min)
 
 export function startOiia() {
+  if (calmMode()) return
   window.dispatchEvent(new Event(START_EVENT))
 }
 

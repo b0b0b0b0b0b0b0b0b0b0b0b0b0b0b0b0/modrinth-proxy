@@ -510,12 +510,13 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
   )
 }
 
-export function ExtrasSettings({ newsBadge: initialNewsBadge, festive: initialFestive }) {
+export function ExtrasSettings({ newsBadge: initialNewsBadge, festive: initialFestive, calm: initialCalm }) {
   const t = useT()
   const { busy, error, save } = useAccountSave()
   const [newsBadge, setNewsBadge] = useState(initialNewsBadge)
   const [festive, setFestive] = useState(initialFestive)
   const [kittenSounds, setKittenSounds] = useState(true)
+  const [calm, setCalm] = useState(initialCalm)
   const [halloween, setHalloween] = useState(false)
   const [ghostTurbo, setGhostTurboState] = useState(false)
   const [newYear, setNewYear] = useState(false)
@@ -602,6 +603,21 @@ export function ExtrasSettings({ newsBadge: initialNewsBadge, festive: initialFe
             setSoundsMuted(kittenSounds)
             if (!kittenSounds) playChime()
           }}
+        />
+      </Setting>
+      <Setting title={t('set.calmMode')} hint={t('set.calmModeHint')}>
+        <Switch
+          checked={calm}
+          label={t('set.calmMode')}
+          disabled={Boolean(busy)}
+          onChange={() =>
+            save(
+              'calm',
+              { calm: !calm },
+              () => setCalm(!calm),
+              () => setCalm(calm),
+            )
+          }
         />
       </Setting>
       <Setting title={t('set.newsBadge')} hint={t('set.newsBadgeHint')}>

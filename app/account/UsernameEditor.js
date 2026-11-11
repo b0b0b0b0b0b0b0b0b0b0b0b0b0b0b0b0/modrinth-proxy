@@ -72,8 +72,11 @@ export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
 
   if (!editing) {
     return (
-      <div className="flex min-w-0 items-center gap-2">
-        <Heading className="truncate text-2xl font-bold text-white">{t('account.hello', { name: username })}</Heading>
+      <div className="flex min-w-0 items-center gap-2 max-[412px]:justify-center">
+        <Heading className="truncate text-2xl font-bold text-white">
+          <span className="max-[412px]:hidden">{t('account.hello', { name: username })}</span>
+          <span className="hidden max-[412px]:inline">{username}</span>
+        </Heading>
         <StyledTooltip label={t('account.editUsername')}>
           <button type="button" onClick={open} aria-label={t('account.editUsername')} className={ICON_BUTTON}>
             <Icon path="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
@@ -85,7 +88,7 @@ export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
 
   return (
     <form onSubmit={save} className="min-w-0">
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 max-[412px]:justify-center">
         <input
           type="text"
           value={value}

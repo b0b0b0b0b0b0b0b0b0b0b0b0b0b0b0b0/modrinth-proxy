@@ -7,6 +7,7 @@ import { useT } from './I18nProvider'
 import StyledTooltip from './StyledTooltip'
 import { playMew } from './softSounds'
 import { OIIA_TAPS, onOiiaChange, startOiia } from './OiiaParty'
+import { calmMode } from './calmMode'
 import { useKittenShy } from './kittenShy'
 
 const POSES = {
@@ -84,7 +85,7 @@ export default function PeekKitten() {
     const tally = taps.current
     tally.count = now - tally.last < TAP_GAP_MS ? tally.count + 1 : 1
     tally.last = now
-    if (tally.count >= OIIA_TAPS) {
+    if (tally.count >= OIIA_TAPS && !calmMode()) {
       tally.count = 0
       startOiia()
       return

@@ -22,7 +22,6 @@ import RelativeTime from '../components/RelativeTime'
 import { RemoveFavoriteButton } from './FavoriteActions'
 import FavoritesShare from './FavoritesShare'
 import AccountMobileMenu from './AccountMobileMenu'
-import LogoutButton from './LogoutButton'
 import NotifyMuteButton from './NotifyMuteButton'
 import UsernameEditor from './UsernameEditor'
 import MarkSeenButton, { UpdateDownloadLink } from './MarkSeenButton'
@@ -36,6 +35,7 @@ import {
 } from './CollectionActions'
 import TypeFilter from './TypeFilter'
 import { HeaderKitten, SleepyKitten } from './AccountKitten'
+import StyledTooltip from '../components/StyledTooltip'
 import { AvatarImage } from './MinecraftAvatarPicker'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { AccountFestiveScore } from '@/lib/festiveScore'
@@ -337,23 +337,22 @@ function AccountHome({ user, scores, festive, t, locale }) {
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-4">
-        <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-2xl bg-(--bg-primary)">
-          {avatar ? <AvatarImage src={avatar} className="h-16 w-16" /> : <HeaderKitten />}
-        </div>
-        <div className="min-w-0 flex-1">
-          <UsernameEditor username={user.username} />
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">{t('account.since', { date: since })}</p>
-          {user.mc_name ? <p className="mt-0.5 text-sm font-semibold text-gray-300">{user.mc_name}</p> : null}
-        </div>
-        <div className="flex shrink-0 items-center gap-2">
+      <div className="flex items-center gap-4 max-[412px]:flex-col max-[412px]:gap-3 max-[412px]:text-center">
+        <StyledTooltip label={t('account.editAvatar')}>
           <Link
             href="/settings/profile"
-            className="rounded-lg border border-gray-800 px-3 py-1.5 text-sm font-semibold text-gray-400 transition-colors hover:border-modrinth-green/50 hover:text-white"
+            aria-label={t('account.editAvatar')}
+            className="group flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-(--bg-primary)"
           >
-            {t('nav.settings')}
+            <span className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-110">
+              {avatar ? <AvatarImage src={avatar} className="h-16 w-16" /> : <HeaderKitten />}
+            </span>
           </Link>
-          <LogoutButton />
+        </StyledTooltip>
+        <div className="w-full min-w-0 flex-1">
+          <UsernameEditor username={user.username} />
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">{t('account.since', { date: since })}</p>
+          {user.mc_name ? <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-500">{t('account.mcName', { name: user.mc_name })}</p> : null}
         </div>
       </div>
       <FestiveScoreCard initial={scores} festive={festive} />
@@ -439,12 +438,9 @@ export default async function AccountPage(props) {
         settings={{ label: t('nav.settings'), icon: TAB_ICONS.settings }}
       />
       {tab === 'home' ? null : (
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex min-w-0 items-center gap-3">
-            {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
-            <UsernameEditor username={user.username} />
-          </div>
-          <LogoutButton />
+        <div className="flex min-w-0 items-center gap-3">
+          {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
+          <UsernameEditor username={user.username} />
         </div>
       )}
 

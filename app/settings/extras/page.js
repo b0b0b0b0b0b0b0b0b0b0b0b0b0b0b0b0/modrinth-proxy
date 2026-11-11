@@ -10,5 +10,5 @@ export async function generateMetadata() {
 export default async function ExtrasSettingsPage() {
   const user = await requireUser('/settings/extras')
 
-  return <ExtrasSettings newsBadge={!user.hide_news_badge} festive={!user.hide_festive} />
+  return <ExtrasSettings newsBadge={!user.hide_news_badge} festive={!user.hide_festive} calm={Boolean(user.kitten_calm)} />
 }

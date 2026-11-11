@@ -1,4 +1,4 @@
-import { getSessionUser, isSameOrigin, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
+import { getSessionUser, isSameOrigin, setCalmCookie, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import {
   clearNotifyMutes,
   isGameLoader,
@@ -34,6 +34,7 @@ export async function POST(request) {
     recordHistory: body?.recordHistory,
     newsBadge: body?.newsBadge,
     festive: body?.festive,
+    calm: body?.calm,
     ownServer: body?.ownServer,
     quietNights: body?.quietNights,
   }
@@ -70,6 +71,7 @@ export async function POST(request) {
     else setAccountPreference(user.id, key, value)
     if (key === 'newsBadge') await setNewsBadgeCookie(value)
     if (key === 'festive') await setFestiveCookie(value)
+    if (key === 'calm') await setCalmCookie(value)
   }
   if (unmuteAll) clearNotifyMutes(user.id)
   return Response.json({ ok: true })
