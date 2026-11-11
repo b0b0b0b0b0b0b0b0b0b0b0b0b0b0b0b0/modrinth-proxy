@@ -111,6 +111,18 @@ const STATS_FALLBACK = {
   versions: 1100000,
 }
 
+function HomeLead({ text }) {
+  return text.split(/\[\[(.+?)\]\]/).map((part, i) =>
+    i % 2 ? (
+      <span key={i} className="font-semibold text-modrinth-green">
+        {part}
+      </span>
+    ) : (
+      part
+    ),
+  )
+}
+
 export default function HomeClient({ platformStats, categoryTotals }) {
   const t = useT()
   const { locale } = useI18n()
@@ -184,7 +196,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           </div>
           
             <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-200 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 animate-fade-in-up animation-delay-600 px-2 sm:px-4 drop-shadow-md font-light leading-relaxed">
-              {t('home.lead')}
+              <HomeLead text={t('home.lead')} />
             </p>
           </div>
         </div>
