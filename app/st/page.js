@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { getSessionUser } from '@/lib/auth'
 import { isAdmin } from '@/lib/admins'
 import { getSiteStats } from '@/lib/siteStats'
-import { getDownloadStats } from '@/lib/downloadCounter'
+import { getAppDownloadStats, getDownloadStats } from '@/lib/downloadCounter'
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
 import { intlLocale } from '@/lib/i18n/config'
@@ -41,6 +41,21 @@ function Card({ title, children, className = '' }) {
       {title ? <h2 className="mb-4 text-xs font-bold uppercase tracking-wide text-gray-600 dark:text-gray-500">{title}</h2> : null}
       {children}
     </section>
+  )
+}
+
+function MiniTiles({ tiles }) {
+  return (
+    <div className="mb-5 grid grid-cols-3 gap-3">
+      {tiles.map((tile) => (
+        <div key={tile.label} className="rounded-xl bg-gray-800/40 px-3 py-3">
+          <div className="text-2xl font-extrabold tabular-nums text-white">
+            <CountUp value={tile.value} />
+          </div>
+          <div className="mt-1 text-xs leading-snug text-gray-600 dark:text-gray-500">{tile.label}</div>
+        </div>
+      ))}
+    </div>
   )
 }
 
@@ -106,6 +121,32 @@ export default async function StatsPage() {
     { value: downloads.month, label: t('st.dlMonth') },
     { value: downloads.today, label: t('st.dlToday') },
   ]
+  const app = getAppDownloadStats()
+  const appSince = app.since
+    ? new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }).format(new Date(app.since))
+    : null
+  const appTiles = [
+    { value: app.total, label: t('st.dlTotal') },
+    { value: app.month, label: t('st.dlMonth') },
+    { value: app.today, label: t('st.dlToday') },
+  ]
+  const appLabels = {
+    modrinth: 'Modrinth App',
+    astral: 'AstralRinth',
+    windows: 'Windows',
+    macos: 'macOS',
+    linux: 'Linux',
+    exe: 'EXE',
+    msi: 'MSI',
+    dmg: 'DMG',
+    flathub: 'Flathub',
+    appimage: 'AppImage',
+    deb: 'DEB',
+    rpm: 'RPM',
+    hero: t('st.appHero'),
+    card: t('st.appCard'),
+    files: t('st.appFiles'),
+  }
   const tiles = [
     { value: stats.active, label: t('st.active') },
     { value: stats.github, label: t('st.github') },
@@ -153,22 +194,27 @@ export default async function StatsPage() {
       </Card>
 
       <Card title={t('st.dlTitle')}>
-        <div className="mb-5 grid grid-cols-3 gap-3">
-          {downloadTiles.map((tile) => (
-            <div key={tile.label} className="rounded-xl bg-gray-800/40 px-3 py-3">
-              <div className="text-2xl font-extrabold tabular-nums text-white">
-                <CountUp value={tile.value} />
-              </div>
-              <div className="mt-1 text-xs leading-snug text-gray-600 dark:text-gray-500">{tile.label}</div>
-            </div>
-          ))}
-        </div>
+        <MiniTiles tiles={downloadTiles} />
         <DaysChart days={downloads.days} label={t('st.dlTitle')} />
         <div className="mt-5">
           <TypeSplit title={t('st.dlByType')} rows={downloads.types} labels={downloadTypeLabels} />
         </div>
         <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
           {since ? t('st.dlNote', { date: since }) : t('st.dlEmpty')}
+        </p>
+      </Card>
+
+      <Card title={t('st.appTitle')}>
+        <MiniTiles tiles={appTiles} />
+        <DaysChart days={app.days} label={t('st.appTitle')} />
+        <div className="mt-5 space-y-5">
+          <TypeSplit title={t('st.appEdition')} rows={app.editions} labels={appLabels} />
+          <TypeSplit title={t('st.appOs')} rows={app.platforms} labels={appLabels} />
+          <TypeSplit title={t('st.appFormat')} rows={app.formats} labels={appLabels} />
+          <TypeSplit title={t('st.appPlace')} rows={app.places} labels={appLabels} />
+        </div>
+        <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
+          {appSince ? t('st.appNote', { date: appSince }) : t('st.appEmpty')}
         </p>
       </Card>
 

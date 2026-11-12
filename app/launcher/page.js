@@ -2,6 +2,7 @@ import DownloadButtons from './DownloadButtons'
 import LauncherVersions from './LauncherVersions'
 import LauncherLastUpdate from './LauncherLastUpdate'
 import DetectedOS from './DetectedOS'
+import AppDownloadTracker from './AppDownloadTracker'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
 import { getAstralRinthData } from '@/lib/astralrinth'
@@ -24,6 +25,7 @@ export default async function AppPage() {
 
   return (
     <div className="min-h-screen">
+      <AppDownloadTracker />
       <div className="relative">
         <div className="landing-hero relative mt-4 mb-16">
           <div className="max-w-7xl mx-auto">

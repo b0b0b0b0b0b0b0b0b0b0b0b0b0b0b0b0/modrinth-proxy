@@ -43,7 +43,7 @@ export function FlathubIcon({ className = 'h-5 w-5' }) {
 const DOWNLOAD_BUTTON_CLASS =
   'download-glass flex h-12 w-full items-center justify-center gap-2.5 rounded-2xl bg-modrinth-green font-bold text-black outline-hidden transition-transform duration-150 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-modrinth-green focus-visible:ring-offset-2 focus-visible:ring-offset-(--bg-primary)'
 
-function OsCard({ id, icon, title, subtitle, detected, url, buttonText, buttonIcon, extra, wide = false, first = false, note, children }) {
+function OsCard({ id, icon, title, subtitle, detected, url, track, buttonText, buttonIcon, extra, wide = false, first = false, note, children }) {
   return (
     <div
       className={`card-glass bg-modrinth-dark flex flex-col rounded-3xl p-6 transition-shadow duration-300 ${
@@ -63,6 +63,7 @@ function OsCard({ id, icon, title, subtitle, detected, url, buttonText, buttonIc
 
       <a
         href={url}
+        data-app-dl={track}
         target="_blank"
         rel="noopener noreferrer"
         className={`${DOWNLOAD_BUTTON_CLASS} ${wide ? 'lg:col-start-3 lg:row-start-1' : 'mt-6'}`}
@@ -118,6 +119,7 @@ function AstralFilesMenu({ files, version, platform }) {
               <a
                 key={file.url}
                 href={file.url}
+                data-app-dl={`astral:${platform}:${file.kind}:files`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-3 rounded-xl px-2 py-2 text-sm outline-hidden transition-colors hover:bg-white/5 focus-visible:bg-white/5"
@@ -215,6 +217,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
   const format = isAstral && linuxFormat === 'flathub' ? 'appimage' : linuxFormat
   const formatLabel = LINUX_FORMATS.find((f) => f.id === format)?.label
   const isFlathub = format === 'flathub'
+  const editionId = isAstral ? 'astral' : 'modrinth'
   const skull = <PirateIcon className="h-5 w-5 translate-y-[-1.5px]" />
 
   const filesMenu = (platform) =>
@@ -259,6 +262,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
           subtitle={t('app.winInstaller')}
           detected={os === 'Windows'}
           url={isAstral ? astralUrls.windows : launcherData.downloads.windows}
+          track={`${editionId}:windows:exe:card`}
           buttonText={t('app.dlWin')}
           buttonIcon={isAstral ? skull : null}
           extra={filesMenu('windows')}
@@ -271,6 +275,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
           subtitle={t('app.macDmg')}
           detected={os === 'macOS'}
           url={isAstral ? astralUrls.macos : launcherData.downloads.macos}
+          track={`${editionId}:macos:dmg:card`}
           buttonText={t('app.dlMac')}
           buttonIcon={isAstral ? skull : null}
           extra={filesMenu('macos')}
@@ -283,6 +288,7 @@ export const DownloadSection = ({ launcherData, astralData }) => {
           subtitle={formats.map((f) => f.label).join(' · ')}
           detected={os === 'Linux'}
           url={isAstral ? astralUrls[format] : isFlathub ? FLATHUB_URL : launcherData.downloads.linux[format]}
+          track={`${editionId}:linux:${format}:card`}
           buttonText={isFlathub ? t('app.dlFlathub') : t('project.downloadNamed', { title: formatLabel })}
           buttonIcon={isAstral ? skull : isFlathub ? <FlathubIcon /> : null}
           extra={filesMenu('linux')}

@@ -1,5 +1,5 @@
 import { isSameOrigin } from '@/lib/auth'
-import { countDownload } from '@/lib/downloadCounter'
+import { countAppDownload, countDownload } from '@/lib/downloadCounter'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
 const RATE_LIMIT = { limit: 60, windowMs: 60_000 }
@@ -21,6 +21,7 @@ export async function POST(request) {
     return new Response(null, { status: 400 })
   }
 
-  countDownload(body?.url, ip)
+  if (body?.app) countAppDownload(body.app, ip)
+  else countDownload(body?.url, ip)
   return new Response(null, { status: 204 })
 }

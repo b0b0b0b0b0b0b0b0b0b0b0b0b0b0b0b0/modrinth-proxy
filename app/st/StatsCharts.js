@@ -12,6 +12,21 @@ const TYPE_COLORS = {
   datapack: 'bg-amber-500',
   modpack: 'bg-red-500',
   minecraft_java_server: 'bg-teal-500',
+  modrinth: 'bg-modrinth-green',
+  astral: 'bg-violet-500',
+  windows: 'bg-sky-500',
+  macos: 'bg-gray-300',
+  linux: 'bg-amber-500',
+  exe: 'bg-sky-500',
+  msi: 'bg-blue-500',
+  dmg: 'bg-gray-300',
+  flathub: 'bg-modrinth-green',
+  appimage: 'bg-amber-500',
+  deb: 'bg-red-500',
+  rpm: 'bg-rose-400',
+  hero: 'bg-modrinth-green',
+  card: 'bg-sky-500',
+  files: 'bg-violet-500',
 }
 
 export function DaysChart({ days, label }) {

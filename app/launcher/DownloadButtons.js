@@ -42,6 +42,7 @@ export default function DownloadButtons({ launcherData }) {
     Windows: {
       url: launcherData.downloads.windows,
       direct: true,
+      track: 'modrinth:windows:exe:hero',
       label: t('app.dlWin'),
       icon: (
         <svg className="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4875 4875" fill="currentColor" aria-hidden>
@@ -52,6 +53,7 @@ export default function DownloadButtons({ launcherData }) {
     macOS: {
       url: launcherData.downloads.macos,
       direct: true,
+      track: 'modrinth:macos:dmg:hero',
       label: t('app.dlMac'),
       icon: (
         <svg className="w-6 h-6 -translate-y-px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -63,6 +65,7 @@ export default function DownloadButtons({ launcherData }) {
     Linux: {
       url: FLATHUB_URL,
       direct: false,
+      track: 'modrinth:linux:flathub:hero',
       label: t('app.dlFlathub'),
       icon: <FlathubIcon className="w-6 h-6" />,
     },
@@ -73,6 +76,7 @@ export default function DownloadButtons({ launcherData }) {
     <>
     <div className="button-group flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
       <button
+        data-app-dl={target.track}
         onClick={() => (target.direct ? handleDownload(target.url) : window.open(target.url, '_blank', 'noopener,noreferrer'))}
         className="iconified-button brand-button btn btn-large download-glass bg-modrinth-green text-black font-bold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 flex items-center gap-3 text-lg cursor-pointer"
       >
