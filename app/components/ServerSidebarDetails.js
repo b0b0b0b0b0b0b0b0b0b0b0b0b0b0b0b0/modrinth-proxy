@@ -21,7 +21,7 @@ function mapRegion(t, region) {
   return serverRegionLabel(t, aliased, reg?.name || region.toUpperCase())
 }
 
-function ServerAddressCopy({ address, tooltip, variant = 'prominent', ourIpLabel, copiedLabel }) {
+function ServerAddressCopy({ address, serverId, tooltip, variant = 'prominent', ourIpLabel, copiedLabel }) {
   const [copied, setCopied] = useState(false)
   const subtle = variant === 'subtle'
 
@@ -44,6 +44,7 @@ function ServerAddressCopy({ address, tooltip, variant = 'prominent', ourIpLabel
     <StyledTooltip label={copied ? copiedLabel : tooltip}>
       <button
         type="button"
+        data-server-click={serverId ? `${serverId}:copy` : undefined}
         onClick={handleCopy}
         className="group flex w-full min-w-0 items-center gap-2 py-0.5 text-left outline-hidden"
       >
@@ -139,7 +140,8 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
             {javaAddress && (
               <div className="mb-3 pb-3 border-b border-gray-800/70">
                 <ServerAddressCopy 
-                  address={javaAddress} 
+                  address={javaAddress}
+                  serverId={server.id}
                   tooltip={javaAddress === bedrockAddress ? t('server.copyServer') : t('server.copyJava')}
                   ourIpLabel={t('server.ourIp')}
                   copiedLabel={t('copy.copied')}
@@ -241,6 +243,7 @@ export default function ServerSidebarDetails({ server, requiredContentVersion = 
           </h3>
           <ServerAddressCopy
             address={bedrockAddress}
+            serverId={server.id}
             variant="subtle"
             tooltip={t('server.copyBedrock')}
             copiedLabel={t('copy.copied')}

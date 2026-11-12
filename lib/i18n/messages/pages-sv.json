@@ -797,6 +797,12 @@
     "appFiles": "AstralRinths filmeny",
     "appNote": "Räknas sedan {date}: varje klick på en nedladdningsknapp på /app, med eller utan konto. Inga IP-adresser, cookies eller konton — bara siffror per dag. Ett nytt klick på samma fil inom 10 minuter räknas inte. Det är klick, inte installationer.",
     "appEmpty": "Räkningen börjar vid första klicket på ”Ladda ner” på /app.",
+    "srvTitle": "Servrar — ”Spela” och IP-kopior",
+    "srvPlay": "klickade ”Spela”",
+    "srvCopy": "kopierade IP",
+    "srvTop": "Populärast på 20 dagar",
+    "srvNote": "Räknas sedan {date}: klick på ”Spela” och kopierade adresser på serversidor, med eller utan konto. Inga IP-adresser, cookies eller konton — bara siffror per dag. Samma handling på samma server inom 10 minuter räknas inte igen.",
+    "srvEmpty": "Räkningen börjar vid första klicket på ”Spela” eller första IP-kopian på en serversida.",
     "topFavorites": "Flest favoriter",
     "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna."
   },

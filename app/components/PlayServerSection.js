@@ -81,6 +81,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
       <StyledTooltip label={t('server.playTip')}>
         <button
           type="button"
+          data-server-click={`${resource.id}:play`}
           onClick={handlePlay}
           className="modrinth-button-font download-glass w-fit px-5! h-10 bg-modrinth-green hover:bg-modrinth-green-light text-black rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all duration-300 active:scale-[0.98] shadow-lg shadow-modrinth-green/10 text-base whitespace-nowrap"
         >
@@ -101,6 +102,7 @@ export default function PlayServerSection({ resource, playersOnline, region, add
           <StyledTooltip label={copied ? t('copy.copied') : t('server.copyAddress')}>
             <button
               type="button"
+              data-server-click={`${resource.id}:copy`}
               onClick={handleCopy}
               className="group flex w-full min-w-0 items-center justify-center gap-2 py-1 text-center outline-hidden"
             >

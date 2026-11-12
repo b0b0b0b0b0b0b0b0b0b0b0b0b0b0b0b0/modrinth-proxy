@@ -797,6 +797,12 @@
     "appFiles": "menu tệp của AstralRinth",
     "appNote": "Đếm từ {date}: mỗi lần bấm nút tải xuống trên /app, có hoặc không có tài khoản. Không lưu IP, cookie hay tài khoản — chỉ số lượng theo ngày. Bấm lại cùng một tệp trong 10 phút không được tính. Đây là lượt bấm, không phải lượt cài đặt.",
     "appEmpty": "Việc đếm sẽ bắt đầu từ lần bấm “Tải xuống” đầu tiên trên /app.",
+    "srvTitle": "Máy chủ — “Chơi” và sao chép IP",
+    "srvPlay": "đã bấm “Chơi”",
+    "srvCopy": "đã sao chép IP",
+    "srvTop": "Phổ biến nhất trong 20 ngày",
+    "srvNote": "Đếm từ {date}: lượt bấm “Chơi” và sao chép địa chỉ trên trang máy chủ, có hoặc không có tài khoản. Không lưu IP, cookie hay tài khoản — chỉ số lượng theo ngày. Lặp lại cùng thao tác trên cùng máy chủ trong 10 phút không được tính.",
+    "srvEmpty": "Việc đếm sẽ bắt đầu từ lần bấm “Chơi” hoặc sao chép IP đầu tiên trên trang máy chủ.",
     "topFavorites": "Được yêu thích nhiều nhất",
     "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất."
   },

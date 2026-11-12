@@ -797,6 +797,12 @@
     "appFiles": "AstralRinth failu izvēlne",
     "appNote": "Skaitām kopš {date}: katrs klikšķis uz lejupielādes pogas /app, ar kontu vai bez. Bez IP, sīkdatnēm un kontiem — tikai skaitļi pa dienām. Atkārtots klikšķis uz to pašu failu 10 minūšu laikā netiek skaitīts. Tie ir klikšķi, nevis instalācijas.",
     "appEmpty": "Skaitīšana sāksies ar pirmo klikšķi uz “Lejupielādēt” /app lapā.",
+    "srvTitle": "Serveri — “Spēlēt” un IP kopēšana",
+    "srvPlay": "nospieda “Spēlēt”",
+    "srvCopy": "nokopēja IP",
+    "srvTop": "Populārākie 20 dienās",
+    "srvNote": "Skaitām kopš {date}: “Spēlēt” klikšķi un adreses kopēšana serveru lapās, ar kontu vai bez. Bez IP, sīkdatnēm un kontiem — tikai skaitļi pa dienām. Tā pati darbība tajā pašā serverī 10 minūšu laikā netiek skaitīta atkārtoti.",
+    "srvEmpty": "Skaitīšana sāksies ar pirmo “Spēlēt” klikšķi vai IP kopēšanu servera lapā.",
     "topFavorites": "Visbiežāk izlasē",
     "note": "Tikai kopskaiti — bez vārdiem un kāda sarakstiem. Lejupielādes par pēdējām 30 dienām."
   },

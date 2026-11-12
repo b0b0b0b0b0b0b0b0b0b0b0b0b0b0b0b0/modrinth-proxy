@@ -797,6 +797,12 @@
     "appFiles": "AstralRinth-Dateimenü",
     "appNote": "Gezählt seit {date}: jeder Klick auf einen Download-Button auf /app, mit oder ohne Konto. Keine IPs, Cookies oder Konten — nur Zahlen pro Tag. Ein erneuter Klick auf dieselbe Datei innerhalb von 10 Minuten zählt nicht. Das sind Klicks, keine Installationen.",
     "appEmpty": "Die Zählung beginnt mit dem ersten Klick auf „Herunterladen“ auf /app.",
+    "srvTitle": "Server — „Spielen“ und IP-Kopien",
+    "srvPlay": "„Spielen“ geklickt",
+    "srvCopy": "IP kopiert",
+    "srvTop": "Am beliebtesten in 20 Tagen",
+    "srvNote": "Gezählt seit {date}: Klicks auf „Spielen“ und kopierte Adressen auf Serverseiten, mit oder ohne Konto. Keine IPs, Cookies oder Konten — nur Zahlen pro Tag. Dieselbe Aktion auf demselben Server innerhalb von 10 Minuten zählt nicht erneut.",
+    "srvEmpty": "Die Zählung beginnt mit dem ersten Klick auf „Spielen“ oder der ersten kopierten IP auf einer Serverseite.",
     "topFavorites": "Am häufigsten favorisiert",
     "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage."
   },

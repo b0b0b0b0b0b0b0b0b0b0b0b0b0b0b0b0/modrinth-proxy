@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { getSessionUser } from '@/lib/auth'
 import { isAdmin } from '@/lib/admins'
 import { getSiteStats } from '@/lib/siteStats'
-import { getAppDownloadStats, getDownloadStats } from '@/lib/downloadCounter'
+import { getAppDownloadStats, getDownloadStats, getServerClickStats } from '@/lib/downloadCounter'
 import { getRequestT } from '@/lib/i18n/server'
 import { pluralize } from '@/lib/i18n/pluralize'
 import { intlLocale } from '@/lib/i18n/config'
@@ -56,6 +56,24 @@ function MiniTiles({ tiles }) {
         </div>
       ))}
     </div>
+  )
+}
+
+function TopRow({ index, href, icon, title, children }) {
+  const avatar = filterAvatar(icon)
+  return (
+    <li>
+      <Link href={href} className="group flex items-center gap-3 rounded-lg px-1 py-1 transition-colors hover:bg-white/5">
+        <span className="w-4 text-right text-xs font-bold tabular-nums text-gray-600 dark:text-gray-500">{index + 1}</span>
+        {avatar ? (
+          <Image src={avatar} alt="" width={28} height={28} className="h-7 w-7 shrink-0 rounded-md" unoptimized />
+        ) : (
+          <span className="h-7 w-7 shrink-0 rounded-md bg-gray-800" />
+        )}
+        <span className="min-w-0 flex-1 truncate text-sm font-semibold text-white group-hover:text-modrinth-green">{title}</span>
+        <span className="inline-flex shrink-0 items-center gap-3 text-xs font-bold tabular-nums text-gray-400">{children}</span>
+      </Link>
+    </li>
   )
 }
 
@@ -113,18 +131,23 @@ export default async function StatsPage() {
   const label = pluralize(stats.users, locale, t('st.userOne'), t('st.userFew'), t('st.userMany'))
   const typeLabels = Object.fromEntries(Object.entries(TYPE_LABEL_KEYS).map(([type, key]) => [type, t(key)]))
   const downloadTypeLabels = { ...typeLabels, unknown: t('st.dlUnknown') }
-  const since = downloads.since
-    ? new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }).format(new Date(downloads.since))
-    : null
+  const sinceFormat = new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' })
+  const formatSince = (ms) => (ms ? sinceFormat.format(new Date(ms)) : null)
+  const since = formatSince(downloads.since)
   const downloadTiles = [
     { value: downloads.total, label: t('st.dlTotal') },
     { value: downloads.month, label: t('st.dlMonth') },
     { value: downloads.today, label: t('st.dlToday') },
   ]
   const app = getAppDownloadStats()
-  const appSince = app.since
-    ? new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' }).format(new Date(app.since))
-    : null
+  const appSince = formatSince(app.since)
+  const servers = getServerClickStats()
+  const serversSince = formatSince(servers.since)
+  const serverTiles = [
+    { value: servers.play, label: t('st.srvPlay') },
+    { value: servers.copy, label: t('st.srvCopy') },
+    { value: servers.today, label: t('st.dlToday') },
+  ]
   const appTiles = [
     { value: app.total, label: t('st.dlTotal') },
     { value: app.month, label: t('st.dlMonth') },
@@ -218,6 +241,44 @@ export default async function StatsPage() {
         </p>
       </Card>
 
+      <Card title={t('st.srvTitle')}>
+        <MiniTiles tiles={serverTiles} />
+        <DaysChart days={servers.days} label={t('st.srvTitle')} />
+        {servers.top.length > 0 ? (
+          <div className="mt-5">
+            <div className="mb-2 text-xs font-semibold text-gray-400">{t('st.srvTop')}</div>
+            <ol className="space-y-2">
+              {servers.top.map((row, index) => (
+                <TopRow
+                  key={row.id}
+                  index={index}
+                  href={`/server/${row.slug || row.id}`}
+                  icon={row.icon_url}
+                  title={row.title || row.id}
+                >
+                  <span className="inline-flex items-center gap-1" title={t('st.srvPlay')}>
+                    <svg className="h-3 w-3 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path d="m5 3 14 9-14 9z" />
+                    </svg>
+                    {row.play}
+                  </span>
+                  <span className="inline-flex items-center gap-1" title={t('st.srvCopy')}>
+                    <svg className="h-3 w-3 text-sky-400" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24" aria-hidden>
+                      <rect width="8" height="4" x="8" y="2" rx="1" ry="1" />
+                      <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
+                    </svg>
+                    {row.copy}
+                  </span>
+                </TopRow>
+              ))}
+            </ol>
+          </div>
+        ) : null}
+        <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
+          {serversSince ? t('st.srvNote', { date: serversSince }) : t('st.srvEmpty')}
+        </p>
+      </Card>
+
       <Card title={t('st.mrTitle')}>
         <ModrinthTrafficChart initial={getModrinthTrafficReport()} />
       </Card>
@@ -233,31 +294,22 @@ export default async function StatsPage() {
         {stats.topFavorites.length > 0 ? (
           <Card title={t('st.topFavorites')}>
             <ol className="space-y-2">
-              {stats.topFavorites.map((row, index) => {
-                const icon = filterAvatar(row.icon_url)
-                const href = row.type === 'minecraft_java_server' ? `/server/${row.slug}` : `/project/${row.slug}`
-                return (
-                  <li key={row.slug}>
-                    <Link href={href} className="group flex items-center gap-3 rounded-lg px-1 py-1 transition-colors hover:bg-white/5">
-                      <span className="w-4 text-right text-xs font-bold tabular-nums text-gray-600 dark:text-gray-500">{index + 1}</span>
-                      {icon ? (
-                        <Image src={icon} alt="" width={28} height={28} className="h-7 w-7 shrink-0 rounded-md" unoptimized />
-                      ) : (
-                        <span className="h-7 w-7 shrink-0 rounded-md bg-gray-800" />
-                      )}
-                      <span className="min-w-0 flex-1 truncate text-sm font-semibold text-white group-hover:text-modrinth-green">
-                        {row.title}
-                      </span>
-                      <span className="inline-flex shrink-0 items-center gap-1 text-xs font-bold tabular-nums text-gray-400">
-                        <svg className="h-3 w-3 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
-                          <path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z" />
-                        </svg>
-                        {row.n}
-                      </span>
-                    </Link>
-                  </li>
-                )
-              })}
+              {stats.topFavorites.map((row, index) => (
+                <TopRow
+                  key={row.slug}
+                  index={index}
+                  href={row.type === 'minecraft_java_server' ? `/server/${row.slug}` : `/project/${row.slug}`}
+                  icon={row.icon_url}
+                  title={row.title}
+                >
+                  <span className="inline-flex items-center gap-1">
+                    <svg className="h-3 w-3 text-modrinth-green" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                      <path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z" />
+                    </svg>
+                    {row.n}
+                  </span>
+                </TopRow>
+              ))}
             </ol>
           </Card>
         ) : null}

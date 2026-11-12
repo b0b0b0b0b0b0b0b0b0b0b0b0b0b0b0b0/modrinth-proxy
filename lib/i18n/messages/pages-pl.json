@@ -797,6 +797,12 @@
     "appFiles": "menu plików AstralRinth",
     "appNote": "Liczymy od {date}: każde kliknięcie przycisku pobierania na /app, z kontem i bez. Bez IP, ciasteczek i kont — tylko liczby dziennie. Ponowne kliknięcie tego samego pliku w ciągu 10 minut nie jest liczone. To kliknięcia, nie instalacje.",
     "appEmpty": "Liczenie zacznie się od pierwszego kliknięcia „Pobierz” na /app.",
+    "srvTitle": "Serwery — „Graj” i kopiowanie IP",
+    "srvPlay": "kliknęli „Graj”",
+    "srvCopy": "skopiowali IP",
+    "srvTop": "Najpopularniejsze w 20 dni",
+    "srvNote": "Liczymy od {date}: kliknięcia „Graj” i kopiowanie adresu na stronach serwerów, z kontem i bez. Bez IP, ciasteczek i kont — tylko liczby dziennie. Ta sama akcja na tym samym serwerze w ciągu 10 minut nie jest liczona ponownie.",
+    "srvEmpty": "Liczenie zacznie się od pierwszego kliknięcia „Graj” lub skopiowania IP na stronie serwera.",
     "topFavorites": "Najczęściej w ulubionych",
     "note": "Tylko sumy — bez nicków i czyichkolwiek list. Pobrania z ostatnich 30 dni."
   },

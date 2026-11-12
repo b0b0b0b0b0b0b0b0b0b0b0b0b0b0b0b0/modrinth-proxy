@@ -797,6 +797,12 @@
     "appFiles": "menu de arquivos do AstralRinth",
     "appNote": "Contando desde {date}: cada clique num botão de download em /app, com ou sem conta. Sem IP, cookies ou contas — só números por dia. Um clique repetido no mesmo arquivo em 10 minutos não conta. São cliques, não instalações.",
     "appEmpty": "A contagem começa no primeiro clique em “Baixar” em /app.",
+    "srvTitle": "Servidores — “Jogar” e cópias de IP",
+    "srvPlay": "clicaram em “Jogar”",
+    "srvCopy": "copiaram o IP",
+    "srvTop": "Mais populares em 20 dias",
+    "srvNote": "Contando desde {date}: cliques em “Jogar” e cópias do endereço nas páginas de servidores, com ou sem conta. Sem IP, cookies ou contas — só números por dia. Repetir a mesma ação no mesmo servidor em 10 minutos não conta.",
+    "srvEmpty": "A contagem começa no primeiro clique em “Jogar” ou cópia de IP numa página de servidor.",
     "topFavorites": "Mais favoritados",
     "note": "Só totais — sem nomes nem listas de ninguém. Downloads dos últimos 30 dias."
   },

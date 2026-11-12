@@ -11,6 +11,7 @@ import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { isAdmin } from '@/lib/admins'
 import { SITE_ORIGIN } from '@/lib/site'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
+import ClickCounter from "./components/ClickCounter"
 import GameProfileSync from './components/GameProfileSync'
 import FestiveScoreSync from './components/FestiveScoreSync'
 import Footer from './components/Footer'
@@ -219,6 +220,7 @@ export default async function RootLayout({ children }) {
           <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
           <VersionsPreloader />
           <DownloadHistoryTracker />
+          <ClickCounter />
           <GameProfileSync />
           <FestiveScoreSync />
           <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser), admin: isAdmin(sessionUser) } : null} />
