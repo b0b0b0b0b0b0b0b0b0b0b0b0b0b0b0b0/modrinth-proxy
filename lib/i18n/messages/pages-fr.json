@@ -781,7 +781,7 @@
     "inDownloads": "Téléchargements de l’historique des comptes",
     "dlTitle": "Téléchargements depuis le site — tous les visiteurs",
     "dlTotal": "téléchargements au total",
-    "dlMonth": "sur 30 jours",
+    "dlMonth": "sur 20 jours",
     "dlToday": "aujourd’hui",
     "dlByType": "Ce qui est téléchargé",
     "dlUnknown": "pas encore connu",
