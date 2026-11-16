@@ -672,7 +672,6 @@
     "pixelNobody": "Jeszcze nikt",
     "pixelRarityTip": "Ma je {p}% graczy",
     "pixelRarest": "Twoje najrzadsze osiągnięcie to „{title}”: ma je tylko {p}% graczy.",
-    "pixelRarityNote": "Graczy, którzy głaskali Pixela: {count}. Procenty aktualizują się co 10 minut.",
     "pixelBadgeTitle": "Odznaka przy nicku",
     "pixelBadgeAuto": "Najnowsza",
     "pixelBadgePlain": "Klasyczna",

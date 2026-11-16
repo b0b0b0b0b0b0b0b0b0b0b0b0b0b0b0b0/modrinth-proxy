@@ -672,7 +672,6 @@
     "pixelNobody": "Ще ні в кого",
     "pixelRarityTip": "Є в {p}% гравців",
     "pixelRarest": "Твоя найрідкісніша ачівка — «{title}»: вона є лише в {p}% гравців.",
-    "pixelRarityNote": "Гравців, що гладили Пікселя: {count}. Відсотки оновлюються раз на 10 хвилин.",
     "pixelBadgeTitle": "Значок біля ніку",
     "pixelBadgeAuto": "Найновіший",
     "pixelBadgePlain": "Звичайний",

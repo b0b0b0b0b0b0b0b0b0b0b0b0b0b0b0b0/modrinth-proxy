@@ -690,7 +690,6 @@
     "pixelNobody": "Nobody yet",
     "pixelRarityTip": "{p}% of players have it",
     "pixelRarest": "Your rarest achievement is “{title}”: only {p}% of players have it.",
-    "pixelRarityNote": "Players who have petted Pixel: {count}. Percentages update every 10 minutes.",
     "pixelBadgeTitle": "Badge next to your name",
     "pixelBadgeAuto": "Newest",
     "pixelBadgePlain": "Classic",

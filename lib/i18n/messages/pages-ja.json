@@ -672,7 +672,6 @@
     "pixelNobody": "まだだれも",
     "pixelRarityTip": "プレイヤーの{p}%が持っているよ",
     "pixelRarest": "きみのいちばんレアな実績は「{title}」。持っているのはプレイヤーの{p}%だけ！",
-    "pixelRarityNote": "ピクセルをなでたプレイヤー：{count}人。パーセントは10分ごとに更新されるよ。",
     "pixelBadgeTitle": "名前のとなりのバッジ",
     "pixelBadgeAuto": "いちばん新しい",
     "pixelBadgePlain": "ふつう",

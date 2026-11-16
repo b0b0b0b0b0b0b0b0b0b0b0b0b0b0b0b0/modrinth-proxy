@@ -672,7 +672,6 @@
     "pixelNobody": "Ancora nessuno",
     "pixelRarityTip": "Ce l’ha il {p}% dei giocatori",
     "pixelRarest": "Il tuo trofeo più raro è «{title}»: ce l’ha solo il {p}% dei giocatori.",
-    "pixelRarityNote": "Giocatori che hanno accarezzato Pixel: {count}. Le percentuali si aggiornano ogni 10 minuti.",
     "pixelBadgeTitle": "Badge accanto al nome",
     "pixelBadgeAuto": "Il più nuovo",
     "pixelBadgePlain": "Classico",

@@ -672,7 +672,6 @@
     "pixelNobody": "Chưa ai có",
     "pixelRarityTip": "{p}% người chơi có",
     "pixelRarest": "Thành tích hiếm nhất của bạn là «{title}»: chỉ {p}% người chơi có.",
-    "pixelRarityNote": "Số người chơi đã vuốt ve Pixel: {count}. Tỷ lệ được cập nhật mỗi 10 phút.",
     "pixelBadgeTitle": "Huy hiệu cạnh tên",
     "pixelBadgeAuto": "Mới nhất",
     "pixelBadgePlain": "Cổ điển",

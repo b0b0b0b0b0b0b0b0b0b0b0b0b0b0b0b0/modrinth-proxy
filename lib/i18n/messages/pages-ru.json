@@ -690,7 +690,6 @@
     "pixelNobody": "Ещё ни у кого",
     "pixelRarityTip": "Есть у {p}% игроков",
     "pixelRarest": "Твоя самая редкая ачивка — «{title}»: она есть только у {p}% игроков.",
-    "pixelRarityNote": "Игроков, гладивших Пикселя: {count}. Проценты обновляются раз в 10 минут.",
     "pixelBadgeTitle": "Значок у ника",
     "pixelBadgeAuto": "Новейший",
     "pixelBadgePlain": "Обычный",

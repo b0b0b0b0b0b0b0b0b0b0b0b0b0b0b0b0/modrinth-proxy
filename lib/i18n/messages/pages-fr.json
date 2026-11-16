@@ -672,7 +672,6 @@
     "pixelNobody": "Personne encore",
     "pixelRarityTip": "{p} % des joueurs l’ont",
     "pixelRarest": "Ton succès le plus rare est « {title} » : seuls {p} % des joueurs l’ont.",
-    "pixelRarityNote": "Joueurs ayant caressé Pixel : {count}. Les pourcentages se mettent à jour toutes les 10 minutes.",
     "pixelBadgeTitle": "Badge à côté du pseudo",
     "pixelBadgeAuto": "Le plus récent",
     "pixelBadgePlain": "Classique",

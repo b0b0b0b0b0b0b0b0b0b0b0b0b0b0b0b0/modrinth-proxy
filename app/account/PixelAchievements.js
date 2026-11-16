@@ -123,11 +123,10 @@ const TIERS = {
 const TIER_LABELS = { rare: 'account.pixelRare', legendary: 'account.pixelLegendary', none: 'account.pixelNobody' }
 
 function rarityOf(rarity, n) {
-  if (!rarity?.players) return null
-  const owners = rarity.owners[n - 1] || 0
-  const share = (owners / rarity.players) * 100
-  const tier = owners === 0 ? 'none' : share < 1 ? 'legendary' : share < 10 ? 'rare' : 'common'
-  return { owners, share, tier }
+  if (!Array.isArray(rarity) || !rarity.length) return null
+  const share = rarity[n - 1] || 0
+  const tier = share === 0 ? 'none' : share < 1 ? 'legendary' : share < 10 ? 'rare' : 'common'
+  return { owners: share > 0, share, tier }
 }
 
 function RarityMeter({ rare, t, percent }) {
@@ -304,10 +303,6 @@ export default function PixelAchievements({ pets, grumpy, chapter, rarity, usern
           />
         ))}
       </ul>
-      <p className="mt-4 text-xs text-gray-500">{t('account.pixelHowTo')}</p>
-      {rarity?.players ? (
-        <p className="mt-1 text-xs text-gray-500">{t('account.pixelRarityNote', { count: format(rarity.players) })}</p>
-      ) : null}
     </>
   )
 }

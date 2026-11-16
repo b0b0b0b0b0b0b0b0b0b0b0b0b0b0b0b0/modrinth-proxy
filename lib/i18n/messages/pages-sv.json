@@ -672,7 +672,6 @@
     "pixelNobody": "Ingen än",
     "pixelRarityTip": "{p} % av spelarna har den",
     "pixelRarest": "Din mest sällsynta prestation är ”{title}”: bara {p} % av spelarna har den.",
-    "pixelRarityNote": "Spelare som har klappat Pixel: {count}. Procenten uppdateras var tionde minut.",
     "pixelBadgeTitle": "Märke vid namnet",
     "pixelBadgeAuto": "Nyaste",
     "pixelBadgePlain": "Klassisk",

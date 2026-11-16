@@ -41,7 +41,7 @@ import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { AccountFestiveScore } from '@/lib/festiveScore'
 import FestiveScoreCard from './FestiveScoreCard'
 import PixelAchievements, { PixelAchievementsCard } from './PixelAchievements'
-import { isGrumpyKitten, pixelBadgeOf, readKittenPets, readKittenRarity } from '@/lib/kittenPets'
+import { isGrumpyKitten, pixelBadgeOf, readKittenPets, readKittenRarityShares } from '@/lib/kittenPets'
 import { kittenLevel } from '@/lib/kittenLevels'
 
 export const dynamic = 'force-dynamic'
@@ -535,7 +535,7 @@ export default async function AccountPage(props) {
             pets={pixel.pets}
             grumpy={pixel.grumpy}
             chapter={searchParams?.type || ''}
-            rarity={readKittenRarity(user.id, pixel.pets)}
+            rarity={readKittenRarityShares(user.id, pixel.pets)}
             username={user.username}
             badgeChoice={user.pixel_badge ?? null}
           />

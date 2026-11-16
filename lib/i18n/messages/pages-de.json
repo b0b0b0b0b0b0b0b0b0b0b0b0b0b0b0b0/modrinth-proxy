@@ -672,7 +672,6 @@
     "pixelNobody": "Noch niemand",
     "pixelRarityTip": "{p} % der Spieler haben ihn",
     "pixelRarest": "Dein seltenster Erfolg ist „{title}“: Nur {p} % der Spieler haben ihn.",
-    "pixelRarityNote": "Spieler, die Pixel gestreichelt haben: {count}. Die Prozente werden alle 10 Minuten aktualisiert.",
     "pixelBadgeTitle": "Abzeichen am Namen",
     "pixelBadgeAuto": "Neuestes",
     "pixelBadgePlain": "Klassisch",

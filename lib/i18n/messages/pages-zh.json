@@ -672,7 +672,6 @@
     "pixelNobody": "还没有人",
     "pixelRarityTip": "{p}% 的玩家拥有",
     "pixelRarest": "你最稀有的成就是“{title}”：只有 {p}% 的玩家拥有。",
-    "pixelRarityNote": "摸过像素的玩家：{count} 位。百分比每 10 分钟更新一次。",
     "pixelBadgeTitle": "昵称旁的徽章",
     "pixelBadgeAuto": "最新",
     "pixelBadgePlain": "经典",
