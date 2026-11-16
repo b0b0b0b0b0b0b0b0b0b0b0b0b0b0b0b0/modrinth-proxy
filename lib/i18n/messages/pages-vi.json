@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Ẩn",
     "pixelBadgeHint": "Một chú Pixel tí hon đứng cạnh tên bạn. Chọn bất kỳ trang phục đã mở khóa, hoặc «Mới nhất» để Pixel tự thay khi bạn mở khóa bộ mới.",
     "pixelBadgeLocked": "Vuốt ve Pixel ít nhất một lần, huy hiệu sẽ xuất hiện cạnh tên bạn.",
-    "pixelInspectTip": "Nhấp chuột phải vào trang phục để xem gần hơn."
+    "pixelInspectTip": "Nhấp chuột phải vào trang phục để xem gần hơn.",
+    "pixelInspectTipTouch": "Nhấn giữ trang phục để xem gần hơn."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",

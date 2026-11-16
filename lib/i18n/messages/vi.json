@@ -1055,6 +1055,8 @@
     "inspectFrom": "Thành tích #{n} — «{title}»",
     "inspectTitle": "Pixel",
     "inspectLevel": "Cấp độ yêu thương {n}",
-    "inspectTip": "Nhấp chuột phải để xem gần hơn"
+    "inspectTip": "Nhấp chuột phải để xem gần hơn",
+    "inspectHintTouch": "Vuốt ngón tay trên Pixel để xoay cậu ấy",
+    "inspectTipTouch": "Nhấn giữ Pixel để xem gần hơn"
   }
 }

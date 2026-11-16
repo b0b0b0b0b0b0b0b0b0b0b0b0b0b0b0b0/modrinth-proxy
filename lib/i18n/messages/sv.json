@@ -1055,6 +1055,8 @@
     "inspectFrom": "Prestation #{n} – ”{title}”",
     "inspectTitle": "Pixel",
     "inspectLevel": "Kärleksnivå {n}",
-    "inspectTip": "Högerklicka för att se närmare"
+    "inspectTip": "Högerklicka för att se närmare",
+    "inspectHintTouch": "Dra fingret över Pixel för att vrida på honom",
+    "inspectTipTouch": "Håll in Pixel för att se honom närmare"
   }
 }

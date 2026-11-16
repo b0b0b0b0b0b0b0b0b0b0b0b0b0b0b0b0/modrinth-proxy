@@ -1055,6 +1055,8 @@
     "inspectFrom": "Erfolg #{n} – „{title}“",
     "inspectTitle": "Pixel",
     "inspectLevel": "Liebesstufe {n}",
-    "inspectTip": "Rechtsklick zum Ansehen aus der Nähe"
+    "inspectTip": "Rechtsklick zum Ansehen aus der Nähe",
+    "inspectHintTouch": "Wische mit dem Finger über Pixel, um ihn zu drehen",
+    "inspectTipTouch": "Halte Pixel gedrückt, um ihn aus der Nähe zu sehen"
   }
 }

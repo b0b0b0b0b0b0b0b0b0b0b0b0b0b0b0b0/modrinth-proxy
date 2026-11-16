@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Ausblenden",
     "pixelBadgeHint": "Ein kleiner Pixel steht neben deinem Namen. Wähle ein freigeschaltetes Outfit oder „Neuestes“, dann zieht er sich bei jedem neuen Outfit selbst um.",
     "pixelBadgeLocked": "Streichle Pixel mindestens einmal, dann erscheint ein Abzeichen neben deinem Namen.",
-    "pixelInspectTip": "Mit Rechtsklick kannst du ein Outfit genauer ansehen."
+    "pixelInspectTip": "Mit Rechtsklick kannst du ein Outfit genauer ansehen.",
+    "pixelInspectTipTouch": "Halte ein Outfit gedrückt, um es genauer anzusehen."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",

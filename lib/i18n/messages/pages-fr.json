@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Masquer",
     "pixelBadgeHint": "Un petit Pixel se tient à côté de ton pseudo. Choisis une tenue débloquée, ou « Le plus récent » pour qu’il se change tout seul à chaque nouvelle tenue.",
     "pixelBadgeLocked": "Caresse Pixel au moins une fois et un badge apparaîtra à côté de ton pseudo.",
-    "pixelInspectTip": "Clic droit sur une tenue pour la voir de plus près."
+    "pixelInspectTip": "Clic droit sur une tenue pour la voir de plus près.",
+    "pixelInspectTipTouch": "Appuie longuement sur une tenue pour la voir de plus près."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",

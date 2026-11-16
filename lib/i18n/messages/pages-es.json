@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Ocultar",
     "pixelBadgeHint": "Un Pixel pequeñito aparece junto a tu nombre. Elige cualquier atuendo desbloqueado, o «La más nueva» para que se cambie solo al desbloquear otro.",
     "pixelBadgeLocked": "Acaricia a Pixel al menos una vez y aparecerá una insignia junto a tu nombre.",
-    "pixelInspectTip": "Haz clic derecho en un atuendo para verlo de cerca."
+    "pixelInspectTip": "Haz clic derecho en un atuendo para verlo de cerca.",
+    "pixelInspectTipTouch": "Mantén pulsado un atuendo para verlo de cerca."
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",

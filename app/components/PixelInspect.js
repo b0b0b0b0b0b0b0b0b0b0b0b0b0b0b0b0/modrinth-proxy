@@ -4,6 +4,64 @@ import { createPortal } from 'react-dom';
 import { PixelFace } from './PixelOutfit';
 const MAX_TILT = 22;
 const CLOSE_PATH = 'M6 6l12 12M18 6 6 18';
+const PRESS_MS = 500;
+const PRESS_SLOP = 10;
+const PRESS_GUARD_MS = 800;
+export function useCoarsePointer() {
+    const [coarse, setCoarse] = useState(false);
+    useEffect(() => {
+        const query = window.matchMedia?.('(hover: none) and (pointer: coarse)');
+        if (!query)
+            return undefined;
+        const update = () => setCoarse(query.matches);
+        update();
+        query.addEventListener?.('change', update);
+        return () => query.removeEventListener?.('change', update);
+    }, []);
+    return coarse;
+}
+export function useInspectPress(onInspect) {
+    const timer = useRef(0);
+    const firedAt = useRef(0);
+    const origin = useRef(null);
+    const inspectRef = useRef(onInspect);
+    inspectRef.current = onInspect;
+    useEffect(() => () => clearTimeout(timer.current), []);
+    const open = () => {
+        if (!inspectRef.current || Date.now() - firedAt.current < PRESS_GUARD_MS)
+            return;
+        firedAt.current = Date.now();
+        inspectRef.current();
+    };
+    const cancel = () => clearTimeout(timer.current);
+    return {
+        onContextMenu: (event) => {
+            if (!inspectRef.current)
+                return;
+            event.preventDefault();
+            open();
+        },
+        onTouchStart: (event) => {
+            const touch = event.touches[0];
+            origin.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
+            clearTimeout(timer.current);
+            timer.current = setTimeout(open, PRESS_MS);
+        },
+        onTouchMove: (event) => {
+            const touch = event.touches[0];
+            if (touch && origin.current && Math.hypot(touch.clientX - origin.current.x, touch.clientY - origin.current.y) > PRESS_SLOP)
+                cancel();
+        },
+        onTouchEnd: cancel,
+        onTouchCancel: cancel,
+        onClickCapture: (event) => {
+            if (Date.now() - firedAt.current < PRESS_GUARD_MS) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        },
+    };
+}
 function prefersCalm() {
     return typeof window !== 'undefined' && Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches);
 }
@@ -15,6 +73,11 @@ export default function PixelInspect(props) {
     closeRef.current = onClose;
     const [pose, setPose] = useState({ x: 0, y: 0, gx: 50, gy: 30, active: false });
     const [shown, setShown] = useState(false);
+    const openedAt = useRef(Date.now());
+    const dismiss = () => {
+        if (Date.now() - openedAt.current > 600)
+            closeRef.current();
+    };
     useEffect(() => {
         const onKey = (event) => {
             if (event.key === 'Escape')
@@ -52,9 +115,9 @@ export default function PixelInspect(props) {
     const band = pose.gx * 0.4;
     if (typeof document === 'undefined')
         return null;
-    return createPortal(<div role="dialog" aria-modal="true" aria-label={title} className={`pixel-inspect${shown ? ' pixel-inspect--shown' : ''}`} onClick={() => closeRef.current()} onContextMenu={(event) => {
+    return createPortal(<div role="dialog" aria-modal="true" aria-label={title} className={`pixel-inspect${shown ? ' pixel-inspect--shown' : ''}`} onClick={dismiss} onContextMenu={(event) => {
             event.preventDefault();
-            closeRef.current();
+            dismiss();
         }}>
       <div className="pixel-inspect-stage" onClick={stop}>
         <div ref={cardRef} className="pixel-inspect-card" onPointerMove={follow} onPointerDown={follow} onPointerLeave={rest} style={{

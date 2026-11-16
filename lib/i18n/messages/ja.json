@@ -1055,6 +1055,8 @@
     "inspectFrom": "実績 #{n}「{title}」",
     "inspectTitle": "ピクセル",
     "inspectLevel": "なかよしレベル {n}",
-    "inspectTip": "右クリックで近くで見られるよ"
+    "inspectTip": "右クリックで近くで見られるよ",
+    "inspectHintTouch": "指でなぞってピクセルをくるっと回してね",
+    "inspectTipTouch": "ピクセルを長押しすると近くで見られるよ"
   }
 }

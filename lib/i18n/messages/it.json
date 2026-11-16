@@ -1055,6 +1055,8 @@
     "inspectFrom": "Trofeo #{n} — «{title}»",
     "inspectTitle": "Pixel",
     "inspectLevel": "Livello d’affetto {n}",
-    "inspectTip": "Clic destro per guardarlo da vicino"
+    "inspectTip": "Clic destro per guardarlo da vicino",
+    "inspectHintTouch": "Fai scorrere il dito su Pixel per farlo girare",
+    "inspectTipTouch": "Tieni premuto Pixel per guardarlo da vicino"
   }
 }

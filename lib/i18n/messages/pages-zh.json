@@ -679,7 +679,8 @@
     "pixelBadgeOff": "不显示",
     "pixelBadgeHint": "一只小小的像素会待在你的昵称旁边。挑一套已解锁的装扮，或选“最新”，解锁新装扮时它会自己换上。",
     "pixelBadgeLocked": "摸一下像素，昵称旁就会出现徽章。",
-    "pixelInspectTip": "右键点击装扮可以凑近看看。"
+    "pixelInspectTip": "右键点击装扮可以凑近看看。",
+    "pixelInspectTipTouch": "长按装扮可以凑近看看。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",

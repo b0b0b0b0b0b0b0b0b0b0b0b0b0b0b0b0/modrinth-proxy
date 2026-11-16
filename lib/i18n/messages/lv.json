@@ -1055,6 +1055,8 @@
     "inspectFrom": "Sasniegums #{n} — “{title}”",
     "inspectTitle": "Pikselis",
     "inspectLevel": "Mīlestības līmenis {n}",
-    "inspectTip": "Labā peles poga — apskatīt tuvāk"
+    "inspectTip": "Labā peles poga — apskatīt tuvāk",
+    "inspectHintTouch": "Velc ar pirkstu pa Pikseli, lai viņu pagrozītu",
+    "inspectTipTouch": "Turi Pikseli nospiestu, lai apskatītu tuvāk"
   }
 }

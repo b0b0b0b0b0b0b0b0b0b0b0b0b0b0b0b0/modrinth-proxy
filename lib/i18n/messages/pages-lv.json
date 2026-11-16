@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Nerādīt",
     "pixelBadgeHint": "Mazs Pikselis stāv blakus tavam vārdam. Izvēlies jebkuru atvērtu tērpu vai “Jaunākais”, un viņš pats pārģērbsies, kad atvērsi jaunu.",
     "pixelBadgeLocked": "Noglāsti Pikseli kaut reizi, un blakus tavam vārdam parādīsies nozīmīte.",
-    "pixelInspectTip": "Ar labo peles pogu tērpu var apskatīt tuvāk."
+    "pixelInspectTip": "Ar labo peles pogu tērpu var apskatīt tuvāk.",
+    "pixelInspectTipTouch": "Turi tērpu nospiestu, lai to apskatītu tuvāk."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",

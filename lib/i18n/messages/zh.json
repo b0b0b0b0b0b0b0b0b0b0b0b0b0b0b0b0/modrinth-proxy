@@ -1055,6 +1055,8 @@
     "inspectFrom": "成就 #{n}“{title}”",
     "inspectTitle": "像素",
     "inspectLevel": "亲密等级 {n}",
-    "inspectTip": "右键点击可以凑近看看"
+    "inspectTip": "右键点击可以凑近看看",
+    "inspectHintTouch": "用手指在像素上滑动来转动它",
+    "inspectTipTouch": "长按像素可以凑近看看"
   }
 }

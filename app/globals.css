@@ -6008,6 +6008,12 @@
     }
   }
 
+  .pixel-press {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   .pixel-inspect {
     position: fixed;
     inset: 0;

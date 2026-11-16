@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Nie pokazuj",
     "pixelBadgeHint": "Mały Pixel stoi obok twojego nicku. Wybierz dowolny odblokowany strój albo „Najnowsza”, a sam się przebierze, gdy odblokujesz nowy.",
     "pixelBadgeLocked": "Pogłaszcz Pixela chociaż raz, a obok twojego nicku pojawi się odznaka.",
-    "pixelInspectTip": "Kliknij strój prawym przyciskiem, żeby obejrzeć go z bliska."
+    "pixelInspectTip": "Kliknij strój prawym przyciskiem, żeby obejrzeć go z bliska.",
+    "pixelInspectTipTouch": "Przytrzymaj strój, żeby obejrzeć go z bliska."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",

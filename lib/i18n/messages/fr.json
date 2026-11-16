@@ -1055,6 +1055,8 @@
     "inspectFrom": "Succès n° {n} — « {title} »",
     "inspectTitle": "Pixel",
     "inspectLevel": "Niveau d’amour {n}",
-    "inspectTip": "Clic droit pour le voir de plus près"
+    "inspectTip": "Clic droit pour le voir de plus près",
+    "inspectHintTouch": "Glisse ton doigt sur Pixel pour le faire tourner",
+    "inspectTipTouch": "Appuie longuement sur Pixel pour le voir de plus près"
   }
 }

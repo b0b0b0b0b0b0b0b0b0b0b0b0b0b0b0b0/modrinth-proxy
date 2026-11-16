@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Nascondi",
     "pixelBadgeHint": "Un piccolo Pixel sta accanto al tuo nome. Scegli un vestito sbloccato, oppure «Il più nuovo» e si cambierà da solo a ogni nuovo vestito.",
     "pixelBadgeLocked": "Accarezza Pixel almeno una volta e accanto al tuo nome comparirà un badge.",
-    "pixelInspectTip": "Clic destro su un vestito per guardarlo da vicino."
+    "pixelInspectTip": "Clic destro su un vestito per guardarlo da vicino.",
+    "pixelInspectTipTouch": "Tieni premuto un vestito per guardarlo da vicino."
   },
   "cookie": {
     "text": "Anche il nostro sito usa i cookie, perché senza non funziona niente.",

@@ -679,7 +679,8 @@
     "pixelBadgeOff": "Ocultar",
     "pixelBadgeHint": "Um Pixel pequenininho fica ao lado do seu nome. Escolha qualquer roupinha desbloqueada, ou «Mais novo» para ele trocar sozinho a cada roupinha nova.",
     "pixelBadgeLocked": "Faça carinho no Pixel pelo menos uma vez e um selo vai aparecer ao lado do seu nome.",
-    "pixelInspectTip": "Clique com o botão direito numa roupinha para ver de perto."
+    "pixelInspectTip": "Clique com o botão direito numa roupinha para ver de perto.",
+    "pixelInspectTipTouch": "Toque e segure uma roupinha para ver de perto."
   },
   "cookie": {
     "text": "Nosso site também usa cookies, porque sem eles nada funciona.",

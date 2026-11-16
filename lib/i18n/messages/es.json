@@ -1055,6 +1055,8 @@
     "inspectFrom": "Logro #{n} — «{title}»",
     "inspectTitle": "Pixel",
     "inspectLevel": "Nivel de cariño {n}",
-    "inspectTip": "Clic derecho para verlo de cerca"
+    "inspectTip": "Clic derecho para verlo de cerca",
+    "inspectHintTouch": "Desliza el dedo sobre Pixel para girarlo",
+    "inspectTipTouch": "Mantén pulsado a Pixel para verlo de cerca"
   }
 }

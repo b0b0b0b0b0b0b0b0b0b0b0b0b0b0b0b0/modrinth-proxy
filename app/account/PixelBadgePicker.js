@@ -7,28 +7,22 @@ import { PixelFace } from '../components/PixelOutfit'
 import { PixelNameTag } from '../components/PixelBadge'
 import { KITTEN_WEAR, PIXEL_BADGE_STAGES, resolvePixelBadge } from '@/lib/kittenLevels'
 import { ACCOUNT_UPDATES_KEY } from '../components/AccountUpdatesDot'
-import PixelInspect from '../components/PixelInspect'
+import PixelInspect, { useCoarsePointer, useInspectPress } from '../components/PixelInspect'
 
 const STAGE_WEAR = new Map(Object.entries(KITTEN_WEAR).map(([id, level]) => [level, id]))
 const EYE_OFF =
   'M10.7 5.1A10 10 0 0 1 12 5c7 0 10 7 10 7a13 13 0 0 1-1.7 2.7M6.6 6.6A13.5 13.5 0 0 0 2 12s3 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20'
 
 function Option({ selected, disabled, onClick, onInspect, children, label }) {
+  const press = useInspectPress(onInspect)
   return (
     <button
       type="button"
       onClick={onClick}
-      onContextMenu={
-        onInspect
-          ? (event) => {
-              event.preventDefault()
-              onInspect()
-            }
-          : undefined
-      }
+      {...press}
       disabled={disabled}
       aria-pressed={selected}
-      className={`flex w-24 shrink-0 flex-col items-center gap-1.5 rounded-2xl border-2 bg-(--bg-primary) px-2 pb-2 pt-3 text-xs font-semibold transition-colors disabled:opacity-60 ${
+      className={`pixel-press flex w-24 shrink-0 flex-col items-center gap-1.5 rounded-2xl border-2 bg-(--bg-primary) px-2 pb-2 pt-3 text-xs font-semibold transition-colors disabled:opacity-60 ${
         selected ? 'border-modrinth-green text-modrinth-green' : 'border-transparent text-gray-400 hover:text-white'
       }`}
     >
@@ -44,6 +38,7 @@ export default function PixelBadgePicker({ username, level, choice: initial, pet
   const wearNames = useMessage('footer.kitten.wear') || {}
   const list = useMessage('footer.kitten.list')
   const [inspect, setInspect] = useState(null)
+  const coarse = useCoarsePointer()
   const [choice, setChoice] = useState(initial ?? null)
   const [busy, setBusy] = useState(false)
   const [failed, setFailed] = useState(false)
@@ -115,8 +110,8 @@ export default function PixelBadgePicker({ username, level, choice: initial, pet
       <p className={`m-0 mt-2 text-xs leading-relaxed ${failed ? 'text-amber-600 dark:text-amber-400' : 'text-gray-500'}`} role={failed ? 'alert' : undefined}>
         {failed ? t('account.errGeneric') : t('account.pixelBadgeHint')}
       </p>
-      <p className="m-0 mt-1 text-xs leading-relaxed text-gray-500">{t('account.pixelInspectTip')}</p>
-      {inspect ? <PixelInspect {...inspect} hint={t('pixel.inspectHint')} closeLabel={t('pixel.inspectClose')} onClose={() => setInspect(null)} /> : null}
+      <p className="m-0 mt-1 text-xs leading-relaxed text-gray-500">{t(coarse ? 'account.pixelInspectTipTouch' : 'account.pixelInspectTip')}</p>
+      {inspect ? <PixelInspect {...inspect} hint={t(coarse ? 'pixel.inspectHintTouch' : 'pixel.inspectHint')} closeLabel={t('pixel.inspectClose')} onClose={() => setInspect(null)} /> : null}
     </>
   )
 }

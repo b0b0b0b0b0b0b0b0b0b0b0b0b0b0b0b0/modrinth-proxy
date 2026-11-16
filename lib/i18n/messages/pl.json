@@ -1055,6 +1055,8 @@
     "inspectFrom": "Osiągnięcie #{n} — „{title}”",
     "inspectTitle": "Pixel",
     "inspectLevel": "Poziom miłości {n}",
-    "inspectTip": "Prawy przycisk — obejrzyj z bliska"
+    "inspectTip": "Prawy przycisk — obejrzyj z bliska",
+    "inspectHintTouch": "Przesuń palcem po Pixelu, żeby go obrócić",
+    "inspectTipTouch": "Przytrzymaj Pixela, żeby obejrzeć go z bliska"
   }
 }

@@ -1055,6 +1055,8 @@
     "inspectFrom": "Conquista #{n} — «{title}»",
     "inspectTitle": "Pixel",
     "inspectLevel": "Nível de carinho {n}",
-    "inspectTip": "Botão direito para ver de perto"
+    "inspectTip": "Botão direito para ver de perto",
+    "inspectHintTouch": "Deslize o dedo sobre o Pixel para girá-lo",
+    "inspectTipTouch": "Toque e segure o Pixel para ver de perto"
   }
 }
