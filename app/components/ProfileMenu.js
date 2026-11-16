@@ -252,7 +252,7 @@ export default function ProfileMenu({ account, linkClassName }) {
                   <Icon paths={ICONS.user} className="h-[18px] w-[18px] shrink-0 text-gray-300" />
                 )}
                 <span className="min-w-0">
-                  <PixelNameTag level={badge} size={16} tooltip={false} className="pt-1">
+                  <PixelNameTag level={badge} size={16} tooltip={false}>
                     <span className="truncate text-sm font-bold text-white">{username}</span>
                   </PixelNameTag>
                   <span className="block text-xs text-gray-600 dark:text-gray-500">{t('sn.dashboard')}</span>

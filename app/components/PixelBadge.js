@@ -24,7 +24,7 @@ export default function PixelBadge({ level, size = 20, tooltip = true, className
 
 export function PixelNameTag({ level, size = 20, tooltip = true, className = '', children }) {
   return (
-    <span className={`relative inline-flex min-w-0 max-w-full ${className}`} style={level ? { marginRight: Math.round(size * 0.3) } : undefined}>
+    <span className={`relative inline-flex min-w-0 max-w-full ${className}`} style={level ? { marginRight: Math.round(size * 0.45) } : undefined}>
       {children}
       {level ? (
         <PixelBadge
@@ -32,7 +32,7 @@ export function PixelNameTag({ level, size = 20, tooltip = true, className = '',
           size={size}
           tooltip={tooltip}
           className="absolute rotate-12"
-          style={{ top: -Math.round(size * 0.5), right: -Math.round(size * 0.4) }}
+          style={{ top: -Math.round(size * 0.4), right: -Math.round(size * 0.55) }}
         />
       ) : null}
     </span>
