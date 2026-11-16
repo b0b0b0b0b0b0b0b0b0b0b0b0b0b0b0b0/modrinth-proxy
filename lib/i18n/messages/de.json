@@ -186,6 +186,686 @@
         {
           "title": "Ewige Liebe",
           "text": "Pixel gehört für immer dir"
+        },
+        {
+          "title": "Neuntes Leben",
+          "text": "Pixel würde dir alle neun Leben schenken"
+        },
+        {
+          "title": "Sonniges Fensterbrett",
+          "text": "Pixel hat dir seinen wärmsten Platz überlassen"
+        },
+        {
+          "title": "Glöckchen",
+          "text": "Pixel trägt ein Glöckchen, damit du hörst, wie er zu dir läuft"
+        },
+        {
+          "title": "Fischfest",
+          "text": "Pixel hat seinen leckersten Fisch mit dir geteilt"
+        },
+        {
+          "title": "Schnurrlied",
+          "text": "Pixel hat ein Lied über dich gedichtet"
+        },
+        {
+          "title": "Katzenträume",
+          "text": "Pixel träumt jede Nacht von dir"
+        },
+        {
+          "title": "Kuscheldecke",
+          "text": "Pixel hat sich auf deinem Schoß eingerollt"
+        },
+        {
+          "title": "Festliche Schleife",
+          "text": "Pixel hat sich für dich eine Schleife ans Ohr gebunden"
+        },
+        {
+          "title": "Freudenflitzer",
+          "text": "Pixel flitzt vor Glück über die ganze Seite"
+        },
+        {
+          "title": "Vierzig Lächeln",
+          "text": "Pixel lächelt dich immer wieder an"
+        },
+        {
+          "title": "Geheimer Pfad",
+          "text": "Pixel hat dir den Weg zu seinem Häuschen gezeigt"
+        },
+        {
+          "title": "Sternschnuppen",
+          "text": "Um Pixel herum tanzen kleine Sterne"
+        },
+        {
+          "title": "Milchbart",
+          "text": "Pixel hat dir ein Schälchen Milch spendiert"
+        },
+        {
+          "title": "Katzenkuss",
+          "text": "Pixel blinzelt dir langsam zu: Auf Katzisch heißt das „Ich hab dich lieb“"
+        },
+        {
+          "title": "Schnurrender Leuchtturm",
+          "text": "Pixel leuchtet für dich, wo immer du bist"
+        },
+        {
+          "title": "Gutenachtgeschichte",
+          "text": "Pixel hat dir sein Lieblingsmärchen erzählt"
+        },
+        {
+          "title": "Pfote in Pfote",
+          "text": "Du und Pixel geht jetzt zusammen spazieren"
+        },
+        {
+          "title": "Flauschiger Komet",
+          "text": "Pixel fliegt schneller als ein Komet zu dir"
+        },
+        {
+          "title": "Etwas Glänzendes",
+          "text": "Pixel probiert schon etwas Goldenes an…"
+        },
+        {
+          "title": "Goldener Pixel",
+          "text": "Pixel strahlt golden: Du hast ihn mehr gestreichelt als alle anderen"
+        },
+        {
+          "title": "Waldpfad",
+          "text": "Pixel hat dich in einen Märchenwald eingeladen"
+        },
+        {
+          "title": "Zapfenfund",
+          "text": "Pixel hat dir den rundesten Tannenzapfen gefunden"
+        },
+        {
+          "title": "Igelbesuch",
+          "text": "Pixel hat dich einem Igel vorgestellt"
+        },
+        {
+          "title": "Erdbeerlichtung",
+          "text": "Pixel hat dich zu reifen Walderdbeeren geführt"
+        },
+        {
+          "title": "Moosbrücke",
+          "text": "Ihr seid über weiches Moos über den Bach gegangen"
+        },
+        {
+          "title": "Eulengeheimnis",
+          "text": "Eine Eule hat Pixel zugeflüstert, dass du lieb bist"
+        },
+        {
+          "title": "Eichhörnchenschatz",
+          "text": "Ein Eichhörnchen hat seine Nüsse mit euch geteilt"
+        },
+        {
+          "title": "Pilzregen",
+          "text": "Pixel hat dich unter einem Pilzhut versteckt"
+        },
+        {
+          "title": "Glühwürmchen",
+          "text": "Glühwürmchen leuchten euch den Weg"
+        },
+        {
+          "title": "Gänseblümchen am Ohr",
+          "text": "Pixel hat sein Ohr mit einem Gänseblümchen geschmückt"
+        },
+        {
+          "title": "Waldorchester",
+          "text": "Die Vögel singen und Pixel schnurrt im Takt"
+        },
+        {
+          "title": "Baumhöhlenhaus",
+          "text": "Pixel hat euch ein Zuhause in einer alten Baumhöhle eingerichtet"
+        },
+        {
+          "title": "Hasenfangen",
+          "text": "Pixel spielt mit einem Häschen Fangen"
+        },
+        {
+          "title": "Honigtropfen",
+          "text": "Ein Bärenjunges hat euch Honig geschenkt"
+        },
+        {
+          "title": "Kleekranz",
+          "text": "Pixel hat dir einen Kranz geflochten"
+        },
+        {
+          "title": "Fuchsfreundin",
+          "text": "Eine kleine rote Füchsin hat sich mit Pixel angefreundet"
+        },
+        {
+          "title": "Stiller See",
+          "text": "Pixel betrachtet sein Spiegelbild und schnurrt"
+        },
+        {
+          "title": "Seerose",
+          "text": "Ein Fröschchen hat euch auf einem Seerosenblatt gefahren"
+        },
+        {
+          "title": "Regenbogen überm Wald",
+          "text": "Nach dem Regen stand ein Regenbogen über dem Wald"
+        },
+        {
+          "title": "Märchenlichtung",
+          "text": "Alle Waldtiere sind gekommen, um dich zu sehen"
+        },
+        {
+          "title": "Alte Eiche",
+          "text": "Die Eiche hat Pixel ein uraltes Märchen erzählt"
+        },
+        {
+          "title": "Nacht im Wald",
+          "text": "Pixel hat dich mit einem großen Blatt zugedeckt"
+        },
+        {
+          "title": "Morgentau",
+          "text": "Pixel hat sich mit Tau gewaschen und strahlt"
+        },
+        {
+          "title": "Spitzenspinnennetz",
+          "text": "Ein Spinnchen hat euch ein Spitzentuch gewebt"
+        },
+        {
+          "title": "Waldrand",
+          "text": "Pixel hat dem Wald zum Abschied mit dem Schwanz gewinkt"
+        },
+        {
+          "title": "Pusteblumenflug",
+          "text": "Der Wind hat euch wie Flaum davongetragen"
+        },
+        {
+          "title": "Wolkentreppe",
+          "text": "Pixel spaziert über die Wolken"
+        },
+        {
+          "title": "Himmelsschloss",
+          "text": "Auf einer Wolke steht ein Schloss, und es gehört euch"
+        },
+        {
+          "title": "Frecher Wind",
+          "text": "Der Wind hat Pixels Fell zerzaust"
+        },
+        {
+          "title": "Gelehrtenbrille",
+          "text": "Pixel hat eine Brille aufgesetzt, um die Sterne anzuschauen"
+        },
+        {
+          "title": "Sternkarte",
+          "text": "Pixel hat eine Himmelskarte gemalt"
+        },
+        {
+          "title": "Sternbild Kater",
+          "text": "Ein Sternbild in Pixels Form leuchtet am Himmel"
+        },
+        {
+          "title": "Mondpfad",
+          "text": "Ihr spaziert im Mondlicht"
+        },
+        {
+          "title": "Käsemond",
+          "text": "Pixel ist sicher, dass der Mond aus Käse ist"
+        },
+        {
+          "title": "Sternschnuppe",
+          "text": "Pixel hat eine Sternschnuppe mit der Pfote gefangen"
+        },
+        {
+          "title": "Milchstraße",
+          "text": "Pixel schleckt Milch aus der Milchstraße"
+        },
+        {
+          "title": "Kometenschweif",
+          "text": "Der Komet wedelt mit dem Schweif wie Pixel"
+        },
+        {
+          "title": "Nordlicht",
+          "text": "Der Himmel schimmert für euch beide"
+        },
+        {
+          "title": "Sternenwiege",
+          "text": "Pixel ist auf der Mondsichel eingeschlafen wie in einer Hängematte"
+        },
+        {
+          "title": "Planet Schnurr",
+          "text": "Pixel hat einen Planeten entdeckt und ihn Schnurr genannt"
+        },
+        {
+          "title": "Kosmisches Wollknäuel",
+          "text": "Pixel rollt ein Planetenknäuel über den Himmel"
+        },
+        {
+          "title": "Ein eigener Mond",
+          "text": "Jetzt hat Pixel einen kleinen Mond"
+        },
+        {
+          "title": "Interstellares Schnurren",
+          "text": "Das Schnurren ist bis zu anderen Sternen geflogen"
+        },
+        {
+          "title": "Sternenpost",
+          "text": "Pixel hat dir einen Brief von einem Stern geschickt"
+        },
+        {
+          "title": "Meteorschauer",
+          "text": "Vom Himmel regnet es Funken"
+        },
+        {
+          "title": "Sonnenfleck",
+          "text": "Pixel jagt einem Sonnenfleck hinterher"
+        },
+        {
+          "title": "Regenbogenbrücke",
+          "text": "Ihr seid über den Regenbogen auf die andere Himmelsseite gegangen"
+        },
+        {
+          "title": "Wolkenkissen",
+          "text": "Pixel hat dir ein Wolkenkissen aufgeschüttelt"
+        },
+        {
+          "title": "Fast hundert",
+          "text": "Noch ein Erfolg, dann passiert Magie"
+        },
+        {
+          "title": "Feenflügel",
+          "text": "Pixel sind Zauberflügel gewachsen"
+        },
+        {
+          "title": "Meeresbrise",
+          "text": "Pixel hat zum ersten Mal das Meer gesehen"
+        },
+        {
+          "title": "Muschel",
+          "text": "Pixel hat dir eine Muschel mit Meeresrauschen geschenkt"
+        },
+        {
+          "title": "Sandburg",
+          "text": "Ihr habt eine Burg aus Sand gebaut"
+        },
+        {
+          "title": "Kapitän Kater",
+          "text": "Pixel trägt eine Kapitänsmütze, nur zum Spaß"
+        },
+        {
+          "title": "Papierschiffchen",
+          "text": "Euer Schiffchen ist in See gestochen"
+        },
+        {
+          "title": "Lieber Wal",
+          "text": "Ein Wal hat euch auf seinem Rücken getragen"
+        },
+        {
+          "title": "Delfinlächeln",
+          "text": "Ein Delfin hat Pixel angelächelt"
+        },
+        {
+          "title": "Seestern",
+          "text": "Pixel hat ein Sternchen direkt im Wasser gefunden"
+        },
+        {
+          "title": "Schatzinsel",
+          "text": "Der Schatz war eine gemütliche Kiste"
+        },
+        {
+          "title": "Flaschenpost",
+          "text": "Pixel hat dir eine Nachricht über die Wellen geschickt"
+        },
+        {
+          "title": "Leuchtturm auf der Klippe",
+          "text": "Der Leuchtturmwärter hat Pixel einen Fisch geschenkt"
+        },
+        {
+          "title": "Perle",
+          "text": "Pixel hat eine Perle gefunden und sie dir gegeben"
+        },
+        {
+          "title": "Rückenwind",
+          "text": "Die Segel sind voll, auf geht’s!"
+        },
+        {
+          "title": "Plaudermöwen",
+          "text": "Die Möwen haben von eurer Freundschaft erzählt"
+        },
+        {
+          "title": "Unterwassergarten",
+          "text": "Die Fische haben euch ihren Garten gezeigt"
+        },
+        {
+          "title": "Meerjungfrauenkater",
+          "text": "Pixel hat einen Meerjungfrauenschwanz anprobiert"
+        },
+        {
+          "title": "Warme Strömung",
+          "text": "Die Strömung trägt euch zu neuen Ufern"
+        },
+        {
+          "title": "Sonnenuntergang am Meer",
+          "text": "Ihr schaut euch zusammen den Sonnenuntergang an"
+        },
+        {
+          "title": "Sternenhafen",
+          "text": "Euer Schiffchen hat unter den Sternen angelegt"
+        },
+        {
+          "title": "Ferne Länder",
+          "text": "Pixel hat dir Grüße aus der Ferne mitgebracht"
+        },
+        {
+          "title": "Köfferchen",
+          "text": "Pixel ist in den Koffer geklettert, um mit dir zu reisen"
+        },
+        {
+          "title": "Heißluftballon",
+          "text": "Ihr fliegt mit einem Heißluftballon"
+        },
+        {
+          "title": "Berggipfel",
+          "text": "Pixel hat einen Berg bezwungen und schnurrt auf dem Gipfel"
+        },
+        {
+          "title": "Schneeleopard",
+          "text": "Der Schneeleopard hat Pixel als einen der Seinen anerkannt"
+        },
+        {
+          "title": "Der Weg nach Hause",
+          "text": "Das Schönste an einer Reise ist, gemeinsam heimzukehren"
+        },
+        {
+          "title": "Erstes Schneeglöckchen",
+          "text": "Pixel hat die erste Frühlingsblume gefunden"
+        },
+        {
+          "title": "Frühlingsbach",
+          "text": "Pixel lässt Schiffchen den Bach hinunterfahren"
+        },
+        {
+          "title": "Vogelhäuschen",
+          "text": "Pixel bewacht das Vogelhäuschen"
+        },
+        {
+          "title": "Frühlingsregen",
+          "text": "Pixel hat den Regen an dich gekuschelt abgewartet"
+        },
+        {
+          "title": "Blühender Garten",
+          "text": "Pixel hüpft über die Blütenblätter"
+        },
+        {
+          "title": "Sommermittag",
+          "text": "Pixel hat sich in der Sonne ausgestreckt"
+        },
+        {
+          "title": "Schmetterling auf der Nase",
+          "text": "Ein Schmetterling hat sich auf Pixels Nase gesetzt"
+        },
+        {
+          "title": "Melonenstück",
+          "text": "Pixel hat eine Wassermelone mit dir geteilt"
+        },
+        {
+          "title": "Nacht der Lichter",
+          "text": "Die Sommernacht leuchtet voller Lichtlein"
+        },
+        {
+          "title": "Warmer Regen",
+          "text": "Pixel tanzt im Sommerregen"
+        },
+        {
+          "title": "Laubfall",
+          "text": "Pixel springt in einen Laubhaufen"
+        },
+        {
+          "title": "Kürbiskuchen",
+          "text": "Pixel hat einen Kuchen gebacken, fast allein"
+        },
+        {
+          "title": "Ein Schal für Pixel",
+          "text": "Du hast Pixel einen kleinen Schal gestrickt"
+        },
+        {
+          "title": "Heißer Kakao",
+          "text": "Pixel wärmt sich an deiner Tasse"
+        },
+        {
+          "title": "Erster Schnee",
+          "text": "Pixel fängt Schneeflocken mit der Pfote"
+        },
+        {
+          "title": "Schneekater",
+          "text": "Ihr habt einen Schneemann mit Ohren gebaut"
+        },
+        {
+          "title": "Eisrutsche",
+          "text": "Pixel rutscht auf dem Schwanz den Hügel hinunter"
+        },
+        {
+          "title": "Eisblumen",
+          "text": "Der Frost hat Pixel ans Fenster gemalt"
+        },
+        {
+          "title": "Warmer Ofen",
+          "text": "Pixel schnurrt am Ofen"
+        },
+        {
+          "title": "Christbaumkugel",
+          "text": "Pixel spielt mit einer glänzenden Kugel"
+        },
+        {
+          "title": "Geschenk unterm Baum",
+          "text": "In einer Schachtel mit Schleife hat Pixel geschlafen"
+        },
+        {
+          "title": "Reigen der Jahreszeiten",
+          "text": "Frühling, Sommer, Herbst, Winter – immer zusammen"
+        },
+        {
+          "title": "Schnurrkalender",
+          "text": "Pixel markiert jeden eurer Tage"
+        },
+        {
+          "title": "Ein Jahr Freundschaft",
+          "text": "Ein ganzes Jahr voller Wärme und Schnurren"
+        },
+        {
+          "title": "Sternenreif",
+          "text": "Über Pixel leuchtet ein Reif aus Licht"
+        },
+        {
+          "title": "Zauberstab",
+          "text": "Pixel hat einen Zauberstab gefunden"
+        },
+        {
+          "title": "Erster Zauberspruch",
+          "text": "„Schnurr-abra-kadabra!“"
+        },
+        {
+          "title": "Zylinder des Zauberers",
+          "text": "Pixel ist aus dem Hut gesprungen"
+        },
+        {
+          "title": "Kuscheltrank",
+          "text": "Ein Schluck, und alle wollen kuscheln"
+        },
+        {
+          "title": "Sprechender Kater",
+          "text": "Pixel hat „schnurr“ zu dir gesagt wie ein Mensch"
+        },
+        {
+          "title": "Unsichtbarer Kater",
+          "text": "Pixel ist unsichtbar geworden, aber der Schwanz ist geblieben"
+        },
+        {
+          "title": "Fliegender Teppich",
+          "text": "Ihr seid auf einem Teppich über die ganze Stadt geflogen"
+        },
+        {
+          "title": "Kristallkugel",
+          "text": "Die Kugel zeigt eure strahlende Zukunft"
+        },
+        {
+          "title": "Zauberknäuel",
+          "text": "Das Knäuel zeigt ganz von selbst den Weg"
+        },
+        {
+          "title": "Siebenmeilenstiefel",
+          "text": "Pixel ist in einer Sekunde bei dir"
+        },
+        {
+          "title": "Märchenbuch",
+          "text": "In einem alten Buch steht ein Märchen über euch"
+        },
+        {
+          "title": "Lieber kleiner Drache",
+          "text": "Ein kleiner Drache hat sich mit Pixel angefreundet"
+        },
+        {
+          "title": "Einhorn",
+          "text": "Ein Einhorn hat sich streicheln lassen"
+        },
+        {
+          "title": "Märchenkönigreich",
+          "text": "Pixel ist der oberste Kater des Königreichs"
+        },
+        {
+          "title": "Kürbiskutsche",
+          "text": "Eine Kutsche wartet vor eurer Tür"
+        },
+        {
+          "title": "Gläserner Schuh",
+          "text": "Pixel hat einen Schuh verloren und dich gefunden"
+        },
+        {
+          "title": "Siebenfarbenblume",
+          "text": "Pixel hat dir alle sieben Wünsche geschenkt"
+        },
+        {
+          "title": "Feuervogel",
+          "text": "Der Feuervogel hat euch eine Feder geschenkt"
+        },
+        {
+          "title": "Tischlein deck dich",
+          "text": "Auf dem Tisch ist ganz von selbst ein Fisch für Pixel erschienen"
+        },
+        {
+          "title": "Apfel der Jugend",
+          "text": "Pixel fühlt sich wieder wie ein Kätzchen"
+        },
+        {
+          "title": "Goldener Schlüssel",
+          "text": "Pixel hat dir den Schlüssel zum Märchen gegeben"
+        },
+        {
+          "title": "Zauberspiegel",
+          "text": "Der Spiegel sagt: „Du bist der beste Freund der Welt“"
+        },
+        {
+          "title": "Schlafkönigreich",
+          "text": "Pixel bewacht deine Märchenträume"
+        },
+        {
+          "title": "Gute Fee",
+          "text": "Eine Fee hat euch mit einem Sternchen belohnt"
+        },
+        {
+          "title": "Herzen ringsum",
+          "text": "Um Pixel herum schweben kleine Herzen"
+        },
+        {
+          "title": "Warmes Herz",
+          "text": "Pixel trägt dich in seinem Herzen"
+        },
+        {
+          "title": "Schnurrrekord",
+          "text": "Pixel hat eine ganze Stunde ohne Pause geschnurrt"
+        },
+        {
+          "title": "Hunderttausend Schnurrer",
+          "text": "So viel Schnurren hat die Welt noch nie gehört"
+        },
+        {
+          "title": "Lehrer Pixel",
+          "text": "Kätzchen lernen von dir das Streicheln"
+        },
+        {
+          "title": "Katzenrat",
+          "text": "Alle Katzen haben dich zum besten Freund gewählt"
+        },
+        {
+          "title": "Knäueldenkmal",
+          "text": "Die Katzen haben dir ein Denkmal aus Wollknäueln gebaut"
+        },
+        {
+          "title": "Ein Lied über dich",
+          "text": "Katzen auf der ganzen Welt singen dein Lied"
+        },
+        {
+          "title": "Porträt überm Körbchen",
+          "text": "Pixel hat dein Porträt über sein Körbchen gehängt"
+        },
+        {
+          "title": "Unzertrennlich",
+          "text": "Nichts wird euch je trennen"
+        },
+        {
+          "title": "Weisheit der Zeiten",
+          "text": "Pixel weiß es genau: Du bist der Beste"
+        },
+        {
+          "title": "Licht im Fenster",
+          "text": "Bei Pixel brennt immer ein Licht für dich"
+        },
+        {
+          "title": "Märchenchronist",
+          "text": "Eure Freundschaft steht jetzt im Märchenbuch"
+        },
+        {
+          "title": "Kätzchenhüter",
+          "text": "Dir wurden die allerkleinsten Kätzchen anvertraut"
+        },
+        {
+          "title": "Ein Stern mit deinem Namen",
+          "text": "Pixel hat einen Stern nach dir benannt"
+        },
+        {
+          "title": "Ehrenkatze",
+          "text": "Du wurdest in die Katzenfamilie aufgenommen"
+        },
+        {
+          "title": "Neun Leben zusammen",
+          "text": "Alle neun Leben – an deiner Seite"
+        },
+        {
+          "title": "Schnurrlegende",
+          "text": "Kätzchen hören Märchen über dich"
+        },
+        {
+          "title": "Grenzenlose Zärtlichkeit",
+          "text": "Es gibt mehr Zärtlichkeit als Sterne"
+        },
+        {
+          "title": "Das größte Wollknäuel",
+          "text": "Pixel hat das größte Wollknäuel der Welt abgewickelt"
+        },
+        {
+          "title": "Stilles Glück",
+          "text": "Einfach zusammen sein und schnurren"
+        },
+        {
+          "title": "Fast für immer",
+          "text": "Pixel weiß nicht mehr, wie er ohne dich gelebt hat"
+        },
+        {
+          "title": "Licht seines Lebens",
+          "text": "Du bist das Licht in Pixels Leben"
+        },
+        {
+          "title": "Letzte Schrittchen",
+          "text": "Nur noch ein bisschen, Pixel ist ganz aufgeregt"
+        },
+        {
+          "title": "Vor dem Wunder",
+          "text": "Der Himmel über Pixel beginnt zu schimmern…"
+        },
+        {
+          "title": "Schnurrlegende des Nordlichts",
+          "text": "Pixel leuchtet im Nordlicht. Du hast das ganze Märchen geschafft!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pixel tut so, als sähe er dich nicht",
           "Mit dem Schwanz gewedelt und weg"
         ]
+      },
+      "wear": {
+        "blush": "Rosige Wangen",
+        "yarn": "Wollknäuel",
+        "star": "Sternchen",
+        "crown": "Krone",
+        "tail": "Regenbogenschwanz",
+        "hearts": "Herzaugen",
+        "bell": "Glöckchen",
+        "bow": "Schleife",
+        "sparkles": "Sternschnuppen",
+        "gold": "Goldener Glanz",
+        "daisy": "Gänseblümchen",
+        "glasses": "Brille",
+        "wings": "Flügel",
+        "halo": "Lichtreif",
+        "love": "Schwebende Herzen",
+        "aurora": "Nordlicht"
       }
     }
   },
