@@ -187,6 +187,686 @@
         {
           "title": "Forever love",
           "text": "Pixel is yours forever"
+        },
+        {
+          "title": "Ninth life",
+          "text": "Pixel would give you all nine of his lives"
+        },
+        {
+          "title": "Sunny windowsill",
+          "text": "Pixel gave you his warmest spot"
+        },
+        {
+          "title": "Jingle bell",
+          "text": "Pixel put on a bell so you can hear him running to you"
+        },
+        {
+          "title": "Fish feast",
+          "text": "Pixel shared his tastiest fish with you"
+        },
+        {
+          "title": "Purring song",
+          "text": "Pixel made up a song about you"
+        },
+        {
+          "title": "Cat dreams",
+          "text": "Pixel dreams about you every night"
+        },
+        {
+          "title": "Fluffy blanket",
+          "text": "Pixel curled up in your lap"
+        },
+        {
+          "title": "Party bow",
+          "text": "Pixel tied a bow on his ear just for you"
+        },
+        {
+          "title": "Happy zoomies",
+          "text": "Pixel is racing around the site from joy"
+        },
+        {
+          "title": "Forty smiles",
+          "text": "Pixel smiles at you again and again"
+        },
+        {
+          "title": "Secret path",
+          "text": "Pixel showed you the way to his little house"
+        },
+        {
+          "title": "Starfall",
+          "text": "Little stars are swirling around Pixel"
+        },
+        {
+          "title": "Milk whiskers",
+          "text": "Pixel treated you to some milk"
+        },
+        {
+          "title": "Cat kiss",
+          "text": "Pixel blinked slowly at you: that means “I love you” in cat"
+        },
+        {
+          "title": "Purring lighthouse",
+          "text": "Pixel shines for you wherever you are"
+        },
+        {
+          "title": "Bedtime story",
+          "text": "Pixel told you his favorite fairy tale"
+        },
+        {
+          "title": "Paw in paw",
+          "text": "You and Pixel go for walks together now"
+        },
+        {
+          "title": "Fluffy comet",
+          "text": "Pixel flies to you faster than a comet"
+        },
+        {
+          "title": "Something shiny",
+          "text": "Pixel is already trying on something golden…"
+        },
+        {
+          "title": "Golden Pixel",
+          "text": "Pixel shines with gold: you petted him more than anyone in the world"
+        },
+        {
+          "title": "Forest path",
+          "text": "Pixel invited you into a fairy-tale forest"
+        },
+        {
+          "title": "Pinecone find",
+          "text": "Pixel found you the roundest pinecone"
+        },
+        {
+          "title": "Hedgehog visit",
+          "text": "Pixel introduced you to a hedgehog"
+        },
+        {
+          "title": "Strawberry glade",
+          "text": "Pixel led you to ripe wild strawberries"
+        },
+        {
+          "title": "Mossy bridge",
+          "text": "You crossed the stream on soft moss"
+        },
+        {
+          "title": "Owl’s secret",
+          "text": "An owl whispered to Pixel that you are kind"
+        },
+        {
+          "title": "Squirrel’s treasure",
+          "text": "A squirrel shared its nuts with you"
+        },
+        {
+          "title": "Mushroom shower",
+          "text": "Pixel hid you under a mushroom cap"
+        },
+        {
+          "title": "Fireflies",
+          "text": "Fireflies light the way for you"
+        },
+        {
+          "title": "Daisy behind the ear",
+          "text": "Pixel decorated his ear with a daisy"
+        },
+        {
+          "title": "Forest orchestra",
+          "text": "Birds sing and Pixel purrs along"
+        },
+        {
+          "title": "Tree-hollow home",
+          "text": "Pixel made you a home in an old hollow"
+        },
+        {
+          "title": "Bunny tag",
+          "text": "Pixel is playing tag with a bunny"
+        },
+        {
+          "title": "Drop of honey",
+          "text": "A bear cub treated you to honey"
+        },
+        {
+          "title": "Clover wreath",
+          "text": "Pixel wove you a wreath"
+        },
+        {
+          "title": "Fox friend",
+          "text": "A little red fox made friends with Pixel"
+        },
+        {
+          "title": "Quiet lake",
+          "text": "Pixel looks at his reflection and purrs"
+        },
+        {
+          "title": "Water lily",
+          "text": "A little frog gave you a ride on a lily pad"
+        },
+        {
+          "title": "Rainbow over the forest",
+          "text": "After the rain a rainbow rose over the forest"
+        },
+        {
+          "title": "Fairy-tale clearing",
+          "text": "All the forest animals came to see you"
+        },
+        {
+          "title": "Old oak",
+          "text": "The oak told Pixel an ancient tale"
+        },
+        {
+          "title": "Night in the forest",
+          "text": "Pixel covered you with a big leaf"
+        },
+        {
+          "title": "Morning dew",
+          "text": "Pixel washed with dew and is all aglow"
+        },
+        {
+          "title": "Lace cobweb",
+          "text": "A little spider wove you a lace hanky"
+        },
+        {
+          "title": "Edge of the forest",
+          "text": "Pixel waved goodbye to the forest with his tail"
+        },
+        {
+          "title": "Dandelion flight",
+          "text": "The wind lifted you up like fluff"
+        },
+        {
+          "title": "Cloud stairs",
+          "text": "Pixel is walking on clouds"
+        },
+        {
+          "title": "Sky castle",
+          "text": "There is a castle on a cloud, and it’s yours"
+        },
+        {
+          "title": "Mischievous wind",
+          "text": "The wind ruffled Pixel’s fur"
+        },
+        {
+          "title": "Scholar glasses",
+          "text": "Pixel put on glasses to look at the stars"
+        },
+        {
+          "title": "Star map",
+          "text": "Pixel drew a map of the sky"
+        },
+        {
+          "title": "The Cat constellation",
+          "text": "A constellation shaped like Pixel lit up"
+        },
+        {
+          "title": "Moon path",
+          "text": "You walk along the moonlight"
+        },
+        {
+          "title": "Cheese moon",
+          "text": "Pixel is sure the moon is made of cheese"
+        },
+        {
+          "title": "Falling star",
+          "text": "Pixel caught a falling star with his paw"
+        },
+        {
+          "title": "Milky Way",
+          "text": "Pixel laps milk from the Milky Way"
+        },
+        {
+          "title": "Comet tail",
+          "text": "The comet wags its tail just like Pixel"
+        },
+        {
+          "title": "Northern lights",
+          "text": "The sky shimmers for the two of you"
+        },
+        {
+          "title": "Star cradle",
+          "text": "Pixel fell asleep on the crescent moon like in a hammock"
+        },
+        {
+          "title": "Planet Purr",
+          "text": "Pixel discovered a planet and named it Purr"
+        },
+        {
+          "title": "Cosmic yarn ball",
+          "text": "Pixel rolls a planet-ball across the sky"
+        },
+        {
+          "title": "A moon of his own",
+          "text": "Now Pixel has a little moon"
+        },
+        {
+          "title": "Interstellar purring",
+          "text": "The purring reached other stars"
+        },
+        {
+          "title": "Star mail",
+          "text": "Pixel sent you a letter from a star"
+        },
+        {
+          "title": "Meteor shower",
+          "text": "The sky is raining sparkles"
+        },
+        {
+          "title": "Sunbeam chase",
+          "text": "Pixel is chasing a sunbeam"
+        },
+        {
+          "title": "Rainbow bridge",
+          "text": "You crossed a rainbow to the other side of the sky"
+        },
+        {
+          "title": "Cloud pillow",
+          "text": "Pixel fluffed up a cloud pillow for you"
+        },
+        {
+          "title": "Almost a hundred",
+          "text": "One more achievement and magic will happen"
+        },
+        {
+          "title": "Fairy wings",
+          "text": "Pixel grew magic wings"
+        },
+        {
+          "title": "Sea breeze",
+          "text": "Pixel saw the sea for the first time"
+        },
+        {
+          "title": "Seashell",
+          "text": "Pixel gave you a shell that sounds like the sea"
+        },
+        {
+          "title": "Sandcastle",
+          "text": "You built a castle out of sand"
+        },
+        {
+          "title": "Captain cat",
+          "text": "Pixel put on a captain’s hat, just pretend"
+        },
+        {
+          "title": "Paper boat",
+          "text": "Your little boat set sail"
+        },
+        {
+          "title": "Kind whale",
+          "text": "A whale gave you a ride on its back"
+        },
+        {
+          "title": "Dolphin smile",
+          "text": "A dolphin smiled at Pixel"
+        },
+        {
+          "title": "Starfish",
+          "text": "Pixel found a little star right in the water"
+        },
+        {
+          "title": "Treasure island",
+          "text": "The treasure turned out to be a cozy box"
+        },
+        {
+          "title": "Message in a bottle",
+          "text": "Pixel sent you a note across the waves"
+        },
+        {
+          "title": "Lighthouse on a cliff",
+          "text": "The lighthouse keeper gave Pixel a fish"
+        },
+        {
+          "title": "Pearl",
+          "text": "Pixel found a pearl and gave it to you"
+        },
+        {
+          "title": "Fair wind",
+          "text": "The sails are full, onward!"
+        },
+        {
+          "title": "Chatty seagulls",
+          "text": "Seagulls spread the news of your friendship"
+        },
+        {
+          "title": "Underwater garden",
+          "text": "The fish showed you their garden"
+        },
+        {
+          "title": "Mermaid cat",
+          "text": "Pixel tried on a mermaid’s tail"
+        },
+        {
+          "title": "Warm current",
+          "text": "The current carries you to new shores"
+        },
+        {
+          "title": "Sunset by the sea",
+          "text": "You watch the sunset together"
+        },
+        {
+          "title": "Starlit harbor",
+          "text": "Your boat docked under the stars"
+        },
+        {
+          "title": "Faraway lands",
+          "text": "Pixel brought you greetings from afar"
+        },
+        {
+          "title": "Little suitcase",
+          "text": "Pixel climbed into a suitcase to travel with you"
+        },
+        {
+          "title": "Hot-air balloon",
+          "text": "You are flying in a hot-air balloon"
+        },
+        {
+          "title": "Mountain peak",
+          "text": "Pixel climbed a mountain and purrs at the top"
+        },
+        {
+          "title": "Snow leopard",
+          "text": "The snow leopard accepted Pixel as one of its own"
+        },
+        {
+          "title": "The way home",
+          "text": "The best part of a journey is coming back together"
+        },
+        {
+          "title": "First snowdrop",
+          "text": "Pixel found the first spring flower"
+        },
+        {
+          "title": "Spring stream",
+          "text": "Pixel sails little boats down the stream"
+        },
+        {
+          "title": "Birdhouse",
+          "text": "Pixel guards the birdhouse"
+        },
+        {
+          "title": "Spring rain",
+          "text": "Pixel waited out the rain snuggled up to you"
+        },
+        {
+          "title": "Blooming garden",
+          "text": "Pixel hops across the petals"
+        },
+        {
+          "title": "Summer noon",
+          "text": "Pixel stretched out in the sun"
+        },
+        {
+          "title": "Butterfly on the nose",
+          "text": "A butterfly landed on Pixel’s nose"
+        },
+        {
+          "title": "Watermelon slice",
+          "text": "Pixel shared a watermelon with you"
+        },
+        {
+          "title": "Night of lights",
+          "text": "The summer night glows with little lights"
+        },
+        {
+          "title": "Warm rain",
+          "text": "Pixel dances in the summer rain"
+        },
+        {
+          "title": "Falling leaves",
+          "text": "Pixel dives into a pile of leaves"
+        },
+        {
+          "title": "Pumpkin pie",
+          "text": "Pixel baked a pie, almost by himself"
+        },
+        {
+          "title": "A scarf for Pixel",
+          "text": "You knitted Pixel a little scarf"
+        },
+        {
+          "title": "Hot cocoa",
+          "text": "Pixel warms up by your mug"
+        },
+        {
+          "title": "First snow",
+          "text": "Pixel catches snowflakes with his paw"
+        },
+        {
+          "title": "Snow cat",
+          "text": "You built a snowman with ears"
+        },
+        {
+          "title": "Ice slide",
+          "text": "Pixel slides down the hill on his tail"
+        },
+        {
+          "title": "Frost patterns",
+          "text": "The frost drew Pixel on the window"
+        },
+        {
+          "title": "Warm stove",
+          "text": "Pixel purrs by the stove"
+        },
+        {
+          "title": "Christmas ornament",
+          "text": "Pixel plays with a shiny ornament"
+        },
+        {
+          "title": "Gift under the tree",
+          "text": "Pixel was asleep in a box with a bow"
+        },
+        {
+          "title": "Dance of seasons",
+          "text": "Spring, summer, autumn, winter — always together"
+        },
+        {
+          "title": "Purring calendar",
+          "text": "Pixel marks every day you spend together"
+        },
+        {
+          "title": "A year of friendship",
+          "text": "A whole year of warmth and purring"
+        },
+        {
+          "title": "Starlight ring",
+          "text": "A ring of light shines above Pixel"
+        },
+        {
+          "title": "Magic wand",
+          "text": "Pixel found a magic wand"
+        },
+        {
+          "title": "First spell",
+          "text": "“Purr-abra-cadabra!”"
+        },
+        {
+          "title": "Magician’s hat",
+          "text": "Pixel jumped out of the hat"
+        },
+        {
+          "title": "Cuddle potion",
+          "text": "One sip and everyone wants a hug"
+        },
+        {
+          "title": "Talking cat",
+          "text": "Pixel said “purr” to you just like a person"
+        },
+        {
+          "title": "Invisible cat",
+          "text": "Pixel turned invisible, but his tail stayed"
+        },
+        {
+          "title": "Flying carpet",
+          "text": "You flew all over town on a carpet"
+        },
+        {
+          "title": "Crystal ball",
+          "text": "The ball shows your bright future"
+        },
+        {
+          "title": "Magic ball of yarn",
+          "text": "The yarn ball shows the way by itself"
+        },
+        {
+          "title": "Seven-league boots",
+          "text": "Pixel runs to you in a second"
+        },
+        {
+          "title": "Book of tales",
+          "text": "An old book has a fairy tale about you"
+        },
+        {
+          "title": "Kind little dragon",
+          "text": "A little dragon made friends with Pixel"
+        },
+        {
+          "title": "Unicorn",
+          "text": "A unicorn let you pet it"
+        },
+        {
+          "title": "Fairy-tale kingdom",
+          "text": "Pixel is the chief cat of the kingdom"
+        },
+        {
+          "title": "Pumpkin carriage",
+          "text": "A carriage is waiting at your door"
+        },
+        {
+          "title": "Glass slipper",
+          "text": "Pixel lost a slipper and found you"
+        },
+        {
+          "title": "Seven-color flower",
+          "text": "Pixel gave you all seven wishes"
+        },
+        {
+          "title": "Firebird",
+          "text": "The Firebird dropped a feather for you"
+        },
+        {
+          "title": "Magic tablecloth",
+          "text": "A fish for Pixel appeared on the table by itself"
+        },
+        {
+          "title": "Apple of youth",
+          "text": "Pixel feels like a kitten again"
+        },
+        {
+          "title": "Golden key",
+          "text": "Pixel gave you the key to the fairy tale"
+        },
+        {
+          "title": "Magic mirror",
+          "text": "The mirror says: “You are the best friend in the world”"
+        },
+        {
+          "title": "Sleepy kingdom",
+          "text": "Pixel guards your fairy-tale dreams"
+        },
+        {
+          "title": "Kind fairy",
+          "text": "A fairy awarded you a little star"
+        },
+        {
+          "title": "Hearts all around",
+          "text": "Little hearts swirl around Pixel"
+        },
+        {
+          "title": "Warm heart",
+          "text": "Pixel keeps you in his heart"
+        },
+        {
+          "title": "Purring record",
+          "text": "Pixel purred for a whole hour nonstop"
+        },
+        {
+          "title": "A hundred thousand purrs",
+          "text": "The world has never heard so much purring"
+        },
+        {
+          "title": "Pixel the teacher",
+          "text": "Kittens learn petting from you"
+        },
+        {
+          "title": "Cat council",
+          "text": "All the cats chose you as their best friend"
+        },
+        {
+          "title": "Yarn monument",
+          "text": "The cats built you a monument out of yarn balls"
+        },
+        {
+          "title": "Song about you",
+          "text": "Cats all over the world sing your song"
+        },
+        {
+          "title": "Portrait above the bed",
+          "text": "Pixel hung your portrait above his bed"
+        },
+        {
+          "title": "Unbreakable friendship",
+          "text": "Nothing will ever part you"
+        },
+        {
+          "title": "Ancient wisdom",
+          "text": "Pixel knows for sure: you are the best"
+        },
+        {
+          "title": "Light in the window",
+          "text": "There is always a light on for you at Pixel’s"
+        },
+        {
+          "title": "Fairy-tale chronicler",
+          "text": "Your friendship went into the book of tales"
+        },
+        {
+          "title": "Kitten keeper",
+          "text": "You were trusted with the tiniest kittens"
+        },
+        {
+          "title": "A star with your name",
+          "text": "Pixel named a star after you"
+        },
+        {
+          "title": "Honorary cat",
+          "text": "You were welcomed into the cat family"
+        },
+        {
+          "title": "Nine lives together",
+          "text": "All nine lives — by your side"
+        },
+        {
+          "title": "Purr legend",
+          "text": "Kittens are told fairy tales about you"
+        },
+        {
+          "title": "Boundless tenderness",
+          "text": "There is more tenderness than stars"
+        },
+        {
+          "title": "The biggest yarn ball",
+          "text": "Pixel unwound the biggest yarn ball in the world"
+        },
+        {
+          "title": "Quiet happiness",
+          "text": "Just being together and purring"
+        },
+        {
+          "title": "Almost forever",
+          "text": "Pixel can’t remember life without you"
+        },
+        {
+          "title": "Light of his life",
+          "text": "You are the light of Pixel’s life"
+        },
+        {
+          "title": "Last little steps",
+          "text": "Just a bit more, Pixel is excited"
+        },
+        {
+          "title": "Before the miracle",
+          "text": "The sky above Pixel begins to shimmer…"
+        },
+        {
+          "title": "Legend of purring",
+          "text": "Pixel glows with northern lights. You finished the whole fairy tale!"
         }
       ],
       "grumpy": {
@@ -200,6 +880,24 @@
           "Pixel pretends not to see you",
           "Flicked its tail and walked off"
         ]
+      },
+      "wear": {
+        "blush": "Blush",
+        "yarn": "Yarn ball",
+        "star": "Little star",
+        "crown": "Crown",
+        "tail": "Rainbow tail",
+        "hearts": "Heart eyes",
+        "bell": "Bell",
+        "bow": "Bow",
+        "sparkles": "Starfall",
+        "gold": "Golden glow",
+        "daisy": "Daisy",
+        "glasses": "Glasses",
+        "wings": "Wings",
+        "halo": "Ring of light",
+        "love": "Floating hearts",
+        "aurora": "Northern lights"
       }
     }
   },

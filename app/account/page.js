@@ -40,10 +40,13 @@ import { AvatarImage } from './MinecraftAvatarPicker'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { AccountFestiveScore } from '@/lib/festiveScore'
 import FestiveScoreCard from './FestiveScoreCard'
+import PixelAchievements, { PixelAchievementsCard } from './PixelAchievements'
+import { isGrumpyKitten, readKittenPets, readKittenRarity } from '@/lib/kittenPets'
+import { kittenLevel } from '@/lib/kittenLevels'
 
 export const dynamic = 'force-dynamic'
 
-const TABS = ['updates', 'favorites', 'collections', 'downloads']
+const TABS = ['updates', 'favorites', 'collections', 'downloads', 'pixel']
 const MOVED_TABS = { signin: '/settings/security', settings: '/settings/profile' }
 const PAGE_SIZE = 20
 const TYPE_ORDER = ['mod', 'plugin', 'resourcepack', 'shader', 'datapack', 'modpack', 'minecraft_java_server']
@@ -78,6 +81,7 @@ const TAB_ICONS = {
     'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z',
   collections: 'm16 6 4 14M12 6v14M8 8v12M4 4v16',
   downloads: 'M12 8v4l3 2M3.05 11a9 9 0 1 1 .5 4M3 4v5h5',
+  pixel: 'M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3',
   settings:
     'M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2zM15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0',
 }
@@ -327,7 +331,7 @@ function CollectionItems({ collection, page, type, t }) {
   )
 }
 
-function AccountHome({ user, scores, festive, t, locale }) {
+function AccountHome({ user, scores, festive, pixel, t, locale }) {
   const avatar = userAvatarUrl(user)
   const since = new Date(user.created_at).toLocaleDateString(intlLocale(locale), {
     day: 'numeric',
@@ -355,6 +359,7 @@ function AccountHome({ user, scores, festive, t, locale }) {
           {user.mc_name ? <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-500">{t('account.mcName', { name: user.mc_name })}</p> : null}
         </div>
       </div>
+      <PixelAchievementsCard pets={pixel.pets} grumpy={pixel.grumpy} />
       <FestiveScoreCard initial={scores} festive={festive} />
     </>
   )
@@ -397,7 +402,14 @@ export default async function AccountPage(props) {
   const collectionPage = collection
     ? paginate(typeFilter ? collection.items.filter((row) => row.project_type === typeFilter) : collection.items, requestedPage)
     : null
-  const counts = { updates: updates.length, favorites: favorites.length, collections: collections.length, downloads: downloads.all }
+  const pixel = { pets: readKittenPets(user.id), grumpy: isGrumpyKitten(user.id) }
+  const counts = {
+    updates: updates.length,
+    favorites: favorites.length,
+    collections: collections.length,
+    downloads: downloads.all,
+    pixel: pixel.grumpy ? 0 : kittenLevel(pixel.pets),
+  }
   const navItems = [
     {
       id: 'home',
@@ -499,7 +511,7 @@ export default async function AccountPage(props) {
 
       <section className="min-w-0 flex-1 rounded-2xl card-glass bg-modrinth-dark p-4 md:p-5 lg:self-start">
         {tab === 'home' ? (
-          <AccountHome user={user} scores={new AccountFestiveScore().read(user.id)} festive={!user.hide_festive} t={t} locale={locale} />
+          <AccountHome user={user} scores={new AccountFestiveScore().read(user.id)} festive={!user.hide_festive} pixel={pixel} t={t} locale={locale} />
         ) : null}
         {tab === 'favorites' && favorites.length > 0 ? (
           <TypeFilter items={typeItems(favoritesByType, favorites.length, t)} active={typeFilter || ''} tab="favorites" />
@@ -518,6 +530,9 @@ export default async function AccountPage(props) {
         ) : null}
         {tab === 'home' ? null : (
         <PageFade key={fadeKey}>
+        {tab === 'pixel' ? (
+          <PixelAchievements pets={pixel.pets} grumpy={pixel.grumpy} chapter={searchParams?.type || ''} rarity={readKittenRarity(user.id, pixel.pets)} />
+        ) : null}
         {tab === 'updates' ? (
           updates.length > 0 ? (
             <>

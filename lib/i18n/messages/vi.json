@@ -186,6 +186,686 @@
         {
           "title": "Tình yêu mãi mãi",
           "text": "Pixel là của bạn mãi mãi"
+        },
+        {
+          "title": "Mạng thứ chín",
+          "text": "Pixel sẵn lòng trao cho bạn cả chín mạng của mình"
+        },
+        {
+          "title": "Bậu cửa đầy nắng",
+          "text": "Pixel nhường cho bạn chỗ ấm nhất"
+        },
+        {
+          "title": "Chuông leng keng",
+          "text": "Pixel đeo chuông để bạn nghe thấy khi cậu chạy tới"
+        },
+        {
+          "title": "Tiệc cá",
+          "text": "Pixel chia cho bạn con cá ngon nhất"
+        },
+        {
+          "title": "Bài hát rừ rừ",
+          "text": "Pixel sáng tác một bài hát về bạn"
+        },
+        {
+          "title": "Giấc mơ mèo",
+          "text": "Đêm nào Pixel cũng mơ thấy bạn"
+        },
+        {
+          "title": "Chăn bông mềm",
+          "text": "Pixel cuộn tròn trên đùi bạn"
+        },
+        {
+          "title": "Nơ ngày hội",
+          "text": "Pixel thắt nơ lên tai vì bạn"
+        },
+        {
+          "title": "Chạy vòng vì vui",
+          "text": "Pixel chạy khắp trang web vì hạnh phúc"
+        },
+        {
+          "title": "Bốn mươi nụ cười",
+          "text": "Pixel cười với bạn mãi không thôi"
+        },
+        {
+          "title": "Lối đi bí mật",
+          "text": "Pixel chỉ cho bạn đường đến ngôi nhà nhỏ của cậu"
+        },
+        {
+          "title": "Mưa sao",
+          "text": "Những ngôi sao nhỏ xoay quanh Pixel"
+        },
+        {
+          "title": "Ria sữa",
+          "text": "Pixel mời bạn uống sữa"
+        },
+        {
+          "title": "Nụ hôn mèo",
+          "text": "Pixel chớp mắt thật chậm với bạn: theo tiếng mèo là «thương bạn»"
+        },
+        {
+          "title": "Ngọn hải đăng rừ rừ",
+          "text": "Pixel tỏa sáng cho bạn dù bạn ở đâu"
+        },
+        {
+          "title": "Chuyện kể trước khi ngủ",
+          "text": "Pixel kể cho bạn câu chuyện cổ tích yêu thích"
+        },
+        {
+          "title": "Tay trong chân",
+          "text": "Giờ bạn và Pixel cùng nhau đi dạo"
+        },
+        {
+          "title": "Sao chổi lông xù",
+          "text": "Pixel bay đến bạn nhanh hơn sao chổi"
+        },
+        {
+          "title": "Thứ gì đó lấp lánh",
+          "text": "Pixel đang thử thứ gì đó màu vàng…"
+        },
+        {
+          "title": "Pixel vàng",
+          "text": "Pixel lấp lánh ánh vàng: bạn vuốt ve cậu nhiều nhất thế giới"
+        },
+        {
+          "title": "Lối mòn trong rừng",
+          "text": "Pixel rủ bạn vào khu rừng cổ tích"
+        },
+        {
+          "title": "Quả thông",
+          "text": "Pixel tìm cho bạn quả thông tròn nhất"
+        },
+        {
+          "title": "Nhím đến chơi",
+          "text": "Pixel giới thiệu bạn với chú nhím"
+        },
+        {
+          "title": "Bãi dâu rừng",
+          "text": "Pixel dẫn bạn đến chỗ dâu rừng chín mọng"
+        },
+        {
+          "title": "Cây cầu rêu",
+          "text": "Hai bạn băng qua suối trên lớp rêu mềm"
+        },
+        {
+          "title": "Bí mật của cú",
+          "text": "Cú mèo thì thầm với Pixel rằng bạn rất tốt bụng"
+        },
+        {
+          "title": "Kho báu của sóc",
+          "text": "Chú sóc chia hạt dẻ cho hai bạn"
+        },
+        {
+          "title": "Mưa nấm",
+          "text": "Pixel giấu bạn dưới mũ nấm"
+        },
+        {
+          "title": "Đom đóm",
+          "text": "Đom đóm soi đường cho hai bạn"
+        },
+        {
+          "title": "Hoa cúc sau tai",
+          "text": "Pixel cài một bông cúc lên tai"
+        },
+        {
+          "title": "Dàn nhạc rừng xanh",
+          "text": "Chim hót, còn Pixel rừ rừ theo nhịp"
+        },
+        {
+          "title": "Ngôi nhà hốc cây",
+          "text": "Pixel làm cho hai bạn ngôi nhà trong hốc cây cổ thụ"
+        },
+        {
+          "title": "Đuổi bắt với thỏ",
+          "text": "Pixel chơi đuổi bắt với chú thỏ con"
+        },
+        {
+          "title": "Giọt mật ong",
+          "text": "Gấu con mời hai bạn ăn mật ong"
+        },
+        {
+          "title": "Vòng cỏ ba lá",
+          "text": "Pixel tết cho bạn một vòng hoa"
+        },
+        {
+          "title": "Bạn cáo nhỏ",
+          "text": "Cô cáo đỏ nhỏ đã làm bạn với Pixel"
+        },
+        {
+          "title": "Hồ lặng",
+          "text": "Pixel ngắm bóng mình dưới nước và rừ rừ"
+        },
+        {
+          "title": "Hoa súng",
+          "text": "Chú ếch con chở hai bạn trên lá súng"
+        },
+        {
+          "title": "Cầu vồng trên rừng",
+          "text": "Sau cơn mưa, cầu vồng hiện lên trên rừng"
+        },
+        {
+          "title": "Bãi cỏ cổ tích",
+          "text": "Muông thú trong rừng đều đến ngắm bạn"
+        },
+        {
+          "title": "Cây sồi già",
+          "text": "Cây sồi kể cho Pixel một câu chuyện xưa"
+        },
+        {
+          "title": "Đêm trong rừng",
+          "text": "Pixel đắp cho bạn một chiếc lá to"
+        },
+        {
+          "title": "Sương mai",
+          "text": "Pixel rửa mặt bằng sương và sáng bừng"
+        },
+        {
+          "title": "Mạng nhện ren",
+          "text": "Nhện con dệt cho hai bạn chiếc khăn ren"
+        },
+        {
+          "title": "Bìa rừng",
+          "text": "Pixel vẫy đuôi tạm biệt khu rừng"
+        },
+        {
+          "title": "Chuyến bay bồ công anh",
+          "text": "Gió cuốn hai bạn đi như những sợi bông"
+        },
+        {
+          "title": "Cầu thang mây",
+          "text": "Pixel đi dạo trên mây"
+        },
+        {
+          "title": "Lâu đài trên trời",
+          "text": "Trên mây có một lâu đài, và nó là của hai bạn"
+        },
+        {
+          "title": "Gió nghịch ngợm",
+          "text": "Gió làm rối tung bộ lông của Pixel"
+        },
+        {
+          "title": "Kính bác học",
+          "text": "Pixel đeo kính để ngắm sao"
+        },
+        {
+          "title": "Bản đồ sao",
+          "text": "Pixel vẽ bản đồ bầu trời"
+        },
+        {
+          "title": "Chòm sao Mèo",
+          "text": "Một chòm sao hình Pixel sáng lên"
+        },
+        {
+          "title": "Đường trăng",
+          "text": "Hai bạn dạo bước dưới ánh trăng"
+        },
+        {
+          "title": "Mặt trăng phô mai",
+          "text": "Pixel tin rằng mặt trăng làm bằng phô mai"
+        },
+        {
+          "title": "Sao băng",
+          "text": "Pixel bắt được ngôi sao băng bằng chân"
+        },
+        {
+          "title": "Dải Ngân Hà",
+          "text": "Pixel liếm sữa từ Dải Ngân Hà"
+        },
+        {
+          "title": "Đuôi sao chổi",
+          "text": "Sao chổi vẫy đuôi y như Pixel"
+        },
+        {
+          "title": "Cực quang",
+          "text": "Bầu trời lung linh cho hai bạn"
+        },
+        {
+          "title": "Nôi sao",
+          "text": "Pixel ngủ trên vầng trăng khuyết như trên võng"
+        },
+        {
+          "title": "Hành tinh Rừ Rừ",
+          "text": "Pixel tìm ra một hành tinh và đặt tên là Rừ Rừ"
+        },
+        {
+          "title": "Cuộn len vũ trụ",
+          "text": "Pixel lăn cuộn len hành tinh khắp bầu trời"
+        },
+        {
+          "title": "Mặt trăng riêng",
+          "text": "Giờ Pixel có một mặt trăng nhỏ"
+        },
+        {
+          "title": "Tiếng rừ rừ liên sao",
+          "text": "Tiếng rừ rừ đã bay tới những vì sao khác"
+        },
+        {
+          "title": "Bưu tá ngôi sao",
+          "text": "Pixel gửi cho bạn lá thư từ một ngôi sao"
+        },
+        {
+          "title": "Mưa sao băng",
+          "text": "Bầu trời rắc đầy tia sáng"
+        },
+        {
+          "title": "Đốm nắng",
+          "text": "Pixel đuổi theo đốm nắng"
+        },
+        {
+          "title": "Cầu vồng làm cầu",
+          "text": "Hai bạn đi qua cầu vồng sang bên kia bầu trời"
+        },
+        {
+          "title": "Gối mây",
+          "text": "Pixel vỗ phồng chiếc gối mây cho bạn"
+        },
+        {
+          "title": "Gần một trăm",
+          "text": "Thêm một thành tích nữa là phép màu xảy ra"
+        },
+        {
+          "title": "Cánh tiên",
+          "text": "Pixel mọc ra đôi cánh thần kỳ"
+        },
+        {
+          "title": "Gió biển",
+          "text": "Pixel lần đầu được thấy biển"
+        },
+        {
+          "title": "Vỏ ốc",
+          "text": "Pixel tặng bạn vỏ ốc có tiếng sóng biển"
+        },
+        {
+          "title": "Lâu đài cát",
+          "text": "Hai bạn xây một lâu đài bằng cát"
+        },
+        {
+          "title": "Mèo thuyền trưởng",
+          "text": "Pixel đội mũ thuyền trưởng, chỉ là giả vờ thôi"
+        },
+        {
+          "title": "Thuyền giấy",
+          "text": "Con thuyền nhỏ của hai bạn đã ra khơi"
+        },
+        {
+          "title": "Cá voi hiền",
+          "text": "Cá voi cõng hai bạn trên lưng"
+        },
+        {
+          "title": "Nụ cười cá heo",
+          "text": "Cá heo mỉm cười với Pixel"
+        },
+        {
+          "title": "Sao biển",
+          "text": "Pixel tìm thấy một ngôi sao nhỏ ngay dưới nước"
+        },
+        {
+          "title": "Đảo kho báu",
+          "text": "Kho báu hóa ra là một chiếc hộp ấm áp"
+        },
+        {
+          "title": "Thư trong chai",
+          "text": "Pixel gửi cho bạn mẩu giấy theo sóng biển"
+        },
+        {
+          "title": "Hải đăng trên vách đá",
+          "text": "Người gác hải đăng tặng Pixel một con cá"
+        },
+        {
+          "title": "Ngọc trai",
+          "text": "Pixel tìm được viên ngọc trai và tặng bạn"
+        },
+        {
+          "title": "Gió xuôi",
+          "text": "Buồm căng rồi, tiến lên!"
+        },
+        {
+          "title": "Hải âu lắm lời",
+          "text": "Hải âu kể khắp nơi về tình bạn của hai bạn"
+        },
+        {
+          "title": "Vườn dưới biển",
+          "text": "Đàn cá dẫn hai bạn đi xem khu vườn của chúng"
+        },
+        {
+          "title": "Mèo tiên cá",
+          "text": "Pixel thử chiếc đuôi tiên cá"
+        },
+        {
+          "title": "Dòng hải lưu ấm",
+          "text": "Dòng nước đưa hai bạn tới những bờ biển mới"
+        },
+        {
+          "title": "Hoàng hôn trên biển",
+          "text": "Hai bạn cùng ngắm hoàng hôn"
+        },
+        {
+          "title": "Bến cảng ngàn sao",
+          "text": "Con thuyền cập bến dưới bầu trời sao"
+        },
+        {
+          "title": "Những miền xa",
+          "text": "Pixel mang lời chào từ phương xa về cho bạn"
+        },
+        {
+          "title": "Chiếc vali nhỏ",
+          "text": "Pixel chui vào vali để được đi cùng bạn"
+        },
+        {
+          "title": "Khinh khí cầu",
+          "text": "Hai bạn bay trên khinh khí cầu"
+        },
+        {
+          "title": "Đỉnh núi",
+          "text": "Pixel chinh phục ngọn núi và rừ rừ trên đỉnh"
+        },
+        {
+          "title": "Báo tuyết",
+          "text": "Báo tuyết đã coi Pixel là người nhà"
+        },
+        {
+          "title": "Đường về nhà",
+          "text": "Điều tuyệt nhất của chuyến đi là cùng nhau trở về"
+        },
+        {
+          "title": "Bông hoa đầu xuân",
+          "text": "Pixel tìm thấy bông hoa đầu tiên của mùa xuân"
+        },
+        {
+          "title": "Dòng suối mùa xuân",
+          "text": "Pixel thả thuyền giấy xuống suối"
+        },
+        {
+          "title": "Tổ chim",
+          "text": "Pixel canh giữ ngôi nhà nhỏ của chim"
+        },
+        {
+          "title": "Mưa xuân",
+          "text": "Pixel nép vào bạn chờ mưa tạnh"
+        },
+        {
+          "title": "Vườn hoa nở",
+          "text": "Pixel nhảy nhót giữa những cánh hoa"
+        },
+        {
+          "title": "Trưa hè",
+          "text": "Pixel nằm duỗi dài dưới nắng"
+        },
+        {
+          "title": "Bướm trên mũi",
+          "text": "Một chú bướm đậu lên mũi Pixel"
+        },
+        {
+          "title": "Miếng dưa hấu",
+          "text": "Pixel chia dưa hấu với bạn"
+        },
+        {
+          "title": "Đêm đèn lung linh",
+          "text": "Đêm hè sáng rực những đốm đèn nhỏ"
+        },
+        {
+          "title": "Mưa ấm",
+          "text": "Pixel nhảy múa dưới mưa hè"
+        },
+        {
+          "title": "Lá rơi",
+          "text": "Pixel lao vào đống lá"
+        },
+        {
+          "title": "Bánh bí ngô",
+          "text": "Pixel nướng bánh, gần như tự làm hết"
+        },
+        {
+          "title": "Khăn cho Pixel",
+          "text": "Bạn đan cho Pixel một chiếc khăn nhỏ"
+        },
+        {
+          "title": "Ca cao nóng",
+          "text": "Pixel sưởi ấm bên cốc của bạn"
+        },
+        {
+          "title": "Tuyết đầu mùa",
+          "text": "Pixel bắt bông tuyết bằng chân"
+        },
+        {
+          "title": "Mèo tuyết",
+          "text": "Hai bạn đắp người tuyết có tai mèo"
+        },
+        {
+          "title": "Cầu trượt băng",
+          "text": "Pixel trượt xuống dốc bằng đuôi"
+        },
+        {
+          "title": "Hoa băng trên kính",
+          "text": "Sương giá vẽ Pixel lên cửa sổ"
+        },
+        {
+          "title": "Bếp lò ấm",
+          "text": "Pixel rừ rừ bên bếp lò"
+        },
+        {
+          "title": "Quả châu thông",
+          "text": "Pixel chơi với quả châu lấp lánh"
+        },
+        {
+          "title": "Quà dưới gốc thông",
+          "text": "Trong hộp thắt nơ có Pixel đang ngủ"
+        },
+        {
+          "title": "Vòng xoay bốn mùa",
+          "text": "Xuân, hạ, thu, đông — luôn bên nhau"
+        },
+        {
+          "title": "Lịch rừ rừ",
+          "text": "Pixel đánh dấu từng ngày của hai bạn"
+        },
+        {
+          "title": "Một năm tình bạn",
+          "text": "Cả một năm ấm áp và rừ rừ"
+        },
+        {
+          "title": "Vòng sáng",
+          "text": "Trên đầu Pixel tỏa sáng một vòng ánh sáng"
+        },
+        {
+          "title": "Đũa thần",
+          "text": "Pixel tìm được cây đũa thần"
+        },
+        {
+          "title": "Câu thần chú đầu tiên",
+          "text": "«Rừ-rừ-a-bra-ca-đa-bra!»"
+        },
+        {
+          "title": "Mũ ảo thuật",
+          "text": "Pixel nhảy ra từ chiếc mũ"
+        },
+        {
+          "title": "Thuốc ôm ấp",
+          "text": "Một ngụm thôi là ai cũng muốn ôm"
+        },
+        {
+          "title": "Mèo biết nói",
+          "text": "Pixel nói «rừ rừ» với bạn y như người"
+        },
+        {
+          "title": "Mèo tàng hình",
+          "text": "Pixel tàng hình, nhưng cái đuôi vẫn còn"
+        },
+        {
+          "title": "Thảm bay",
+          "text": "Hai bạn bay khắp thành phố trên tấm thảm"
+        },
+        {
+          "title": "Quả cầu pha lê",
+          "text": "Quả cầu cho thấy tương lai tươi sáng của hai bạn"
+        },
+        {
+          "title": "Cuộn len thần",
+          "text": "Cuộn len tự chỉ đường"
+        },
+        {
+          "title": "Hài bảy dặm",
+          "text": "Pixel chạy đến bên bạn chỉ trong một giây"
+        },
+        {
+          "title": "Sách cổ tích",
+          "text": "Trong cuốn sách cũ có câu chuyện về hai bạn"
+        },
+        {
+          "title": "Rồng con hiền lành",
+          "text": "Một chú rồng con làm bạn với Pixel"
+        },
+        {
+          "title": "Kỳ lân",
+          "text": "Kỳ lân cho phép bạn vuốt ve nó"
+        },
+        {
+          "title": "Vương quốc cổ tích",
+          "text": "Pixel là chú mèo quan trọng nhất vương quốc"
+        },
+        {
+          "title": "Cỗ xe bí ngô",
+          "text": "Cỗ xe đang chờ hai bạn trước cửa"
+        },
+        {
+          "title": "Chiếc hài pha lê",
+          "text": "Pixel đánh rơi chiếc hài và tìm thấy bạn"
+        },
+        {
+          "title": "Hoa bảy sắc",
+          "text": "Pixel tặng bạn cả bảy điều ước"
+        },
+        {
+          "title": "Chim lửa",
+          "text": "Chim lửa để lại cho hai bạn một chiếc lông"
+        },
+        {
+          "title": "Khăn trải bàn thần",
+          "text": "Trên bàn tự hiện ra một con cá cho Pixel"
+        },
+        {
+          "title": "Táo trẻ mãi",
+          "text": "Pixel lại thấy mình như mèo con"
+        },
+        {
+          "title": "Chìa khóa vàng",
+          "text": "Pixel trao cho bạn chìa khóa của câu chuyện cổ tích"
+        },
+        {
+          "title": "Gương thần",
+          "text": "Gương nói: «Bạn là người bạn tốt nhất thế giới»"
+        },
+        {
+          "title": "Vương quốc giấc mơ",
+          "text": "Pixel canh giữ những giấc mơ cổ tích của bạn"
+        },
+        {
+          "title": "Bà tiên tốt bụng",
+          "text": "Bà tiên thưởng cho hai bạn một ngôi sao nhỏ"
+        },
+        {
+          "title": "Trái tim quanh Pixel",
+          "text": "Những trái tim nhỏ bay quanh Pixel"
+        },
+        {
+          "title": "Trái tim ấm áp",
+          "text": "Pixel giữ bạn trong tim"
+        },
+        {
+          "title": "Kỷ lục rừ rừ",
+          "text": "Pixel rừ rừ suốt một tiếng không nghỉ"
+        },
+        {
+          "title": "Mười vạn tiếng rừ rừ",
+          "text": "Thế giới chưa từng nghe nhiều tiếng rừ rừ như vậy"
+        },
+        {
+          "title": "Thầy Pixel",
+          "text": "Mèo con học cách vuốt ve từ bạn"
+        },
+        {
+          "title": "Hội đồng mèo",
+          "text": "Tất cả mèo đều chọn bạn là bạn thân nhất"
+        },
+        {
+          "title": "Tượng đài cuộn len",
+          "text": "Đàn mèo xây cho bạn tượng đài bằng cuộn len"
+        },
+        {
+          "title": "Bài hát về bạn",
+          "text": "Mèo khắp thế giới hát bài ca của bạn"
+        },
+        {
+          "title": "Chân dung trên ổ",
+          "text": "Pixel treo chân dung bạn trên ổ nằm"
+        },
+        {
+          "title": "Tình bạn bền chặt",
+          "text": "Không gì chia cắt được hai bạn"
+        },
+        {
+          "title": "Trí tuệ ngàn năm",
+          "text": "Pixel biết chắc: bạn là tuyệt nhất"
+        },
+        {
+          "title": "Ngọn đèn bên cửa sổ",
+          "text": "Nhà Pixel luôn có một ngọn đèn sáng chờ bạn"
+        },
+        {
+          "title": "Người ghi chép cổ tích",
+          "text": "Tình bạn của hai bạn đã vào sách cổ tích"
+        },
+        {
+          "title": "Người giữ mèo con",
+          "text": "Bạn được giao chăm những chú mèo con bé nhất"
+        },
+        {
+          "title": "Ngôi sao mang tên bạn",
+          "text": "Pixel đặt tên bạn cho một ngôi sao"
+        },
+        {
+          "title": "Mèo danh dự",
+          "text": "Bạn được nhận vào gia đình mèo"
+        },
+        {
+          "title": "Chín mạng bên nhau",
+          "text": "Cả chín mạng — đều ở bên bạn"
+        },
+        {
+          "title": "Huyền thoại rừ rừ",
+          "text": "Mèo con được nghe kể chuyện cổ tích về bạn"
+        },
+        {
+          "title": "Dịu dàng vô tận",
+          "text": "Sự dịu dàng nhiều hơn cả những vì sao"
+        },
+        {
+          "title": "Cuộn len lớn nhất",
+          "text": "Pixel gỡ cuộn len lớn nhất thế giới"
+        },
+        {
+          "title": "Hạnh phúc lặng lẽ",
+          "text": "Chỉ cần ở bên nhau và rừ rừ"
+        },
+        {
+          "title": "Gần như mãi mãi",
+          "text": "Pixel không còn nhớ ngày chưa có bạn"
+        },
+        {
+          "title": "Ánh sáng đời Pixel",
+          "text": "Bạn là ánh sáng trong đời Pixel"
+        },
+        {
+          "title": "Những bước cuối",
+          "text": "Thêm chút nữa thôi, Pixel hồi hộp lắm"
+        },
+        {
+          "title": "Trước phép màu",
+          "text": "Bầu trời trên Pixel bắt đầu lung linh…"
+        },
+        {
+          "title": "Huyền thoại cực quang",
+          "text": "Pixel rực sáng cực quang. Bạn đã đi hết câu chuyện cổ tích!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pixel giả vờ không thấy bạn",
           "Vẫy đuôi rồi bỏ đi"
         ]
+      },
+      "wear": {
+        "blush": "Má hồng",
+        "yarn": "Cuộn len",
+        "star": "Ngôi sao nhỏ",
+        "crown": "Vương miện",
+        "tail": "Đuôi cầu vồng",
+        "hearts": "Mắt trái tim",
+        "bell": "Chuông",
+        "bow": "Nơ",
+        "sparkles": "Mưa sao",
+        "gold": "Ánh vàng",
+        "daisy": "Hoa cúc",
+        "glasses": "Kính",
+        "wings": "Đôi cánh",
+        "halo": "Vòng sáng",
+        "love": "Trái tim bay",
+        "aurora": "Cực quang"
       }
     }
   },

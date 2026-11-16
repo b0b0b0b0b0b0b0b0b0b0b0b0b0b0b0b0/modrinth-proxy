@@ -186,6 +186,686 @@
         {
           "title": "Wieczna miłość",
           "text": "Piksel jest twój na zawsze"
+        },
+        {
+          "title": "Dziewiąte życie",
+          "text": "Pixel oddałby ci wszystkie dziewięć żyć"
+        },
+        {
+          "title": "Słoneczny parapet",
+          "text": "Pixel oddał ci swoje najcieplejsze miejsce"
+        },
+        {
+          "title": "Dzwoneczek",
+          "text": "Pixel założył dzwoneczek, żebyś słyszał, jak do ciebie biegnie"
+        },
+        {
+          "title": "Rybna uczta",
+          "text": "Pixel podzielił się z tobą najsmaczniejszą rybką"
+        },
+        {
+          "title": "Mrucząca piosenka",
+          "text": "Pixel ułożył piosenkę o tobie"
+        },
+        {
+          "title": "Kocie sny",
+          "text": "Pixel śni o tobie co noc"
+        },
+        {
+          "title": "Puchaty kocyk",
+          "text": "Pixel zwinął się w kłębek na twoich kolanach"
+        },
+        {
+          "title": "Odświętna kokardka",
+          "text": "Pixel zawiązał sobie kokardkę na uszku specjalnie dla ciebie"
+        },
+        {
+          "title": "Radosne gonitwy",
+          "text": "Pixel ze szczęścia biega po całej stronie"
+        },
+        {
+          "title": "Czterdzieści uśmiechów",
+          "text": "Pixel uśmiecha się do ciebie raz za razem"
+        },
+        {
+          "title": "Sekretna ścieżka",
+          "text": "Pixel pokazał ci drogę do swojego domku"
+        },
+        {
+          "title": "Gwiezdny deszcz",
+          "text": "Wokół Pixela wirują gwiazdeczki"
+        },
+        {
+          "title": "Mleczne wąsy",
+          "text": "Pixel poczęstował cię mleczkiem"
+        },
+        {
+          "title": "Koci całus",
+          "text": "Pixel powoli do ciebie mrugnął: po kociemu to znaczy „kocham”"
+        },
+        {
+          "title": "Mrucząca latarnia",
+          "text": "Pixel świeci dla ciebie, gdziekolwiek jesteś"
+        },
+        {
+          "title": "Bajka na dobranoc",
+          "text": "Pixel opowiedział ci swoją ulubioną bajkę"
+        },
+        {
+          "title": "Łapka w łapce",
+          "text": "Teraz chodzicie z Pixelem na spacery razem"
+        },
+        {
+          "title": "Puszysta kometa",
+          "text": "Pixel przylatuje do ciebie szybciej niż kometa"
+        },
+        {
+          "title": "Coś błyszczącego",
+          "text": "Pixel już przymierza coś złotego…"
+        },
+        {
+          "title": "Złoty Pixel",
+          "text": "Pixel lśni złotem: głaskałeś go najwięcej na świecie"
+        },
+        {
+          "title": "Leśna ścieżka",
+          "text": "Pixel zaprosił cię do bajkowego lasu"
+        },
+        {
+          "title": "Szyszkowe znalezisko",
+          "text": "Pixel znalazł dla ciebie najokrąglejszą szyszkę"
+        },
+        {
+          "title": "Jeżyk w gościnie",
+          "text": "Pixel przedstawił ci jeżyka"
+        },
+        {
+          "title": "Poziomkowa polana",
+          "text": "Pixel zaprowadził cię do dojrzałych poziomek"
+        },
+        {
+          "title": "Mszysty mostek",
+          "text": "Przeszliście przez strumyk po miękkim mchu"
+        },
+        {
+          "title": "Sekret sowy",
+          "text": "Sowa szepnęła Pixelowi, że jesteś dobry"
+        },
+        {
+          "title": "Wiewiórczy skarb",
+          "text": "Wiewiórka podzieliła się z wami orzeszkami"
+        },
+        {
+          "title": "Grzybowy deszczyk",
+          "text": "Pixel schował cię pod kapeluszem grzyba"
+        },
+        {
+          "title": "Świetliki",
+          "text": "Świetliki oświetlają wam drogę"
+        },
+        {
+          "title": "Stokrotka za uszkiem",
+          "text": "Pixel ozdobił uszko stokrotką"
+        },
+        {
+          "title": "Leśna orkiestra",
+          "text": "Ptaki śpiewają, a Pixel mruczy do rytmu"
+        },
+        {
+          "title": "Domek w dziupli",
+          "text": "Pixel urządził wam domek w starej dziupli"
+        },
+        {
+          "title": "Berek z zajączkiem",
+          "text": "Pixel bawi się z zajączkiem w berka"
+        },
+        {
+          "title": "Kropelka miodu",
+          "text": "Niedźwiadek poczęstował was miodem"
+        },
+        {
+          "title": "Wianek z koniczyny",
+          "text": "Pixel uplótł ci wianek"
+        },
+        {
+          "title": "Lisia przyjaciółka",
+          "text": "Ruda lisiczka zaprzyjaźniła się z Pixelem"
+        },
+        {
+          "title": "Ciche jezioro",
+          "text": "Pixel patrzy na swoje odbicie i mruczy"
+        },
+        {
+          "title": "Lilia wodna",
+          "text": "Żabka przewiozła was na liściu lilii"
+        },
+        {
+          "title": "Tęcza nad lasem",
+          "text": "Po deszczu nad lasem pojawiła się tęcza"
+        },
+        {
+          "title": "Bajkowa polana",
+          "text": "Wszystkie zwierzątka przyszły cię zobaczyć"
+        },
+        {
+          "title": "Stary dąb",
+          "text": "Dąb opowiedział Pixelowi dawną baśń"
+        },
+        {
+          "title": "Noc w lesie",
+          "text": "Pixel przykrył cię dużym listkiem"
+        },
+        {
+          "title": "Poranna rosa",
+          "text": "Pixel umył się rosą i cały lśni"
+        },
+        {
+          "title": "Koronkowa pajęczynka",
+          "text": "Pajączek utkał wam koronkową chusteczkę"
+        },
+        {
+          "title": "Skraj lasu",
+          "text": "Pixel pomachał lasowi ogonkiem na pożegnanie"
+        },
+        {
+          "title": "Lot dmuchawca",
+          "text": "Wiatr porwał was jak puszek"
+        },
+        {
+          "title": "Schody z chmurek",
+          "text": "Pixel spaceruje po chmurach"
+        },
+        {
+          "title": "Podniebny zamek",
+          "text": "Na chmurce stoi zamek i jest wasz"
+        },
+        {
+          "title": "Psotny wiatr",
+          "text": "Wiatr zmierzwił Pixelowi futerko"
+        },
+        {
+          "title": "Okulary uczonego",
+          "text": "Pixel założył okulary, żeby oglądać gwiazdy"
+        },
+        {
+          "title": "Mapa gwiazd",
+          "text": "Pixel narysował mapę nieba"
+        },
+        {
+          "title": "Gwiazdozbiór Kota",
+          "text": "Na niebie zapłonął gwiazdozbiór w kształcie Pixela"
+        },
+        {
+          "title": "Księżycowa ścieżka",
+          "text": "Spacerujecie w świetle księżyca"
+        },
+        {
+          "title": "Serowy księżyc",
+          "text": "Pixel jest pewien, że księżyc jest z sera"
+        },
+        {
+          "title": "Spadająca gwiazda",
+          "text": "Pixel złapał łapką spadającą gwiazdę"
+        },
+        {
+          "title": "Droga Mleczna",
+          "text": "Pixel chłepcze mleko z Drogi Mlecznej"
+        },
+        {
+          "title": "Ogon komety",
+          "text": "Kometa macha ogonem zupełnie jak Pixel"
+        },
+        {
+          "title": "Zorza polarna",
+          "text": "Niebo mieni się dla was dwojga"
+        },
+        {
+          "title": "Gwiezdna kołyska",
+          "text": "Pixel zasnął na rogaliku księżyca jak w hamaku"
+        },
+        {
+          "title": "Planeta Mru",
+          "text": "Pixel odkrył planetę i nazwał ją Mru"
+        },
+        {
+          "title": "Kosmiczny kłębek",
+          "text": "Pixel turla po niebie kłębek-planetę"
+        },
+        {
+          "title": "Własny księżyc",
+          "text": "Teraz Pixel ma mały księżyc"
+        },
+        {
+          "title": "Międzygwiezdne mruczenie",
+          "text": "Mruczenie doleciało do innych gwiazd"
+        },
+        {
+          "title": "Gwiezdny listonosz",
+          "text": "Pixel przysłał ci list z gwiazdy"
+        },
+        {
+          "title": "Deszcz meteorów",
+          "text": "Z nieba sypią się iskierki"
+        },
+        {
+          "title": "Słoneczny zajączek",
+          "text": "Pixel goni słonecznego zajączka"
+        },
+        {
+          "title": "Tęczowy most",
+          "text": "Przeszliście po tęczy na drugą stronę nieba"
+        },
+        {
+          "title": "Poduszka z chmurki",
+          "text": "Pixel wytrzepał ci chmurkową poduszkę"
+        },
+        {
+          "title": "Prawie setka",
+          "text": "Jeszcze jedno osiągnięcie i stanie się cud"
+        },
+        {
+          "title": "Skrzydełka wróżki",
+          "text": "Pixelowi wyrosły czarodziejskie skrzydełka"
+        },
+        {
+          "title": "Morska bryza",
+          "text": "Pixel pierwszy raz zobaczył morze"
+        },
+        {
+          "title": "Muszelka",
+          "text": "Pixel podarował ci muszelkę z szumem morza"
+        },
+        {
+          "title": "Zamek z piasku",
+          "text": "Zbudowaliście zamek z piasku"
+        },
+        {
+          "title": "Kot kapitan",
+          "text": "Pixel założył czapkę kapitana, na niby"
+        },
+        {
+          "title": "Papierowa łódeczka",
+          "text": "Wasza łódeczka wypłynęła w rejs"
+        },
+        {
+          "title": "Dobry wieloryb",
+          "text": "Wieloryb przewiózł was na grzbiecie"
+        },
+        {
+          "title": "Uśmiech delfina",
+          "text": "Delfin uśmiechnął się do Pixela"
+        },
+        {
+          "title": "Rozgwiazda",
+          "text": "Pixel znalazł gwiazdkę prosto w wodzie"
+        },
+        {
+          "title": "Wyspa skarbów",
+          "text": "Skarbem okazało się przytulne pudełko"
+        },
+        {
+          "title": "List w butelce",
+          "text": "Pixel wysłał ci liścik przez fale"
+        },
+        {
+          "title": "Latarnia na skale",
+          "text": "Latarnik poczęstował Pixela rybką"
+        },
+        {
+          "title": "Perła",
+          "text": "Pixel znalazł perłę i dał ją tobie"
+        },
+        {
+          "title": "Pomyślny wiatr",
+          "text": "Żagle pełne, naprzód!"
+        },
+        {
+          "title": "Gadatliwe mewy",
+          "text": "Mewy rozniosły wieść o waszej przyjaźni"
+        },
+        {
+          "title": "Podwodny ogród",
+          "text": "Rybki pokazały wam swój ogród"
+        },
+        {
+          "title": "Kot syrenka",
+          "text": "Pixel przymierzył ogon syrenki"
+        },
+        {
+          "title": "Ciepły prąd",
+          "text": "Prąd niesie was ku nowym brzegom"
+        },
+        {
+          "title": "Zachód słońca nad morzem",
+          "text": "Oglądacie razem zachód słońca"
+        },
+        {
+          "title": "Gwiezdna przystań",
+          "text": "Łódeczka przybiła do brzegu pod gwiazdami"
+        },
+        {
+          "title": "Dalekie kraje",
+          "text": "Pixel przywiózł ci pozdrowienia z daleka"
+        },
+        {
+          "title": "Walizeczka",
+          "text": "Pixel wszedł do walizki, żeby jechać z tobą"
+        },
+        {
+          "title": "Balon",
+          "text": "Lecicie balonem"
+        },
+        {
+          "title": "Górski szczyt",
+          "text": "Pixel zdobył górę i mruczy na szczycie"
+        },
+        {
+          "title": "Irbis",
+          "text": "Śnieżna pantera uznała Pixela za swojego"
+        },
+        {
+          "title": "Droga do domu",
+          "text": "Najlepsze w podróży jest wspólny powrót"
+        },
+        {
+          "title": "Pierwszy przebiśnieg",
+          "text": "Pixel znalazł pierwszy wiosenny kwiatek"
+        },
+        {
+          "title": "Wiosenny strumyk",
+          "text": "Pixel puszcza łódeczki po strumyku"
+        },
+        {
+          "title": "Budka dla ptaków",
+          "text": "Pixel pilnuje ptasiego domku"
+        },
+        {
+          "title": "Wiosenny deszczyk",
+          "text": "Pixel przeczekał deszczyk wtulony w ciebie"
+        },
+        {
+          "title": "Kwitnący sad",
+          "text": "Pixel skacze po płatkach"
+        },
+        {
+          "title": "Letnie południe",
+          "text": "Pixel wyciągnął się na słoneczku"
+        },
+        {
+          "title": "Motylek na nosie",
+          "text": "Motylek usiadł Pixelowi na nosie"
+        },
+        {
+          "title": "Kawałek arbuza",
+          "text": "Pixel podzielił się z tobą arbuzem"
+        },
+        {
+          "title": "Noc światełek",
+          "text": "Letnia noc świeci światełkami"
+        },
+        {
+          "title": "Ciepły deszcz",
+          "text": "Pixel tańczy w letnim deszczu"
+        },
+        {
+          "title": "Liście na wietrze",
+          "text": "Pixel nurkuje w stosie liści"
+        },
+        {
+          "title": "Ciasto dyniowe",
+          "text": "Pixel upiekł ciasto, prawie sam"
+        },
+        {
+          "title": "Szalik dla Pixela",
+          "text": "Zrobiłeś Pixelowi szaliczek na drutach"
+        },
+        {
+          "title": "Gorące kakao",
+          "text": "Pixel grzeje się przy twoim kubku"
+        },
+        {
+          "title": "Pierwszy śnieg",
+          "text": "Pixel łapie łapką płatki śniegu"
+        },
+        {
+          "title": "Śnieżny kot",
+          "text": "Ulepiliście bałwana z uszkami"
+        },
+        {
+          "title": "Lodowa górka",
+          "text": "Pixel zjeżdża z górki na ogonku"
+        },
+        {
+          "title": "Szronowe wzory",
+          "text": "Mróz namalował Pixela na szybie"
+        },
+        {
+          "title": "Ciepły piec",
+          "text": "Pixel mruczy przy piecu"
+        },
+        {
+          "title": "Bombka",
+          "text": "Pixel bawi się błyszczącą bombką"
+        },
+        {
+          "title": "Prezent pod choinką",
+          "text": "W pudełku z kokardą spał Pixel"
+        },
+        {
+          "title": "Korowód pór roku",
+          "text": "Wiosna, lato, jesień, zima — zawsze razem"
+        },
+        {
+          "title": "Kalendarz mruczenia",
+          "text": "Pixel zaznacza każdy wasz dzień"
+        },
+        {
+          "title": "Rok przyjaźni",
+          "text": "Cały rok ciepła i mruczenia"
+        },
+        {
+          "title": "Gwiezdna obręcz",
+          "text": "Nad Pixelem rozbłysła obręcz ze światła"
+        },
+        {
+          "title": "Czarodziejska różdżka",
+          "text": "Pixel znalazł czarodziejską różdżkę"
+        },
+        {
+          "title": "Pierwsze zaklęcie",
+          "text": "„Mru-abra-kadabra!”"
+        },
+        {
+          "title": "Kapelusz magika",
+          "text": "Z kapelusza wyskoczył Pixel"
+        },
+        {
+          "title": "Eliksir przytulania",
+          "text": "Jeden łyk i wszyscy chcą się przytulać"
+        },
+        {
+          "title": "Mówiący kot",
+          "text": "Pixel powiedział ci „mru” jak prawdziwy człowiek"
+        },
+        {
+          "title": "Niewidzialny kot",
+          "text": "Pixel stał się niewidzialny, ale ogonek został"
+        },
+        {
+          "title": "Latający dywan",
+          "text": "Oblecieliście całe miasto na dywanie"
+        },
+        {
+          "title": "Kryształowa kula",
+          "text": "W kuli widać waszą jasną przyszłość"
+        },
+        {
+          "title": "Zaczarowany kłębek",
+          "text": "Kłębek sam wskazuje drogę"
+        },
+        {
+          "title": "Siedmiomilowe buty",
+          "text": "Pixel przybiega do ciebie w sekundę"
+        },
+        {
+          "title": "Księga baśni",
+          "text": "W starej księdze znalazła się baśń o was"
+        },
+        {
+          "title": "Dobry smoczek",
+          "text": "Smoczek zaprzyjaźnił się z Pixelem"
+        },
+        {
+          "title": "Jednorożec",
+          "text": "Jednorożec pozwolił się pogłaskać"
+        },
+        {
+          "title": "Baśniowe królestwo",
+          "text": "Pixel jest najważniejszym kotem królestwa"
+        },
+        {
+          "title": "Karoca z dyni",
+          "text": "Karoca czeka na was przed progiem"
+        },
+        {
+          "title": "Szklany pantofelek",
+          "text": "Pixel zgubił pantofelek i znalazł ciebie"
+        },
+        {
+          "title": "Kwiat siedmiu barw",
+          "text": "Pixel oddał ci wszystkie siedem życzeń"
+        },
+        {
+          "title": "Ognisty ptak",
+          "text": "Ognisty ptak upuścił wam piórko"
+        },
+        {
+          "title": "Stoliczku, nakryj się",
+          "text": "Na stole sama pojawiła się rybka dla Pixela"
+        },
+        {
+          "title": "Jabłko młodości",
+          "text": "Pixel znów czuje się kociakiem"
+        },
+        {
+          "title": "Złoty kluczyk",
+          "text": "Pixel dał ci kluczyk do baśni"
+        },
+        {
+          "title": "Czarodziejskie lusterko",
+          "text": "Lusterko mówi: „Jesteś najlepszym przyjacielem na świecie”"
+        },
+        {
+          "title": "Senne królestwo",
+          "text": "Pixel strzeże twoich baśniowych snów"
+        },
+        {
+          "title": "Dobra wróżka",
+          "text": "Wróżka nagrodziła was gwiazdką"
+        },
+        {
+          "title": "Serduszka dookoła",
+          "text": "Wokół Pixela krążą serduszka"
+        },
+        {
+          "title": "Ciepłe serce",
+          "text": "Pixel nosi cię w swoim sercu"
+        },
+        {
+          "title": "Mruczący rekord",
+          "text": "Pixel mruczał całą godzinę bez przerwy"
+        },
+        {
+          "title": "Sto tysięcy mruknięć",
+          "text": "Świat nie słyszał jeszcze tyle mruczenia"
+        },
+        {
+          "title": "Pixel nauczyciel",
+          "text": "Kociaki uczą się od ciebie głaskania"
+        },
+        {
+          "title": "Koci sejmik",
+          "text": "Wszystkie koty wybrały cię najlepszym przyjacielem"
+        },
+        {
+          "title": "Pomnik z kłębków",
+          "text": "Koty ułożyły ci pomnik z kłębków"
+        },
+        {
+          "title": "Piosenka o tobie",
+          "text": "Koty z całego świata śpiewają twoją piosenkę"
+        },
+        {
+          "title": "Portret nad legowiskiem",
+          "text": "Pixel powiesił twój portret nad legowiskiem"
+        },
+        {
+          "title": "Niezniszczalna przyjaźń",
+          "text": "Nic was nie rozdzieli"
+        },
+        {
+          "title": "Mądrość wieków",
+          "text": "Pixel wie na pewno: jesteś najlepszy"
+        },
+        {
+          "title": "Światełko w okienku",
+          "text": "U Pixela zawsze pali się dla ciebie światło"
+        },
+        {
+          "title": "Baśniowy kronikarz",
+          "text": "Wasza przyjaźń trafiła do księgi baśni"
+        },
+        {
+          "title": "Opiekun kociąt",
+          "text": "Powierzono ci najmniejsze kocięta"
+        },
+        {
+          "title": "Gwiazda z twoim imieniem",
+          "text": "Pixel nazwał gwiazdę twoim imieniem"
+        },
+        {
+          "title": "Honorowy kot",
+          "text": "Przyjęto cię do kociej rodziny"
+        },
+        {
+          "title": "Dziewięć żyć razem",
+          "text": "Wszystkie dziewięć żyć — przy tobie"
+        },
+        {
+          "title": "Mrucząca legenda",
+          "text": "Kociętom opowiada się bajki o tobie"
+        },
+        {
+          "title": "Bezgraniczna czułość",
+          "text": "Czułości jest więcej niż gwiazd"
+        },
+        {
+          "title": "Największy kłębek",
+          "text": "Pixel rozwinął największy kłębek na świecie"
+        },
+        {
+          "title": "Ciche szczęście",
+          "text": "Po prostu być razem i mruczeć"
+        },
+        {
+          "title": "Prawie wieczność",
+          "text": "Pixel nie pamięta już, jak żył bez ciebie"
+        },
+        {
+          "title": "Światło jego życia",
+          "text": "Jesteś światłem w życiu Pixela"
+        },
+        {
+          "title": "Ostatnie kroczki",
+          "text": "Jeszcze troszkę, Pixel się denerwuje"
+        },
+        {
+          "title": "Przed cudem",
+          "text": "Niebo nad Pixelem zaczyna się mienić…"
+        },
+        {
+          "title": "Legenda zorzy",
+          "text": "Pixel lśni zorzą polarną. Przeszedłeś całą baśń!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Piksel udaje, że cię nie widzi",
           "Machnął ogonem i poszedł"
         ]
+      },
+      "wear": {
+        "blush": "Rumieńce",
+        "yarn": "Kłębek",
+        "star": "Gwiazdka",
+        "crown": "Korona",
+        "tail": "Tęczowy ogonek",
+        "hearts": "Serduszka w oczach",
+        "bell": "Dzwoneczek",
+        "bow": "Kokardka",
+        "sparkles": "Gwiezdny deszcz",
+        "gold": "Złoty blask",
+        "daisy": "Stokrotka",
+        "glasses": "Okulary",
+        "wings": "Skrzydełka",
+        "halo": "Obręcz ze światła",
+        "love": "Fruwające serduszka",
+        "aurora": "Zorza polarna"
       }
     }
   },

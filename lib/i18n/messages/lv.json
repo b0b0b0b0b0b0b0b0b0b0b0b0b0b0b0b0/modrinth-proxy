@@ -186,6 +186,686 @@
         {
           "title": "Mūžīga mīlestība",
           "text": "Pikselis ir tavs uz visiem laikiem"
+        },
+        {
+          "title": "Devītā dzīve",
+          "text": "Pikselis tev atdotu visas savas deviņas dzīves"
+        },
+        {
+          "title": "Saulainā palodze",
+          "text": "Pikselis tev atdeva savu siltāko vietiņu"
+        },
+        {
+          "title": "Zvaniņš",
+          "text": "Pikselis uzlika zvaniņu, lai tu dzirdētu, kā viņš skrien pie tevis"
+        },
+        {
+          "title": "Zivju mielasts",
+          "text": "Pikselis dalījās ar tevi savā gardākajā zivtiņā"
+        },
+        {
+          "title": "Murrāšanas dziesmiņa",
+          "text": "Pikselis sacerēja dziesmiņu par tevi"
+        },
+        {
+          "title": "Kaķu sapņi",
+          "text": "Pikselis sapņo par tevi katru nakti"
+        },
+        {
+          "title": "Pūkains pleds",
+          "text": "Pikselis saritinājās kamoliņā tev klēpī"
+        },
+        {
+          "title": "Svētku lentīte",
+          "text": "Pikselis tevis dēļ apsēja lentīti ap austiņu"
+        },
+        {
+          "title": "Prieka skrējieni",
+          "text": "Pikselis no laimes skraida pa visu vietni"
+        },
+        {
+          "title": "Četrdesmit smaidi",
+          "text": "Pikselis smaida tev atkal un atkal"
+        },
+        {
+          "title": "Slepenā taciņa",
+          "text": "Pikselis parādīja tev ceļu uz savu mājiņu"
+        },
+        {
+          "title": "Zvaigžņu krišana",
+          "text": "Ap Pikseli virpuļo zvaigznītes"
+        },
+        {
+          "title": "Piena ūsas",
+          "text": "Pikselis pacienāja tevi ar pieniņu"
+        },
+        {
+          "title": "Kaķa skūpsts",
+          "text": "Pikselis lēnām tev pamirkšķināja: kaķu valodā tas nozīmē “mīlu”"
+        },
+        {
+          "title": "Murrājošā bāka",
+          "text": "Pikselis spīd tev, lai kur tu būtu"
+        },
+        {
+          "title": "Pasaka pirms miega",
+          "text": "Pikselis izstāstīja tev savu mīļāko pasaku"
+        },
+        {
+          "title": "Ķepa ķepā",
+          "text": "Tagad jūs ar Pikseli staigājat kopā"
+        },
+        {
+          "title": "Pūkainā komēta",
+          "text": "Pikselis atlido pie tevis ātrāk par komētu"
+        },
+        {
+          "title": "Kaut kas mirdzošs",
+          "text": "Pikselis jau pielaiko kaut ko zeltītu…"
+        },
+        {
+          "title": "Zelta Pikselis",
+          "text": "Pikselis mirdz zeltā: tu viņu glaudi visvairāk pasaulē"
+        },
+        {
+          "title": "Meža taciņa",
+          "text": "Pikselis aicināja tevi uz pasaku mežu"
+        },
+        {
+          "title": "Čiekura atradums",
+          "text": "Pikselis atrada tev visapaļāko čiekuru"
+        },
+        {
+          "title": "Ezītis ciemos",
+          "text": "Pikselis iepazīstināja tevi ar ezīti"
+        },
+        {
+          "title": "Zemeņu pļaviņa",
+          "text": "Pikselis aizveda tevi pie gatavām meža zemenēm"
+        },
+        {
+          "title": "Sūnu tiltiņš",
+          "text": "Jūs pārgājāt strautu pa mīkstām sūnām"
+        },
+        {
+          "title": "Pūces noslēpums",
+          "text": "Pūce iečukstēja Pikselim, ka tu esi labs"
+        },
+        {
+          "title": "Vāveres dārgums",
+          "text": "Vāvere dalījās ar jums riekstiņiem"
+        },
+        {
+          "title": "Sēņu lietutiņš",
+          "text": "Pikselis paslēpa tevi zem sēnes cepurītes"
+        },
+        {
+          "title": "Jāņtārpiņi",
+          "text": "Jāņtārpiņi apgaismo jums ceļu"
+        },
+        {
+          "title": "Margrietiņa aiz austiņas",
+          "text": "Pikselis izrotāja austiņu ar margrietiņu"
+        },
+        {
+          "title": "Meža orķestris",
+          "text": "Putni dzied, un Pikselis murrā līdzi"
+        },
+        {
+          "title": "Mājiņa dobumā",
+          "text": "Pikselis iekārtoja jums mājiņu vecā koka dobumā"
+        },
+        {
+          "title": "Ķeršanās ar zaķīti",
+          "text": "Pikselis spēlē ķerenes ar zaķīti"
+        },
+        {
+          "title": "Medus pilīte",
+          "text": "Lācēns pacienāja jūs ar medu"
+        },
+        {
+          "title": "Āboliņa vainags",
+          "text": "Pikselis nopina tev vainagu"
+        },
+        {
+          "title": "Lapsiņa draudzene",
+          "text": "Ruda lapsiņa sadraudzējās ar Pikseli"
+        },
+        {
+          "title": "Klusais ezers",
+          "text": "Pikselis skatās savā atspulgā un murrā"
+        },
+        {
+          "title": "Ūdensroze",
+          "text": "Vardulēns izvizināja jūs uz ūdensrozes lapas"
+        },
+        {
+          "title": "Varavīksne pār mežu",
+          "text": "Pēc lietus pār mežu parādījās varavīksne"
+        },
+        {
+          "title": "Pasaku laukums",
+          "text": "Visi meža zvēriņi atnāca tevi apskatīt"
+        },
+        {
+          "title": "Vecais ozols",
+          "text": "Ozols izstāstīja Pikselim senu pasaku"
+        },
+        {
+          "title": "Nakts mežā",
+          "text": "Pikselis apsedza tevi ar lielu lapu"
+        },
+        {
+          "title": "Rīta rasa",
+          "text": "Pikselis nomazgājās rasā un viss mirdz"
+        },
+        {
+          "title": "Mežģīņu tīkls",
+          "text": "Zirneklītis noauda jums mežģīņu lakatiņu"
+        },
+        {
+          "title": "Meža mala",
+          "text": "Pikselis atvadoties pamāja mežam ar astīti"
+        },
+        {
+          "title": "Pienenes lidojums",
+          "text": "Vējš aiznesa jūs kā pūciņas"
+        },
+        {
+          "title": "Mākoņu kāpnes",
+          "text": "Pikselis staigā pa mākoņiem"
+        },
+        {
+          "title": "Debesu pils",
+          "text": "Uz mākoņa stāv pils, un tā ir jūsu"
+        },
+        {
+          "title": "Nerātnais vējš",
+          "text": "Vējš sapūrināja Pikseļa kažociņu"
+        },
+        {
+          "title": "Gudrās brilles",
+          "text": "Pikselis uzlika brilles, lai aplūkotu zvaigznes"
+        },
+        {
+          "title": "Zvaigžņu karte",
+          "text": "Pikselis uzzīmēja debesu karti"
+        },
+        {
+          "title": "Kaķa zvaigznājs",
+          "text": "Debesīs iedegās zvaigznājs Pikseļa izskatā"
+        },
+        {
+          "title": "Mēness taciņa",
+          "text": "Jūs pastaigājaties mēnesgaismā"
+        },
+        {
+          "title": "Siera mēness",
+          "text": "Pikselis ir drošs, ka mēness ir no siera"
+        },
+        {
+          "title": "Krītošā zvaigzne",
+          "text": "Pikselis noķēra krītošu zvaigzni ar ķepiņu"
+        },
+        {
+          "title": "Piena ceļš",
+          "text": "Pikselis laka pienu no Piena ceļa"
+        },
+        {
+          "title": "Komētas aste",
+          "text": "Komēta luncina asti gluži kā Pikselis"
+        },
+        {
+          "title": "Ziemeļblāzma",
+          "text": "Debesis mirdz jums abiem"
+        },
+        {
+          "title": "Zvaigžņu šūpulis",
+          "text": "Pikselis aizmiga uz mēness sirpja kā šūpuļtīklā"
+        },
+        {
+          "title": "Planēta Murr",
+          "text": "Pikselis atklāja planētu un nosauca to par Murr"
+        },
+        {
+          "title": "Kosmiskais kamols",
+          "text": "Pikselis ripina pa debesīm kamolu-planētu"
+        },
+        {
+          "title": "Savs mēness",
+          "text": "Tagad Pikselim ir mazs mēnestiņš"
+        },
+        {
+          "title": "Starpzvaigžņu murrāšana",
+          "text": "Murrāšana aizlidoja līdz citām zvaigznēm"
+        },
+        {
+          "title": "Zvaigžņu pastnieks",
+          "text": "Pikselis atsūtīja tev vēstuli no zvaigznes"
+        },
+        {
+          "title": "Meteoru lietus",
+          "text": "No debesīm birst dzirkstelītes"
+        },
+        {
+          "title": "Saules zaķītis",
+          "text": "Pikselis dzenā saules zaķīti"
+        },
+        {
+          "title": "Varavīksnes tilts",
+          "text": "Jūs pa varavīksni pārgājāt debesu otrā pusē"
+        },
+        {
+          "title": "Mākoņa spilvens",
+          "text": "Pikselis sapūta tev mākoņa spilvenu"
+        },
+        {
+          "title": "Gandrīz simts",
+          "text": "Vēl viens sasniegums, un notiks brīnums"
+        },
+        {
+          "title": "Fejas spārniņi",
+          "text": "Pikselim izauga burvju spārniņi"
+        },
+        {
+          "title": "Jūras vēsma",
+          "text": "Pikselis pirmo reizi ieraudzīja jūru"
+        },
+        {
+          "title": "Gliemežvāks",
+          "text": "Pikselis uzdāvināja tev gliemežvāku ar jūras šalkoņu"
+        },
+        {
+          "title": "Smilšu pils",
+          "text": "Jūs uzcēlāt pili no smiltīm"
+        },
+        {
+          "title": "Kaķis kapteinis",
+          "text": "Pikselis uzlika kapteiņa cepuri, pa jokam"
+        },
+        {
+          "title": "Papīra laiviņa",
+          "text": "Jūsu laiviņa devās ceļā"
+        },
+        {
+          "title": "Labais valis",
+          "text": "Valis izvizināja jūs uz muguras"
+        },
+        {
+          "title": "Delfīna smaids",
+          "text": "Delfīns uzsmaidīja Pikselim"
+        },
+        {
+          "title": "Jūras zvaigzne",
+          "text": "Pikselis atrada zvaigznīti tieši ūdenī"
+        },
+        {
+          "title": "Dārgumu sala",
+          "text": "Dārgums izrādījās mājīga kaste"
+        },
+        {
+          "title": "Vēstule pudelē",
+          "text": "Pikselis aizsūtīja tev zīmīti pa viļņiem"
+        },
+        {
+          "title": "Bāka uz klints",
+          "text": "Bākas sargs pacienāja Pikseli ar zivtiņu"
+        },
+        {
+          "title": "Pērle",
+          "text": "Pikselis atrada pērli un atdeva to tev"
+        },
+        {
+          "title": "Ceļavējš",
+          "text": "Buras pilnas, uz priekšu!"
+        },
+        {
+          "title": "Pļāpīgās kaijas",
+          "text": "Kaijas izpauda ziņu par jūsu draudzību"
+        },
+        {
+          "title": "Zemūdens dārzs",
+          "text": "Zivtiņas parādīja jums savu dārzu"
+        },
+        {
+          "title": "Kaķis nāriņa",
+          "text": "Pikselis pielaikoja nāriņas asti"
+        },
+        {
+          "title": "Siltā straume",
+          "text": "Straume nes jūs uz jauniem krastiem"
+        },
+        {
+          "title": "Saulriets pie jūras",
+          "text": "Jūs kopā vērojat saulrietu"
+        },
+        {
+          "title": "Zvaigžņu osta",
+          "text": "Laiviņa pietauvojās zem zvaigznēm"
+        },
+        {
+          "title": "Tālās zemes",
+          "text": "Pikselis atveda tev sveicienus no tālienes"
+        },
+        {
+          "title": "Čemodāniņš",
+          "text": "Pikselis ielīda čemodānā, lai brauktu kopā ar tevi"
+        },
+        {
+          "title": "Gaisa balons",
+          "text": "Jūs lidojat ar gaisa balonu"
+        },
+        {
+          "title": "Kalna virsotne",
+          "text": "Pikselis iekaroja kalnu un murrā virsotnē"
+        },
+        {
+          "title": "Sniega leopards",
+          "text": "Sniega leopards atzina Pikseli par savējo"
+        },
+        {
+          "title": "Ceļš mājup",
+          "text": "Labākais ceļojumā ir atgriezties kopā"
+        },
+        {
+          "title": "Pirmā sniegpulkstenīte",
+          "text": "Pikselis atrada pirmo pavasara ziedu"
+        },
+        {
+          "title": "Pavasara strautiņš",
+          "text": "Pikselis laiž laiviņas pa strautiņu"
+        },
+        {
+          "title": "Putnu būrītis",
+          "text": "Pikselis sargā putnu būrīti"
+        },
+        {
+          "title": "Pavasara lietutiņš",
+          "text": "Pikselis pārlaida lietu, piespiedies tev klāt"
+        },
+        {
+          "title": "Ziedošs dārzs",
+          "text": "Pikselis lēkā pa ziedlapiņām"
+        },
+        {
+          "title": "Vasaras pusdienlaiks",
+          "text": "Pikselis izstiepās saulītē"
+        },
+        {
+          "title": "Taurenītis uz deguna",
+          "text": "Taurenītis apsēdās Pikselim uz deguna"
+        },
+        {
+          "title": "Arbūza šķēle",
+          "text": "Pikselis dalījās ar tevi arbūzā"
+        },
+        {
+          "title": "Gaismiņu nakts",
+          "text": "Vasaras nakts mirdz gaismiņām"
+        },
+        {
+          "title": "Silts lietus",
+          "text": "Pikselis dejo vasaras lietū"
+        },
+        {
+          "title": "Lapkritis",
+          "text": "Pikselis ienirst lapu kaudzē"
+        },
+        {
+          "title": "Ķirbju pīrāgs",
+          "text": "Pikselis izcepa pīrāgu, gandrīz pats"
+        },
+        {
+          "title": "Šallīte Pikselim",
+          "text": "Tu noadīji Pikselim šallīti"
+        },
+        {
+          "title": "Karsts kakao",
+          "text": "Pikselis sildās pie tavas krūzītes"
+        },
+        {
+          "title": "Pirmais sniegs",
+          "text": "Pikselis ķer sniegpārslas ar ķepiņu"
+        },
+        {
+          "title": "Sniega kaķis",
+          "text": "Jūs uztaisījāt sniegavīru ar austiņām"
+        },
+        {
+          "title": "Ledus kalniņš",
+          "text": "Pikselis slīd no kalniņa uz astītes"
+        },
+        {
+          "title": "Sarmas raksti",
+          "text": "Sals uzzīmēja logā Pikseli"
+        },
+        {
+          "title": "Silta krāsns",
+          "text": "Pikselis murrā pie krāsns"
+        },
+        {
+          "title": "Eglītes bumbiņa",
+          "text": "Pikselis spēlējas ar spīdīgu bumbiņu"
+        },
+        {
+          "title": "Dāvana zem eglītes",
+          "text": "Kastē ar bantīti gulēja Pikselis"
+        },
+        {
+          "title": "Gadalaiku rotaļa",
+          "text": "Pavasaris, vasara, rudens, ziema — vienmēr kopā"
+        },
+        {
+          "title": "Murrāšanas kalendārs",
+          "text": "Pikselis atzīmē katru jūsu dienu"
+        },
+        {
+          "title": "Draudzības gads",
+          "text": "Vesels gads siltuma un murrāšanas"
+        },
+        {
+          "title": "Zvaigžņu loks",
+          "text": "Virs Pikseļa iemirdzējās gaismas loks"
+        },
+        {
+          "title": "Burvju nūjiņa",
+          "text": "Pikselis atrada burvju nūjiņu"
+        },
+        {
+          "title": "Pirmā burvestība",
+          "text": "“Murr-abra-kadabra!”"
+        },
+        {
+          "title": "Burvja cepure",
+          "text": "No cepures izlēca Pikselis"
+        },
+        {
+          "title": "Apskāvienu dzira",
+          "text": "Viens malks — un visi grib apskauties"
+        },
+        {
+          "title": "Runājošs kaķis",
+          "text": "Pikselis pateica tev “murr” gluži kā cilvēks"
+        },
+        {
+          "title": "Neredzamais kaķis",
+          "text": "Pikselis kļuva neredzams, bet astīte palika"
+        },
+        {
+          "title": "Lidojošais paklājs",
+          "text": "Jūs uz paklāja aplidojāt visu pilsētu"
+        },
+        {
+          "title": "Kristāla lode",
+          "text": "Lodē redzama jūsu gaišā nākotne"
+        },
+        {
+          "title": "Burvju kamols",
+          "text": "Kamols pats rāda ceļu"
+        },
+        {
+          "title": "Septiņjūdžu zābaki",
+          "text": "Pikselis atskrien pie tevis vienā mirklī"
+        },
+        {
+          "title": "Pasaku grāmata",
+          "text": "Vecā grāmatā atradās pasaka par jums"
+        },
+        {
+          "title": "Labais pūķītis",
+          "text": "Pūķītis sadraudzējās ar Pikseli"
+        },
+        {
+          "title": "Vienradzis",
+          "text": "Vienradzis ļāva sevi noglāstīt"
+        },
+        {
+          "title": "Pasaku valstība",
+          "text": "Pikselis ir valstības galvenais kaķis"
+        },
+        {
+          "title": "Ķirbja kariete",
+          "text": "Kariete gaida jūs pie sliekšņa"
+        },
+        {
+          "title": "Stikla kurpīte",
+          "text": "Pikselis pazaudēja kurpīti un atrada tevi"
+        },
+        {
+          "title": "Septiņkrāsu zieds",
+          "text": "Pikselis atdeva tev visas septiņas vēlēšanās"
+        },
+        {
+          "title": "Ugunsputns",
+          "text": "Ugunsputns nometa jums spalviņu"
+        },
+        {
+          "title": "Burvju galdauts",
+          "text": "Uz galda pati parādījās zivtiņa Pikselim"
+        },
+        {
+          "title": "Jaunības ābols",
+          "text": "Pikselis atkal jūtas kā kaķēns"
+        },
+        {
+          "title": "Zelta atslēdziņa",
+          "text": "Pikselis iedeva tev atslēdziņu no pasakas"
+        },
+        {
+          "title": "Burvju spogulītis",
+          "text": "Spogulītis saka: “Tu esi labākais draugs pasaulē”"
+        },
+        {
+          "title": "Miega valstība",
+          "text": "Pikselis sargā tavus pasaku sapņus"
+        },
+        {
+          "title": "Labā feja",
+          "text": "Feja apbalvoja jūs ar zvaigznīti"
+        },
+        {
+          "title": "Sirsniņas visapkārt",
+          "text": "Ap Pikseli virpuļo sirsniņas"
+        },
+        {
+          "title": "Silta sirds",
+          "text": "Pikselis glabā tevi savā sirdī"
+        },
+        {
+          "title": "Murrāšanas rekords",
+          "text": "Pikselis murrāja veselu stundu bez pārtraukuma"
+        },
+        {
+          "title": "Simt tūkstoši murrājienu",
+          "text": "Tik daudz murrāšanas pasaule vēl nav dzirdējusi"
+        },
+        {
+          "title": "Skolotājs Pikselis",
+          "text": "Kaķēni mācās no tevis glāstīt"
+        },
+        {
+          "title": "Kaķu padome",
+          "text": "Visi kaķi izvēlējās tevi par labāko draugu"
+        },
+        {
+          "title": "Kamolu piemineklis",
+          "text": "Kaķi uzcēla tev pieminekli no kamoliem"
+        },
+        {
+          "title": "Dziesma par tevi",
+          "text": "Visas pasaules kaķi dzied tavu dziesmu"
+        },
+        {
+          "title": "Portrets virs guļvietas",
+          "text": "Pikselis pakāra tavu portretu virs savas guļvietas"
+        },
+        {
+          "title": "Nesatricināma draudzība",
+          "text": "Nekas jūs neizšķirs"
+        },
+        {
+          "title": "Gadsimtu gudrība",
+          "text": "Pikselis noteikti zina: tu esi labākais"
+        },
+        {
+          "title": "Gaisma lodziņā",
+          "text": "Pie Pikseļa tev vienmēr deg gaisma"
+        },
+        {
+          "title": "Pasaku hronists",
+          "text": "Jūsu draudzība iekļuva pasaku grāmatā"
+        },
+        {
+          "title": "Kaķēnu sargs",
+          "text": "Tev uzticēja pašus mazākos kaķēnus"
+        },
+        {
+          "title": "Zvaigzne ar tavu vārdu",
+          "text": "Pikselis nosauca zvaigzni tavā vārdā"
+        },
+        {
+          "title": "Goda kaķis",
+          "text": "Tevi uzņēma kaķu ģimenē"
+        },
+        {
+          "title": "Deviņas dzīves kopā",
+          "text": "Visas deviņas dzīves — tev blakus"
+        },
+        {
+          "title": "Murrāšanas leģenda",
+          "text": "Kaķēniem stāsta pasakas par tevi"
+        },
+        {
+          "title": "Bezgalīgs maigums",
+          "text": "Maiguma ir vairāk nekā zvaigžņu"
+        },
+        {
+          "title": "Lielākais kamols",
+          "text": "Pikselis attina lielāko kamolu pasaulē"
+        },
+        {
+          "title": "Klusa laime",
+          "text": "Vienkārši būt kopā un murrāt"
+        },
+        {
+          "title": "Gandrīz mūžība",
+          "text": "Pikselis vairs neatceras, kā dzīvoja bez tevis"
+        },
+        {
+          "title": "Viņa dzīves gaisma",
+          "text": "Tu esi gaisma Pikseļa dzīvē"
+        },
+        {
+          "title": "Pēdējie solīši",
+          "text": "Vēl mazliet, Pikselis uztraucas"
+        },
+        {
+          "title": "Pirms brīnuma",
+          "text": "Debesis virs Pikseļa sāk mirdzēt…"
+        },
+        {
+          "title": "Ziemeļblāzmas leģenda",
+          "text": "Pikselis mirdz ziemeļblāzmā. Tu izgāji visu pasaku!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pikselis izliekas, ka tevi neredz",
           "Pamāja ar asti un aizgāja"
         ]
+      },
+      "wear": {
+        "blush": "Sārti vaidziņi",
+        "yarn": "Kamoliņš",
+        "star": "Zvaigznīte",
+        "crown": "Kronis",
+        "tail": "Varavīksnes aste",
+        "hearts": "Sirsniņu acis",
+        "bell": "Zvaniņš",
+        "bow": "Lentīte",
+        "sparkles": "Zvaigžņu krišana",
+        "gold": "Zelta mirdzums",
+        "daisy": "Margrietiņa",
+        "glasses": "Brilles",
+        "wings": "Spārniņi",
+        "halo": "Gaismas loks",
+        "love": "Lidojošas sirsniņas",
+        "aurora": "Ziemeļblāzma"
       }
     }
   },

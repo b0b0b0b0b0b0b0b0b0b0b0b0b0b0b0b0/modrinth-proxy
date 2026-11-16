@@ -186,6 +186,686 @@
         {
           "title": "Amour éternel",
           "text": "Pixel est à toi pour toujours"
+        },
+        {
+          "title": "Neuvième vie",
+          "text": "Pixel te donnerait ses neuf vies"
+        },
+        {
+          "title": "Rebord ensoleillé",
+          "text": "Pixel t’a laissé sa place la plus chaude"
+        },
+        {
+          "title": "Clochette",
+          "text": "Pixel porte une clochette pour que tu l’entendes accourir"
+        },
+        {
+          "title": "Festin de poisson",
+          "text": "Pixel a partagé avec toi son poisson le plus délicieux"
+        },
+        {
+          "title": "Chanson ronronnante",
+          "text": "Pixel a inventé une chanson sur toi"
+        },
+        {
+          "title": "Rêves de chat",
+          "text": "Pixel rêve de toi chaque nuit"
+        },
+        {
+          "title": "Plaid tout doux",
+          "text": "Pixel s’est roulé en boule sur tes genoux"
+        },
+        {
+          "title": "Nœud de fête",
+          "text": "Pixel a noué un ruban à son oreille rien que pour toi"
+        },
+        {
+          "title": "Folle course de joie",
+          "text": "Pixel court partout sur le site de bonheur"
+        },
+        {
+          "title": "Quarante sourires",
+          "text": "Pixel te sourit encore et encore"
+        },
+        {
+          "title": "Sentier secret",
+          "text": "Pixel t’a montré le chemin de sa petite maison"
+        },
+        {
+          "title": "Pluie d’étoiles",
+          "text": "De petites étoiles tourbillonnent autour de Pixel"
+        },
+        {
+          "title": "Moustaches de lait",
+          "text": "Pixel t’a offert un peu de lait"
+        },
+        {
+          "title": "Bisou de chat",
+          "text": "Pixel a cligné lentement des yeux : en langage chat, ça veut dire « je t’aime »"
+        },
+        {
+          "title": "Phare ronronnant",
+          "text": "Pixel brille pour toi, où que tu sois"
+        },
+        {
+          "title": "Histoire du soir",
+          "text": "Pixel t’a raconté son conte préféré"
+        },
+        {
+          "title": "Patte dans la patte",
+          "text": "Toi et Pixel, vous vous promenez ensemble maintenant"
+        },
+        {
+          "title": "Comète duveteuse",
+          "text": "Pixel vole vers toi plus vite qu’une comète"
+        },
+        {
+          "title": "Quelque chose qui brille",
+          "text": "Pixel essaie déjà quelque chose de doré…"
+        },
+        {
+          "title": "Pixel doré",
+          "text": "Pixel brille d’or : tu l’as caressé plus que tout le monde"
+        },
+        {
+          "title": "Sentier forestier",
+          "text": "Pixel t’a invité dans une forêt enchantée"
+        },
+        {
+          "title": "Pomme de pin",
+          "text": "Pixel t’a trouvé la pomme de pin la plus ronde"
+        },
+        {
+          "title": "Visite du hérisson",
+          "text": "Pixel t’a présenté un hérisson"
+        },
+        {
+          "title": "Clairière aux fraises",
+          "text": "Pixel t’a mené aux fraises des bois bien mûres"
+        },
+        {
+          "title": "Pont de mousse",
+          "text": "Vous avez traversé le ruisseau sur la mousse douce"
+        },
+        {
+          "title": "Secret de la chouette",
+          "text": "Une chouette a soufflé à Pixel que tu es gentil"
+        },
+        {
+          "title": "Trésor de l’écureuil",
+          "text": "Un écureuil a partagé ses noisettes avec vous"
+        },
+        {
+          "title": "Pluie de champignons",
+          "text": "Pixel t’a abrité sous un chapeau de champignon"
+        },
+        {
+          "title": "Lucioles",
+          "text": "Les lucioles éclairent votre chemin"
+        },
+        {
+          "title": "Marguerite à l’oreille",
+          "text": "Pixel a orné son oreille d’une marguerite"
+        },
+        {
+          "title": "Orchestre de la forêt",
+          "text": "Les oiseaux chantent et Pixel ronronne en rythme"
+        },
+        {
+          "title": "Maison dans un arbre creux",
+          "text": "Pixel vous a installé une maison dans un vieux tronc"
+        },
+        {
+          "title": "Chat perché avec un lapin",
+          "text": "Pixel joue à chat avec un petit lapin"
+        },
+        {
+          "title": "Goutte de miel",
+          "text": "Un ourson vous a offert du miel"
+        },
+        {
+          "title": "Couronne de trèfle",
+          "text": "Pixel t’a tressé une couronne"
+        },
+        {
+          "title": "Amie renarde",
+          "text": "Une petite renarde rousse est devenue l’amie de Pixel"
+        },
+        {
+          "title": "Lac paisible",
+          "text": "Pixel regarde son reflet et ronronne"
+        },
+        {
+          "title": "Nénuphar",
+          "text": "Une petite grenouille vous a promenés sur un nénuphar"
+        },
+        {
+          "title": "Arc-en-ciel sur la forêt",
+          "text": "Après la pluie, un arc-en-ciel est apparu sur la forêt"
+        },
+        {
+          "title": "Clairière enchantée",
+          "text": "Tous les animaux sont venus te voir"
+        },
+        {
+          "title": "Vieux chêne",
+          "text": "Le chêne a raconté à Pixel un très vieux conte"
+        },
+        {
+          "title": "Nuit en forêt",
+          "text": "Pixel t’a couvert d’une grande feuille"
+        },
+        {
+          "title": "Rosée du matin",
+          "text": "Pixel s’est lavé avec la rosée et il rayonne"
+        },
+        {
+          "title": "Toile de dentelle",
+          "text": "Une petite araignée vous a tissé un mouchoir en dentelle"
+        },
+        {
+          "title": "Lisière",
+          "text": "Pixel a dit au revoir à la forêt d’un coup de queue"
+        },
+        {
+          "title": "Vol de pissenlit",
+          "text": "Le vent vous a emportés comme des aigrettes"
+        },
+        {
+          "title": "Escalier de nuages",
+          "text": "Pixel marche sur les nuages"
+        },
+        {
+          "title": "Château dans le ciel",
+          "text": "Sur un nuage se dresse un château, et il est à vous"
+        },
+        {
+          "title": "Vent farceur",
+          "text": "Le vent a ébouriffé le pelage de Pixel"
+        },
+        {
+          "title": "Lunettes de savant",
+          "text": "Pixel a mis des lunettes pour observer les étoiles"
+        },
+        {
+          "title": "Carte du ciel",
+          "text": "Pixel a dessiné une carte du ciel"
+        },
+        {
+          "title": "Constellation du Chat",
+          "text": "Une constellation en forme de Pixel s’est allumée"
+        },
+        {
+          "title": "Chemin de lune",
+          "text": "Vous vous promenez au clair de lune"
+        },
+        {
+          "title": "Lune en fromage",
+          "text": "Pixel est sûr que la lune est en fromage"
+        },
+        {
+          "title": "Étoile filante",
+          "text": "Pixel a attrapé une étoile filante avec sa patte"
+        },
+        {
+          "title": "Voie lactée",
+          "text": "Pixel lape le lait de la Voie lactée"
+        },
+        {
+          "title": "Queue de comète",
+          "text": "La comète remue la queue comme Pixel"
+        },
+        {
+          "title": "Aurore boréale",
+          "text": "Le ciel scintille rien que pour vous deux"
+        },
+        {
+          "title": "Berceau d’étoiles",
+          "text": "Pixel s’est endormi sur le croissant de lune comme dans un hamac"
+        },
+        {
+          "title": "Planète Ronron",
+          "text": "Pixel a découvert une planète et l’a appelée Ronron"
+        },
+        {
+          "title": "Pelote cosmique",
+          "text": "Pixel fait rouler une pelote-planète dans le ciel"
+        },
+        {
+          "title": "Sa propre lune",
+          "text": "Maintenant Pixel a une petite lune"
+        },
+        {
+          "title": "Ronron interstellaire",
+          "text": "Le ronron a atteint d’autres étoiles"
+        },
+        {
+          "title": "Facteur des étoiles",
+          "text": "Pixel t’a envoyé une lettre depuis une étoile"
+        },
+        {
+          "title": "Pluie de météores",
+          "text": "Le ciel fait pleuvoir des étincelles"
+        },
+        {
+          "title": "Rayon de soleil",
+          "text": "Pixel court après un reflet de soleil"
+        },
+        {
+          "title": "Pont arc-en-ciel",
+          "text": "Vous avez traversé l’arc-en-ciel vers l’autre côté du ciel"
+        },
+        {
+          "title": "Oreiller nuage",
+          "text": "Pixel t’a gonflé un oreiller de nuage"
+        },
+        {
+          "title": "Presque cent",
+          "text": "Encore un succès et la magie arrivera"
+        },
+        {
+          "title": "Ailes de fée",
+          "text": "Pixel a reçu des ailes magiques"
+        },
+        {
+          "title": "Brise marine",
+          "text": "Pixel a vu la mer pour la première fois"
+        },
+        {
+          "title": "Coquillage",
+          "text": "Pixel t’a offert un coquillage qui chante la mer"
+        },
+        {
+          "title": "Château de sable",
+          "text": "Vous avez construit un château de sable"
+        },
+        {
+          "title": "Capitaine chat",
+          "text": "Pixel a mis une casquette de capitaine, pour de faux"
+        },
+        {
+          "title": "Bateau en papier",
+          "text": "Votre petit bateau a pris la mer"
+        },
+        {
+          "title": "Gentille baleine",
+          "text": "Une baleine vous a promenés sur son dos"
+        },
+        {
+          "title": "Sourire de dauphin",
+          "text": "Un dauphin a souri à Pixel"
+        },
+        {
+          "title": "Étoile de mer",
+          "text": "Pixel a trouvé une petite étoile dans l’eau"
+        },
+        {
+          "title": "Île au trésor",
+          "text": "Le trésor était une boîte bien douillette"
+        },
+        {
+          "title": "Bouteille à la mer",
+          "text": "Pixel t’a envoyé un mot par les vagues"
+        },
+        {
+          "title": "Phare sur la falaise",
+          "text": "Le gardien du phare a offert un poisson à Pixel"
+        },
+        {
+          "title": "Perle",
+          "text": "Pixel a trouvé une perle et te l’a donnée"
+        },
+        {
+          "title": "Vent favorable",
+          "text": "Les voiles sont gonflées, en avant !"
+        },
+        {
+          "title": "Mouettes bavardes",
+          "text": "Les mouettes ont répandu la nouvelle de votre amitié"
+        },
+        {
+          "title": "Jardin sous-marin",
+          "text": "Les poissons vous ont montré leur jardin"
+        },
+        {
+          "title": "Chat sirène",
+          "text": "Pixel a essayé une queue de sirène"
+        },
+        {
+          "title": "Courant chaud",
+          "text": "Le courant vous porte vers de nouveaux rivages"
+        },
+        {
+          "title": "Coucher de soleil",
+          "text": "Vous regardez le coucher de soleil à deux"
+        },
+        {
+          "title": "Port étoilé",
+          "text": "Votre bateau a accosté sous les étoiles"
+        },
+        {
+          "title": "Pays lointains",
+          "text": "Pixel t’a rapporté un bonjour de très loin"
+        },
+        {
+          "title": "Petite valise",
+          "text": "Pixel s’est glissé dans la valise pour voyager avec toi"
+        },
+        {
+          "title": "Montgolfière",
+          "text": "Vous volez en montgolfière"
+        },
+        {
+          "title": "Sommet",
+          "text": "Pixel a gravi une montagne et ronronne au sommet"
+        },
+        {
+          "title": "Panthère des neiges",
+          "text": "La panthère des neiges a adopté Pixel"
+        },
+        {
+          "title": "Le chemin du retour",
+          "text": "Le meilleur d’un voyage, c’est de rentrer ensemble"
+        },
+        {
+          "title": "Premier perce-neige",
+          "text": "Pixel a trouvé la première fleur du printemps"
+        },
+        {
+          "title": "Ruisseau de printemps",
+          "text": "Pixel fait voguer des bateaux sur le ruisseau"
+        },
+        {
+          "title": "Nichoir",
+          "text": "Pixel veille sur le nichoir"
+        },
+        {
+          "title": "Pluie de printemps",
+          "text": "Pixel a attendu la fin de l’averse blotti contre toi"
+        },
+        {
+          "title": "Jardin en fleurs",
+          "text": "Pixel saute de pétale en pétale"
+        },
+        {
+          "title": "Midi d’été",
+          "text": "Pixel s’est étiré au soleil"
+        },
+        {
+          "title": "Papillon sur le nez",
+          "text": "Un papillon s’est posé sur le nez de Pixel"
+        },
+        {
+          "title": "Tranche de pastèque",
+          "text": "Pixel a partagé une pastèque avec toi"
+        },
+        {
+          "title": "Nuit des lumières",
+          "text": "La nuit d’été brille de petites lumières"
+        },
+        {
+          "title": "Pluie tiède",
+          "text": "Pixel danse sous la pluie d’été"
+        },
+        {
+          "title": "Feuilles mortes",
+          "text": "Pixel plonge dans un tas de feuilles"
+        },
+        {
+          "title": "Tarte à la citrouille",
+          "text": "Pixel a fait une tarte, presque tout seul"
+        },
+        {
+          "title": "Une écharpe pour Pixel",
+          "text": "Tu as tricoté une petite écharpe à Pixel"
+        },
+        {
+          "title": "Chocolat chaud",
+          "text": "Pixel se réchauffe près de ta tasse"
+        },
+        {
+          "title": "Première neige",
+          "text": "Pixel attrape les flocons avec sa patte"
+        },
+        {
+          "title": "Chat de neige",
+          "text": "Vous avez fait un bonhomme de neige avec des oreilles"
+        },
+        {
+          "title": "Toboggan glacé",
+          "text": "Pixel glisse en bas de la colline sur sa queue"
+        },
+        {
+          "title": "Fleurs de givre",
+          "text": "Le givre a dessiné Pixel sur la fenêtre"
+        },
+        {
+          "title": "Poêle bien chaud",
+          "text": "Pixel ronronne près du poêle"
+        },
+        {
+          "title": "Boule de sapin",
+          "text": "Pixel joue avec une boule brillante"
+        },
+        {
+          "title": "Cadeau sous le sapin",
+          "text": "Pixel dormait dans une boîte avec un nœud"
+        },
+        {
+          "title": "Ronde des saisons",
+          "text": "Printemps, été, automne, hiver — toujours ensemble"
+        },
+        {
+          "title": "Calendrier des ronrons",
+          "text": "Pixel note chacun de vos jours"
+        },
+        {
+          "title": "Un an d’amitié",
+          "text": "Une année entière de chaleur et de ronrons"
+        },
+        {
+          "title": "Anneau d’étoiles",
+          "text": "Un anneau de lumière brille au-dessus de Pixel"
+        },
+        {
+          "title": "Baguette magique",
+          "text": "Pixel a trouvé une baguette magique"
+        },
+        {
+          "title": "Premier sort",
+          "text": "« Ronron-abra-cadabra ! »"
+        },
+        {
+          "title": "Chapeau de magicien",
+          "text": "Pixel a surgi du chapeau"
+        },
+        {
+          "title": "Potion de câlins",
+          "text": "Une gorgée et tout le monde veut un câlin"
+        },
+        {
+          "title": "Chat qui parle",
+          "text": "Pixel t’a dit « ronron » comme une vraie personne"
+        },
+        {
+          "title": "Chat invisible",
+          "text": "Pixel est devenu invisible, mais sa queue est restée"
+        },
+        {
+          "title": "Tapis volant",
+          "text": "Vous avez survolé toute la ville sur un tapis"
+        },
+        {
+          "title": "Boule de cristal",
+          "text": "La boule montre votre bel avenir"
+        },
+        {
+          "title": "Pelote magique",
+          "text": "La pelote montre le chemin toute seule"
+        },
+        {
+          "title": "Bottes de sept lieues",
+          "text": "Pixel accourt vers toi en une seconde"
+        },
+        {
+          "title": "Livre de contes",
+          "text": "Un vieux livre contient un conte sur vous"
+        },
+        {
+          "title": "Gentil petit dragon",
+          "text": "Un petit dragon est devenu l’ami de Pixel"
+        },
+        {
+          "title": "Licorne",
+          "text": "Une licorne s’est laissé caresser"
+        },
+        {
+          "title": "Royaume enchanté",
+          "text": "Pixel est le grand chat du royaume"
+        },
+        {
+          "title": "Carrosse-citrouille",
+          "text": "Un carrosse vous attend à la porte"
+        },
+        {
+          "title": "Pantoufle de verre",
+          "text": "Pixel a perdu une pantoufle et t’a trouvé"
+        },
+        {
+          "title": "Fleur aux sept couleurs",
+          "text": "Pixel t’a offert ses sept vœux"
+        },
+        {
+          "title": "Oiseau de feu",
+          "text": "L’oiseau de feu vous a laissé une plume"
+        },
+        {
+          "title": "Nappe magique",
+          "text": "Un poisson pour Pixel est apparu tout seul sur la table"
+        },
+        {
+          "title": "Pomme de jouvence",
+          "text": "Pixel se sent de nouveau chaton"
+        },
+        {
+          "title": "Clé d’or",
+          "text": "Pixel t’a donné la clé du conte"
+        },
+        {
+          "title": "Miroir magique",
+          "text": "Le miroir dit : « Tu es le meilleur ami du monde »"
+        },
+        {
+          "title": "Royaume des rêves",
+          "text": "Pixel veille sur tes rêves de conte de fées"
+        },
+        {
+          "title": "Gentille fée",
+          "text": "Une fée vous a offert une petite étoile"
+        },
+        {
+          "title": "Cœurs tout autour",
+          "text": "De petits cœurs tournent autour de Pixel"
+        },
+        {
+          "title": "Cœur chaud",
+          "text": "Pixel te garde dans son cœur"
+        },
+        {
+          "title": "Record de ronron",
+          "text": "Pixel a ronronné une heure entière sans s’arrêter"
+        },
+        {
+          "title": "Cent mille ronrons",
+          "text": "Le monde n’a jamais entendu autant de ronrons"
+        },
+        {
+          "title": "Professeur Pixel",
+          "text": "Les chatons apprennent les caresses avec toi"
+        },
+        {
+          "title": "Conseil des chats",
+          "text": "Tous les chats t’ont élu meilleur ami"
+        },
+        {
+          "title": "Monument de pelotes",
+          "text": "Les chats t’ont bâti un monument en pelotes"
+        },
+        {
+          "title": "Chanson pour toi",
+          "text": "Les chats du monde entier chantent ta chanson"
+        },
+        {
+          "title": "Portrait au-dessus du panier",
+          "text": "Pixel a accroché ton portrait au-dessus de son panier"
+        },
+        {
+          "title": "Amitié inébranlable",
+          "text": "Rien ne vous séparera"
+        },
+        {
+          "title": "Sagesse des siècles",
+          "text": "Pixel le sait : tu es le meilleur"
+        },
+        {
+          "title": "Lumière à la fenêtre",
+          "text": "Chez Pixel, une lumière brille toujours pour toi"
+        },
+        {
+          "title": "Chroniqueur de contes",
+          "text": "Votre amitié est entrée dans le livre des contes"
+        },
+        {
+          "title": "Gardien des chatons",
+          "text": "On t’a confié les plus petits chatons"
+        },
+        {
+          "title": "Une étoile à ton nom",
+          "text": "Pixel a donné ton nom à une étoile"
+        },
+        {
+          "title": "Chat d’honneur",
+          "text": "Tu as été accueilli dans la famille des chats"
+        },
+        {
+          "title": "Neuf vies ensemble",
+          "text": "Les neuf vies — à tes côtés"
+        },
+        {
+          "title": "Légende du ronron",
+          "text": "On raconte des contes sur toi aux chatons"
+        },
+        {
+          "title": "Tendresse infinie",
+          "text": "Il y a plus de tendresse que d’étoiles"
+        },
+        {
+          "title": "La plus grande pelote",
+          "text": "Pixel a déroulé la plus grande pelote du monde"
+        },
+        {
+          "title": "Bonheur tranquille",
+          "text": "Juste être ensemble et ronronner"
+        },
+        {
+          "title": "Presque l’éternité",
+          "text": "Pixel ne se souvient plus de sa vie sans toi"
+        },
+        {
+          "title": "Lumière de sa vie",
+          "text": "Tu es la lumière de la vie de Pixel"
+        },
+        {
+          "title": "Derniers petits pas",
+          "text": "Encore un peu, Pixel est tout ému"
+        },
+        {
+          "title": "Avant le miracle",
+          "text": "Le ciel au-dessus de Pixel commence à scintiller…"
+        },
+        {
+          "title": "Légende boréale",
+          "text": "Pixel brille d’une aurore boréale. Tu as fini tout le conte !"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pixel fait semblant de ne pas te voir",
           "Il a remué la queue et il est parti"
         ]
+      },
+      "wear": {
+        "blush": "Joues roses",
+        "yarn": "Pelote",
+        "star": "Petite étoile",
+        "crown": "Couronne",
+        "tail": "Queue arc-en-ciel",
+        "hearts": "Yeux en cœur",
+        "bell": "Clochette",
+        "bow": "Nœud",
+        "sparkles": "Pluie d’étoiles",
+        "gold": "Éclat doré",
+        "daisy": "Marguerite",
+        "glasses": "Lunettes",
+        "wings": "Ailes",
+        "halo": "Anneau de lumière",
+        "love": "Cœurs flottants",
+        "aurora": "Aurore boréale"
       }
     }
   },

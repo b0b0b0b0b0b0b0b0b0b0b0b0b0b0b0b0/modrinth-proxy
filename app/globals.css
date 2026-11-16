@@ -5833,6 +5833,146 @@
   html:not(.dark) .oiia-body {
     fill: #ffffff;
   }
+
+  .fk-cheek--love {
+    fill: rgb(244 114 182 / 0.45);
+  }
+
+  .fk-sparkle {
+    fill: #fde68a;
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: fk-twinkle 2.6s ease-in-out infinite;
+  }
+
+  .fk-sparkle--star {
+    fill: #fbbf24;
+  }
+
+  @keyframes fk-twinkle {
+    0%,
+    100% {
+      opacity: 0.35;
+      transform: scale(0.6) rotate(0deg);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.15) rotate(45deg);
+    }
+  }
+
+  .fk-tail {
+    transform-box: fill-box;
+    transform-origin: 0% 100%;
+    animation: fk-tail 2.8s ease-in-out infinite;
+  }
+
+  @keyframes fk-tail {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(-9deg);
+    }
+  }
+
+  .fk-face--gold {
+    filter: drop-shadow(0 0 6px rgb(251 191 36 / 0.5));
+  }
+
+  .fk-gem {
+    animation: fk-gem 1.8s ease-in-out infinite;
+  }
+
+  @keyframes fk-gem {
+    50% {
+      fill: #fda4af;
+    }
+  }
+
+  .fk-wing {
+    transform-box: fill-box;
+    animation: fk-wing 1.6s ease-in-out infinite;
+  }
+
+  .fk-wing--left {
+    transform-origin: 100% 50%;
+  }
+
+  .fk-wing--right {
+    transform-origin: 0% 50%;
+  }
+
+  @keyframes fk-wing {
+    0%,
+    100% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(10deg);
+    }
+  }
+
+  .fk-halo {
+    filter: drop-shadow(0 0 1.5px rgb(253 230 138 / 0.9));
+    animation: fk-halo 3s ease-in-out infinite;
+  }
+
+  @keyframes fk-halo {
+    50% {
+      transform: translateY(-0.8px);
+    }
+  }
+
+  .fk-float-heart {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: fk-float-heart 3.3s ease-in-out infinite;
+  }
+
+  @keyframes fk-float-heart {
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: translateY(0) scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: translateY(-1.5px) scale(1.1);
+    }
+  }
+
+  .fk-face--aurora {
+    filter: drop-shadow(0 0 6px rgb(52 211 153 / 0.55));
+    animation: fk-aurora 6s ease-in-out infinite;
+  }
+
+  @keyframes fk-aurora {
+    33% {
+      filter: drop-shadow(0 0 7px rgb(56 189 248 / 0.55));
+    }
+    66% {
+      filter: drop-shadow(0 0 7px rgb(167 139 250 / 0.6));
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fk-sparkle,
+    .fk-tail,
+    .fk-gem,
+    .fk-wing,
+    .fk-halo,
+    .fk-float-heart,
+    .fk-face--aurora {
+      animation: none;
+    }
+
+    .fk-sparkle {
+      opacity: 0.85;
+    }
+  }
+
   .fk-say--rank {
     color: var(--color-green);
   }

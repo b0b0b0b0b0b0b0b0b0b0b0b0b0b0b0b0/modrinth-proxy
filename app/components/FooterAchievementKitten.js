@@ -1,5 +1,6 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { GrumpyKittenFace, PixelFace } from './PixelOutfit';
 import { useMessage, useT } from './I18nProvider';
 import StyledTooltip from './StyledTooltip';
 import { playMew } from './softSounds';
@@ -8,55 +9,6 @@ import { useKittenShy } from './kittenShy';
 const FLUSH_MS = 700;
 const MAX_BATCH = 5;
 const GOALS = KITTEN_GOALS;
-const EARS = [
-    { outer: 'M5.7 5.6 5 0.9 10.1 3.2', inner: 'M6.6 5 6.3 2.6 8.8 3.7Z' },
-    { outer: 'M18.3 5.6 19 0.9 13.9 3.2', inner: 'M17.4 5 17.7 2.6 15.2 3.7Z' },
-];
-function GrumpyKittenFace() {
-    return (<svg className="fk-face fk-face--grumpy" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
-      {EARS.map((ear, index) => (<g key={ear.outer} className={`fk-ear fk-ear--${index ? 'right' : 'left'}`}>
-          <path d={ear.outer} strokeLinejoin="round" className="fk-fill"/>
-          <path d={ear.inner} stroke="none" className="fk-inner"/>
-        </g>))}
-      <circle cx="12" cy="12" r="9" className="fk-fill"/>
-      <path d="M7.6 9.2l2.6.8M16.4 9.2l-2.6.8" strokeWidth="1.2"/>
-      <path d="M8.2 11h2.2M13.6 11h2.2"/>
-      <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round"/>
-      <path d="M10.7 14.9q1.3-1.1 2.6 0"/>
-      <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1"/>
-    </svg>);
-}
-function KittenFace({ mood, look, paws = null }) {
-    return (<svg className="fk-face" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" viewBox="0 0 24 24" aria-hidden="true">
-      {EARS.map((ear, index) => (<g key={ear.outer} className={`fk-ear fk-ear--${index ? 'right' : 'left'}`}>
-          <path d={ear.outer} strokeLinejoin="round" className="fk-fill"/>
-          <path d={ear.inner} stroke="none" className="fk-inner"/>
-        </g>))}
-      <circle cx="12" cy="12" r="9" className="fk-fill"/>
-      <ellipse cx="7.6" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={`fk-cheek${mood === 'happy' ? ' fk-cheek--blush' : ''}`}/>
-      <ellipse cx="16.4" cy="13.4" rx="1.5" ry="0.9" stroke="none" className={`fk-cheek${mood === 'happy' ? ' fk-cheek--blush' : ''}`}/>
-      {mood === 'happy' ? (<path d="M7.9 10.6q1.3-1.8 2.6 0M13.5 10.6q1.3-1.8 2.6 0"/>) : mood === 'blink' ? (<path d="M8 10.2h2.4M13.6 10.2h2.4"/>) : (<g stroke="none">
-          {[9.2, 14.8].map((cx) => (<g key={cx}>
-              <circle cx={cx + look.x * 0.7} cy={10 + look.y * 0.6} r="1.35" fill="currentColor"/>
-              <circle cx={cx + look.x * 0.7 - 0.45} cy={10 + look.y * 0.6 - 0.45} r="0.42" fill="white"/>
-            </g>))}
-        </g>)}
-      <g className={`fk-paws${paws ? ` fk-paws--${paws}` : ''}`} stroke="none">
-        {[9.2, 14.8].map((cx, index) => (
-          <g key={cx} className={`fk-paw fk-paw--${index ? 'right' : 'left'}`}>
-            <ellipse cx={cx} cy="10.6" rx="2.7" ry="2.3" fill="currentColor" />
-            <ellipse cx={cx} cy="11.2" rx="1" ry="0.75" fill="white" fillOpacity="0.45" />
-            {[-1.2, 0, 1.2].map((dx) => (
-              <circle key={dx} cx={cx + dx} cy={dx ? 9.3 : 9} r="0.42" fill="white" fillOpacity="0.45" />
-            ))}
-          </g>
-        ))}
-      </g>
-      <path d="M11.4 12.5h1.2l-.6.7Z" fill="currentColor" strokeWidth="1" strokeLinejoin="round"/>
-      {mood === 'happy' ? (<path d="M10.6 13.4q1.4 1.8 2.8 0"/>) : (<path d="M12 13.3q-.4 1.4-1.6 1.1M12 13.3q.4 1.4 1.6 1.1"/>)}
-      <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" strokeWidth="1"/>
-    </svg>);
-}
 export default function FooterAchievementKitten() {
     const t = useT();
     const shy = useKittenShy();
@@ -222,7 +174,7 @@ export default function FooterAchievementKitten() {
       <div className="fk-stage">
         <StyledTooltip label={t('pixel.footer')}>
           <button ref={ref} type="button" className={`fk-button${hop ? ' fk-button--hop' : ''}`} onClick={pet} onAnimationEnd={() => setHop(false)} aria-label={t('footer.kitten.aria')}>
-            <KittenFace mood={shy ? 'look' : mood} look={look} paws={shy}/>
+            <PixelFace mood={shy ? 'look' : mood} look={look} paws={shy} level={signedIn ? unlockedCount : 0}/>
           </button>
         </StyledTooltip>
         {hearts.map((heart) => (<span key={heart.id} className="fk-heart" style={{

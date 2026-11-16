@@ -7,6 +7,7 @@ import { isMinecraftBirthdaySeason } from '@/lib/minecraftBirthday'
 import { isNewYearSeason } from '@/lib/newYear'
 import { onFestiveChange } from '@/lib/festive'
 import { PIXEL_DIAMOND_SIZE, PixelDiamondPixels } from './PixelDiamond'
+import Crown from './KittenCrown'
 
 const HEART_PATH =
   'M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7Z'
@@ -156,17 +157,6 @@ function Scarf() {
       <path d="M15 19.8 18 18.9 18.9 24.4 16.2 25Z" className="fill-red-500" />
       <path d="M4.8 16.6Q12 22 19.2 16.6L20.3 19.6Q12 25.6 3.7 19.6Z" className="fill-red-500" />
       <path d="M8.3 19.4 7.8 21.9M12 20.3V23M15.7 19.4 16.2 21.9M16.4 21.3 18.3 20.8M16.8 23.3 18.6 22.8" stroke="white" strokeWidth="1" />
-    </g>
-  )
-}
-
-function Crown() {
-  return (
-    <g transform="rotate(-14 12 2.5)" strokeWidth="0.7" strokeLinejoin="round" stroke="#d97706">
-      <path d="M8.7 3.5 8.2-0.5l2.1 1.8L12-1.6l1.7 2.9 2.1-1.8-.5 4Z" fill="#fbbf24" />
-      <rect x="8.6" y="2.6" width="6.8" height="1.4" rx="0.5" fill="#f59e0b" />
-      <circle cx="12" cy="3.3" r="0.45" stroke="none" fill="#f43f5e" />
-      <circle cx="12" cy="-1.7" r="0.55" fill="#fde68a" />
     </g>
   )
 }

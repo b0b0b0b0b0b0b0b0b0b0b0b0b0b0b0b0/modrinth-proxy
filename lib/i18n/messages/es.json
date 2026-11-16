@@ -186,6 +186,686 @@
         {
           "title": "Amor eterno",
           "text": "Pixel es tuyo para siempre"
+        },
+        {
+          "title": "Novena vida",
+          "text": "Pixel te daría sus nueve vidas"
+        },
+        {
+          "title": "Ventana soleada",
+          "text": "Pixel te cedió su rincón más calentito"
+        },
+        {
+          "title": "Cascabel",
+          "text": "Pixel se puso un cascabel para que lo oigas venir corriendo"
+        },
+        {
+          "title": "Festín de pescado",
+          "text": "Pixel compartió contigo su pescado más rico"
+        },
+        {
+          "title": "Canción ronroneada",
+          "text": "Pixel inventó una canción sobre ti"
+        },
+        {
+          "title": "Sueños gatunos",
+          "text": "Pixel sueña contigo cada noche"
+        },
+        {
+          "title": "Mantita suave",
+          "text": "Pixel se hizo un ovillo en tu regazo"
+        },
+        {
+          "title": "Lazo de fiesta",
+          "text": "Pixel se ató un lazo en la oreja solo por ti"
+        },
+        {
+          "title": "Carreras de alegría",
+          "text": "Pixel corre por todo el sitio de felicidad"
+        },
+        {
+          "title": "Cuarenta sonrisas",
+          "text": "Pixel te sonríe una y otra vez"
+        },
+        {
+          "title": "Sendero secreto",
+          "text": "Pixel te enseñó el camino a su casita"
+        },
+        {
+          "title": "Lluvia de estrellas",
+          "text": "Pequeñas estrellas giran alrededor de Pixel"
+        },
+        {
+          "title": "Bigotes de leche",
+          "text": "Pixel te invitó a un poco de leche"
+        },
+        {
+          "title": "Beso gatuno",
+          "text": "Pixel te parpadeó despacio: en idioma gato significa «te quiero»"
+        },
+        {
+          "title": "Faro ronroneante",
+          "text": "Pixel brilla para ti estés donde estés"
+        },
+        {
+          "title": "Cuento para dormir",
+          "text": "Pixel te contó su cuento favorito"
+        },
+        {
+          "title": "Patita con patita",
+          "text": "Ahora tú y Pixel salís a pasear juntos"
+        },
+        {
+          "title": "Cometa peludito",
+          "text": "Pixel vuela hacia ti más rápido que un cometa"
+        },
+        {
+          "title": "Algo brillante",
+          "text": "Pixel ya se está probando algo dorado…"
+        },
+        {
+          "title": "Pixel dorado",
+          "text": "Pixel brilla de oro: lo acariciaste más que nadie en el mundo"
+        },
+        {
+          "title": "Sendero del bosque",
+          "text": "Pixel te invitó a un bosque de cuento"
+        },
+        {
+          "title": "Piña encontrada",
+          "text": "Pixel te encontró la piña más redonda"
+        },
+        {
+          "title": "Visita del erizo",
+          "text": "Pixel te presentó a un erizo"
+        },
+        {
+          "title": "Claro de fresas",
+          "text": "Pixel te llevó a unas fresas silvestres maduras"
+        },
+        {
+          "title": "Puente de musgo",
+          "text": "Cruzasteis el arroyo sobre musgo suave"
+        },
+        {
+          "title": "Secreto del búho",
+          "text": "Un búho le susurró a Pixel que eres bueno"
+        },
+        {
+          "title": "Tesoro de la ardilla",
+          "text": "Una ardilla compartió sus nueces con vosotros"
+        },
+        {
+          "title": "Lluvia de setas",
+          "text": "Pixel te escondió bajo el sombrero de una seta"
+        },
+        {
+          "title": "Luciérnagas",
+          "text": "Las luciérnagas os alumbran el camino"
+        },
+        {
+          "title": "Margarita en la oreja",
+          "text": "Pixel adornó su oreja con una margarita"
+        },
+        {
+          "title": "Orquesta del bosque",
+          "text": "Los pájaros cantan y Pixel ronronea al compás"
+        },
+        {
+          "title": "Casita en el árbol",
+          "text": "Pixel os preparó una casita en un viejo hueco"
+        },
+        {
+          "title": "Pilla-pilla con el conejito",
+          "text": "Pixel juega al pilla-pilla con un conejito"
+        },
+        {
+          "title": "Gota de miel",
+          "text": "Un osito os invitó a miel"
+        },
+        {
+          "title": "Corona de trébol",
+          "text": "Pixel te tejió una corona"
+        },
+        {
+          "title": "Amiga zorrita",
+          "text": "Una zorrita pelirroja se hizo amiga de Pixel"
+        },
+        {
+          "title": "Lago tranquilo",
+          "text": "Pixel mira su reflejo y ronronea"
+        },
+        {
+          "title": "Nenúfar",
+          "text": "Una ranita os paseó sobre un nenúfar"
+        },
+        {
+          "title": "Arcoíris sobre el bosque",
+          "text": "Tras la lluvia salió un arcoíris sobre el bosque"
+        },
+        {
+          "title": "Claro de cuento",
+          "text": "Todos los animalitos vinieron a verte"
+        },
+        {
+          "title": "Viejo roble",
+          "text": "El roble le contó a Pixel un cuento antiguo"
+        },
+        {
+          "title": "Noche en el bosque",
+          "text": "Pixel te tapó con una hoja grande"
+        },
+        {
+          "title": "Rocío de la mañana",
+          "text": "Pixel se lavó con rocío y reluce"
+        },
+        {
+          "title": "Telaraña de encaje",
+          "text": "Una arañita os tejió un pañuelo de encaje"
+        },
+        {
+          "title": "Linde del bosque",
+          "text": "Pixel se despidió del bosque con la cola"
+        },
+        {
+          "title": "Vuelo de diente de león",
+          "text": "El viento os llevó como pelusas"
+        },
+        {
+          "title": "Escalera de nubes",
+          "text": "Pixel camina sobre las nubes"
+        },
+        {
+          "title": "Castillo en el cielo",
+          "text": "Sobre una nube hay un castillo, y es vuestro"
+        },
+        {
+          "title": "Viento travieso",
+          "text": "El viento despeinó a Pixel"
+        },
+        {
+          "title": "Gafas de sabio",
+          "text": "Pixel se puso gafas para mirar las estrellas"
+        },
+        {
+          "title": "Mapa estelar",
+          "text": "Pixel dibujó un mapa del cielo"
+        },
+        {
+          "title": "Constelación del Gato",
+          "text": "Se encendió una constelación con forma de Pixel"
+        },
+        {
+          "title": "Camino de luna",
+          "text": "Paseáis a la luz de la luna"
+        },
+        {
+          "title": "Luna de queso",
+          "text": "Pixel está seguro de que la luna es de queso"
+        },
+        {
+          "title": "Estrella fugaz",
+          "text": "Pixel atrapó una estrella fugaz con la patita"
+        },
+        {
+          "title": "Vía Láctea",
+          "text": "Pixel bebe leche de la Vía Láctea"
+        },
+        {
+          "title": "Cola de cometa",
+          "text": "El cometa mueve la cola igual que Pixel"
+        },
+        {
+          "title": "Aurora boreal",
+          "text": "El cielo brilla para vosotros dos"
+        },
+        {
+          "title": "Cuna de estrellas",
+          "text": "Pixel se durmió en la luna creciente como en una hamaca"
+        },
+        {
+          "title": "Planeta Rrrr",
+          "text": "Pixel descubrió un planeta y lo llamó Rrrr"
+        },
+        {
+          "title": "Ovillo cósmico",
+          "text": "Pixel hace rodar un ovillo-planeta por el cielo"
+        },
+        {
+          "title": "Su propia luna",
+          "text": "Ahora Pixel tiene una lunita"
+        },
+        {
+          "title": "Ronroneo interestelar",
+          "text": "El ronroneo llegó hasta otras estrellas"
+        },
+        {
+          "title": "Cartero estelar",
+          "text": "Pixel te envió una carta desde una estrella"
+        },
+        {
+          "title": "Lluvia de meteoros",
+          "text": "Del cielo caen chispitas"
+        },
+        {
+          "title": "Reflejo de sol",
+          "text": "Pixel persigue un reflejo de sol"
+        },
+        {
+          "title": "Puente de arcoíris",
+          "text": "Cruzasteis el arcoíris hasta el otro lado del cielo"
+        },
+        {
+          "title": "Almohada de nube",
+          "text": "Pixel te ahuecó una almohada de nube"
+        },
+        {
+          "title": "Casi cien",
+          "text": "Un logro más y ocurrirá la magia"
+        },
+        {
+          "title": "Alas de hada",
+          "text": "A Pixel le crecieron alas mágicas"
+        },
+        {
+          "title": "Brisa marina",
+          "text": "Pixel vio el mar por primera vez"
+        },
+        {
+          "title": "Caracola",
+          "text": "Pixel te regaló una caracola con el sonido del mar"
+        },
+        {
+          "title": "Castillo de arena",
+          "text": "Construisteis un castillo de arena"
+        },
+        {
+          "title": "Gato capitán",
+          "text": "Pixel se puso una gorra de capitán, de mentirijillas"
+        },
+        {
+          "title": "Barquito de papel",
+          "text": "Vuestro barquito zarpó"
+        },
+        {
+          "title": "Ballena buena",
+          "text": "Una ballena os llevó sobre su lomo"
+        },
+        {
+          "title": "Sonrisa de delfín",
+          "text": "Un delfín le sonrió a Pixel"
+        },
+        {
+          "title": "Estrella de mar",
+          "text": "Pixel encontró una estrellita en el agua"
+        },
+        {
+          "title": "Isla del tesoro",
+          "text": "El tesoro resultó ser una caja acogedora"
+        },
+        {
+          "title": "Mensaje en una botella",
+          "text": "Pixel te envió una nota por las olas"
+        },
+        {
+          "title": "Faro en el acantilado",
+          "text": "El farero le regaló un pescado a Pixel"
+        },
+        {
+          "title": "Perla",
+          "text": "Pixel encontró una perla y te la dio"
+        },
+        {
+          "title": "Viento a favor",
+          "text": "¡Velas llenas, adelante!"
+        },
+        {
+          "title": "Gaviotas parlanchinas",
+          "text": "Las gaviotas contaron a todos vuestra amistad"
+        },
+        {
+          "title": "Jardín submarino",
+          "text": "Los peces os enseñaron su jardín"
+        },
+        {
+          "title": "Gato sirena",
+          "text": "Pixel se probó una cola de sirena"
+        },
+        {
+          "title": "Corriente cálida",
+          "text": "La corriente os lleva a nuevas orillas"
+        },
+        {
+          "title": "Atardecer en el mar",
+          "text": "Veis el atardecer juntos"
+        },
+        {
+          "title": "Puerto de estrellas",
+          "text": "Vuestro barquito atracó bajo las estrellas"
+        },
+        {
+          "title": "Tierras lejanas",
+          "text": "Pixel te trajo saludos de muy lejos"
+        },
+        {
+          "title": "Maletita",
+          "text": "Pixel se metió en la maleta para viajar contigo"
+        },
+        {
+          "title": "Globo aerostático",
+          "text": "Voláis en globo"
+        },
+        {
+          "title": "Cima de la montaña",
+          "text": "Pixel subió una montaña y ronronea en la cima"
+        },
+        {
+          "title": "Leopardo de las nieves",
+          "text": "El leopardo de las nieves aceptó a Pixel como uno de los suyos"
+        },
+        {
+          "title": "Camino a casa",
+          "text": "Lo mejor de un viaje es volver juntos"
+        },
+        {
+          "title": "Primera campanilla",
+          "text": "Pixel encontró la primera flor de primavera"
+        },
+        {
+          "title": "Arroyo de primavera",
+          "text": "Pixel echa barquitos al arroyo"
+        },
+        {
+          "title": "Casita de pájaros",
+          "text": "Pixel cuida la casita de los pájaros"
+        },
+        {
+          "title": "Lluvia de primavera",
+          "text": "Pixel esperó a que pasara la lluvia acurrucado a tu lado"
+        },
+        {
+          "title": "Jardín en flor",
+          "text": "Pixel salta entre los pétalos"
+        },
+        {
+          "title": "Mediodía de verano",
+          "text": "Pixel se estiró al sol"
+        },
+        {
+          "title": "Mariposa en la nariz",
+          "text": "Una mariposa se posó en la nariz de Pixel"
+        },
+        {
+          "title": "Tajada de sandía",
+          "text": "Pixel compartió una sandía contigo"
+        },
+        {
+          "title": "Noche de lucecitas",
+          "text": "La noche de verano brilla con lucecitas"
+        },
+        {
+          "title": "Lluvia tibia",
+          "text": "Pixel baila bajo la lluvia de verano"
+        },
+        {
+          "title": "Hojas caídas",
+          "text": "Pixel se zambulle en un montón de hojas"
+        },
+        {
+          "title": "Tarta de calabaza",
+          "text": "Pixel horneó una tarta, casi solito"
+        },
+        {
+          "title": "Una bufanda para Pixel",
+          "text": "Le tejiste una bufandita a Pixel"
+        },
+        {
+          "title": "Chocolate caliente",
+          "text": "Pixel se calienta junto a tu taza"
+        },
+        {
+          "title": "Primera nevada",
+          "text": "Pixel atrapa copos con la patita"
+        },
+        {
+          "title": "Gato de nieve",
+          "text": "Hicisteis un muñeco de nieve con orejas"
+        },
+        {
+          "title": "Tobogán de hielo",
+          "text": "Pixel se desliza colina abajo sobre la cola"
+        },
+        {
+          "title": "Escarcha en la ventana",
+          "text": "La escarcha dibujó a Pixel en la ventana"
+        },
+        {
+          "title": "Estufa calentita",
+          "text": "Pixel ronronea junto a la estufa"
+        },
+        {
+          "title": "Bola del árbol",
+          "text": "Pixel juega con una bola brillante"
+        },
+        {
+          "title": "Regalo bajo el árbol",
+          "text": "En una caja con lazo dormía Pixel"
+        },
+        {
+          "title": "Corro de estaciones",
+          "text": "Primavera, verano, otoño, invierno: siempre juntos"
+        },
+        {
+          "title": "Calendario de ronroneos",
+          "text": "Pixel marca cada uno de vuestros días"
+        },
+        {
+          "title": "Un año de amistad",
+          "text": "Un año entero de cariño y ronroneos"
+        },
+        {
+          "title": "Aro de estrellas",
+          "text": "Sobre Pixel brilla un aro de luz"
+        },
+        {
+          "title": "Varita mágica",
+          "text": "Pixel encontró una varita mágica"
+        },
+        {
+          "title": "Primer hechizo",
+          "text": "«¡Rrrr-abra-cadabra!»"
+        },
+        {
+          "title": "Sombrero de mago",
+          "text": "Pixel salió del sombrero"
+        },
+        {
+          "title": "Poción de abrazos",
+          "text": "Un sorbo y todos quieren abrazarse"
+        },
+        {
+          "title": "Gato que habla",
+          "text": "Pixel te dijo «rrrr» como una persona"
+        },
+        {
+          "title": "Gato invisible",
+          "text": "Pixel se volvió invisible, pero la cola se quedó"
+        },
+        {
+          "title": "Alfombra voladora",
+          "text": "Sobrevolasteis toda la ciudad en una alfombra"
+        },
+        {
+          "title": "Bola de cristal",
+          "text": "La bola muestra vuestro futuro brillante"
+        },
+        {
+          "title": "Ovillo mágico",
+          "text": "El ovillo enseña el camino solito"
+        },
+        {
+          "title": "Botas de siete leguas",
+          "text": "Pixel llega corriendo hasta ti en un segundo"
+        },
+        {
+          "title": "Libro de cuentos",
+          "text": "En un libro antiguo hay un cuento sobre vosotros"
+        },
+        {
+          "title": "Dragoncito bueno",
+          "text": "Un dragoncito se hizo amigo de Pixel"
+        },
+        {
+          "title": "Unicornio",
+          "text": "Un unicornio se dejó acariciar"
+        },
+        {
+          "title": "Reino de cuento",
+          "text": "Pixel es el gato principal del reino"
+        },
+        {
+          "title": "Carroza de calabaza",
+          "text": "Una carroza os espera en la puerta"
+        },
+        {
+          "title": "Zapatito de cristal",
+          "text": "Pixel perdió un zapatito y te encontró a ti"
+        },
+        {
+          "title": "Flor de siete colores",
+          "text": "Pixel te regaló los siete deseos"
+        },
+        {
+          "title": "Pájaro de fuego",
+          "text": "El pájaro de fuego os dejó una pluma"
+        },
+        {
+          "title": "Mantel mágico",
+          "text": "En la mesa apareció solito un pescado para Pixel"
+        },
+        {
+          "title": "Manzana de la juventud",
+          "text": "Pixel vuelve a sentirse un gatito"
+        },
+        {
+          "title": "Llave dorada",
+          "text": "Pixel te dio la llave del cuento"
+        },
+        {
+          "title": "Espejito mágico",
+          "text": "El espejo dice: «Eres el mejor amigo del mundo»"
+        },
+        {
+          "title": "Reino del sueño",
+          "text": "Pixel vigila tus sueños de cuento"
+        },
+        {
+          "title": "Hada buena",
+          "text": "Un hada os premió con una estrellita"
+        },
+        {
+          "title": "Corazones alrededor",
+          "text": "Corazoncitos giran alrededor de Pixel"
+        },
+        {
+          "title": "Corazón cálido",
+          "text": "Pixel te guarda en su corazón"
+        },
+        {
+          "title": "Récord de ronroneo",
+          "text": "Pixel ronroneó una hora entera sin parar"
+        },
+        {
+          "title": "Cien mil ronroneos",
+          "text": "El mundo nunca había oído tanto ronroneo"
+        },
+        {
+          "title": "Pixel maestro",
+          "text": "Los gatitos aprenden de ti a acariciar"
+        },
+        {
+          "title": "Consejo gatuno",
+          "text": "Todos los gatos te eligieron su mejor amigo"
+        },
+        {
+          "title": "Monumento de ovillos",
+          "text": "Los gatos te hicieron un monumento de ovillos"
+        },
+        {
+          "title": "Canción para ti",
+          "text": "Los gatos de todo el mundo cantan tu canción"
+        },
+        {
+          "title": "Retrato sobre la camita",
+          "text": "Pixel colgó tu retrato sobre su camita"
+        },
+        {
+          "title": "Amistad inquebrantable",
+          "text": "Nada os separará"
+        },
+        {
+          "title": "Sabiduría de los siglos",
+          "text": "Pixel lo sabe seguro: eres el mejor"
+        },
+        {
+          "title": "Luz en la ventana",
+          "text": "En casa de Pixel siempre hay una luz para ti"
+        },
+        {
+          "title": "Cronista de cuentos",
+          "text": "Vuestra amistad entró en el libro de cuentos"
+        },
+        {
+          "title": "Guardián de gatitos",
+          "text": "Te confiaron los gatitos más pequeños"
+        },
+        {
+          "title": "Una estrella con tu nombre",
+          "text": "Pixel le puso tu nombre a una estrella"
+        },
+        {
+          "title": "Gato de honor",
+          "text": "Te acogieron en la familia gatuna"
+        },
+        {
+          "title": "Nueve vidas juntos",
+          "text": "Las nueve vidas, a tu lado"
+        },
+        {
+          "title": "Leyenda ronroneante",
+          "text": "A los gatitos les cuentan cuentos sobre ti"
+        },
+        {
+          "title": "Ternura infinita",
+          "text": "Hay más ternura que estrellas"
+        },
+        {
+          "title": "El ovillo más grande",
+          "text": "Pixel desenrolló el ovillo más grande del mundo"
+        },
+        {
+          "title": "Felicidad tranquila",
+          "text": "Solo estar juntos y ronronear"
+        },
+        {
+          "title": "Casi para siempre",
+          "text": "Pixel ya no recuerda cómo vivía sin ti"
+        },
+        {
+          "title": "Luz de su vida",
+          "text": "Eres la luz de la vida de Pixel"
+        },
+        {
+          "title": "Últimos pasitos",
+          "text": "Un poquito más, Pixel está emocionado"
+        },
+        {
+          "title": "Antes del milagro",
+          "text": "El cielo sobre Pixel empieza a brillar…"
+        },
+        {
+          "title": "Leyenda boreal",
+          "text": "Pixel brilla con la aurora boreal. ¡Has terminado todo el cuento!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pixel finge que no te ve",
           "Movió la cola y se fue"
         ]
+      },
+      "wear": {
+        "blush": "Mejillas rosadas",
+        "yarn": "Ovillo",
+        "star": "Estrellita",
+        "crown": "Corona",
+        "tail": "Cola arcoíris",
+        "hearts": "Ojos de corazón",
+        "bell": "Cascabel",
+        "bow": "Lazo",
+        "sparkles": "Lluvia de estrellas",
+        "gold": "Brillo dorado",
+        "daisy": "Margarita",
+        "glasses": "Gafas",
+        "wings": "Alitas",
+        "halo": "Aro de luz",
+        "love": "Corazones flotantes",
+        "aurora": "Aurora boreal"
       }
     }
   },

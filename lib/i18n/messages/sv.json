@@ -186,6 +186,686 @@
         {
           "title": "Evig kärlek",
           "text": "Pixel är din för alltid"
+        },
+        {
+          "title": "Nionde livet",
+          "text": "Pixel skulle ge dig alla sina nio liv"
+        },
+        {
+          "title": "Solig fönsterbräda",
+          "text": "Pixel gav dig sin varmaste plats"
+        },
+        {
+          "title": "Bjällra",
+          "text": "Pixel har tagit på sig en bjällra så att du hör när han springer till dig"
+        },
+        {
+          "title": "Fiskfest",
+          "text": "Pixel delade sin godaste fisk med dig"
+        },
+        {
+          "title": "Spinnvisa",
+          "text": "Pixel har hittat på en visa om dig"
+        },
+        {
+          "title": "Kattdrömmar",
+          "text": "Pixel drömmer om dig varje natt"
+        },
+        {
+          "title": "Mjuk filt",
+          "text": "Pixel rullade ihop sig i ditt knä"
+        },
+        {
+          "title": "Festrosett",
+          "text": "Pixel knöt en rosett på örat bara för dig"
+        },
+        {
+          "title": "Glädjespring",
+          "text": "Pixel springer runt på hela sajten av glädje"
+        },
+        {
+          "title": "Fyrtio leenden",
+          "text": "Pixel ler mot dig om och om igen"
+        },
+        {
+          "title": "Hemlig stig",
+          "text": "Pixel visade dig vägen till sitt lilla hus"
+        },
+        {
+          "title": "Stjärnfall",
+          "text": "Små stjärnor virvlar runt Pixel"
+        },
+        {
+          "title": "Mjölkmustasch",
+          "text": "Pixel bjöd dig på lite mjölk"
+        },
+        {
+          "title": "Kattpuss",
+          "text": "Pixel blinkade långsamt mot dig: på kattspråk betyder det ”jag älskar dig”"
+        },
+        {
+          "title": "Spinnande fyr",
+          "text": "Pixel lyser för dig var du än är"
+        },
+        {
+          "title": "Godnattsaga",
+          "text": "Pixel berättade sin favoritsaga för dig"
+        },
+        {
+          "title": "Tass i tass",
+          "text": "Nu går du och Pixel på promenader tillsammans"
+        },
+        {
+          "title": "Fluffig komet",
+          "text": "Pixel flyger till dig snabbare än en komet"
+        },
+        {
+          "title": "Något glittrigt",
+          "text": "Pixel provar redan något gyllene…"
+        },
+        {
+          "title": "Gyllene Pixel",
+          "text": "Pixel skiner av guld: du har klappat honom mest i hela världen"
+        },
+        {
+          "title": "Skogsstig",
+          "text": "Pixel bjöd in dig till en sagoskog"
+        },
+        {
+          "title": "Kottefynd",
+          "text": "Pixel hittade den rundaste kotten åt dig"
+        },
+        {
+          "title": "Igelkottsbesök",
+          "text": "Pixel presenterade dig för en igelkott"
+        },
+        {
+          "title": "Smultronställe",
+          "text": "Pixel ledde dig till mogna smultron"
+        },
+        {
+          "title": "Mossbro",
+          "text": "Ni gick över bäcken på mjuk mossa"
+        },
+        {
+          "title": "Ugglans hemlighet",
+          "text": "En uggla viskade till Pixel att du är snäll"
+        },
+        {
+          "title": "Ekorrens skatt",
+          "text": "En ekorre delade sina nötter med er"
+        },
+        {
+          "title": "Svampregn",
+          "text": "Pixel gömde dig under en svamphatt"
+        },
+        {
+          "title": "Eldflugor",
+          "text": "Eldflugor lyser upp vägen för er"
+        },
+        {
+          "title": "Prästkrage bakom örat",
+          "text": "Pixel prydde sitt öra med en prästkrage"
+        },
+        {
+          "title": "Skogsorkester",
+          "text": "Fåglarna sjunger och Pixel spinner i takt"
+        },
+        {
+          "title": "Hem i en trädhåla",
+          "text": "Pixel ordnade ett hem åt er i en gammal trädhåla"
+        },
+        {
+          "title": "Kull med kaninen",
+          "text": "Pixel leker kull med en liten kanin"
+        },
+        {
+          "title": "Honungsdroppe",
+          "text": "En björnunge bjöd er på honung"
+        },
+        {
+          "title": "Klöverkrans",
+          "text": "Pixel flätade en krans åt dig"
+        },
+        {
+          "title": "Rävvän",
+          "text": "En liten röd räv blev vän med Pixel"
+        },
+        {
+          "title": "Stilla sjö",
+          "text": "Pixel tittar på sin spegelbild och spinner"
+        },
+        {
+          "title": "Näckros",
+          "text": "En liten groda skjutsade er på ett näckrosblad"
+        },
+        {
+          "title": "Regnbåge över skogen",
+          "text": "Efter regnet steg en regnbåge över skogen"
+        },
+        {
+          "title": "Sagoglänta",
+          "text": "Alla skogens djur kom för att titta på dig"
+        },
+        {
+          "title": "Gamla eken",
+          "text": "Eken berättade en urgammal saga för Pixel"
+        },
+        {
+          "title": "Natt i skogen",
+          "text": "Pixel täckte dig med ett stort löv"
+        },
+        {
+          "title": "Morgondagg",
+          "text": "Pixel tvättade sig i dagg och skiner"
+        },
+        {
+          "title": "Spetsspindelväv",
+          "text": "En liten spindel vävde en spetsnäsduk åt er"
+        },
+        {
+          "title": "Skogsbrynet",
+          "text": "Pixel vinkade adjö till skogen med svansen"
+        },
+        {
+          "title": "Maskrosflykt",
+          "text": "Vinden lyfte er som maskrosfjun"
+        },
+        {
+          "title": "Molntrappa",
+          "text": "Pixel går på molnen"
+        },
+        {
+          "title": "Slott i himlen",
+          "text": "På ett moln står ett slott, och det är ert"
+        },
+        {
+          "title": "Busig vind",
+          "text": "Vinden rufsade till Pixels päls"
+        },
+        {
+          "title": "Lärda glasögon",
+          "text": "Pixel tog på sig glasögon för att titta på stjärnorna"
+        },
+        {
+          "title": "Stjärnkarta",
+          "text": "Pixel ritade en karta över himlen"
+        },
+        {
+          "title": "Stjärnbilden Katten",
+          "text": "En stjärnbild formad som Pixel tändes"
+        },
+        {
+          "title": "Månstig",
+          "text": "Ni promenerar i månskenet"
+        },
+        {
+          "title": "Ostmåne",
+          "text": "Pixel är säker på att månen är gjord av ost"
+        },
+        {
+          "title": "Fallande stjärna",
+          "text": "Pixel fångade ett stjärnfall med tassen"
+        },
+        {
+          "title": "Vintergatan",
+          "text": "Pixel lapar mjölk från Vintergatan"
+        },
+        {
+          "title": "Kometsvans",
+          "text": "Kometen viftar på svansen precis som Pixel"
+        },
+        {
+          "title": "Norrsken",
+          "text": "Himlen skimrar för er två"
+        },
+        {
+          "title": "Stjärnvagga",
+          "text": "Pixel somnade på månskäran som i en hängmatta"
+        },
+        {
+          "title": "Planeten Spinn",
+          "text": "Pixel upptäckte en planet och döpte den till Spinn"
+        },
+        {
+          "title": "Kosmiskt garnnystan",
+          "text": "Pixel rullar ett planetnystan över himlen"
+        },
+        {
+          "title": "En egen måne",
+          "text": "Nu har Pixel en liten måne"
+        },
+        {
+          "title": "Interstellärt spinnande",
+          "text": "Spinnandet nådde ända till andra stjärnor"
+        },
+        {
+          "title": "Stjärnposten",
+          "text": "Pixel skickade ett brev till dig från en stjärna"
+        },
+        {
+          "title": "Meteorregn",
+          "text": "Himlen regnar gnistor"
+        },
+        {
+          "title": "Solkatt",
+          "text": "Pixel jagar en solkatt"
+        },
+        {
+          "title": "Regnbågsbro",
+          "text": "Ni gick över regnbågen till himlens andra sida"
+        },
+        {
+          "title": "Molnkudde",
+          "text": "Pixel skakade upp en molnkudde åt dig"
+        },
+        {
+          "title": "Nästan hundra",
+          "text": "En prestation till så händer något magiskt"
+        },
+        {
+          "title": "Älvvingar",
+          "text": "Pixel har fått magiska vingar"
+        },
+        {
+          "title": "Havsbris",
+          "text": "Pixel såg havet för första gången"
+        },
+        {
+          "title": "Snäcka",
+          "text": "Pixel gav dig en snäcka som brusar som havet"
+        },
+        {
+          "title": "Sandslott",
+          "text": "Ni byggde ett slott av sand"
+        },
+        {
+          "title": "Kaptenskatt",
+          "text": "Pixel tog på sig en kaptensmössa, på låtsas"
+        },
+        {
+          "title": "Pappersbåt",
+          "text": "Er lilla båt har gett sig ut på sjön"
+        },
+        {
+          "title": "Snäll val",
+          "text": "En val gav er skjuts på ryggen"
+        },
+        {
+          "title": "Delfinleende",
+          "text": "En delfin log mot Pixel"
+        },
+        {
+          "title": "Sjöstjärna",
+          "text": "Pixel hittade en liten stjärna mitt i vattnet"
+        },
+        {
+          "title": "Skattkammarön",
+          "text": "Skatten visade sig vara en mysig låda"
+        },
+        {
+          "title": "Flaskpost",
+          "text": "Pixel skickade en lapp till dig över vågorna"
+        },
+        {
+          "title": "Fyr på klippan",
+          "text": "Fyrvaktaren bjöd Pixel på en fisk"
+        },
+        {
+          "title": "Pärla",
+          "text": "Pixel hittade en pärla och gav den till dig"
+        },
+        {
+          "title": "Medvind",
+          "text": "Seglen är fulla, framåt!"
+        },
+        {
+          "title": "Pratiga måsar",
+          "text": "Måsarna spred nyheten om er vänskap"
+        },
+        {
+          "title": "Undervattensträdgård",
+          "text": "Fiskarna visade er sin trädgård"
+        },
+        {
+          "title": "Sjöjungfrukatt",
+          "text": "Pixel provade en sjöjungfrustjärt"
+        },
+        {
+          "title": "Varm ström",
+          "text": "Strömmen bär er mot nya stränder"
+        },
+        {
+          "title": "Solnedgång vid havet",
+          "text": "Ni ser solnedgången tillsammans"
+        },
+        {
+          "title": "Stjärnhamn",
+          "text": "Er båt lade till under stjärnorna"
+        },
+        {
+          "title": "Fjärran länder",
+          "text": "Pixel tog med sig hälsningar från långt borta"
+        },
+        {
+          "title": "Liten resväska",
+          "text": "Pixel kröp ner i resväskan för att följa med dig"
+        },
+        {
+          "title": "Luftballong",
+          "text": "Ni flyger i en luftballong"
+        },
+        {
+          "title": "Bergstopp",
+          "text": "Pixel besteg ett berg och spinner på toppen"
+        },
+        {
+          "title": "Snöleopard",
+          "text": "Snöleoparden godtog Pixel som en av sina egna"
+        },
+        {
+          "title": "Vägen hem",
+          "text": "Det bästa med en resa är att komma hem tillsammans"
+        },
+        {
+          "title": "Första snödroppen",
+          "text": "Pixel hittade vårens första blomma"
+        },
+        {
+          "title": "Vårbäck",
+          "text": "Pixel låter små båtar segla nerför bäcken"
+        },
+        {
+          "title": "Fågelholk",
+          "text": "Pixel vaktar fågelholken"
+        },
+        {
+          "title": "Vårregn",
+          "text": "Pixel väntade ut regnet tätt intill dig"
+        },
+        {
+          "title": "Blommande trädgård",
+          "text": "Pixel hoppar bland kronbladen"
+        },
+        {
+          "title": "Sommarmiddag",
+          "text": "Pixel sträckte ut sig i solen"
+        },
+        {
+          "title": "Fjäril på nosen",
+          "text": "En fjäril landade på Pixels nos"
+        },
+        {
+          "title": "Vattenmelonbit",
+          "text": "Pixel delade en vattenmelon med dig"
+        },
+        {
+          "title": "Ljusens natt",
+          "text": "Sommarnatten lyser av små ljus"
+        },
+        {
+          "title": "Varmt regn",
+          "text": "Pixel dansar i sommarregnet"
+        },
+        {
+          "title": "Lövfall",
+          "text": "Pixel dyker ner i en lövhög"
+        },
+        {
+          "title": "Pumpapaj",
+          "text": "Pixel bakade en paj, nästan själv"
+        },
+        {
+          "title": "En halsduk till Pixel",
+          "text": "Du stickade en liten halsduk till Pixel"
+        },
+        {
+          "title": "Varm choklad",
+          "text": "Pixel värmer sig vid din mugg"
+        },
+        {
+          "title": "Första snön",
+          "text": "Pixel fångar snöflingor med tassen"
+        },
+        {
+          "title": "Snökatt",
+          "text": "Ni byggde en snögubbe med öron"
+        },
+        {
+          "title": "Isbacke",
+          "text": "Pixel åker nerför backen på svansen"
+        },
+        {
+          "title": "Frostmönster",
+          "text": "Frosten målade Pixel på fönstret"
+        },
+        {
+          "title": "Varm kakelugn",
+          "text": "Pixel spinner vid kakelugnen"
+        },
+        {
+          "title": "Julgranskula",
+          "text": "Pixel leker med en glänsande kula"
+        },
+        {
+          "title": "Paket under granen",
+          "text": "I en låda med rosett låg Pixel och sov"
+        },
+        {
+          "title": "Årstidernas dans",
+          "text": "Vår, sommar, höst, vinter — alltid tillsammans"
+        },
+        {
+          "title": "Spinnkalender",
+          "text": "Pixel bockar av varje dag ni har"
+        },
+        {
+          "title": "Ett år av vänskap",
+          "text": "Ett helt år av värme och spinnande"
+        },
+        {
+          "title": "Stjärnring",
+          "text": "En ring av ljus lyser ovanför Pixel"
+        },
+        {
+          "title": "Trollstav",
+          "text": "Pixel hittade en trollstav"
+        },
+        {
+          "title": "Första trollformeln",
+          "text": "”Spinn-abra-kadabra!”"
+        },
+        {
+          "title": "Trollkarlens hatt",
+          "text": "Pixel hoppade upp ur hatten"
+        },
+        {
+          "title": "Kramdryck",
+          "text": "En klunk och alla vill kramas"
+        },
+        {
+          "title": "Pratande katt",
+          "text": "Pixel sa ”spinn” till dig precis som en människa"
+        },
+        {
+          "title": "Osynlig katt",
+          "text": "Pixel blev osynlig, men svansen blev kvar"
+        },
+        {
+          "title": "Flygande matta",
+          "text": "Ni flög över hela stan på en matta"
+        },
+        {
+          "title": "Kristallkula",
+          "text": "Kulan visar er ljusa framtid"
+        },
+        {
+          "title": "Magiskt nystan",
+          "text": "Nystanet visar vägen alldeles själv"
+        },
+        {
+          "title": "Sjumilastövlar",
+          "text": "Pixel springer till dig på en sekund"
+        },
+        {
+          "title": "Sagobok",
+          "text": "I en gammal bok finns en saga om er"
+        },
+        {
+          "title": "Snäll liten drake",
+          "text": "En liten drake blev vän med Pixel"
+        },
+        {
+          "title": "Enhörning",
+          "text": "En enhörning lät sig klappas"
+        },
+        {
+          "title": "Sagorike",
+          "text": "Pixel är rikets viktigaste katt"
+        },
+        {
+          "title": "Pumpavagn",
+          "text": "En vagn väntar på er vid dörren"
+        },
+        {
+          "title": "Glastoffel",
+          "text": "Pixel tappade en toffel och hittade dig"
+        },
+        {
+          "title": "Sjufärgad blomma",
+          "text": "Pixel gav dig alla sju önskningar"
+        },
+        {
+          "title": "Eldfågel",
+          "text": "Eldfågeln tappade en fjäder åt er"
+        },
+        {
+          "title": "Duka dig bord",
+          "text": "På bordet dök det upp en fisk åt Pixel helt av sig själv"
+        },
+        {
+          "title": "Ungdomens äpple",
+          "text": "Pixel känner sig som en kattunge igen"
+        },
+        {
+          "title": "Gyllene nyckel",
+          "text": "Pixel gav dig nyckeln till sagan"
+        },
+        {
+          "title": "Magisk spegel",
+          "text": "Spegeln säger: ”Du är världens bästa vän”"
+        },
+        {
+          "title": "Sömnens rike",
+          "text": "Pixel vaktar dina sagodrömmar"
+        },
+        {
+          "title": "God fe",
+          "text": "En fe belönade er med en liten stjärna"
+        },
+        {
+          "title": "Hjärtan runtom",
+          "text": "Små hjärtan virvlar runt Pixel"
+        },
+        {
+          "title": "Varmt hjärta",
+          "text": "Pixel bär dig i sitt hjärta"
+        },
+        {
+          "title": "Spinnrekord",
+          "text": "Pixel spann en hel timme utan paus"
+        },
+        {
+          "title": "Hundratusen spinn",
+          "text": "Världen har aldrig hört så mycket spinnande"
+        },
+        {
+          "title": "Lärare Pixel",
+          "text": "Kattungarna lär sig klappa av dig"
+        },
+        {
+          "title": "Kattrådet",
+          "text": "Alla katter valde dig till sin bästa vän"
+        },
+        {
+          "title": "Nystanmonument",
+          "text": "Katterna byggde ett monument av nystan åt dig"
+        },
+        {
+          "title": "En sång om dig",
+          "text": "Katter i hela världen sjunger din sång"
+        },
+        {
+          "title": "Porträtt över korgen",
+          "text": "Pixel hängde upp ditt porträtt över sin korg"
+        },
+        {
+          "title": "Orubblig vänskap",
+          "text": "Ingenting kan skilja er åt"
+        },
+        {
+          "title": "Tidernas visdom",
+          "text": "Pixel vet säkert: du är bäst"
+        },
+        {
+          "title": "Ljus i fönstret",
+          "text": "Hos Pixel lyser det alltid ett ljus för dig"
+        },
+        {
+          "title": "Sagokrönikör",
+          "text": "Er vänskap har kommit med i sagoboken"
+        },
+        {
+          "title": "Kattungarnas väktare",
+          "text": "Du har fått ansvar för de minsta kattungarna"
+        },
+        {
+          "title": "En stjärna med ditt namn",
+          "text": "Pixel döpte en stjärna efter dig"
+        },
+        {
+          "title": "Hederskatt",
+          "text": "Du har välkomnats i kattfamiljen"
+        },
+        {
+          "title": "Nio liv tillsammans",
+          "text": "Alla nio liv — vid din sida"
+        },
+        {
+          "title": "Spinnlegend",
+          "text": "Kattungar får höra sagor om dig"
+        },
+        {
+          "title": "Gränslös ömhet",
+          "text": "Det finns mer ömhet än stjärnor"
+        },
+        {
+          "title": "Det största nystanet",
+          "text": "Pixel nystade upp världens största garnnystan"
+        },
+        {
+          "title": "Stilla lycka",
+          "text": "Bara vara tillsammans och spinna"
+        },
+        {
+          "title": "Nästan för evigt",
+          "text": "Pixel minns inte längre livet utan dig"
+        },
+        {
+          "title": "Ljuset i hans liv",
+          "text": "Du är ljuset i Pixels liv"
+        },
+        {
+          "title": "Sista små stegen",
+          "text": "Bara lite till, Pixel är så spänd"
+        },
+        {
+          "title": "Inför undret",
+          "text": "Himlen ovanför Pixel börjar skimra…"
+        },
+        {
+          "title": "Norrskenslegend",
+          "text": "Pixel lyser av norrsken. Du har klarat hela sagan!"
         }
       ],
       "grumpy": {
@@ -199,6 +879,24 @@
           "Pixel låtsas att han inte ser dig",
           "Viftade på svansen och gick"
         ]
+      },
+      "wear": {
+        "blush": "Rosiga kinder",
+        "yarn": "Garnnystan",
+        "star": "Liten stjärna",
+        "crown": "Krona",
+        "tail": "Regnbågssvans",
+        "hearts": "Hjärtögon",
+        "bell": "Bjällra",
+        "bow": "Rosett",
+        "sparkles": "Stjärnregn",
+        "gold": "Gyllene glans",
+        "daisy": "Prästkrage",
+        "glasses": "Glasögon",
+        "wings": "Vingar",
+        "halo": "Ljusring",
+        "love": "Svävande hjärtan",
+        "aurora": "Norrsken"
       }
     }
   },
