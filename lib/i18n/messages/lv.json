@@ -882,6 +882,7 @@
       },
       "wear": {
         "blush": "Sārti vaidziņi",
+        "logo": "modrinth.black logotips",
         "yarn": "Kamoliņš",
         "star": "Zvaigznīte",
         "crown": "Kronis",
@@ -1047,6 +1048,13 @@
     "header": "Pikselis priecājas tevi redzēt",
     "sleepy": "Pikselis snauž. Paglaudi viņu, un viņš pamodīsies",
     "extension": "Pikselis dzīvo arī paplašinājumā",
-    "notFound": "Pikselis arī apmaldījās, bet nebēdā"
+    "notFound": "Pikselis arī apmaldījās, bet nebēdā",
+    "badge": "Pikseļa nozīmīte: “{title}”",
+    "inspectHint": "Pakustini peli, lai pagrozītu Pikseli",
+    "inspectClose": "Aizvērt",
+    "inspectFrom": "Sasniegums #{n} — “{title}”",
+    "inspectTitle": "Pikselis",
+    "inspectLevel": "Mīlestības līmenis {n}",
+    "inspectTip": "Labā peles poga — apskatīt tuvāk"
   }
 }

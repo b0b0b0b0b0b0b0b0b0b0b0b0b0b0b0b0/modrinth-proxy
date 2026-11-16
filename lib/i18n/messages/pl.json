@@ -882,6 +882,7 @@
       },
       "wear": {
         "blush": "Rumieńce",
+        "logo": "Logo modrinth.black",
         "yarn": "Kłębek",
         "star": "Gwiazdka",
         "crown": "Korona",
@@ -1047,6 +1048,13 @@
     "header": "Piksel cieszy się, że cię widzi",
     "sleepy": "Piksel drzemie. Pogłaszcz go, to się obudzi",
     "extension": "Piksel mieszka też w rozszerzeniu",
-    "notFound": "Piksel też się zgubił, ale się nie smuci"
+    "notFound": "Piksel też się zgubił, ale się nie smuci",
+    "badge": "Odznaka Pixela: „{title}”",
+    "inspectHint": "Porusz myszką, żeby obrócić Pixela",
+    "inspectClose": "Zamknij",
+    "inspectFrom": "Osiągnięcie #{n} — „{title}”",
+    "inspectTitle": "Pixel",
+    "inspectLevel": "Poziom miłości {n}",
+    "inspectTip": "Prawy przycisk — obejrzyj z bliska"
   }
 }

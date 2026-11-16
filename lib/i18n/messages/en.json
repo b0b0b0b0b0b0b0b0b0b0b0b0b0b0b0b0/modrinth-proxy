@@ -883,6 +883,7 @@
       },
       "wear": {
         "blush": "Blush",
+        "logo": "modrinth.black logo",
         "yarn": "Yarn ball",
         "star": "Little star",
         "crown": "Crown",
@@ -1048,6 +1049,13 @@
     "header": "Pixel is happy to see you",
     "sleepy": "Pixel is napping. Pet him to wake him up",
     "extension": "Pixel lives in the extension too",
-    "notFound": "Pixel got lost too, but he isn’t sad"
+    "notFound": "Pixel got lost too, but he isn’t sad",
+    "badge": "Pixel badge: “{title}”",
+    "inspectHint": "Move your mouse to turn Pixel around",
+    "inspectClose": "Close",
+    "inspectFrom": "Achievement #{n} — “{title}”",
+    "inspectTitle": "Pixel",
+    "inspectLevel": "Love level {n}",
+    "inspectTip": "Right-click to take a closer look"
   }
 }

@@ -41,7 +41,7 @@ import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { AccountFestiveScore } from '@/lib/festiveScore'
 import FestiveScoreCard from './FestiveScoreCard'
 import PixelAchievements, { PixelAchievementsCard } from './PixelAchievements'
-import { isGrumpyKitten, readKittenPets, readKittenRarity } from '@/lib/kittenPets'
+import { isGrumpyKitten, pixelBadgeOf, readKittenPets, readKittenRarity } from '@/lib/kittenPets'
 import { kittenLevel } from '@/lib/kittenLevels'
 
 export const dynamic = 'force-dynamic'
@@ -354,7 +354,7 @@ function AccountHome({ user, scores, festive, pixel, t, locale }) {
           </Link>
         </StyledTooltip>
         <div className="w-full min-w-0 flex-1">
-          <UsernameEditor username={user.username} />
+          <UsernameEditor username={user.username} badge={pixelBadgeOf(user)} />
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-500">{t('account.since', { date: since })}</p>
           {user.mc_name ? <p className="mt-0.5 text-sm text-gray-600 dark:text-gray-500">{t('account.mcName', { name: user.mc_name })}</p> : null}
         </div>
@@ -452,7 +452,7 @@ export default async function AccountPage(props) {
       {tab === 'home' ? null : (
         <div className="flex min-w-0 items-center gap-3">
           {userAvatarUrl(user) ? <AvatarImage src={userAvatarUrl(user)} /> : <HeaderKitten />}
-          <UsernameEditor username={user.username} />
+          <UsernameEditor username={user.username} badge={pixelBadgeOf(user)} />
         </div>
       )}
 
@@ -531,7 +531,14 @@ export default async function AccountPage(props) {
         {tab === 'home' ? null : (
         <PageFade key={fadeKey}>
         {tab === 'pixel' ? (
-          <PixelAchievements pets={pixel.pets} grumpy={pixel.grumpy} chapter={searchParams?.type || ''} rarity={readKittenRarity(user.id, pixel.pets)} />
+          <PixelAchievements
+            pets={pixel.pets}
+            grumpy={pixel.grumpy}
+            chapter={searchParams?.type || ''}
+            rarity={readKittenRarity(user.id, pixel.pets)}
+            username={user.username}
+            badgeChoice={user.pixel_badge ?? null}
+          />
         ) : null}
         {tab === 'updates' ? (
           updates.length > 0 ? (

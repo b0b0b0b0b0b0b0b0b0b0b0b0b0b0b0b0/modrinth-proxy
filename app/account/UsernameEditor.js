@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useT } from '../components/I18nProvider'
 import StyledTooltip from '../components/StyledTooltip'
+import { PixelNameTag } from '../components/PixelBadge'
 
 const USERNAME_RE = /^[A-Za-z0-9_]{3,24}$/
 const ERROR_KEYS = {
@@ -22,7 +23,7 @@ function Icon({ path }) {
   )
 }
 
-export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
+export default function UsernameEditor({ username, badge = null, heading: Heading = 'h1' }) {
   const t = useT()
   const router = useRouter()
   const [editing, setEditing] = useState(false)
@@ -73,10 +74,12 @@ export default function UsernameEditor({ username, heading: Heading = 'h1' }) {
   if (!editing) {
     return (
       <div className="flex min-w-0 items-center gap-2 max-[412px]:justify-center">
-        <Heading className="truncate text-2xl font-bold text-white">
-          <span className="max-[412px]:hidden">{t('account.hello', { name: username })}</span>
-          <span className="hidden max-[412px]:inline">{username}</span>
-        </Heading>
+        <PixelNameTag level={badge} size={24}>
+          <Heading className="truncate text-2xl font-bold text-white">
+            <span className="max-[412px]:hidden">{t('account.hello', { name: username })}</span>
+            <span className="hidden max-[412px]:inline">{username}</span>
+          </Heading>
+        </PixelNameTag>
         <StyledTooltip label={t('account.editUsername')}>
           <button type="button" onClick={open} aria-label={t('account.editUsername')} className={ICON_BUTTON}>
             <Icon path="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />

@@ -690,7 +690,14 @@
     "pixelNobody": "Nobody yet",
     "pixelRarityTip": "{p}% of players have it",
     "pixelRarest": "Your rarest achievement is “{title}”: only {p}% of players have it.",
-    "pixelRarityNote": "Players who have petted Pixel: {count}. Percentages update every 10 minutes."
+    "pixelRarityNote": "Players who have petted Pixel: {count}. Percentages update every 10 minutes.",
+    "pixelBadgeTitle": "Badge next to your name",
+    "pixelBadgeAuto": "Newest",
+    "pixelBadgePlain": "Classic",
+    "pixelBadgeOff": "Hide",
+    "pixelBadgeHint": "A tiny Pixel sits next to your name. Pick any outfit you’ve unlocked, or “Newest” to switch automatically when you unlock a new one.",
+    "pixelBadgeLocked": "Pet Pixel at least once and a badge will appear next to your name.",
+    "pixelInspectTip": "Right-click an outfit to take a closer look."
   },
   "cookie": {
     "text": "Our site uses cookies too, because nothing works without them.",

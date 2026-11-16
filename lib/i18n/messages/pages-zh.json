@@ -672,7 +672,14 @@
     "pixelNobody": "还没有人",
     "pixelRarityTip": "{p}% 的玩家拥有",
     "pixelRarest": "你最稀有的成就是“{title}”：只有 {p}% 的玩家拥有。",
-    "pixelRarityNote": "摸过像素的玩家：{count} 位。百分比每 10 分钟更新一次。"
+    "pixelRarityNote": "摸过像素的玩家：{count} 位。百分比每 10 分钟更新一次。",
+    "pixelBadgeTitle": "昵称旁的徽章",
+    "pixelBadgeAuto": "最新",
+    "pixelBadgePlain": "经典",
+    "pixelBadgeOff": "不显示",
+    "pixelBadgeHint": "一只小小的像素会待在你的昵称旁边。挑一套已解锁的装扮，或选“最新”，解锁新装扮时它会自己换上。",
+    "pixelBadgeLocked": "摸一下像素，昵称旁就会出现徽章。",
+    "pixelInspectTip": "右键点击装扮可以凑近看看。"
   },
   "cookie": {
     "text": "本站也使用 Cookie，因为没有它们什么都运行不了。",

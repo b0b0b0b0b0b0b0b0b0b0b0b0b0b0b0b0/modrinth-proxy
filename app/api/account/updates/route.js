@@ -2,6 +2,7 @@ import { cookies } from 'next/headers'
 import { CALM_COOKIE, FESTIVE_OFF_COOKIE, ensureSsoCookie, getSessionUser, isSameOrigin, setCalmCookie, setFestiveCookie, setNewsBadgeCookie } from '@/lib/auth'
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
+import { pixelBadgeOf } from '@/lib/kittenPets'
 
 export const dynamic = 'force-dynamic'
 
@@ -19,7 +20,7 @@ export async function GET() {
   }
   await ensureSsoCookie()
   const updates = await getUpdates(user.id)
-  return Response.json({ count: updates.length, username: user.username, avatar: userAvatarUrl(user) })
+  return Response.json({ count: updates.length, username: user.username, avatar: userAvatarUrl(user), badge: pixelBadgeOf(user) })
 }
 
 export async function POST(request) {

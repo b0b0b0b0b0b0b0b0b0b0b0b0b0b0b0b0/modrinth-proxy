@@ -672,7 +672,14 @@
     "pixelNobody": "Jeszcze nikt",
     "pixelRarityTip": "Ma je {p}% graczy",
     "pixelRarest": "Twoje najrzadsze osiągnięcie to „{title}”: ma je tylko {p}% graczy.",
-    "pixelRarityNote": "Graczy, którzy głaskali Pixela: {count}. Procenty aktualizują się co 10 minut."
+    "pixelRarityNote": "Graczy, którzy głaskali Pixela: {count}. Procenty aktualizują się co 10 minut.",
+    "pixelBadgeTitle": "Odznaka przy nicku",
+    "pixelBadgeAuto": "Najnowsza",
+    "pixelBadgePlain": "Klasyczna",
+    "pixelBadgeOff": "Nie pokazuj",
+    "pixelBadgeHint": "Mały Pixel stoi obok twojego nicku. Wybierz dowolny odblokowany strój albo „Najnowsza”, a sam się przebierze, gdy odblokujesz nowy.",
+    "pixelBadgeLocked": "Pogłaszcz Pixela chociaż raz, a obok twojego nicku pojawi się odznaka.",
+    "pixelInspectTip": "Kliknij strój prawym przyciskiem, żeby obejrzeć go z bliska."
   },
   "cookie": {
     "text": "Nasza strona też używa ciasteczek, bo bez nich nic nie działa.",

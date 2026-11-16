@@ -34,7 +34,7 @@ export function loadAccountUpdates() {
     .then((response) => (response.ok ? response.json() : null))
     .then((data) => {
       if (!data) return null
-      const stored = { at: Date.now(), count: data.count || 0, username: data.username, avatar: data.avatar || null }
+      const stored = { at: Date.now(), count: data.count || 0, username: data.username, avatar: data.avatar || null, badge: data.badge || null }
       try {
         sessionStorage.setItem(ACCOUNT_UPDATES_KEY, JSON.stringify(stored))
       } catch {}

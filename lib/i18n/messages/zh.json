@@ -882,6 +882,7 @@
       },
       "wear": {
         "blush": "腮红",
+        "logo": "modrinth.black 标志",
         "yarn": "毛线球",
         "star": "小星星",
         "crown": "王冠",
@@ -1047,6 +1048,13 @@
     "header": "像素很高兴见到你",
     "sleepy": "像素在打盹，摸摸它就会醒",
     "extension": "像素也住在扩展程序里",
-    "notFound": "像素也迷路了，但它不难过"
+    "notFound": "像素也迷路了，但它不难过",
+    "badge": "像素徽章：“{title}”",
+    "inspectHint": "移动鼠标来转动像素",
+    "inspectClose": "关闭",
+    "inspectFrom": "成就 #{n}“{title}”",
+    "inspectTitle": "像素",
+    "inspectLevel": "亲密等级 {n}",
+    "inspectTip": "右键点击可以凑近看看"
   }
 }

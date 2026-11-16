@@ -672,7 +672,14 @@
     "pixelNobody": "まだだれも",
     "pixelRarityTip": "プレイヤーの{p}%が持っているよ",
     "pixelRarest": "きみのいちばんレアな実績は「{title}」。持っているのはプレイヤーの{p}%だけ！",
-    "pixelRarityNote": "ピクセルをなでたプレイヤー：{count}人。パーセントは10分ごとに更新されるよ。"
+    "pixelRarityNote": "ピクセルをなでたプレイヤー：{count}人。パーセントは10分ごとに更新されるよ。",
+    "pixelBadgeTitle": "名前のとなりのバッジ",
+    "pixelBadgeAuto": "いちばん新しい",
+    "pixelBadgePlain": "ふつう",
+    "pixelBadgeOff": "かくす",
+    "pixelBadgeHint": "名前のとなりに小さなピクセルがいるよ。あけたおようふくから好きなのをえらんでね。「いちばん新しい」なら、新しいのをあけると自分で着がえるよ。",
+    "pixelBadgeLocked": "ピクセルを1回でもなでると、名前のとなりにバッジが出るよ。",
+    "pixelInspectTip": "右クリックでおようふくを大きく見られるよ。"
   },
   "cookie": {
     "text": "このサイトも Cookie を使っています。ないと何も動かないからです。",

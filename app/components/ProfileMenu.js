@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import AccountUpdatesDot, { ACCOUNT_UPDATES_KEY, loadAccountUpdates } from './AccountUpdatesDot'
 import { useT } from './I18nProvider'
+import { PixelNameTag } from './PixelBadge'
 import { clearFavoritesCache } from '@/lib/favoritesCache'
 import { clearSavedCollectionsCache } from './ProjectSaveButton'
 import { hasSignedHint } from '@/lib/signedHint'
@@ -75,6 +76,7 @@ export default function ProfileMenu({ account, linkClassName }) {
   const [open, setOpen] = useState(false)
   const [username, setUsername] = useState(account?.username || null)
   const [avatar, setAvatar] = useState(account?.avatar || null)
+  const [badge, setBadge] = useState(account?.badge || null)
   const [signed, setSigned] = useState(Boolean(account))
   const [updates, setUpdates] = useState(0)
   const [busy, setBusy] = useState(false)
@@ -82,7 +84,8 @@ export default function ProfileMenu({ account, linkClassName }) {
   useEffect(() => {
     setUsername(account?.username || null)
     setAvatar(account?.avatar || null)
-  }, [account?.username, account?.avatar])
+    setBadge(account?.badge || null)
+  }, [account?.username, account?.avatar, account?.badge])
 
   useEffect(() => {
     setOpen(false)
@@ -119,6 +122,7 @@ export default function ProfileMenu({ account, linkClassName }) {
         if (alive && data?.username) {
           setUsername(data.username)
           setAvatar(data.avatar || null)
+          setBadge(data.badge || null)
         }
       })
       .catch(() => {})
@@ -248,7 +252,9 @@ export default function ProfileMenu({ account, linkClassName }) {
                   <Icon paths={ICONS.user} className="h-[18px] w-[18px] shrink-0 text-gray-300" />
                 )}
                 <span className="min-w-0">
-                  <span className="block truncate text-sm font-bold text-white">{username}</span>
+                  <PixelNameTag level={badge} size={16} tooltip={false} className="pt-1">
+                    <span className="truncate text-sm font-bold text-white">{username}</span>
+                  </PixelNameTag>
                   <span className="block text-xs text-gray-600 dark:text-gray-500">{t('sn.dashboard')}</span>
                 </span>
               </Link>

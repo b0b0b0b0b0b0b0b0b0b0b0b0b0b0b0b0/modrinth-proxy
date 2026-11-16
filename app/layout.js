@@ -9,6 +9,7 @@ import Navigation from './components/Navigation'
 import TopNav from "./components/TopNav"
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { isAdmin } from '@/lib/admins'
+import { pixelBadgeOf } from '@/lib/kittenPets'
 import { SITE_ORIGIN } from '@/lib/site'
 import DownloadHistoryTracker from "./components/DownloadHistoryTracker"
 import ClickCounter from "./components/ClickCounter"
@@ -223,7 +224,7 @@ export default async function RootLayout({ children }) {
           <ClickCounter />
           <GameProfileSync />
           <FestiveScoreSync />
-          <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser), admin: isAdmin(sessionUser) } : null} />
+          <TopNav account={sessionUser ? { username: sessionUser.username, avatar: userAvatarUrl(sessionUser), admin: isAdmin(sessionUser), badge: pixelBadgeOf(sessionUser) } : null} />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4!">
               <div className="flex min-w-0 items-center gap-4 md:gap-6">

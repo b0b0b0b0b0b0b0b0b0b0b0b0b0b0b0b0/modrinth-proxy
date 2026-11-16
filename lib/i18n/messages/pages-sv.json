@@ -672,7 +672,14 @@
     "pixelNobody": "Ingen än",
     "pixelRarityTip": "{p} % av spelarna har den",
     "pixelRarest": "Din mest sällsynta prestation är ”{title}”: bara {p} % av spelarna har den.",
-    "pixelRarityNote": "Spelare som har klappat Pixel: {count}. Procenten uppdateras var tionde minut."
+    "pixelRarityNote": "Spelare som har klappat Pixel: {count}. Procenten uppdateras var tionde minut.",
+    "pixelBadgeTitle": "Märke vid namnet",
+    "pixelBadgeAuto": "Nyaste",
+    "pixelBadgePlain": "Klassisk",
+    "pixelBadgeOff": "Dölj",
+    "pixelBadgeHint": "En liten Pixel sitter bredvid ditt namn. Välj vilken upplåst klädsel som helst, eller ”Nyaste” så byter han själv när du låser upp en ny.",
+    "pixelBadgeLocked": "Klappa Pixel minst en gång så dyker ett märke upp bredvid ditt namn.",
+    "pixelInspectTip": "Högerklicka på en klädsel för att se den närmare."
   },
   "cookie": {
     "text": "Vår sajt använder också kakor, för utan dem fungerar ingenting.",

@@ -672,7 +672,14 @@
     "pixelNobody": "Chưa ai có",
     "pixelRarityTip": "{p}% người chơi có",
     "pixelRarest": "Thành tích hiếm nhất của bạn là «{title}»: chỉ {p}% người chơi có.",
-    "pixelRarityNote": "Số người chơi đã vuốt ve Pixel: {count}. Tỷ lệ được cập nhật mỗi 10 phút."
+    "pixelRarityNote": "Số người chơi đã vuốt ve Pixel: {count}. Tỷ lệ được cập nhật mỗi 10 phút.",
+    "pixelBadgeTitle": "Huy hiệu cạnh tên",
+    "pixelBadgeAuto": "Mới nhất",
+    "pixelBadgePlain": "Cổ điển",
+    "pixelBadgeOff": "Ẩn",
+    "pixelBadgeHint": "Một chú Pixel tí hon đứng cạnh tên bạn. Chọn bất kỳ trang phục đã mở khóa, hoặc «Mới nhất» để Pixel tự thay khi bạn mở khóa bộ mới.",
+    "pixelBadgeLocked": "Vuốt ve Pixel ít nhất một lần, huy hiệu sẽ xuất hiện cạnh tên bạn.",
+    "pixelInspectTip": "Nhấp chuột phải vào trang phục để xem gần hơn."
   },
   "cookie": {
     "text": "Trang của chúng tôi cũng dùng cookie, vì không có chúng thì chẳng gì hoạt động.",

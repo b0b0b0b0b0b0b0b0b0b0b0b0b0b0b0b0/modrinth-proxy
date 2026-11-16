@@ -1,6 +1,7 @@
 import { getUserBySessionToken } from '@/lib/auth'
 import { isInternalRequest } from '@/lib/internalApi'
 import { absoluteAvatarUrl, userAvatarUrl } from '@/lib/minecraftAvatar'
+import { pixelBadgeOf } from '@/lib/kittenPets'
 
 export const dynamic = 'force-dynamic'
 
@@ -15,6 +16,7 @@ export async function POST(request) {
       username: user.username,
       mcName: user.mc_name || null,
       avatar: absoluteAvatarUrl(userAvatarUrl(user)),
+      pixelBadge: pixelBadgeOf(user),
     },
   })
 }

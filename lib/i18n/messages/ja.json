@@ -882,6 +882,7 @@
       },
       "wear": {
         "blush": "ほっぺ",
+        "logo": "modrinth.blackのロゴ",
         "yarn": "毛糸玉",
         "star": "おほしさま",
         "crown": "王冠",
@@ -1047,6 +1048,13 @@
     "header": "ピクセルはきみに会えてうれしいよ",
     "sleepy": "ピクセルはお昼寝中。なでると起きるよ",
     "extension": "ピクセルは拡張機能にも住んでいるよ",
-    "notFound": "ピクセルも迷子だけど、元気だよ"
+    "notFound": "ピクセルも迷子だけど、元気だよ",
+    "badge": "ピクセルバッジ：「{title}」",
+    "inspectHint": "マウスを動かしてピクセルをくるっと回してね",
+    "inspectClose": "閉じる",
+    "inspectFrom": "実績 #{n}「{title}」",
+    "inspectTitle": "ピクセル",
+    "inspectLevel": "なかよしレベル {n}",
+    "inspectTip": "右クリックで近くで見られるよ"
   }
 }

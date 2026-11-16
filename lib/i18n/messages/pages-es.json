@@ -672,7 +672,14 @@
     "pixelNobody": "Nadie todavía",
     "pixelRarityTip": "Lo tiene el {p} % de los jugadores",
     "pixelRarest": "Tu logro más raro es «{title}»: solo lo tiene el {p} % de los jugadores.",
-    "pixelRarityNote": "Jugadores que han acariciado a Pixel: {count}. Los porcentajes se actualizan cada 10 minutos."
+    "pixelRarityNote": "Jugadores que han acariciado a Pixel: {count}. Los porcentajes se actualizan cada 10 minutos.",
+    "pixelBadgeTitle": "Insignia junto al nombre",
+    "pixelBadgeAuto": "La más nueva",
+    "pixelBadgePlain": "Clásico",
+    "pixelBadgeOff": "Ocultar",
+    "pixelBadgeHint": "Un Pixel pequeñito aparece junto a tu nombre. Elige cualquier atuendo desbloqueado, o «La más nueva» para que se cambie solo al desbloquear otro.",
+    "pixelBadgeLocked": "Acaricia a Pixel al menos una vez y aparecerá una insignia junto a tu nombre.",
+    "pixelInspectTip": "Haz clic derecho en un atuendo para verlo de cerca."
   },
   "cookie": {
     "text": "Nuestro sitio también usa cookies, porque sin ellas nada funciona.",

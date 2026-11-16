@@ -672,7 +672,14 @@
     "pixelNobody": "Noch niemand",
     "pixelRarityTip": "{p} % der Spieler haben ihn",
     "pixelRarest": "Dein seltenster Erfolg ist „{title}“: Nur {p} % der Spieler haben ihn.",
-    "pixelRarityNote": "Spieler, die Pixel gestreichelt haben: {count}. Die Prozente werden alle 10 Minuten aktualisiert."
+    "pixelRarityNote": "Spieler, die Pixel gestreichelt haben: {count}. Die Prozente werden alle 10 Minuten aktualisiert.",
+    "pixelBadgeTitle": "Abzeichen am Namen",
+    "pixelBadgeAuto": "Neuestes",
+    "pixelBadgePlain": "Klassisch",
+    "pixelBadgeOff": "Ausblenden",
+    "pixelBadgeHint": "Ein kleiner Pixel steht neben deinem Namen. Wähle ein freigeschaltetes Outfit oder „Neuestes“, dann zieht er sich bei jedem neuen Outfit selbst um.",
+    "pixelBadgeLocked": "Streichle Pixel mindestens einmal, dann erscheint ein Abzeichen neben deinem Namen.",
+    "pixelInspectTip": "Mit Rechtsklick kannst du ein Outfit genauer ansehen."
   },
   "cookie": {
     "text": "Auch unsere Seite nutzt Cookies, denn ohne sie funktioniert nichts.",

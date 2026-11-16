@@ -672,7 +672,14 @@
     "pixelNobody": "Vēl nevienam",
     "pixelRarityTip": "Ir {p}% spēlētāju",
     "pixelRarest": "Tavs retākais sasniegums ir “{title}”: tas ir tikai {p}% spēlētāju.",
-    "pixelRarityNote": "Spēlētāji, kas glaudījuši Pikseli: {count}. Procenti atjaunojas reizi 10 minūtēs."
+    "pixelRarityNote": "Spēlētāji, kas glaudījuši Pikseli: {count}. Procenti atjaunojas reizi 10 minūtēs.",
+    "pixelBadgeTitle": "Nozīmīte pie vārda",
+    "pixelBadgeAuto": "Jaunākais",
+    "pixelBadgePlain": "Parastais",
+    "pixelBadgeOff": "Nerādīt",
+    "pixelBadgeHint": "Mazs Pikselis stāv blakus tavam vārdam. Izvēlies jebkuru atvērtu tērpu vai “Jaunākais”, un viņš pats pārģērbsies, kad atvērsi jaunu.",
+    "pixelBadgeLocked": "Noglāsti Pikseli kaut reizi, un blakus tavam vārdam parādīsies nozīmīte.",
+    "pixelInspectTip": "Ar labo peles pogu tērpu var apskatīt tuvāk."
   },
   "cookie": {
     "text": "Arī mūsu vietne izmanto sīkdatnes, jo bez tām nekas nedarbojas.",

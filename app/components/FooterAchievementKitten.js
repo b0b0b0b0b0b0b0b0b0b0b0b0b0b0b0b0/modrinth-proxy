@@ -1,6 +1,7 @@
 'use client';
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { GrumpyKittenFace, PixelFace } from './PixelOutfit';
+import PixelInspect from './PixelInspect';
 import { useMessage, useT } from './I18nProvider';
 import StyledTooltip from './StyledTooltip';
 import { playMew } from './softSounds';
@@ -27,6 +28,7 @@ export default function FooterAchievementKitten() {
     const [signedIn, setSignedIn] = useState(null);
     const [loginHref, setLoginHref] = useState('/login');
     const [toast, setToast] = useState(null);
+    const [inspecting, setInspecting] = useState(false);
     const moodTimer = useRef(undefined);
     const toastTimer = useRef(undefined);
     const flushTimer = useRef(undefined);
@@ -172,8 +174,11 @@ export default function FooterAchievementKitten() {
     const current = unlockedCount > 0 ? ACHIEVEMENTS[unlockedCount - 1] : null;
     return (<div className="fk">
       <div className="fk-stage">
-        <StyledTooltip label={t('pixel.footer')}>
-          <button ref={ref} type="button" className={`fk-button${hop ? ' fk-button--hop' : ''}`} onClick={pet} onAnimationEnd={() => setHop(false)} aria-label={t('footer.kitten.aria')}>
+        <StyledTooltip label={<>{t('pixel.footer')}<br /><span className="opacity-70">{t('pixel.inspectTip')}</span></>}>
+          <button ref={ref} type="button" className={`fk-button${hop ? ' fk-button--hop' : ''}`} onClick={pet} onContextMenu={(event) => {
+                event.preventDefault();
+                setInspecting(true);
+            }} onAnimationEnd={() => setHop(false)} aria-label={t('footer.kitten.aria')}>
             <PixelFace mood={shy ? 'look' : mood} look={look} paws={shy} level={signedIn ? unlockedCount : 0}/>
           </button>
         </StyledTooltip>
@@ -204,6 +209,8 @@ export default function FooterAchievementKitten() {
             </p>
           </>)}
       </div>
+
+      {inspecting ? (<PixelInspect level={signedIn ? unlockedCount : 0} title={current ? current.title : t('pixel.inspectTitle')} subtitle={current ? t('pixel.inspectLevel', { n: unlockedCount }) : ''} hint={t('pixel.inspectHint')} closeLabel={t('pixel.inspectClose')} onClose={() => setInspecting(false)}/>) : null}
 
       {toast && (<div className="fk-toast glass-pop" role="status" aria-live="polite">
           <span className="fk-toast-icon" aria-hidden="true">

@@ -7,6 +7,7 @@ import { KITTEN_GOALS, kittenLevel } from '@/lib/kittenLevels'
 import { intlLocale } from '@/lib/i18n/config'
 import TypeFilter from './TypeFilter'
 import StyledTooltip from '../components/StyledTooltip'
+import PixelBadgePicker from './PixelBadgePicker'
 
 const PIXEL_CHAPTERS = [
   { id: 'start', label: 'account.pixelChStart', from: 1, to: 50 },
@@ -195,7 +196,7 @@ function chapterForLevel(level) {
   return (PIXEL_CHAPTERS.find((chapter) => level + 1 <= chapter.to) || PIXEL_CHAPTERS[PIXEL_CHAPTERS.length - 1]).id
 }
 
-export default function PixelAchievements({ pets, grumpy, chapter, rarity }) {
+export default function PixelAchievements({ pets, grumpy, chapter, rarity, username, badgeChoice }) {
   const { t, format, percent, items, level, current, next, step } = usePixelProgress(pets)
   const wearNames = useMessage('footer.kitten.wear') || {}
 
@@ -256,6 +257,11 @@ export default function PixelAchievements({ pets, grumpy, chapter, rarity }) {
           </span>
         </p>
       ) : null}
+
+      <section className="mt-6" aria-label={t('account.pixelBadgeTitle')}>
+        <h3 className="m-0 text-sm font-semibold text-gray-400">{t('account.pixelBadgeTitle')}</h3>
+        <PixelBadgePicker username={username} level={level} choice={badgeChoice} pets={pets} />
+      </section>
 
       <section className="mt-6" aria-label={t('account.pixelWardrobe')}>
         <h3 className="m-0 text-sm font-semibold text-gray-400">{t('account.pixelWardrobe')}</h3>

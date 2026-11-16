@@ -672,7 +672,14 @@
     "pixelNobody": "Personne encore",
     "pixelRarityTip": "{p} % des joueurs l’ont",
     "pixelRarest": "Ton succès le plus rare est « {title} » : seuls {p} % des joueurs l’ont.",
-    "pixelRarityNote": "Joueurs ayant caressé Pixel : {count}. Les pourcentages se mettent à jour toutes les 10 minutes."
+    "pixelRarityNote": "Joueurs ayant caressé Pixel : {count}. Les pourcentages se mettent à jour toutes les 10 minutes.",
+    "pixelBadgeTitle": "Badge à côté du pseudo",
+    "pixelBadgeAuto": "Le plus récent",
+    "pixelBadgePlain": "Classique",
+    "pixelBadgeOff": "Masquer",
+    "pixelBadgeHint": "Un petit Pixel se tient à côté de ton pseudo. Choisis une tenue débloquée, ou « Le plus récent » pour qu’il se change tout seul à chaque nouvelle tenue.",
+    "pixelBadgeLocked": "Caresse Pixel au moins une fois et un badge apparaîtra à côté de ton pseudo.",
+    "pixelInspectTip": "Clic droit sur une tenue pour la voir de plus près."
   },
   "cookie": {
     "text": "Notre site utilise aussi des cookies, car sans eux rien ne fonctionne.",
