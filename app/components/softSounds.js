@@ -78,6 +78,19 @@ export function playPoof() {
   tone(ctx, { from: vary(520, 0.1), to: vary(1500, 0.1), start: 0.04, length: 0.18, volume: 0.025, attack: 0.02, cutoff: 2600 })
 }
 
+export function playDig() {
+  const ctx = audio()
+  if (!ctx) return
+  tone(ctx, { type: 'triangle', from: vary(210, 0.12), to: vary(130, 0.12), length: 0.08, volume: 0.05, attack: 0.003, cutoff: 900 })
+}
+
+export function playBreak() {
+  const ctx = audio()
+  if (!ctx) return
+  tone(ctx, { type: 'triangle', from: vary(240, 0.1), to: vary(80, 0.1), length: 0.2, volume: 0.06, attack: 0.003, cutoff: 800 })
+  tone(ctx, { from: vary(700, 0.1), to: vary(1200, 0.1), start: 0.12, length: 0.12, volume: 0.02, attack: 0.01, cutoff: 2400 })
+}
+
 export function playChime() {
   const ctx = audio()
   if (!ctx) return

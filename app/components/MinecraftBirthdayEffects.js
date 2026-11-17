@@ -5,9 +5,10 @@ import { usePathname } from 'next/navigation'
 import { DIAMOND_MILESTONE, isMinecraftBirthdaySeason, minecraftAge, minecraftBirthdayPhase } from '@/lib/minecraftBirthday'
 import { festiveBook } from '@/lib/festiveScoreClient'
 import { useT } from './I18nProvider'
-import { playChime, playDing } from './softSounds'
+import { playBreak, playChime, playDig, playDing } from './softSounds'
 import PagePinsLayer, { headingSpot, pinCards, usePagePins } from './PagePins'
 import PixelDiamond from './PixelDiamond'
+import PixelEmerald from './PixelEmerald'
 import useCandle from './useCandle'
 
 const BITS = Array.from({ length: 24 }, (_, i) => ({
@@ -20,6 +21,8 @@ const BITS = Array.from({ length: 24 }, (_, i) => ({
 }))
 
 const DIAMOND_PACE = { max: 4, every: 1500, first: 900 }
+const PIN_SPREAD = 200
+const PIN_EMERALD_RESPAWN_MS = 3000
 
 function collectPins(base) {
   if (window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return []
@@ -34,22 +37,31 @@ function collectPins(base) {
       show: true,
     })
   }
-  const kinds = ['grass', 'diamond', 'grass']
-  pinCards(3).forEach((r, i) => {
-    const right = i % 2 === 0
-    const kind = kinds[i]
-    const size = kind === 'grass' ? 30 : 22
-    out.push({
-      id: `mcb-${kind}-${i}`,
+  const cards = pinCards(8)
+  if (cards.length === 0) return out
+  const place = (r, kind, right) => {
+    const size = kind === 'grass' || kind === 'emerald' ? 30 : 22
+    return {
+      id: `mcb-${kind}`,
       type: kind,
       x: (right ? r.right - size - 12 : r.left + 12) - base.x,
       y: r.top - size * 0.62 - base.y,
       w: size,
       h: size,
       show: true,
-      delay: `${-i * 0.9}s`,
-    })
-  })
+    }
+  }
+  const grass = place(cards[0], 'grass', true)
+  out.push({ ...grass, delay: '0s' })
+  for (const card of cards.slice(1)) {
+    const emerald = [place(card, 'emerald', true), place(card, 'emerald', false)].find(
+      (spot) => Math.hypot(spot.x - grass.x, spot.y - grass.y) >= PIN_SPREAD,
+    )
+    if (emerald) {
+      out.push({ ...emerald, delay: '-0.9s' })
+      break
+    }
+  }
   return out
 }
 
@@ -95,7 +107,86 @@ function CakeButton({ className }) {
   )
 }
 
-function GrassBlock() {
+const CRACKS = [
+  'M8 7l3 2-1 3M20 6l-2 2 2 1',
+  'M5 14l3 2-1 3 2 2M22 15l2 3-2 2M12 9l2 2',
+  'M9 22l2 2-1 3M19 21l3 1 1 3M26 12l-2 2 1 2M15 4l-2 2',
+]
+const CRUMBS = Array.from({ length: 10 }, (_, i) => ({
+  angle: i * 36 + (i % 3) * 9,
+  far: 16 + (i % 4) * 5,
+  color: ['#7cc04b', '#8b5a2b', '#5fa336', '#6b4220', '#a6713d'][i % 5],
+}))
+const HITS_TO_BREAK = 4
+const CRACK_FORGET_MS = 2500
+const REGROW_MS = 2600
+
+function MineableGrass() {
+  const [stage, setStage] = useState(0)
+  const [hits, setHits] = useState(0)
+  const [broken, setBroken] = useState(false)
+  const [round, setRound] = useState(0)
+  const forgetRef = useRef(0)
+  const regrowRef = useRef(0)
+
+  useEffect(
+    () => () => {
+      window.clearTimeout(forgetRef.current)
+      window.clearTimeout(regrowRef.current)
+    },
+    [],
+  )
+
+  const dig = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    if (broken) return
+    window.clearTimeout(forgetRef.current)
+    setHits((n) => n + 1)
+    const next = stage + 1
+    if (next >= HITS_TO_BREAK) {
+      playBreak()
+      setStage(0)
+      setBroken(true)
+      regrowRef.current = window.setTimeout(() => {
+        setBroken(false)
+        setRound((n) => n + 1)
+      }, REGROW_MS)
+      return
+    }
+    playDig()
+    setStage(next)
+    forgetRef.current = window.setTimeout(() => setStage(0), CRACK_FORGET_MS)
+  }
+
+  return (
+    <button type="button" tabIndex={-1} aria-hidden className="mcb-grass-btn" onPointerDown={dig}>
+      {broken ? (
+        <>
+          <span className="mcb-crumbs">
+            {CRUMBS.map((crumb, i) => (
+              <span
+                key={i}
+                style={{ background: crumb.color, '--mcb-crumb': `${crumb.angle}deg`, '--mcb-far': `${crumb.far}px` }}
+              />
+            ))}
+          </span>
+          <span className="mcb-item">
+            <GrassBlock />
+          </span>
+        </>
+      ) : (
+        <span key={round} className={`mcb-grass${round ? ' mcb-grass--regrow' : ''}`}>
+          <span key={hits} className={`mcb-grass${hits ? ' mcb-grass--hit' : ''}`}>
+            <GrassBlock stage={stage} />
+          </span>
+        </span>
+      )}
+    </button>
+  )
+}
+
+function GrassBlock({ stage = 0 }) {
   return (
     <svg viewBox="0 0 32 32" className="mcb-block" aria-hidden>
       <polygon points="16,2 30,9 16,16 2,9" fill="#7cc04b" />
@@ -109,6 +200,9 @@ function GrassBlock() {
       <rect x="11" y="23" width="2" height="2" fill="#6f4520" />
       <rect x="21" y="20" width="2" height="2" fill="#583518" />
       <rect x="25" y="16" width="2" height="2" fill="#7d5028" />
+      {CRACKS.slice(0, stage).map((d, i) => (
+        <path key={i} d={d} fill="none" stroke="#24150a" strokeOpacity="0.7" strokeWidth="1.2" strokeLinecap="square" />
+      ))}
     </svg>
   )
 }
@@ -250,10 +344,45 @@ function DiamondGame({ onCollect }) {
   )
 }
 
+function PinnedEmerald() {
+  const [got, setGot] = useState(false)
+  const [round, setRound] = useState(0)
+  const timer = useRef(0)
+
+  useEffect(() => () => window.clearTimeout(timer.current), [])
+
+  const collect = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    if (got) return
+    playDing()
+    setGot(true)
+    timer.current = window.setTimeout(() => {
+      setGot(false)
+      setRound((n) => n + 1)
+    }, PIN_EMERALD_RESPAWN_MS)
+  }
+
+  return (
+    <button type="button" tabIndex={-1} aria-hidden className="mcb-grass-btn" onPointerDown={collect}>
+      <span key={round} className={`mcb-grass${got ? ' mcb-pin-gem--got' : round ? ' mcb-grass--regrow' : ''}`}>
+        <PixelEmerald className="mcb-gem" />
+      </span>
+      {got || round ? (
+        <span key={got ? 'got' : `back-${round}`} className="mcb-sparks mcb-sparks--emerald">
+          {[0, 1, 2, 3, 4, 5].map((i) => (
+            <span key={i} style={{ '--mcb-spark': `${i * 60}deg` }} />
+          ))}
+        </span>
+      ) : null}
+    </button>
+  )
+}
+
 function Pin({ pin }) {
   if (pin.type === 'cake') return <CakeButton className="mcb-cake-btn" />
-  if (pin.type === 'diamond') return <Diamond />
-  return <GrassBlock />
+  if (pin.type === 'emerald') return <PinnedEmerald />
+  return <MineableGrass />
 }
 
 export default function MinecraftBirthdayEffects() {
@@ -291,16 +420,16 @@ export default function MinecraftBirthdayEffects() {
 
   if (!phase) return null
 
+  const collectDiamond = () => {
+    collectedAtRef.current = Date.now()
+    playDing()
+    festiveBook.catch('diamonds')
+  }
+
   return (
     <>
       <MinecraftBanner phase={phase} count={count} bump={bump} />
-      <DiamondGame
-        onCollect={() => {
-          collectedAtRef.current = Date.now()
-          playDing()
-          festiveBook.catch('diamonds')
-        }}
-      />
+      <DiamondGame onCollect={collectDiamond} />
       <div className="mcb-layer" aria-hidden>
         {BITS.map((bit, i) => (
           <span
