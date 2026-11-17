@@ -1,25 +1,27 @@
-import { zipSync } from 'fflate'
+import { Zip, ZipPassThrough } from 'fflate'
 import { isSameOrigin } from '@/lib/auth'
 import { MODRINTH_CDN_HOST, MODRINTH_USER_AGENT } from '@/lib/modrinth'
 import { sanitizeZipFilename } from '@/lib/downloadZip'
 import { countDownload } from '@/lib/downloadCounter'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
-const ALLOWED_HOST = MODRINTH_CDN_HOST
 const RATE_LIMIT = { limit: 6, windowMs: 60_000 }
 const MAX_FILES = 100
 const MAX_TOTAL_BYTES = 300 * 1024 * 1024
-const MAX_PARALLEL_ZIPS = 2
-const FETCH_TIMEOUT_MS = 60_000
+const MAX_PARALLEL_ZIPS = 4
+const DEADLINE_MS = 5 * 60 * 1000
+const QUEUE_BYTES = 4 * 1024 * 1024
 
 const busy = (globalThis.__downloadZipBusy ??= { count: 0, ips: new Set() })
 
-function isAllowedUrl(url) {
+function normalizeUrl(url) {
   try {
     const parsed = new URL(url)
-    return parsed.protocol === 'https:' && parsed.hostname === ALLOWED_HOST
+    if (parsed.protocol !== 'https:' || parsed.hostname !== MODRINTH_CDN_HOST || parsed.username || parsed.password) return null
+    if (parsed.port && parsed.port !== '443') return null
+    return `https://${MODRINTH_CDN_HOST}${parsed.pathname}`
   } catch {
-    return false
+    return null
   }
 }
 
@@ -38,29 +40,13 @@ function entryName(filename, used) {
   return safe
 }
 
-async function readLimited(response, budget) {
-  const declared = Number(response.headers.get('content-length') || 0)
-  if (declared > budget) return null
-  const reader = response.body.getReader()
-  const chunks = []
-  let size = 0
-  while (true) {
-    const { done, value } = await reader.read()
-    if (done) break
-    size += value.byteLength
-    if (size > budget) {
-      await reader.cancel().catch(() => {})
-      return null
-    }
-    chunks.push(value)
-  }
-  const out = new Uint8Array(size)
-  let offset = 0
-  for (const chunk of chunks) {
-    out.set(chunk, offset)
-    offset += chunk.byteLength
-  }
-  return out
+function contentDisposition(name) {
+  const ascii = name.replace(/[^\x20-\x7e]/g, '_').replace(/["\\]/g, '_')
+  return `attachment; filename="${ascii}"; filename*=UTF-8''${encodeURIComponent(name)}`
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 export async function POST(request) {
@@ -86,12 +72,13 @@ export async function POST(request) {
   const unique = []
   const seenUrls = new Set()
   for (const file of files) {
-    if (typeof file?.url !== 'string' || typeof file?.filename !== 'string' || !isAllowedUrl(file.url)) {
+    const url = typeof file?.url === 'string' ? normalizeUrl(file.url) : null
+    if (!url || typeof file?.filename !== 'string') {
       return Response.json({ error: 'invalid file url' }, { status: 400 })
     }
-    if (seenUrls.has(file.url)) continue
-    seenUrls.add(file.url)
-    unique.push(file)
+    if (seenUrls.has(url)) continue
+    seenUrls.add(url)
+    unique.push({ url, filename: file.filename })
   }
   if (unique.length > MAX_FILES) {
     return Response.json({ error: 'too_many_files' }, { status: 413 })
@@ -102,39 +89,93 @@ export async function POST(request) {
   }
   busy.count += 1
   busy.ips.add(ip)
-
-  try {
-    const entries = {}
-    const usedNames = new Set()
-    let total = 0
-    for (const file of unique) {
-      const response = await fetch(file.url, {
-        headers: { 'User-Agent': MODRINTH_USER_AGENT },
-        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-      })
-      if (!response.ok || !response.body) {
-        return Response.json({ error: 'fetch failed' }, { status: 502 })
-      }
-      const data = await readLimited(response, MAX_TOTAL_BYTES - total)
-      if (!data) return Response.json({ error: 'too_large' }, { status: 413 })
-      total += data.byteLength
-      entries[entryName(file.filename, usedNames)] = [data, { level: 0 }]
-    }
-
-    const zipped = zipSync(entries)
-    for (const file of unique) countDownload(file.url, ip)
-    const safeName = sanitizeZipFilename(zipName)
-
-    return new Response(zipped, {
-      headers: {
-        'Content-Type': 'application/zip',
-        'Content-Disposition': `attachment; filename="${safeName}"`,
-      },
-    })
-  } catch {
-    return Response.json({ error: 'zip failed' }, { status: 502 })
-  } finally {
+  let released = false
+  const release = () => {
+    if (released) return
+    released = true
     busy.count -= 1
     busy.ips.delete(ip)
   }
+
+  const abort = new AbortController()
+  const signal = AbortSignal.any([abort.signal, request.signal, AbortSignal.timeout(DEADLINE_MS)])
+
+  const stream = new ReadableStream(
+    {
+      async start(controller) {
+        let failed = false
+        const fail = (error) => {
+          if (failed) return
+          failed = true
+          abort.abort()
+          try {
+            controller.error(error)
+          } catch {}
+        }
+        const zip = new Zip((error, chunk, final) => {
+          if (error) return fail(error)
+          if (failed) return
+          controller.enqueue(chunk)
+          if (final) controller.close()
+        })
+        const waitForReader = async () => {
+          while (!failed && controller.desiredSize !== null && controller.desiredSize <= 0) {
+            if (signal.aborted) throw new Error('aborted')
+            await sleep(25)
+          }
+        }
+
+        try {
+          const usedNames = new Set()
+          let total = 0
+          for (const file of unique) {
+            if (signal.aborted) throw new Error('aborted')
+            const response = await fetch(file.url, {
+              headers: { 'User-Agent': MODRINTH_USER_AGENT },
+              signal,
+              cache: 'no-store',
+            })
+            if (!response.ok || !response.body) throw new Error('fetch failed')
+            const declared = Number(response.headers.get('content-length') || 0)
+            if (total + declared > MAX_TOTAL_BYTES) throw new Error('too large')
+
+            const entry = new ZipPassThrough(entryName(file.filename, usedNames))
+            zip.add(entry)
+            const reader = response.body.getReader()
+            while (true) {
+              const { done, value } = await reader.read()
+              if (done) break
+              total += value.byteLength
+              if (total > MAX_TOTAL_BYTES) {
+                await reader.cancel().catch(() => {})
+                throw new Error('too large')
+              }
+              entry.push(value)
+              await waitForReader()
+            }
+            entry.push(new Uint8Array(0), true)
+          }
+          zip.end()
+          for (const file of unique) countDownload(file.url, ip)
+        } catch (error) {
+          fail(error)
+        } finally {
+          release()
+        }
+      },
+      cancel() {
+        abort.abort()
+        release()
+      },
+    },
+    new ByteLengthQueuingStrategy({ highWaterMark: QUEUE_BYTES }),
+  )
+
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'application/zip',
+      'Content-Disposition': contentDisposition(sanitizeZipFilename(zipName)),
+      'Cache-Control': 'no-store',
+    },
+  })
 }

@@ -2,7 +2,7 @@ import { isSameOrigin } from '@/lib/auth'
 import { createDownloadDependencyResolver } from '@/lib/downloadDependencies'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
-const RATE_LIMIT = { limit: 20, windowMs: 60_000 }
+const RATE_LIMIT = { limit: 10, windowMs: 60_000 }
 const MAX_DEPENDENCIES = 100
 const ID_RE = /^[A-Za-z0-9]{1,32}$/
 const LOADER_RE = /^[a-z0-9_-]{1,32}$/i
@@ -53,13 +53,13 @@ export async function POST(request) {
 
   const resolver = createDownloadDependencyResolver()
   try {
-    const [tree, files] = await Promise.all([
-      resolver.resolveTree(clean, { loader, gameVersion }),
-      resolver.resolve(clean, { loader, gameVersion }),
-    ])
-    return Response.json({ tree, files }, {
+    const fullTree = await resolver.resolveTree(clean, { loader, gameVersion, maxDepth: resolver.fullMaxNestingDepth })
+    const tree = resolver.trimTree(fullTree)
+    const files = resolver.flattenTreeDeduped(fullTree)
+    const partial = Boolean(resolver.client.truncated)
+    return Response.json({ tree, files, partial }, {
       headers: {
-        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+        'Cache-Control': partial ? 'no-store' : 'public, s-maxage=3600, stale-while-revalidate=86400',
       },
     })
   } catch {
