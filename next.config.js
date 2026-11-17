@@ -95,6 +95,23 @@ const nextConfig = {
   async headers() {
     return [
       {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://modrinth.black https://*.modrinth.black",
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+        ],
+      },
+      {
         source: '/:path((?!_next/static|_next/image|api/avatar/|favicon.ico|icon.png|manifest.json|sw.js|sw-v2.js|workbox-).*)',
         headers: [
           {

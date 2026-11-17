@@ -3,6 +3,7 @@ import { CALM_COOKIE, FESTIVE_OFF_COOKIE, ensureSsoCookie, getSessionUser, isSam
 import { dismissUpdates, getUpdates, isProjectId, isVariant } from '@/lib/account'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { pixelBadgeOf } from '@/lib/kittenPets'
+import { checkRateLimit } from '@/lib/rateLimit'
 
 export const dynamic = 'force-dynamic'
 
@@ -28,6 +29,9 @@ export async function POST(request) {
 
   const user = await getSessionUser()
   if (!user) return Response.json({ error: 'unauthorized' }, { status: 401 })
+  if (!checkRateLimit(`account-updates:${user.id}`, { limit: 60, windowMs: 60_000 }).ok) {
+    return Response.json({ error: 'rate_limit' }, { status: 429 })
+  }
 
   const body = await request.json().catch(() => null)
   if (body?.projectId == null) {
