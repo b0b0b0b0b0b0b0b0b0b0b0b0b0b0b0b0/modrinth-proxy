@@ -360,11 +360,6 @@ export default function VersionsList({
         if (!selectedMcVersions.some((v) => gameVersions.includes(v))) return false
       }
 
-      if (showOnlyReleases && selectedMcVersions.length === 0) {
-        const hasReleaseVersion = getVersionGameVersions(version).some(v => releaseVersions.includes(v))
-        if (!hasReleaseVersion) return false
-      }
-
       if (selectedLoaders.length > 0) {
         const hasSelectedLoader = getVersionPlatformIds(version).some(l => selectedLoaders.includes(l))
         if (!hasSelectedLoader) return false
@@ -382,7 +377,7 @@ export default function VersionsList({
 
       return true
     })
-  }, [contextualVersions, searchQuery, selectedMcVersions, selectedLoaders, selectedEnvs, selectedChannel, showOnlyReleases, releaseVersions])
+  }, [contextualVersions, searchQuery, selectedMcVersions, selectedLoaders, selectedEnvs, selectedChannel])
 
   const totalPages = Math.ceil(filteredVersions.length / versionsPerPage)
   const paginatedVersions = filteredVersions.slice(
