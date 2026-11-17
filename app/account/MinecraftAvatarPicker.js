@@ -31,7 +31,7 @@ export function AvatarImage({ src, className = 'h-11 w-11' }) {
       width={128}
       height={128}
       draggable={false}
-      className={`shrink-0 object-contain ${className}`}
+      className={`pin-avoid shrink-0 object-contain ${className}`}
     />
   )
 }

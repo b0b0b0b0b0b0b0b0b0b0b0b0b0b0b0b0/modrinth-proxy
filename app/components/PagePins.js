@@ -30,7 +30,7 @@ export function pinHeading() {
   return heading
 }
 
-const OBSTACLES = 'main a, main button, main input, main select, main textarea, main [role="button"], main [role="link"], header'
+const OBSTACLES = 'main a, main button, main input, main select, main textarea, main [role="button"], main [role="link"], main .fk-badge, main .pin-avoid, header'
 const GAP = 6
 
 function textRect(el) {
