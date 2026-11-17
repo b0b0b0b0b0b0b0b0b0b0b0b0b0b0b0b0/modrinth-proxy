@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import { safeRehypePlugins } from '@/lib/markdownSanitize'
 import { resolveModrinthProjectAccent } from '@/lib/modrinth'
 import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { filterVersionChangelog } from '@/lib/contentFilter'
@@ -126,7 +126,7 @@ export default function ChangelogVersionEntries({
           >
             <div className="prose prose-invert prose-sm max-w-none text-sm text-gray-300">
               {version.changelog ? (
-                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={safeRehypePlugins}>
                   {filterVersionChangelog(version.changelog)}
                 </ReactMarkdown>
               ) : (

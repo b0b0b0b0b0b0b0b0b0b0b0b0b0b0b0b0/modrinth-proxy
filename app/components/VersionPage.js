@@ -14,7 +14,7 @@ import { getVersionPlatformIds } from '@/lib/contextualVersions'
 import { IconDownload, IconHardDrive } from '@/lib/icons'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import { safeRehypePlugins } from '@/lib/markdownSanitize'
 import CopyButton from './CopyButton'
 import ContentNavigation from './ContentNavigation'
 import ProjectArchivedBanner from './ProjectArchivedBanner'
@@ -400,7 +400,7 @@ export default async function VersionPage({ project, version, author, contentTyp
                 <h3 className="mt-0 mb-2 text-lg font-semibold">{t('version.changelog')}</h3>
                 <div className="card-glass p-4 bg-gray-100 dark:bg-(--bg-tertiary) rounded-2xl">
                   <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={safeRehypePlugins}>
                       {filterVersionChangelog(version.changelog)}
                     </ReactMarkdown>
                   </div>

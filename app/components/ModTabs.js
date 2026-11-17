@@ -20,7 +20,7 @@ import ChannelsDropdown from './ChannelsDropdown'
 import { ChangelogTimelineRow } from './ChangelogVersionEntries'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import rehypeRaw from 'rehype-raw'
+import { safeRehypePlugins } from '@/lib/markdownSanitize'
 
 export default function ModTabs({ mod, versions, initialTab = 'description', initialLoader = 'all' }) {
   const { t, locale } = useI18n()
@@ -191,7 +191,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
           <div className="prose prose-invert prose-sm max-w-none">
             <ReactMarkdown 
               remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeRaw]}
+              rehypePlugins={safeRehypePlugins}
             >
               {mod.body}
             </ReactMarkdown>
@@ -242,7 +242,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                     {version.changelog ? (
                       <ReactMarkdown
                         remarkPlugins={[remarkGfm]}
-                        rehypePlugins={[rehypeRaw]}
+                        rehypePlugins={safeRehypePlugins}
                       >
                         {filterVersionChangelog(version.changelog)}
                       </ReactMarkdown>
