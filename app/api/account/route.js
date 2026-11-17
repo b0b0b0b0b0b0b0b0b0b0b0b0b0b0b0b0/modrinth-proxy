@@ -1,5 +1,6 @@
 import { deleteAccount, getSessionUser, isSameOrigin } from '@/lib/auth'
 import { checkRateLimit } from '@/lib/rateLimit'
+import { dropUserUpdatesMemo } from '@/lib/account'
 
 const RATE_LIMIT = { limit: 5, windowMs: 15 * 60 * 1000 }
 
@@ -18,5 +19,6 @@ export async function DELETE(request) {
   if (body?.confirm !== 'delete-my-account') return Response.json({ error: 'bad_request' }, { status: 400 })
 
   await deleteAccount(user.id)
+  dropUserUpdatesMemo(user.id)
   return Response.json({ ok: true })
 }

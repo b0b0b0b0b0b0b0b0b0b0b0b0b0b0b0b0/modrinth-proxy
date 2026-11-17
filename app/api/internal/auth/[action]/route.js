@@ -8,7 +8,17 @@ import {
   revokeSessionToken,
   validateCredentials,
 } from '@/lib/auth'
-import { clearLoginFailures, createCaptcha, recordLoginFailure, recordSignup, signupAllowed, verifyCaptcha } from '@/lib/captcha'
+import {
+  clearLoginFailures,
+  clearLoginNameFailures,
+  createCaptcha,
+  loginNameLocked,
+  recordLoginFailure,
+  recordLoginNameFailure,
+  recordSignup,
+  signupAllowed,
+  verifyCaptcha,
+} from '@/lib/captcha'
 import { isInternalRequest } from '@/lib/internalApi'
 import { absoluteAvatarUrl, userAvatarUrl } from '@/lib/minecraftAvatar'
 import { checkRateLimit } from '@/lib/rateLimit'
@@ -43,12 +53,15 @@ async function login(body, ip) {
   if (!verifyCaptcha(body?.captcha, 'login', ip)) return fail('captcha', 400)
   const username = typeof body?.username === 'string' ? body.username.trim().slice(0, 64) : ''
   const password = typeof body?.password === 'string' ? body.password.slice(0, 256) : ''
+  if (loginNameLocked(username)) return fail('rate_limit', 429)
   const user = await authenticateUser(username, password)
   if (!user) {
     recordLoginFailure(ip)
+    recordLoginNameFailure(username)
     return fail('invalid', 401)
   }
   clearLoginFailures(ip)
+  clearLoginNameFailures(username)
   return issue(user.id)
 }
 

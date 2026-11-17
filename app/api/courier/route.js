@@ -65,9 +65,9 @@ export async function POST(request) {
     maxAge: Math.floor(COURIER_TTL_MS / 1000),
   })
 
-  const items = [{ url: `${MODRINTH_API}/project/${slug}`, data: body.project, size: JSON.stringify(body.project).length }]
+  const items = [{ url: `${MODRINTH_API}/project/${encodeURIComponent(slug)}`, data: body.project, size: JSON.stringify(body.project).length }]
   if (validVersions(body.versions, body.project.id)) {
-    items.push({ url: `${MODRINTH_API}/project/${slug}/version`, data: body.versions, size: JSON.stringify(body.versions).length })
+    items.push({ url: `${MODRINTH_API}/project/${encodeURIComponent(slug)}/version`, data: body.versions, size: JSON.stringify(body.versions).length })
   }
   if (!putCourierDelivery(token, slug, items)) return Response.json({ error: 'too_large' }, { status: 413 })
 

@@ -16,6 +16,12 @@ export default function SessionWatcher({ userId = null }) {
   }, [userId])
 
   useEffect(() => {
+    try {
+      window.caches?.delete('start-url').catch(() => {})
+    } catch {}
+  }, [])
+
+  useEffect(() => {
     let alive = true
     const check = async () => {
       const now = Date.now()

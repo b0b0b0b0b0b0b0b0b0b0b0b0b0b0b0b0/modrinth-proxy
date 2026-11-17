@@ -1,5 +1,12 @@
 import { authenticateUser, isSameOrigin, startSession } from '@/lib/auth'
-import { clearLoginFailures, recordLoginFailure, verifyCaptcha } from '@/lib/captcha'
+import {
+  clearLoginFailures,
+  clearLoginNameFailures,
+  loginNameLocked,
+  recordLoginFailure,
+  recordLoginNameFailure,
+  verifyCaptcha,
+} from '@/lib/captcha'
 import { linkHeldIdentity } from '@/lib/externalAccounts'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
@@ -19,13 +26,17 @@ export async function POST(request) {
   const username = typeof body?.username === 'string' ? body.username.trim().slice(0, 64) : ''
   const password = typeof body?.password === 'string' ? body.password.slice(0, 256) : ''
 
+  if (loginNameLocked(username)) return Response.json({ error: 'rate_limit' }, { status: 429 })
+
   const user = await authenticateUser(username, password)
   if (!user) {
     recordLoginFailure(ip)
+    recordLoginNameFailure(username)
     return Response.json({ error: 'invalid' }, { status: 401 })
   }
 
   clearLoginFailures(ip)
+  clearLoginNameFailures(username)
   await startSession(user.id)
   if (body?.linkHeld) await linkHeldIdentity(user.id)
   return Response.json({ user: { username: user.username } })

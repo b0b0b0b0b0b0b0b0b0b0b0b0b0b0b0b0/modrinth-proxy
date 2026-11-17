@@ -5,7 +5,7 @@ const withPWA = require('@ducanh2912/next-pwa').default({
   register: true,
   skipWaiting: true,
   cacheOnFrontEndNav: false,
-  cacheStartUrl: true,
+  cacheStartUrl: false,
   fallbacks: {
     document: '/offline.html',
   },
@@ -120,6 +120,15 @@ const nextConfig = {
           },
         ],
       },
+      ...['/login', '/register', '/account', '/account/:path*', '/admin/:path*', '/st', '/api/account/:path*', '/api/auth/:path*'].map((source) => ({
+        source,
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'private, no-store',
+          },
+        ],
+      })),
       {
         source: '/sw.js',
         headers: [
