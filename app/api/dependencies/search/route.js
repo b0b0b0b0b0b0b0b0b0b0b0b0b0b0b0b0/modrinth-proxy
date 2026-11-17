@@ -1,10 +1,13 @@
 import { filterModsList } from '@/lib/contentFilter'
 import { fetchSearchResults } from '@/lib/modrinth'
+import { rateLimitResponse } from '@/lib/rateLimit'
 
 const PROJECT_TYPES = ['mod', 'resourcepack', 'shader', 'datapack', 'plugin']
 const LIMIT = 8
 
 export async function GET(request) {
+  const limited = rateLimitResponse(request, 'deps-search')
+  if (limited) return limited
   const { searchParams } = new URL(request.url)
   const query = (searchParams.get('q') || '').trim().slice(0, 100)
   if (!query) return Response.json({ hits: [] })

@@ -1,10 +1,13 @@
 import { getProjectDependents } from '@/lib/modrinth'
 import { isProjectId } from '@/lib/dependentsFilter'
 import { ALL_LOADER_IDS } from '@/lib/loaders'
+import { rateLimitResponse } from '@/lib/rateLimit'
 
 const PROJECT_TYPES = ['mod', 'plugin', 'datapack', 'resourcepack', 'shader']
 
 export async function GET(request) {
+  const limited = rateLimitResponse(request, 'deps-dependents', { limit: 120 })
+  if (limited) return limited
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const projectType = searchParams.get('type')
