@@ -34,6 +34,8 @@ import FestiveGate from './components/FestiveGate'
 import AppSettingsSync from './components/AppSettingsSync'
 import SessionWatcher from './components/SessionWatcher'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
+import YandexMetrika from './components/YandexMetrika'
+import { METRIKA_ID, isMetrikaPrivatePath } from '@/lib/metrika'
 import { I18nProvider } from './components/I18nProvider'
 import DisclaimerBadge from './components/DisclaimerBadge'
 import { PALETTES } from '../lib/paletteManager'
@@ -93,7 +95,9 @@ export default async function RootLayout({ children }) {
   )
   const { t } = await getRequestT()
   const sessionUser = await getSessionUser()
-  const discordEmbed = await discordEmbedJson((await headers()).get('x-modrinth-pathname'))
+  const requestPath = (await headers()).get('x-modrinth-pathname')
+  const discordEmbed = await discordEmbedJson(requestPath)
+  const metrikaHidden = isMetrikaPrivatePath(requestPath)
   const consoleStop = t('console.stop')
   const consoleWarn = t('console.warn')
   const consoleReport = t('console.report')
@@ -183,15 +187,6 @@ export default async function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/icon.png?v=2" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <Script id="yandex-metrika" strategy="afterInteractive">
-          {`(function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-          })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105182235', 'ym');
-          ym(105182235, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});`}
-        </Script>
         <Script id="console-devtools-hint" strategy="afterInteractive">
           {`(function(){
   function warn(){
@@ -218,7 +213,10 @@ export default async function RootLayout({ children }) {
           <AppSettingsSync />
           <SessionWatcher userId={sessionUser?.id ?? null} />
           <CatalogReturnLifecycle />
-          <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
+          <YandexMetrika />
+          {!metrikaHidden && (
+            <noscript dangerouslySetInnerHTML={{ __html: `<div><img src="https://mc.yandex.ru/watch/${METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div>` }} />
+          )}
           <VersionsPreloader />
           <DownloadHistoryTracker />
           <ClickCounter />
