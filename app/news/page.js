@@ -3,6 +3,7 @@ import MarkCommitsRead from '../components/MarkCommitsRead'
 import NewsUnder16Button from '../components/NewsUnder16Button'
 import { ChangelogTimelineRow } from '../components/ChangelogVersionEntries'
 import RelativeTime from '../components/RelativeTime'
+import CommitAvatar from '../components/CommitAvatar'
 import CommitMessage from '../components/CommitMessageLazy'
 import { getSiteCommits } from '@/lib/commits'
 import { GITHUB_REPO_URL } from '@/lib/githubRepo'
@@ -79,18 +80,7 @@ export default async function NewsPage() {
                       <CommitMessage message={commit.commit.message} />
                       <div className="mt-3 flex flex-wrap items-center gap-4 text-sm text-gray-500">
                         <div className="flex items-center gap-2">
-                          {commit.author?.avatar_url ? (
-                            <img
-                              src={commit.author.avatar_url}
-                              alt={commit.commit.author.name}
-                              className="h-6 w-6 rounded-full shadow-md ring-1 ring-white/10"
-                              referrerPolicy="no-referrer"
-                            />
-                          ) : (
-                            <div className="flex h-6 w-6 items-center justify-center rounded-full bg-linear-to-br from-modrinth-green to-modrinth-green-light text-xs font-bold text-white shadow-md">
-                              {commit.commit.author.name.charAt(0).toUpperCase()}
-                            </div>
-                          )}
+                          <CommitAvatar src={commit.author?.avatar_url} name={commit.commit.author.name} />
                           <span className="max-w-48 truncate md:max-w-none">
                             {commit.commit.author.name}
                           </span>
