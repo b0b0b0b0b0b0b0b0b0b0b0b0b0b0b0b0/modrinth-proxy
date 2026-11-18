@@ -10,6 +10,9 @@ import {
   catmullRomPath,
 } from '@/lib/projectActivity'
 
+const EDGE_FADE_MASK = 'linear-gradient(to right, transparent, #000 12%, #000 88%, transparent)'
+const EDGE_FADE = { WebkitMaskImage: EDGE_FADE_MASK, maskImage: EDGE_FADE_MASK }
+
 function useSiteAccentColor() {
   const [accent, setAccent] = useState('#ec7fab')
 
@@ -104,6 +107,7 @@ export default function ProjectActivityBackground({ versions = [] }) {
       ref={wrapperRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+      style={EDGE_FADE}
     >
       {ready && (
         <svg
