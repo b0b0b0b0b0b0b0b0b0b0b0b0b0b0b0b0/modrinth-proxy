@@ -6182,9 +6182,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18rem;
-    height: 18rem;
-    border-radius: 2rem;
+    width: min(40rem, 88vw, 64vh);
+    height: min(40rem, 88vw, 64vh);
+    border-radius: 2.75rem;
     background: var(--pi-card);
     color: var(--pi-accent);
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5), inset 0 0 0 1px rgb(255 255 255 / 0.1);
@@ -6216,29 +6216,36 @@
   }
 
   .pixel-inspect-face {
+    width: 64%;
+    height: 64%;
     transform: translateZ(40px);
   }
 
+  .pixel-inspect-face svg {
+    width: 100%;
+    height: 100%;
+  }
+
   .pixel-inspect-caption {
-    margin-top: 1.25rem;
+    margin-top: 1.75rem;
     text-align: center;
   }
 
   .pixel-inspect-title {
-    font-size: 1.125rem;
+    font-size: 1.5rem;
     font-weight: 800;
     color: #fff;
   }
 
   .pixel-inspect-subtitle {
-    margin-top: 0.125rem;
-    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    font-size: 1rem;
     color: #9ca3af;
   }
 
   .pixel-inspect-hint {
-    margin-top: 0.5rem;
-    font-size: 0.75rem;
+    margin-top: 0.625rem;
+    font-size: 0.8125rem;
     color: #6b7280;
   }
 
@@ -6268,12 +6275,6 @@
     height: 1.25rem;
   }
 
-  @media (max-width: 360px) {
-    .pixel-inspect-card {
-      width: 16rem;
-      height: 16rem;
-    }
-  }
 
   .fk-say--rank {
     color: var(--color-green);

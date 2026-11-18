@@ -126,7 +126,7 @@ export default function PixelInspect(props) {
         }}>
           <div className="pixel-inspect-glow" aria-hidden="true"/>
           <div className="pixel-inspect-face">
-            <PixelFace level={level} size={176}/>
+            <PixelFace level={level}/>
           </div>
           <div className="pixel-inspect-light" aria-hidden="true" style={{
             opacity: pose.active ? 1 : 0,
