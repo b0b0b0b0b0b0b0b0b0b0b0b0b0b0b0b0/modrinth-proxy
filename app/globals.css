@@ -6206,12 +6206,12 @@
   }
 
   .pixel-inspect-light {
-    mix-blend-mode: overlay;
+    mix-blend-mode: soft-light;
     transition: opacity 0.3s ease;
   }
 
   .pixel-inspect-foil {
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: soft-light;
     transition: opacity 0.3s ease;
   }
 

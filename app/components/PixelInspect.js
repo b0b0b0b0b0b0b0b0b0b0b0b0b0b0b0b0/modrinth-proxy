@@ -129,12 +129,12 @@ export default function PixelInspect(props) {
             <PixelFace level={level} size={176}/>
           </div>
           <div className="pixel-inspect-light" aria-hidden="true" style={{
-            opacity: pose.active ? 1 : 0.35,
-            background: `radial-gradient(circle at ${pose.gx}% ${pose.gy}%, rgba(255,255,255,0.75), rgba(255,255,255,0.15) 28%, transparent 55%)`,
+            opacity: pose.active ? 1 : 0,
+            background: `radial-gradient(circle at ${pose.gx}% ${pose.gy}%, rgba(255,255,255,0.35), rgba(255,255,255,0.08) 35%, transparent 65%)`,
         }}/>
           <div className="pixel-inspect-foil" aria-hidden="true" style={{
-            opacity: pose.active ? 0.35 : 0,
-            background: `linear-gradient(${115 + (pose.gx - 50) * 0.6}deg, transparent ${band + 10}%, rgba(255,255,255,0.55) ${band + 22}%, rgba(167,139,250,0.35) ${band + 30}%, rgba(56,189,248,0.3) ${band + 38}%, transparent ${band + 52}%)`,
+            opacity: pose.active ? 1 : 0,
+            background: `linear-gradient(${115 + (pose.gx - 50) * 0.6}deg, transparent ${band + 15}%, rgba(255,255,255,0.12) ${band + 30}%, transparent ${band + 45}%)`,
         }}/>
         </div>
       </div>

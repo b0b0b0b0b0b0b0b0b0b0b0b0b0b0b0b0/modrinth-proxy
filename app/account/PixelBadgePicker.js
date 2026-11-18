@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useLayoutEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMessage, useT } from '../components/I18nProvider'
 import { PixelFace } from '../components/PixelOutfit'
@@ -8,28 +8,51 @@ import { PixelNameTag } from '../components/PixelBadge'
 import { KITTEN_WEAR, PIXEL_BADGE_STAGES, resolvePixelBadge } from '@/lib/kittenLevels'
 import { ACCOUNT_UPDATES_KEY } from '../components/AccountUpdatesDot'
 import PixelInspect, { useCoarsePointer, useInspectPress } from '../components/PixelInspect'
+import StyledTooltip from '../components/StyledTooltip'
 
 const STAGE_WEAR = new Map(Object.entries(KITTEN_WEAR).map(([id, level]) => [level, id]))
 const EYE_OFF =
   'M10.7 5.1A10 10 0 0 1 12 5c7 0 10 7 10 7a13 13 0 0 1-1.7 2.7M6.6 6.6A13.5 13.5 0 0 0 2 12s3 7 10 7a9.7 9.7 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20'
 
-function Option({ selected, disabled, onClick, onInspect, children, label }) {
+function useTruncated() {
+  const [node, ref] = useState(null)
+  const [cut, setCut] = useState(false)
+  useLayoutEffect(() => {
+    if (!node) return
+    const check = () => setCut(node.scrollWidth > node.clientWidth + 1 || node.scrollHeight > node.clientHeight + 1)
+    check()
+    const observer = new ResizeObserver(check)
+    observer.observe(node)
+    document.fonts?.ready.then(check).catch(() => {})
+    return () => observer.disconnect()
+  }, [node])
+  return [ref, cut]
+}
+
+function Option({ selected, disabled, onClick, onInspect, children, label, iconOnly = false }) {
   const press = useInspectPress(onInspect)
-  return (
+  const [labelRef, cut] = useTruncated()
+  const button = (
     <button
       type="button"
       onClick={onClick}
       {...press}
       disabled={disabled}
       aria-pressed={selected}
-      className={`pixel-press flex w-24 shrink-0 flex-col items-center gap-1.5 rounded-2xl border-2 bg-(--bg-primary) px-2 pb-2 pt-3 text-xs font-semibold transition-colors disabled:opacity-60 ${
+      aria-label={iconOnly ? label : undefined}
+      className={`pixel-press flex h-22 w-24 shrink-0 flex-col items-center justify-center gap-1.5 rounded-2xl border-2 bg-(--bg-primary) px-2 text-xs font-semibold transition-colors disabled:opacity-60 ${
         selected ? 'border-modrinth-green text-modrinth-green' : 'border-transparent text-gray-400 hover:text-white'
       }`}
     >
-      <span className="flex h-10 w-10 items-center justify-center text-modrinth-green">{children}</span>
-      <span className="w-full truncate text-center">{label}</span>
+      <span className={`flex items-center justify-center text-modrinth-green ${iconOnly ? 'h-14 w-14' : 'h-10 w-10'}`}>{children}</span>
+      {iconOnly ? null : (
+        <span ref={labelRef} className="line-clamp-2 w-full text-center leading-tight wrap-break-word">
+          {label}
+        </span>
+      )}
     </button>
   )
+  return iconOnly || cut ? <StyledTooltip label={label}>{button}</StyledTooltip> : button
 }
 
 export default function PixelBadgePicker({ username, level, choice: initial, pets }) {
@@ -97,8 +120,9 @@ export default function PixelBadgePicker({ username, level, choice: initial, pet
             onClick={() => pick(stage)}
             onInspect={() => open(stage, stageName(stage))}
             label={stageName(stage)}
+            iconOnly
           >
-            <PixelFace level={stage} size={36} />
+            <PixelFace level={stage} size={52} />
           </Option>
         ))}
         <Option selected={choice === 0} disabled={busy} onClick={() => pick(0)} label={t('account.pixelBadgeOff')}>
