@@ -1058,5 +1058,89 @@
     "inspectTip": "Botão direito para ver de perto",
     "inspectHintTouch": "Deslize o dedo sobre o Pixel para girá-lo",
     "inspectTipTouch": "Toque e segure o Pixel para ver de perto"
+  },
+  "blockedNotice": {
+    "image": "Imagem bloqueada a pedido do Roskomnadzor",
+    "imageHost": "Imagem de {host} bloqueada a pedido do Roskomnadzor",
+    "link": "Link bloqueado a pedido do Roskomnadzor",
+    "linkHost": "Link para {host} bloqueado a pedido do Roskomnadzor"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Equipe modrinth.black",
+      "description": "Desenvolve e mantém este espelho do Modrinth."
+    },
+    "staff": {
+      "name": "Equipe Modrinth",
+      "description": "Este usuário trabalha no Modrinth."
+    },
+    "moderator": {
+      "name": "Moderador de conteúdo",
+      "description": "Moderador de conteúdo do Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "No Modrinth desde a era Alpha (antes de novembro de 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "No Modrinth desde a era Beta (antes de fevereiro de 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Apoia o Modrinth e os criadores da plataforma."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Testou modpacks antes do lançamento em maio de 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Testou pacotes de recursos antes do lançamento em agosto de 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Testou plugins antes do lançamento em agosto de 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Testou pacotes de dados antes do lançamento em janeiro de 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Testou shaders antes do lançamento em janeiro de 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Testou servidores antes do lançamento em março de 2026."
+    },
+    "downloads-1m": {
+      "name": "1 mi de downloads",
+      "description": "Os projetos deste criador passaram de 1 milhões de downloads."
+    },
+    "downloads-10m": {
+      "name": "10 mi de downloads",
+      "description": "Os projetos deste criador passaram de 10 milhões de downloads."
+    },
+    "downloads-25m": {
+      "name": "25 mi de downloads",
+      "description": "Os projetos deste criador passaram de 25 milhões de downloads."
+    },
+    "downloads-50m": {
+      "name": "50 mi de downloads",
+      "description": "Os projetos deste criador passaram de 50 milhões de downloads."
+    },
+    "downloads-100m": {
+      "name": "100 mi de downloads",
+      "description": "Os projetos deste criador passaram de 100 milhões de downloads."
+    },
+    "downloads-250m": {
+      "name": "250 mi de downloads",
+      "description": "Os projetos deste criador passaram de 250 milhões de downloads."
+    },
+    "downloads-500m": {
+      "name": "500 mi de downloads",
+      "description": "Os projetos deste criador passaram de 500 milhões de downloads."
+    }
   }
 }

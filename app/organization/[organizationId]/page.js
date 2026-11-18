@@ -86,12 +86,12 @@ export default async function OrganizationPage(props) {
   let organization
   try {
     organization = await getOrganization(organizationId)
-    if (!organization?.id) notFound()
-    if (organization.id !== organizationId) {
-      redirect(`/organization/${organization.id}`)
-    }
   } catch {
-    notFound()
+    organization = null
+  }
+  if (!organization?.id) notFound()
+  if (organization.id !== organizationId) {
+    redirect(`/organization/${organization.id}`)
   }
 
   if (

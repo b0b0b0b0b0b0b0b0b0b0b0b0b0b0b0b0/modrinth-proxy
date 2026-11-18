@@ -2,7 +2,12 @@ import RestrictedNotice from '@/app/components/RestrictedNotice'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAuthorInfo } from '@/lib/author'
-import { COLLECTION_PAGE_SIZE, getCollection, getProjectsByIds } from '@/lib/collections'
+import {
+  COLLECTION_PAGE_SIZE,
+  attachProjectOwners,
+  getCollection,
+  getProjectsByIds,
+} from '@/lib/collections'
 import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
 import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
@@ -59,7 +64,7 @@ export default async function CollectionPage(props) {
   const totalPages = Math.max(1, Math.ceil(projectCount / COLLECTION_PAGE_SIZE))
   const page = Math.min(totalPages, Math.max(1, parseInt(searchParams?.page || '1', 10) || 1))
   const pageIds = projectIds.slice((page - 1) * COLLECTION_PAGE_SIZE, page * COLLECTION_PAGE_SIZE)
-  const rawProjects = await getProjectsByIds(pageIds)
+  const rawProjects = await attachProjectOwners(await getProjectsByIds(pageIds))
   const filtered = await filterModsList(rawProjects)
   const projects = filtered.hits.map((project) => filterModContent(project))
 

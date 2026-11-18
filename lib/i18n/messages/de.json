@@ -1058,5 +1058,89 @@
     "inspectTip": "Rechtsklick zum Ansehen aus der Nähe",
     "inspectHintTouch": "Wische mit dem Finger über Pixel, um ihn zu drehen",
     "inspectTipTouch": "Halte Pixel gedrückt, um ihn aus der Nähe zu sehen"
+  },
+  "blockedNotice": {
+    "image": "Bild auf Anordnung von Roskomnadzor gesperrt",
+    "imageHost": "Bild von {host} auf Anordnung von Roskomnadzor gesperrt",
+    "link": "Link auf Anordnung von Roskomnadzor gesperrt",
+    "linkHost": "Link zu {host} auf Anordnung von Roskomnadzor gesperrt"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black-Team",
+      "description": "Entwickelt und betreut diesen Modrinth-Spiegel."
+    },
+    "staff": {
+      "name": "Modrinth-Team",
+      "description": "Diese Person arbeitet bei Modrinth."
+    },
+    "moderator": {
+      "name": "Inhaltsmoderator",
+      "description": "Inhaltsmoderator bei Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "Auf Modrinth seit der Alpha-Zeit (vor November 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "Auf Modrinth seit der Beta-Zeit (vor Februar 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Unterstützt Modrinth und die Creator auf der Plattform."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Hat Modpacks vor dem Start im Mai 2022 getestet."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Hat Ressourcenpakete vor dem Start im August 2022 getestet."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Hat Plugins vor dem Start im August 2022 getestet."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Hat Datenpakete vor dem Start im Januar 2023 getestet."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Hat Shader vor dem Start im Januar 2023 getestet."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Hat Server vor dem Start im März 2026 getestet."
+    },
+    "downloads-1m": {
+      "name": "1 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 1 Mio. Downloads erreicht."
+    },
+    "downloads-10m": {
+      "name": "10 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 10 Mio. Downloads erreicht."
+    },
+    "downloads-25m": {
+      "name": "25 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 25 Mio. Downloads erreicht."
+    },
+    "downloads-50m": {
+      "name": "50 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 50 Mio. Downloads erreicht."
+    },
+    "downloads-100m": {
+      "name": "100 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 100 Mio. Downloads erreicht."
+    },
+    "downloads-250m": {
+      "name": "250 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 250 Mio. Downloads erreicht."
+    },
+    "downloads-500m": {
+      "name": "500 Mio. Downloads",
+      "description": "Die Projekte dieser Person haben über 500 Mio. Downloads erreicht."
+    }
   }
 }

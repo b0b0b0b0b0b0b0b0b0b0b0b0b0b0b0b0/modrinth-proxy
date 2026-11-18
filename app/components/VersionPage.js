@@ -297,7 +297,7 @@ function SupplementaryVersionFiles({ files, t }) {
 }
 
 export default async function VersionPage({ project, version, author, contentType, pluralName, singularName, versions = [], galleryCount }) {
-  const { t } = await getRequestT()
+  const { t, locale } = await getRequestT()
   const disclosures = project?.slug ? await getProjectDisclosures(project.slug) : []
   const archived = findArchivedDisclosure(disclosures)
   const primaryFile = version.files?.find((f) => f.primary) || version.files?.[0]
@@ -401,7 +401,7 @@ export default async function VersionPage({ project, version, author, contentTyp
                 <div className="card-glass p-4 bg-gray-100 dark:bg-(--bg-tertiary) rounded-2xl">
                   <div className="prose dark:prose-invert prose-sm max-w-none text-gray-700 dark:text-gray-300">
                     <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={safeRehypePlugins}>
-                      {filterVersionChangelog(version.changelog)}
+                      {filterVersionChangelog(version.changelog, locale)}
                     </ReactMarkdown>
                   </div>
                 </div>

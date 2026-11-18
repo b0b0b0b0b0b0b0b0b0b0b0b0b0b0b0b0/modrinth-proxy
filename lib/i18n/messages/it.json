@@ -1058,5 +1058,89 @@
     "inspectTip": "Clic destro per guardarlo da vicino",
     "inspectHintTouch": "Fai scorrere il dito su Pixel per farlo girare",
     "inspectTipTouch": "Tieni premuto Pixel per guardarlo da vicino"
+  },
+  "blockedNotice": {
+    "image": "Immagine bloccata su richiesta di Roskomnadzor",
+    "imageHost": "Immagine da {host} bloccata su richiesta di Roskomnadzor",
+    "link": "Link bloccato su richiesta di Roskomnadzor",
+    "linkHost": "Link a {host} bloccato su richiesta di Roskomnadzor"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Team di modrinth.black",
+      "description": "Sviluppa e gestisce questo mirror di Modrinth."
+    },
+    "staff": {
+      "name": "Team di Modrinth",
+      "description": "Questo utente lavora per Modrinth."
+    },
+    "moderator": {
+      "name": "Moderatore dei contenuti",
+      "description": "Moderatore dei contenuti di Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "Su Modrinth dall'era Alpha (prima di novembre 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "Su Modrinth dall'era Beta (prima di febbraio 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Sostiene Modrinth e i creatori della piattaforma."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Ha testato i modpack prima del lancio a maggio 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Ha testato i resource pack prima del lancio ad agosto 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Ha testato i plugin prima del lancio ad agosto 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Ha testato i data pack prima del lancio a gennaio 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Ha testato gli shader prima del lancio a gennaio 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Ha testato i server prima del lancio a marzo 2026."
+    },
+    "downloads-1m": {
+      "name": "1M download",
+      "description": "I progetti di questo autore hanno superato 1 milioni di download."
+    },
+    "downloads-10m": {
+      "name": "10M download",
+      "description": "I progetti di questo autore hanno superato 10 milioni di download."
+    },
+    "downloads-25m": {
+      "name": "25M download",
+      "description": "I progetti di questo autore hanno superato 25 milioni di download."
+    },
+    "downloads-50m": {
+      "name": "50M download",
+      "description": "I progetti di questo autore hanno superato 50 milioni di download."
+    },
+    "downloads-100m": {
+      "name": "100M download",
+      "description": "I progetti di questo autore hanno superato 100 milioni di download."
+    },
+    "downloads-250m": {
+      "name": "250M download",
+      "description": "I progetti di questo autore hanno superato 250 milioni di download."
+    },
+    "downloads-500m": {
+      "name": "500M download",
+      "description": "I progetti di questo autore hanno superato 500 milioni di download."
+    }
   }
 }

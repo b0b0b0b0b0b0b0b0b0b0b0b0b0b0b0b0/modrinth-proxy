@@ -1058,5 +1058,89 @@
     "inspectTip": "Högerklicka för att se närmare",
     "inspectHintTouch": "Dra fingret över Pixel för att vrida på honom",
     "inspectTipTouch": "Håll in Pixel för att se honom närmare"
+  },
+  "blockedNotice": {
+    "image": "Bilden blockerad på begäran av Roskomnadzor",
+    "imageHost": "Bild från {host} blockerad på begäran av Roskomnadzor",
+    "link": "Länken blockerad på begäran av Roskomnadzor",
+    "linkHost": "Länk till {host} blockerad på begäran av Roskomnadzor"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black-teamet",
+      "description": "Utvecklar och sköter den här Modrinth-spegeln."
+    },
+    "staff": {
+      "name": "Modrinth-teamet",
+      "description": "Den här användaren arbetar på Modrinth."
+    },
+    "moderator": {
+      "name": "Innehållsmoderator",
+      "description": "Innehållsmoderator på Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "På Modrinth sedan Alpha-eran (före november 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "På Modrinth sedan Beta-eran (före februari 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Stöttar Modrinth och skaparna på plattformen."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Testade modpaket före lanseringen i maj 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Testade resurspaket före lanseringen i augusti 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Testade plugins före lanseringen i augusti 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Testade datapaket före lanseringen i januari 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Testade shaders före lanseringen i januari 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Testade servrar före lanseringen i mars 2026."
+    },
+    "downloads-1m": {
+      "name": "1 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 1 miljoner nedladdningar."
+    },
+    "downloads-10m": {
+      "name": "10 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 10 miljoner nedladdningar."
+    },
+    "downloads-25m": {
+      "name": "25 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 25 miljoner nedladdningar."
+    },
+    "downloads-50m": {
+      "name": "50 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 50 miljoner nedladdningar."
+    },
+    "downloads-100m": {
+      "name": "100 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 100 miljoner nedladdningar."
+    },
+    "downloads-250m": {
+      "name": "250 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 250 miljoner nedladdningar."
+    },
+    "downloads-500m": {
+      "name": "500 milj. nedladdningar",
+      "description": "Skaparens projekt har nått över 500 miljoner nedladdningar."
+    }
   }
 }

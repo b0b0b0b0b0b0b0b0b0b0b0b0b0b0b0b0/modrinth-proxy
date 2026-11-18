@@ -1058,5 +1058,89 @@
     "inspectTip": "右键点击可以凑近看看",
     "inspectHintTouch": "用手指在像素上滑动来转动它",
     "inspectTipTouch": "长按像素可以凑近看看"
+  },
+  "blockedNotice": {
+    "image": "图片应 Roskomnadzor 要求已被屏蔽",
+    "imageHost": "来自 {host} 的图片应 Roskomnadzor 要求已被屏蔽",
+    "link": "链接应 Roskomnadzor 要求已被屏蔽",
+    "linkHost": "指向 {host} 的链接应 Roskomnadzor 要求已被屏蔽"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black 团队",
+      "description": "开发并维护这个 Modrinth 镜像站。"
+    },
+    "staff": {
+      "name": "Modrinth 团队",
+      "description": "该用户在 Modrinth 工作。"
+    },
+    "moderator": {
+      "name": "内容审核员",
+      "description": "Modrinth 的内容审核员。"
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "自 Alpha 时期（2020 年 11 月之前）起加入 Modrinth。"
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "自 Beta 时期（2022 年 2 月之前）起加入 Modrinth。"
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "支持 Modrinth 和平台上的创作者。"
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "在 2022 年 5 月整合包上线前参与测试。"
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "在 2022 年 8 月资源包上线前参与测试。"
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "在 2022 年 8 月插件上线前参与测试。"
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "在 2023 年 1 月数据包上线前参与测试。"
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "在 2023 年 1 月光影上线前参与测试。"
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "在 2026 年 3 月服务器上线前参与测试。"
+    },
+    "downloads-1m": {
+      "name": "100 万次下载",
+      "description": "该作者的项目下载量已超过 100 万次。"
+    },
+    "downloads-10m": {
+      "name": "1000 万次下载",
+      "description": "该作者的项目下载量已超过 1000 万次。"
+    },
+    "downloads-25m": {
+      "name": "2500 万次下载",
+      "description": "该作者的项目下载量已超过 2500 万次。"
+    },
+    "downloads-50m": {
+      "name": "5000 万次下载",
+      "description": "该作者的项目下载量已超过 5000 万次。"
+    },
+    "downloads-100m": {
+      "name": "10000 万次下载",
+      "description": "该作者的项目下载量已超过 10000 万次。"
+    },
+    "downloads-250m": {
+      "name": "25000 万次下载",
+      "description": "该作者的项目下载量已超过 25000 万次。"
+    },
+    "downloads-500m": {
+      "name": "50000 万次下载",
+      "description": "该作者的项目下载量已超过 50000 万次。"
+    }
   }
 }

@@ -1058,5 +1058,89 @@
     "inspectTip": "右クリックで近くで見られるよ",
     "inspectHintTouch": "指でなぞってピクセルをくるっと回してね",
     "inspectTipTouch": "ピクセルを長押しすると近くで見られるよ"
+  },
+  "blockedNotice": {
+    "image": "画像は Roskomnadzor の要請によりブロックされています",
+    "imageHost": "{host} の画像は Roskomnadzor の要請によりブロックされています",
+    "link": "リンクは Roskomnadzor の要請によりブロックされています",
+    "linkHost": "{host} へのリンクは Roskomnadzor の要請によりブロックされています"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black チーム",
+      "description": "この Modrinth ミラーの開発とサポートを担当しています。"
+    },
+    "staff": {
+      "name": "Modrinth チーム",
+      "description": "このユーザーは Modrinth で働いています。"
+    },
+    "moderator": {
+      "name": "コンテンツモデレーター",
+      "description": "Modrinth のコンテンツモデレーターです。"
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "Alpha 時代（2020年11月以前）から Modrinth を利用しています。"
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "Beta 時代（2022年2月以前）から Modrinth を利用しています。"
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Modrinth とクリエイターを応援しています。"
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "2022年5月の公開前にモッドパックをテストしました。"
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "2022年8月の公開前にリソースパックをテストしました。"
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "2022年8月の公開前にプラグインをテストしました。"
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "2023年1月の公開前にデータパックをテストしました。"
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "2023年1月の公開前にシェーダーをテストしました。"
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "2026年3月の公開前にサーバーをテストしました。"
+    },
+    "downloads-1m": {
+      "name": "100万ダウンロード",
+      "description": "この作者のプロジェクトは100万ダウンロードを超えました。"
+    },
+    "downloads-10m": {
+      "name": "1000万ダウンロード",
+      "description": "この作者のプロジェクトは1000万ダウンロードを超えました。"
+    },
+    "downloads-25m": {
+      "name": "2500万ダウンロード",
+      "description": "この作者のプロジェクトは2500万ダウンロードを超えました。"
+    },
+    "downloads-50m": {
+      "name": "5000万ダウンロード",
+      "description": "この作者のプロジェクトは5000万ダウンロードを超えました。"
+    },
+    "downloads-100m": {
+      "name": "10000万ダウンロード",
+      "description": "この作者のプロジェクトは10000万ダウンロードを超えました。"
+    },
+    "downloads-250m": {
+      "name": "25000万ダウンロード",
+      "description": "この作者のプロジェクトは25000万ダウンロードを超えました。"
+    },
+    "downloads-500m": {
+      "name": "50000万ダウンロード",
+      "description": "この作者のプロジェクトは50000万ダウンロードを超えました。"
+    }
   }
 }

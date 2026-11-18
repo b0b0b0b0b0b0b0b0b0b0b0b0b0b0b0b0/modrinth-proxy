@@ -244,7 +244,7 @@ export default function ModTabs({ mod, versions, initialTab = 'description', ini
                         remarkPlugins={[remarkGfm]}
                         rehypePlugins={safeRehypePlugins}
                       >
-                        {filterVersionChangelog(version.changelog)}
+                        {filterVersionChangelog(version.changelog, locale)}
                       </ReactMarkdown>
                     ) : (
                       <p className="text-gray-500 italic">Нет описания изменений</p>

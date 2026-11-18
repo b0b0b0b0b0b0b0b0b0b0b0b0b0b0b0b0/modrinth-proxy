@@ -1058,5 +1058,89 @@
     "inspectTip": "Правою кнопкою мыши — поглядѣть поближе",
     "inspectHintTouch": "Веди перстомъ по Пикселю, дабы покрутить его",
     "inspectTipTouch": "Зажми Пикселя, дабы поглядѣть поближе"
+  },
+  "blockedNotice": {
+    "image": "Изображеніе запечатано по волѣ РКН",
+    "imageHost": "Изображеніе съ {host} запечатано по волѣ РКН",
+    "link": "Ссылка запечатана по волѣ РКН",
+    "linkHost": "Ссылка на {host} запечатана по волѣ РКН"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Дружина modrinth.black",
+      "description": "Строитель и попечитель сего зерцала Modrinth."
+    },
+    "staff": {
+      "name": "Дружина Modrinth",
+      "description": "Сія особа служитъ въ Modrinth."
+    },
+    "moderator": {
+      "name": "Блюститель твореній",
+      "description": "Блюститель твореній Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "На Modrinth со временъ Alpha (до ноября 2020 года)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "На Modrinth со временъ Beta (до февраля 2022 года)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Подкрѣпляетъ Modrinth и мастеровъ его."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Испытывалъ модпаки прежде открытія въ маѣ 2022 года."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Испытывалъ ресурспаки прежде открытія въ августѣ 2022 года."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Испытывалъ плагины прежде открытія въ августѣ 2022 года."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Испытывалъ датапаки прежде открытія въ январѣ 2023 года."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Испытывалъ шейдеры прежде открытія въ январѣ 2023 года."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Испытывалъ серверы прежде открытія въ мартѣ 2026 года."
+    },
+    "downloads-1m": {
+      "name": "1M загрузокъ",
+      "description": "Творенія мастера набрали 1 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-10m": {
+      "name": "10M загрузокъ",
+      "description": "Творенія мастера набрали 10 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-25m": {
+      "name": "25M загрузокъ",
+      "description": "Творенія мастера набрали 25 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-50m": {
+      "name": "50M загрузокъ",
+      "description": "Творенія мастера набрали 50 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-100m": {
+      "name": "100M загрузокъ",
+      "description": "Творенія мастера набрали 100 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-250m": {
+      "name": "250M загрузокъ",
+      "description": "Творенія мастера набрали 250 милліоновъ загрузокъ и болѣе."
+    },
+    "downloads-500m": {
+      "name": "500M загрузокъ",
+      "description": "Творенія мастера набрали 500 милліоновъ загрузокъ и болѣе."
+    }
   }
 }

@@ -1058,5 +1058,89 @@
     "inspectTip": "Правою кнопкою миші — роздивитися ближче",
     "inspectHintTouch": "Веди пальцем по Пікселю, щоб покрутити його",
     "inspectTipTouch": "Затисни Пікселя, щоб роздивитися ближче"
+  },
+  "blockedNotice": {
+    "image": "Зображення заблоковано на вимогу РКН",
+    "imageHost": "Зображення з {host} заблоковано на вимогу РКН",
+    "link": "Посилання заблоковано на вимогу РКН",
+    "linkHost": "Посилання на {host} заблоковано на вимогу РКН"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Команда modrinth.black",
+      "description": "Розробник і підтримка цього дзеркала Modrinth."
+    },
+    "staff": {
+      "name": "Команда Modrinth",
+      "description": "Цей користувач працює в Modrinth."
+    },
+    "moderator": {
+      "name": "Модератор контенту",
+      "description": "Модератор контенту Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "На Modrinth з епохи Alpha (до листопада 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "На Modrinth з епохи Beta (до лютого 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Підтримує Modrinth і авторів на платформі."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Тестував модпаки до запуску в травні 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Тестував ресурспаки до запуску в серпні 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Тестував плагіни до запуску в серпні 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Тестував датапаки до запуску в січні 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Тестував шейдери до запуску в січні 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Тестував сервери до запуску в березні 2026."
+    },
+    "downloads-1m": {
+      "name": "1M завантажень",
+      "description": "Проєкти автора набрали 1 млн+ завантажень."
+    },
+    "downloads-10m": {
+      "name": "10M завантажень",
+      "description": "Проєкти автора набрали 10 млн+ завантажень."
+    },
+    "downloads-25m": {
+      "name": "25M завантажень",
+      "description": "Проєкти автора набрали 25 млн+ завантажень."
+    },
+    "downloads-50m": {
+      "name": "50M завантажень",
+      "description": "Проєкти автора набрали 50 млн+ завантажень."
+    },
+    "downloads-100m": {
+      "name": "100M завантажень",
+      "description": "Проєкти автора набрали 100 млн+ завантажень."
+    },
+    "downloads-250m": {
+      "name": "250M завантажень",
+      "description": "Проєкти автора набрали 250 млн+ завантажень."
+    },
+    "downloads-500m": {
+      "name": "500M завантажень",
+      "description": "Проєкти автора набрали 500 млн+ завантажень."
+    }
   }
 }

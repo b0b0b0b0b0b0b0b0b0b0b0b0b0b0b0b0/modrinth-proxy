@@ -1059,5 +1059,89 @@
     "inspectTip": "Правой кнопкой мыши — посмотреть поближе",
     "inspectHintTouch": "Веди пальцем по Пикселю, чтобы покрутить его",
     "inspectTipTouch": "Зажми Пикселя, чтобы посмотреть поближе"
+  },
+  "blockedNotice": {
+    "image": "Изображение заблокировано по требованию РКН",
+    "imageHost": "Изображение с {host} заблокировано по требованию РКН",
+    "link": "Ссылка заблокирована по требованию РКН",
+    "linkHost": "Ссылка на {host} заблокирована по требованию РКН"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Команда modrinth.black",
+      "description": "Разработчик и поддержка этого зеркала Modrinth."
+    },
+    "staff": {
+      "name": "Команда Modrinth",
+      "description": "Этот пользователь работает в Modrinth."
+    },
+    "moderator": {
+      "name": "Модератор контента",
+      "description": "Модератор контента Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "На Modrinth с эпохи Alpha (до ноября 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "На Modrinth с эпохи Beta (до февраля 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Поддерживает Modrinth и авторов на платформе."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Тестировал модпаки до запуска в мае 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Тестировал ресурспаки до запуска в августе 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Тестировал плагины до запуска в августе 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Тестировал датапаки до запуска в январе 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Тестировал шейдеры до запуска в январе 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Тестировал серверы до запуска в марте 2026."
+    },
+    "downloads-1m": {
+      "name": "1M загрузок",
+      "description": "Проекты автора набрали 1 млн+ загрузок."
+    },
+    "downloads-10m": {
+      "name": "10M загрузок",
+      "description": "Проекты автора набрали 10 млн+ загрузок."
+    },
+    "downloads-25m": {
+      "name": "25M загрузок",
+      "description": "Проекты автора набрали 25 млн+ загрузок."
+    },
+    "downloads-50m": {
+      "name": "50M загрузок",
+      "description": "Проекты автора набрали 50 млн+ загрузок."
+    },
+    "downloads-100m": {
+      "name": "100M загрузок",
+      "description": "Проекты автора набрали 100 млн+ загрузок."
+    },
+    "downloads-250m": {
+      "name": "250M загрузок",
+      "description": "Проекты автора набрали 250 млн+ загрузок."
+    },
+    "downloads-500m": {
+      "name": "500M загрузок",
+      "description": "Проекты автора набрали 500 млн+ загрузок."
+    }
   }
 }

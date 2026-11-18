@@ -10,7 +10,7 @@ import { versionChannelLetterRingClass } from '@/lib/versionChannelStyles'
 import { filterVersionChangelog } from '@/lib/contentFilter'
 import RelativeTime from './RelativeTime'
 import CatalogPagination from './CatalogPagination'
-import { useT } from './I18nProvider'
+import { useI18n } from './I18nProvider'
 
 function changelogBarClass(versionType) {
   if (versionType === 'release') return 'release'
@@ -55,7 +55,7 @@ export default function ChangelogVersionEntries({
   contentType,
   projectColor,
 }) {
-  const t = useT()
+  const { t, locale } = useI18n()
   const accent = useMemo(
     () => resolveModrinthProjectAccent(projectColor),
     [projectColor],
@@ -127,7 +127,7 @@ export default function ChangelogVersionEntries({
             <div className="prose prose-invert prose-sm max-w-none text-sm text-gray-300">
               {version.changelog ? (
                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={safeRehypePlugins}>
-                  {filterVersionChangelog(version.changelog)}
+                  {filterVersionChangelog(version.changelog, locale)}
                 </ReactMarkdown>
               ) : (
                 <p className="italic text-gray-500">{t('version.noChangelog')}</p>

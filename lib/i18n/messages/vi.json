@@ -1058,5 +1058,89 @@
     "inspectTip": "Nhấp chuột phải để xem gần hơn",
     "inspectHintTouch": "Vuốt ngón tay trên Pixel để xoay cậu ấy",
     "inspectTipTouch": "Nhấn giữ Pixel để xem gần hơn"
+  },
+  "blockedNotice": {
+    "image": "Hình ảnh bị chặn theo yêu cầu của Roskomnadzor",
+    "imageHost": "Hình ảnh từ {host} bị chặn theo yêu cầu của Roskomnadzor",
+    "link": "Liên kết bị chặn theo yêu cầu của Roskomnadzor",
+    "linkHost": "Liên kết tới {host} bị chặn theo yêu cầu của Roskomnadzor"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "Đội ngũ modrinth.black",
+      "description": "Phát triển và hỗ trợ bản sao Modrinth này."
+    },
+    "staff": {
+      "name": "Đội ngũ Modrinth",
+      "description": "Người dùng này làm việc tại Modrinth."
+    },
+    "moderator": {
+      "name": "Người kiểm duyệt nội dung",
+      "description": "Người kiểm duyệt nội dung của Modrinth."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "Có mặt trên Modrinth từ thời Alpha (trước tháng 11 năm 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "Có mặt trên Modrinth từ thời Beta (trước tháng 2 năm 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Ủng hộ Modrinth và các nhà sáng tạo trên nền tảng."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Đã thử nghiệm modpack trước khi ra mắt vào tháng 5 năm 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Đã thử nghiệm gói tài nguyên trước khi ra mắt vào tháng 8 năm 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Đã thử nghiệm plugin trước khi ra mắt vào tháng 8 năm 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Đã thử nghiệm gói dữ liệu trước khi ra mắt vào tháng 1 năm 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Đã thử nghiệm shader trước khi ra mắt vào tháng 1 năm 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Đã thử nghiệm máy chủ trước khi ra mắt vào tháng 3 năm 2026."
+    },
+    "downloads-1m": {
+      "name": "1 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 1 triệu lượt tải."
+    },
+    "downloads-10m": {
+      "name": "10 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 10 triệu lượt tải."
+    },
+    "downloads-25m": {
+      "name": "25 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 25 triệu lượt tải."
+    },
+    "downloads-50m": {
+      "name": "50 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 50 triệu lượt tải."
+    },
+    "downloads-100m": {
+      "name": "100 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 100 triệu lượt tải."
+    },
+    "downloads-250m": {
+      "name": "250 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 250 triệu lượt tải."
+    },
+    "downloads-500m": {
+      "name": "500 triệu lượt tải",
+      "description": "Các dự án của tác giả đã đạt hơn 500 triệu lượt tải."
+    }
   }
 }

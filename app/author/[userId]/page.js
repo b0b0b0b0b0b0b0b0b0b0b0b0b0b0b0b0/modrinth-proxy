@@ -73,7 +73,7 @@ export default async function AuthorPage(props) {
 
     const allProjects = await getAuthorProjects(author.id, { limit: 10000 })
     stats = formatAuthorStats(author, allProjects.hits)
-    organizations = await resolveOrganizationsFromProjects(allProjects.hits)
+    organizations = await resolveOrganizationsFromProjects(allProjects.hits, author.id)
     badges = resolveUserBadges(author, allProjects.hits)
     collections = await getUserCollections(author.id)
     const byType = projectType

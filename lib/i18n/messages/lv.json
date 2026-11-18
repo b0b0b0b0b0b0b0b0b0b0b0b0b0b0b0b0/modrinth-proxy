@@ -1058,5 +1058,89 @@
     "inspectTip": "Labā peles poga — apskatīt tuvāk",
     "inspectHintTouch": "Velc ar pirkstu pa Pikseli, lai viņu pagrozītu",
     "inspectTipTouch": "Turi Pikseli nospiestu, lai apskatītu tuvāk"
+  },
+  "blockedNotice": {
+    "image": "Attēls bloķēts pēc Roskomnadzor pieprasījuma",
+    "imageHost": "Attēls no {host} bloķēts pēc Roskomnadzor pieprasījuma",
+    "link": "Saite bloķēta pēc Roskomnadzor pieprasījuma",
+    "linkHost": "Saite uz {host} bloķēta pēc Roskomnadzor pieprasījuma"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black komanda",
+      "description": "Izstrādā un uztur šo Modrinth spoguli."
+    },
+    "staff": {
+      "name": "Modrinth komanda",
+      "description": "Šis lietotājs strādā Modrinth."
+    },
+    "moderator": {
+      "name": "Satura moderators",
+      "description": "Modrinth satura moderators."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "Modrinth kopš Alpha laikiem (pirms 2020. gada novembra)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "Modrinth kopš Beta laikiem (pirms 2022. gada februāra)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Atbalsta Modrinth un platformas autorus."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Testēja modpakas pirms to palaišanas 2022. gada maijā."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Testēja resursu pakas pirms to palaišanas 2022. gada augustā."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Testēja spraudņus pirms to palaišanas 2022. gada augustā."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Testēja datu pakas pirms to palaišanas 2023. gada janvārī."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Testēja ēnotājus pirms to palaišanas 2023. gada janvārī."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Testēja serverus pirms to palaišanas 2026. gada martā."
+    },
+    "downloads-1m": {
+      "name": "1 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 1 milj. lejupielāžu."
+    },
+    "downloads-10m": {
+      "name": "10 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 10 milj. lejupielāžu."
+    },
+    "downloads-25m": {
+      "name": "25 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 25 milj. lejupielāžu."
+    },
+    "downloads-50m": {
+      "name": "50 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 50 milj. lejupielāžu."
+    },
+    "downloads-100m": {
+      "name": "100 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 100 milj. lejupielāžu."
+    },
+    "downloads-250m": {
+      "name": "250 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 250 milj. lejupielāžu."
+    },
+    "downloads-500m": {
+      "name": "500 milj. lejupielāžu",
+      "description": "Autora projekti sasnieguši vairāk nekā 500 milj. lejupielāžu."
+    }
   }
 }

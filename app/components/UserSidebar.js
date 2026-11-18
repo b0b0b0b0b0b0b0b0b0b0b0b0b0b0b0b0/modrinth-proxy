@@ -7,11 +7,14 @@ import UserProfileIds from './UserProfileIds'
 import { useT } from './I18nProvider'
 
 function BadgeItem({ badge }) {
-  const tooltip = `${badge.name}. ${badge.description}`
+  const t = useT()
+  const name = badge.nameKey ? t(badge.nameKey) : badge.name
+  const description = badge.descriptionKey ? t(badge.descriptionKey) : badge.description
+  const tooltip = description ? `${name}. ${description}` : name
   const image = (
     <img
       src={badge.icon}
-      alt={badge.name}
+      alt={name}
       className="size-full p-0.5"
       loading="lazy"
       referrerPolicy="no-referrer"

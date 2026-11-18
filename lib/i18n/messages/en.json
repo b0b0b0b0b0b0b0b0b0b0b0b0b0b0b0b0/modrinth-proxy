@@ -1059,5 +1059,89 @@
     "inspectTip": "Right-click to take a closer look",
     "inspectHintTouch": "Slide your finger over Pixel to turn him around",
     "inspectTipTouch": "Press and hold Pixel to take a closer look"
+  },
+  "blockedNotice": {
+    "image": "Image blocked at the request of Roskomnadzor",
+    "imageHost": "Image from {host} blocked at the request of Roskomnadzor",
+    "link": "Link blocked at the request of Roskomnadzor",
+    "linkHost": "Link to {host} blocked at the request of Roskomnadzor"
+  },
+  "userBadges": {
+    "site-team": {
+      "name": "modrinth.black team",
+      "description": "Develops and supports this Modrinth mirror."
+    },
+    "staff": {
+      "name": "Modrinth Team",
+      "description": "This user works at Modrinth."
+    },
+    "moderator": {
+      "name": "Content Moderator",
+      "description": "A Modrinth content moderator."
+    },
+    "alpha": {
+      "name": "Alpha Tester",
+      "description": "On Modrinth since the Alpha era (before November 2020)."
+    },
+    "beta": {
+      "name": "Beta Tester",
+      "description": "On Modrinth since the Beta era (before February 2022)."
+    },
+    "plus": {
+      "name": "Modrinth+",
+      "description": "Supports Modrinth and the creators on the platform."
+    },
+    "early-modpack": {
+      "name": "Early Modpack Adopter",
+      "description": "Tested modpacks before their launch in May 2022."
+    },
+    "early-resourcepack": {
+      "name": "Early Resource Pack Adopter",
+      "description": "Tested resource packs before their launch in August 2022."
+    },
+    "early-plugin": {
+      "name": "Early Plugin Adopter",
+      "description": "Tested plugins before their launch in August 2022."
+    },
+    "early-datapack": {
+      "name": "Early Data Pack Adopter",
+      "description": "Tested data packs before their launch in January 2023."
+    },
+    "early-shaders": {
+      "name": "Early Shader Adopter",
+      "description": "Tested shaders before their launch in January 2023."
+    },
+    "early-servers": {
+      "name": "Early Server Adopter",
+      "description": "Tested servers before their launch in March 2026."
+    },
+    "downloads-1m": {
+      "name": "1M downloads",
+      "description": "This creator's projects have reached 1M+ downloads."
+    },
+    "downloads-10m": {
+      "name": "10M downloads",
+      "description": "This creator's projects have reached 10M+ downloads."
+    },
+    "downloads-25m": {
+      "name": "25M downloads",
+      "description": "This creator's projects have reached 25M+ downloads."
+    },
+    "downloads-50m": {
+      "name": "50M downloads",
+      "description": "This creator's projects have reached 50M+ downloads."
+    },
+    "downloads-100m": {
+      "name": "100M downloads",
+      "description": "This creator's projects have reached 100M+ downloads."
+    },
+    "downloads-250m": {
+      "name": "250M downloads",
+      "description": "This creator's projects have reached 250M+ downloads."
+    },
+    "downloads-500m": {
+      "name": "500M downloads",
+      "description": "This creator's projects have reached 500M+ downloads."
+    }
   }
 }
