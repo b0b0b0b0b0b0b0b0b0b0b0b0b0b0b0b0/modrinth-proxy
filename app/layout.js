@@ -88,6 +88,11 @@ const POSTERITY_COMMENT_BODY = ` _    _
   \\ \\_\\\\ //_/ /
    ~~  ~~  ~~`
 
+const POSTERITY_COMMENT_JS = JSON.stringify(POSTERITY_COMMENT_BODY).replace(
+  /[<>/]/g,
+  (c) => `\\u${c.charCodeAt(0).toString(16).padStart(4, '0')}`,
+)
+
 export default async function RootLayout({ children }) {
   const locale = resolveLocale(
     (await cookies()).get(LOCALE_COOKIE)?.value,
@@ -181,7 +186,7 @@ export default async function RootLayout({ children }) {
           }}
         />
         <Script id="__posterity" strategy="beforeInteractive">
-          {`(function(){var h=document.documentElement,t=${JSON.stringify(POSTERITY_COMMENT_BODY)},c=document.createComment(t),f=h.firstChild;if(f)h.insertBefore(c,f);else h.appendChild(c);var s=document.currentScript||document.getElementById("__posterity");if(s&&s.parentNode)s.parentNode.removeChild(s);})();`}
+          {`(function(){var h=document.documentElement,t=${POSTERITY_COMMENT_JS},c=document.createComment(t),f=h.firstChild;if(f)h.insertBefore(c,f);else h.appendChild(c);var s=document.currentScript||document.getElementById("__posterity");if(s&&s.parentNode)s.parentNode.removeChild(s);})();`}
         </Script>
         <link rel="manifest" href="/manifest.json" crossOrigin="use-credentials" />
         <link rel="apple-touch-icon" href="/icon.png?v=2" />

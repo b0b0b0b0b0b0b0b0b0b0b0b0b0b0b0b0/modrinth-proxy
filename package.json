@@ -43,6 +43,11 @@
     "postcss": "^8.5.32",
     "tailwindcss": "^4.3.4"
   },
+  "overrides": {
+    "picomatch@^2": "^2.3.2",
+    "picomatch@^4": "^4.0.7",
+    "serialize-javascript": "^7.1.4"
+  },
   "allowScripts": {
     "better-sqlite3": true
   }
