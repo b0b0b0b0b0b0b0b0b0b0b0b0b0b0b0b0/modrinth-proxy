@@ -10,5 +10,7 @@ export async function register() {
     startTelegramTicker()
     const { startTelegramWelcome } = await import('./lib/telegramWelcome')
     startTelegramWelcome()
+    const { startDiscordGateway } = await import('./lib/discordGateway')
+    startDiscordGateway()
   }
 }
