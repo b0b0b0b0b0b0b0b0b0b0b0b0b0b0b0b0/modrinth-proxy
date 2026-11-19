@@ -78,6 +78,12 @@ const nextConfig = {
       { source: '/favicon.ico', destination: '/icon.png' },
     ]
   },
+  async redirects() {
+    return [
+      { source: '/discord', destination: 'https://discord.gg/zn8vpVnn3y', permanent: false },
+      { source: '/dc', destination: 'https://discord.gg/zn8vpVnn3y', permanent: false },
+    ]
+  },
   images: {
     remotePatterns: [
       {

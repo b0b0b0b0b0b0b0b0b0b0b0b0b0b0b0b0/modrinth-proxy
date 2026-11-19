@@ -1,4 +1,5 @@
 import { buildFavoritesCode, getDownloadsPage, getFavorites } from '@/lib/account'
+import { discordAuthEnabled } from '@/lib/discordAuth'
 import { githubAuthEnabled } from '@/lib/githubAuth'
 import { telegramBotId } from '@/lib/telegramAuth'
 import { getRequestT } from '@/lib/i18n/server'
@@ -19,6 +20,7 @@ export default async function SecuritySettingsPage(props) {
   const user = await requireUser('/settings/security')
   const githubEnabled = githubAuthEnabled()
   const telegramBot = telegramBotId()
+  const discordEnabled = discordAuthEnabled()
   const favorites = getFavorites(user.id)
 
   return (
@@ -37,6 +39,7 @@ export default async function SecuritySettingsPage(props) {
             ...(telegramBot || user.telegram_id
               ? [{ id: 'telegram', linked: Boolean(user.telegram_id), botId: telegramBot }]
               : []),
+            ...(discordEnabled || user.discord_id ? [{ id: 'discord', linked: Boolean(user.discord_id) }] : []),
           ]}
         />
       </section>
@@ -46,7 +49,7 @@ export default async function SecuritySettingsPage(props) {
         favoritesCode={favorites.length > 0 ? buildFavoritesCode(favorites.map((row) => row.project_id)) : ''}
         favoriteTitles={favorites.map((row) => row.title)}
         downloads={getDownloadsPage(user.id, 1).all}
-        linkedNames={[...(user.github_id ? ['GitHub'] : []), ...(user.telegram_id ? ['Telegram'] : [])]}
+        linkedNames={[...(user.github_id ? ['GitHub'] : []), ...(user.telegram_id ? ['Telegram'] : []), ...(user.discord_id ? ['Discord'] : [])]}
       />
     </>
   )

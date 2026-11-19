@@ -26,9 +26,10 @@ const ERROR_KEYS = {
   signup_limit: 'account.errSignupLimit',
   github: 'account.errGithub',
   telegram: 'account.errTelegram',
+  discord: 'account.errDiscord',
 }
 
-const PROVIDER_NAMES = { github: 'GitHub', telegram: 'Telegram' }
+const PROVIDER_NAMES = { github: 'GitHub', telegram: 'Telegram', discord: 'Discord' }
 const AUTO_BUTTON =
   'flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-gray-700 bg-(--bg-primary) text-white transition-colors hover:border-modrinth-green hover:text-modrinth-green disabled:opacity-50 dark:border-gray-800'
 const TELEGRAM_ICON =
@@ -36,6 +37,9 @@ const TELEGRAM_ICON =
 
 const GITHUB_ICON =
   'M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.69 1.25 3.35.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.21-1.49 3.18-1.18 3.18-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z'
+
+const DISCORD_ICON =
+  'M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .08-.03c.46-.63.87-1.3 1.23-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1-.01.13c-.6.35-1.22.65-1.87.89a.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .08.03 19.84 19.84 0 0 0 6.01-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z'
 
 const PERKS = [
   {
@@ -52,7 +56,7 @@ const PERKS = [
   },
 ]
 
-export default function AuthCard({ github = false, telegram = null, claim = null }) {
+export default function AuthCard({ github = false, telegram = null, discord = false, claim = null }) {
   const t = useT()
   const router = useRouter()
   const goNext = (target) => (target.startsWith('/') ? router.push(target) : window.location.assign(target))
@@ -328,7 +332,7 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                       {t('account.githubClaimCreate')}
                     </button>
                   </div>
-                ) : github || telegram ? (
+                ) : github || telegram || discord ? (
                   <>
                     <div className="mt-5 flex items-center justify-between gap-3">
                       <div className="min-w-0">
@@ -352,6 +356,15 @@ export default function AuthCard({ github = false, telegram = null, claim = null
                                 <path d={TELEGRAM_ICON} />
                               </svg>
                             </button>
+                          </StyledTooltip>
+                        ) : null}
+                        {discord ? (
+                          <StyledTooltip label={t('account.discordContinue')}>
+                            <a href={`/api/auth/discord${query}`} aria-label={t('account.discordContinue')} className={AUTO_BUTTON}>
+                              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden>
+                                <path d={DISCORD_ICON} />
+                              </svg>
+                            </a>
                           </StyledTooltip>
                         ) : null}
                         {github ? (

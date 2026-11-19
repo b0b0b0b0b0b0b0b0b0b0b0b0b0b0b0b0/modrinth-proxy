@@ -18,8 +18,11 @@ const ICONS = {
   telegram: {
     path: 'M21.94 4.3 18.6 20.05c-.25 1.1-.9 1.38-1.83.86l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.15 9.37-8.47c.4-.36-.09-.56-.63-.2L5.78 13.5.8 11.95c-1.08-.34-1.1-1.08.23-1.6L20.5 2.84c.9-.33 1.69.21 1.44 1.46Z',
   },
+  discord: {
+    path: 'M20.32 4.37a19.8 19.8 0 0 0-4.89-1.52.07.07 0 0 0-.08.04c-.21.38-.44.87-.61 1.25a18.27 18.27 0 0 0-5.49 0 12.6 12.6 0 0 0-.62-1.25.08.08 0 0 0-.08-.04 19.74 19.74 0 0 0-4.88 1.52.07.07 0 0 0-.03.03C.53 9.05-.32 13.58.1 18.06a.08.08 0 0 0 .03.06 19.9 19.9 0 0 0 5.99 3.03.08.08 0 0 0 .08-.03c.46-.63.87-1.3 1.23-1.99a.08.08 0 0 0-.04-.11 13.1 13.1 0 0 1-1.87-.89.08.08 0 0 1-.01-.13l.37-.29a.07.07 0 0 1 .08-.01c3.93 1.79 8.18 1.79 12.06 0a.07.07 0 0 1 .08.01l.37.29a.08.08 0 0 1-.01.13c-.6.35-1.22.65-1.87.89a.08.08 0 0 0-.04.11c.36.7.77 1.36 1.22 1.99a.08.08 0 0 0 .08.03 19.84 19.84 0 0 0 6.01-3.03.08.08 0 0 0 .03-.06c.5-5.18-.84-9.67-3.55-13.66a.06.06 0 0 0-.03-.03ZM8.02 15.33c-1.18 0-2.16-1.09-2.16-2.42s.96-2.42 2.16-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.96 2.42-2.16 2.42Zm7.97 0c-1.18 0-2.15-1.09-2.15-2.42s.95-2.42 2.15-2.42c1.21 0 2.18 1.1 2.16 2.42 0 1.33-.95 2.42-2.16 2.42Z',
+  },
 }
-const NAMES = { github: 'GitHub', telegram: 'Telegram' }
+const NAMES = { github: 'GitHub', telegram: 'Telegram', discord: 'Discord' }
 const BUTTON =
   'inline-flex shrink-0 items-center justify-center rounded-lg border px-2.5 py-1.5 text-xs font-semibold leading-none transition-colors disabled:cursor-not-allowed disabled:opacity-40'
 const LINK_BUTTON = `${BUTTON} border-transparent bg-modrinth-green font-bold text-black hover:opacity-90`
@@ -343,8 +346,8 @@ export default function SignInMethods({ hasPassword, username, providers, takenP
                 >
                   {t('account.connUnlink')}
                 </button>
-              ) : provider.id === 'github' ? (
-                <a href="/api/auth/github" className={LINK_BUTTON}>
+              ) : provider.id === 'github' || provider.id === 'discord' ? (
+                <a href={`/api/auth/${provider.id}`} className={LINK_BUTTON}>
                   {t('account.connLink')}
                 </a>
               ) : (

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
 import { heldIdentity } from '@/lib/externalAccounts'
+import { discordAuthEnabled } from '@/lib/discordAuth'
 import { githubAuthEnabled } from '@/lib/githubAuth'
 import { telegramBotId } from '@/lib/telegramAuth'
 import AuthCard from './AuthCard'
@@ -14,6 +15,7 @@ export default async function AuthLayout({ children }) {
         <AuthCard
           github={githubAuthEnabled()}
           telegram={telegramBotId()}
+          discord={discordAuthEnabled()}
           claim={held ? { name: held.username, provider: held.provider } : null}
         />
       </Suspense>
