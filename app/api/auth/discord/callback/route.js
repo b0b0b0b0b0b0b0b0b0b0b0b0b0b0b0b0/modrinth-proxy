@@ -1,7 +1,7 @@
 import { getSessionUser } from '@/lib/auth'
 import { resolveExternalSignIn } from '@/lib/externalAccounts'
 import { consumeDiscordState, discordAuthEnabled, fetchDiscordIdentity } from '@/lib/discordAuth'
-import { joinDiscordGuild } from '@/lib/discordBot'
+import { joinDiscordGuild, setDiscordLinkedRole } from '@/lib/discordBot'
 import { redirectTo } from '@/lib/githubAuth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
@@ -30,7 +30,10 @@ export async function GET(request) {
     ip,
     next: pending.next,
   })
-  if (result === 'linked' || result === 'session') await joinDiscordGuild(identity.id, identity.accessToken)
+  if (result === 'linked' || result === 'session') {
+    await joinDiscordGuild(identity.id, identity.accessToken)
+    await setDiscordLinkedRole(identity.id, true)
+  }
 
   if (result === 'linked') return redirectTo('/settings/security')
   if (result === 'taken') return redirectTo('/settings/security?taken=discord')
