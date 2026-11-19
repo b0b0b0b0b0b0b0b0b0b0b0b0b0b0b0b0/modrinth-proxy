@@ -174,6 +174,7 @@ export default async function StatsPage() {
     { value: stats.active, label: t('st.active') },
     { value: stats.github, label: t('st.github') },
     { value: stats.telegram, label: t('st.telegram') },
+    { value: stats.discord, label: t('st.discord') },
     { value: stats.favorites, label: t('st.favorites') },
     { value: stats.downloads, label: t('st.downloads') },
   ]
@@ -206,7 +207,7 @@ export default async function StatsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
         {tiles.map((tile, index) => (
           <Tile key={tile.label} index={index} {...tile} />
         ))}

@@ -831,6 +831,7 @@
     "active": "24時間以内にログイン",
     "github": "GitHub で登録",
     "telegram": "Telegram 連携",
+    "discord": "Discord 連携",
     "favorites": "お気に入りのプロジェクト",
     "downloads": "アカウント履歴のダウンロード",
     "byDay": "2週間の登録数",

@@ -849,6 +849,7 @@
     "active": "signed in today",
     "github": "joined with GitHub",
     "telegram": "linked Telegram",
+    "discord": "linked Discord",
     "favorites": "projects in favorites",
     "downloads": "downloads in account history",
     "byDay": "Sign-ups over two weeks",

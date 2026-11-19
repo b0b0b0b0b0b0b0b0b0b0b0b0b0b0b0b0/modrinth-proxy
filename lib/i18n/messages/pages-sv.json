@@ -831,6 +831,7 @@
     "active": "inloggade senaste dygnet",
     "github": "via GitHub",
     "telegram": "kopplade Telegram",
+    "discord": "kopplade Discord",
     "favorites": "projekt i favoriter",
     "downloads": "nedladdningar i kontohistoriken",
     "byDay": "Registreringar på två veckor",

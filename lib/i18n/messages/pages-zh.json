@@ -831,6 +831,7 @@
     "active": "24 小时内登录",
     "github": "通过 GitHub",
     "telegram": "已绑定 Telegram",
+    "discord": "已绑定 Discord",
     "favorites": "收藏中的项目",
     "downloads": "账号历史中的下载",
     "byDay": "两周内的注册",
