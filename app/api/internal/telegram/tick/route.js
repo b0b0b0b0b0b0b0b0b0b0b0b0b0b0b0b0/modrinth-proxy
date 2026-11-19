@@ -1,4 +1,5 @@
 import { timingSafeEqual } from 'crypto'
+import { discordFeedTick } from '@/lib/discordFeed'
 import { notifyTick } from '@/lib/updateNotifier'
 
 export const dynamic = 'force-dynamic'
@@ -9,5 +10,6 @@ export async function POST(request) {
   if (expected.length === 0 || expected.length !== actual.length || !timingSafeEqual(expected, actual)) {
     return new Response(null, { status: 404 })
   }
-  return Response.json({ ok: await notifyTick() })
+  const [ok] = await Promise.all([notifyTick(), discordFeedTick()])
+  return Response.json({ ok })
 }
