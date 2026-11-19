@@ -36,6 +36,7 @@ import {
 import TypeFilter from './TypeFilter'
 import { HeaderKitten, SleepyKitten } from './AccountKitten'
 import StyledTooltip from '../components/StyledTooltip'
+import { CheaterScreen, CheaterStamp } from '../components/CheaterStamp'
 import { AvatarImage } from './MinecraftAvatarPicker'
 import { userAvatarUrl } from '@/lib/minecraftAvatar'
 import { AccountFestiveScore } from '@/lib/festiveScore'
@@ -341,16 +342,18 @@ function AccountHome({ user, scores, festive, pixel, t, locale }) {
 
   return (
     <>
+      {pixel.grumpy ? <CheaterScreen text={t('footer.kitten.grumpy.stamp')} /> : null}
       <div className="flex items-center gap-4 max-[412px]:flex-col max-[412px]:gap-3 max-[412px]:text-center">
         <StyledTooltip label={t('account.editAvatar')}>
           <Link
             href="/settings/profile"
             aria-label={t('account.editAvatar')}
-            className="group flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-(--bg-primary)"
+            className={`group relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-2xl bg-(--bg-primary)${pixel.grumpy ? ' is-busted' : ''}`}
           >
             <span className="flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-110">
               {avatar ? <AvatarImage src={avatar} className="h-16 w-16" /> : <HeaderKitten />}
             </span>
+            {pixel.grumpy ? <CheaterStamp text={t('footer.kitten.grumpy.stamp')} /> : null}
           </Link>
         </StyledTooltip>
         <div className="w-full min-w-0 flex-1">

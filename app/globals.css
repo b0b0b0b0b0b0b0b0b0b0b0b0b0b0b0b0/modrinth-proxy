@@ -6597,3 +6597,143 @@ html:not(.dark) .peel-under {
     }
   }
 }
+
+.busted-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-backdrop-filter: grayscale(1);
+  backdrop-filter: grayscale(1);
+}
+
+.busted-screen__dim {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.5);
+  animation: busted-dim 0.4s ease both;
+}
+
+.busted-screen__band {
+  position: relative;
+  width: 130vw;
+  margin-left: -15vw;
+  padding: 10px 0;
+  background: linear-gradient(90deg, transparent, rgb(0 0 0 / 0.86) 18%, rgb(0 0 0 / 0.86) 82%, transparent);
+  transform: rotate(-5deg);
+  animation: busted-band 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.busted-screen svg {
+  display: block;
+  width: min(80vw, 920px);
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.busted-screen text,
+.busted-stamp text {
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', 'Roboto Condensed', sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: #d3202b;
+  stroke: #000;
+  stroke-width: 1.2px;
+  stroke-linejoin: round;
+  paint-order: stroke fill;
+}
+
+.busted-stamp {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: busted-late 0.01s linear 6s both;
+}
+
+.busted-stamp.is-landed {
+  animation: busted-thud 0.32s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.busted-stamp__band {
+  display: block;
+  width: 130%;
+  margin-left: -15%;
+  padding: 3% 0;
+  background: linear-gradient(90deg, transparent, rgb(0 0 0 / 0.86) 18%, rgb(0 0 0 / 0.86) 82%, transparent);
+  transform: rotate(-5deg);
+}
+
+.busted-stamp svg {
+  display: block;
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.is-busted img,
+.is-busted svg:not(.busted-stamp svg) {
+  filter: grayscale(1) contrast(1.1) brightness(0.72);
+}
+
+@keyframes busted-dim {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes busted-band {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(1.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-5deg) scale(1);
+  }
+}
+
+@keyframes busted-late {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes busted-thud {
+  from {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .busted-screen {
+    display: none;
+  }
+
+  .busted-stamp,
+  .busted-stamp.is-landed {
+    animation: none;
+  }
+}

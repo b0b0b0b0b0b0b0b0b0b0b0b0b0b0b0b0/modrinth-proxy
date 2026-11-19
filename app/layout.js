@@ -40,6 +40,7 @@ import { I18nProvider } from './components/I18nProvider'
 import DisclaimerBadge from './components/DisclaimerBadge'
 import { PALETTES } from '../lib/paletteManager'
 import { getSessionUser } from '@/lib/auth'
+import { isGrumpyKitten } from '@/lib/kittenPets'
 import { discordEmbedJson } from '@/lib/discordEmbed'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
 import { LOCALE_COOKIE } from '../lib/i18n/config'
@@ -256,13 +257,15 @@ export default async function RootLayout({ children }) {
           <ExtensionBanner />
           <CookieNotice />
           <FeedbackThoughtBanner />
-          <FestiveGate>
-            <HalloweenEffects />
-            <NewYearEffects />
-            <KittenSnowball />
-            <BirthdayEffects />
-            <MinecraftBirthdayEffects />
-          </FestiveGate>
+          {sessionUser && isGrumpyKitten(sessionUser.id) ? null : (
+            <FestiveGate>
+              <HalloweenEffects />
+              <NewYearEffects />
+              <KittenSnowball />
+              <BirthdayEffects />
+              <MinecraftBirthdayEffects />
+            </FestiveGate>
+          )}
           </I18nProvider>
           </AppTooltipProvider>
         </ThemeProvider>

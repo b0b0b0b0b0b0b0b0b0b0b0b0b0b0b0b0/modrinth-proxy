@@ -873,6 +873,7 @@
         "aria": "Pixel does not want to be petted",
         "title": "Pixel is sulking",
         "text": "No petting allowed, no achievements counted",
+        "stamp": "BUSTED",
         "sulks": [
           "Hmph! Paws off",
           "Pixel turned away",
