@@ -727,6 +727,17 @@
     "btnSite": "Öppna sidan",
     "btnUpdates": "Mina uppdateringar"
   },
+  "dcdm": {
+    "notifyTitle": "Aviseringar i Discord",
+    "notifyHint": "Pixel skickar ett DM när något du laddat ner eller favoritmarkerat får en ny version. Vi kollar ungefär var tredje timme.",
+    "notifyNeedLink": "Koppla Discord för att få aviseringar där. Pixel skickar ett DM när något du laddat ner eller favoritmarkerat får en ny version.",
+    "link": "Koppla Discord",
+    "serverTitle": "Vår server",
+    "serverHint": "Pixel kan bara skicka DM om du är med på vår Discord-server.",
+    "serverJoin": "Gå med i servern",
+    "dmFailed": "Pixel kunde inte skicka ett DM till dig. Gå med i vår Discord-server, tillåt direktmeddelanden från servermedlemmar och slå på igen.",
+    "hello": "Från och med nu skriver jag här så fort en mod du laddat ner eller favoritmarkerat får en ny version 🐾"
+  },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",
     "trackDownloadsHint": "Stänger du av det finns bara favoriterna kvar på fliken ”Uppdateringar” och i Telegram.",

@@ -727,6 +727,17 @@
     "btnSite": "Seite öffnen",
     "btnUpdates": "Meine Updates"
   },
+  "dcdm": {
+    "notifyTitle": "Discord-Benachrichtigungen",
+    "notifyHint": "Pixel schreibt dir eine DM, wenn etwas, das du heruntergeladen oder favorisiert hast, eine neue Version bekommt. Wir schauen etwa alle drei Stunden nach.",
+    "notifyNeedLink": "Verknüpfe Discord, um dort Benachrichtigungen zu bekommen. Pixel schreibt dir eine DM, wenn etwas, das du heruntergeladen oder favorisiert hast, eine neue Version bekommt.",
+    "link": "Discord verknüpfen",
+    "serverTitle": "Unser Server",
+    "serverHint": "Pixel kann dir nur schreiben, wenn du auf unserem Discord-Server bist.",
+    "serverJoin": "Server beitreten",
+    "dmFailed": "Pixel konnte dir keine DM schicken. Tritt unserem Discord-Server bei, erlaube Direktnachrichten von Servermitgliedern und schalte es noch mal ein.",
+    "hello": "Ab jetzt schreibe ich dir hier, sobald ein Mod, den du heruntergeladen oder favorisiert hast, eine neue Version bekommt 🐾"
+  },
   "set": {
     "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",
     "trackDownloadsHint": "Wenn du das ausschaltest, bleiben im Tab „Updates“ und in Telegram nur die Favoriten.",

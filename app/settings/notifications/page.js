@@ -1,4 +1,5 @@
 import { getNotifyMutes } from '@/lib/account'
+import { discordBotEnabled } from '@/lib/discordBot'
 import { telegramBotId } from '@/lib/telegramAuth'
 import { NotificationSettings } from '../../account/AccountSettings'
 import { accountSettingsMetadata, requireUser } from '../accountPage'
@@ -23,6 +24,11 @@ export default async function NotificationSettingsPage() {
         timezone: user.timezone || '',
         quietFrom: user.quiet_from,
         quietTo: user.quiet_to,
+      }}
+      discord={{
+        enabled: discordBotEnabled(),
+        linked: Boolean(user.discord_id),
+        notify: Boolean(user.discord_notify),
       }}
       trackDownloads={!user.skip_download_updates}
       mutedCount={getNotifyMutes(user.id).size}

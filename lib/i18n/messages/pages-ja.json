@@ -727,6 +727,17 @@
     "btnSite": "サイトを開く",
     "btnUpdates": "マイアップデート"
   },
+  "dcdm": {
+    "notifyTitle": "Discord 通知",
+    "notifyHint": "ダウンロードやお気に入りに新しいバージョンが出たら、Pixel が DM でお知らせします。約3時間ごとに確認します。",
+    "notifyNeedLink": "Discord を連携すると、そこで通知を受け取れます。ダウンロードやお気に入りに新しいバージョンが出たら、Pixel が DM でお知らせします。",
+    "link": "Discord を連携",
+    "serverTitle": "私たちのサーバー",
+    "serverHint": "Pixel が DM を送れるのは、私たちの Discord サーバーに参加している場合だけです。",
+    "serverJoin": "サーバーに参加",
+    "dmFailed": "Pixel から DM を送れませんでした。私たちの Discord サーバーに参加し、サーバーメンバーからの DM を許可してから、もう一度オンにしてください。",
+    "hello": "これからは、ダウンロードやお気に入りの MOD に新しいバージョンが出たら、ここでお知らせするね 🐾"
+  },
   "set": {
     "trackDownloads": "ダウンロードしたものの新バージョンを追跡",
     "trackDownloadsHint": "オフにすると、「アップデート」タブと Telegram にはお気に入りだけが残ります。",

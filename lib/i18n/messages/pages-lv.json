@@ -727,6 +727,17 @@
     "btnSite": "Atvērt vietni",
     "btnUpdates": "Mani atjauninājumi"
   },
+  "dcdm": {
+    "notifyTitle": "Paziņojumi Discord",
+    "notifyHint": "Pikselis tev uzrakstīs privāti, kad lejupielādētajam vai izlasē pievienotajam iznāks jauna versija. Pārbaudām apmēram reizi trijās stundās.",
+    "notifyNeedLink": "Piesaisti Discord, lai saņemtu paziņojumus tur. Pikselis rakstīs privāti, kad lejupielādētajam vai izlasē pievienotajam iznāks jauna versija.",
+    "link": "Piesaistīt Discord",
+    "serverTitle": "Mūsu serveris",
+    "serverHint": "Pikselis var tev rakstīt privāti tikai tad, ja esi mūsu Discord serverī.",
+    "serverJoin": "Pievienoties serverim",
+    "dmFailed": "Pikselim neizdevās tev uzrakstīt privāti. Pievienojies mūsu Discord serverim, atļauj tur privātās ziņas no dalībniekiem un ieslēdz vēlreiz.",
+    "hello": "No šī brīža rakstīšu šeit, tiklīdz modam, ko lejupielādēji vai pievienoji izlasei, iznāks jauna versija 🐾"
+  },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",
     "trackDownloadsHint": "Ja izslēgsi, cilnē «Atjauninājumi» un Telegram paliks tikai izlase.",

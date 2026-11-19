@@ -727,6 +727,17 @@
     "btnSite": "Apri il sito",
     "btnUpdates": "I miei aggiornamenti"
   },
+  "dcdm": {
+    "notifyTitle": "Notifiche su Discord",
+    "notifyHint": "Pixel ti scriverà in privato quando qualcosa che hai scaricato o messo nei preferiti riceve una nuova versione. Controlliamo circa ogni tre ore.",
+    "notifyNeedLink": "Collega Discord per ricevere le notifiche lì. Pixel ti scriverà in privato quando qualcosa che hai scaricato o messo nei preferiti riceve una nuova versione.",
+    "link": "Collega Discord",
+    "serverTitle": "Il nostro server",
+    "serverHint": "Pixel può scriverti in privato solo se sei nel nostro server Discord.",
+    "serverJoin": "Entra nel server",
+    "dmFailed": "Pixel non è riuscito a scriverti in privato. Entra nel nostro server Discord, consenti i messaggi diretti dai membri del server e riattiva.",
+    "hello": "D’ora in poi ti scriverò qui appena una mod che hai scaricato o messo nei preferiti riceve una nuova versione 🐾"
+  },
   "set": {
     "trackDownloads": "Segui le nuove versioni dei download",
     "trackDownloadsHint": "Se lo disattivi, nella scheda «Aggiornamenti» e su Telegram restano solo i preferiti.",

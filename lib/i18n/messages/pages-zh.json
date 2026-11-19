@@ -727,6 +727,17 @@
     "btnSite": "打开网站",
     "btnUpdates": "我的更新"
   },
+  "dcdm": {
+    "notifyTitle": "Discord 通知",
+    "notifyHint": "当你下载或收藏的内容发布新版本时，Pixel 会私信你。大约每三小时检查一次。",
+    "notifyNeedLink": "绑定 Discord 即可在那里收到通知。当你下载或收藏的内容发布新版本时，Pixel 会私信你。",
+    "link": "绑定 Discord",
+    "serverTitle": "我们的服务器",
+    "serverHint": "只有当你在我们的 Discord 服务器里时，Pixel 才能私信你。",
+    "serverJoin": "加入服务器",
+    "dmFailed": "Pixel 没能私信你。请加入我们的 Discord 服务器，允许来自服务器成员的私信，然后再打开一次。",
+    "hello": "从现在起，只要你下载或收藏的模组发布新版本，我就会在这里告诉你 🐾"
+  },
   "set": {
     "trackDownloads": "跟踪已下载内容的新版本",
     "trackDownloadsHint": "关闭后，“更新”标签页和 Telegram 中只保留收藏的内容。",

@@ -1,5 +1,5 @@
 import { timingSafeEqual } from 'crypto'
-import { telegramTick } from '@/lib/telegramBot'
+import { notifyTick } from '@/lib/updateNotifier'
 
 export const dynamic = 'force-dynamic'
 
@@ -9,5 +9,5 @@ export async function POST(request) {
   if (expected.length === 0 || expected.length !== actual.length || !timingSafeEqual(expected, actual)) {
     return new Response(null, { status: 404 })
   }
-  return Response.json({ ok: await telegramTick() })
+  return Response.json({ ok: await notifyTick() })
 }

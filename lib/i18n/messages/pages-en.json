@@ -745,6 +745,17 @@
     "btnSite": "Open the site",
     "btnUpdates": "My updates"
   },
+  "dcdm": {
+    "notifyTitle": "Discord notifications",
+    "notifyHint": "Pixel will DM you when something you downloaded or favorited gets a new version. We check about every three hours.",
+    "notifyNeedLink": "Link Discord to get notifications there. Pixel will DM you when something you downloaded or favorited gets a new version.",
+    "link": "Link Discord",
+    "serverTitle": "Our server",
+    "serverHint": "Pixel can only DM you if you’re on our Discord server.",
+    "serverJoin": "Join the server",
+    "dmFailed": "Pixel couldn’t DM you. Join our Discord server, allow direct messages from server members, and turn this on again.",
+    "hello": "From now on I’ll write here as soon as a mod you downloaded or favorited gets a new version 🐾"
+  },
   "set": {
     "trackDownloads": "Track new versions of downloads",
     "trackDownloadsHint": "If you turn this off, only favorites stay in the Updates tab and in Telegram.",

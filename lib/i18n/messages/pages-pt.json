@@ -727,6 +727,17 @@
     "btnSite": "Abrir o site",
     "btnUpdates": "Minhas atualizações"
   },
+  "dcdm": {
+    "notifyTitle": "Notificações no Discord",
+    "notifyHint": "O Pixel vai te mandar DM quando algo que você baixou ou favoritou ganhar uma nova versão. Verificamos mais ou menos a cada três horas.",
+    "notifyNeedLink": "Vincule o Discord para receber notificações lá. O Pixel vai te mandar DM quando algo que você baixou ou favoritou ganhar uma nova versão.",
+    "link": "Vincular Discord",
+    "serverTitle": "Nosso servidor",
+    "serverHint": "O Pixel só consegue te mandar DM se você estiver no nosso servidor do Discord.",
+    "serverJoin": "Entrar no servidor",
+    "dmFailed": "O Pixel não conseguiu te mandar DM. Entre no nosso servidor do Discord, permita mensagens diretas de membros do servidor e ative de novo.",
+    "hello": "A partir de agora vou escrever aqui assim que um mod que você baixou ou favoritou ganhar uma nova versão 🐾"
+  },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",
     "trackDownloadsHint": "Se desligar, na aba “Atualizações” e no Telegram ficam só os favoritos.",

@@ -727,6 +727,17 @@
     "btnSite": "Otwórz stronę",
     "btnUpdates": "Moje aktualizacje"
   },
+  "dcdm": {
+    "notifyTitle": "Powiadomienia na Discordzie",
+    "notifyHint": "Pixel napisze do ciebie na priv, gdy coś, co pobrałeś lub dodałeś do ulubionych, dostanie nową wersję. Sprawdzamy mniej więcej co trzy godziny.",
+    "notifyNeedLink": "Podłącz Discorda, żeby dostawać tam powiadomienia. Pixel napisze na priv, gdy coś, co pobrałeś lub dodałeś do ulubionych, dostanie nową wersję.",
+    "link": "Podłącz Discord",
+    "serverTitle": "Nasz serwer",
+    "serverHint": "Pixel może napisać na priv tylko wtedy, gdy jesteś na naszym serwerze Discord.",
+    "serverJoin": "Dołącz do serwera",
+    "dmFailed": "Pixel nie mógł napisać do ciebie na priv. Dołącz do naszego serwera Discord, zezwól na wiadomości prywatne od członków serwera i włącz ponownie.",
+    "hello": "Od teraz będę tu pisać, gdy tylko mod, który pobrałeś lub dodałeś do ulubionych, dostanie nową wersję 🐾"
+  },
   "set": {
     "trackDownloads": "Śledź nowe wersje pobranych",
     "trackDownloadsHint": "Jeśli wyłączysz, w zakładce „Aktualizacje” i w Telegramie zostaną tylko ulubione.",

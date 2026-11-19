@@ -727,6 +727,17 @@
     "btnSite": "Mở trang web",
     "btnUpdates": "Cập nhật của tôi"
   },
+  "dcdm": {
+    "notifyTitle": "Thông báo qua Discord",
+    "notifyHint": "Pixel sẽ nhắn riêng cho bạn khi thứ bạn đã tải hoặc yêu thích có phiên bản mới. Kiểm tra khoảng ba giờ một lần.",
+    "notifyNeedLink": "Liên kết Discord để nhận thông báo ở đó. Pixel sẽ nhắn riêng khi thứ bạn đã tải hoặc yêu thích có phiên bản mới.",
+    "link": "Liên kết Discord",
+    "serverTitle": "Máy chủ của chúng tôi",
+    "serverHint": "Pixel chỉ nhắn riêng được nếu bạn đang ở trong máy chủ Discord của chúng tôi.",
+    "serverJoin": "Vào máy chủ",
+    "dmFailed": "Pixel không nhắn riêng được cho bạn. Hãy vào máy chủ Discord của chúng tôi, cho phép tin nhắn riêng từ thành viên máy chủ rồi bật lại.",
+    "hello": "Từ giờ mình sẽ nhắn ở đây ngay khi mod bạn đã tải hoặc yêu thích có phiên bản mới 🐾"
+  },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",
     "trackDownloadsHint": "Nếu tắt, ở thẻ “Cập nhật” và trong Telegram chỉ còn mục yêu thích.",

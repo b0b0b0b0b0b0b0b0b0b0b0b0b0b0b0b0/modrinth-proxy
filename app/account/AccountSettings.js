@@ -104,7 +104,7 @@ function useAccountSave() {
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState('')
 
-  const save = async (key, payload, apply, revert) => {
+  const save = async (key, payload, apply, revert, errorKeys = {}) => {
     if (busy) return false
     setBusy(key)
     setError('')
@@ -117,7 +117,8 @@ function useAccountSave() {
       })
       if (!response.ok) {
         revert()
-        setError(t('account.errGeneric'))
+        const code = (await response.json().catch(() => null))?.error
+        setError(t(errorKeys[code] || 'account.errGeneric'))
         return false
       }
       return true
@@ -277,11 +278,12 @@ function browserTimeZone() {
   }
 }
 
-export function NotificationSettings({ telegram, trackDownloads: initialTrack, mutedCount }) {
+export function NotificationSettings({ telegram, discord, trackDownloads: initialTrack, mutedCount }) {
   const t = useT()
   const router = useRouter()
   const { busy, setBusy, error, setError, save } = useAccountSave()
   const [notify, setNotify] = useState(telegram.notify)
+  const [discordNotify, setDiscordNotify] = useState(discord.notify)
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
   const [quiet, setQuiet] = useState(telegram.quiet)
   const [timezone, setTimezone] = useState(telegram.timezone || '')
@@ -406,7 +408,39 @@ export function NotificationSettings({ telegram, trackDownloads: initialTrack, m
         </SettingsCard>
       ) : null}
 
-      {telegram.botId && telegram.linked && notify ? (
+      {discord.enabled ? (
+        <SettingsCard title="Discord">
+          <Setting title={t('dcdm.notifyTitle')} hint={t(discord.linked ? 'dcdm.notifyHint' : 'dcdm.notifyNeedLink')}>
+            {discord.linked ? (
+              <Switch
+                checked={discordNotify}
+                label={t('dcdm.notifyTitle')}
+                disabled={Boolean(busy)}
+                onChange={() =>
+                  save(
+                    'discord',
+                    { discord: !discordNotify },
+                    () => setDiscordNotify(!discordNotify),
+                    () => setDiscordNotify(discordNotify),
+                    { discord_blocked: 'dcdm.dmFailed', discord_failed: 'dcdm.dmFailed' },
+                  )
+                }
+              />
+            ) : (
+              <a href="/api/auth/discord" className={LINK_BUTTON}>
+                {t('dcdm.link')}
+              </a>
+            )}
+          </Setting>
+          <Setting title={t('dcdm.serverTitle')} hint={t('dcdm.serverHint')}>
+            <a href="/discord" target="_blank" rel="noopener noreferrer" className={GHOST_BUTTON}>
+              {t('dcdm.serverJoin')}
+            </a>
+          </Setting>
+        </SettingsCard>
+      ) : null}
+
+      {(telegram.botId && telegram.linked && notify) || (discord.enabled && discord.linked && discordNotify) ? (
         <SettingsCard title={t('tg.quietCard')}>
           <Setting title={t('tg.quietTitle')} hint={t('tg.quietHint')}>
             <Switch checked={quiet} label={t('tg.quietTitle')} disabled={Boolean(busy) || !timezone} onChange={toggleQuiet} />

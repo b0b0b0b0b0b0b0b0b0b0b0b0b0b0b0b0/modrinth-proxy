@@ -13,6 +13,7 @@ import { getRequestLocale } from '@/lib/i18n/server'
 import { isValidQuietWindow, isValidTimeZone } from '@/lib/quietHours'
 import { checkRateLimit } from '@/lib/rateLimit'
 import { setTelegramNotify } from '@/lib/telegramBot'
+import { setDiscordNotify } from '@/lib/updateNotifier'
 
 const RATE_LIMIT = { limit: 30, windowMs: 10 * 60 * 1000 }
 
@@ -30,6 +31,7 @@ export async function POST(request) {
   const body = await request.json().catch(() => null)
   const changes = {
     telegram: body?.telegram,
+    discord: body?.discord,
     trackDownloads: body?.trackDownloads,
     recordHistory: body?.recordHistory,
     newsBadge: body?.newsBadge,
@@ -68,7 +70,10 @@ export async function POST(request) {
 
   for (const [key, value] of booleans) {
     if (key === 'telegram') setTelegramNotify(user.id, value, await getRequestLocale())
-    else setAccountPreference(user.id, key, value)
+    else if (key === 'discord') {
+      const result = await setDiscordNotify(user.id, value, await getRequestLocale())
+      if (result !== 'ok') return Response.json({ error: `discord_${result}` }, { status: 409 })
+    } else setAccountPreference(user.id, key, value)
     if (key === 'newsBadge') await setNewsBadgeCookie(value)
     if (key === 'festive') await setFestiveCookie(value)
     if (key === 'calm') await setCalmCookie(value)
