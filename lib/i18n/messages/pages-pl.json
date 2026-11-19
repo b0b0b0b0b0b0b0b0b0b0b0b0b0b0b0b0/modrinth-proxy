@@ -736,10 +736,16 @@
     "serverHint": "Pixel może napisać na priv tylko wtedy, gdy jesteś na naszym serwerze Discord.",
     "serverJoin": "Dołącz do serwera",
     "serverIn": "Jesteś na serwerze",
-    "serverInHint": "Pixel cię widzi i będzie mógł napisać na priv.",
-    "dmFailed": "Pixel nie mógł napisać do ciebie na priv. Dołącz do naszego serwera Discord, zezwól na wiadomości prywatne od członków serwera i włącz ponownie.",
+    "serverInHint": "Pixel widzi cię na naszym serwerze Discord.",
+    "dmFailed": "Pixel nie mógł napisać do ciebie na priv. W Discordzie kliknij nazwę naszego serwera → „Ustawienia prywatności” i włącz „Wiadomości prywatne”. Potem włącz powiadomienia ponownie.",
     "hello": "Od teraz będę tu pisać, gdy tylko mod, który pobrałeś lub dodałeś do ulubionych, dostanie nową wersję 🐾",
-    "linked": "{user} połączył swoje konto z {name}."
+    "linked": "{user} połączył swoje konto z {name}.",
+    "dmBlockedTitle": "Pixel jeszcze nie może do ciebie napisać",
+    "dmBlockedLead": "Discord blokuje jego wiadomości: masz zamknięte wiadomości prywatne dla członków naszego serwera. Naprawisz to w minutę:",
+    "dmStepJoin": "Dołącz do naszego serwera Discord.",
+    "dmStepServer": "W Discordzie kliknij nazwę naszego serwera w lewym górnym rogu i wybierz „Ustawienia prywatności”.",
+    "dmStepPrivacy": "Włącz „Wiadomości prywatne” i naciśnij przycisk poniżej.",
+    "dmRetry": "Spróbuj ponownie"
   },
   "set": {
     "trackDownloads": "Śledź nowe wersje pobranych",

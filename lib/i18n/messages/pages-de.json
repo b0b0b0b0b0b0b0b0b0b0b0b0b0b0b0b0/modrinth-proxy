@@ -736,10 +736,16 @@
     "serverHint": "Pixel kann dir nur schreiben, wenn du auf unserem Discord-Server bist.",
     "serverJoin": "Server beitreten",
     "serverIn": "Du bist auf dem Server",
-    "serverInHint": "Pixel sieht dich und kann dir eine DM schreiben.",
-    "dmFailed": "Pixel konnte dir keine DM schicken. Tritt unserem Discord-Server bei, erlaube Direktnachrichten von Servermitgliedern und schalte es noch mal ein.",
+    "serverInHint": "Pixel sieht dich auf unserem Discord-Server.",
+    "dmFailed": "Pixel konnte dir keine DM schicken. Klicke in Discord auf den Namen unseres Servers → „Privatsphäreeinstellungen“ und schalte „Direktnachrichten“ ein. Dann schalte die Benachrichtigungen noch mal ein.",
     "hello": "Ab jetzt schreibe ich dir hier, sobald ein Mod, den du heruntergeladen oder favorisiert hast, eine neue Version bekommt 🐾",
-    "linked": "{user} hat sein Konto mit {name} verknüpft."
+    "linked": "{user} hat sein Konto mit {name} verknüpft.",
+    "dmBlockedTitle": "Pixel kann dir noch nicht schreiben",
+    "dmBlockedLead": "Discord lässt seine Nachrichten nicht durch: Deine DMs sind für Mitglieder unseres Servers geschlossen. Das ist in einer Minute erledigt:",
+    "dmStepJoin": "Tritt unserem Discord-Server bei.",
+    "dmStepServer": "Klicke in Discord oben links auf den Namen unseres Servers und wähle „Privatsphäreeinstellungen“.",
+    "dmStepPrivacy": "Schalte „Direktnachrichten“ ein und drücke den Button unten.",
+    "dmRetry": "Noch mal versuchen"
   },
   "set": {
     "trackDownloads": "Neue Versionen von Heruntergeladenem verfolgen",

@@ -736,10 +736,16 @@
     "serverHint": "Pikselis var tev rakstīt privāti tikai tad, ja esi mūsu Discord serverī.",
     "serverJoin": "Pievienoties serverim",
     "serverIn": "Tu esi serverī",
-    "serverInHint": "Pikselis tevi redz un varēs tev uzrakstīt privāti.",
-    "dmFailed": "Pikselim neizdevās tev uzrakstīt privāti. Pievienojies mūsu Discord serverim, atļauj tur privātās ziņas no dalībniekiem un ieslēdz vēlreiz.",
+    "serverInHint": "Pikselis tevi redz mūsu Discord serverī.",
+    "dmFailed": "Pikselim neizdevās tev uzrakstīt privāti. Discord noklikšķini uz mūsu servera nosaukuma → “Privātuma iestatījumi” un ieslēdz “Tiešās ziņas”. Tad ieslēdz paziņojumus vēlreiz.",
     "hello": "No šī brīža rakstīšu šeit, tiklīdz modam, ko lejupielādēji vai pievienoji izlasei, iznāks jauna versija 🐾",
-    "linked": "{user} sasaistīja savu kontu ar {name}."
+    "linked": "{user} sasaistīja savu kontu ar {name}.",
+    "dmBlockedTitle": "Pikselis vēl nevar tev uzrakstīt",
+    "dmBlockedLead": "Discord nelaiž cauri viņa ziņas: tev ir slēgtas privātās ziņas mūsu servera dalībniekiem. To var salabot minūtes laikā:",
+    "dmStepJoin": "Pievienojies mūsu Discord serverim.",
+    "dmStepServer": "Discord augšā pa kreisi noklikšķini uz mūsu servera nosaukuma un izvēlies “Privātuma iestatījumi”.",
+    "dmStepPrivacy": "Ieslēdz “Tiešās ziņas” un nospied pogu zemāk.",
+    "dmRetry": "Mēģināt vēlreiz"
   },
   "set": {
     "trackDownloads": "Sekot lejupielādētā jaunajām versijām",

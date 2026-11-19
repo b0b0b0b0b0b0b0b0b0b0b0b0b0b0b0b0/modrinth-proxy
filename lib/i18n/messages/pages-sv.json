@@ -736,10 +736,16 @@
     "serverHint": "Pixel kan bara skicka DM om du är med på vår Discord-server.",
     "serverJoin": "Gå med i servern",
     "serverIn": "Du är på servern",
-    "serverInHint": "Pixel ser dig och kan skicka DM till dig.",
-    "dmFailed": "Pixel kunde inte skicka ett DM till dig. Gå med i vår Discord-server, tillåt direktmeddelanden från servermedlemmar och slå på igen.",
+    "serverInHint": "Pixel ser dig på vår Discord-server.",
+    "dmFailed": "Pixel kunde inte skicka ett DM till dig. Klicka på vår servers namn i Discord → ”Sekretessinställningar” och slå på ”Direktmeddelanden”. Slå sedan på aviseringarna igen.",
     "hello": "Från och med nu skriver jag här så fort en mod du laddat ner eller favoritmarkerat får en ny version 🐾",
-    "linked": "{user} kopplade sitt konto till {name}."
+    "linked": "{user} kopplade sitt konto till {name}.",
+    "dmBlockedTitle": "Pixel kan inte skriva till dig än",
+    "dmBlockedLead": "Discord släpper inte igenom hans meddelanden: dina DM är stängda för medlemmar på vår server. Det fixas på en minut:",
+    "dmStepJoin": "Gå med i vår Discord-server.",
+    "dmStepServer": "Klicka på vår servers namn uppe till vänster i Discord och välj ”Sekretessinställningar”.",
+    "dmStepPrivacy": "Slå på ”Direktmeddelanden” och tryck på knappen nedan.",
+    "dmRetry": "Försök igen"
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",

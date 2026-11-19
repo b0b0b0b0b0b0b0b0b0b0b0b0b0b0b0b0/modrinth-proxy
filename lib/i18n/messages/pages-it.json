@@ -736,10 +736,16 @@
     "serverHint": "Pixel può scriverti in privato solo se sei nel nostro server Discord.",
     "serverJoin": "Entra nel server",
     "serverIn": "Sei nel server",
-    "serverInHint": "Pixel ti vede e potrà scriverti in privato.",
-    "dmFailed": "Pixel non è riuscito a scriverti in privato. Entra nel nostro server Discord, consenti i messaggi diretti dai membri del server e riattiva.",
+    "serverInHint": "Pixel ti vede nel nostro server Discord.",
+    "dmFailed": "Pixel non è riuscito a scriverti in privato. Su Discord clicca sul nome del nostro server → “Impostazioni privacy” e attiva “Messaggi diretti”. Poi riattiva le notifiche.",
     "hello": "D’ora in poi ti scriverò qui appena una mod che hai scaricato o messo nei preferiti riceve una nuova versione 🐾",
-    "linked": "{user} ha collegato il suo account a {name}."
+    "linked": "{user} ha collegato il suo account a {name}.",
+    "dmBlockedTitle": "Pixel non riesce ancora a scriverti",
+    "dmBlockedLead": "Discord blocca i suoi messaggi: hai i messaggi diretti chiusi per i membri del nostro server. Si risolve in un minuto:",
+    "dmStepJoin": "Entra nel nostro server Discord.",
+    "dmStepServer": "Su Discord clicca sul nome del nostro server in alto a sinistra e scegli “Impostazioni privacy”.",
+    "dmStepPrivacy": "Attiva “Messaggi diretti” e premi il pulsante qui sotto.",
+    "dmRetry": "Riprova"
   },
   "set": {
     "trackDownloads": "Segui le nuove versioni dei download",

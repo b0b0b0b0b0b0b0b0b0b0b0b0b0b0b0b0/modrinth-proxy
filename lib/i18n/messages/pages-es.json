@@ -736,10 +736,16 @@
     "serverHint": "Pixel solo puede escribirte por MD si estás en nuestro servidor de Discord.",
     "serverJoin": "Entrar al servidor",
     "serverIn": "Estás en el servidor",
-    "serverInHint": "Pixel te ve y podrá escribirte por MD.",
-    "dmFailed": "Pixel no pudo escribirte por MD. Entra en nuestro servidor de Discord, permite mensajes directos de miembros del servidor y vuelve a activarlo.",
+    "serverInHint": "Pixel te ve en nuestro servidor de Discord.",
+    "dmFailed": "Pixel no pudo escribirte por MD. En Discord, haz clic en el nombre de nuestro servidor → «Ajustes de privacidad» y activa «Mensajes directos». Luego vuelve a activar las notificaciones.",
     "hello": "A partir de ahora te escribiré aquí en cuanto un mod que descargaste o marcaste como favorito tenga una nueva versión 🐾",
-    "linked": "{user} vinculó su cuenta con {name}."
+    "linked": "{user} vinculó su cuenta con {name}.",
+    "dmBlockedTitle": "Pixel aún no puede escribirte",
+    "dmBlockedLead": "Discord bloquea sus mensajes: tienes los MD cerrados para los miembros de nuestro servidor. Se arregla en un minuto:",
+    "dmStepJoin": "Entra en nuestro servidor de Discord.",
+    "dmStepServer": "En Discord, haz clic en el nombre de nuestro servidor arriba a la izquierda y elige «Ajustes de privacidad».",
+    "dmStepPrivacy": "Activa «Mensajes directos» y pulsa el botón de abajo.",
+    "dmRetry": "Intentar de nuevo"
   },
   "set": {
     "trackDownloads": "Seguir nuevas versiones de lo descargado",

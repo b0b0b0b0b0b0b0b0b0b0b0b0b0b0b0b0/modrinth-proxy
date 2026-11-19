@@ -736,10 +736,16 @@
     "serverHint": "Pixel chỉ nhắn riêng được nếu bạn đang ở trong máy chủ Discord của chúng tôi.",
     "serverJoin": "Vào máy chủ",
     "serverIn": "Bạn đã ở trong máy chủ",
-    "serverInHint": "Pixel thấy bạn và có thể nhắn riêng cho bạn.",
-    "dmFailed": "Pixel không nhắn riêng được cho bạn. Hãy vào máy chủ Discord của chúng tôi, cho phép tin nhắn riêng từ thành viên máy chủ rồi bật lại.",
+    "serverInHint": "Pixel thấy bạn trong máy chủ Discord của chúng tôi.",
+    "dmFailed": "Pixel không nhắn riêng được cho bạn. Trong Discord, bấm vào tên máy chủ của chúng tôi → “Cài đặt quyền riêng tư” và bật “Tin nhắn trực tiếp”. Sau đó bật lại thông báo.",
     "hello": "Từ giờ mình sẽ nhắn ở đây ngay khi mod bạn đã tải hoặc yêu thích có phiên bản mới 🐾",
-    "linked": "{user} đã liên kết tài khoản với {name}."
+    "linked": "{user} đã liên kết tài khoản với {name}.",
+    "dmBlockedTitle": "Pixel chưa nhắn được cho bạn",
+    "dmBlockedLead": "Discord chặn tin nhắn của Pixel: bạn đang tắt tin nhắn riêng từ thành viên máy chủ của chúng tôi. Sửa chỉ mất một phút:",
+    "dmStepJoin": "Vào máy chủ Discord của chúng tôi.",
+    "dmStepServer": "Trong Discord, bấm vào tên máy chủ của chúng tôi ở góc trên bên trái và chọn “Cài đặt quyền riêng tư”.",
+    "dmStepPrivacy": "Bật “Tin nhắn trực tiếp” rồi bấm nút bên dưới.",
+    "dmRetry": "Thử lại"
   },
   "set": {
     "trackDownloads": "Theo dõi phiên bản mới của những thứ đã tải",

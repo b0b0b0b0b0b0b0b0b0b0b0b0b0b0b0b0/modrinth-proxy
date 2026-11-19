@@ -754,10 +754,16 @@
     "serverHint": "Pixel can only DM you if you’re on our Discord server.",
     "serverJoin": "Join the server",
     "serverIn": "You’re on the server",
-    "serverInHint": "Pixel can see you and will be able to DM you.",
-    "dmFailed": "Pixel couldn’t DM you. Join our Discord server, allow direct messages from server members, and turn this on again.",
+    "serverInHint": "Pixel can see you on our Discord server.",
+    "dmFailed": "Pixel couldn’t DM you. In Discord, click our server’s name → “Privacy Settings” and turn on “Direct Messages”. Then turn notifications on again.",
     "hello": "From now on I’ll write here as soon as a mod you downloaded or favorited gets a new version 🐾",
-    "linked": "{user} linked their account to {name}."
+    "linked": "{user} linked their account to {name}.",
+    "dmBlockedTitle": "Pixel can’t message you yet",
+    "dmBlockedLead": "Discord blocks his messages: your DMs are closed to members of our server. It takes a minute to fix:",
+    "dmStepJoin": "Join our Discord server.",
+    "dmStepServer": "In Discord, click our server’s name at the top left and choose “Privacy Settings”.",
+    "dmStepPrivacy": "Turn on “Direct Messages” and press the button below.",
+    "dmRetry": "Try again"
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",

@@ -736,10 +736,16 @@
     "serverHint": "O Pixel só consegue te mandar DM se você estiver no nosso servidor do Discord.",
     "serverJoin": "Entrar no servidor",
     "serverIn": "Você está no servidor",
-    "serverInHint": "O Pixel te vê e vai conseguir te mandar DM.",
-    "dmFailed": "O Pixel não conseguiu te mandar DM. Entre no nosso servidor do Discord, permita mensagens diretas de membros do servidor e ative de novo.",
+    "serverInHint": "O Pixel te vê no nosso servidor do Discord.",
+    "dmFailed": "O Pixel não conseguiu te mandar DM. No Discord, clique no nome do nosso servidor → “Configurações de privacidade” e ative “Mensagens diretas”. Depois ative as notificações de novo.",
     "hello": "A partir de agora vou escrever aqui assim que um mod que você baixou ou favoritou ganhar uma nova versão 🐾",
-    "linked": "{user} vinculou a conta a {name}."
+    "linked": "{user} vinculou a conta a {name}.",
+    "dmBlockedTitle": "O Pixel ainda não consegue te escrever",
+    "dmBlockedLead": "O Discord bloqueia as mensagens dele: suas DMs estão fechadas para membros do nosso servidor. Resolve em um minuto:",
+    "dmStepJoin": "Entre no nosso servidor do Discord.",
+    "dmStepServer": "No Discord, clique no nome do nosso servidor no canto superior esquerdo e escolha “Configurações de privacidade”.",
+    "dmStepPrivacy": "Ative “Mensagens diretas” e aperte o botão abaixo.",
+    "dmRetry": "Tentar de novo"
   },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",

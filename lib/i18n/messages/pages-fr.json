@@ -736,10 +736,16 @@
     "serverHint": "Pixel ne peut t’écrire en MP que si tu es sur notre serveur Discord.",
     "serverJoin": "Rejoindre le serveur",
     "serverIn": "Tu es sur le serveur",
-    "serverInHint": "Pixel te voit et pourra t’envoyer un MP.",
-    "dmFailed": "Pixel n’a pas pu t’envoyer de MP. Rejoins notre serveur Discord, autorise les messages privés des membres du serveur et réactive.",
+    "serverInHint": "Pixel te voit sur notre serveur Discord.",
+    "dmFailed": "Pixel n’a pas pu t’envoyer de MP. Dans Discord, clique sur le nom de notre serveur → « Paramètres de confidentialité » et active « Messages privés ». Puis réactive les notifications.",
     "hello": "Désormais, je t’écrirai ici dès qu’un mod que tu as téléchargé ou mis en favori reçoit une nouvelle version 🐾",
-    "linked": "{user} a lié son compte à {name}."
+    "linked": "{user} a lié son compte à {name}.",
+    "dmBlockedTitle": "Pixel ne peut pas encore t’écrire",
+    "dmBlockedLead": "Discord bloque ses messages : tes MP sont fermés aux membres de notre serveur. Ça se règle en une minute :",
+    "dmStepJoin": "Rejoins notre serveur Discord.",
+    "dmStepServer": "Dans Discord, clique sur le nom de notre serveur en haut à gauche et choisis « Paramètres de confidentialité ».",
+    "dmStepPrivacy": "Active « Messages privés » et appuie sur le bouton ci-dessous.",
+    "dmRetry": "Réessayer"
   },
   "set": {
     "trackDownloads": "Suivre les nouvelles versions des téléchargements",

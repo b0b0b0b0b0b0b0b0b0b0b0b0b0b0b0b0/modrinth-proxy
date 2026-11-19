@@ -103,11 +103,13 @@ function useAccountSave() {
   const t = useT()
   const [busy, setBusy] = useState(null)
   const [error, setError] = useState('')
+  const [errorFor, setErrorFor] = useState(null)
 
   const save = async (key, payload, apply, revert, errorKeys = {}) => {
     if (busy) return false
     setBusy(key)
     setError('')
+    setErrorFor(key)
     apply()
     try {
       const response = await fetch('/api/account/settings', {
@@ -131,7 +133,12 @@ function useAccountSave() {
     }
   }
 
-  return { busy, setBusy, error, setError, save }
+  const setGeneralError = (value) => {
+    setErrorFor(null)
+    setError(value)
+  }
+
+  return { busy, setBusy, error, setError: setGeneralError, errorFor, save }
 }
 
 export function GameSettings({ game }) {
@@ -281,7 +288,17 @@ function browserTimeZone() {
 export function NotificationSettings({ telegram, discord, trackDownloads: initialTrack, mutedCount }) {
   const t = useT()
   const router = useRouter()
-  const { busy, setBusy, error, setError, save } = useAccountSave()
+  const { busy, setBusy, error, setError, errorFor, save } = useAccountSave()
+  const discordError = errorFor === 'discord' ? error : ''
+  const discordBlocked = Boolean(discordError) && discordError === t('dcdm.dmFailed')
+  const toggleDiscord = (next) =>
+    save(
+      'discord',
+      { discord: next },
+      () => setDiscordNotify(next),
+      () => setDiscordNotify(!next),
+      { discord_blocked: 'dcdm.dmFailed', discord_failed: 'dcdm.dmFailed' },
+    )
   const [notify, setNotify] = useState(telegram.notify)
   const [discordNotify, setDiscordNotify] = useState(discord.notify)
   const [trackDownloads, setTrackDownloads] = useState(initialTrack)
@@ -416,15 +433,7 @@ export function NotificationSettings({ telegram, discord, trackDownloads: initia
                 checked={discordNotify}
                 label={t('dcdm.notifyTitle')}
                 disabled={Boolean(busy)}
-                onChange={() =>
-                  save(
-                    'discord',
-                    { discord: !discordNotify },
-                    () => setDiscordNotify(!discordNotify),
-                    () => setDiscordNotify(discordNotify),
-                    { discord_blocked: 'dcdm.dmFailed', discord_failed: 'dcdm.dmFailed' },
-                  )
-                }
+                onChange={() => toggleDiscord(!discordNotify)}
               />
             ) : (
               <a href="/api/auth/discord" className={LINK_BUTTON}>
@@ -432,6 +441,40 @@ export function NotificationSettings({ telegram, discord, trackDownloads: initia
               </a>
             )}
           </Setting>
+          {discordBlocked ? (
+            <div className="pb-3">
+              <div
+                role="alert"
+                className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3 text-xs leading-relaxed text-amber-800 dark:text-amber-200"
+              >
+                <div className="text-sm font-bold text-white">{t('dcdm.dmBlockedTitle')}</div>
+                <p className="mt-0.5">{t('dcdm.dmBlockedLead')}</p>
+                <ol className="mt-2 list-decimal space-y-1 pl-4">
+                  {discord.member ? null : (
+                    <li>
+                      <a href="/discord" target="_blank" rel="noopener noreferrer" className="font-semibold underline">
+                        {t('dcdm.dmStepJoin')}
+                      </a>
+                    </li>
+                  )}
+                  <li>{t('dcdm.dmStepServer')}</li>
+                  <li>{t('dcdm.dmStepPrivacy')}</li>
+                </ol>
+                <button
+                  type="button"
+                  onClick={() => toggleDiscord(true)}
+                  disabled={Boolean(busy)}
+                  className={`${LINK_BUTTON} mt-3`}
+                >
+                  {t('dcdm.dmRetry')}
+                </button>
+              </div>
+            </div>
+          ) : discordError ? (
+            <div className="pb-3">
+              <ErrorLine error={discordError} />
+            </div>
+          ) : null}
           {discord.member ? (
             <Setting title={t('dcdm.serverTitle')} hint={t('dcdm.serverInHint')}>
               <span className="shrink-0 text-xs font-semibold text-modrinth-green">{t('dcdm.serverIn')}</span>
@@ -545,7 +588,7 @@ export function NotificationSettings({ telegram, discord, trackDownloads: initia
           </Setting>
         ) : null}
       </SettingsCard>
-      <ErrorLine error={error} />
+      <ErrorLine error={discordError ? '' : error} />
     </>
   )
 }

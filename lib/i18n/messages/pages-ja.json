@@ -736,10 +736,16 @@
     "serverHint": "Pixel が DM を送れるのは、私たちの Discord サーバーに参加している場合だけです。",
     "serverJoin": "サーバーに参加",
     "serverIn": "サーバーに参加中",
-    "serverInHint": "Pixel はあなたを確認できたので、DM を送れます。",
-    "dmFailed": "Pixel から DM を送れませんでした。私たちの Discord サーバーに参加し、サーバーメンバーからの DM を許可してから、もう一度オンにしてください。",
+    "serverInHint": "Pixel は Discord サーバーであなたを確認できています。",
+    "dmFailed": "Pixel から DM を送れませんでした。Discord でサーバー名をクリック →「プライバシー設定」で「ダイレクトメッセージ」をオンにしてから、もう一度通知をオンにしてください。",
     "hello": "これからは、ダウンロードやお気に入りの MOD に新しいバージョンが出たら、ここでお知らせするね 🐾",
-    "linked": "{user} がアカウントを {name} と連携しました。"
+    "linked": "{user} がアカウントを {name} と連携しました。",
+    "dmBlockedTitle": "Pixel はまだ DM を送れません",
+    "dmBlockedLead": "Discord が彼のメッセージを止めています。サーバーメンバーからの DM がオフになっているためです。1 分で直せます：",
+    "dmStepJoin": "私たちの Discord サーバーに参加する。",
+    "dmStepServer": "Discord の左上でサーバー名をクリックし、「プライバシー設定」を開く。",
+    "dmStepPrivacy": "「ダイレクトメッセージ」をオンにして、下のボタンを押す。",
+    "dmRetry": "もう一度試す"
   },
   "set": {
     "trackDownloads": "ダウンロードしたものの新バージョンを追跡",
