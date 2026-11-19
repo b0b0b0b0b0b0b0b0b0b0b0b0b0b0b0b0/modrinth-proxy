@@ -864,6 +864,18 @@
     "srvEmpty": "Die Zählung beginnt mit dem ersten Klick auf „Spielen“ oder der ersten kopierten IP auf einer Serverseite.",
     "topFavorites": "Am häufigsten favorisiert",
     "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage.",
+    "playTitle": "Wer heute schummelt",
+    "playEmpty": "Alles ruhig: niemand fängt schneller als von Hand möglich oder spielt ohne Pause.",
+    "playFast": "{kind}: {peak} in einer Stunde, von Hand höchstens {limit}",
+    "playNonstop": "hat {hours} von {window} Stunden fast ohne Pause gefangen",
+    "playNote": "Nur Konten und nur, was angemeldet gefangen wurde. Verdächtig: mehr pro Stunde als von Hand möglich oder {hours}+ von {window} Stunden. Zum Bestrafen die id in data/grumpy-kittens.json eintragen.",
+    "playKinds": {
+      "diamonds": "Diamanten",
+      "pets": "Streicheleinheiten",
+      "ghosts": "Geister",
+      "ornaments": "Kugeln",
+      "cookies": "Kekse"
+    },
     "chartWeekdays": "Werktage",
     "chartWeekends": "Wochenende",
     "chartAvg": "Ø {n}",

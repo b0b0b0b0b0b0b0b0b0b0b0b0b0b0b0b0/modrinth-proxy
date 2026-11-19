@@ -864,6 +864,18 @@
     "srvEmpty": "Räkningen börjar vid första klicket på ”Spela” eller första IP-kopian på en serversida.",
     "topFavorites": "Flest favoriter",
     "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna.",
+    "playTitle": "Vem fuskar i dag",
+    "playEmpty": "Lugnt: ingen fångar snabbare än det går för hand eller spelar utan paus.",
+    "playFast": "{kind}: {peak} på en timme, för hand högst {limit}",
+    "playNonstop": "fångade {hours} av {window} timmar nästan utan paus",
+    "playNote": "Bara konton och bara det som fångats inloggad. Misstänkt: mer per timme än det går för hand, eller {hours}+ av {window} timmar. För att straffa, lägg till id i data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "diamanter",
+      "pets": "klappar",
+      "ghosts": "spöken",
+      "ornaments": "julgranskulor",
+      "cookies": "kakor"
+    },
     "chartWeekdays": "vardagar",
     "chartWeekends": "helger",
     "chartAvg": "snitt {n}",

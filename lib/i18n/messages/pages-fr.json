@@ -864,6 +864,18 @@
     "srvEmpty": "Le comptage commencera au premier clic sur « Jouer » ou à la première copie d’IP sur une page de serveur.",
     "topFavorites": "Les plus mis en favoris",
     "note": "Seulement des totaux — aucun pseudo ni liste personnelle. Les téléchargements couvrent les 30 derniers jours.",
+    "playTitle": "Qui triche aujourd’hui",
+    "playEmpty": "Tout est calme : personne n’attrape plus vite qu’à la main ni ne joue sans pause.",
+    "playFast": "{kind} : {peak} en une heure, à la main au plus {limit}",
+    "playNonstop": "a attrapé pendant {hours} h sur {window} presque sans pause",
+    "playNote": "Comptes uniquement, et seulement ce qui a été attrapé connecté. Suspect : plus par heure qu’à la main, ou {hours} h et plus sur {window}. Pour punir, ajoute l’id dans data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "diamants",
+      "pets": "caresses",
+      "ghosts": "fantômes",
+      "ornaments": "boules",
+      "cookies": "cookies"
+    },
     "chartWeekdays": "semaine",
     "chartWeekends": "week-end",
     "chartAvg": "moy. {n}",

@@ -864,6 +864,18 @@
     "srvEmpty": "Việc đếm sẽ bắt đầu từ lần bấm “Chơi” hoặc sao chép IP đầu tiên trên trang máy chủ.",
     "topFavorites": "Được yêu thích nhiều nhất",
     "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất.",
+    "playTitle": "Ai gian lận hôm nay",
+    "playEmpty": "Mọi thứ yên ổn: không ai bắt nhanh hơn mức tay người làm được hay chơi không nghỉ.",
+    "playFast": "{kind}: {peak} trong một giờ, bằng tay tối đa {limit}",
+    "playNonstop": "đã bắt {hours} trên {window} giờ gần như không nghỉ",
+    "playNote": "Chỉ tài khoản và chỉ những gì bắt được khi đã đăng nhập. Đáng ngờ: mỗi giờ nhiều hơn mức tay người, hoặc bắt {hours}+ trên {window} giờ. Để phạt, thêm id vào data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "kim cương",
+      "pets": "lượt vuốt ve",
+      "ghosts": "bóng ma",
+      "ornaments": "đồ trang trí",
+      "cookies": "bánh quy"
+    },
     "chartWeekdays": "ngày thường",
     "chartWeekends": "cuối tuần",
     "chartAvg": "TB {n}",

@@ -14,6 +14,7 @@ import RoyalKitten from './RoyalKitten'
 import { DaysChart, TypeSplit } from './StatsCharts'
 import ModrinthTrafficChart from './ModrinthTrafficChart'
 import { getModrinthTrafficReport } from '@/lib/modrinthTrafficReport'
+import { PLAY_NONSTOP_HOURS, PLAY_WINDOW_HOURS, readPlaySuspects } from '@/lib/playWatch'
 
 export const dynamic = 'force-dynamic'
 
@@ -108,6 +109,36 @@ function NumberCrown() {
   )
 }
 
+function PlaySuspects({ suspects, t, format }) {
+  if (!suspects.length) return <p className="text-sm text-gray-400">{t('st.playEmpty')}</p>
+  const kindLabel = (kind) => t(`st.playKinds.${kind}`)
+  return (
+    <ol className="divide-y divide-white/5">
+      {suspects.map((row) => (
+        <li key={row.id} className="py-3 first:pt-0 last:pb-0">
+          <div className="flex items-baseline gap-2">
+            <span className="min-w-0 truncate text-sm font-semibold text-white">{row.username}</span>
+            <span className="shrink-0 text-xs tabular-nums text-gray-600 dark:text-gray-500">id {row.id}</span>
+          </div>
+          <div className="mt-1 space-y-0.5 text-xs leading-snug">
+            {row.fast.map((item) => (
+              <div key={item.kind} className="text-red-400">
+                {t('st.playFast', { kind: kindLabel(item.kind), peak: format(item.peak), limit: format(item.limit) })}
+              </div>
+            ))}
+            {row.nonstop ? (
+              <div className="text-amber-400">{t('st.playNonstop', { hours: row.activeHours, window: PLAY_WINDOW_HOURS })}</div>
+            ) : null}
+            <div className="text-gray-400">
+              {row.totals.map((item) => `${kindLabel(item.kind)}: ${format(item.n)}`).join(' · ')}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
+
 function Tile({ value, label, index }) {
   return (
     <div
@@ -132,6 +163,7 @@ export default async function StatsPage() {
   const typeLabels = Object.fromEntries(Object.entries(TYPE_LABEL_KEYS).map(([type, key]) => [type, t(key)]))
   const downloadTypeLabels = { ...typeLabels, unknown: t('st.dlUnknown') }
   const sinceFormat = new Intl.DateTimeFormat(intlLocale(locale), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Moscow' })
+  const numberFormat = new Intl.NumberFormat(intlLocale(locale))
   const formatSince = (ms) => (ms ? sinceFormat.format(new Date(ms)) : null)
   const since = formatSince(downloads.since)
   const downloadTiles = [
@@ -212,6 +244,13 @@ export default async function StatsPage() {
           <Tile key={tile.label} index={index} {...tile} />
         ))}
       </div>
+
+      <Card title={t('st.playTitle')}>
+        <PlaySuspects suspects={readPlaySuspects()} t={t} format={(n) => numberFormat.format(n)} />
+        <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
+          {t('st.playNote', { hours: PLAY_NONSTOP_HOURS, window: PLAY_WINDOW_HOURS })}
+        </p>
+      </Card>
 
       <Card title={t('st.byDay')}>
         <DaysChart days={stats.days} label={t('st.byDay')} />

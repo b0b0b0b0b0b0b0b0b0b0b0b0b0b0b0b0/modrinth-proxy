@@ -864,6 +864,18 @@
     "srvEmpty": "El conteo empezará con el primer clic en «Jugar» o la primera copia de IP en una página de servidor.",
     "topFavorites": "Más en favoritos",
     "note": "Solo totales: sin nombres ni listas de nadie. Las descargas son de los últimos 30 días.",
+    "playTitle": "Quién hace trampas hoy",
+    "playEmpty": "Todo tranquilo: nadie atrapa más rápido de lo posible a mano ni juega sin parar.",
+    "playFast": "{kind}: {peak} en una hora, a mano como mucho {limit}",
+    "playNonstop": "atrapó {hours} de {window} horas casi sin parar",
+    "playNote": "Solo cuentas y solo lo atrapado con sesión iniciada. Sospechoso: más por hora de lo posible a mano, o atrapar {hours}+ de {window} horas. Para castigar, añade el id a data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "diamantes",
+      "pets": "caricias",
+      "ghosts": "fantasmas",
+      "ornaments": "adornos",
+      "cookies": "galletas"
+    },
     "chartWeekdays": "entre semana",
     "chartWeekends": "fin de semana",
     "chartAvg": "media {n}",

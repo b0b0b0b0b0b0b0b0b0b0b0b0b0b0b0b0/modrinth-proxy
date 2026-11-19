@@ -864,6 +864,18 @@
     "srvEmpty": "在服务器页面第一次点击“开始游戏”或复制 IP 后开始计数。",
     "topFavorites": "收藏最多",
     "note": "只有总数——没有用户名或任何人的列表。下载按最近 30 天统计。",
+    "playTitle": "今天谁在作弊",
+    "playEmpty": "一切正常：没有人比手动更快，也没有人不停地玩。",
+    "playFast": "{kind}：一小时 {peak}，手动最多 {limit}",
+    "playNonstop": "{window} 小时中有 {hours} 小时几乎不停地收集",
+    "playNote": "只统计账号，且只统计登录时收集的。可疑：一小时超过手动上限，或 {window} 小时中收集 {hours} 小时以上。要惩罚，把 id 加到 data/grumpy-kittens.json。",
+    "playKinds": {
+      "diamonds": "钻石",
+      "pets": "抚摸",
+      "ghosts": "幽灵",
+      "ornaments": "装饰球",
+      "cookies": "饼干"
+    },
     "chartWeekdays": "工作日",
     "chartWeekends": "周末",
     "chartAvg": "平均 {n}",

@@ -864,6 +864,18 @@
     "srvEmpty": "Liczenie zacznie się od pierwszego kliknięcia „Graj” lub skopiowania IP na stronie serwera.",
     "topFavorites": "Najczęściej w ulubionych",
     "note": "Tylko sumy — bez nicków i czyichkolwiek list. Pobrania z ostatnich 30 dni.",
+    "playTitle": "Kto dziś oszukuje",
+    "playEmpty": "Spokój: nikt nie łapie szybciej, niż da się ręcznie, ani nie gra bez przerwy.",
+    "playFast": "{kind}: {peak} w godzinę, ręcznie najwyżej {limit}",
+    "playNonstop": "łapał przez {hours} z {window} godzin prawie bez przerwy",
+    "playNote": "Tylko konta i tylko to, co złapano po zalogowaniu. Podejrzane: więcej na godzinę, niż da się ręcznie, albo {hours}+ z {window} godzin. Aby ukarać, dopisz id do data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "diamenty",
+      "pets": "głaskanie",
+      "ghosts": "duchy",
+      "ornaments": "bombki",
+      "cookies": "ciastka"
+    },
     "chartWeekdays": "dni robocze",
     "chartWeekends": "weekendy",
     "chartAvg": "średnio {n}",

@@ -864,6 +864,18 @@
     "srvEmpty": "Skaitīšana sāksies ar pirmo “Spēlēt” klikšķi vai IP kopēšanu servera lapā.",
     "topFavorites": "Visbiežāk izlasē",
     "note": "Tikai kopskaiti — bez vārdiem un kāda sarakstiem. Lejupielādes par pēdējām 30 dienām.",
+    "playTitle": "Kurš šodien krāpjas",
+    "playEmpty": "Viss mierīgi: neviens neķer ātrāk, nekā var ar roku, un nespēlē bez pārtraukuma.",
+    "playFast": "{kind}: {peak} stundā, ar roku ne vairāk kā {limit}",
+    "playNonstop": "ķēra {hours} no {window} stundām gandrīz bez pārtraukuma",
+    "playNote": "Tikai konti un tikai tas, kas noķerts pierakstītam. Aizdomīgi: stundā vairāk, nekā var ar roku, vai {hours}+ no {window} stundām. Lai sodītu, pievieno id failā data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "dimanti",
+      "pets": "glaudieni",
+      "ghosts": "spoki",
+      "ornaments": "rotājumi",
+      "cookies": "cepumi"
+    },
     "chartWeekdays": "darbdienas",
     "chartWeekends": "brīvdienas",
     "chartAvg": "vidēji {n}",

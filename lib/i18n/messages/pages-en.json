@@ -991,6 +991,18 @@
     "srvEmpty": "Counting starts with the first “Play” click or IP copy on a server page.",
     "topFavorites": "Most favorited",
     "note": "Only totals — no usernames or anyone’s lists. Downloads cover the last 30 days.",
+    "playTitle": "Who is cheating today",
+    "playEmpty": "All quiet: nobody is catching faster than humanly possible or playing nonstop.",
+    "playFast": "{kind}: {peak} in an hour, a human can do at most {limit}",
+    "playNonstop": "caught things for {hours} of {window} hours almost nonstop",
+    "playNote": "Accounts only, and only what was caught while signed in. Suspicious: more in an hour than a human can do, or catching for {hours}+ of {window} hours. To punish, add the id to data/grumpy-kittens.json.",
+    "playKinds": {
+      "diamonds": "diamonds",
+      "pets": "pets",
+      "ghosts": "ghosts",
+      "ornaments": "ornaments",
+      "cookies": "cookies"
+    },
     "chartWeekdays": "weekdays",
     "chartWeekends": "weekends",
     "chartAvg": "avg {n}",
