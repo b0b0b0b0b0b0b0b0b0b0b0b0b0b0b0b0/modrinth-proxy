@@ -868,7 +868,8 @@
     "playEmpty": "一切正常：没有人比手动更快，也没有人不停地玩。",
     "playFast": "{kind}：一小时 {peak}，手动最多 {limit}",
     "playNonstop": "{window} 小时中有 {hours} 小时几乎不停地收集",
-    "playNote": "只统计账号，且只统计登录时收集的。可疑：一小时超过手动上限，或 {window} 小时中收集 {hours} 小时以上。要惩罚，把 id 加到 data/grumpy-kittens.json。",
+    "playNote": "只统计账号，且只统计登录时收集的。可疑：一小时超过手动上限，或 {window} 小时中收集 {hours} 小时以上。对明显的作弊者 Pixel 会自己生气：一小时超过上限三倍，或 24 小时中 10 小时不停。要原谅，从 data/grumpy-kittens.json 删除该条目，原来的数字保存在其中（was）。",
+    "playAuto": "Pixel 自己生气的人",
     "playKinds": {
       "diamonds": "钻石",
       "pets": "抚摸",

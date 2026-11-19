@@ -868,7 +868,8 @@
     "playEmpty": "異常なし：手作業より速く集めている人も、休まず続けている人もいません。",
     "playFast": "{kind}：1時間で{peak}、手作業では最大{limit}",
     "playNonstop": "{window}時間中{hours}時間ほぼ休まず集めた",
-    "playNote": "アカウントのみ、ログイン中に集めた分だけを数えます。疑わしい：1時間で手作業の上限を超える、または{window}時間中{hours}時間以上。罰するには id を data/grumpy-kittens.json に追加。",
+    "playNote": "アカウントのみ、ログイン中に集めた分だけを数えます。疑わしい：1時間で手作業の上限を超える、または{window}時間中{hours}時間以上。明らかなズルにはピクセルが自分ですねます：1時間で上限の3倍、または24時間中10時間休まず。許すには data/grumpy-kittens.json から項目を削除（元の数は was に残っています）。",
+    "playAuto": "ピクセルが自分ですねた相手",
     "playKinds": {
       "diamonds": "ダイヤ",
       "pets": "なでなで",

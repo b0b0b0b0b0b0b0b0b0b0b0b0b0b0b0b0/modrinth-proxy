@@ -15,6 +15,7 @@ import { DaysChart, TypeSplit } from './StatsCharts'
 import ModrinthTrafficChart from './ModrinthTrafficChart'
 import { getModrinthTrafficReport } from '@/lib/modrinthTrafficReport'
 import { PLAY_NONSTOP_HOURS, PLAY_WINDOW_HOURS, readPlaySuspects } from '@/lib/playWatch'
+import { readAutoGrumpy } from '@/lib/autoGrumpy'
 
 export const dynamic = 'force-dynamic'
 
@@ -139,6 +140,29 @@ function PlaySuspects({ suspects, t, format }) {
   )
 }
 
+function AutoGrumpy({ entries, t }) {
+  if (!entries.length) return null
+  return (
+    <div className="mt-5">
+      <div className="mb-2 text-xs font-semibold text-gray-400">{t('st.playAuto')}</div>
+      <ol className="space-y-1.5">
+        {entries
+          .slice(-20)
+          .reverse()
+          .map((entry) => (
+            <li key={entry.id} className="text-xs leading-snug">
+              <span className="font-semibold text-white">{entry.name}</span>
+              <span className="ml-2 tabular-nums text-gray-600 dark:text-gray-500">
+                id {entry.id} · {entry.date}
+              </span>
+              <div className="text-gray-400">{entry.why}</div>
+            </li>
+          ))}
+      </ol>
+    </div>
+  )
+}
+
 function Tile({ value, label, index }) {
   return (
     <div
@@ -247,6 +271,7 @@ export default async function StatsPage() {
 
       <Card title={t('st.playTitle')}>
         <PlaySuspects suspects={readPlaySuspects()} t={t} format={(n) => numberFormat.format(n)} />
+        <AutoGrumpy entries={readAutoGrumpy()} t={t} />
         <p className="mt-4 text-[11px] leading-snug text-gray-600 dark:text-gray-500">
           {t('st.playNote', { hours: PLAY_NONSTOP_HOURS, window: PLAY_WINDOW_HOURS })}
         </p>

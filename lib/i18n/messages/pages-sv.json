@@ -868,7 +868,8 @@
     "playEmpty": "Lugnt: ingen fångar snabbare än det går för hand eller spelar utan paus.",
     "playFast": "{kind}: {peak} på en timme, för hand högst {limit}",
     "playNonstop": "fångade {hours} av {window} timmar nästan utan paus",
-    "playNote": "Bara konton och bara det som fångats inloggad. Misstänkt: mer per timme än det går för hand, eller {hours}+ av {window} timmar. För att straffa, lägg till id i data/grumpy-kittens.json.",
+    "playNote": "Bara konton och bara det som fångats inloggad. Misstänkt: mer per timme än det går för hand, eller {hours}+ av {window} timmar. På uppenbara fuskare blir Pixel sur själv: tre gånger timgränsen eller 10 av 24 timmar utan paus. För att förlåta, ta bort posten ur data/grumpy-kittens.json; de gamla räknarna finns i den (was).",
+    "playAuto": "Pixel blev sur på dem själv",
     "playKinds": {
       "diamonds": "diamanter",
       "pets": "klappar",

@@ -868,7 +868,8 @@
     "playEmpty": "Alles ruhig: niemand fängt schneller als von Hand möglich oder spielt ohne Pause.",
     "playFast": "{kind}: {peak} in einer Stunde, von Hand höchstens {limit}",
     "playNonstop": "hat {hours} von {window} Stunden fast ohne Pause gefangen",
-    "playNote": "Nur Konten und nur, was angemeldet gefangen wurde. Verdächtig: mehr pro Stunde als von Hand möglich oder {hours}+ von {window} Stunden. Zum Bestrafen die id in data/grumpy-kittens.json eintragen.",
+    "playNote": "Nur Konten und nur, was angemeldet gefangen wurde. Verdächtig: mehr pro Stunde als von Hand möglich oder {hours}+ von {window} Stunden. Bei klaren Schummlern ist Pixel von selbst beleidigt: dreifaches Stundenlimit oder 10 von 24 Stunden ohne Pause. Verzeihen: Eintrag aus data/grumpy-kittens.json löschen, die alten Zähler stehen darin (was).",
+    "playAuto": "Pixel ist von selbst beleidigt",
     "playKinds": {
       "diamonds": "Diamanten",
       "pets": "Streicheleinheiten",

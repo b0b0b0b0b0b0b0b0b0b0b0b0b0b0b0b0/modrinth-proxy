@@ -868,7 +868,8 @@
     "playEmpty": "Todo tranquilo: nadie atrapa más rápido de lo posible a mano ni juega sin parar.",
     "playFast": "{kind}: {peak} en una hora, a mano como mucho {limit}",
     "playNonstop": "atrapó {hours} de {window} horas casi sin parar",
-    "playNote": "Solo cuentas y solo lo atrapado con sesión iniciada. Sospechoso: más por hora de lo posible a mano, o atrapar {hours}+ de {window} horas. Para castigar, añade el id a data/grumpy-kittens.json.",
+    "playNote": "Solo cuentas y solo lo atrapado con sesión iniciada. Sospechoso: más por hora de lo posible a mano, o atrapar {hours}+ de {window} horas. Con los tramposos claros Pixel se enfada solo: el triple del límite por hora o 10 de 24 horas sin parar. Para perdonar, quita la entrada de data/grumpy-kittens.json; los contadores antiguos están en ella (was).",
+    "playAuto": "Pixel se enfadó con ellos solo",
     "playKinds": {
       "diamonds": "diamantes",
       "pets": "caricias",

@@ -868,7 +868,8 @@
     "playEmpty": "Tutto tranquillo: nessuno cattura più in fretta di quanto si possa a mano né gioca senza sosta.",
     "playFast": "{kind}: {peak} in un’ora, a mano al massimo {limit}",
     "playNonstop": "ha catturato per {hours} ore su {window} quasi senza sosta",
-    "playNote": "Solo account e solo ciò che è stato catturato con l’accesso. Sospetto: più in un’ora di quanto si possa a mano, o {hours}+ ore su {window}. Per punire, aggiungi l’id in data/grumpy-kittens.json.",
+    "playNote": "Solo account e solo ciò che è stato catturato con l’accesso. Sospetto: più in un’ora di quanto si possa a mano, o {hours}+ ore su {window}. Con i bari evidenti Pixel si offende da solo: il triplo del limite orario o 10 ore su 24 senza sosta. Per perdonare, togli la voce da data/grumpy-kittens.json; i vecchi contatori sono lì (was).",
+    "playAuto": "Pixel si è offeso da solo",
     "playKinds": {
       "diamonds": "diamanti",
       "pets": "carezze",

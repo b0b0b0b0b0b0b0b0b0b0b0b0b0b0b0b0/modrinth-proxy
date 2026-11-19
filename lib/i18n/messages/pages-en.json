@@ -995,7 +995,8 @@
     "playEmpty": "All quiet: nobody is catching faster than humanly possible or playing nonstop.",
     "playFast": "{kind}: {peak} in an hour, a human can do at most {limit}",
     "playNonstop": "caught things for {hours} of {window} hours almost nonstop",
-    "playNote": "Accounts only, and only what was caught while signed in. Suspicious: more in an hour than a human can do, or catching for {hours}+ of {window} hours. To punish, add the id to data/grumpy-kittens.json.",
+    "playNote": "Accounts only, and only what was caught while signed in. Suspicious: more in an hour than a human can do, or catching for {hours}+ of {window} hours. Pixel gets grumpy at obvious cheaters on his own: three times the hourly ceiling, or 10 of 24 hours nonstop. To forgive, remove the entry from data/grumpy-kittens.json; the old counters are kept in it (was).",
+    "playAuto": "Pixel got grumpy at them on his own",
     "playKinds": {
       "diamonds": "diamonds",
       "pets": "pets",
