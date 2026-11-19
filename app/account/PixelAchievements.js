@@ -81,7 +81,7 @@ export function PixelAchievementsCard({ pets, grumpy }) {
   return (
     <Link
       href="/account?tab=pixel"
-      className="group mt-6 flex items-center gap-4 rounded-2xl bg-(--bg-primary) p-4 transition-colors hover:bg-gray-800/60"
+      className="group mt-6 flex items-center gap-4 rounded-2xl bg-(--bg-primary) p-4"
     >
       <span className="flex h-16 w-16 shrink-0 items-center justify-center text-modrinth-green">
         {grumpy ? <GrumpyKittenFace size={56} /> : <PixelFace level={level} size={56} />}

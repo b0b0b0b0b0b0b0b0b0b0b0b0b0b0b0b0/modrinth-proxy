@@ -212,7 +212,7 @@ function CollectionCard({ href, title, count, t, locale }) {
   return (
     <Link
       href={href}
-      className="group block min-w-0 rounded-2xl bg-(--bg-primary) p-4 transition-colors hover:bg-gray-800/60"
+      className="group block min-w-0 rounded-2xl bg-(--bg-primary) p-4"
     >
       <div className="min-w-0">
         <div className="truncate text-base font-bold text-white group-hover:text-modrinth-green">{title}</div>
