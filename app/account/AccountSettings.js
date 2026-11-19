@@ -432,11 +432,17 @@ export function NotificationSettings({ telegram, discord, trackDownloads: initia
               </a>
             )}
           </Setting>
-          <Setting title={t('dcdm.serverTitle')} hint={t('dcdm.serverHint')}>
-            <a href="/discord" target="_blank" rel="noopener noreferrer" className={GHOST_BUTTON}>
-              {t('dcdm.serverJoin')}
-            </a>
-          </Setting>
+          {discord.member ? (
+            <Setting title={t('dcdm.serverTitle')} hint={t('dcdm.serverInHint')}>
+              <span className="shrink-0 text-xs font-semibold text-modrinth-green">{t('dcdm.serverIn')}</span>
+            </Setting>
+          ) : (
+            <Setting title={t('dcdm.serverTitle')} hint={t('dcdm.serverHint')}>
+              <a href="/discord" target="_blank" rel="noopener noreferrer" className={GHOST_BUTTON}>
+                {t('dcdm.serverJoin')}
+              </a>
+            </Setting>
+          )}
         </SettingsCard>
       ) : null}
 

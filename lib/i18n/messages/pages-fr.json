@@ -735,6 +735,8 @@
     "serverTitle": "Notre serveur",
     "serverHint": "Pixel ne peut t’écrire en MP que si tu es sur notre serveur Discord.",
     "serverJoin": "Rejoindre le serveur",
+    "serverIn": "Tu es sur le serveur",
+    "serverInHint": "Pixel te voit et pourra t’envoyer un MP.",
     "dmFailed": "Pixel n’a pas pu t’envoyer de MP. Rejoins notre serveur Discord, autorise les messages privés des membres du serveur et réactive.",
     "hello": "Désormais, je t’écrirai ici dès qu’un mod que tu as téléchargé ou mis en favori reçoit une nouvelle version 🐾"
   },

@@ -735,6 +735,8 @@
     "serverTitle": "Nasz serwer",
     "serverHint": "Pixel może napisać na priv tylko wtedy, gdy jesteś na naszym serwerze Discord.",
     "serverJoin": "Dołącz do serwera",
+    "serverIn": "Jesteś na serwerze",
+    "serverInHint": "Pixel cię widzi i będzie mógł napisać na priv.",
     "dmFailed": "Pixel nie mógł napisać do ciebie na priv. Dołącz do naszego serwera Discord, zezwól na wiadomości prywatne od członków serwera i włącz ponownie.",
     "hello": "Od teraz będę tu pisać, gdy tylko mod, który pobrałeś lub dodałeś do ulubionych, dostanie nową wersję 🐾"
   },

@@ -735,6 +735,8 @@
     "serverTitle": "Máy chủ của chúng tôi",
     "serverHint": "Pixel chỉ nhắn riêng được nếu bạn đang ở trong máy chủ Discord của chúng tôi.",
     "serverJoin": "Vào máy chủ",
+    "serverIn": "Bạn đã ở trong máy chủ",
+    "serverInHint": "Pixel thấy bạn và có thể nhắn riêng cho bạn.",
     "dmFailed": "Pixel không nhắn riêng được cho bạn. Hãy vào máy chủ Discord của chúng tôi, cho phép tin nhắn riêng từ thành viên máy chủ rồi bật lại.",
     "hello": "Từ giờ mình sẽ nhắn ở đây ngay khi mod bạn đã tải hoặc yêu thích có phiên bản mới 🐾"
   },

@@ -735,6 +735,8 @@
     "serverTitle": "Nuestro servidor",
     "serverHint": "Pixel solo puede escribirte por MD si estás en nuestro servidor de Discord.",
     "serverJoin": "Entrar al servidor",
+    "serverIn": "Estás en el servidor",
+    "serverInHint": "Pixel te ve y podrá escribirte por MD.",
     "dmFailed": "Pixel no pudo escribirte por MD. Entra en nuestro servidor de Discord, permite mensajes directos de miembros del servidor y vuelve a activarlo.",
     "hello": "A partir de ahora te escribiré aquí en cuanto un mod que descargaste o marcaste como favorito tenga una nueva versión 🐾"
   },

@@ -1,5 +1,5 @@
 import { getNotifyMutes } from '@/lib/account'
-import { discordBotEnabled } from '@/lib/discordBot'
+import { discordBotEnabled, isDiscordGuildMember } from '@/lib/discordBot'
 import { telegramBotId } from '@/lib/telegramAuth'
 import { NotificationSettings } from '../../account/AccountSettings'
 import { accountSettingsMetadata, requireUser } from '../accountPage'
@@ -13,6 +13,7 @@ export async function generateMetadata() {
 export default async function NotificationSettingsPage() {
   const user = await requireUser('/settings/notifications')
   const devTelegram = process.env.NODE_ENV !== 'production'
+  const discordEnabled = discordBotEnabled()
 
   return (
     <NotificationSettings
@@ -26,9 +27,10 @@ export default async function NotificationSettingsPage() {
         quietTo: user.quiet_to,
       }}
       discord={{
-        enabled: discordBotEnabled(),
+        enabled: discordEnabled,
         linked: Boolean(user.discord_id),
         notify: Boolean(user.discord_notify),
+        member: discordEnabled && user.discord_id ? await isDiscordGuildMember(user.discord_id) : null,
       }}
       trackDownloads={!user.skip_download_updates}
       mutedCount={getNotifyMutes(user.id).size}

@@ -735,6 +735,8 @@
     "serverTitle": "私たちのサーバー",
     "serverHint": "Pixel が DM を送れるのは、私たちの Discord サーバーに参加している場合だけです。",
     "serverJoin": "サーバーに参加",
+    "serverIn": "サーバーに参加中",
+    "serverInHint": "Pixel はあなたを確認できたので、DM を送れます。",
     "dmFailed": "Pixel から DM を送れませんでした。私たちの Discord サーバーに参加し、サーバーメンバーからの DM を許可してから、もう一度オンにしてください。",
     "hello": "これからは、ダウンロードやお気に入りの MOD に新しいバージョンが出たら、ここでお知らせするね 🐾"
   },

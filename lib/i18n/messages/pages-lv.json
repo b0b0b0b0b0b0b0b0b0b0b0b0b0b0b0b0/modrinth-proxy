@@ -735,6 +735,8 @@
     "serverTitle": "Mūsu serveris",
     "serverHint": "Pikselis var tev rakstīt privāti tikai tad, ja esi mūsu Discord serverī.",
     "serverJoin": "Pievienoties serverim",
+    "serverIn": "Tu esi serverī",
+    "serverInHint": "Pikselis tevi redz un varēs tev uzrakstīt privāti.",
     "dmFailed": "Pikselim neizdevās tev uzrakstīt privāti. Pievienojies mūsu Discord serverim, atļauj tur privātās ziņas no dalībniekiem un ieslēdz vēlreiz.",
     "hello": "No šī brīža rakstīšu šeit, tiklīdz modam, ko lejupielādēji vai pievienoji izlasei, iznāks jauna versija 🐾"
   },

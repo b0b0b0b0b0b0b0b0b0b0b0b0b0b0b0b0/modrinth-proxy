@@ -753,6 +753,8 @@
     "serverTitle": "Our server",
     "serverHint": "Pixel can only DM you if you’re on our Discord server.",
     "serverJoin": "Join the server",
+    "serverIn": "You’re on the server",
+    "serverInHint": "Pixel can see you and will be able to DM you.",
     "dmFailed": "Pixel couldn’t DM you. Join our Discord server, allow direct messages from server members, and turn this on again.",
     "hello": "From now on I’ll write here as soon as a mod you downloaded or favorited gets a new version 🐾"
   },
