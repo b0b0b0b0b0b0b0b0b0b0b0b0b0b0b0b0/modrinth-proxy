@@ -756,7 +756,8 @@
     "serverIn": "You’re on the server",
     "serverInHint": "Pixel can see you and will be able to DM you.",
     "dmFailed": "Pixel couldn’t DM you. Join our Discord server, allow direct messages from server members, and turn this on again.",
-    "hello": "From now on I’ll write here as soon as a mod you downloaded or favorited gets a new version 🐾"
+    "hello": "From now on I’ll write here as soon as a mod you downloaded or favorited gets a new version 🐾",
+    "linked": "{user} linked their account to {name}."
   },
   "set": {
     "trackDownloads": "Track new versions of downloads",

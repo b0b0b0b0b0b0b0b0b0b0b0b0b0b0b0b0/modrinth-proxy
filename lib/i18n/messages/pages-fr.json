@@ -738,7 +738,8 @@
     "serverIn": "Tu es sur le serveur",
     "serverInHint": "Pixel te voit et pourra t’envoyer un MP.",
     "dmFailed": "Pixel n’a pas pu t’envoyer de MP. Rejoins notre serveur Discord, autorise les messages privés des membres du serveur et réactive.",
-    "hello": "Désormais, je t’écrirai ici dès qu’un mod que tu as téléchargé ou mis en favori reçoit une nouvelle version 🐾"
+    "hello": "Désormais, je t’écrirai ici dès qu’un mod que tu as téléchargé ou mis en favori reçoit une nouvelle version 🐾",
+    "linked": "{user} a lié son compte à {name}."
   },
   "set": {
     "trackDownloads": "Suivre les nouvelles versions des téléchargements",

@@ -738,7 +738,8 @@
     "serverIn": "Sei nel server",
     "serverInHint": "Pixel ti vede e potrà scriverti in privato.",
     "dmFailed": "Pixel non è riuscito a scriverti in privato. Entra nel nostro server Discord, consenti i messaggi diretti dai membri del server e riattiva.",
-    "hello": "D’ora in poi ti scriverò qui appena una mod che hai scaricato o messo nei preferiti riceve una nuova versione 🐾"
+    "hello": "D’ora in poi ti scriverò qui appena una mod che hai scaricato o messo nei preferiti riceve una nuova versione 🐾",
+    "linked": "{user} ha collegato il suo account a {name}."
   },
   "set": {
     "trackDownloads": "Segui le nuove versioni dei download",

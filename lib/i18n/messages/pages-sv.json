@@ -738,7 +738,8 @@
     "serverIn": "Du är på servern",
     "serverInHint": "Pixel ser dig och kan skicka DM till dig.",
     "dmFailed": "Pixel kunde inte skicka ett DM till dig. Gå med i vår Discord-server, tillåt direktmeddelanden från servermedlemmar och slå på igen.",
-    "hello": "Från och med nu skriver jag här så fort en mod du laddat ner eller favoritmarkerat får en ny version 🐾"
+    "hello": "Från och med nu skriver jag här så fort en mod du laddat ner eller favoritmarkerat får en ny version 🐾",
+    "linked": "{user} kopplade sitt konto till {name}."
   },
   "set": {
     "trackDownloads": "Följ nya versioner av nedladdat",

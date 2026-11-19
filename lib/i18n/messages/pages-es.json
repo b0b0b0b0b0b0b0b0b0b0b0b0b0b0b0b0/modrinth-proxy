@@ -738,7 +738,8 @@
     "serverIn": "Estás en el servidor",
     "serverInHint": "Pixel te ve y podrá escribirte por MD.",
     "dmFailed": "Pixel no pudo escribirte por MD. Entra en nuestro servidor de Discord, permite mensajes directos de miembros del servidor y vuelve a activarlo.",
-    "hello": "A partir de ahora te escribiré aquí en cuanto un mod que descargaste o marcaste como favorito tenga una nueva versión 🐾"
+    "hello": "A partir de ahora te escribiré aquí en cuanto un mod que descargaste o marcaste como favorito tenga una nueva versión 🐾",
+    "linked": "{user} vinculó su cuenta con {name}."
   },
   "set": {
     "trackDownloads": "Seguir nuevas versiones de lo descargado",

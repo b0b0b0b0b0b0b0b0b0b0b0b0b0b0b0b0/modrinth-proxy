@@ -738,7 +738,8 @@
     "serverIn": "Você está no servidor",
     "serverInHint": "O Pixel te vê e vai conseguir te mandar DM.",
     "dmFailed": "O Pixel não conseguiu te mandar DM. Entre no nosso servidor do Discord, permita mensagens diretas de membros do servidor e ative de novo.",
-    "hello": "A partir de agora vou escrever aqui assim que um mod que você baixou ou favoritou ganhar uma nova versão 🐾"
+    "hello": "A partir de agora vou escrever aqui assim que um mod que você baixou ou favoritou ganhar uma nova versão 🐾",
+    "linked": "{user} vinculou a conta a {name}."
   },
   "set": {
     "trackDownloads": "Acompanhar novas versões do que baixei",

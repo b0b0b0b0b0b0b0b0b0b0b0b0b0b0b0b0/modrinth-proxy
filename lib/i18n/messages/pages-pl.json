@@ -738,7 +738,8 @@
     "serverIn": "Jesteś na serwerze",
     "serverInHint": "Pixel cię widzi i będzie mógł napisać na priv.",
     "dmFailed": "Pixel nie mógł napisać do ciebie na priv. Dołącz do naszego serwera Discord, zezwól na wiadomości prywatne od członków serwera i włącz ponownie.",
-    "hello": "Od teraz będę tu pisać, gdy tylko mod, który pobrałeś lub dodałeś do ulubionych, dostanie nową wersję 🐾"
+    "hello": "Od teraz będę tu pisać, gdy tylko mod, który pobrałeś lub dodałeś do ulubionych, dostanie nową wersję 🐾",
+    "linked": "{user} połączył swoje konto z {name}."
   },
   "set": {
     "trackDownloads": "Śledź nowe wersje pobranych",
