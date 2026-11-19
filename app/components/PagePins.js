@@ -54,9 +54,18 @@ export function spotIsFree(left, top, width, height) {
   return true
 }
 
+function isSettling(el) {
+  const animations = el.getAnimations?.() || []
+  return animations.some(
+    (animation) =>
+      (animation.pending || animation.playState === 'running') &&
+      animation.effect?.getComputedTiming?.().endTime !== Infinity,
+  )
+}
+
 export function headingSpot(width, height) {
   const heading = pinHeading()
-  if (!heading) return null
+  if (!heading || isSettling(heading)) return null
   const text = textRect(heading)
   if (text.width < 24 || text.height < 16) return null
   const vw = document.documentElement.clientWidth
@@ -116,6 +125,7 @@ export function usePagePins(collect, { enabled, pathname }) {
     if (main) mo.observe(main, { childList: true, subtree: true })
     window.addEventListener('resize', schedule)
     window.addEventListener('load', schedule)
+    document.addEventListener('animationend', schedule)
     return () => {
       window.clearTimeout(start)
       window.clearInterval(timer)
@@ -124,6 +134,7 @@ export function usePagePins(collect, { enabled, pathname }) {
       mo.disconnect()
       window.removeEventListener('resize', schedule)
       window.removeEventListener('load', schedule)
+      document.removeEventListener('animationend', schedule)
     }
   }, [enabled, pathname])
 
