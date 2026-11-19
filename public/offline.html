@@ -1,406 +1,442 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт недоступен - ModrinthProxy</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Нет связи с сайтом</title>
+  <script>
+    (function () {
+      var theme = ''
+      try {
+        theme = window.localStorage.getItem('modrinth-theme') || ''
+      } catch (e) {}
+      try {
+        if (theme !== 'light' && theme !== 'dark') {
+          var match = document.cookie.match(/(?:^|;\s*)site-theme=([^;]*)/)
+          theme = match ? decodeURIComponent(match[1]) : ''
         }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #1a1a1a 100%);
-            color: #f3f4f6;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            overflow-x: hidden;
-        }
-        
-        .container {
-            max-width: 600px;
-            width: 100%;
-            background: rgba(31, 41, 55, 0.6);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 0.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .icon-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-        
-        .icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 10px 30px rgba(239, 68, 68, 0.3);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 15px 40px rgba(239, 68, 68, 0.5);
-            }
-        }
-        
-        .icon svg {
-            width: 40px;
-            height: 40px;
-            color: white;
-        }
-        
-        h1 {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ffffff 0%, #d1d5db 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .subtitle {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 16px;
-            margin-bottom: 35px;
-            line-height: 1.5;
-        }
-        
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
-            margin: 30px 0;
-        }
-        
-        .section-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1bd96a;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .section-title::before {
-            content: '';
-            width: 4px;
-            height: 18px;
-            background: #1bd96a;
-            border-radius: 2px;
-        }
-        
-        .domains {
-            background: rgba(17, 24, 39, 0.5);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        
-        .domain-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 16px;
-            background: rgba(27, 217, 106, 0.05);
-            border: 1px solid rgba(27, 217, 106, 0.2);
-            border-radius: 12px;
-            margin-bottom: 10px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .domain-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .domain-item:hover {
-            background: rgba(27, 217, 106, 0.1);
-            border-color: rgba(27, 217, 106, 0.4);
-            transform: translateX(5px);
-        }
-        
-        .domain-icon {
-            width: 10px;
-            height: 10px;
-            background: #1bd96a;
-            border-radius: 50%;
-            margin-right: 12px;
-            flex-shrink: 0;
-        }
-        
-        .domain-name {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #e5e7eb;
-            flex: 1;
-        }
-        
-        .tips {
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        
-        .tip-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-        
-        .tip-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .tip-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 24px;
-            height: 24px;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: 50%;
-            font-weight: 600;
-            color: #60a5fa;
-            margin-right: 12px;
-            font-size: 13px;
-        }
-        
-        .tip-text {
-            color: #d1d5db;
-            padding-top: 2px;
-        }
-        
-        .buttons {
-            display: flex;
-            gap: 12px;
-            margin-top: 30px;
-        }
-        
-        .btn {
-            flex: 1;
-            padding: 14px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 15px;
-            text-decoration: none;
-            text-align: center;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #1bd96a 0%, #16a34a 100%);
-            color: white;
-            box-shadow: 0 4px 15px rgba(27, 217, 106, 0.3);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(27, 217, 106, 0.4);
-        }
-        
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #e5e7eb;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        .github-section {
-            background: rgba(88, 28, 135, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-        }
-        
-        .github-section h3 {
-            font-size: 16px;
-            font-weight: 600;
-            color: #c084fc;
-            margin-bottom: 12px;
-        }
-        
-        .github-section p {
-            color: #d1d5db;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-        
-        .github-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            background: rgba(168, 85, 247, 0.15);
-            border: 1px solid rgba(168, 85, 247, 0.4);
-            border-radius: 10px;
-            color: #e9d5ff;
-            text-decoration: none;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            transition: all 0.3s ease;
-        }
-        
-        .github-link:hover {
-            background: rgba(168, 85, 247, 0.25);
-            border-color: rgba(168, 85, 247, 0.6);
-            transform: translateY(-2px);
-        }
-        
-        .github-icon {
-            width: 20px;
-            height: 20px;
-        }
-        
-        .footer {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #6b7280;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-        
-        @media (max-width: 640px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .buttons {
-                flex-direction: column;
-            }
-            
-            .domain-name {
-                font-size: 13px;
-            }
-        }
-    </style>
+      } catch (e) {}
+      if (theme === 'light' || theme === 'dark') document.documentElement.setAttribute('data-theme', theme)
+    })()
+  </script>
+  <style>
+    :root {
+      --bg: #16181c;
+      --card: #1f2227;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f3f4f6;
+      --muted: #9ca3af;
+      --soft: #6b7280;
+      --green: #1bd96a;
+      --green-soft: rgba(27, 217, 106, 0.12);
+      --on-green: #0b1f13;
+      color-scheme: dark;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root:not([data-theme="dark"]) {
+        --bg: #f4f5f7;
+        --card: #ffffff;
+        --line: rgba(0, 0, 0, 0.08);
+        --text: #111827;
+        --muted: #4b5563;
+        --soft: #6b7280;
+        --green: #0f9d4f;
+        --green-soft: rgba(15, 157, 79, 0.1);
+        --on-green: #ffffff;
+        color-scheme: light;
+      }
+    }
+
+    :root[data-theme="light"] {
+      --bg: #f4f5f7;
+      --card: #ffffff;
+      --line: rgba(0, 0, 0, 0.08);
+      --text: #111827;
+      --muted: #4b5563;
+      --soft: #6b7280;
+      --green: #0f9d4f;
+      --green-soft: rgba(15, 157, 79, 0.1);
+      --on-green: #ffffff;
+      color-scheme: light;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      padding: 40px 32px 32px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--card);
+      text-align: center;
+      animation: rise 0.4s ease-out both;
+    }
+
+    .kitten {
+      position: relative;
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 24px;
+      color: var(--green);
+    }
+
+    .kitten svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .kitten .fill {
+      fill: var(--green-soft);
+    }
+
+    .kitten .breath {
+      transform-origin: 12px 21px;
+      animation: breathe 3.6s ease-in-out infinite;
+    }
+
+    .z {
+      position: absolute;
+      right: -4px;
+      top: 0;
+      font-weight: 900;
+      color: var(--green);
+      opacity: 0;
+      animation: float 3.6s ease-in-out infinite;
+    }
+
+    .z:nth-child(2) {
+      right: -14px;
+      top: -12px;
+      font-size: 13px;
+      animation-delay: 1.2s;
+    }
+
+    .z:nth-child(3) {
+      right: -24px;
+      top: -26px;
+      font-size: 16px;
+      animation-delay: 2.4s;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .lead {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .tips {
+      margin: 24px 0 0;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--green-soft);
+      list-style: none;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .tips li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .tips li + li {
+      margin-top: 8px;
+    }
+
+    .tips li::before {
+      content: '';
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .retry {
+      width: 100%;
+      margin-top: 24px;
+      padding: 13px 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--green);
+      color: var(--on-green);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: filter 0.15s ease;
+    }
+
+    .retry:hover {
+      filter: brightness(1.08);
+    }
+
+    .retry:disabled {
+      cursor: default;
+      filter: saturate(0.6);
+    }
+
+    .status {
+      margin-top: 14px;
+      min-height: 20px;
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    .own {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 20px;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--text);
+      text-align: left;
+      text-decoration: none;
+      transition: border-color 0.15s ease;
+    }
+
+    .own:hover {
+      border-color: var(--green);
+    }
+
+    .own svg {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      color: var(--muted);
+    }
+
+    .own-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .own-text {
+      display: block;
+      color: var(--soft);
+      font-size: 13px;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes breathe {
+      0%, 100% {
+        transform: scaleY(1);
+      }
+      50% {
+        transform: scaleY(1.035);
+      }
+    }
+
+    @keyframes float {
+      0% {
+        opacity: 0;
+        transform: translate(0, 6px);
+      }
+      30% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(6px, -10px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .kitten .breath,
+      .z {
+        animation: none;
+      }
+
+      .z {
+        opacity: 0.8;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        padding: 32px 20px 24px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Сайт недоступен</h1>
-        <p class="subtitle">РКН заблокировал хостинг-провайдера (Vercel, Railway) или проблемы с интернетом. Попробуйте другое зеркало.</p>
-
-        <div class="current-domain">
-            <div class="domain-badge">
-                <svg class="domain-globe" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                </svg>
-                <span id="current-domain-text" class="domain-text">...</span>
-            </div>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="section-title">Доступные зеркала сайта</div>
-        <div class="domains">
-            <a href="https://modrinth.white-minecraft.net" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">modrinth.white-minecraft.net</span>
-            </a>
-            <a href="https://modrinth.churka.pro" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">modrinth.churka.pro</span>
-            </a>
-            <a href="https://modrinth.black" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">modrinth.black</span>
-            </a>
-            <a href="https://m.modrinth.black" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">m.modrinth.black</span>
-            </a>
-            <a href="https://nepidoras.ru" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">nepidoras.ru</span>
-            </a>
-            <a href="https://modrinth-proxy-brown.vercel.app" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">modrinth-proxy-brown.vercel.app</span>
-            </a>
-            <a href="https://modrinth-proxy-production.up.railway.app" class="domain-item">
-                <span class="domain-icon"></span>
-                <span class="domain-name">modrinth-proxy-production.up.railway.app</span>
-            </a>
-        </div>
-
-        <div class="github-section">
-            <h3>🚀 Запустите свою копию сайта</h3>
-            <p>Если все зеркала недоступны, вы можете запустить сайт локально на своём компьютере. Все инструкции есть на GitHub:</p>
-            <a href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" target="_blank" class="github-link">
-                <svg class="github-icon" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-                github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy
-            </a>
-        </div>
-
-        <div class="buttons">
-            <button onclick="window.location.reload()" class="btn btn-primary">
-                Попробовать снова
-            </button>
-            <a href="/" class="btn btn-secondary">
-                На главную
-            </a>
-        </div>
-
-        <div class="footer">
-            РКН блокирует хостинг-провайдеры (Vercel, Railway), поэтому некоторые зеркала могут быть недоступны.<br>
-            Все зеркала ведут на один и тот же сайт с одинаковым контентом.
-        </div>
+  <main class="card">
+    <div class="kitten" aria-hidden="true">
+      <span class="z">z</span>
+      <span class="z">z</span>
+      <span class="z">Z</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <g class="breath">
+          <path d="M5.7 5.6 5 0.9 10.1 3.2" stroke-linejoin="round" class="fill" />
+          <path d="M6.6 5 6.3 2.6 8.8 3.7Z" stroke="none" fill="currentColor" fill-opacity="0.35" />
+          <path d="M18.3 5.6 19 0.9 13.9 3.2" stroke-linejoin="round" class="fill" />
+          <path d="M17.4 5 17.7 2.6 15.2 3.7Z" stroke="none" fill="currentColor" fill-opacity="0.35" />
+          <circle cx="12" cy="12" r="9" class="fill" />
+          <path d="M7.9 10.7q1.2 1 2.4 0M13.7 10.7q1.2 1 2.4 0" />
+          <path d="M11.4 12.6h1.2l-.6.7Z" fill="currentColor" stroke-width="1" stroke-linejoin="round" />
+          <path d="M10.8 14.6q1.2.8 2.4 0" />
+          <path d="M3.6 12.2 6.4 12.8M3.9 14.6l2.6-.7M20.4 12.2l-2.8.6M20.1 14.6l-2.6-.7" stroke-width="1" />
+        </g>
+      </svg>
     </div>
+
+    <h1 id="title">Нет связи с сайтом</h1>
+    <p class="lead" id="lead">Пиксель не может достучаться до сайта и прилёг подремать, пока связь не вернётся.</p>
+
+    <ul class="tips">
+      <li id="tip1">Проверь, работает ли интернет</li>
+      <li id="tip2">Если интернет есть, значит сайт на минутку прилёг — скоро встанет</li>
+    </ul>
+
+    <button type="button" class="retry" id="retry">Попробовать снова</button>
+    <p class="status" id="status" aria-live="polite"></p>
+
+    <a class="own" href="https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+      </svg>
+      <span>
+        <span class="own-title" id="ownTitle">Подними свою копию сайта</span>
+        <span class="own-text" id="ownText">Код открыт, инструкция на GitHub</span>
+      </span>
+    </a>
+  </main>
+
+  <script>
+    (function () {
+      var TEXT = {
+        ru: ['Нет связи с сайтом', 'Пиксель не может достучаться до сайта и прилёг подремать, пока связь не вернётся.', 'Проверь, работает ли интернет', 'Если интернет есть, значит сайт на минутку прилёг — скоро встанет', 'Попробовать снова', 'Пиксель сам проверит связь через {n} с', 'Проверяю…', 'Пока не отвечает', 'Подними свою копию сайта', 'Код открыт, инструкция на GitHub'],
+        en: ['Can’t reach the site', 'Pixel can’t reach the site, so he’s napping until the connection is back.', 'Check that your internet is working', 'If it is, the site is just taking a short nap — it’ll be back soon', 'Try again', 'Pixel will check again in {n}s', 'Checking…', 'Still no answer', 'Run your own copy of the site', 'The code is open, instructions are on GitHub'],
+        uk: ['Немає зв’язку із сайтом', 'Піксель не може достукатися до сайту й приліг подрімати, поки зв’язок не повернеться.', 'Перевір, чи працює інтернет', 'Якщо інтернет є, то сайт на хвильку приліг — скоро встане', 'Спробувати ще раз', 'Піксель сам перевірить зв’язок за {n} с', 'Перевіряю…', 'Поки не відповідає', 'Підніми свою копію сайту', 'Код відкритий, інструкція на GitHub'],
+        de: ['Keine Verbindung zur Seite', 'Pixel erreicht die Seite nicht und macht ein Nickerchen, bis die Verbindung zurück ist.', 'Prüfe, ob dein Internet funktioniert', 'Wenn ja, ruht sich die Seite nur kurz aus — sie ist gleich wieder da', 'Erneut versuchen', 'Pixel prüft in {n} s erneut', 'Prüfe…', 'Noch keine Antwort', 'Starte deine eigene Kopie der Seite', 'Der Code ist offen, die Anleitung liegt auf GitHub'],
+        es: ['No hay conexión con el sitio', 'Pixel no logra llegar al sitio y se echó una siesta hasta que vuelva la conexión.', 'Comprueba que tu internet funcione', 'Si funciona, el sitio solo está descansando un momento — volverá pronto', 'Reintentar', 'Pixel lo comprobará de nuevo en {n} s', 'Comprobando…', 'Aún no responde', 'Levanta tu propia copia del sitio', 'El código es abierto, las instrucciones están en GitHub'],
+        fr: ['Impossible de joindre le site', 'Pixel n’arrive pas à joindre le site, alors il fait une sieste en attendant le retour de la connexion.', 'Vérifie que ton internet fonctionne', 'Si oui, le site fait juste une petite pause — il revient vite', 'Réessayer', 'Pixel revérifie dans {n} s', 'Vérification…', 'Toujours pas de réponse', 'Lance ta propre copie du site', 'Le code est ouvert, les instructions sont sur GitHub'],
+        it: ['Nessuna connessione al sito', 'Pixel non riesce a raggiungere il sito e fa un pisolino finché la connessione non torna.', 'Controlla che internet funzioni', 'Se funziona, il sito si sta solo riposando un attimo — tornerà presto', 'Riprova', 'Pixel ricontrolla tra {n} s', 'Controllo…', 'Ancora nessuna risposta', 'Avvia la tua copia del sito', 'Il codice è aperto, le istruzioni sono su GitHub'],
+        ja: ['サイトに接続できません', 'ピクセルはサイトにつながらないので、接続が戻るまでお昼寝中です。', 'インターネットにつながっているか確認してね', 'つながっているなら、サイトがちょっと休憩中 — すぐに戻ります', 'もう一度試す', 'ピクセルが {n} 秒後にもう一度確認します', '確認中…', 'まだ応答がありません', '自分でサイトのコピーを動かす', 'コードは公開中、手順は GitHub にあります'],
+        lv: ['Nav savienojuma ar vietni', 'Pikselis nevar sasniegt vietni un nolicies nosnausties, līdz savienojums atgriezīsies.', 'Pārbaudi, vai internets strādā', 'Ja strādā, vietne uz brītiņu atpūšas — drīz būs atpakaļ', 'Mēģināt vēlreiz', 'Pikselis pārbaudīs vēlreiz pēc {n} s', 'Pārbaudu…', 'Vēl neatbild', 'Palaid savu vietnes kopiju', 'Kods ir atvērts, instrukcija ir GitHub'],
+        orv: ['Нѣтъ связи съ сайтомъ', 'Пиксель не можетъ достучатися до сайта и прилегъ подремати, доколѣ связь не возвратится.', 'Провѣрь, работаетъ ли интернетъ', 'Аще интернетъ есть, то сайтъ на малый часъ прилегъ — скоро встанетъ', 'Попытати паки', 'Пиксель самъ провѣритъ связь черезъ {n} с', 'Провѣряю…', 'Покамѣстъ не отвѣчаетъ', 'Подыми свою списъ сайта', 'Кодъ открытъ, наставление на GitHub'],
+        pl: ['Brak połączenia ze stroną', 'Piksel nie może dostać się do strony, więc ucina sobie drzemkę, aż połączenie wróci.', 'Sprawdź, czy internet działa', 'Jeśli działa, strona tylko na chwilę przysnęła — zaraz wróci', 'Spróbuj ponownie', 'Piksel sprawdzi ponownie za {n} s', 'Sprawdzam…', 'Nadal brak odpowiedzi', 'Uruchom własną kopię strony', 'Kod jest otwarty, instrukcja jest na GitHubie'],
+        pt: ['Sem conexão com o site', 'O Pixel não consegue chegar ao site e tirou uma soneca até a conexão voltar.', 'Verifique se a internet está funcionando', 'Se estiver, o site só está descansando um pouco — logo volta', 'Tentar de novo', 'O Pixel vai verificar de novo em {n} s', 'Verificando…', 'Ainda sem resposta', 'Rode sua própria cópia do site', 'O código é aberto, as instruções estão no GitHub'],
+        sv: ['Ingen kontakt med sajten', 'Pixel når inte sajten och tar en tupplur tills anslutningen är tillbaka.', 'Kolla att internet fungerar', 'Om det gör det vilar sajten bara en stund — den är snart tillbaka', 'Försök igen', 'Pixel kollar igen om {n} s', 'Kollar…', 'Inget svar än', 'Kör din egen kopia av sajten', 'Koden är öppen, instruktionerna finns på GitHub'],
+        vi: ['Không kết nối được với trang', 'Pixel không kết nối được với trang nên đang chợp mắt chờ mạng quay lại.', 'Kiểm tra xem internet có hoạt động không', 'Nếu có, trang chỉ đang nghỉ một chút — sẽ quay lại sớm', 'Thử lại', 'Pixel sẽ kiểm tra lại sau {n} giây', 'Đang kiểm tra…', 'Vẫn chưa phản hồi', 'Tự chạy bản sao của trang', 'Mã nguồn mở, hướng dẫn có trên GitHub'],
+        zh: ['无法连接到网站', 'Pixel 连不上网站，先打个盹，等连接恢复。', '检查一下网络是否正常', '如果网络正常，网站只是在小憩 —— 很快就回来', '重试', 'Pixel 将在 {n} 秒后再次检查', '正在检查…', '仍然没有响应', '自己运行一份网站副本', '代码开源，说明在 GitHub 上'],
+      }
+      var WAIT = 15
+
+      function pickLocale() {
+        try {
+          var match = document.cookie.match(/(?:^|;\s*)site-locale=([^;]*)/)
+          var saved = match ? decodeURIComponent(match[1]) : ''
+          if (TEXT[saved]) return saved
+        } catch (e) {}
+        var list = navigator.languages || [navigator.language || 'ru']
+        for (var i = 0; i < list.length; i += 1) {
+          var code = String(list[i]).toLowerCase().split('-')[0]
+          if (TEXT[code]) return code
+        }
+        return 'en'
+      }
+
+      var locale = pickLocale()
+      var text = TEXT[locale]
+      document.documentElement.lang = locale
+      document.title = text[0]
+      document.getElementById('title').textContent = text[0]
+      document.getElementById('lead').textContent = text[1]
+      document.getElementById('tip1').textContent = text[2]
+      document.getElementById('tip2').textContent = text[3]
+      document.getElementById('ownTitle').textContent = text[8]
+      document.getElementById('ownText').textContent = text[9]
+
+      var button = document.getElementById('retry')
+      var status = document.getElementById('status')
+      button.textContent = text[4]
+
+      var left = WAIT
+      var busy = false
+      var failed = false
+
+      function countdown() {
+        var line = text[5].replace('{n}', left)
+        status.textContent = failed ? text[7] + ' · ' + line : line
+      }
+
+      function tick() {
+        if (busy) return
+        left -= 1
+        if (left <= 0) check()
+        else countdown()
+      }
+
+      function check() {
+        if (busy) return
+        busy = true
+        button.disabled = true
+        status.textContent = text[6]
+        fetch('/api/auth/state?ping=' + Date.now(), { method: 'HEAD', cache: 'no-store', credentials: 'same-origin' })
+          .then(function (response) {
+            if (response.status < 500) {
+              window.location.reload()
+              return
+            }
+            throw new Error('down')
+          })
+          .catch(function () {
+            busy = false
+            failed = true
+            button.disabled = false
+            left = WAIT
+            countdown()
+          })
+      }
+
+      button.addEventListener('click', check)
+      window.addEventListener('online', check)
+      countdown()
+      setInterval(tick, 1000)
+    })()
+  </script>
 </body>
 </html>

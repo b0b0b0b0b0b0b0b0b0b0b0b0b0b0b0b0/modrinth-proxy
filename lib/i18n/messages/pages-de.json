@@ -839,7 +839,12 @@
     "srvNote": "Gezählt seit {date}: Klicks auf „Spielen“ und kopierte Adressen auf Serverseiten, mit oder ohne Konto. Keine IPs, Cookies oder Konten — nur Zahlen pro Tag. Dieselbe Aktion auf demselben Server innerhalb von 10 Minuten zählt nicht erneut.",
     "srvEmpty": "Die Zählung beginnt mit dem ersten Klick auf „Spielen“ oder der ersten kopierten IP auf einer Serverseite.",
     "topFavorites": "Am häufigsten favorisiert",
-    "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage."
+    "note": "Nur Gesamtzahlen — keine Namen und keine Listen. Downloads zählen die letzten 30 Tage.",
+    "chartWeekdays": "Werktage",
+    "chartWeekends": "Wochenende",
+    "chartAvg": "Ø {n}",
+    "chartToday": "heute, läuft noch",
+    "chartTodayPartial": "der Tag ist noch nicht vorbei"
   },
   "notfound": {
     "metaTitle": "404 — Seite nicht gefunden | ModrinthProxy",

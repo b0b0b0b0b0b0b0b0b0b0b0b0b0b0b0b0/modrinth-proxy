@@ -839,7 +839,12 @@
     "srvNote": "Räknas sedan {date}: klick på ”Spela” och kopierade adresser på serversidor, med eller utan konto. Inga IP-adresser, cookies eller konton — bara siffror per dag. Samma handling på samma server inom 10 minuter räknas inte igen.",
     "srvEmpty": "Räkningen börjar vid första klicket på ”Spela” eller första IP-kopian på en serversida.",
     "topFavorites": "Flest favoriter",
-    "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna."
+    "note": "Bara totalsiffror — inga namn eller listor. Nedladdningar gäller de senaste 30 dagarna.",
+    "chartWeekdays": "vardagar",
+    "chartWeekends": "helger",
+    "chartAvg": "snitt {n}",
+    "chartToday": "idag, räknas fortfarande",
+    "chartTodayPartial": "dagen är inte slut än"
   },
   "notfound": {
     "metaTitle": "404 — Sidan hittades inte | ModrinthProxy",

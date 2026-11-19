@@ -839,7 +839,12 @@
     "srvNote": "Skaitām kopš {date}: “Spēlēt” klikšķi un adreses kopēšana serveru lapās, ar kontu vai bez. Bez IP, sīkdatnēm un kontiem — tikai skaitļi pa dienām. Tā pati darbība tajā pašā serverī 10 minūšu laikā netiek skaitīta atkārtoti.",
     "srvEmpty": "Skaitīšana sāksies ar pirmo “Spēlēt” klikšķi vai IP kopēšanu servera lapā.",
     "topFavorites": "Visbiežāk izlasē",
-    "note": "Tikai kopskaiti — bez vārdiem un kāda sarakstiem. Lejupielādes par pēdējām 30 dienām."
+    "note": "Tikai kopskaiti — bez vārdiem un kāda sarakstiem. Lejupielādes par pēdējām 30 dienām.",
+    "chartWeekdays": "darbdienas",
+    "chartWeekends": "brīvdienas",
+    "chartAvg": "vidēji {n}",
+    "chartToday": "šodien, vēl skaitām",
+    "chartTodayPartial": "diena vēl nav beigusies"
   },
   "notfound": {
     "metaTitle": "404 — Lapa nav atrasta | ModrinthProxy",

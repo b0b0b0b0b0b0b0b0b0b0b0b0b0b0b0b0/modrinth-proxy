@@ -839,7 +839,12 @@
     "srvNote": "Đếm từ {date}: lượt bấm “Chơi” và sao chép địa chỉ trên trang máy chủ, có hoặc không có tài khoản. Không lưu IP, cookie hay tài khoản — chỉ số lượng theo ngày. Lặp lại cùng thao tác trên cùng máy chủ trong 10 phút không được tính.",
     "srvEmpty": "Việc đếm sẽ bắt đầu từ lần bấm “Chơi” hoặc sao chép IP đầu tiên trên trang máy chủ.",
     "topFavorites": "Được yêu thích nhiều nhất",
-    "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất."
+    "note": "Chỉ có số tổng — không có tên hay danh sách của ai. Lượt tải tính trong 30 ngày gần nhất.",
+    "chartWeekdays": "ngày thường",
+    "chartWeekends": "cuối tuần",
+    "chartAvg": "TB {n}",
+    "chartToday": "hôm nay, vẫn đang đếm",
+    "chartTodayPartial": "ngày vẫn chưa kết thúc"
   },
   "notfound": {
     "metaTitle": "404 — Không tìm thấy trang | ModrinthProxy",

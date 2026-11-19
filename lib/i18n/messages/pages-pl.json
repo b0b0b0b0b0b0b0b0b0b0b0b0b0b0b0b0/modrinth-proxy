@@ -839,7 +839,12 @@
     "srvNote": "Liczymy od {date}: kliknięcia „Graj” i kopiowanie adresu na stronach serwerów, z kontem i bez. Bez IP, ciasteczek i kont — tylko liczby dziennie. Ta sama akcja na tym samym serwerze w ciągu 10 minut nie jest liczona ponownie.",
     "srvEmpty": "Liczenie zacznie się od pierwszego kliknięcia „Graj” lub skopiowania IP na stronie serwera.",
     "topFavorites": "Najczęściej w ulubionych",
-    "note": "Tylko sumy — bez nicków i czyichkolwiek list. Pobrania z ostatnich 30 dni."
+    "note": "Tylko sumy — bez nicków i czyichkolwiek list. Pobrania z ostatnich 30 dni.",
+    "chartWeekdays": "dni robocze",
+    "chartWeekends": "weekendy",
+    "chartAvg": "średnio {n}",
+    "chartToday": "dziś, jeszcze liczymy",
+    "chartTodayPartial": "dzień jeszcze się nie skończył"
   },
   "notfound": {
     "metaTitle": "404 — Nie znaleziono strony | ModrinthProxy",

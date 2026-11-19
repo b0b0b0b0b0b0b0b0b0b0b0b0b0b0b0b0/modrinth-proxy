@@ -839,7 +839,12 @@
     "srvNote": "Comptés depuis le {date} : clics sur « Jouer » et copies d’adresse sur les pages des serveurs, avec ou sans compte. Sans IP, cookies ni comptes — seulement des chiffres par jour. La même action sur le même serveur en moins de 10 minutes n’est pas recomptée.",
     "srvEmpty": "Le comptage commencera au premier clic sur « Jouer » ou à la première copie d’IP sur une page de serveur.",
     "topFavorites": "Les plus mis en favoris",
-    "note": "Seulement des totaux — aucun pseudo ni liste personnelle. Les téléchargements couvrent les 30 derniers jours."
+    "note": "Seulement des totaux — aucun pseudo ni liste personnelle. Les téléchargements couvrent les 30 derniers jours.",
+    "chartWeekdays": "semaine",
+    "chartWeekends": "week-end",
+    "chartAvg": "moy. {n}",
+    "chartToday": "aujourd’hui, en cours",
+    "chartTodayPartial": "la journée n’est pas finie"
   },
   "notfound": {
     "metaTitle": "404 — Page introuvable | ModrinthProxy",

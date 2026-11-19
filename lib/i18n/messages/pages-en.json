@@ -966,7 +966,12 @@
     "srvNote": "Counting since {date}: “Play” clicks and address copies on server pages, signed in or not. No IPs, cookies or accounts — just daily numbers. Repeating the same action on the same server within 10 minutes isn't counted.",
     "srvEmpty": "Counting starts with the first “Play” click or IP copy on a server page.",
     "topFavorites": "Most favorited",
-    "note": "Only totals — no usernames or anyone’s lists. Downloads cover the last 30 days."
+    "note": "Only totals — no usernames or anyone’s lists. Downloads cover the last 30 days.",
+    "chartWeekdays": "weekdays",
+    "chartWeekends": "weekends",
+    "chartAvg": "avg {n}",
+    "chartToday": "today, still counting",
+    "chartTodayPartial": "the day isn’t over yet"
   },
   "codeBlock": {
     "copy": "Copy code",

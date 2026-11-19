@@ -839,7 +839,12 @@
     "srvNote": "自 {date} 起统计：服务器页面上“开始游戏”的点击和地址复制，无论是否登录。不记录 IP、Cookie 或账号——只有每日数字。10 分钟内在同一服务器上重复同一操作不计入。",
     "srvEmpty": "在服务器页面第一次点击“开始游戏”或复制 IP 后开始计数。",
     "topFavorites": "收藏最多",
-    "note": "只有总数——没有用户名或任何人的列表。下载按最近 30 天统计。"
+    "note": "只有总数——没有用户名或任何人的列表。下载按最近 30 天统计。",
+    "chartWeekdays": "工作日",
+    "chartWeekends": "周末",
+    "chartAvg": "平均 {n}",
+    "chartToday": "今天，仍在统计",
+    "chartTodayPartial": "今天还没结束"
   },
   "notfound": {
     "metaTitle": "404 — 页面未找到 | ModrinthProxy",
