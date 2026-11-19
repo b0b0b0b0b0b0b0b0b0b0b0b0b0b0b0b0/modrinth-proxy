@@ -31,7 +31,8 @@
     "pingServersTip": "MinecraftサーバーにPing",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "公式 Discord"
   },
   "lang": {
     "label": "言語",
@@ -900,7 +901,8 @@
         "love": "ふわふわハート",
         "aurora": "オーロラ"
       }
-    }
+    },
+    "discord": "公式 Discord"
   },
   "copy": {
     "id": "IDをクリップボードにコピー",

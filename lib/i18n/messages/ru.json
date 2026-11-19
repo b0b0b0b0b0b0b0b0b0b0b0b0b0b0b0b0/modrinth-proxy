@@ -32,7 +32,8 @@
     "pingServersTip": "Проверка серверов Minecraft",
     "more": "Ещё сервисы",
     "mtools": "MTools",
-    "mtoolsTip": "Инструменты для серверов Minecraft"
+    "mtoolsTip": "Инструменты для серверов Minecraft",
+    "discord": "Наш Discord"
   },
   "lang": {
     "label": "Язык",
@@ -901,7 +902,8 @@
         "love": "Летающие сердечки",
         "aurora": "Северное сияние"
       }
-    }
+    },
+    "discord": "Наш Discord"
   },
   "copy": {
     "id": "Скопировать ID в буфер обмена",

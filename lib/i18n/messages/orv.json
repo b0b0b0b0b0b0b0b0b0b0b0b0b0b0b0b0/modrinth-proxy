@@ -31,7 +31,8 @@
     "pingServersTip": "Послать городового ко дворамъ",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "Нашъ Discord"
   },
   "lang": {
     "label": "Рѣчь",
@@ -900,7 +901,8 @@
         "love": "Летающія сердечки",
         "aurora": "Сѣверное сіяніе"
       }
-    }
+    },
+    "discord": "Нашъ Discord"
   },
   "copy": {
     "id": "Снять нумеръ въ записную книжку",

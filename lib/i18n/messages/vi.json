@@ -31,7 +31,8 @@
     "pingServersTip": "Ping máy chủ Minecraft",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "Discord của chúng tôi"
   },
   "lang": {
     "label": "Ngôn ngữ",
@@ -900,7 +901,8 @@
         "love": "Trái tim bay",
         "aurora": "Cực quang"
       }
-    }
+    },
+    "discord": "Discord của chúng tôi"
   },
   "copy": {
     "id": "Sao chép ID vào clipboard",

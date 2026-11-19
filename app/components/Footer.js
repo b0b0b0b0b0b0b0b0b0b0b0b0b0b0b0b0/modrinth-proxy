@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { SITE_VERSION } from '@/lib/siteVersion'
-import { IconSiteVersion } from '@/lib/icons'
+import { IconDiscord, IconSiteVersion } from '@/lib/icons'
 import StyledTooltip from './StyledTooltip'
 import SnowballButton from './SnowballButton'
 import FooterAchievementKitten from './FooterAchievementKitten'
@@ -82,6 +82,18 @@ export default function Footer() {
                 </g>
               </svg>
               <span>Open Source</span>
+              <svg className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"></path>
+              </svg>
+            </a>
+            <a
+              href="/discord"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-btn inline-flex items-center gap-2 px-4 py-2 text-white rounded-2xl text-sm font-medium transition-all duration-300 group hover:scale-95"
+            >
+              <IconDiscord className="w-5 h-5 shrink-0 text-modrinth-green group-hover:text-modrinth-green-light transition-all duration-300 group-hover:-rotate-12" aria-hidden />
+              <span>{t('footer.discord')}</span>
               <svg className="w-3.5 h-3.5 opacity-50 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"></path>
               </svg>

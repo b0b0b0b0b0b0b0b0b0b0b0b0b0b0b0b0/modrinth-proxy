@@ -31,7 +31,8 @@
     "pingServersTip": "Pinga Minecraft-servrar",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "Vår Discord"
   },
   "lang": {
     "label": "Språk",
@@ -900,7 +901,8 @@
         "love": "Svävande hjärtan",
         "aurora": "Norrsken"
       }
-    }
+    },
+    "discord": "Vår Discord"
   },
   "copy": {
     "id": "Kopiera ID till urklipp",

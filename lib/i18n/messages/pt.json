@@ -31,7 +31,8 @@
     "pingServersTip": "Ping em servidores Minecraft",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "Nosso Discord"
   },
   "lang": {
     "label": "Idioma",
@@ -900,7 +901,8 @@
         "love": "Corações flutuantes",
         "aurora": "Aurora boreal"
       }
-    }
+    },
+    "discord": "Nosso Discord"
   },
   "copy": {
     "id": "Copiar ID para a área de transferência",

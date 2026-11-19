@@ -31,7 +31,8 @@
     "pingServersTip": "Ping Minecraft 服务器",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "我们的 Discord"
   },
   "lang": {
     "label": "语言",
@@ -900,7 +901,8 @@
         "love": "飘浮爱心",
         "aurora": "北极光"
       }
-    }
+    },
+    "discord": "我们的 Discord"
   },
   "copy": {
     "id": "复制 ID 到剪贴板",

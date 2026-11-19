@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import NewsCounter from './NewsCounter'
 import ProfileMenu from './ProfileMenu'
+import { IconDiscord } from '@/lib/icons'
 import { useT } from './I18nProvider'
 
 export default function TopNav({ account = null }) {
@@ -136,6 +137,19 @@ export default function TopNav({ account = null }) {
   const iconLinkClass = (active) =>
     `top-nav-link top-nav-link--icon p-2 rounded-xl transition-colors flex items-center justify-center${active ? ' top-nav-link--active' : ''}`
 
+  const discordLink = (
+    <a
+      href="/discord"
+      target="_blank"
+      rel="noopener noreferrer"
+      className={iconLinkClass(false)}
+      data-tooltip={t('nav.discord')}
+      aria-label={t('nav.discord')}
+    >
+      <IconDiscord className="w-5 h-5" />
+    </a>
+  )
+
   return (
     <nav className="top-nav">
       <div className="top-nav-content top-nav-content--stack">
@@ -199,6 +213,7 @@ export default function TopNav({ account = null }) {
               </svg>
               <NewsCounter />
             </Link>
+            {discordLink}
           </div>
 
           <div
@@ -292,6 +307,7 @@ export default function TopNav({ account = null }) {
             </svg>
             <NewsCounter />
           </Link>
+          {discordLink}
         </div>
       </div>
     </nav>

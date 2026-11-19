@@ -31,7 +31,8 @@
     "pingServersTip": "Minecraft serveru ping",
     "more": "More services",
     "mtools": "MTools",
-    "mtoolsTip": "Tools for Minecraft servers"
+    "mtoolsTip": "Tools for Minecraft servers",
+    "discord": "Mūsu Discord"
   },
   "lang": {
     "label": "Valoda",
@@ -900,7 +901,8 @@
         "love": "Lidojošas sirsniņas",
         "aurora": "Ziemeļblāzma"
       }
-    }
+    },
+    "discord": "Mūsu Discord"
   },
   "copy": {
     "id": "Kopēt ID starpliktuvē",

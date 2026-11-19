@@ -31,7 +31,8 @@
     "pingServersTip": "Пінг серверів Minecraft",
     "more": "Ще сервіси",
     "mtools": "MTools",
-    "mtoolsTip": "Інструменти для серверів Minecraft"
+    "mtoolsTip": "Інструменти для серверів Minecraft",
+    "discord": "Наш Discord"
   },
   "lang": {
     "label": "Мова",
@@ -900,7 +901,8 @@
         "love": "Летючі сердечка",
         "aurora": "Північне сяйво"
       }
-    }
+    },
+    "discord": "Наш Discord"
   },
   "copy": {
     "id": "Скопіювати ID в буфер",
