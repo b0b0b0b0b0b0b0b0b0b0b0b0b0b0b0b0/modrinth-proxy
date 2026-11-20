@@ -16,6 +16,7 @@ import ModrinthTrafficChart from './ModrinthTrafficChart'
 import { getModrinthTrafficReport } from '@/lib/modrinthTrafficReport'
 import { PLAY_NONSTOP_HOURS, PLAY_WINDOW_HOURS, readPlaySuspects } from '@/lib/playWatch'
 import { readAutoGrumpy } from '@/lib/autoGrumpy'
+import { IconDiscord, IconGithub, IconTelegram } from '@/lib/icons'
 
 export const dynamic = 'force-dynamic'
 
@@ -163,6 +164,38 @@ function AutoGrumpy({ entries, t }) {
   )
 }
 
+function LoginRows({ rows, total, format }) {
+  return (
+    <ul className="space-y-4">
+      {rows.map(({ key, Icon, color, value, label }) => {
+        const share = total > 0 ? Math.min(100, (value / total) * 100) : 0
+        return (
+          <li key={key} className="flex items-center gap-3">
+            <span
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl"
+              style={{ background: `${color}26`, color }}
+            >
+              <Icon className="h-5 w-5" aria-hidden />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-baseline justify-between gap-3">
+                <span className="truncate text-sm text-gray-400">{label}</span>
+                <span className="text-xl font-extrabold tabular-nums text-white">
+                  <CountUp value={value} />
+                </span>
+              </div>
+              <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-gray-800/60">
+                <div className="h-full rounded-full" style={{ width: `${share}%`, background: color }} />
+              </div>
+              <div className="mt-1 text-[11px] tabular-nums text-gray-600 dark:text-gray-500">{format(share)}</div>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
 function Tile({ value, label, index }) {
   return (
     <div
@@ -228,12 +261,15 @@ export default async function StatsPage() {
   }
   const tiles = [
     { value: stats.active, label: t('st.active') },
-    { value: stats.github, label: t('st.github') },
-    { value: stats.telegram, label: t('st.telegram') },
-    { value: stats.discord, label: t('st.discord') },
     { value: stats.favorites, label: t('st.favorites') },
     { value: stats.downloads, label: t('st.downloads') },
   ]
+  const loginRows = [
+    { key: 'github', Icon: IconGithub, color: '#e6edf3', value: stats.github, label: t('st.github') },
+    { key: 'telegram', Icon: IconTelegram, color: '#2aabee', value: stats.telegram, label: t('st.telegram') },
+    { key: 'discord', Icon: IconDiscord, color: '#5865f2', value: stats.discord, label: t('st.discord') },
+  ]
+  const shareFormat = new Intl.NumberFormat(intlLocale(locale), { maximumFractionDigits: 1 })
 
   return (
     <div className="mx-auto max-w-3xl space-y-4 pb-10">
@@ -263,11 +299,19 @@ export default async function StatsPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      <div className="grid grid-cols-3 gap-3">
         {tiles.map((tile, index) => (
           <Tile key={tile.label} index={index} {...tile} />
         ))}
       </div>
+
+      <Card title={t('st.loginsTitle')}>
+        <LoginRows
+          rows={loginRows}
+          total={stats.users}
+          format={(share) => t('st.loginsShare', { n: shareFormat.format(share) })}
+        />
+      </Card>
 
       <Card title={t('st.playTitle')}>
         <PlaySuspects suspects={readPlaySuspects()} t={t} format={(n) => numberFormat.format(n)} />

@@ -832,6 +832,8 @@
     "github": "ar GitHub",
     "telegram": "piesaistījuši Telegram",
     "discord": "piesaistījuši Discord",
+    "loginsTitle": "Pieteikšanās un sasaistes",
+    "loginsShare": "{n}% no visiem kontiem",
     "favorites": "projekti izlasē",
     "downloads": "lejupielādes kontu vēsturē",
     "byDay": "Reģistrācijas divās nedēļās",

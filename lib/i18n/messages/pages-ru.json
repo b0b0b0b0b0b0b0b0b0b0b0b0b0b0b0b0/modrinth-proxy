@@ -850,6 +850,8 @@
     "github": "вошли через GitHub",
     "telegram": "привязали Telegram",
     "discord": "привязали Discord",
+    "loginsTitle": "Входы и привязки",
+    "loginsShare": "{n}% всех аккаунтов",
     "favorites": "проектов в избранном",
     "downloads": "скачиваний в истории аккаунтов",
     "byDay": "Регистрации за две недели",

@@ -832,6 +832,8 @@
     "github": "con GitHub",
     "telegram": "hanno collegato Telegram",
     "discord": "hanno collegato Discord",
+    "loginsTitle": "Accessi e collegamenti",
+    "loginsShare": "{n}% di tutti gli account",
     "favorites": "progetti nei preferiti",
     "downloads": "download nella cronologia degli account",
     "byDay": "Iscrizioni in due settimane",

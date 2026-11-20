@@ -832,6 +832,8 @@
     "github": "con GitHub",
     "telegram": "vincularon Telegram",
     "discord": "vincularon Discord",
+    "loginsTitle": "Inicios de sesión y vínculos",
+    "loginsShare": "{n} % de todas las cuentas",
     "favorites": "proyectos en favoritos",
     "downloads": "descargas en el historial de cuentas",
     "byDay": "Registros en dos semanas",

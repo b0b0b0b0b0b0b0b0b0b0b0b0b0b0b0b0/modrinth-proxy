@@ -832,6 +832,8 @@
     "github": "über GitHub",
     "telegram": "Telegram verknüpft",
     "discord": "Discord verknüpft",
+    "loginsTitle": "Anmeldungen und Verknüpfungen",
+    "loginsShare": "{n} % aller Konten",
     "favorites": "Projekte in Favoriten",
     "downloads": "Downloads im Kontoverlauf",
     "byDay": "Registrierungen in zwei Wochen",

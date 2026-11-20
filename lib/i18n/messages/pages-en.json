@@ -850,6 +850,8 @@
     "github": "joined with GitHub",
     "telegram": "linked Telegram",
     "discord": "linked Discord",
+    "loginsTitle": "Sign-ins and linked accounts",
+    "loginsShare": "{n}% of all accounts",
     "favorites": "projects in favorites",
     "downloads": "downloads in account history",
     "byDay": "Sign-ups over two weeks",

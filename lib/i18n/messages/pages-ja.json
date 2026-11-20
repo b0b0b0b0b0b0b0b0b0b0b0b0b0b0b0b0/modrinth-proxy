@@ -832,6 +832,8 @@
     "github": "GitHub で登録",
     "telegram": "Telegram 連携",
     "discord": "Discord 連携",
+    "loginsTitle": "ログインと連携",
+    "loginsShare": "全アカウントの {n}%",
     "favorites": "お気に入りのプロジェクト",
     "downloads": "アカウント履歴のダウンロード",
     "byDay": "2週間の登録数",

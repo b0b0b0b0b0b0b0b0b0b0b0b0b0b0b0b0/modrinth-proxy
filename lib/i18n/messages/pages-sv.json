@@ -832,6 +832,8 @@
     "github": "via GitHub",
     "telegram": "kopplade Telegram",
     "discord": "kopplade Discord",
+    "loginsTitle": "Inloggningar och kopplingar",
+    "loginsShare": "{n} % av alla konton",
     "favorites": "projekt i favoriter",
     "downloads": "nedladdningar i kontohistoriken",
     "byDay": "Registreringar på två veckor",
