@@ -870,7 +870,7 @@
     "playEmpty": "Tout est calme : personne n’attrape plus vite qu’à la main ni ne joue sans pause.",
     "playFast": "{kind} : {peak} en une heure, à la main au plus {limit}",
     "playNonstop": "a attrapé pendant {hours} h sur {window} presque sans pause",
-    "playNote": "Comptes uniquement, et seulement ce qui a été attrapé connecté. Suspect : plus par heure qu’à la main, ou {hours} h et plus sur {window}. Pixel se vexe tout seul contre les tricheurs évidents : trois fois la limite horaire, ou 10 h sur 24 sans pause. Pour pardonner, retire l’entrée de data/grumpy-kittens.json ; les anciens compteurs y sont gardés (was).",
+    "playNote": "Comptes uniquement, et seulement ce qui a été attrapé connecté. Suspect : plus par heure qu’à la main, ou {hours} h et plus sur {window}. Pixel se vexe tout seul contre les tricheurs évidents : deux fois la limite horaire, ou 10 h sur 24 sans pause. Pour pardonner, retire l’entrée de data/grumpy-kittens.json ; les anciens compteurs y sont gardés (was).",
     "playAuto": "Pixel s’est vexé tout seul",
     "playKinds": {
       "diamonds": "diamants",

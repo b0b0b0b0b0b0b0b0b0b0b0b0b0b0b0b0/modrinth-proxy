@@ -870,7 +870,7 @@
     "playEmpty": "Tudo calmo: ninguém pega mais rápido do que é possível à mão nem joga sem parar.",
     "playFast": "{kind}: {peak} em uma hora, à mão no máximo {limit}",
     "playNonstop": "pegou por {hours} de {window} horas quase sem parar",
-    "playNote": "Só contas e só o que foi pego com login. Suspeito: mais por hora do que é possível à mão, ou {hours}+ de {window} horas. Com trapaceiros óbvios o Pixel fica bravo sozinho: o triplo do limite por hora ou 10 de 24 horas sem parar. Para perdoar, remova a entrada de data/grumpy-kittens.json; os contadores antigos ficam nela (was).",
+    "playNote": "Só contas e só o que foi pego com login. Suspeito: mais por hora do que é possível à mão, ou {hours}+ de {window} horas. Com trapaceiros óbvios o Pixel fica bravo sozinho: o dobro do limite por hora ou 10 de 24 horas sem parar. Para perdoar, remova a entrada de data/grumpy-kittens.json; os contadores antigos ficam nela (was).",
     "playAuto": "Pixel ficou bravo com eles sozinho",
     "playKinds": {
       "diamonds": "diamantes",

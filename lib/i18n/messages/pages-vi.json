@@ -870,7 +870,7 @@
     "playEmpty": "Mọi thứ yên ổn: không ai bắt nhanh hơn mức tay người làm được hay chơi không nghỉ.",
     "playFast": "{kind}: {peak} trong một giờ, bằng tay tối đa {limit}",
     "playNonstop": "đã bắt {hours} trên {window} giờ gần như không nghỉ",
-    "playNote": "Chỉ tài khoản và chỉ những gì bắt được khi đã đăng nhập. Đáng ngờ: mỗi giờ nhiều hơn mức tay người, hoặc bắt {hours}+ trên {window} giờ. Với kẻ gian rõ ràng, Pixel tự giận: gấp ba giới hạn mỗi giờ hoặc 10 trên 24 giờ không nghỉ. Để tha thứ, xóa mục khỏi data/grumpy-kittens.json; số cũ được giữ trong đó (was).",
+    "playNote": "Chỉ tài khoản và chỉ những gì bắt được khi đã đăng nhập. Đáng ngờ: mỗi giờ nhiều hơn mức tay người, hoặc bắt {hours}+ trên {window} giờ. Với kẻ gian rõ ràng, Pixel tự giận: gấp đôi giới hạn mỗi giờ hoặc 10 trên 24 giờ không nghỉ. Để tha thứ, xóa mục khỏi data/grumpy-kittens.json; số cũ được giữ trong đó (was).",
     "playAuto": "Pixel tự giận những người này",
     "playKinds": {
       "diamonds": "kim cương",
