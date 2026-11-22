@@ -6,6 +6,10 @@ export async function register() {
     const { knownProjectStamp, noteProjectStamp } = await import('./lib/versionWatch')
     globalThis.__noteProjectStamp = noteProjectStamp
     globalThis.__knownProjectStamp = knownProjectStamp
+    const { saveOrganizationCopy, organizationCopy, forgetOrganizationCopy } = await import('./lib/organizationCopies')
+    globalThis.__saveOrganizationCopy = saveOrganizationCopy
+    globalThis.__organizationCopy = organizationCopy
+    globalThis.__forgetOrganizationCopy = forgetOrganizationCopy
     const { startTelegramTicker } = await import('./lib/telegramTicker')
     startTelegramTicker()
     const { startTelegramWelcome } = await import('./lib/telegramWelcome')
