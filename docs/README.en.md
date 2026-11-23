@@ -18,6 +18,18 @@ All files are downloaded directly from the Modrinth CDN. We don't host any mods 
 >
 > So extend a bit of goodwill and **please don’t demand we remove your project** from our pages over that alone.
 
+## Removal requests
+
+We strongly ask you **not to demand removal** from us. We **don't do individual opt-outs** and don't make exceptions.
+
+- Our site works exactly like **thousands of launchers, apps and tools** built on Modrinth's **public API** (Prism Launcher and many others). We show what Modrinth makes public to everyone.
+- We **don't host, store or re-upload** anything — every file is downloaded **directly from Modrinth's CDN**. Asking us to remove your project is like asking every launcher out there to do the same.
+- **Want your project gone from our site?** Hide or remove it on Modrinth — it will disappear from our site automatically.
+- **Don't want your project available through the API?** That's a request for **Modrinth**, not for us. Ask them for a feature that lets authors exclude their projects from the public API — once it exists, it will apply to us automatically, just like to everyone else.
+- **Someone uploaded your work to Modrinth without permission?** Report it to Modrinth. Once they take it down, it's gone from our site too.
+
+The only content we remove ourselves is content we are **legally obliged** to filter.
+
 ## Quick links
 
 - **[Mods](https://modrinth.black/discover/mods)** - Minecraft modifications
