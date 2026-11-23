@@ -62,7 +62,7 @@ export default async function ModpackGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={modpack} organization={organization} teamMembers={[]} />
+        <ResourceSidebarContainer resource={modpack} organization={organization} />
       </div>
     </div>
   )

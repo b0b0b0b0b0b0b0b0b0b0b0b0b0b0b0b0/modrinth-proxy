@@ -4,22 +4,11 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useT } from './components/I18nProvider'
+import { deliverProject, projectSlugFrom } from '@/lib/courierClient'
 
 const AUTO_RETRY_MS = 4000
-const COURIER_TIMEOUT_MS = 12000
 const ATTEMPT_COOLDOWN_MS = 60_000
 const ATTEMPTS_KEY = 'errorPageAttempts'
-const PROJECT_ROUTE_RE = /^\/(?:mod|plugin|datapack|resourcepack|shader|modpack|project)\/([^/?#]+)/
-
-function projectSlugFrom(pathname) {
-  const match = PROJECT_ROUTE_RE.exec(pathname || '')
-  if (!match) return null
-  try {
-    return decodeURIComponent(match[1])
-  } catch {
-    return null
-  }
-}
 
 function takeAttempt(kind, pathname) {
   try {
@@ -32,24 +21,6 @@ function takeAttempt(kind, pathname) {
   } catch {
     return kind === 'courier'
   }
-}
-
-async function fetchJson(url) {
-  const response = await fetch(url, { signal: AbortSignal.timeout(COURIER_TIMEOUT_MS) })
-  return response.ok ? response.json() : null
-}
-
-async function deliverProject(slug) {
-  const base = `https://api.modrinth.com/v2/project/${encodeURIComponent(slug)}`
-  const project = await fetchJson(base)
-  if (!project?.id) return false
-  const versions = await fetchJson(`${base}/version`).catch(() => null)
-  const response = await fetch('/api/courier', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ slug, project, versions }),
-  })
-  return response.ok
 }
 
 function reloadPage() {

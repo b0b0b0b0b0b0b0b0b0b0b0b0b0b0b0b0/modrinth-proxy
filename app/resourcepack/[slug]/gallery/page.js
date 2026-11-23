@@ -62,7 +62,7 @@ export default async function ResourcepackGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} />
+        <ResourceSidebarContainer resource={pack} organization={organization} />
       </div>
     </div>
   )

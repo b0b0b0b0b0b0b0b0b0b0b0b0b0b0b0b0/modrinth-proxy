@@ -15,6 +15,7 @@ import GitHubSidebarSection from './GitHubSidebarSection'
 import { parseGitHubRepoFromSourceUrl } from '@/lib/github'
 import LicenseLink from './LicenseLink'
 import AuthorsSection from './AuthorsSection'
+import AuthorsCourier from './AuthorsCourier'
 import StyledTooltip from './StyledTooltip'
 import AlternateProjectFormatLink from './AlternateProjectFormatLink'
 import ProjectLinksCard from './ProjectLinksCard'
@@ -29,14 +30,16 @@ function contentTypeFromPathname(pathname) {
   return match?.[1] ?? null
 }
 
-export default function ResourceSidebar({ resource, teamMembers = [], organization = null, contentType = null, disclosures = [] }) {
+export default function ResourceSidebar({ resource, teamMembers, organization = null, contentType = null, disclosures = [] }) {
   const t = useT()
   const { locale } = useI18n()
   const pathname = usePathname()
   const resolvedContentType = contentType ?? contentTypeFromPathname(pathname)
+  const members = Array.isArray(teamMembers) ? teamMembers : []
+  const authorsMissing = resource.organization ? !organization : Array.isArray(teamMembers) && members.length === 0
   const authorMembers =
-    teamMembers.length > 0
-      ? teamMembers
+    members.length > 0
+      ? members
       : (organization?.members ?? [])
   const gameVersions = resource.minecraft_java_server?.content?.supported_game_versions || resource.game_versions || []
   const allowedLoaderIds = resolvedContentType ? buildAllowedLoaderIds(resolvedContentType) : null
@@ -226,6 +229,8 @@ export default function ResourceSidebar({ resource, teamMembers = [], organizati
       {hasGitHubSource && (
         <GitHubSidebarSection sourceUrl={resource.source_url} />
       )}
+
+      {authorsMissing && <AuthorsCourier />}
 
       {(organization || authorMembers.length > 0) && (
         <div className="ny-snow-host bg-modrinth-dark card-glass rounded-lg p-4">

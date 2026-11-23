@@ -62,7 +62,7 @@ export default async function ShaderGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={shader} organization={organization} teamMembers={[]} />
+        <ResourceSidebarContainer resource={shader} organization={organization} />
       </div>
     </div>
   )

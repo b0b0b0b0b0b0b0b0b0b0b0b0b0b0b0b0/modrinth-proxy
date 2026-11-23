@@ -62,7 +62,7 @@ export default async function PluginGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={plugin} organization={organization} teamMembers={[]} contentType="plugin" />
+        <ResourceSidebarContainer resource={plugin} organization={organization} contentType="plugin" />
       </div>
     </div>
   )

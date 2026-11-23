@@ -1,5 +1,7 @@
 # ModrinthProxy
 
+[English](docs/README.en.md) · **Русский**
+
 Веб-интерфейс для Modrinth на русском языке. Простой доступ к модам, плагинам, шейдерам и другому контенту для Minecraft без VPN и лишних заморочек.
 
 Все файлы качаются напрямую с CDN Modrinth. Мы не храним моды у себя - только делаем удобный интерфейс и кэшируем описания.
@@ -8,13 +10,15 @@
 
 ## For rights holders
 
-> No drama — your work has **not been stolen**. We are only a small **proxy** in front of a great platform.
+> Без драмы — вашу работу **не украли**. Мы всего лишь небольшой **прокси** перед отличной платформой.
 >
-> We simply can’t build the same kind of payment system Modrinth has — royalties for views and downloads require infrastructure way beyond what we can realistically run. And to be clear: we make absolutely nothing from this site. No money from traffic, no money from downloads — we actually pay for the servers ourselves just to keep it alive. So please try to understand us too — we love Minecraft just as much as you do.
+> Мы просто не можем построить такую же систему выплат, как у Modrinth, — отчисления за просмотры и скачивания требуют инфраструктуры, которая нам реально не по силам. И чтобы было понятно: мы ровным счётом ничего не зарабатываем на этом сайте. Ни денег с трафика, ни денег со скачиваний — наоборот, мы сами платим за серверы, лишь бы он продолжал работать. Так что, пожалуйста, постарайтесь понять и нас — мы любим Minecraft так же сильно, как и вы.
 >
-> Some authors assume we — the people behind this project — **oppose** the content we’re sometimes **forced** to filter. That is **absolutely not** the case: we’re **not against** that work. Restrictions exist only because we’re **obliged** to apply them so **modrinth.com** stays reachable here, **not** because we dislike you or your project.
+> Некоторые авторы думают, что мы — люди, стоящие за этим проектом, — **против** контента, который нам иногда **приходится** фильтровать. Это **абсолютно не** так: мы **не против** этих работ. Ограничения существуют только потому, что мы **обязаны** их применять, чтобы **modrinth.com** оставался доступен здесь, а **не** потому, что нам не нравитесь вы или ваш проект.
 >
-> So extend a bit of goodwill and **please don’t demand we remove your project** from our pages over that alone.
+> Так что проявите немного доброй воли и, **пожалуйста, не требуйте убрать ваш проект** с наших страниц только из-за этого.
+
+[English version](docs/README.en.md#for-rights-holders)
 
 ## Быстрые ссылки
 

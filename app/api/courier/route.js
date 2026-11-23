@@ -2,12 +2,13 @@ import { randomBytes } from 'crypto'
 import { cookies } from 'next/headers'
 import { isSameOrigin } from '@/lib/auth'
 import { COURIER_COOKIE, COURIER_TTL_MS, putCourierDelivery } from '@/lib/courierStore'
-import { MODRINTH_API } from '@/lib/modrinth'
+import { MODRINTH_API, MODRINTH_SERVER_API } from '@/lib/modrinth'
 import { checkRateLimit, getClientIp } from '@/lib/rateLimit'
 
 const RATE_LIMIT = { limit: 20, windowMs: 60_000 }
 const MAX_BYTES = 8 * 1024 * 1024
 const MAX_VERSIONS = 5000
+const MAX_MEMBERS = 500
 const SLUG_RE = /^[\w!@$()`.+,"\-']{1,64}$/
 
 export const dynamic = 'force-dynamic'
@@ -23,6 +24,26 @@ function validVersions(versions, projectId) {
     Array.isArray(versions) &&
     versions.length <= MAX_VERSIONS &&
     versions.every((version) => version && typeof version === 'object' && version.project_id === projectId)
+  )
+}
+
+function validMembers(members, teamId) {
+  return (
+    Array.isArray(members) &&
+    members.length > 0 &&
+    members.length <= MAX_MEMBERS &&
+    members.every((member) => member && typeof member === 'object' && member.team_id === teamId && typeof member.user?.id === 'string')
+  )
+}
+
+function validOrganization(organization, organizationId) {
+  return (
+    Boolean(organization) &&
+    typeof organization === 'object' &&
+    !Array.isArray(organization) &&
+    typeof organizationId === 'string' &&
+    organization.id === organizationId &&
+    (organization.members === undefined || validMembers(organization.members, organization.team_id))
   )
 }
 
@@ -68,6 +89,16 @@ export async function POST(request) {
   const items = [{ url: `${MODRINTH_API}/project/${encodeURIComponent(slug)}`, data: body.project, size: JSON.stringify(body.project).length }]
   if (validVersions(body.versions, body.project.id)) {
     items.push({ url: `${MODRINTH_API}/project/${encodeURIComponent(slug)}/version`, data: body.versions, size: JSON.stringify(body.versions).length })
+  }
+  if (validMembers(body.members, body.project.team)) {
+    items.push({ url: `${MODRINTH_API}/project/${encodeURIComponent(slug)}/members`, data: body.members, size: JSON.stringify(body.members).length })
+  }
+  if (validOrganization(body.organization, body.project.organization)) {
+    items.push({
+      url: `${MODRINTH_SERVER_API}/organization/${encodeURIComponent(body.project.organization)}`,
+      data: body.organization,
+      size: JSON.stringify(body.organization).length,
+    })
   }
   if (!putCourierDelivery(token, slug, items)) return Response.json({ error: 'too_large' }, { status: 413 })
 

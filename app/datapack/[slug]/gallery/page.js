@@ -62,7 +62,7 @@ export default async function DatapackGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={pack} organization={organization} teamMembers={[]} contentType="datapack" />
+        <ResourceSidebarContainer resource={pack} organization={organization} contentType="datapack" />
       </div>
     </div>
   )

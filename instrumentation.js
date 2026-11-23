@@ -10,6 +10,9 @@ export async function register() {
     globalThis.__saveOrganizationCopy = saveOrganizationCopy
     globalThis.__organizationCopy = organizationCopy
     globalThis.__forgetOrganizationCopy = forgetOrganizationCopy
+    const { noteProjectView, startProjectFreshness } = await import('./lib/projectFreshness')
+    globalThis.__noteProjectView = noteProjectView
+    startProjectFreshness()
     const { startTelegramTicker } = await import('./lib/telegramTicker')
     startTelegramTicker()
     const { startTelegramWelcome } = await import('./lib/telegramWelcome')

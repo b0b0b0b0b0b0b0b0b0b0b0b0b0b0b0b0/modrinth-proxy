@@ -85,7 +85,7 @@ export default async function ModGalleryPage(props) {
           <GalleryGrid gallery={sortedGallery} />
         </div>
         
-        <ResourceSidebarContainer resource={mod} organization={organization} teamMembers={[]} />
+        <ResourceSidebarContainer resource={mod} organization={organization} />
       </div>
     </div>
   )
